@@ -1,9 +1,6 @@
 JJ's Reference Architecture
 ===========================
 
-Contents
---------
-
 - [Introduction](Introduction.docx)
 - [Layers](Layers.docx)
 - [Namespaces, Assemblies & Folder Structure](Namespaces,%20Assemblies%20and%20Folder%20Structure.docx)
