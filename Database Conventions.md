@@ -152,7 +152,7 @@ So it has the format:
 
 In the Excel, add a column for each database instance for that database structure. There can be different databases with the same structure for different staging areas (dev, test, acc, prod) or a database for different customers or databases running on different servers. Put ‘TRUE’ (or ‘WAAR’ in Dutch) where the upgrade script has been executed. For instance:
 
-![](Aspose.Words.0aeae50c-3cfd-43e3-a87f-3418f3232d31.001.png)
+![](images/Aspose.Words.0aeae50c-3cfd-43e3-a87f-3418f3232d31.001.png)
 
 Also include a column saying whether you have scripted it at all (for if you are in a hurry and have no time to script it). A release date column is also handy, to get some sense of when things went live.
 ##### *Exceptional Cases*
@@ -202,7 +202,7 @@ To deploy multiple database structure changes you can use the Excel.
 
 Always edit the Excel in the dev branch, because Excels cannot be merged.
 
-![](Aspose.Words.0aeae50c-3cfd-43e3-a87f-3418f3232d31.002.png)
+![](images/Aspose.Words.0aeae50c-3cfd-43e3-a87f-3418f3232d31.002.png)
 
 You can easily see which scripts are still to be executed onto the database.
 

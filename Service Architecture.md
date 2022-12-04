@@ -62,17 +62,17 @@ The canonical model helps us exchange data between systems. Data can be retrieve
 ### ***Less Integration Code***
 Say you have 4 systems: A, B, C and D and you want to connect all 4 of them together. Theoretically you would have to write 12 different message conversion as you can see from the arrows in the diagram below:
 
-![\\JJS-SERVER\Data\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Diagrams\No ESB.png](Aspose.Words.eaf5d394-0455-4c42-8d66-b3d4659166f2.001.png)
+![](images/Aspose.Words.eaf5d394-0455-4c42-8d66-b3d4659166f2.001.png)
 
 By connecting a system to the ESB, instead of connecting individual systems together, you have to implement only 8 different message conversions as you can see from the arrows below:
 
-![\\JJS-SERVER\Data\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Diagrams\ESB.png](Aspose.Words.eaf5d394-0455-4c42-8d66-b3d4659166f2.002.png)
+![](images/Aspose.Words.eaf5d394-0455-4c42-8d66-b3d4659166f2.002.png)
 
 You just saved yourself 33% of the work!
 
 With every system you add to your ESB it gets better as you can see from the numbers below that indicate the amount of message conversions.
 
-![\\JJS-SERVER\Data\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Diagrams\ESB Connection Counts.png](Aspose.Words.eaf5d394-0455-4c42-8d66-b3d4659166f2.003.png)
+![](images/Aspose.Words.eaf5d394-0455-4c42-8d66-b3d4659166f2.003.png)
 
 The first integration between 2 systems you program using your ESB you actually program more message conversions, but with the next system it is already a tie between ESB and no ESB. The 4th integration you introduce you will have saved 33% of the overall work.
 

@@ -29,7 +29,7 @@ This is a suggestion of how to split up your software into layers.
 
 The software is split up into 3 layers:
 
-![\\JJS-SERVER\Data\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Data, Business, Presentation.png](Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.001.png)
+![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.001.png)
 
 The presentation layer contains the screens of the system.
 
@@ -47,7 +47,7 @@ The presentation layer is sometimes referred to as the ‘front-end’.
 ### ***Data Layer***
 The data layer is built up of the following sub-layers:
 
-![\\JJS-SERVER\Data\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Data Layer.png](Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.002.png)
+![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.002.png)
 
 It all starts with the database. The database is not directly accessed by the rest of the code, but the database is talked to through NHibernate, an object-relational mapper. NHibernate will translate database records to instance of classes. Those classes have properties, that map to columns in the database, and properties that point to related data. NHibernate needs to be given mappings, that define which class maps to which table and which columns map to which properties.
 
@@ -66,7 +66,7 @@ Because the architecture is multi-platform, the labels in the diagram are actual
 ### ***Presentation Layer***
 The presentation layer is built up of the following sub-layers:
 
-![D:\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Diagrams\Presentation Layer.png](Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.003.png)
+![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.003.png)
 
 <TODO: ToEntity is in a really odd spot if you read the diagram from top to bottom.>
 
@@ -106,7 +106,7 @@ Because the architecture is multi-platform, the labels in the diagram above are 
 - The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have ‘code-behind’ to only put dumb code in it and delegate the real work elsewhere.
 - ‘Html’ can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
 ### ***Business Layer***
-![](Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.004.png)
+![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.004.png)
 
 What is business logic? Basically anything that is not presentation or data access, is business logic.
 
@@ -128,7 +128,7 @@ The business layer is platform independent and the code can be deployed anywhere
 ### ***Perpendicular Layers***
 The subdivision into data, business and presentation is just about the most important subdivision in software design. But there are other additional layers, called perpendicular layers:
 
-![\\JJS-SERVER\Data\JJ\Dev\1. Products\1. Docs\2. Software Architecture\Diagrams\Perpendicular Layers.png](Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.005.png)
+![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.005.png)
 
 The Framework layer consists of API’s that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
 

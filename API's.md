@@ -219,13 +219,13 @@ Executing queries onto a database is normally done through ORM, but if performan
 
 We will not use stored procedures or views. Instead we store SQL files directly in our .NET projects. We put the SQL files in a sub-folder named ‘Sql’.
 
-![](Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.001.png)
+![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.001.png)
 
 The classic way of executing SQL in .NET is to use System.Data.SqlClient. Instead, we will use our own SqlExecutor API. With that we can execute SQL in a strongly-typed way, often with only a single code line.
 
 The best method of doing it is to make the SQL file embedded resources:
 
-![](Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.002.png)
+![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.002.png)
 
 The SQL may look as follows:
 
@@ -235,7 +235,7 @@ Then put an enum in the SQL folder in your .NET project:
 
 
 
-![](Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.003.png)
+![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.003.png)
 
 Add enum members that exactly correspond to the file names of the sql files:
 
@@ -297,7 +297,7 @@ The column names in the SQL are *case sensitive!*
 
 It is smart to let the SQL file names begin with the entity type name, so they stay neatly grouped together:
 
-![](Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.004.png)
+![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.004.png)
 #### **With NHibernate**
 If you use SqlExecutor in combination with NHibernate you have to use the NHibernateSqlExecutorFactory instead of the default SqlExecutorFactory:
 
@@ -309,7 +309,7 @@ This version uses an NHibernate ISession. In order for the SQL to run in the sam
 
 It is usually the best choice to include the SQL as an embedded resource, but you can also use files or literal strings.
 #### **Files instead of Embedded Resources**
-![](Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.005.png)
+![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.005.png)
 
 The is the code to create the SqlExecutor and execute an SQL file:
 
