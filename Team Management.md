@@ -1,14 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Team Management*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Team Management
+---------------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Team Management**
 ### ***Contents***
 [Contents	1](#_Toc487131215)
 

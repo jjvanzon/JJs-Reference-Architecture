@@ -1,14 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Service Architecture*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Service Architecture
+--------------------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Service Architecture**
 ### ***Contents***
 [Contents	1](#_Toc487131174)
 

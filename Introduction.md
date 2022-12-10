@@ -1,13 +1,9 @@
-﻿`		`*JJ’s Reference Architecture, Introduction*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Introduction
+------------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-## **Introduction**
 ### ***Contents***
 [Contents	1](#_Toc487130271)
 

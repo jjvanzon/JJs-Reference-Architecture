@@ -1,14 +1,9 @@
-﻿`		`*JJ’s Reference Architecture*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Software Lifecycle
+------------------
 
-`	`*Author: Jan-Joost van Zon*	
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Software Lifecycle**
 ### ***Contents***
 [Contents	1](#_Toc487131117)
 

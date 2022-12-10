@@ -1,10 +1,9 @@
-﻿`		`*JJ’s Reference Architecture, Appendices*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
-*Author: Jan-Joost van Zon*
+Appendices
+----------
 
-*Date: December 2014 – July 2017*
-## **Appendices**
 ### ***Contents***
 [Contents	1](#_Toc487129930)
 

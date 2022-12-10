@@ -1,13 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Namespaces, Assemblies and Folder Structure*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Namespaces, Assemblies and Folder Structure
+-------------------------------------------
 
-`	`*Author: Jan-Joost van Zon*	
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-## **Namespaces, Assemblies and Folder Structure**
 ### ***Contents***
 [Contents	1](#_Toc487130778)
 

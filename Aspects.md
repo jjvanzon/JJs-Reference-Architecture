@@ -1,13 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Aspects*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
-*Author: Jan-Joost van Zon*
+Aspects
+-------
 
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Aspects**	
 ### ***Contents***
 [Contents	1](#_Toc487136202)
 

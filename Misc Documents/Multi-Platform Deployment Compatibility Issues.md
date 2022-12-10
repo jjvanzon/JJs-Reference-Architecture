@@ -1,22 +1,7 @@
-﻿`		`*Multi-Platform Deployment Compatibility Issues*
-**Multi-Platform Compatibility Issues**
-
-
-=======================================
-***-***
-
-
-*Author: Jan-Joost van Zon*
-
-*Location: Oosterhout, The Netherlands*
+﻿Multi-Platform Compatibility Issues
+===================================
 
 *Date: January 2014 – May 2014*
-
-
-
-
-
-
 
 ## **Contents**
 [Contents	1](#_Toc3543)

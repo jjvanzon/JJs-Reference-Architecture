@@ -1,14 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Database Conventions*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Database Conventions
+--------------------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Database Conventions**
 ### ***Contents***
 [Contents	1](#_Toc487130206)
 

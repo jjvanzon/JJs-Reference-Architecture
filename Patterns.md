@@ -1,13 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Patterns*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Patterns
+--------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-## **Patterns**
 ### ***Contents***
 [Contents	1](#_Toc502941242)
 

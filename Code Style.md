@@ -1,14 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Code Style*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Code Style
+----------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Code Style**
 ### ***Contents***
 [Contents	1](#_Toc487130072)
 

@@ -1,14 +1,11 @@
-﻿`		`*JJ’s Reference Architecture: API’s*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+API's
+-----
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-## **API’s**
 ### ***Contents***
+
 [Contents	1](#_Toc487129800)
 
 [AJAX	1](#_Toc487129801)

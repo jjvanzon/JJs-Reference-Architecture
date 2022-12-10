@@ -1,13 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Layers*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Layers
+------
 
-`	`*Author: Jan-Joost van Zon*	
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-## **Layers**
 ### ***Contents***
 [Contents	1](#_Toc487130353)
 

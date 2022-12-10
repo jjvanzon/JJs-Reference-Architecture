@@ -1,14 +1,9 @@
-﻿`		`*JJ’s Reference Architecture: Practices & Principles*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Practices & Principles
+----------------------
 
-*Author: Jan-Joost van Zon*
-
-*Date: December 2014 – July 2017*
-
-***[Under Construction]***
-
-## **Practices & Principles**
 ### ***Contents***
 [Contents	1](#_Toc495396878)
 

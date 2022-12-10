@@ -1,6 +1,11 @@
 JJ's Reference Architecture
 ===========================
 
+`[ Under Construction ]`
+
+*Author: Jan Joost van Zon*  
+*Date: December 2014 – July 2017*
+
 - [Introduction](Introduction.md)
 - [Layers](Layers.md)
 - [Namespaces, Assemblies & Folder Structure](Namespaces,%20Assemblies%20and%20Folder%20Structure.md)
