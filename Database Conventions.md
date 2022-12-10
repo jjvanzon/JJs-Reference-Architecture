@@ -65,7 +65,7 @@ Only if you need a bigger range:
 
 ### Naming Conventions
 
-|**Object Type**|**Example Name**|
+| Object Type | Example Name |
 | :- | :- |
 |Database name|ShopDB|
 |Tables|MyTable|
@@ -132,14 +132,14 @@ So it has the format:
 {Date} {Number} {DatabaseStructureName} {DatabaseObject}{SubDatabaseObject} {Change}.sql
 
 
-||**Description**|**Examples**|
+|| Description | Examples |
 | :- | :- | :- |
-|**Date**|Use the format yyyy-mm-dd|2014-08-28|
-|**Number**|Use 3 digits and count in 10’s so you might insert one in betweeen|040|
-|**DatabaseStructureName**||ShopDB|
-|**DatabaseObject**|A table name or index name or other database object name|<p>Supplier</p><p>IX\_Supplier\_Name</p><p>FK\_Supplier\_Branch</p>|
-|**SubDatabaseObject**|Optional. Usually a column name|.Name|
-|**Change**|Optional. Usually left out. You can sometimes mention a specific change, but be brief.|not null|
+|__Date__|Use the format yyyy-mm-dd|2014-08-28|
+|__Number__|Use 3 digits and count in 10’s so you might insert one in betweeen|040|
+|__DatabaseStructureName__||ShopDB|
+|__DatabaseObject__|A table name or index name or other database object name|<p>Supplier</p><p>IX\_Supplier\_Name</p><p>FK\_Supplier\_Branch</p>|
+|__SubDatabaseObject__|Optional. Usually a column name|.Name|
+|__Change__|Optional. Usually left out. You can sometimes mention a specific change, but be brief.|not null|
 
 In the Excel, add a column for each database instance for that database structure. There can be different databases with the same structure for different staging areas (dev, test, acc, prod) or a database for different customers or databases running on different servers. Put ‘TRUE’ (or ‘WAAR’ in Dutch) where the upgrade script has been executed. For instance:
 

@@ -199,12 +199,12 @@ Separation of concerns can also be applied to technical aspects, such as validat
 In this architecture we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
-||**Dto**|**Mapping**|**Validator**|**ViewModel**|**Presenter**|**…**|
+||Dto|Mapping|Validator|ViewModel|Presenter|…|
 | :- | :- | :- | :- | :- | :- | :- |
-|**Order**|OrderDto|OrderMapping|OrderValidator|OrderViewModel|OrderPresenter|…|
-|**Product**|ProductDto|ProductMapping|ProductValidator|ProductViewModel|ProductPresenter|…|
-|**Customer**|CustomerDto|CustomerMapping|CustomerValidator|CustomerViewModel|CustomerPresenter|…|
-|**…**|…|…|…|…|…|…|
+|__Order__|OrderDto|OrderMapping|OrderValidator|OrderViewModel|OrderPresenter|…|
+|__Product__|ProductDto|ProductMapping|ProductValidator|ProductViewModel|ProductPresenter|…|
+|__Customer__|CustomerDto|CustomerMapping|CustomerValidator|CustomerViewModel|CustomerPresenter|…|
+|__…__|…|…|…|…|…|…|
 
 Plus: you can have specialized variations of these classes, for instance: OrderEditPresenter, SubscriptionProductValidator.
 
@@ -218,25 +218,25 @@ The separation into technical and functional concerns extends further than the c
 
 These are the functional concerns:
 
-JJ.Data.**Ordering**.NHibernate
+JJ.Data.__Ordering__.NHibernate
 
-JJ.Business.**Ordering**.Validation
+JJ.Business.__Ordering__.Validation
 
-JJ.Presentation.**Cms**
+JJ.Presentation.__Cms__
 
-JJ.Presentation.**Cms**.Mvc
+JJ.Presentation.__Cms__.Mvc
 
 And these are the technical concerns:
 
-JJ.**Data**.Ordering.**NHibernate**
+JJ.__Data__.Ordering.__NHibernate__
 
-JJ.**Business**.Ordering.**Validation**
+JJ.__Business__.Ordering.__Validation__
 
-JJ.**Presentation**.Cms
+JJ.__Presentation__.Cms
 
-JJ.**Presentation**.Cms.**Mvc**
+JJ.__Presentation__.Cms.__Mvc__
 
-JJ.**Presentation**.Cms.**Mobile**
+JJ.__Presentation__.Cms.__Mobile__
 
 The assemblies are split up by functional domains.
 
@@ -919,7 +919,7 @@ public bool MustExecute(MyClass myParameter)
 
 {
 
-bool **mustExecute** = myParameter.IsSpecial || myParameter.Items.Count > 3;
+bool __mustExecute__ = myParameter.IsSpecial || myParameter.Items.Count > 3;
 
 return mustDoIt;
 
@@ -1013,7 +1013,7 @@ if (condition)
 
 {
 
-**<<No code>>**
+__<<No code>>__
 
 }
 

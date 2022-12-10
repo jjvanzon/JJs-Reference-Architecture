@@ -215,7 +215,7 @@ enum MyEnum
 
 {
 
-**Undefined = 0**
+__Undefined = 0__
 
 }
 
@@ -223,7 +223,7 @@ This prevents you from accidently forgetting to assign the enum value.
 
 - Prefer not using specific underlying enum types. Enums ‘derive’ from int by default, but you can e.g. do the following, which is not recommended:
 
-enum MyEnum **: long**
+enum MyEnum __: long__
 
 {
 
@@ -274,7 +274,7 @@ MyEnumMember2 = 2
 
 }
 
-**var myEnum = (MyEnum)3; // WORKS!**
+__var myEnum = (MyEnum)3; // WORKS!__
 
 The difference between throwing an InvalidValueException or a ValueNotSupportedException is that you would use InvalidValueException if all enum members except Undefined were part of the switch, because then it was not a sensible enum value. You would throw ValueNotSupportedException if the switch uses only some of the enum members, but other perfectly sensible members were not relevant in this particular case. But it is not a disaster to use these exception types interchangedly.
 
@@ -620,7 +620,7 @@ The combination { EntityTypeName, EntityID } is a alternative key to the entity.
 
 Another alternative is to give the translation item entity a whole bunch of foreign keys: one for each possible translatable entity type.
 
-NameAndDescription { ID, Name, Description, CultureName, **ProductID, DepartmentID** }
+NameAndDescription { ID, Name, Description, CultureName, __ProductID, DepartmentID__ }
 
 A downside of that is that the table structure is dependent on the domain model you applied it to. This can be a problem if you want your translation structure to be very isolated from the other business domains or used by business domains that you do not develop yourself. It really depends on your requirements whether this is a problem at all.
 

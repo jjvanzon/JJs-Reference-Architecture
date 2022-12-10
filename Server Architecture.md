@@ -24,7 +24,7 @@ The server subdivision is subject to the needs of the organization, so this over
 <TODO: Consider the machine configuration needs in more detail.>
 
 
-|**Stage**|**Name**|**Remarks**|**Configuration Focus Points**|
+|Stage|Name|Remarks|Configuration Focus Points|
 | :- | :- | :- | :- |
 |Development|Database server|Stores a development copy of all the databases we use. |SQL Server, decent performance, particular focus on having enough RAM.|
 |Development|App server|Where development can use a shared FTP server if needed, run long processes to aleviate the development workstations. Can also host shared web services, be it third party, be it internally developed ones, even though for that last thing it is usually better to run it on the development workstations.|IIS, preferrably many-core. SQL Server installation is advised, for delegating number crunching from the main development database server to another server. RAM is also important, since heavy number crunching processes may use a lot of memory.|

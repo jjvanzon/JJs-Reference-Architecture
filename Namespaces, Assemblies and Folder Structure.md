@@ -42,43 +42,43 @@ Company.SoftwareLayer.BusinessDomain [.Technology] [.Test] [.DesignPattern] [.Pa
 
 In this architecture the root namespace will be the ‘company name’, for instance:
 
-**JJ**
+__JJ__
 
 ### Main Layers
 
 The second level in the namespacing consists of the following parts:
 
 
-|JJ.**Data**|The data layer including the entity models and persistence.|
+|JJ.__Data__|The data layer including the entity models and persistence.|
 | :- | :- |
-|JJ.**Business**|The business logic layer|
-|JJ.**Presentation**|The presentation layer|
-|JJ.**Framework**|Contains any reusable code, that is independent from any domain model. Any layer in the software architecture can have reusable framework code to support it.|
+|JJ.__Business__|The business logic layer|
+|JJ.__Presentation__|The presentation layer|
+|JJ.__Framework__|Contains any reusable code, that is independent from any domain model. Any layer in the software architecture can have reusable framework code to support it.|
 
 And the less important:
 
 
-|JJ.**Demos**|Demo code for educational purposes|
+|JJ.__Demos__|Demo code for educational purposes|
 | :- | :- |
-|JJ.**Utilities**|Processes that are not run very often. Utilities contains small programs for IT. E.g. load translations, things to run for deployment.|
+|JJ.__Utilities__|Processes that are not run very often. Utilities contains small programs for IT. E.g. load translations, things to run for deployment.|
 
 ### Business Domains
 
 The third level in the namespacing is the business domain. A business domain can be present in multiple layers, or missing in a specific layer, an app can use multiple business domains, a single business domain can have multiple front-ends. Examples:
 
-JJ.Data.**Calendar**
+JJ.Data.__Calendar__
 
-JJ.Business.**Calendar**
+JJ.Business.__Calendar__
 
-JJ.Presentation.**Calendar**
+JJ.Presentation.__Calendar__
 
 The ‘business domain’ of the framework layer is usually a technical aspect. Examples:
 
-JJ.Framework.**Validation**
+JJ.Framework.__Validation__
 
-JJ.Framework.**Security**
+JJ.Framework.__Security__
 
-JJ.Framework.**Logging**
+JJ.Framework.__Logging__
 
 ### Technologies
 
@@ -86,15 +86,15 @@ The fourth level in the namespacing denotes the used technology. It is kind of a
 
 JJ.Data.Calendar
 
-JJ.Data.Calendar.**NHibernate**
+JJ.Data.Calendar.__NHibernate__
 
 JJ.Presentation.Calendar
 
-JJ.Presentation.Calendar.**Mvc**
+JJ.Presentation.Calendar.__Mvc__
 
 JJ.Framework.Logging
 
-JJ.Framework.Logging.**DebugOutput**
+JJ.Framework.Logging.__DebugOutput__
 
 This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that much of the code is shared between platforms. It also means, that we can be very specific about which technologies we want to be dependent on.
 
@@ -102,9 +102,9 @@ This means that the platform-indepent part of the code is separate from the plat
 
 Every assembly can get a Test assembly, which contains unit tests. For instance:
 
-JJ.Business.Calendar.**Tests**
+JJ.Business.Calendar.__Tests__
 
-JJ.Presentation.Calendar.Mvc.**Tests**
+JJ.Presentation.Calendar.Mvc.__Tests__
 
 ### Details
 
@@ -124,17 +124,17 @@ JJ.Business.Ordering.Validation.Products
 
 These are the functional (or commercial) concerns:
 
-**JJ**.Business.**Ordering**.Validation.**Products**
+__JJ__.Business.__Ordering__.Validation.__Products__
 
 These are the technical concerns:
 
-JJ.**Business**.Ordering.**Validation**.Products
+JJ.__Business__.Ordering.__Validation__.Products
 
 The reason for ‘scrambling’ of technical and functional concerns, is rooted in that we are trying to project something 2-dimensional (funtional vs. technical) onto something sequential (written text). We could artificially keep functionality together and technical things together:
 
-***JJ.Ordering.Products***.Business.NHibernate.Validation
+__JJ.Ordering.Products__.Business.NHibernate.Validation
 
-JJ.Ordering.Products.***Business.NHibernate.Validation***
+JJ.Ordering.Products.__Business.NHibernate.Validation__
 
 But this does not help us do our job.
 

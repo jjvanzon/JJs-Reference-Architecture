@@ -12,7 +12,7 @@ API's
   - [Configuration](#configuration)
     - [Custom Configuration Sections](#custom-configuration-sections)
     - [appSettings](#appsettings)
-    - [**connectionStrings**](#connectionstrings)
+    - [connectionStrings](#connectionstrings)
   - [Embedded Resources](#embedded-resources)
   - [Entity Framework 5](#entity-framework-5)
   - [JavaScript / TypeScript](#javascript--typescript)
@@ -139,7 +139,9 @@ This interface defines the names and types of the settings. To retrieve a settin
 int testInt32 = AppSettings<IAppSettings>.GetValue(x => x.TestInt32);
 
 It automatically converts to the right data type and allows you to use strongly-typed names.
-#### **connectionStrings**
+
+#### connectionStrings
+
 Reading out connectionStrings is similar to reading out the appSettings. Connection strings in the App.config or Web.config look as follows:
 
 <connectionStrings>

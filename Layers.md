@@ -54,8 +54,8 @@ The dashed line going right through the diagram separates the platform-specific 
 
 Because the architecture is multi-platform, the labels in the diagram are actually too specific:
 
-- ‘DB’ can actually be any **data store** – that is the proper term for it: ‘data store’: an XML file, flat file or even just in-memory data.
-- ‘NHibernate’ can be an any **persistence technology**: another ‘ORM’ (‘object relational mapper’), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
+- ‘DB’ can actually be any __data store__ – that is the proper term for it: ‘data store’: an XML file, flat file or even just in-memory data.
+- ‘NHibernate’ can be an any __persistence technology__: another ‘ORM’ (‘object relational mapper’), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
 
 ### Presentation Layer
 

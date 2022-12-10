@@ -343,7 +343,7 @@ A ViewModel class holds the data shown on screen.
 
 It is purely a data object. It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the viewmodels is fully responsible for it.)
 
-**A ViewModel should say *what* is shown, not *how* or *why*.**
+__A ViewModel should say *what* is shown, not *how* or *why*.__
 
 Every screen gets a view model, e.g. ProductDetailsViewModel, ProductListViewModel, ProductEditViewModel, CategorySelectorViewModel.
 
@@ -574,7 +574,7 @@ In an ASP.NET MVC application a controller has a lot of responsibilities, but in
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
 -
-- Entity names put in controller should be plural. So Customer**s**Controller not CustomerController.
+- Entity names put in controller should be plural. So Customer__s__Controller not CustomerController.
 
 #### Post-Redirect-Get
 
@@ -586,37 +586,37 @@ Before you do so, you must store the view model in the TempData dictionary. In t
 
 Here is simplified pseudo-code in which the pattern is applied.
 
-**public ActionResult Edit(int id)**
+__public ActionResult Edit(int id)__
 
-**{**
+__{__
 
-`    `**object viewModel;**
+`    `__object viewModel;__
 
-`    `**if (!TempData.TryGetValue(TempDataKeys.ViewModel, out viewModel))**
+`    `__if (!TempData.TryGetValue(TempDataKeys.ViewModel, out viewModel))__
 
-**{**
+__{__
 
-`    `**// TODO: Call presenter**
+`    `__// TODO: Call presenter__
 
-`    `**}**
+`    `__}__
 
-`    `**return View(viewModel);**
+`    `__return View(viewModel);__
 
-**}**
+__}__
 
-**[HttpPost]**
+__[HttpPost]__
 
-**public ActionResult Edit(EditViewModel viewModel)**
+__public ActionResult Edit(EditViewModel viewModel)__
 
-**{**
+__{__
 
-**// TODO: Call presenter**
+__// TODO: Call presenter__
 
-`    `**TempData[TempDataKeys.ViewModel] = viewModel2;**
+`    `__TempData[TempDataKeys.ViewModel] = viewModel2;__
 
-`    `**return RedirectToAction(ActionNames.Details);**
+`    `__return RedirectToAction(ActionNames.Details);__
 
-**}**
+__}__
 
 There might be an exception to the rule to always RedirectToAction at the end of a Post. When you would redirect to a page that you can never go to directly, you might return View() instead, because there is no Get method. This may be the case for a NotFoundViewModel or a DeleteConfirmedViewModel.
 
@@ -655,29 +655,29 @@ This means that in the MVC Controller action methods, the Presenter returns obje
 
 Here is simplified code for how you can do this in a post method:
 
-**var editViewModel = viewModel as EditViewModel;**
+__var editViewModel = viewModel as EditViewModel;__
 
-**if (editViewModel != null)**
+__if (editViewModel != null)__
 
-**{**
+__{__
 
-**return RedirectToAction(ActionNames.Edit,** 
+__return RedirectToAction(ActionNames.Edit,__ 
 
-`    `**new { id = editViewModel.Question.ID });**
+`    `__new { id = editViewModel.Question.ID });__
 
-**}**
+__}__
 
-**var detailsViewModel = viewModel as DetailsViewModel;**
+__var detailsViewModel = viewModel as DetailsViewModel;__
 
-**if (detailsViewModel != null)**
+__if (detailsViewModel != null)__
 
-**{**
+__{__
 
-**return RedirectToAction(ActionNames.Details,** 
+__return RedirectToAction(ActionNames.Details,__ 
 
-`    `**new { id = viewModel.Question.ID });**
+`    `__new { id = viewModel.Question.ID });__
 
-**}**
+__}__
 
 At the end throw the following exception (out of the Framework):
 
@@ -691,29 +691,29 @@ In MVC it is not straightforeward to post a collection of items or nested struct
 
 This architecture’s framework has HtmlHelper extensions to make that easier: the Html.BeginCollection API. Using this API you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
-**@using (Html.BeginItem(() => Model.MyItem))**
+__@using (Html.BeginItem(() => Model.MyItem))__
 
-**{**
+__{__
 
-`    `**using (Html.BeginCollection(() => Model.MyItem.MyCollection))**
+`    `__using (Html.BeginCollection(() => Model.MyItem.MyCollection))__
 
-`    `**{**
+`    `__{__
 
-`        `**foreach (var x in Model.MyItem.MyCollection)**
+`        `__foreach (var x in Model.MyItem.MyCollection)__
 
-`        `**{**
+`        `__{__
 
-`            `**using (Html.BeginCollectionItem())**
+`            `__using (Html.BeginCollectionItem())__
 
-`            `**{**
+`            `__{__
 
-`            `**}**
+`            `__}__
 
-`        `**}**
+`        `__}__
 
-`    `**}**
+`    `__}__
 
-**}**
+__}__
 
 So each time you enter a level, you need another call to the Html helper again and wrap the code in a using block. You can use as many collections as you like, and use as much nesting as you like. You can spread the nesting around multiple partials.
 
@@ -733,33 +733,33 @@ Otherwise the input fields will not bind to the view model. This often forces yo
 
 An alternative to Html.BeginCollection() is using for-loops.
 
-**@Html.TextBoxFor(x => x.MyItem.MyProperty)**
+__@Html.TextBoxFor(x => x.MyItem.MyProperty)__
 
-**@for (int i = 0; i < Model.MyItem.MyCollection.Count; i++)**
+__@for (int i = 0; i < Model.MyItem.MyCollection.Count; i++)__
 
-**{**
+__{__
 
-`    `**@Html.TextBoxFor(x => x.MyItem.MyCollection[i].MyProperty)**
+`    `__@Html.TextBoxFor(x => x.MyItem.MyCollection[i].MyProperty)__
 
-**}**
+__}__
 
 This solution only works if the expressions you pass to the Html helpers contain the full path to a view model property (or hack the HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix) and therefore it does not work if you want to split up your view code into partials.
 
 Another alternative to the BeginCollection() is the often-used BeginCollectionItem(string) API. Example:
 
-**@foreach (var child in Model.Children)**
+__@foreach (var child in Model.Children)__
 
-**{**
+__{__
 
-`    `**using (Html.BeginCollectionItem("Children"))**
+`    `__using (Html.BeginCollectionItem("Children"))__
 
-`    `**{**
+`    `__{__
 
-`        `**@\*** ... **\*@**
+`        `__@\__* ... __\*@__
 
-`    `**}**
+`    `__}__
 
-**}**
+__}__
 
 The limitation of that API is that you can only send one collection over the line and no additional nesting is possible.
 
@@ -770,7 +770,7 @@ Beware that currently the different solutions do not mix well and you should onl
 - Return URL’s indicate what page to go back to when you are done in another page.
 - It is used when you are redirected to a login screen, so it knows what page to go back to after you login.
 - Return URL’s are encoded into a URL parameter, called ‘ret’ e.g.:
-  http://www.mysite.com/Login?**ret=%2FMenu%2FIndex**
+  http://www.mysite.com/Login?__ret=%2FMenu%2FIndex__
 
 The ret parameter is the following value encoded:  /Menu/Index
 That is the URL you will go back to after you log in.
@@ -1031,7 +1031,7 @@ public void Dispose()
 
 {
 
-\_myConnection**?**.Close();
+\_myConnection__?__.Close();
 
 }
 -

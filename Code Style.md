@@ -38,7 +38,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 ### Casing, Punctuation and Spacing
 
-|**Rule**|**Example**|
+| Rule | Example |
 | :- | :- |
 |Properties, methods, class names and events are in pascal case.|<p>MyProperty</p><p>MyMethod</p>|
 |Local variables and parameters are in camel case.|<p>myLocalVariable</p><p>myParameter</p>|
@@ -54,7 +54,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |Partial view names in MVC should begin with an underscore|\_MyPartialView|
 
 
-|**Rule**|**Not Recommended**|**Recommended**|
+| Rule | Not Recommended | Recommended |
 | :- | :- | :- |
 |Keep Visual Studio’s autoformatting enabled and set to its defaults.|||
 |No extra enters between braces.|<p>}</p><p></p><p>}</p><p></p>|<p>}</p><p>}</p><p></p>|
@@ -74,41 +74,41 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 ### Trivial Rules
 
-|**Rule**|**Wrong**|**Right**|
+| Rule | Wrong | Right |
 | :- | :- | :- |
 |Give each class (or enum) its own file (except nested classes).|-|-|
 |Keep members private as much as possible.||<p>private void Bla()</p><p>{<br>}</p><p></p>|
 |Keep types internal as much as possible.||<p>internal class MyClass</p><p>{<br>}</p><p></p>|
-|Use explicit access modifiers (except for interface members).|int Bla() { ... }|**public** int Bla() { ... }|
-|No public fields. Use properties instead.|public int X;|<p>**public** int X **{ get; set; }**</p><p></p>|
+|Use explicit access modifiers (except for interface members).|int Bla() { ... }|__public__ int Bla() { ... }|
+|No public fields. Use properties instead.|public int X;|<p>__public__ int X __{ get; set; }__</p><p></p>|
 |Put nested classes at the top of the parent class’s code.|<p>internal class A</p><p>{</p><p>public int X { get; set; }</p><p></p><p>private class B</p><p>{</p><p>}</p><p>}</p><p></p>|<p>internal class A</p><p>{</p><p>private class B</p><p>{</p><p>}</p><p></p><p>public int X { get; set; }</p><p>}</p><p></p>|
 |Avoid getting information by catching an exception. Prefer getting your information without using exception handling.|<p>bool FileExists(string path)</p><p>{</p><p>try</p><p>{</p><p>File.Open(path, ...);</p><p>return true;</p><p>}</p><p>catch (IOException)</p><p>{</p><p>return false;</p><p>}</p><p>}</p><p></p>|<p>bool FileExists(string path)</p><p>{</p><p>return File.Exists(path);</p><p>}</p><p></p>|
-|Do not use type arguments that can be inferred.|<p>References**<Child>**(x => x.Child)</p><p></p>|References(x => x.Child)|
-|Use interface types as variable types when they are present.|**List**<int> list = new List<int>;|**IList**<int> list = new List<int>;|
-|Prefer ToArray over ToList.|IList<int> collection = x.**ToList**()|IList<int> collection = x.**ToArray**()|
+|Do not use type arguments that can be inferred.|<p>References__<Child>__(x => x.Child)</p><p></p>|References(x => x.Child)|
+|Use interface types as variable types when they are present.|__List__<int> list = new List<int>;|__IList__<int> list = new List<int>;|
+|Prefer ToArray over ToList.|IList<int> collection = x.__ToList__()|IList<int> collection = x.__ToArray__()|
 |Use object initializers for readability.|<p>var x = new X();</p><p>x.A = 10;</p><p>x.B = 20;</p>|<p>var x = new X</p><p>{</p><p>A = 10,</p><p>B = 20</p><p>}</p><p></p>|
-|Put comment for members in <summary> tags.|<p>// This is the x-coordinate.</p><p>int X { get; set; }</p>|<p>**/// <summary>**</p><p>**///** This is the x coordinate.</p><p>**/// </summary>**</p><p>int X { get; set; }</p><p></p>|
+|Put comment for members in <summary> tags.|<p>// This is the x-coordinate.</p><p>int X { get; set; }</p>|<p>__/// <summary>__</p><p>__///__ This is the x coordinate.</p><p>__/// </summary>__</p><p>int X { get; set; }</p><p></p>|
 |Comment in English.|// Dit is een ding.|<p>// This is a thing.</p><p></p>|
-|Do not write comment that does not add information|<p>**// This is x**</p><p>int x;</p><p></p>|<p>int x;</p><p></p>|
-|<p>Avoid compiler directives</p><p></p><p>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything. </p>|<p>**#if FEATURE\_X\_ENABLED**</p><p>**// ...**</p><p>**#endif**</p>|<p>if (config.FeatureXEnabled)</p><p>{</p><p>// ...</p><p>}</p><p></p>|
-|<p>An internal class should not have internal members.</p><p></p><p>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods.</p>|<p>**internal class A**</p><p>**{**</p><p>**internal void B**</p><p>**{**</p><p>**}**</p><p>**}**</p><p></p>|<p>internal class A</p><p>{</p><p>public void B</p><p>{</p><p>}</p><p>}</p><p></p>|
-|Default switch case at the bottom.|<p>**switch (x)**</p><p>**{**</p><p>**default:**</p><p>**break;**</p><p></p><p>**case 0:**</p><p>**break;**</p><p></p><p>**case 1:**</p><p>**break;**</p><p>**}**</p>|<p>switch (x)</p><p>{</p><p>case 0:</p><p>break;</p><p></p><p>case 1:</p><p>break;</p><p></p><p>**default:**</p><p>**break;**</p><p>}</p>|
-|Prefer .Value and .HasValue for nullable types.|<p>**int? number;**</p><p>**if (number != null)<br>{**</p><p>**string message = String.Format(**</p><p>**"Number = {0}", number);**</p><p>**}**</p>|<p>int? number;</p><p>if (number.HasValue)<br>{</p><p>string message = String.Format(</p><p>"Number = {0}", number.Value);</p><p>}</p>|
+|Do not write comment that does not add information|<p>__// This is x__</p><p>int x;</p><p></p>|<p>int x;</p><p></p>|
+|<p>Avoid compiler directives</p><p></p><p>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything. </p>|<p>__#if FEATURE\_X\_ENABLED__</p><p>__// ...__</p><p>__#endif__</p>|<p>if (config.FeatureXEnabled)</p><p>{</p><p>// ...</p><p>}</p><p></p>|
+|<p>An internal class should not have internal members.</p><p></p><p>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods.</p>|<p>__internal class A__</p><p>__{__</p><p>__internal void B__</p><p>__{__</p><p>__}__</p><p>__}__</p><p></p>|<p>internal class A</p><p>{</p><p>public void B</p><p>{</p><p>}</p><p>}</p><p></p>|
+|Default switch case at the bottom.|<p>__switch (x)__</p><p>__{__</p><p>__default:__</p><p>__break;__</p><p></p><p>__case 0:__</p><p>__break;__</p><p></p><p>__case 1:__</p><p>__break;__</p><p>__}__</p>|<p>switch (x)</p><p>{</p><p>case 0:</p><p>break;</p><p></p><p>case 1:</p><p>break;</p><p></p><p>__default:__</p><p>__break;__</p><p>}</p>|
+|Prefer .Value and .HasValue for nullable types.|<p>__int? number;__</p><p>__if (number != null)<br>{__</p><p>__string message = String.Format(__</p><p>__"Number = {0}", number);__</p><p>__}__</p>|<p>int? number;</p><p>if (number.HasValue)<br>{</p><p>string message = String.Format(</p><p>"Number = {0}", number.Value);</p><p>}</p>|
 |Do not leave unused (outcommented) around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.|||
 |it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.|||
 
 ### Miscellaneous Rules
 
-|**Description**|**Not Recommended**|**Recommended**|
+| Description | Not Recommended | Recommended |
 | :- | :- | :- |
 |Test class names end with ‘Tests’.|<p>[TestClass]</p><p>public class **Tests\_**Validator()</p><p>{</p><p>}</p><p></p>|<p>[TestClass]</p><p>public class Validator**Tests**()</p><p>{</p><p>}</p><p></p>|
-|Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.|<p>[TestMethod]</p><p>public void **Test** ()</p><p>{ </p><p>...</p><p>}</p>|<p>[TestMethod]</p><p>public void **Test\_Validator\_NotNullOrEmpty\_NotValid**()</p><p>{ </p><p>...</p><p>}</p><p></p>|
-|var should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are:|**var** x = y.X;||
-|- An anonymous type is used.|**X** q = from x in list select **new { A = x.A }**;|**var** q = from x in list select **new { A = x.A }**;|
-|- The code line is a ‘new’ statement.|**X** x = new **X**()|**var** x = new **X**()|
-|- The code line is a direct cast.|**X** x = (**X**)y;|**var** x = (**X**)y;|
-|- The code line is WAAAY too long and unreadable without ‘var’.|foreach (**KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>** entry in dictionary)|foreach (**var** entry in dictionary)|
-|- Use var in your **view** code.|<% foreach (**OrderViewModel** order in Model.Orders) %>|<% foreach (**var** order in Model.Orders) %>|
+|Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.|<p>[TestMethod]</p><p>public void **Test** ()</p><p>{ </p><p>...</p><p>}</p>|<p>[TestMethod]</p><p>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()</p><p>{ </p><p>...</p><p>}</p><p></p>|
+|var should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are:|__var__ x = y.X;||
+|- An anonymous type is used.|__X__ q = from x in list select __new { A = x.A }__;|__var__ q = from x in list select __new { A = x.A }__;|
+|- The code line is a ‘new’ statement.|__X__ x = new __X__()|__var__ x = new __X__()|
+|- The code line is a direct cast.|__X__ x = (__X__)y;|__var__ x = (__X__)y;|
+|- The code line is WAAAY too long and unreadable without ‘var’.|foreach (__KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>__ entry in dictionary)|foreach (__var__ entry in dictionary)|
+|- Use var in your __view__ code.|<% foreach (__OrderViewModel__ order in Model.Orders) %>|<% foreach (__var__ order in Model.Orders) %>|
 |Handle null and empty string the same way everywhere.|||
 |To check if a string is filled use IsNullOrEmpty.|str == null|String.IsNullOrEmpty(str)|
 |To equate string use String.Equals.|str == "bla"|String.Equals(str, "bla")|
@@ -164,7 +164,7 @@ See also: Casing, Punctuation and Spacing.
 Use common boolean variable name prefixes and suffixes:
 
 
-|**Prefix / Suffix**|**Example**|**Comment**|
+| Prefix / Suffix | Example | Comment |
 | :- | :- | :- |
 |Is…|IsDeleted|This is the most common prefix.|
 |Must…|MustDelete||
@@ -329,10 +329,10 @@ Names for other constructs should not start with a verb.
 Common verbs:
 
 
-|**Verb**|**Description**|
+| Verb | Description |
 | :- | :- |
 |Add|<p>E.g.</p><p></p><p>List.Add(item)</p><p>ListManager.Add(list, item)</p><p></p><p>In cases such as the last example, it is best to make the list the first parameter.</p>|
-|Assert|A method that throws **exceptions** if input is invalid.|
+|Assert|A method that throws __exceptions__ if input is invalid.|
 |Calculate||
 |Clear||
 |Convert||
@@ -351,14 +351,14 @@ Common verbs:
 |Set||
 |Try||
 |TryGet||
-|Validate|A method that generates **validation messages** for user-input errors|
+|Validate|A method that generates __validation messages__ for user-input errors|
 
 #### File-Related Variable Names
 
 Variable names that indicate parts of file paths can easily become ambiguous. Here is a list of names that can be used to disambiguate it all:
 
 
-|**Name**|**Value**|
+| Name | Value |
 | :- | :- |
 |FileName|"MyFile.txt"|
 |FilePath|"C:\MyFolder\MyFile.txt"|
@@ -372,10 +372,10 @@ Variable names that indicate parts of file paths can easily become ambiguous. He
 |AbsoluteFolderPath|"C:\MyFolder"|
 |AbsoluteFileName|DOES NOT EXIST|
 |FileName**Pattern**, FilePath**Pattern**, etc.|<p>**\***.xml</p><p>C:\temp\BLA\_**????**.csv</p>|
-|FileName**Format**, FilePath**Format**, etc.|<p>order-**{0}**.txt</p><p>orders-**{0:dd-MM-yyyy}**\\*.\*</p>|
-**Prefixes and Suffixes** 
+|FileName**Format**, FilePath**Format**, etc.|<p>order-__{0}__.txt</p><p>orders-__{0:dd-MM-yyyy}__\\*.\*</p>|
+__Prefixes and Suffixes__ 
 
-|**Suffix**|**Description**|
+| Suffix | Description |
 | :- | :- |
 |<p>source..</p><p>dest…</p>|In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.|
 |existing...|Denotes that something already existed (in the data store) before starting this transaction.|
