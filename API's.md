@@ -354,5 +354,3 @@ Prefer the XmlHelper methods over using the API’s directly, because the helper
 The classes ManyToOneRelationship and OneToManyRelationship do inverse property management more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: you still have to program classes that derive from ManyToOneRelationship and OneToManyRelationship and use them a certain way, but the result will be in a navigation property and collection property whose ends will be kept in sync.
 
 <TODO: Perhaps clarify a bit more. Code example, perhaps.>
-
-`	`2 / 6
