@@ -4,43 +4,28 @@
 Code Style
 ----------
 
-### ***Contents***
-[Contents	1](#_Toc487130072)
+<h3>Contents</h3>
 
-[Introduction	2](#_Toc487130073)
+- [Code Style](#code-style)
+    - [Introduction](#introduction)
+    - [Casing, Punctuation and Spacing](#casing-punctuation-and-spacing)
+    - [Trivial Rules](#trivial-rules)
+    - [Miscellaneous Rules](#miscellaneous-rules)
+        - [Namespace Tips](#namespace-tips)
+    - [Member Order](#member-order)
+    - [Naming](#naming)
+        - [Boolean Names](#boolean-names)
+        - [Class Names](#class-names)
+        - [Collection Names](#collection-names)
+        - [DateTime Names](#datetime-names)
+        - [Enum Names](#enum-names)
+        - [Event Names / Delegate Names](#event-names--delegate-names)
+        - [Method Names](#method-names)
+        - [File-Related Variable Names](#file-related-variable-names)
+        - [Miscellaneous Names](#miscellaneous-names)
 
-[Casing, Punctuation and Spacing	2](#_Toc487130074)
+### Introduction
 
-[Trivial Rules	4](#_Toc487130075)
-
-[Miscellaneous Rules	7](#_Toc487130076)
-
-[Namespace Tips	9](#_Toc487130077)
-
-[Member Order	9](#_Toc487130078)
-
-[Naming	9](#_Toc487130079)
-
-[Boolean Names	9](#_Toc487130080)
-
-[Class Names	10](#_Toc487130081)
-
-[Collection Names	11](#_Toc487130082)
-
-[DateTime Names	11](#_Toc487130083)
-
-[Enum Names	12](#_Toc487130084)
-
-[Event Names / Delegate Names	12](#_Toc487130085)
-
-[Method Names	13](#_Toc487130086)
-
-[File-Related Variable Names	13](#_Toc487130087)
-
-[Miscellaneous Names	15](#_Toc487130088)
-
-
-### ***Introduction***
 This section lists trivial coding rules, that should be followed throughout the code.
 
 Coding standards mostly conform to the Microsoft standard described in the following documents:
@@ -50,7 +35,8 @@ Coding standards mostly conform to the Microsoft standard described in the follo
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
 Use Resharper. Seriously. Finetune it to automatically check your coding style. Use it to keep code clean as write code or change existing code.
-### ***Casing, Punctuation and Spacing***
+
+### Casing, Punctuation and Spacing
 
 |**Rule**|**Example**|
 | :- | :- |
@@ -85,7 +71,8 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |Use proper indentation|<TODO: Example.>|<TODO: Example.>|
 |<p>Generic constraints on next line.</p><p>(So they stand out)</p>|<p>class MyGenericClass<T> where T: MyInterface</p><p>{</p><p>}</p><p></p>|<p>class MyGenericClass<T></p><p>where T: MyInterface</p><p>{</p><p>}</p>|
 |For one-liners, but generic constraints on same line instead.|<p>interface IMyInterface</p><p>{</p><p>void MyMethod(T param) </p><p>where T : ISomething</p><p>}</p>|<p>interface IMyInterface</p><p>{</p><p>void MyMethod(T param) where T : ISomething</p><p>}</p>|
-### ***Trivial Rules***
+
+### Trivial Rules
 
 |**Rule**|**Wrong**|**Right**|
 | :- | :- | :- |
@@ -109,7 +96,8 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |Prefer .Value and .HasValue for nullable types.|<p>**int? number;**</p><p>**if (number != null)<br>{**</p><p>**string message = String.Format(**</p><p>**"Number = {0}", number);**</p><p>**}**</p>|<p>int? number;</p><p>if (number.HasValue)<br>{</p><p>string message = String.Format(</p><p>"Number = {0}", number.Value);</p><p>}</p>|
 |Do not leave unused (outcommented) around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.|||
 |it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.|||
-### ***Miscellaneous Rules***
+
+### Miscellaneous Rules
 
 |**Description**|**Not Recommended**|**Recommended**|
 | :- | :- | :- |
@@ -130,11 +118,10 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |<p>Parameter order:</p><p>When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings.</p>||<p>class MyPresenter</p><p>{</p><p>public MyPresenter(</p><p>MyEntity entity, </p><p>IMyRepository repository,</p><p>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)</p><p>{</p><p>...</p><p>}</p><p>}</p>|
 |No long code lines<br><TODO: Describe better.>|||
 |When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.|<p>if (x <= 100 && x >= 10)</p><p>if (x >= 11 && x <= 99)</p>|<p>if (x >= 10 && x <= 100)</p><p>if (x > 10 && x < 100)</p>|
-####
-`	`2 / 15	
 
 
-#### **Namespace Tips**
+#### Namespace Tips
+
 Avoid using full namespaces in code, because that makes the code line very hard to read:
 
 NOT RECOMMENDED:
@@ -154,7 +141,9 @@ using IUserRepository\_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepositor
 ...
 
 IUserRepository\_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IUserRepository\_Cms>(cmsContext);
-### ***Member Order***
+
+### Member Order
+
 Try giving the members in your code file a logical order, instead of mixing them all up. Suggested possibilities for organizing your members:
 
 
@@ -165,9 +154,13 @@ Try giving the members in your code file a logical order, instead of mixing them
 |By layer|When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.|
 
 The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Pick the one most appropriate for your code.
-### ***Naming***
+
+### Naming
+
 See also: Casing, Punctuation and Spacing.
-#### **Boolean Names**
+
+#### Boolean Names
+
 Use common boolean variable name prefixes and suffixes:
 
 
@@ -195,7 +188,8 @@ Some boolean names are so common that they do not get any prefixes:
 | :- |
 |Enabled|
 
-#### **Class Names**
+#### Class Names
+
 Class names usually end with the pattern name or a verb converted to a noun, e.g.:
 
 Converter
@@ -240,7 +234,9 @@ Common ‘last names’ for classes apart form the pattern names are:
 |Provider|A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider can also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.|
 |Asserter|<TODO: Describe>|
 ||Any method verb could become a class name, by turning it into a verby noun, e.g. Convert à Converter.|
-#### **Collection Names**
+
+#### Collection Names
+
 Collection names are plural words, e.g.:
 
 Products
@@ -252,7 +248,9 @@ Variable names for amounts of elements in the collection are named:
 Count
 
 So avoid using plural words to denote a count and avoid plural words for things other than collections.
-#### **DateTime Names**
+
+#### DateTime Names
+
 A DateTime property should be suffixed with ‘Utc’ or ‘Local’:
 
 StartDateLocal
@@ -270,10 +268,14 @@ But that looks less nice when you add the Local and Utc suffices again:
 ModifiedWhenUtc
 
 OrderedWhenLocal
-#### **Enum Names**
+
+#### Enum Names
+
 Use the ‘Enum’ suffix for enum types e.g. OrderStatus**Enum**.
 Another acceptable alternative is the suffix ‘Mode’, e.g. Connection**Mode**, but the first choice should be the suffix ‘Enum’.
-#### **Event Names / Delegate Names**
+
+#### Event Names / Delegate Names
+
 Event names and delegate names, that indicate what just happened have the following form:
 
 Deleted
@@ -317,7 +319,9 @@ RemoveRequested
 Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix ‘On’ for instance and the prefix ‘Handle’ may very well be used for the methods that actually raise the event. ‘Fire’ and ‘Do’ are also alternatives.
 
 Avoid event names that indicate that it is an event in two different ways. For instance ‘OnDragging’ can be shortened to just ‘Dragging’, because the suffix -ing is already an indication that it is an event. ‘OnMouseUp’ can be shortened to just ‘MouseUp’, because that is an established event name.
-#### **Method Names**
+
+#### Method Names
+
 Method names start with verbs, e.g. CreateOrder. 
 
 Names for other constructs should not start with a verb.
@@ -348,7 +352,9 @@ Common verbs:
 |Try||
 |TryGet||
 |Validate|A method that generates **validation messages** for user-input errors|
-#### **File-Related Variable Names**
+
+#### File-Related Variable Names
+
 Variable names that indicate parts of file paths can easily become ambiguous. Here is a list of names that can be used to disambiguate it all:
 
 
@@ -384,5 +390,7 @@ Variable names that indicate parts of file paths can easily become ambiguous. He
 |…Recursive|(Some people tend to use ‘Recursively’ instead, probably insisting it is better grammer, but Recursive is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)|
 |To…|<p>For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:</p><p></p><p>array.ToHashSet()</p><p></p><p>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:</p><p></p><p>MyConverter.ToHashSet(object[] array)</p><p></p><p>The Convert or ConvertTo verbs might be more appropriate there:</p><p></p><p>MyConverter.ConvertToHashSet(object[] array)</p><p></p>|
 |From…|<p>For conversion from one to another thing. A lot like ‘To…’ executed on the dest object instead:</p><p></p><p>dest.FromSource(source)</p><p></p><p>The ‘To…’ prefix is more common, and usually more readable.</p>|
-#### **Miscellaneous Names**
+
+#### Miscellaneous Names
+
 - For number sequences you can use names like: ListIndex, IndexNumber, SortOrder. (Avoid Index because it is an SQL keyword.)

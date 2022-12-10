@@ -3,36 +3,28 @@
 
 *Date: January 2014 – May 2014*
 
-## **Contents**
-[Contents	1](#_Toc3543)
+<h2>Contents</h2>
 
-[Introduction	1](#_Toc32735)
-
-[Unity / .NET Compatibility Issues	2](#_Toc18393)
-
-[Unity Free Compatibility Issues	2](#_Toc28005)
-
-[Android / Unity Compatibility Issues	2](#_Toc15684)
-
-[Windows Phone 8 Compatibility Issues	3](#_Toc8526)
-
-[Windows Phone 8 / Unity Compatibility Issues	3](#_Toc31409)
-
-[Mac OS / Unity Compatibility Issues	5](#_Toc7352)
-
-[iOS 6 / Unity Compatibility Issues	6](#_Toc12289)
-
-[Information	6](#_Toc15928)
+- [Introduction](#introduction)
+- [Unity 4.3.4 / .NET Compatibility Issues](#unity-434--net-compatibility-issues)
+- [Unity Free 4.3.4 Compatibility Issues](#unity-free-434-compatibility-issues)
+- [Android / Unity 4.3.4 Issues](#android--unity-434-issues)
+- [Windows Phone 8 Compatibility Issues](#windows-phone-8-compatibility-issues)
+- [Windows Phone 8 / Unity 4.3.4 Compatibility Issues](#windows-phone-8--unity-434-compatibility-issues)
+- [Mac OS / Unity 4.3.4 Compatibility Issues](#mac-os--unity-434-compatibility-issues)
+- [iOS 6 / Unity 4.3.4 Compatibility Issues](#ios-6--unity-434-compatibility-issues)
+- [Information](#information)
 
 
+Introduction
+------------
 
-
-
-## **Introduction**
 Deploying .NET code to mobile platforms means dealing with a variety of compatibility issues. This document lists the issues found while deploying of .NET code to iOS, Windows Phone and Android. This document may not be exhaustive and might be extended in the future as new issues come to light. The deployment was done using a tool called Unity, which is a Mono-based game engine.
-4 / 6
-`		`*Multi-Platform Deployment Compatibility Issues*
-## **Unity 4.3.4 / .NET Compatibility Issues**
+
+
+Unity 4.3.4 / .NET Compatibility Issues
+---------------------------------------
+
 You must take the following things into consideration to make your .NET code work in Unity.
 
 
@@ -41,18 +33,24 @@ You must take the following things into consideration to make your .NET code wor
 |Copy your compiled assemblies|To use your own .NET assemblies in Unity, you need to copy them to the Assets folder or a sub-folder there in your Unity project.|
 |Target .NET 2.0|<p>You have to target .NET 2.0 in Unity (not '.NET 2.0 Subset')</p><p>(<http://answers.unity3d.com/questions/30881/compiling-error-with-mysql-pls-help.html>)</p>|
 |Copy Mono .NET assemblies|You might need to use the Mono versions of .NET assemblies that are not included by default in your Unity projects. To work with .NET assemblies not standardly included by Unity (for instance System.ServiceModel and System.Runtime.Serialization) you need to copy the dll’s from the Unity program files to your Unity project. The location of these dll’s is the program files folder of Unity and then: “Editor/Data/Mono/lib/mono/2.0”. They have to be copied to your Unity project somewhere in the Assets folder. You might want to create a new sub-folder in your Assets folder, possibly named ‘Plugins’.|
-## **Unity Free 4.3.4 Compatibility Issues**
+
+
+Unity Free 4.3.4 Compatibility Issues
+-------------------------------------
 
 |System.Net.Sockets|Unity Free does not support deploying applications that use System.Net.Sockets. You would need Unity Pro for that. This also means any part of .NET that indirectly uses System.Net.Sockets. So basically connecting to a network from your .NET code is disabled. You can use it in the emulator in Unity, but you cannot deploy it to a device. If you want to deploy, you must remove the System.ServiceModel.dll from your Assets folder and anything else that uses System.Net.Sockets.|
 | :- | :- |
-## **Android / Unity 4.3.4 Issues**
+
+Android / Unity 4.3.4 Issues
+----------------------------
 
 |Install Android SDK|For the Android deployment to work, you need to install Android SDK.|
 | :- | :- |
 |Build and Run may not work|Building the APK file may work, while running it on the device directly from Untiy might not work.<br>Install the APK deployment file on the device instead.|
 |Installing deployment files|You can install the APK file on your Android device by simply copying the file some somewhere on the device when you have connected it to your PC. Find a file browser that works on Android (e.g. ASTRO File Manager), find the APK file and click it.|
 
-## **Windows Phone 8 Compatibility Issues**
+Windows Phone 8 Compatibility Issues
+------------------------------------
 
 |Windows 8|You need Windows 8 to deploy to Windows Phone 8. You cannot do it with Windows 7.|
 | :- | :- |
@@ -61,9 +59,12 @@ You must take the following things into consideration to make your .NET code wor
 |System.Type.GetInterface(string name)|Not supported. Alternative: System.Type.GetInterface(string name, bool ignoreCase)|
 |System.Xml.Linq limitations|<p>On Windows Phone 8:</p><p>XDocument.Save(string fileName) does not exist.</p><p>XElement.Save(string fileName) does not exist either.</p><p>XElement.Save(Stream) exists on Windows Phone 8, but not in .NET 3.5.</p><p>so use XElement.Save(TextWriter).</p>|
 |CultureInfo.GetCultureInfo(string)|Not supported. Alternative: new CultureInfo(string).|
-## **Windows Phone 8 / Unity 4.3.4 Compatibility Issues**
-The items below are compatibility problems related to how Unity interoperates with Windows Phone.
 
+
+Windows Phone 8 / Unity 4.3.4 Compatibility Issues
+--------------------------------------------------
+
+The items below are compatibility problems related to how Unity interoperates with Windows Phone.
 
 |System.Reflection.MemberInfo.MemberType|<p>Threw a strange exception when deployed using Unity: "Method not found: 'System.Reflection.MemberTypes"</p><p></p><p>Officially it is supported:</p><p><http://msdn.microsoft.com/en-us/library/windowsphone/develop/system.reflection.memberinfo.membertype%28v=vs.105%29.aspx></p><p>Maybe not supported on lower Windows Phone .NET framework version?</p><p></p><p>Alternative code:</p><p>if (memberInfo is FieldInfo) { ... }</p><p>if (memberInfo is PropertyInfo) { ... }</p><p>etc.</p>|
 | :- | :- |
@@ -77,14 +78,19 @@ The items below are compatibility problems related to how Unity interoperates wi
 |Constructor WWW(url, byte[], header)|The WWW class is a Unity framework class that allows you to send HTTP requests. The header parameter of this constructor is a Dictionary<string, string> for Windows Phone 8 and a Hashtable for Android and iOS. Use the compiler directive UNITY\_WP8 to use a variable of a different type.|
 |Encoding.GetString|Does not have the overload that takes byte[], but does have an overload with byte[], index and count.|
 |System.Diagnostics.Trace class|` `Not available on Windows Phone 8. (This makes JJ.Framework.Logging not usable.)|
-## **Mac OS / Unity 4.3.4 Compatibility Issues**
+
+Mac OS / Unity 4.3.4 Compatibility Issues
+-----------------------------------------
 
 |Copy System.Runtime.Serialization|<p>On Mac OS, the Unity emulator will not run a program that requires System.Runtime.Serialization if you do not copy the Mono version of the DLL to the Assets folder of the Unity project.</p><p></p><p>The location of these dll’s in the Unity program files on Windows is (the program files folder of Unity and then: “Editor/Data/Mono/lib/mono/2.0”.</p><p>(The location on Mac OS might be similar.)</p>|
 | :- | :- |
 |Mac OS version|<p>A Mac that is too old or whose system specs are too low, might not run the XCode version that is required to deploy to your particular version of iOS.</p><p>XCode 4.6 is required for deployment to iOS 6, which requires Mac OS X 10.6.7 Lion, which requires a minimum of 2 GB of memory. XCode 4.2 is the highest version that will run on Mac OS X 10.6.8 Snow Leopard.</p><p>XCode 3.2 is not a high enough version to run the project that is output by Unity.</p>|
 |Connecting to Windows share|Connecting to a Windows share from Mac OS hangs on my Mac all the time. It works one time, and then not anymore. Alternatively you can turn on sharing on the Mac and connect to the shares from Windows by simply going to [\\192.168.1.1\](\\192.168.1.1\) (numbers may vary). You could also RDP from the Mac to the Windows machine, configure that you can access local local folders on the Mac from your RDP session and then copy files from the Windows PC to the Mac inside the RDP session. You can also use VNC to connect from a Windows machine to a Mac, which might be convenient, but might also have bad performance.|
 |Errors in Unity that can be ignored|<p>You can get the following errors in Unity. The deployment will still work, even when you ignore the errors (if you use the ‘Build’ button, not ‘Build and Run’ and then run it from XCode):</p><p>- “Socket: bind failed, error: Address already in use (48)”</p><p>- “Unable to join player connection multicast group”</p>|
-## **iOS 6 / Unity 4.3.4 Compatibility Issues**
+
+
+iOS 6 / Unity 4.3.4 Compatibility Issues
+----------------------------------------
 
 |Mac OS|You definitely need Mac OS in order to deploy to iOS. You cannot do it in Windows.|
 | :- | :- |
@@ -95,7 +101,11 @@ The items below are compatibility problems related to how Unity interoperates wi
 |Compile for release|Resources might not work when you do not compile .NET assemblies for release.|
 |System.ServiceModel|<p>Not supported. Cross-compilation fails because the Mono implementation of System.ServiceModel references parts of Mono.WebBrowser, which is not supported on iOS 6.</p><p>A solution is to program your own SOAP client based on System.Xml.Linq.</p><p>NOT TESTED YET...</p>|
 |System.Web.Services|<p>Not supported. When trying to send a message, the XmlSerializer is used, which calls MonoProperty.GetValue, which attempts to JIT Compile, which is not supported.<br>A solution is to program your own SOAP client based on System.Xml.Linq.</p><p>NOT TESTED YET...</p>|
-## **Information**
+
+
+Information
+-----------
+
 About compatibility between Mac OS versions and versions of Xcode:
 
 <https://discussions.apple.com/thread/3924758>
@@ -113,5 +123,3 @@ Google "multi-platform solutions"
 <http://simpleprogrammer.com/2013/07/01/cross-platform-mobile-development>
 
 <http://sixrevisions.com/mobile/cross-platform-mobile-apps/>
-
-

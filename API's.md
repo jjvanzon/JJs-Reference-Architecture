@@ -4,48 +4,48 @@
 API's
 -----
 
-### ***Contents***
+<h3>Contents</h3>
 
-[Contents	1](#_Toc487129800)
-
-[AJAX	1](#_Toc487129801)
-
-[Embedded Resources	1](#_Toc487129802)
-
-[Entity Framework 5	2](#_Toc487129803)
-
-[JavaScript / TypeScript	2](#_Toc487129804)
-
-[NHibernate	2](#_Toc487129805)
-
-[ORM	2](#_Toc487129806)
-
-[SQL	3](#_Toc487129807)
-
-[With NHibernate	5](#_Toc487129808)
-
-[Files instead of Embedded Resources	6](#_Toc487129809)
-
-[Strings instead of Embedded Resources:	6](#_Toc487129810)
-
-[XML	6](#_Toc487129811)
-
-[Framework.Business Relationships	6](#_Toc487129812)
+- [API's](#apis)
+  - [TODO](#todo)
+  - [AJAX](#ajax)
+  - [Configuration](#configuration)
+    - [Custom Configuration Sections](#custom-configuration-sections)
+    - [appSettings](#appsettings)
+    - [**connectionStrings**](#connectionstrings)
+  - [Embedded Resources](#embedded-resources)
+  - [Entity Framework 5](#entity-framework-5)
+  - [JavaScript / TypeScript](#javascript--typescript)
+  - [NHibernate](#nhibernate)
+  - [ORM](#orm)
+  - [SQL](#sql)
+    - [With NHibernate](#with-nhibernate)
+    - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
+    - [Strings instead of Embedded Resources:](#strings-instead-of-embedded-resources)
+  - [XML](#xml)
+  - [Framework.Business Relationships](#frameworkbusiness-relationships)
 
 
-### ***TODO***
+### TODO
+
 <TODO: API’s: Make sure you mention all the important in-house API’s and external API’s in the documentation.>
 
 <TODO: Mention JJ.Framework.
 
 ` `JJ.Framework documentation: Separate document for overviewing what’s in JJ.Framework. Otherwise (lead) developers that use it would have to have a chrystal ball to know what’s in there.>
-### ***AJAX***
+
+### AJAX
+
 We make our own wrapper ajax methods around ones from e.g. jQuery, so we can AJAX with a single code line and handle both partial loads and full reloads.
 
 We choose full loads first, before resorting to AJAX. See ‘First full load – then partial load – then native code’.
-### ***Configuration***
+
+### Configuration
+
 For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET’s System.Configuration directly can be quite a lot of work.
-#### **Custom Configuration Sections**
+
+#### Custom Configuration Sections
+
 If your configuration requires more than a flat list of key value pairs, you might make a custom configuration section. In a configuration section you can add as much hierarchy as you like. You can read out structures like the following:
 
 <jj.demos.configuration>
@@ -107,7 +107,9 @@ internal class ItemConfig
 }
 
 Note that C# will follow the convention that property names are pascal case, while this automatically maps to the convention in XML, in which element and attribute names are camel case.
-#### **appSettings**
+
+#### appSettings
+
 An appSetting looks as follows in the App.config or Web.config:
 
 <appSettings>
@@ -163,13 +165,21 @@ internal interface IConnectionStrings
 `    `string OrderDB { get; }
 
 }
-### ***Embedded Resources***
+
+### Embedded Resources
+
 <TODO: Write text.>
-### ***Entity Framework 5***
+
+### Entity Framework 5
+
 *<TODO: Add story about enabling MSDTC and transactionality.>*
-### ***JavaScript / TypeScript***
+
+### JavaScript / TypeScript
+
 <TODO: Describe Framework.Javascript and why you might avoid JavaScript and why you might not. Also mention TypeScript.>
-### ***NHibernate***
+
+### NHibernate
+
 <TODO: Describe thgis problem with polymorphism:
 
 API’s, ORM: Arch: when an entity is a proxy or not a proxy, could reference comparison fail?
@@ -185,7 +195,9 @@ So for polymorphic entities always Unproxy before evaluating their type.>
 <TODO: describe which NHibernate methods to use and what features to avoid. Do not map binary and other serialized data fields using NHibernate, because it gives terrible performance. Use separate SQL statements for retrieving blobs. Also: always include bride entities for 1-to-n relationships, never let the two sides of the 1-to-n relationship refer to eachother directly. Always go through a bride entity. Always have surrogate keys in a bridge table, not just the composite key. Otherwise you will get problems with ORM mapping technologies crazy-complicated guarding of integrity of object graphs and passing around composite keys all the time, no-good hashing keys, ugly URL’s, etc.>
 
 <TODO: Describe more of the pitfalls and dos and don’ts around NHibernate and also FluentNHibernate.>
-### ***ORM***
+
+### ORM
+
 Here is a ubiquitous quirk of ORM:
 
 Many methods of IContext work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. But IContext.Query usually does the opposite: it only returns committed / flushed entities. This asymmetry is common in ORM’s and doing it any other way would harm performance.
@@ -199,7 +211,9 @@ Many methods of IContext work with uncommitted / non-flushed entities: so things
 - Mappings: do not solve n-to-n relationships with (NHibernate) mappings. Always use bridge entities.>
 
 <TODO: A problem with ORM: meet-in-the-middle querties. You have two ends of a graph, you filter both ends and then want what is in the middle.>
-### ***SQL***
+
+### SQL
+
 <TODO: 
 
 - No SQL strings:
@@ -295,7 +309,8 @@ The column names in the SQL are *case sensitive!*
 It is smart to let the SQL file names begin with the entity type name, so they stay neatly grouped together:
 
 ![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.004.png)
-#### **With NHibernate**
+
+#### With NHibernate
 If you use SqlExecutor in combination with NHibernate you have to use the NHibernateSqlExecutorFactory instead of the default SqlExecutorFactory:
 
 ISession session = ...;
@@ -305,7 +320,8 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSou
 This version uses an NHibernate ISession. In order for the SQL to run in the same transaction as the SQL that NHibernate executes, it needs to be aware of the ISession.
 
 It is usually the best choice to include the SQL as an embedded resource, but you can also use files or literal strings.
-#### **Files instead of Embedded Resources**
+#### Files instead of Embedded Resources
+
 ![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.005.png)
 
 The is the code to create the SqlExecutor and execute an SQL file:
@@ -315,7 +331,8 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSou
 sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient\_Update.sql", new { id, name });
 
 So the SqlEnum cannot be used anymore. You have to use the (relative) file path.
-#### **Strings instead of Embedded Resources:**
+#### Strings instead of Embedded Resources:
+
 It is not recommended to use SQL strings in your code! But it is possible all the same using the following code:
 
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.String, session);
@@ -323,13 +340,17 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSou
 sqlExecutor.ExecuteNonQuery("update Ingredient set Name = @name where ID = @id", new { id, name });
 
 In that case no SQL files have to be included in your project.
-### ***XML***
+
+### XML
+
 Always choose XElement (LINQ to XML) over XmlDocument except when you have to use XPath.
 
 Prefer the XmlHelper methods over using the API’s directly, because the helper will handle nullability and unicity better.
 
 `	`XmlToObjectConverter and ObjectToXmlConverter are also acceptable XML API’s.
-### ***Framework.Business Relationships***
+
+### Framework.Business Relationships
+
 The classes ManyToOneRelationship and OneToManyRelationship do inverse property management more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: you still have to program classes that derive from ManyToOneRelationship and OneToManyRelationship and use them a certain way, but the result will be in a navigation property and collection property whose ends will be kept in sync.
 
 <TODO: Perhaps clarify a bit more. Code example, perhaps.>
