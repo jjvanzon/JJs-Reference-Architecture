@@ -141,7 +141,7 @@ Another funny thing about infrastructure, for example user right management, is 
 
 ### Alternatives
 
-||Benefits|Downsides|
-| :- | :- | :- |
-|Data and Business in one layer|- Might be easier to understand|More likely for data access and business to get entangled |
-|No repositories|||
+|                                | Benefits                        | Downsides |
+|--------------------------------|---------------------------------|-----------|
+| Data and Business in one layer | - Might be easier to understand | More likely for data access and business to get entangled
+| No repositories                |                                 |
