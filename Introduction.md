@@ -25,8 +25,6 @@ It is about modular design of software components, which can be done by splittin
 
 Software architecture also has a strong focus on maintainability and being prepared the future as a system grows.
 
-
-
 The programming side of software architecture is about making frameworks, coding the functionalities, combining different technologies and using best practices. It also involves technical design, which by the way you can do in your head as well as on paper.
 
 ### Inter-Disciplinary Aspects

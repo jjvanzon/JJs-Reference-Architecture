@@ -845,19 +845,13 @@ Note that deletion of destination objects is not managed by the TryGet-Insert-Up
 
 Used for managing complex conversions between data structures, that require insert, update and delete operations. There is no one way of implementing it, but generally it will involve the following steps:
 
-\- Loop through the source collection.
-
-\- TryGet: look up an item in the destination collection.
-
-\- Insert: create a new item in the destination collection if none exists.
-
-\- Update: update the newly created or existing destination item.
-
-\- Do delete operations after that:
-
-\- Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
-
-\- Then you loop through that collection and delete each item.
+- Loop through the source collection.
+- TryGet: look up an item in the destination collection.
+- Insert: create a new item in the destination collection if none exists.
+- Update: update the newly created or existing destination item.
+- Do delete operations after that:
+- Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
+- Then you loop through that collection and delete each item.
 
 ##### Considerations
 
@@ -865,19 +859,13 @@ Converting one collection to another may involve more than creating a destinatio
 
 In a little more detail:
 
-\- Loop through the source collection.
-
-\- TryGet: look up an item in the destination collection.
-
-\- Insert: create a new item in the destination collection if none exists.
-
-\- Update: update the newly created or existing destination item.
-
-\- Do delete operations after that:
-
-\- Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
-
-\- Then you loop through that collection and delete each item.
+- Loop through the source collection.
+- TryGet: look up an item in the destination collection.
+- Insert: create a new item in the destination collection if none exists.
+- Update: update the newly created or existing destination item.
+- Do delete operations after that:
+- Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
+- Then you loop through that collection and delete each item.
 
 Here follows some pseudo code for how to do it:
 
@@ -917,23 +905,15 @@ Delete(itemToDelete);
 
 The specific way to implement it, is different in every situation. Reasons that there are many ways to do it are:
 
-\- You cannot always count on instance integrity.
-
-\- You cannot always count on identity integrity.
-
-\- The key to a destination item might be complex, instead of just an ID.
-
-\- You do not always have a repository.
-
-\- It does not always need to be full-CRUD.
-
-\- You might need to report exactly what operation is executed on each entity.
-
-\- You might need a separate normalized *singular* form of the conversion, that may conflict with the way of working in the plural form.
-
-\- An alternative isNew detection might be needed.
-
-\- Some persistence technologies will behave unexpectedly when first retrieving and then writing and then retrieving again. Intermediate redundant retrievals should be avoided. Or not, depending on the situation.
+- You cannot always count on instance integrity.
+- You cannot always count on identity integrity.
+- The key to a destination item might be complex, instead of just an ID.
+- You do not always have a repository.
+- It does not always need to be full-CRUD.
+- You might need to report exactly what operation is executed on each entity.
+- You might need a separate normalized *singular* form of the conversion, that may conflict with the way of working in the plural form.
+- An alternative isNew detection might be needed.
+- Some persistence technologies will behave unexpectedly when first retrieving and then writing and then retrieving again. Intermediate redundant retrievals should be avoided. Or not, depending on the situation.
 
 Each variation has either overhead or elegance depending on the situation. If you always pick the same way of doing it, you may end up with unneccesary and unsensical overhead, or with an overly complicated expression of what you are trying to do.
 
@@ -1024,7 +1004,6 @@ You can also choose to implement IDisposable. This is useful if you want to be a
 Dispose();
 
 }
--
 - Make sure the dispose can successfully run regardless of state, so check any variable you might use for null first and be tollerant towards null.
 
 public void Dispose()
@@ -1034,7 +1013,7 @@ public void Dispose()
 \_myConnection__?__.Close();
 
 }
--
+
 - Also call GC.SuppressFinalize() in the Dispose() method, because then the garbage collector will skip a few unneeded steps in getting rid of the object.
 
 #### Constructor Inheritance
@@ -1330,7 +1309,7 @@ Singular or Plural methods do not process related entities unless they have the 
 There is a subtle difference between ‘WithRelatedEntities’ and  ‘Recursive’. They are similar, but Recursive processing can pass the same object type again and again, while processing with related entities processes a tree of objects, in which the same object type does not recur at a deeper level.
 
 Finer details about the Singular form:
--
+
 - They do not process child entities, they can however link to reusable entities, such as enum-like types, or categories.
 - They usualy do not assign a parent. The caller of the Singular form does that. That way methods are more independent of context and better reusable and code better rewritable. There are exceptions to that rule.
 

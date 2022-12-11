@@ -41,7 +41,6 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Direction
 - Planning
 - Strategy
--
 - Keep your cool
 - Be open to other views
 
@@ -53,7 +52,6 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Get to know each other to make optimal ‘use’ of skills but also to enhance morale and good feeling, mutual understanding and promote openness.
 - Assess what the team member’s problems are, regarding the way he feels about the work.
 - Dialog should sometimes be limited too, because this job requires focus and quiet often, in order to do it well.
-
 - Periodic workshops mostly from team lead, but could be from someone else, to present an idea.
 
 #### Periodic Individual Meetings
@@ -154,11 +152,11 @@ Tools & techniques:
 - If your involvement starts in the middle, do not try to steer it too much into another direction.
 - You could find the biggest problem area and then suggest that as a point of improvement. 
 - Meetings: (borders the topic of Dialog)
-  - Try keep focus in meetings, so things do not go off topic too much.
-  - On one hand I dislike it, when a meeting about a topic that could have been 30 minutes turns into 5 hours of a whole range of topics with only loose ends and inconclusives at the end.
-  - On the other hand I dislike it, when the response to a proposal is: "That is not what this meeting is about."
-  - The intermediate version would be brief attention to off-topics and main focus on the topic at hand.
-  - It also depends on whether it is a general meeting or a conversation about a specific topic.
+    - Try keep focus in meetings, so things do not go off topic too much.
+    - On one hand I dislike it, when a meeting about a topic that could have been 30 minutes turns into 5 hours of a whole range of topics with only loose ends and inconclusives at the end.
+    - On the other hand I dislike it, when the response to a proposal is: "That is not what this meeting is about."
+    - The intermediate version would be brief attention to off-topics and main focus on the topic at hand.
+    - It also depends on whether it is a general meeting or a conversation about a specific topic.
 - API choice: Medior developers and juniors are *not* free to choose any API without collaborating with seniors, leads and architects. It just has too high an impact. Not that we should not be open to new API’s.
 - Framework development: Same point as API choice: juniors and mediors only adapt framework in collaboration with seniors, leads and architects.
 
@@ -198,52 +196,52 @@ I cannot stress enough that it is a bad idea to let a only one developer work on
 Here are suggestions of how to spread and vary the work over multiple team members. Variations can be mixed and mingled at will. That is the point. Be flexible.
 
 - Variation 1:
-  - Junior front-end
-  - Medior back-end
-  - Senior framework
+    - Junior front-end
+    - Medior back-end
+    - Senior framework
 - Variation 2:
-  - Senior coaches medior
-  - Medior coaches junior
+    - Senior coaches medior
+    - Medior coaches junior
 - Variation 3:
-  - Senior reviews code of mediors
-  - Medior reviews code of juniors
+    - Senior reviews code of mediors
+    - Medior reviews code of juniors
 - Variation 4:
-  - 1 developer does rework of previous iteration
-  - Another developer does new features.
-  - Every now and then they switch
-  - That way rework is not in the way of new developments.
+    - 1 developer does rework of previous iteration
+    - Another developer does new features.
+    - Every now and then they switch
+    - That way rework is not in the way of new developments.
 - Variation 5:
-  - One developer answers questions coming from outside the department and each day a different developer does it.
-  - If needed other tedious task go to that developer.
-  - That way the other days you know you can keep working on actual software development uninterruptedly and you at most only lose that one day that it is your turn.
+    - One developer answers questions coming from outside the department and each day a different developer does it.
+    - If needed other tedious task go to that developer.
+    - That way the other days you know you can keep working on actual software development uninterruptedly and you at most only lose that one day that it is your turn.
 - Variation 6:
-  - Each developer or a set of developers works on a different part of the application or major feature.
-  - Perhaps a junion/medior pair can work on a feature together.
+    - Each developer or a set of developers works on a different part of the application or major feature.
+    - Perhaps a junion/medior pair can work on a feature together.
 - Variation:
-  - A developer gets a similar task as before because he is now proficient at it.
+    - A developer gets a similar task as before because he is now proficient at it.
 - Variation 7:
-  - A developer gets intentionally different tasks than before, to spread knowledge over the team and enriching the developer’s knowledge.
+    - A developer gets intentionally different tasks than before, to spread knowledge over the team and enriching the developer’s knowledge.
 - Variation 8:
-  - Some developers work on high-risk experiments.
-  - Other developers work on low-risk productive feature development.
-  - That way you create room for doing experiments that you do not know the outcome of yet or do not even know how long it is going to take or if it gives any useable results, without it actually stalling productivity completely.
+    - Some developers work on high-risk experiments.
+    - Other developers work on low-risk productive feature development.
+    - That way you create room for doing experiments that you do not know the outcome of yet or do not even know how long it is going to take or if it gives any useable results, without it actually stalling productivity completely.
 - Variation 9: (very specific)
-  - Seniors do:
-    - Task management
-    - Code review
-    - Architecture
-    - Framework development
-    - Data model design for the most part
-    - Software design
-    - Research / orientation of possible solutions
-  - Mediors program:
-    - Business logic
-    - Data model implementation
-    - *Some* framework and data model design but in tight collaboration with seniors.
-  - Juniors do:
-    - Front-end development, but under supervision so that patterns are followed.
-    - Repetitive tasks, but only ones the junior can handle.
-    - This may sound a bit deprecating, but sometimes a junior developer, when asked to do something in a very specific way, apply it the same all over the place, do it totally differently when you turn your back. That says something about the need for guidance. You have to monitor junior developers.
+    - Seniors do:
+        - Task management
+        - Code review
+        - Architecture
+        - Framework development
+        - Data model design for the most part
+        - Software design
+        - Research / orientation of possible solutions
+    - Mediors program:
+        - Business logic
+        - Data model implementation
+        - *Some* framework and data model design but in tight collaboration with seniors.
+    - Juniors do:
+        - Front-end development, but under supervision so that patterns are followed.
+        - Repetitive tasks, but only ones the junior can handle.
+        - This may sound a bit deprecating, but sometimes a junior developer, when asked to do something in a very specific way, apply it the same all over the place, do it totally differently when you turn your back. That says something about the need for guidance. You have to monitor junior developers.
 
 #### Upward Management
 
@@ -275,7 +273,6 @@ This will make someone aware of expectations, and of how deep to go.
 - Lead must be informed of completed task
 - Lead must be asked in case of unclarities
 - Lead communicate the following rules
-
 - Begin Task -> Go to lead
 - End Task -> Go to lead
 - No Task -> Go to lead
@@ -288,7 +285,6 @@ Fill in the lead’s name and basically hang up the wall.
 ‘+ Add the basics around this data model to all the architectural layers.’ Discuss verbally which layers. Use the Layering Checklist from the Software Architecture document’s Appendices to make a selection.
 
 - A task should involve all the required work, but what is not asked should be left out
-
 
 But this comes with problems.
 Ideally a developer knows which things to involve in a task, and which things to not involve.

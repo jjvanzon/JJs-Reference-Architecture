@@ -122,7 +122,7 @@ Alternatives: In database. might not play well with ORM. Does not give the idea 
 Code style an be enforced with different methods:
 
 - The Code Style handbook, such as is part of this Reference Architecture.
-- Write your own code analysers, though this can be difficult except for the really basic ones.  Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
+- Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
 - Using Visual Studio’s code style options from the Options screen.
 - Resharper!
 
@@ -546,7 +546,7 @@ An alternative is the OneToManyRelationship and ManyToOneRelationship classes fr
 - Idea 2015-04-29: Inverse property management with a List and a HashSet to make operations not n-problems...
 - make story about inverse property management in property setters. A general description and maybe later mention the helper classes like OneToManyHandler if they are programmed. (They are.)
 - In the software aspects section mention a summary of inverse property management methods, even though they have been individually described in other places in the document.
-  - Reasons not to have an inverse property:
+    - Reasons not to have an inverse property:
         - Enum-like type
         - Loosely linked entity
         - 1-to-1 relationship
@@ -844,9 +844,9 @@ Possible API’s:
 
 <TODO: Write text. Include: Discuss what NHibernate does, explicit and implicit commit, IContext, how to use the SqlExecutor API. Discuss view model transaction and how to work transactionally regardless of how a database does it.
 
-\- Describe transactionality: usage of rollback and commit. Document that flush is an exception and dangerous and if used, must be commented with the reason why you use it.
+- Describe transactionality: usage of rollback and commit. Document that flush is an exception and dangerous and if used, must be commented with the reason why you use it.
 
-\- Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I’m not sure. >
+- Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I’m not sure. >
 
 ### Type Safety
 

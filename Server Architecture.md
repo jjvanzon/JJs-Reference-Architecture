@@ -42,7 +42,7 @@ The server subdivision is subject to the needs of the organization, so this over
 
 <TODO: Write something about this. Include:
 
-- Explain DEV, TEST and PROD. And ACC. And then also the INTERNAL and EXTERNAL production environments and their benefits, mostly with regards to publishing. Use the prefix ACC, instead of ACCEPTANCE, because the prefix goes all over the place e.g. ACC\_BuildlingBlocksDB instead of ACCEPTANCE\_BuildlingBlocksDB. But then again I like this better: acceptance.electroluxservice.JJ-bv.nl >
+- Explain DEV, TEST and PROD. And ACC. And then also the INTERNAL and EXTERNAL production environments and their benefits, mostly with regards to publishing. Use the prefix ACC, instead of ACCEPTANCE, because the prefix goes all over the place e.g. ACC\_MySystemDB instead of ACCEPTANCE\_MySystemsDB. But then again I like this better: acceptance.mysystem.jjvanzon.io >
 
 ### Folders
 

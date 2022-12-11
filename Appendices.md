@@ -36,10 +36,10 @@ This checklist might be used if you want to bulk-program the architecture for an
 - Business: String Resources
 - Business: EnumExtensions
 - Business: Validators
-  - Delete Validators too
-  - Warning Validators (optional)
+    - Delete Validators too
+    - Warning Validators (optional)
 - Business: SideEffects
-  - SetDefaults SideEffects too
+    - SetDefaults SideEffects too
 - Business: Facades
 - Business: Extensions
 - Business: RepositoryWrappers
@@ -50,35 +50,35 @@ This checklist might be used if you want to bulk-program the architecture for an
 - Business: EntityWrappers (optional)
 - Business: Other helpers (optional)
 - Presentation: ViewModels
-  - Item ViewModels
-  - List item ViewModels (some may only need IDNameDto, no ListItem view model)
-  - Lookup ViewModel
-  - List ViewModels
-  - Detail ViewModels
-  - DocumentViewModel (optional)
+    - Item ViewModels
+    - List item ViewModels (some may only need IDNameDto, no ListItem view model)
+    - Lookup ViewModel
+    - List ViewModels
+    - Detail ViewModels
+    - DocumentViewModel (optional)
 - Presentation: ToViewModel
-  - Singular forms
-  - WithRelatedEntities forms
-  - ToListItemViewModel
-  - ToLookupViewModel
-  - ToScreenViewModel
-  - ToDocumentViewModel (optional)
-  - CreateEmptyViewModel (not every view model needs one)
+    - Singular forms
+    - WithRelatedEntities forms
+    - ToListItemViewModel
+    - ToLookupViewModel
+    - ToScreenViewModel
+    - ToDocumentViewModel (optional)
+    - CreateEmptyViewModel (not every view model needs one)
 - Presentation: ToEntity
-  - Singular forms
-  - WithRelatedEntities forms
-  - From screen view model
-  - From DocumentViewModel (optional)
+    - Singular forms
+    - WithRelatedEntities forms
+    - From screen view model
+    - From DocumentViewModel (optional)
 - Presentation: Presenters
-  - List Presenters
-  - Detail Presenters
-  - (Edit Presenters)
-  - Save methods in Detail (or Edit) Presenters.
-  - MainPresenter (optional)
+    - List Presenters
+    - Detail Presenters
+    - (Edit Presenters)
+    - Save methods in Detail (or Edit) Presenters.
+    - MainPresenter (optional)
 - Presentation: Views (Mvc / UserControls…)
-  - List Views
-  - Detail Views
-  - Main View (optional)
+    - List Views
+    - Detail Views
+    - Main View (optional)
 
 ### Appendix B: Knopteksten en berichtteksten in applicaties (resource strings) [ Dutch ]
 

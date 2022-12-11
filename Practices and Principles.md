@@ -382,7 +382,7 @@ Here are rules for null-checks for other constructs:
 
 ##### Alternatives
 
-- Microsoft’s C# Language Design team is currently (2017-06-28) working hard at coming up with compile-time analyisis of nullability problems, that may make null-checks a thing of the past. They are not finished with it yet, and we have to wait and see what the outcome will be.
+Nullability problems might be solved next to automatically by newer C# versions.
 
 #### Process that Checks Itself (generally bad)
 
@@ -440,7 +440,7 @@ This instead of calling it just Customer or just ViewModel.
 Here are a few more examples:
 
 - CustomerListReload
-  - It was a controller action name intended to be a AJAX variation of the Index action. Not only should CustomerList be replaced with Index, but also the word Reload is not clear. It may have something to do with reloading some piece of index, but it really is the AJAX variation of Index, so perhaps a suffix Ajax would be more appropriate. IndexAjax would have been a better name.
+    - It was a controller action name intended to be a AJAX variation of the Index action. Not only should CustomerList be replaced with Index, but also the word Reload is not clear. It may have something to do with reloading some piece of index, but it really is the AJAX variation of Index, so perhaps a suffix Ajax would be more appropriate. IndexAjax would have been a better name.
 - A class name Cooking is also a good example of an conceptual name. Cooking? If you have to ask ‘What about it?’, you got a conceptual name, that should be made more specific.
 - A view named \_CollectionListAction.cshtml: The name Action is a conceptual name. It has something to do with an Action. More specifically: multiple actions, and more specifically: it is an ActionBar. The word Action is too general. It can refer to a Controller Action, the .NET Action<T> class, etc.  Perhaps \_IndexActionBar.cshtml would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
@@ -1160,7 +1160,6 @@ Solve the root of the problem. Do not work around a problem, because it will cat
 #### Environmental Causes
 
 - Consider if your problem might be solely due to the environment something runs on.
--
 - Is infrastructure the problem?
 - Was a service updated?
 - Is it due to different versions in prod, acc and dev?
@@ -1198,7 +1197,7 @@ By the way ‘did you cause the bug’ sounds a little accusing. It is not meant
 Some miscellaneous things to ask:
 
 Information gathering:
--
+
 - Read the error message
 - Google the error message.
 
@@ -1232,15 +1231,11 @@ You could add some *Logging* or improve *DebuggerDisplays.* You could also impro
 
 You could also try and look for the already existing diagnostics to help you. Are the loggings, is there something in the windows event log. Can I see error messages in Windows Task Scheduler. Can you get a clearer error message?
 
-\- Can we look in the database?
-
-\- Look at the data
-
-\- Ask what data was entered
-
-\- And what URL, in what object someone was working
-
-\- Ask for the steps to reproduce the error.
+- Can we look in the database?
+- Look at the data
+- Ask what data was entered
+- And what URL, in what object someone was working
+- Ask for the steps to reproduce the error.
 
 ### Strategy
 
@@ -1432,8 +1427,8 @@ Things that could still be wrong with the program are for instance that:
 - Does not give validation or exception messages when something goes wrong.
 - Does not integrate well with other technologies.
 - Etcetera. 
--
-- These are all examples of what could still be wrong with the code if a program ‘seems to work’.
+
+These are all examples of what could still be wrong with the code if a program ‘seems to work’.
 
 Another false argument against doing all this work is the claim that these are just unimportant details.
 
@@ -1600,10 +1595,10 @@ If you want to update a set of records, you can sometimes get away with deleting
 - The entity might not be linked to by other entities, but the entity’s ID may very well be present in URL’s someone might send to someone in an e-mail.
 - Also there could be links to an entity in the UI, even though there are not links to the entity from other entities.
 - The entity might not be linked to through a foreign key but could be linked to externally by a loosely linked key. (It can be said that it is very easy to overlook that there are links to an entity.)
--
-- Hopefully this will give you an idea of how soon you run into problems if you pretend an update equals a deletion + an insertion and make you think twice and do it another way.
--
-- See also: Patterns, TryGet-Insert-Update.
+
+Hopefully this will give you an idea of how soon you run into problems if you pretend an update equals a deletion + an insertion and make you think twice and do it another way.
+
+See also: Patterns, TryGet-Insert-Update.
 
 #### Whirlpool Anti-Pattern / Inappropriate Conversions
 

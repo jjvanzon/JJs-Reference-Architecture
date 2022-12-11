@@ -26,19 +26,19 @@ Developing a database generally involves the following steps:
 
 - Create tables
 - Add primary keys
-  - Create ID column
-  - Set primary key
-  - Set Identity Yes
+    - Create ID column
+    - Set primary key
+    - Set Identity Yes
 - Add columns
-  - Give them the right data types (see further down)
+    - Give them the right data types (see further down)
 - Most columns not nullable
-  - Limit the nullable columns as much as possible
-  - But keep them nullable where it functionally makes sense.
+    - Limit the nullable columns as much as possible
+    - But keep them nullable where it functionally makes sense.
 - Make foreign keys on columns that link to other tables
 - Add indexes on foreign keys columns
 - Add unique indexes
-  - However, sometimes ORM’s will trip over unique keys at which we promptly remove the unique constraint.
-- - Note that you do not need an additional index when there is already a unique constriant whose first column is the column you would like to index.
+    - However, sometimes ORM’s will trip over unique keys at which we promptly remove the unique constraint.
+    - Note that you do not need an additional index when there is already a unique constriant whose first column is the column you would like to index.
 - Add indexes to search columns and alternative keys
 - Add indexes for problem queries
 

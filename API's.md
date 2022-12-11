@@ -219,9 +219,9 @@ Many methods of IContext work with uncommitted / non-flushed entities: so things
 <TODO: 
 
 - No SQL strings:
-  - Talk about not building up SQL strings in code.
-  - No parameter concatination
-  - Trick to prevent conditional blocks of sql. (@value is null or Value = @value)
+    - Talk about not building up SQL strings in code.
+    - No parameter concatination
+    - Trick to prevent conditional blocks of sql. (@value is null or Value = @value)
 - No SQL in the code. Use SqlExecutor and .sql files.
 - No string concatination of sql parameters.
 - Hiding the SQL behind a repository.
