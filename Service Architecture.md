@@ -4,10 +4,9 @@
 Service Architecture
 --------------------
 
-### Contents
+<h3>Contents</h3>
 
 - [Service Architecture](#service-architecture)
-    - [Contents](#contents)
     - [Introduction](#introduction)
     - [The ESB Concept](#the-esb-concept)
     - [Canonical Model](#canonical-model)
@@ -94,7 +93,7 @@ Every individual connection between two parties would be registered in the Conne
 
 #### Keys
 
-Often systems have different identifiers for e.g. orders or other objects. There may be a need to map a reference number from one system to the reference number of another system. An ESB model could habe entities and logic to manage these key mappings.
+Often systems have different identifiers for e.g. orders or other objects. There may be a need to map a reference number from one system to the reference number of another system. An ESB model could have entities and logic to manage these key mappings.
 
 #### Transmissions
 
@@ -112,26 +111,26 @@ The content of a canonical model might determine what service to send it to. For
 
 These namespaces use a hypothetical Ordering system as an example.
 
-|                                           |     |
-|-------------------------------------------|-----|
-| JJ.Services                               | Root namespace for web services / WCF services
-| JJ.LocalServices                          | Root namespace for windows services. (Not part of the service architecture, but this is where that other type of service goes.)
-| JJ.Data.Canonical                         | Where are canonical entity models are defined.
-| JJ.Data.Esb                               | Entity model that stores Enterprises, Users, ConnectionTypes, Connections, etc. Basically the configuration settings of the architecture.
-| JJ.Data.Esb.NHibernate                    | Stores the Esb entity model using NHibernate.
-| JJ.Data.Esb.SqlClient                     | SQL queries for working with the stored Esb entity model.
-| JJ.Business.Canonical                     | Some shared logic that operates on canonical models.
-| JJ.Business.Esb                           | Business logic for managing the Esb model.
-| JJ.Services.Ordering.Interface            | Defines interfaces (the C# kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
-| JJ.Services.Ordering.Dispatcher           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
-| JJ.Services.Ordering.Email                | A specific implementation of an ordering interface, behind which we send the order by e-mail.
-| JJ.Services.Ordering.SuperAwesomeProtocol | A specific implementation of an ordering interface, behind which we implement the hypothetical ‘super awesome protocol’ for sending orders.
-| JJ.Services.Ordering.Wcf                  | A WCF service that allows you to communicate with the multi-dispatch ordering system.
-| JJ.Services.Ordering.Wcf.Interface        | Defines the interface of the WCF service that allows you to communicate with the multi-dispatch ordering system. This service interface can is used by both service and client.
-| JJ.Services.Ordering.Wcf.Client           | Allows code to connect to the WCF service using the strongly typed service interface.
-| JJ.Services.Ordering.JsonRest             | Exposes the multi-dispatch ordering service using the Json and Rest protocols.
-| JJ.Services.Ordering.WebApi               | There is no reason Web API should not be involved in this service architecture, in fact, the idea of WCF being the default for services, might not be a very long-lived.
-| JJ.Presentation.Shop.AppService.Wcf       | A special kind of service is an app service, that exposes presentation logic instead of business logic and returns ViewModels.
+|                                               |     |
+|-----------------------------------------------|-----|
+| __JJ.Services__                               | Root namespace for web services / WCF services
+| __JJ.LocalServices__                          | Root namespace for windows services. (Not part of the service architecture, but this is where that other type of service goes.)
+| __JJ.Data.Canonical__                         | Where are canonical entity models are defined.
+| __JJ.Data.Esb__                               | Entity model that stores Enterprises, Users, ConnectionTypes, Connections, etc. Basically the configuration settings of the architecture.
+| __JJ.Data.Esb.NHibernate__                    | Stores the Esb entity model using NHibernate.
+| __JJ.Data.Esb.SqlClient__                     | SQL queries for working with the stored Esb entity model.
+| __JJ.Business.Canonical__                     | Some shared logic that operates on canonical models.
+| __JJ.Business.Esb__                           | Business logic for managing the Esb model.
+| __JJ.Services.Ordering.Interface__            | Defines interfaces (the C# kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
+| __JJ.Services.Ordering.Dispatcher__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
+| __JJ.Services.Ordering.Email__                | A specific implementation of an ordering interface, behind which we send the order by e-mail.
+| __JJ.Services.Ordering.SuperAwesomeProtocol__ | A specific implementation of an ordering interface, behind which we implement the hypothetical ‘super awesome protocol’ for sending orders.
+| __JJ.Services.Ordering.Wcf__                  | A WCF service that allows you to communicate with the multi-dispatch ordering system.
+| __JJ.Services.Ordering.Wcf.Interface__        | Defines the interface of the WCF service that allows you to communicate with the multi-dispatch ordering system. This service interface can is used by both service and client.
+| __JJ.Services.Ordering.Wcf.Client__           | Allows code to connect to the WCF service using the strongly typed service interface.
+| __JJ.Services.Ordering.JsonRest__             | Exposes the multi-dispatch ordering service using the Json and Rest protocols.
+| __JJ.Services.Ordering.WebApi__               | There is no reason Web API should not be involved in this service architecture, in fact, the idea of WCF being the default for services, might not be a very long-lived.
+| __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes presentation logic instead of business logic and returns ViewModels.
 
 ### Service-Related Patterns
 
