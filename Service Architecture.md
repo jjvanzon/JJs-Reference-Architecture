@@ -94,7 +94,7 @@ Every individual connection between two parties would be registered in the Conne
 
 #### Keys
 
-Often systems have different identifiers for e.g. orders or other objects. There may be a need to map a reference number from one system to the reference number of another system. An ESB model could habe entities and logic to manage these key mappings.
+Often systems have different identifiers for e.g. orders or other objects. There may be a need to map a reference number from one system to the reference number of another system. An ESB model could have entities and logic to manage these key mappings.
 
 #### Transmissions
 
