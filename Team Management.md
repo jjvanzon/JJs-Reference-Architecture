@@ -1,61 +1,39 @@
-﻿`		`*JJ’s Reference Architecture: Team Management*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Team Management
+---------------
 
-*Author: Jan-Joost van Zon*
+<h3>Contents</h3>
 
-*Date: December 2014 – July 2017*
+- [Team Management](#team-management)
+  - [Introduction](#introduction)
+  - [Focus Points](#focus-points)
+  - [Dialog](#dialog)
+    - [Periodic Individual Meetings](#periodic-individual-meetings)
+    - [Reporting to Management](#reporting-to-management)
+  - [Limiting Dialog](#limiting-dialog)
+  - [Support](#support)
+    - [Question Rotation](#question-rotation)
+  - [Support & Direction](#support--direction)
+    - [Developer Skills](#developer-skills)
+  - [Direction](#direction)
+    - [Miscellaneous Pointers](#miscellaneous-pointers)
+    - [Behavior to Expect](#behavior-to-expect)
+    - [Vary a Developer’s Tasks](#vary-a-developers-tasks)
+    - [Upward Management](#upward-management)
+    - [Budgeting](#budgeting)
+  - [Planning](#planning)
+    - [Tasks](#tasks)
+  - [Strategy](#strategy)
+  - [Keep Your Cool, Be Open to Other Views](#keep-your-cool-be-open-to-other-views)
 
-***[Under Construction]***
+### Introduction
 
-## **Team Management**
-### ***Contents***
-[Contents	1](#_Toc487131215)
-
-[Introduction	1](#_Toc487131216)
-
-[Focus Points	1](#_Toc487131217)
-
-[Dialog	2](#_Toc487131218)
-
-[Periodic Individual Meetings	2](#_Toc487131219)
-
-[Reporting to Management	2](#_Toc487131220)
-
-[Limiting Dialog	2](#_Toc487131221)
-
-[Support	3](#_Toc487131222)
-
-[Question Rotation	3](#_Toc487131223)
-
-[Support & Direction	3](#_Toc487131224)
-
-[Developer Skills	3](#_Toc487131225)
-
-[Direction	4](#_Toc487131226)
-
-[Miscellaneous Pointers	4](#_Toc487131227)
-
-[Behavior to Expect	4](#_Toc487131228)
-
-[Vary a Developer’s Tasks	5](#_Toc487131229)
-
-[Upward Management	7](#_Toc487131230)
-
-[Budgeting	7](#_Toc487131231)
-
-[Planning	7](#_Toc487131232)
-
-[Tasks	7](#_Toc487131233)
-
-[Strategy	8](#_Toc487131234)
-
-[Keep Your Cool, Be Open to Other Views	8](#_Toc487131235)
-
-
-### ***Introduction***
 This documentation section describes techniques you can employ for the hands-on technical leading of a software development team.
-### ***Focus Points***
+
+### Focus Points
+
 It is still debatable, whether everything falls into these key areas. I am trying to structure this…
 
 - Dialog
@@ -63,19 +41,21 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Direction
 - Planning
 - Strategy
--
 - Keep your cool
 - Be open to other views
-### ***Dialog***
+
+### Dialog
+
 - Is the one I might forget about, but if I put extra focus on it, it would help a lot.
 - Exchange ideas between team lead and team member.
 - Exchange ideas between team members.
 - Get to know each other to make optimal ‘use’ of skills but also to enhance morale and good feeling, mutual understanding and promote openness.
 - Assess what the team member’s problems are, regarding the way he feels about the work.
 - Dialog should sometimes be limited too, because this job requires focus and quiet often, in order to do it well.
-
 - Periodic workshops mostly from team lead, but could be from someone else, to present an idea.
-#### **Periodic Individual Meetings**
+
+#### Periodic Individual Meetings
+
 - Periodically talk to each developer individually about work done. Ask:
 - Currently working on
 - Done this period
@@ -90,10 +70,14 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Good question (similar, but different formulation): ‘What have you found to be a good way of working?’ (‘Even though it differs from how [I / the team lead] might view it.’)
 - Good question: ‘Can you tell me some interesting new things you found out?’
 - The team lead also asks himself the same questions.
-#### **Reporting to Management**
+
+#### Reporting to Management
+
 - Lead makes a report of issues discussed, preferably not grouped by employee, but grouped by development area. Employees can be mentioned with tasks.
 - Lead discusses report with management.
-### ***Limiting Dialog***
+
+### Limiting Dialog
+
 - Prevent people from getting distracted by too much dialog.
 - Promote sympathy for people that have ear plugs with music on.
 - Only bother people when useful.
@@ -103,7 +87,9 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - But perhaps I am wrong and these are the people that you can bother more often to vent about am issue.
 - Consider moving a conversation to another room, so others can focus.
 - Not speaking too loudly also helps a lot.
-### ***Support***
+
+### Support
+
 Support from the team lead is mostly inward directed toward the team members. But support is also has an outward direction from the team towards the rest of the organization or to the customer.
 
 - A strategy of giving team members more freedom.
@@ -120,16 +106,22 @@ Support from the team lead is mostly inward directed toward the team members. Bu
 - Do not think someone is stupid if that person does not know something.
 - Accept that someone else knows a thing or two you can learn from him or her.
 - Do not be afraid to admit your weaker points, and work together to come to a solution.
-#### **Question Rotation**
+
+#### Question Rotation
+
 - Questions from outside the development department are handled on a rotating basis.
 - Everyone takes turns in a day of being the one to ask questions.
 - This will make sure most of the time developers can continue undisturbed with their programming work.
-### ***Support & Direction***
+
+### Support & Direction
+
 - Support and Direction are very closely related.
 - Support is more oriented towards the coworker: what can you do to make him do a better job and feel better doing it and advance in his job.
 - Direction is more about how can I make the work be beneficial to the client or rest of the organization. It is more outward directed.
 - Both are about how can we do the work optimally to serve the goals.
-#### **Developer Skills**
+
+#### Developer Skills
+
 You can test someone’s skills in something by giving them a specific task, that requires one skill in particular.
 
 Meta-skills:
@@ -149,22 +141,27 @@ Tools & techniques:
 - SQL
 
 <TODO: Add more… Could be a pretty extensive list.>
-### ***Direction***
-#### **Miscellaneous Pointers**
+
+### Direction
+
+#### Miscellaneous Pointers
+
 - Guard the main outlines
 - Accept that people work outside the borders.
 - Be involved at the beginning of a task at the end of a task and during the execution of a task too.
 - If your involvement starts in the middle, do not try to steer it too much into another direction.
 - You could find the biggest problem area and then suggest that as a point of improvement. 
 - Meetings: (borders the topic of Dialog)
-  - Try keep focus in meetings, so things do not go off topic too much.
-  - On one hand I dislike it, when a meeting about a topic that could have been 30 minutes turns into 5 hours of a whole range of topics with only loose ends and inconclusives at the end.
-  - On the other hand I dislike it, when the response to a proposal is: "That is not what this meeting is about."
-  - The intermediate version would be brief attention to off-topics and main focus on the topic at hand.
-  - It also depends on whether it is a general meeting or a conversation about a specific topic.
+    - Try keep focus in meetings, so things do not go off topic too much.
+    - On one hand I dislike it, when a meeting about a topic that could have been 30 minutes turns into 5 hours of a whole range of topics with only loose ends and inconclusives at the end.
+    - On the other hand I dislike it, when the response to a proposal is: "That is not what this meeting is about."
+    - The intermediate version would be brief attention to off-topics and main focus on the topic at hand.
+    - It also depends on whether it is a general meeting or a conversation about a specific topic.
 - API choice: Medior developers and juniors are *not* free to choose any API without collaborating with seniors, leads and architects. It just has too high an impact. Not that we should not be open to new API’s.
 - Framework development: Same point as API choice: juniors and mediors only adapt framework in collaboration with seniors, leads and architects.
-#### **Behavior to Expect**
+
+#### Behavior to Expect
+
 There are a lot of undesirable situations you can be confronted with as a team lead. While others would not dare do anything, you are expected to do something about it.
 
 - After someone agreed to do something (a certain way) 3 times, the person still does not do it (that way).
@@ -178,7 +175,9 @@ Or less annoying (because you cannot really blame anyone):
 - Someone thinks he or she is an expert, but the truth is he is not.
 - Someone spends a week on something, while asking for advice, could have made that a couple of hours.
 - Someone extremely talented will keep beating him or herself up over tiny details or just will not assert his opinion or be scared of other peoples’ criticism.
-#### **Vary a Developer’s Tasks**
+
+#### Vary a Developer’s Tasks
+
 What I often see, is that each developer is assigned to his application and never changes focus, because everyone feels, that this person is the ‘go-to guy’ for this topic. The motivation behind this is that it would be more economical to let the guy that knows most about it, do the work. That makes sense intuitively, but what’s intuitive, isn’t always what’s right. It is an over-simplified view on the issue that will cost you money. You lose something when you do not vary a programmer’s work.
 
 - There is the risk that comes a developer becomes ill or falling away for another reason.
@@ -197,62 +196,70 @@ I cannot stress enough that it is a bad idea to let a only one developer work on
 Here are suggestions of how to spread and vary the work over multiple team members. Variations can be mixed and mingled at will. That is the point. Be flexible.
 
 - Variation 1:
-  - Junior front-end
-  - Medior back-end
-  - Senior framework
+    - Junior front-end
+    - Medior back-end
+    - Senior framework
 - Variation 2:
-  - Senior coaches medior
-  - Medior coaches junior
+    - Senior coaches medior
+    - Medior coaches junior
 - Variation 3:
-  - Senior reviews code of mediors
-  - Medior reviews code of juniors
+    - Senior reviews code of mediors
+    - Medior reviews code of juniors
 - Variation 4:
-  - 1 developer does rework of previous iteration
-  - Another developer does new features.
-  - Every now and then they switch
-  - That way rework is not in the way of new developments.
+    - 1 developer does rework of previous iteration
+    - Another developer does new features.
+    - Every now and then they switch
+    - That way rework is not in the way of new developments.
 - Variation 5:
-  - One developer answers questions coming from outside the department and each day a different developer does it.
-  - If needed other tedious task go to that developer.
-  - That way the other days you know you can keep working on actual software development uninterruptedly and you at most only lose that one day that it is your turn.
+    - One developer answers questions coming from outside the department and each day a different developer does it.
+    - If needed other tedious task go to that developer.
+    - That way the other days you know you can keep working on actual software development uninterruptedly and you at most only lose that one day that it is your turn.
 - Variation 6:
-  - Each developer or a set of developers works on a different part of the application or major feature.
-  - Perhaps a junion/medior pair can work on a feature together.
+    - Each developer or a set of developers works on a different part of the application or major feature.
+    - Perhaps a junion/medior pair can work on a feature together.
 - Variation:
-  - A developer gets a similar task as before because he is now proficient at it.
+    - A developer gets a similar task as before because he is now proficient at it.
 - Variation 7:
-  - A developer gets intentionally different tasks than before, to spread knowledge over the team and enriching the developer’s knowledge.
+    - A developer gets intentionally different tasks than before, to spread knowledge over the team and enriching the developer’s knowledge.
 - Variation 8:
-  - Some developers work on high-risk experiments.
-  - Other developers work on low-risk productive feature development.
-  - That way you create room for doing experiments that you do not know the outcome of yet or do not even know how long it is going to take or if it gives any useable results, without it actually stalling productivity completely.
+    - Some developers work on high-risk experiments.
+    - Other developers work on low-risk productive feature development.
+    - That way you create room for doing experiments that you do not know the outcome of yet or do not even know how long it is going to take or if it gives any useable results, without it actually stalling productivity completely.
 - Variation 9: (very specific)
-  - Seniors do:
-    - Task management
-    - Code review
-    - Architecture
-    - Framework development
-    - Data model design for the most part
-    - Software design
-    - Research / orientation of possible solutions
-  - Mediors program:
-    - Business logic
-    - Data model implementation
-    - *Some* framework and data model design but in tight collaboration with seniors.
-  - Juniors do:
-    - Front-end development, but under supervision so that patterns are followed.
-    - Repetitive tasks, but only ones the junior can handle.
-    - This may sound a bit deprecating, but sometimes a junior developer, when asked to do something in a very specific way, apply it the same all over the place, do it totally differently when you turn your back. That says something about the need for guidance. You have to monitor junior developers.
-#### **Upward Management**
+    - Seniors do:
+        - Task management
+        - Code review
+        - Architecture
+        - Framework development
+        - Data model design for the most part
+        - Software design
+        - Research / orientation of possible solutions
+    - Mediors program:
+        - Business logic
+        - Data model implementation
+        - *Some* framework and data model design but in tight collaboration with seniors.
+    - Juniors do:
+        - Front-end development, but under supervision so that patterns are followed.
+        - Repetitive tasks, but only ones the junior can handle.
+        - This may sound a bit deprecating, but sometimes a junior developer, when asked to do something in a very specific way, apply it the same all over the place, do it totally differently when you turn your back. That says something about the need for guidance. You have to monitor junior developers.
+
+#### Upward Management
+
 - Lead does ask critical questions to management about strategy and decisions.
 - Lead advises management about (future) employees to hire.
-#### **Budgeting**
+
+#### Budgeting
+
 - Lead investigates software and hardware requirements and opportunities to use newer software, offer better quality, quantity, service or reduce costs.
 
 <TODO: Write a little more about it.>
-### ***Planning***
+
+### Planning
+
 Borders the topic of ‘Direction’.
-#### **Tasks**
+
+#### Tasks
+
 - Split up tasks into multiple distinct pieces of work.
 
 If the task is to broad, some people that think they can add another 200% of work to it, that they made up themselves. It will be unclear where a task starts and ends.
@@ -266,7 +273,6 @@ This will make someone aware of expectations, and of how deep to go.
 - Lead must be informed of completed task
 - Lead must be asked in case of unclarities
 - Lead communicate the following rules
-
 - Begin Task -> Go to lead
 - End Task -> Go to lead
 - No Task -> Go to lead
@@ -280,7 +286,6 @@ Fill in the lead’s name and basically hang up the wall.
 
 - A task should involve all the required work, but what is not asked should be left out
 
-
 But this comes with problems.
 Ideally a developer knows which things to involve in a task, and which things to not involve.
 But in practice this is often not the case.
@@ -288,11 +293,15 @@ One developer may not know what a task implies, another developer will involve t
 If you need to mention everything in a task, this is too much of a burden on the one administrating the tasks.
 
 Also: the lead may not have all the details, that the developer finds out while doing the job.
-### ***Strategy***
+
+### Strategy
+
 - Strategy is broad. It takes anything you could do and molds it to fit your current goal.
 
 <TODO: Write something about it.>
-### ***Keep Your Cool, Be Open to Other Views***
+
+### Keep Your Cool, Be Open to Other Views
+
 <TODO: Write some more about it.>
 
 <TODO: Use this phrase? All this heated discussion about subjective things. Can't we just keep calm and discuss pros and cons and try to solve the problem together? Nothing is black and white in the choice of tools and techniques. It is always a trade off.>
@@ -300,4 +309,3 @@ Also: the lead may not have all the details, that the developer finds out while 
 <TODO: Use this phrase? Be less sarcastic.>
 
 <TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid.>
-`	`8 / 8	

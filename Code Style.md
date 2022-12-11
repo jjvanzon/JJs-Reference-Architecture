@@ -1,51 +1,31 @@
-﻿`		`*JJ’s Reference Architecture: Code Style*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Code Style
+----------
 
-*Author: Jan-Joost van Zon*
+<h3>Contents</h3>
 
-*Date: December 2014 – July 2017*
+- [Code Style](#code-style)
+    - [Introduction](#introduction)
+    - [Casing, Punctuation and Spacing](#casing-punctuation-and-spacing)
+    - [Trivial Rules](#trivial-rules)
+    - [Miscellaneous Rules](#miscellaneous-rules)
+        - [Namespace Tips](#namespace-tips)
+    - [Member Order](#member-order)
+    - [Naming](#naming)
+        - [Boolean Names](#boolean-names)
+        - [Class Names](#class-names)
+        - [Collection Names](#collection-names)
+        - [DateTime Names](#datetime-names)
+        - [Enum Names](#enum-names)
+        - [Event Names / Delegate Names](#event-names--delegate-names)
+        - [Method Names](#method-names)
+        - [File-Related Variable Names](#file-related-variable-names)
+        - [Miscellaneous Names](#miscellaneous-names)
 
-***[Under Construction]***
+### Introduction
 
-## **Code Style**
-### ***Contents***
-[Contents	1](#_Toc487130072)
-
-[Introduction	2](#_Toc487130073)
-
-[Casing, Punctuation and Spacing	2](#_Toc487130074)
-
-[Trivial Rules	4](#_Toc487130075)
-
-[Miscellaneous Rules	7](#_Toc487130076)
-
-[Namespace Tips	9](#_Toc487130077)
-
-[Member Order	9](#_Toc487130078)
-
-[Naming	9](#_Toc487130079)
-
-[Boolean Names	9](#_Toc487130080)
-
-[Class Names	10](#_Toc487130081)
-
-[Collection Names	11](#_Toc487130082)
-
-[DateTime Names	11](#_Toc487130083)
-
-[Enum Names	12](#_Toc487130084)
-
-[Event Names / Delegate Names	12](#_Toc487130085)
-
-[Method Names	13](#_Toc487130086)
-
-[File-Related Variable Names	13](#_Toc487130087)
-
-[Miscellaneous Names	15](#_Toc487130088)
-
-
-### ***Introduction***
 This section lists trivial coding rules, that should be followed throughout the code.
 
 Coding standards mostly conform to the Microsoft standard described in the following documents:
@@ -55,9 +35,10 @@ Coding standards mostly conform to the Microsoft standard described in the follo
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
 Use Resharper. Seriously. Finetune it to automatically check your coding style. Use it to keep code clean as write code or change existing code.
-### ***Casing, Punctuation and Spacing***
 
-|**Rule**|**Example**|
+### Casing, Punctuation and Spacing
+
+| Rule | Example |
 | :- | :- |
 |Properties, methods, class names and events are in pascal case.|<p>MyProperty</p><p>MyMethod</p>|
 |Local variables and parameters are in camel case.|<p>myLocalVariable</p><p>myParameter</p>|
@@ -73,7 +54,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |Partial view names in MVC should begin with an underscore|\_MyPartialView|
 
 
-|**Rule**|**Not Recommended**|**Recommended**|
+| Rule | Not Recommended | Recommended |
 | :- | :- | :- |
 |Keep Visual Studio’s autoformatting enabled and set to its defaults.|||
 |No extra enters between braces.|<p>}</p><p></p><p>}</p><p></p>|<p>}</p><p>}</p><p></p>|
@@ -90,42 +71,44 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |Use proper indentation|<TODO: Example.>|<TODO: Example.>|
 |<p>Generic constraints on next line.</p><p>(So they stand out)</p>|<p>class MyGenericClass<T> where T: MyInterface</p><p>{</p><p>}</p><p></p>|<p>class MyGenericClass<T></p><p>where T: MyInterface</p><p>{</p><p>}</p>|
 |For one-liners, but generic constraints on same line instead.|<p>interface IMyInterface</p><p>{</p><p>void MyMethod(T param) </p><p>where T : ISomething</p><p>}</p>|<p>interface IMyInterface</p><p>{</p><p>void MyMethod(T param) where T : ISomething</p><p>}</p>|
-### ***Trivial Rules***
 
-|**Rule**|**Wrong**|**Right**|
+### Trivial Rules
+
+| Rule | Wrong | Right |
 | :- | :- | :- |
 |Give each class (or enum) its own file (except nested classes).|-|-|
 |Keep members private as much as possible.||<p>private void Bla()</p><p>{<br>}</p><p></p>|
 |Keep types internal as much as possible.||<p>internal class MyClass</p><p>{<br>}</p><p></p>|
-|Use explicit access modifiers (except for interface members).|int Bla() { ... }|**public** int Bla() { ... }|
-|No public fields. Use properties instead.|public int X;|<p>**public** int X **{ get; set; }**</p><p></p>|
+|Use explicit access modifiers (except for interface members).|int Bla() { ... }|__public__ int Bla() { ... }|
+|No public fields. Use properties instead.|public int X;|<p>__public__ int X __{ get; set; }__</p><p></p>|
 |Put nested classes at the top of the parent class’s code.|<p>internal class A</p><p>{</p><p>public int X { get; set; }</p><p></p><p>private class B</p><p>{</p><p>}</p><p>}</p><p></p>|<p>internal class A</p><p>{</p><p>private class B</p><p>{</p><p>}</p><p></p><p>public int X { get; set; }</p><p>}</p><p></p>|
 |Avoid getting information by catching an exception. Prefer getting your information without using exception handling.|<p>bool FileExists(string path)</p><p>{</p><p>try</p><p>{</p><p>File.Open(path, ...);</p><p>return true;</p><p>}</p><p>catch (IOException)</p><p>{</p><p>return false;</p><p>}</p><p>}</p><p></p>|<p>bool FileExists(string path)</p><p>{</p><p>return File.Exists(path);</p><p>}</p><p></p>|
-|Do not use type arguments that can be inferred.|<p>References**<Child>**(x => x.Child)</p><p></p>|References(x => x.Child)|
-|Use interface types as variable types when they are present.|**List**<int> list = new List<int>;|**IList**<int> list = new List<int>;|
-|Prefer ToArray over ToList.|IList<int> collection = x.**ToList**()|IList<int> collection = x.**ToArray**()|
+|Do not use type arguments that can be inferred.|<p>References__<Child>__(x => x.Child)</p><p></p>|References(x => x.Child)|
+|Use interface types as variable types when they are present.|__List__<int> list = new List<int>;|__IList__<int> list = new List<int>;|
+|Prefer ToArray over ToList.|IList<int> collection = x.__ToList__()|IList<int> collection = x.__ToArray__()|
 |Use object initializers for readability.|<p>var x = new X();</p><p>x.A = 10;</p><p>x.B = 20;</p>|<p>var x = new X</p><p>{</p><p>A = 10,</p><p>B = 20</p><p>}</p><p></p>|
-|Put comment for members in <summary> tags.|<p>// This is the x-coordinate.</p><p>int X { get; set; }</p>|<p>**/// <summary>**</p><p>**///** This is the x coordinate.</p><p>**/// </summary>**</p><p>int X { get; set; }</p><p></p>|
+|Put comment for members in <summary> tags.|<p>// This is the x-coordinate.</p><p>int X { get; set; }</p>|<p>__/// <summary>__</p><p>__///__ This is the x coordinate.</p><p>__/// </summary>__</p><p>int X { get; set; }</p><p></p>|
 |Comment in English.|// Dit is een ding.|<p>// This is a thing.</p><p></p>|
-|Do not write comment that does not add information|<p>**// This is x**</p><p>int x;</p><p></p>|<p>int x;</p><p></p>|
-|<p>Avoid compiler directives</p><p></p><p>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything. </p>|<p>**#if FEATURE\_X\_ENABLED**</p><p>**// ...**</p><p>**#endif**</p>|<p>if (config.FeatureXEnabled)</p><p>{</p><p>// ...</p><p>}</p><p></p>|
-|<p>An internal class should not have internal members.</p><p></p><p>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods.</p>|<p>**internal class A**</p><p>**{**</p><p>**internal void B**</p><p>**{**</p><p>**}**</p><p>**}**</p><p></p>|<p>internal class A</p><p>{</p><p>public void B</p><p>{</p><p>}</p><p>}</p><p></p>|
-|Default switch case at the bottom.|<p>**switch (x)**</p><p>**{**</p><p>**default:**</p><p>**break;**</p><p></p><p>**case 0:**</p><p>**break;**</p><p></p><p>**case 1:**</p><p>**break;**</p><p>**}**</p>|<p>switch (x)</p><p>{</p><p>case 0:</p><p>break;</p><p></p><p>case 1:</p><p>break;</p><p></p><p>**default:**</p><p>**break;**</p><p>}</p>|
-|Prefer .Value and .HasValue for nullable types.|<p>**int? number;**</p><p>**if (number != null)<br>{**</p><p>**string message = String.Format(**</p><p>**"Number = {0}", number);**</p><p>**}**</p>|<p>int? number;</p><p>if (number.HasValue)<br>{</p><p>string message = String.Format(</p><p>"Number = {0}", number.Value);</p><p>}</p>|
+|Do not write comment that does not add information|<p>__// This is x__</p><p>int x;</p><p></p>|<p>int x;</p><p></p>|
+|<p>Avoid compiler directives</p><p></p><p>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything. </p>|<p>__#if FEATURE\_X\_ENABLED__</p><p>__// ...__</p><p>__#endif__</p>|<p>if (config.FeatureXEnabled)</p><p>{</p><p>// ...</p><p>}</p><p></p>|
+|<p>An internal class should not have internal members.</p><p></p><p>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods.</p>|<p>__internal class A__</p><p>__{__</p><p>__internal void B__</p><p>__{__</p><p>__}__</p><p>__}__</p><p></p>|<p>internal class A</p><p>{</p><p>public void B</p><p>{</p><p>}</p><p>}</p><p></p>|
+|Default switch case at the bottom.|<p>__switch (x)__</p><p>__{__</p><p>__default:__</p><p>__break;__</p><p></p><p>__case 0:__</p><p>__break;__</p><p></p><p>__case 1:__</p><p>__break;__</p><p>__}__</p>|<p>switch (x)</p><p>{</p><p>case 0:</p><p>break;</p><p></p><p>case 1:</p><p>break;</p><p></p><p>__default:__</p><p>__break;__</p><p>}</p>|
+|Prefer .Value and .HasValue for nullable types.|<p>__int? number;__</p><p>__if (number != null)<br>{__</p><p>__string message = String.Format(__</p><p>__"Number = {0}", number);__</p><p>__}__</p>|<p>int? number;</p><p>if (number.HasValue)<br>{</p><p>string message = String.Format(</p><p>"Number = {0}", number.Value);</p><p>}</p>|
 |Do not leave unused (outcommented) around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.|||
 |it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.|||
-### ***Miscellaneous Rules***
 
-|**Description**|**Not Recommended**|**Recommended**|
+### Miscellaneous Rules
+
+| Description | Not Recommended | Recommended |
 | :- | :- | :- |
 |Test class names end with ‘Tests’.|<p>[TestClass]</p><p>public class **Tests\_**Validator()</p><p>{</p><p>}</p><p></p>|<p>[TestClass]</p><p>public class Validator**Tests**()</p><p>{</p><p>}</p><p></p>|
-|Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.|<p>[TestMethod]</p><p>public void **Test** ()</p><p>{ </p><p>...</p><p>}</p>|<p>[TestMethod]</p><p>public void **Test\_Validator\_NotNullOrEmpty\_NotValid**()</p><p>{ </p><p>...</p><p>}</p><p></p>|
-|var should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are:|**var** x = y.X;||
-|- An anonymous type is used.|**X** q = from x in list select **new { A = x.A }**;|**var** q = from x in list select **new { A = x.A }**;|
-|- The code line is a ‘new’ statement.|**X** x = new **X**()|**var** x = new **X**()|
-|- The code line is a direct cast.|**X** x = (**X**)y;|**var** x = (**X**)y;|
-|- The code line is WAAAY too long and unreadable without ‘var’.|foreach (**KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>** entry in dictionary)|foreach (**var** entry in dictionary)|
-|- Use var in your **view** code.|<% foreach (**OrderViewModel** order in Model.Orders) %>|<% foreach (**var** order in Model.Orders) %>|
+|Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.|<p>[TestMethod]</p><p>public void **Test** ()</p><p>{ </p><p>...</p><p>}</p>|<p>[TestMethod]</p><p>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()</p><p>{ </p><p>...</p><p>}</p><p></p>|
+|var should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are:|__var__ x = y.X;||
+|- An anonymous type is used.|__X__ q = from x in list select __new { A = x.A }__;|__var__ q = from x in list select __new { A = x.A }__;|
+|- The code line is a ‘new’ statement.|__X__ x = new __X__()|__var__ x = new __X__()|
+|- The code line is a direct cast.|__X__ x = (__X__)y;|__var__ x = (__X__)y;|
+|- The code line is WAAAY too long and unreadable without ‘var’.|foreach (__KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>__ entry in dictionary)|foreach (__var__ entry in dictionary)|
+|- Use var in your __view__ code.|<% foreach (__OrderViewModel__ order in Model.Orders) %>|<% foreach (__var__ order in Model.Orders) %>|
 |Handle null and empty string the same way everywhere.|||
 |To check if a string is filled use IsNullOrEmpty.|str == null|String.IsNullOrEmpty(str)|
 |To equate string use String.Equals.|str == "bla"|String.Equals(str, "bla")|
@@ -135,11 +118,10 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 |<p>Parameter order:</p><p>When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings.</p>||<p>class MyPresenter</p><p>{</p><p>public MyPresenter(</p><p>MyEntity entity, </p><p>IMyRepository repository,</p><p>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)</p><p>{</p><p>...</p><p>}</p><p>}</p>|
 |No long code lines<br><TODO: Describe better.>|||
 |When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.|<p>if (x <= 100 && x >= 10)</p><p>if (x >= 11 && x <= 99)</p>|<p>if (x >= 10 && x <= 100)</p><p>if (x > 10 && x < 100)</p>|
-####
-`	`2 / 15	
 
 
-#### **Namespace Tips**
+#### Namespace Tips
+
 Avoid using full namespaces in code, because that makes the code line very hard to read:
 
 NOT RECOMMENDED:
@@ -159,7 +141,9 @@ using IUserRepository\_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepositor
 ...
 
 IUserRepository\_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IUserRepository\_Cms>(cmsContext);
-### ***Member Order***
+
+### Member Order
+
 Try giving the members in your code file a logical order, instead of mixing them all up. Suggested possibilities for organizing your members:
 
 
@@ -170,13 +154,17 @@ Try giving the members in your code file a logical order, instead of mixing them
 |By layer|When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.|
 
 The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Pick the one most appropriate for your code.
-### ***Naming***
+
+### Naming
+
 See also: Casing, Punctuation and Spacing.
-#### **Boolean Names**
+
+#### Boolean Names
+
 Use common boolean variable name prefixes and suffixes:
 
 
-|**Prefix / Suffix**|**Example**|**Comment**|
+| Prefix / Suffix | Example | Comment |
 | :- | :- | :- |
 |Is…|IsDeleted|This is the most common prefix.|
 |Must…|MustDelete||
@@ -200,7 +188,8 @@ Some boolean names are so common that they do not get any prefixes:
 | :- |
 |Enabled|
 
-#### **Class Names**
+#### Class Names
+
 Class names usually end with the pattern name or a verb converted to a noun, e.g.:
 
 Converter
@@ -245,7 +234,9 @@ Common ‘last names’ for classes apart form the pattern names are:
 |Provider|A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider can also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.|
 |Asserter|<TODO: Describe>|
 ||Any method verb could become a class name, by turning it into a verby noun, e.g. Convert à Converter.|
-#### **Collection Names**
+
+#### Collection Names
+
 Collection names are plural words, e.g.:
 
 Products
@@ -257,7 +248,9 @@ Variable names for amounts of elements in the collection are named:
 Count
 
 So avoid using plural words to denote a count and avoid plural words for things other than collections.
-#### **DateTime Names**
+
+#### DateTime Names
+
 A DateTime property should be suffixed with ‘Utc’ or ‘Local’:
 
 StartDateLocal
@@ -275,10 +268,14 @@ But that looks less nice when you add the Local and Utc suffices again:
 ModifiedWhenUtc
 
 OrderedWhenLocal
-#### **Enum Names**
+
+#### Enum Names
+
 Use the ‘Enum’ suffix for enum types e.g. OrderStatus**Enum**.
 Another acceptable alternative is the suffix ‘Mode’, e.g. Connection**Mode**, but the first choice should be the suffix ‘Enum’.
-#### **Event Names / Delegate Names**
+
+#### Event Names / Delegate Names
+
 Event names and delegate names, that indicate what just happened have the following form:
 
 Deleted
@@ -322,7 +319,9 @@ RemoveRequested
 Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix ‘On’ for instance and the prefix ‘Handle’ may very well be used for the methods that actually raise the event. ‘Fire’ and ‘Do’ are also alternatives.
 
 Avoid event names that indicate that it is an event in two different ways. For instance ‘OnDragging’ can be shortened to just ‘Dragging’, because the suffix -ing is already an indication that it is an event. ‘OnMouseUp’ can be shortened to just ‘MouseUp’, because that is an established event name.
-#### **Method Names**
+
+#### Method Names
+
 Method names start with verbs, e.g. CreateOrder. 
 
 Names for other constructs should not start with a verb.
@@ -330,10 +329,10 @@ Names for other constructs should not start with a verb.
 Common verbs:
 
 
-|**Verb**|**Description**|
+| Verb | Description |
 | :- | :- |
 |Add|<p>E.g.</p><p></p><p>List.Add(item)</p><p>ListManager.Add(list, item)</p><p></p><p>In cases such as the last example, it is best to make the list the first parameter.</p>|
-|Assert|A method that throws **exceptions** if input is invalid.|
+|Assert|A method that throws __exceptions__ if input is invalid.|
 |Calculate||
 |Clear||
 |Convert||
@@ -352,12 +351,14 @@ Common verbs:
 |Set||
 |Try||
 |TryGet||
-|Validate|A method that generates **validation messages** for user-input errors|
-#### **File-Related Variable Names**
+|Validate|A method that generates __validation messages__ for user-input errors|
+
+#### File-Related Variable Names
+
 Variable names that indicate parts of file paths can easily become ambiguous. Here is a list of names that can be used to disambiguate it all:
 
 
-|**Name**|**Value**|
+| Name | Value |
 | :- | :- |
 |FileName|"MyFile.txt"|
 |FilePath|"C:\MyFolder\MyFile.txt"|
@@ -371,10 +372,10 @@ Variable names that indicate parts of file paths can easily become ambiguous. He
 |AbsoluteFolderPath|"C:\MyFolder"|
 |AbsoluteFileName|DOES NOT EXIST|
 |FileName**Pattern**, FilePath**Pattern**, etc.|<p>**\***.xml</p><p>C:\temp\BLA\_**????**.csv</p>|
-|FileName**Format**, FilePath**Format**, etc.|<p>order-**{0}**.txt</p><p>orders-**{0:dd-MM-yyyy}**\\*.\*</p>|
-**Prefixes and Suffixes** 
+|FileName**Format**, FilePath**Format**, etc.|<p>order-__{0}__.txt</p><p>orders-__{0:dd-MM-yyyy}__\\*.\*</p>|
+__Prefixes and Suffixes__ 
 
-|**Suffix**|**Description**|
+| Suffix | Description |
 | :- | :- |
 |<p>source..</p><p>dest…</p>|In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.|
 |existing...|Denotes that something already existed (in the data store) before starting this transaction.|
@@ -389,5 +390,7 @@ Variable names that indicate parts of file paths can easily become ambiguous. He
 |…Recursive|(Some people tend to use ‘Recursively’ instead, probably insisting it is better grammer, but Recursive is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)|
 |To…|<p>For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:</p><p></p><p>array.ToHashSet()</p><p></p><p>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:</p><p></p><p>MyConverter.ToHashSet(object[] array)</p><p></p><p>The Convert or ConvertTo verbs might be more appropriate there:</p><p></p><p>MyConverter.ConvertToHashSet(object[] array)</p><p></p>|
 |From…|<p>For conversion from one to another thing. A lot like ‘To…’ executed on the dest object instead:</p><p></p><p>dest.FromSource(source)</p><p></p><p>The ‘To…’ prefix is more common, and usually more readable.</p>|
-#### **Miscellaneous Names**
+
+#### Miscellaneous Names
+
 - For number sequences you can use names like: ListIndex, IndexNumber, SortOrder. (Avoid Index because it is an SQL keyword.)

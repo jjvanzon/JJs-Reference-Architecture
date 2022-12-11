@@ -1,30 +1,21 @@
-﻿`		`*JJ’s Reference Architecture: Layers*
+﻿JJ's Reference Architecture
+===========================
 
-# **JJ’s Reference Architecture**
+Layers
+------
 
-`	`*Author: Jan-Joost van Zon*	
+<h3>Contents</h3>
 
-*Date: December 2014 – July 2017*
+- [Layers](#layers)
+    - [Introduction](#introduction)
+    - [Data Layer](#data-layer)
+    - [Presentation Layer](#presentation-layer)
+    - [Business Layer](#business-layer)
+    - [Perpendicular Layers](#perpendicular-layers)
+    - [Alternatives](#alternatives)
 
-***[Under Construction]***
-## **Layers**
-### ***Contents***
-[Contents	1](#_Toc487130353)
+### Introduction
 
-[Introduction	1](#_Toc487130354)
-
-[Data Layer	2](#_Toc487130355)
-
-[Presentation Layer	4](#_Toc487130356)
-
-[Business Layer	6](#_Toc487130357)
-
-[Perpendicular Layers	7](#_Toc487130358)
-
-[Alternatives	8](#_Toc487130359)
-
-
-### ***Introduction***
 This is a suggestion of how to split up your software into layers.
 
 The software is split up into 3 layers:
@@ -44,7 +35,9 @@ The data layer is also called the ‘data access layer’ or ‘persistence laye
 The business layer is also referred to as ‘business logic’.
 
 The presentation layer is sometimes referred to as the ‘front-end’.
-### ***Data Layer***
+
+### Data Layer
+
 The data layer is built up of the following sub-layers:
 
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.002.png)
@@ -61,9 +54,11 @@ The dashed line going right through the diagram separates the platform-specific 
 
 Because the architecture is multi-platform, the labels in the diagram are actually too specific:
 
-- ‘DB’ can actually be any **data store** – that is the proper term for it: ‘data store’: an XML file, flat file or even just in-memory data.
-- ‘NHibernate’ can be an any **persistence technology**: another ‘ORM’ (‘object relational mapper’), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
-### ***Presentation Layer***
+- ‘DB’ can actually be any __data store__ – that is the proper term for it: ‘data store’: an XML file, flat file or even just in-memory data.
+- ‘NHibernate’ can be an any __persistence technology__: another ‘ORM’ (‘object relational mapper’), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
+
+### Presentation Layer
+
 The presentation layer is built up of the following sub-layers:
 
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.003.png)
@@ -105,7 +100,9 @@ Because the architecture is multi-platform, the labels in the diagram above are 
 - The *controller* is very specific to MVC and an equivalent might not even be present on other presentation platforms, even though it is advisable to have a central place to manage calls to the presenter and showing the right views depending on its result.
 - The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have ‘code-behind’ to only put dumb code in it and delegate the real work elsewhere.
 - ‘Html’ can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
-### ***Business Layer***
+
+### Business Layer
+
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.004.png)
 
 What is business logic? Basically anything that is not presentation or data access, is business logic.
@@ -124,8 +121,10 @@ The business layer is platform independent and the code can be deployed anywhere
 
 <TODO: Consider this: 
 
-\- Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already.>
-### ***Perpendicular Layers***
+- Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already.>
+
+### Perpendicular Layers
+
 The subdivision into data, business and presentation is just about the most important subdivision in software design. But there are other additional layers, called perpendicular layers:
 
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.005.png)
@@ -139,11 +138,10 @@ Infrastructure is things like security, network connections and storage. The inf
 Services expose business logic through a network interface, often through the SOAP protocol. A service might also expose a presentation model to the outside world. Because it is about a specific network / communication protocol, the service layer is considered part of the infrastructure too.
 
 Another funny thing about infrastructure, for example user right management, is that a program navigation model in the presenter layer can actually adapt itself to what rights the user has. In that respect the platform-independent presentation layer is dependent on the infrastructure, which is a paradox. The reason the presenter layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
-### ***Alternatives***
+
+### Alternatives
 
 ||Benefits|Downsides|
 | :- | :- | :- |
 |Data and Business in one layer|- Might be easier to understand|More likely for data access and business to get entangled |
 |No repositories|||
-
-`	`8 / 8
