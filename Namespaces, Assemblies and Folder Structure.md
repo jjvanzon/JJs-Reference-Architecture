@@ -49,18 +49,19 @@ __JJ__
 The second level in the namespacing consists of the following parts:
 
 
-|JJ.__Data__|The data layer including the entity models and persistence.|
-| :- | :- |
-|JJ.__Business__|The business logic layer|
-|JJ.__Presentation__|The presentation layer|
-|JJ.__Framework__|Contains any reusable code, that is independent from any domain model. Any layer in the software architecture can have reusable framework code to support it.|
+|                     |                     |
+|---------------------|---------------------|
+| JJ.__Data__         | The data layer including the entity models and persistence.
+| JJ.__Business__     | The business logic layer
+| JJ.__Presentation__ | The presentation layer
+| JJ.__Framework__    | Contains any reusable code, that is independent from any domain model. Any layer in the software architecture can have reusable framework code to support it.
 
 And the less important:
 
-
-|JJ.__Demos__|Demo code for educational purposes|
-| :- | :- |
-|JJ.__Utilities__|Processes that are not run very often. Utilities contains small programs for IT. E.g. load translations, things to run for deployment.|
+|                  |                  |
+|------------------|------------------|
+| JJ.__Demos__     | Demo code for educational purposes
+| JJ.__Utilities__ | Processes that are not run very often. Utilities contains small programs for IT. E.g. load translations, things to run for deployment.
 
 ### Business Domains
 

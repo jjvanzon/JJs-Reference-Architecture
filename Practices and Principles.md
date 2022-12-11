@@ -199,12 +199,12 @@ Separation of concerns can also be applied to technical aspects, such as validat
 In this architecture we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
-||Dto|Mapping|Validator|ViewModel|Presenter|…|
-| :- | :- | :- | :- | :- | :- | :- |
-|__Order__|OrderDto|OrderMapping|OrderValidator|OrderViewModel|OrderPresenter|…|
-|__Product__|ProductDto|ProductMapping|ProductValidator|ProductViewModel|ProductPresenter|…|
-|__Customer__|CustomerDto|CustomerMapping|CustomerValidator|CustomerViewModel|CustomerPresenter|…|
-|__…__|…|…|…|…|…|…|
+|              | Dto         | Mapping         | Validator         | ViewModel         | Presenter         | ... |
+|--------------|-------------|-----------------|-------------------|-------------------|-------------------|-----|
+| __Order__    | OrderDto    | OrderMapping    | OrderValidator    | OrderViewModel    | OrderPresenter    | ... |
+| __Product__  | ProductDto  | ProductMapping  | ProductValidator  | ProductViewModel  | ProductPresenter  | ... |
+| __Customer__ | CustomerDto | CustomerMapping | CustomerValidator | CustomerViewModel | CustomerPresenter | ... |
+| __...__      | ...         | ...             | ...               | ...               | ...               | ... |
 
 Plus: you can have specialized variations of these classes, for instance: OrderEditPresenter, SubscriptionProductValidator.
 
@@ -369,16 +369,16 @@ Allow nulls as little as possible. Similar rules also apply to other integrity c
 
 Here are rules for null-checks for other constructs:
 
-
-|DTO’s|<p>Usually the same rules apply to DTO’s as do for entities. Especially if they just transfer data from SQL statements to application logic.</p><p></p>|
-| :- | :- |
-|Strings|<p>To check if a string is filled in, use IsNullOrEmpty:<br>if (String.IsNullOrEmpty(str)) throw new NullOrEmptyException(() => str);<br>So this is wrong: if (str == null) throw new NullException(() => str);</p><p></p><p>Another common mistake is this:</p><p>obj.ToString()</p><p>This will crash if the object can be null. This is the solution:</p><p>Convert.ToString(obj)</p><p></p>|
-|Value types|<p>Value types, for instance int and decimal, cannot be null unless they are nullable, for instance ‘int?’ and ‘decimal?’, so do not execute null-checks on non-nullable value types.</p><p></p>|
-|Parameters|<p>Execute null-checks on arguments of public methods. Use NullException (out of Framework.Reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.</p><p></p><p>Avoid allowing null parameters. But if a parameter *is* nullable, you can denote this in several ways.</p><p></p><p>- Assign null as the default value of the parameter, so it is clear that it can accept null:<br>  private void MyMethod(object myParameter = null)</p><p></p><p>- Document with XML tags, that it is nullable:</p><p>/// <param name="myParameter ">nullable</param><br>private void MyMethod(object myParameter)</p><p></p><p>- Add an overload that does not have the parameter:<br>  private void MyMethod() { }<br>  private void MyMethod(object myParameter) { }<br>  Ideally in the overload with the parameter, do a null-check.</p><p></p>|
-|ViewModels|<p>ViewModels that are passed to Presenters may contain nulls. You can use the NullCoalesce pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.</p><p></p>|
-|Our own framework API’s|<p>For API’s in our own framework you can count on an object when you call a Get method. You have to take null into consideration when you call TryGet.</p><p></p>|
-|Your own application code|<p>Conform to that same pattern in your own application code, so you know when you can expect null.</p><p></p>|
-|Third-party API’s|Some .NET API’s and third party API’s may return null when you call a Get method. Some do not. You have to learn which methods can return null and do null-checks appropriately.|
+|                           |     |
+|---------------------------|-----|
+| DTO’s                     | <p>Usually the same rules apply to DTO’s as do for entities. Especially if they just transfer data from SQL statements to application logic.</p><p></p>
+| Strings                   | <p>To check if a string is filled in, use IsNullOrEmpty:<br>if (String.IsNullOrEmpty(str)) throw new NullOrEmptyException(() => str);<br>So this is wrong: if (str == null) throw new NullException(() => str);</p><p></p><p>Another common mistake is this:</p><p>obj.ToString()</p><p>This will crash if the object can be null. This is the solution:</p><p>Convert.ToString(obj)</p><p></p>
+| Value types               | <p>Value types, for instance int and decimal, cannot be null unless they are nullable, for instance ‘int?’ and ‘decimal?’, so do not execute null-checks on non-nullable value types.</p><p></p>
+| Parameters                | <p>Execute null-checks on arguments of public methods. Use NullException (out of Framework.Reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.</p><p></p><p>Avoid allowing null parameters. But if a parameter *is* nullable, you can denote this in several ways.</p><p></p><p>- Assign null as the default value of the parameter, so it is clear that it can accept null:<br>  private void MyMethod(object myParameter = null)</p><p></p><p>- Document with XML tags, that it is nullable:</p><p>/// <param name="myParameter ">nullable</param><br>private void MyMethod(object myParameter)</p><p></p><p>- Add an overload that does not have the parameter:<br>  private void MyMethod() { }<br>  private void MyMethod(object myParameter) { }<br>  Ideally in the overload with the parameter, do a null-check.</p><p></p>
+| ViewModels                | <p>ViewModels that are passed to Presenters may contain nulls. You can use the NullCoalesce pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.</p><p></p>
+| Our own framework API’s   | <p>For API’s in our own framework you can count on an object when you call a Get method. You have to take null into consideration when you call TryGet.</p><p></p>
+| Your own application code | <p>Conform to that same pattern in your own application code, so you know when you can expect null.</p><p></p>
+| Third-party API’s         | Some .NET API’s and third party API’s may return null when you call a Get method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 ##### Alternatives
 
