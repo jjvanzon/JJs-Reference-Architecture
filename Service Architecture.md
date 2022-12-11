@@ -4,10 +4,9 @@
 Service Architecture
 --------------------
 
-### Contents
+<h3>Contents</h3>
 
 - [Service Architecture](#service-architecture)
-    - [Contents](#contents)
     - [Introduction](#introduction)
     - [The ESB Concept](#the-esb-concept)
     - [Canonical Model](#canonical-model)
