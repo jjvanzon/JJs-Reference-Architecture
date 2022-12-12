@@ -1,4 +1,6 @@
-﻿Multi-Platform Compatibility Issues
+﻿<style>table td:first-child { white-space: nowrap; vertical-align:top; }</style>
+
+Multi-Platform Compatibility Issues
 ===================================
 
 *Date: January 2014 – May 2014*
