@@ -125,21 +125,26 @@ Avoid using full namespaces in code, because that makes the code line very hard 
 
 NOT RECOMMENDED:
 
+```cs
 JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository = PersistenceHelper.CreatCmsRepository< JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
+```
 
 Using half a namespace is also not great, because when you need to rename a namespace, you will have a lot of manual work:
 
 NOT RECOMMENDED:
 
+```cs
 Business.Cms.RepositoryInterfaces.IUserRepository userRepository = PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
+```
 
 Instead, try giving a class a unique name or use aliases:
 
-using IUserRepository\_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
-
+```cs
+using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
 ...
 
-IUserRepository\_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IUserRepository\_Cms>(cmsContext);
+IUserRepository_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IUserRepository_Cms>(cmsContext);
+```
 
 ### Member Order
 
@@ -183,7 +188,6 @@ If it is ugly to put the prefix at the beginning, you can put it in the middle, 
 
 Some boolean names are so common that they do not get any prefixes:
 
-
 |         |
 |---------|
 | Visible |
@@ -193,33 +197,28 @@ Some boolean names are so common that they do not get any prefixes:
 
 Class names usually end with the pattern name or a verb converted to a noun, e.g.:
 
-Converter
-
-Validator
-
-Calculator
+    Converter
+    Validator
+    Calculator
 
 And they start with a term out of the domain:
 
-OrderConverter
-
-ProductValidator
-
-PriceCalculator
+    OrderConverter
+    ProductValidator
+    PriceCalculator
 
 A more specialized class can get prefixes or suffixes as follows:
 
-OptimizedPriceCalculator
-
-OrderWithPriorityShippingValidator
+    OptimizedPriceCalculator
+    OrderWithPriorityShippingValidator
 
 Or alternatively:
 
-OrderValidatorWithPriorityShipping
+    OrderValidatorWithPriorityShipping
 
 Abstract classes get the preferred suffix ‘Base’:
 
-ProductValidatorBase
+    ProductValidatorBase
 
 This is because it is very important to see in code whether something is a base class. Exceptions to the suffix rule can be made if it would otherwise result in less readable code. For instance, base classes in entity models might not look good with the ‘Base’ suffix.
 
@@ -227,96 +226,85 @@ Keep variable names similar to the class names, and end them with the pattern na
 
 Common ‘last names’ for classes apart form the pattern names are:
 
-
-|            | |
-|------------|-|
-| Resolver   | A class that does lookups that require complex keys or different ways of looking up depending on the situations, fuzzy lookups, etc.
-| Dispatcher | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
-| Invoker    | Something that invokes another method, probably based on input or specific conditions.
-| Provider   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider can also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
-| Asserter   | <TODO: Describe>
-|            | Any method verb could become a class name, by turning it into a verby noun, e.g. Convert à Converter.
+|              | |
+|--------------|-|
+| `Resolver`   | A class that does lookups that require complex keys or different ways of looking up depending on the situations, fuzzy lookups, etc.
+| `Dispatcher` | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
+| `Invoker`    | Something that invokes another method, probably based on input or specific conditions.
+| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider can also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
+| `Asserter`   | <TODO: Describe>
+|              | Any method verb could become a class name, by turning it into a verby noun, e.g. Convert à Converter.
 
 #### Collection Names
 
 Collection names are plural words, e.g.:
 
-Products
-
-Orders
+    Products
+    Orders
 
 Variable names for amounts of elements in the collection are named:
 
-Count
+    Count
 
 So avoid using plural words to denote a count and avoid plural words for things other than collections.
 
 #### DateTime Names
 
-A DateTime property should be suffixed with ‘Utc’ or ‘Local’:
+A `DateTime` property should be suffixed with `Utc` or `Local`:
 
-StartDateLocal
+    StartDateLocal
+    OrderDateTimeUtc
 
-OrderDateTimeUtc
+An alternative possible suffix for `DateTimes` would be `When`:
 
-An alternative possible suffix for DateTimes would be ‘When’:
-
-ModifiedWhen
-
-OrderedWhen
+    ModifiedWhen
+    OrderedWhen
 
 But that looks less nice when you add the Local and Utc suffices again:
 
-ModifiedWhenUtc
-
-OrderedWhenLocal
+    ModifiedWhenUtc
+    OrderedWhenLocal
 
 #### Enum Names
 
-Use the ‘Enum’ suffix for enum types e.g. OrderStatus**Enum**.
-Another acceptable alternative is the suffix ‘Mode’, e.g. Connection**Mode**, but the first choice should be the suffix ‘Enum’.
+Use the `Enum` suffix for enum types e.g. OrderStatus**Enum**.
+Another acceptable alternative is the suffix `Mode`, e.g. Connection**Mode**, but the first choice should be the suffix `Enum`.
 
 #### Event Names / Delegate Names
 
 Event names and delegate names, that indicate what just happened have the following form:
 
-Deleted
-
-TransactionCompleted
+    Deleted
+    TransactionCompleted
 
 Event names and delegate names, that indicate what is about to happen have the following form:
 
-Deleting
-
-TransactionCompleting
+    Deleting
+    TransactionCompleting
 
 UI-related event names do not have to follow that rule:
 
-Click
-
-DoubleClick
-
-KeyPress
+    Click
+    DoubleClick
+    KeyPress
 
 Delegate names can also have the suffix Callback or Delegate:
 
-ProgressInfoCallback
-
-AddItemDelegate
+    ProgressInfoCallback
+    AddItemDelegate
 
 Sometimes the word ‘On’ is used:
 
-OnSelectedIndexChanged
-
-OnClick
+    OnSelectedIndexChanged
+    OnClick
 
 Or the prefix Handle:
 
-HandleMouseDown
+    HandleMouseDown
 
 Or the suffix Requested, if your event looks like a method name.
 
-RemoveRequested
+    RemoveRequested
 
 Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix ‘On’ for instance and the prefix ‘Handle’ may very well be used for the methods that actually raise the event. ‘Fire’ and ‘Do’ are also alternatives.
 
@@ -330,30 +318,29 @@ Names for other constructs should not start with a verb.
 
 Common verbs:
 
-
-| Verb      | Description |
-|-----------|-------------|
-| Add       | <p>E.g.</p><p></p><p>List.Add(item)</p><p>ListManager.Add(list, item)</p><p></p><p>In cases such as the last example, it is best to make the list the first parameter.</p>
-| Assert    | A method that throws __exceptions__ if input is invalid.
-| Calculate |
-| Clear     |
-| Convert   |
-| ConvertTo |
-| Create    | When a method returns a new object.
-| Delete    |
-| Ensure    | Sets up a state if it is not set up yet. If Ensure means throw an exception if a state is not there, then consider using the verb ‘Assert’ instead.
-| Execute   |
-| Generate  |
-| Get       |
-| Invoke    |
-| Parse     |
-| Process   |
-| Remove    |
-| Save      |
-| Set       |
-| Try       |
-| TryGet    |
-| Validate  | A method that generates __validation messages__ for user-input errors
+| Verb        | Description |
+|-------------|-------------|
+| `Add`       | <p>E.g.</p><p></p><p>List.Add(item)</p><p>ListManager.Add(list, item)</p><p></p><p>In cases such as the last example, it is best to make the list the first parameter.</p>
+| `Assert`    | A method that throws __exceptions__ if input is invalid.
+| `Calculate` |
+| `Clear`     |
+| `Convert`   |
+| `ConvertTo` |
+| `Create`    | When a method returns a new object.
+| `Delete`    |
+| `Ensure`    | Sets up a state if it is not set up yet. If Ensure means throw an exception if a state is not there, then consider using the verb ‘Assert’ instead.
+| `Execute`   |
+| `Generate`  |
+| `Get`       |
+| `Invoke`    |
+| `Parse`     |
+| `Process`   |
+| `Remove`    |
+| `Save`      |
+| `Set`       |
+| `Try`       |
+| `TryGet`    |
+| `Validate`  | A method that generates __validation messages__ for user-input errors
 
 #### File-Related Variable Names
 
@@ -395,4 +382,4 @@ __Prefixes and Suffixes__
 
 #### Miscellaneous Names
 
-- For number sequences you can use names like: ListIndex, IndexNumber, SortOrder. (Avoid Index because it is an SQL keyword.)
+- For number sequences you can use names like: `ListIndex`, `IndexNumber`, `SortOrder` or `Rank`. (Perhaps avoid `Index` because it is an SQL keyword.)

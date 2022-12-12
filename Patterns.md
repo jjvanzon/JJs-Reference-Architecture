@@ -199,77 +199,59 @@ This pattern is about inverse property management. Inverse property management m
 
 To manage inverse properties even when the underlying persistent technology does not have inverse property management, you can link entities with LinkTo methods, instead of assigning properties or adding or removing from related collections directly. By calling the LinkTo methods, both ends of the relationship are kept in sync. Here is a template for a LinkTo method that works for 1-to-n relationships. Beware that all the checks can come with performance penalties.
 
+```cs
 public static void LinkTo(this Child child, Parent parent)
-
 {
+    if (child == null) throw new NullException(() => child);
 
-`    `if (child == null) throw new NullException(() => child);
+    if (child.Parent != null)
+    {
+        if (child.Parent.Children.Contains(child))
+        {
+            child.Parent.Children.Remove(child);
+        }
+    }
 
-`    `if (child.Parent != null)
+    child.Parent = parent;
 
-`    `{
-
-`        `if (child.Parent.Children.Contains(child))
-
-`        `{
-
-`            `child.Parent.Children.Remove(child);
-
-`        `}
-
-`    `}
-
-`    `child.Parent = parent;
-
-`    `if (child.Parent != null)
-
-`    `{
-
-`        `if (!child.Parent.Children.Contains(child))
-
-`        `{
-
-`            `child.Parent.Children.Add(child);
-
-`        `}
-
-`    `}
-
+    if (child.Parent != null)
+    {
+        if (!child.Parent.Children.Contains(child))
+        {
+            child.Parent.Children.Add(child);
+        }
+    }
 }
+```
 
-The class in which to put the LinkTo methods, should be called LinkToExtensions and it should be put in the LinkTo sub-namespace in your project.
+The class in which to put the `LinkTo` methods, should be called `LinkToExtensions` and it should be put in the `LinkTo` sub-namespace in your project.
 
-Only if the LinkTo method name is ambiguous, you can suffix it, e.g.:
+Only if the `LinkTo` method name is ambiguous, you can suffix it, e.g.:
 
-LinkToParentDocument
+  LinkToParentDocument
 
 Next to LinkTo method, you should have Unlink methods in an UnlinkExtensions class:
 
+```cs
 public static void UnlinkParent(this Child child)
-
 {
-
-if (child == null) throw new NullException(() => child);
-
-child.LinkTo((Parent)null);
-
+    if (child == null) throw new NullException(() => child);
+    child.LinkTo((Parent)null);
 }
+```
 
 If you are linking objects together that you know are new, you may create better-performing variations for LinkTo, called NewLinkTo, that omit all the expensive checks:
 
+```cs
 public static void NewLinkTo(this Child child, Parent parent)
-
 {
-
-`    `if (child == null) throw new NullException(() => child);
-
-`    `child.Parent = parent;
-
-`    `parent.Children.Add(child);
-
+    if (child == null) throw new NullException(() => child);
+    child.Parent = parent;
+    parent.Children.Add(child);
 }
+```
 
-Be aware that executing NewLinkTo onto *existing* objects will result in a corrupted object graph.
+Be aware that executing `NewLinkTo` onto *existing* objects will result in a corrupted object graph.
 
 #### Cascading Extensions
 
@@ -303,9 +285,9 @@ A good example of a Visitor class is .NET’s own ExpressionVisitor, however we 
 
 <TODO: Make a good text out of this, covering handling polymorphism in visitors. Merge this with the main text: 
 
-\- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.
+- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.
 
-\- Visitor pattern: mention that you always need to call polymorphic, otherwise you will not get all the objects when you override the polymorphic. >
+- Visitor pattern: mention that you always need to call polymorphic, otherwise you will not get all the objects when you override the polymorphic. >
 
 <TODO: Code example.>
 
@@ -317,11 +299,9 @@ For button texts, translations of model properties in different languages, etc.,
 
 If you follow the following naming convention for resources files, .NET will automatically return the translations into the language of the current culture:
 
-Resources.resx
-
-Resources.nl-NL.resx
-
-Resources.de-DE.resx
+    Resources.resx
+    Resources.nl-NL.resx
+    Resources.de-DE.resx
 
 The culture-inspecific resx has the en-US language.
 
@@ -331,7 +311,7 @@ The key should be representative of the text itself.
 
 Resources seem part of the presentation, but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
 
-Framework.Resources contains reusable resource strings for common titles such as ‘Delete’, ‘Edit’, ‘Save’ etcetera.
+Framework.Resources contains reusable resource strings for common titles such as `Delete`, `Edit`, `Save` etcetera.
 
 Extra information in Dutch about how to structure your resource files can be read in Appendix B.
 
@@ -375,61 +355,46 @@ For small lookup lists you might include a copy of the list in each entity view 
 
 Reusing the same list instance in multiple entity view models may seem to save you some memory, but a message formatter may actually repeat the list when sending a view model over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an edit view model. A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 <datalist> tag to let a <select> / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a jQuery trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an edit view model. A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a jQuery trick to populate a drop down just before you slide it open.
 
 For big lookup list the only viable option seems to AJAX the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once AJAX’ed you might cache the popup to be reused each time you need to select something from it.
 
 #### ToViewModel
 
-An extension method that convert an entity to a view model. You can make simple ToViewModel methods per entity, converting it to a simple view model that represents the entity. You can also have methods returning more complex view models, such as ToDetailsViewModel() or ToCategoryTreeEditViewModel().
+An extension method that convert an entity to a view model. You can make simple ToViewModel methods per entity, converting it to a simple view model that represents the entity. You can also have methods returning more complex view models, such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
-You may pass repositories to the ToViewModel methods if required.
+You may pass repositories to the `ToViewModel` methods if required.
 
 Sometimes you cannot appoint one entity type as the source of a view model. In that case you cannot logically make it an extension method, but you make it a helper method in the static ViewModelHelpers class.
 
-The ToViewModel classes should be put in the sub-folder / sub-namespace ToViewModel in your csproj. For an app with many views a split it up into the following files may be a good plan:
+The `ToViewModel` classes should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many views a split it up into the following files may be a good plan:
 
-ToIDAndNameExtensions.cs
+    ToIDAndNameExtensions.cs
+    ToItemViewModelExtensions.cs
+    ToListItemViewModelExtensions.cs
+    ToPartialViewModelExtentions.cs
+    ToScreenViewModelExtensions.cs
+    ToViewModelHelper.cs
+    ToViewModelHelper.EmptyViewModels.cs
+    ToViewModelHelper.Values.cs
+    ToViewModelHelper.Items.cs
+    ToViewModelHelper.ListItems.cs
+    ToViewModelHelper.Lookups.cs
+    ToViewModelHelper.Partials.cs
+    ToViewModelHelper.Screens.cs
+    ToViewModelHelper.Values.cs
 
-ToItemViewModelExtensions.cs
-
-ToListItemViewModelExtensions.cs
-
-ToPartialViewModelExtentions.cs
-
-ToScreenViewModelExtensions.cs
-
-ToViewModelHelper.cs
-
-ToViewModelHelper.EmptyViewModels.cs
-
-ToViewModelHelper.Values.cs
-
-ToViewModelHelper.Items.cs
-
-ToViewModelHelper.ListItems.cs
-
-ToViewModelHelper.Lookups.cs
-
-ToViewModelHelper.Partials.cs
-
-ToViewModelHelper.Screens.cs
-
-ToViewModelHelper.Values.cs
-
-To be clear: the ViewModelHelper files are all ViewModelHelper partial classes. The other files have a class that has the same name as the file.
+To be clear: the `ViewModelHelper` files are all `ViewModelHelper` partial classes. The other files have a class that has the same name as the file.
 
 Inside the classes, the methods should be sorted by source entity or application section alphabetically and each section should be headed by a comment line, e.g.:
 
+```cs
 // Orders
 
-
-
-public static OrderListViewModel ToListViewModel(this IList<Order> orders) ...
-
-public static OrderEditPopupViewModel ToEditViewModel(this Order order) ...
-
-public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) ...
+public static OrderListViewModel ToListViewModel(this IList<Order> orders) { ... }
+public static OrderEditPopupViewModel ToEditViewModel(this Order order) { ... }
+public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) { ... }
+```
 
 Some view models do not take one primary entity as input. So it does not make sense to turn it into an extension method, because you cannot decide which entity is the this argument. In that case we put it in a ViewModelHelper class with static classes without this arguments. ViewModelHelper is also part of the ToViewModel layer.
 
@@ -482,17 +447,16 @@ Not all of the phases must be present. ToEntity / Business / ToViewModel are the
 
 Comment the phases in the code in the presenter action method:
 
+```cs
 // ToEntity
-
-Dinner dinner = userInput.ToEntity(\_dinnerRepository);
+Dinner dinner = userInput.ToEntity(_dinnerRepository);
 
 // Business
-
-\_dinnerFacade.Cancel(dinner);
+_dinnerFacade.Cancel(dinner);
 
 // ToViewModel
-
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
+```
 
 Even though the actual call to the business logic might be trivial, it is still necessary to convert from entity to view model and back. This is due to the stateless nature of the web. It requires restoring state from the view to the entity model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do JavaScript or other native code.
 
@@ -505,7 +469,7 @@ When you user input back as a ViewModel from your presentation framework of choi
 <TODO: Better description. Also incorporate:
 
 - Also add a code example.
-- Consider making a separate pattern description for NullCoalesce methods in general and move it to the Other Patterns section to which you then refer from this section NullCoalesce (ViewModels).
+- Consider making a separate pattern description for `NullCoalesce` methods in general and move it to the Other Patterns section to which you then refer from this section `NullCoalesce` (ViewModels).
 - Null-coalesce. Applied to viewmodels that are passed to presenters. The choice is made here to only null-coalesce things that a view / client technology might leave out. Theoretically it might be better to null-coalesce everything in the view model, but this does take full traversal of the tree, which comes with a (small) performance penalty. Also: the null-coalesce procedures take some typing time for the programmer, and requires maintenance when the structure changes. That is why the choice is made to only null-coalesce a select set of things, that is adapted to our specific needs, rather than something that will always work. >
 
 #### Views
@@ -534,7 +498,7 @@ But it is always the first choice to do full postbacks.
 
 The reason is maintainability: programming the application navigation in C# using presenters is more maintainable than a whole lot of JavaScript. Also: when you do not use AJAX, the Presenter keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore AJAX’ing comes with extra difficulties. For instance that MVC <input> tag ID’s vary depending on the context and must be preserved after an AJAX call, big code blocks of JavaScript for doing AJAX posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full view. Things like managing the redirection to a full view from a partial action. Info from a parent view model e.g. a lookup list that is passed to the generation of a child view model is not available when you generate a partial view. Request.RawUrl cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the view depending on the outcome of the business logic. Sometimes an ajax call’s result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore AJAX’ing comes with extra difficulties. For instance that MVC `<input>` tag ID’s vary depending on the context and must be preserved after an AJAX call, big code blocks of JavaScript for doing AJAX posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full view. Things like managing the redirection to a full view from a partial action. Info from a parent view model e.g. a lookup list that is passed to the generation of a child view model is not available when you generate a partial view. Request.RawUrl cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the view depending on the outcome of the business logic. Sometimes an ajax call’s result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
 Some of the difficulties with AJAX have been solved by employing a specific way of working, as described under AJAX  in the Aspects section.
 
@@ -573,52 +537,40 @@ You will be making assumptions in your Presenter code when you program a statefu
 In an ASP.NET MVC application a controller has a lot of responsibilities, but in this architecture most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
--
-- Entity names put in controller should be plural. So Customer__s__Controller not CustomerController.
+
+Entity names put in controller should be plural. So Customer__s__Controller not CustomerController.
 
 #### Post-Redirect-Get
 
 This is a quirk intrinsic to ASP.NET MVC. We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
 
-At the end of a post action, you must call RedirectToAction() to redirect to a Get action.
+At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
-Before you do so, you must store the view model in the TempData dictionary. In the Get action that you redirect to, you have to check if the view model is in the TempData dictionary. If the view model exist in the TempData, you must use that view model, otherwise you must create a new view model.
+Before you do so, you must store the view model in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the view model is in the TempData dictionary. If the view model exist in the TempData, you must use that view model, otherwise you must create a new view model.
 
 Here is simplified pseudo-code in which the pattern is applied.
 
-__public ActionResult Edit(int id)__
+```cs
+public ActionResult Edit(int id)
+{
+    object viewModel;
+    if (!TempData.TryGetValue(TempDataKeys.ViewModel, out viewModel))
+    {
+      // TODO: Call presenter
+    }
+    return View(viewModel);
+}
 
-__{__
+[HttpPost]
+public ActionResult Edit(EditViewModel viewModel)
+{
+    // TODO: Call presenter
+    TempData[TempDataKeys.ViewModel] = viewModel2;
+    return RedirectToAction(ActionNames.Details);
+}
+```
 
-`    `__object viewModel;__
-
-`    `__if (!TempData.TryGetValue(TempDataKeys.ViewModel, out viewModel))__
-
-__{__
-
-`    `__// TODO: Call presenter__
-
-`    `__}__
-
-`    `__return View(viewModel);__
-
-__}__
-
-__[HttpPost]__
-
-__public ActionResult Edit(EditViewModel viewModel)__
-
-__{__
-
-__// TODO: Call presenter__
-
-`    `__TempData[TempDataKeys.ViewModel] = viewModel2;__
-
-`    `__return RedirectToAction(ActionNames.Details);__
-
-__}__
-
-There might be an exception to the rule to always RedirectToAction at the end of a Post. When you would redirect to a page that you can never go to directly, you might return View() instead, because there is no Get method. This may be the case for a NotFoundViewModel or a DeleteConfirmedViewModel.
+There might be an exception to the rule to always `RedirectToAction` at the end of a Post. When you would redirect to a page that you can never go to directly, you might return `View()` instead, because there is no `Get` method. This may be the case for a `NotFoundViewModel` or a `DeleteConfirmedViewModel`.
 
 <TODO:
 
@@ -631,21 +583,22 @@ If you do not conform to the Post-Redirect-Get pattern in MVC, you may get to se
 
 #### ValidationMessages in ModelState
 
-For the architecture to integrate well with MVC, you have to make MVC aware that there are validation messages, after you have gotten a ViewModel from a Presenter. If you do not do this, you will get strange application navigation in case of validation errors.
+For the architecture to integrate well with MVC, you have to make MVC aware that there are validation messages, after you have gotten a `ViewModel` from a `Presenter`. If you do not do this, you will get strange application navigation in case of validation errors.
 
 You do this in an MVC HTTP GET action method.
 
 The way we do it here is as follows:
 
+```cs
 if (viewModel.ValidationMessages.Any())
-
 {
-
-ModelState.AddModelError(ControllerHelper.DEFAULT\_ERROR\_KEY, ControllerHelper.GENERIC\_ERROR\_MESSAGE);
-
+    ModelState.AddModelError(
+        ControllerHelper.DEFAULT_ERROR_KEY,
+        ControllerHelper.GENERIC_ERROR_MESSAGE);
 }
+```
 
-In theory we could communicate all validation messages to MVC instead of just communicating a single generic error message. In theory MVC could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a validation summary, we simply render all the validation messages from the view model ourselves and not use the Html.ValidationSummary() method at all. If we want to change the appearance of input fields if they have validation errors, then the view model should give the information that the appearance of the field should be different. Our view’s content is totally managed by the view model.
+In theory we could communicate all validation messages to MVC instead of just communicating a single generic error message. In theory MVC could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a validation summary, we simply render all the validation messages from the view model ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have validation errors, then the view model should give the information that the appearance of the field should be different. Our view’s content is totally managed by the view model.
 
 #### Polymorphic RedirectToAction / View()
 
@@ -655,33 +608,25 @@ This means that in the MVC Controller action methods, the Presenter returns obje
 
 Here is simplified code for how you can do this in a post method:
 
-__var editViewModel = viewModel as EditViewModel;__
+```cs
+var editViewModel = viewModel as EditViewModel;
+if (editViewModel != null)
+{
+    return RedirectToAction(ActionNames.Edit, new { id = editViewModel.Question.ID });
+}
 
-__if (editViewModel != null)__
-
-__{__
-
-__return RedirectToAction(ActionNames.Edit,__ 
-
-`    `__new { id = editViewModel.Question.ID });__
-
-__}__
-
-__var detailsViewModel = viewModel as DetailsViewModel;__
-
-__if (detailsViewModel != null)__
-
-__{__
-
-__return RedirectToAction(ActionNames.Details,__ 
-
-`    `__new { id = viewModel.Question.ID });__
-
-__}__
+var detailsViewModel = viewModel as DetailsViewModel;
+if (detailsViewModel != null)
+{
+    return RedirectToAction(ActionNames.Details, new { id = viewModel.Question.ID });
+}
+```
 
 At the end throw the following exception (out of the Framework):
 
+```cs
 throw new UnexpectedTypeException(() => viewModel);
+```
 
 To prevent repeating this code for each controller action, you could program a generalized method that returns the right ActionResult depending on the ViewModel type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
@@ -691,75 +636,68 @@ In MVC it is not straightforeward to post a collection of items or nested struct
 
 This architecture’s framework has HtmlHelper extensions to make that easier: the Html.BeginCollection API. Using this API you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
-__@using (Html.BeginItem(() => Model.MyItem))__
+```cs
+@using (Html.BeginItem(() => Model.MyItem))
+{
+    using (Html.BeginCollection(() => Model.MyItem.MyCollection))
+    {
+        foreach (var x in Model.MyItem.MyCollection)
+        {
+            using (Html.BeginCollectionItem())
+            {
+                ...
+            }
+        }
+    }
+}
+```
 
-__{__
-
-`    `__using (Html.BeginCollection(() => Model.MyItem.MyCollection))__
-
-`    `__{__
-
-`        `__foreach (var x in Model.MyItem.MyCollection)__
-
-`        `__{__
-
-`            `__using (Html.BeginCollectionItem())__
-
-`            `__{__
-
-`            `__}__
-
-`        `__}__
-
-`    `__}__
-
-__}__
-
-So each time you enter a level, you need another call to the Html helper again and wrap the code in a using block. You can use as many collections as you like, and use as much nesting as you like. You can spread the nesting around multiple partials.
+So each time you enter a level, you need another call to the `HtmlHelper` again and wrap the code in a using block. You can use as many collections as you like, and use as much nesting as you like. You can spread the nesting around multiple partials.
 
 Input fields in a nested structure must look as follows:
 
+```cs
 Html.TextBoxFor(x => x.MyProperty)
+```
 
 Or:
 
+```cs
 Html.TextBoxFor(x => Model.MyProperty)
+```
 
 Not like this:
 
+```cs
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
+```
 
 Otherwise the input fields will not bind to the view model. This often forces you to program partial views for separate items. This is good practice anyway, so not that big a trade-off.
 
 An alternative to Html.BeginCollection() is using for-loops.
 
-__@Html.TextBoxFor(x => x.MyItem.MyProperty)__
+```cs
+@Html.TextBoxFor(x => x.MyItem.MyProperty)
 
-__@for (int i = 0; i < Model.MyItem.MyCollection.Count; i++)__
+@for (int i = 0; i < Model.MyItem.MyCollection.Count; i++)
+{
+    @Html.TextBoxFor(x => x.MyItem.MyCollection[i].MyProperty)
+}
+```
 
-__{__
+This solution only works if the expressions you pass to the Html helpers contain the full path to a view model property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your view code into partials.
 
-`    `__@Html.TextBoxFor(x => x.MyItem.MyCollection[i].MyProperty)__
+Another alternative to the `BeginCollection()` is the often-used `BeginCollectionItem(string)` API. Example:
 
-__}__
-
-This solution only works if the expressions you pass to the Html helpers contain the full path to a view model property (or hack the HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix) and therefore it does not work if you want to split up your view code into partials.
-
-Another alternative to the BeginCollection() is the often-used BeginCollectionItem(string) API. Example:
-
-__@foreach (var child in Model.Children)__
-
-__{__
-
-`    `__using (Html.BeginCollectionItem("Children"))__
-
-`    `__{__
-
-`        `__@\__* ... __\*@__
-
-`    `__}__
-
-__}__
+```cs
+@foreach (var child in Model.Children)
+{
+    using (Html.BeginCollectionItem("Children"))
+    {
+        @* ... *@
+    }
+}
+```
 
 The limitation of that API is that you can only send one collection over the line and no additional nesting is possible.
 
@@ -775,37 +713,42 @@ Beware that currently the different solutions do not mix well and you should onl
 The ret parameter is the following value encoded:  /Menu/Index
 That is the URL you will go back to after you log in.
 
-- The Login action can redirect to the ret URL like this:
+The Login action can redirect to the ret URL like this:
 
+```cs
 [HttpPost]
-
 public ActionResult Login(... string ret = null)
-
 {
-
-`    `...
-
-`    `return Redirect(ret);
-
-`    `...
-
+    ...
+    return Redirect(ret);
+    ...
 }
+```
 
 ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR AJAX CALL.
 
 - For full page loads, the ret parameter must be set to:
 
-Request.RawUrl
+  ```cs
+  Request.RawUrl
+  ```
 
 - For AJAX calls the ret parameter must be set to:
 
-Url.Action(ActionNames.Index)
+  ```cs
+  Url.Action(ActionNames.Index)
+  ```
 
 - The ret parameter is set in a controller action method, when you return the ActionResult. Example:
 
-EXAMPLE WORKS FOR FULL PAGE LOAD ONLY!!!
+  EXAMPLE WORKS FOR FULL PAGE LOAD ONLY!!!
 
-return RedirectToAction(ActionNames.Login, ControllerNames.Account, new { ret = Request.RawUrl });
+  ```cs
+  return RedirectToAction(
+    ActionNames.Login,
+    ControllerNames.Account,
+    new { ret = Request.RawUrl });
+  ```
 
 - A return URL should always be optional, otherwise you could never serparately debug a view.
 - That way you have an easily codeable, well maintainable solution.
@@ -869,39 +812,27 @@ In a little more detail:
 
 Here follows some pseudo code for how to do it:
 
+```cs
 void ConvertCollection(IList sourceCollection, IList destCollection)
-
 {
+    foreach (var sourceItem in sourceCollection)
+    {
+        var destItem = TryGet(...);
+        if (destItem == null)
+        {
+            destItem = Insert();
+        }
 
-foreach (var sourceItem in sourceCollection)
-
-{
-
-var destItem = TryGet(...);
-
-if (destItem == null)
-
-{
-
-destItem = Insert();
-
+        destItem.Name = sourceItem.Name; // Update
+    }
+    
+    var itemsToDelete = destCollection.Except(sourceCollection);
+    foreach (var itemToDelete in itemsToDelete)
+    {
+        Delete(itemToDelete);
+    }
 }
-
-destItem.Name = sourceItem.Name; // Update
-
-}
-
-var itemsToDelete = destCollection.Except(sourceCollection);
-
-foreach (var itemToDelete in itemsToDelete)
-
-{
-
-Delete(itemToDelete);
-
-}
-
-}
+```
 
 The specific way to implement it, is different in every situation. Reasons that there are many ways to do it are:
 
@@ -997,24 +928,23 @@ You can also choose to implement IDisposable. This is useful if you want to be a
 
 - If you implement IDisposable, call Dispose from the finalizer/destructor.:
 
-~MyClass 
+    ```cs
+    ~MyClass 
+    {
+        Dispose();
+    }
+    ```
 
-{
-
-Dispose();
-
-}
 - Make sure the dispose can successfully run regardless of state, so check any variable you might use for null first and be tollerant towards null.
 
-public void Dispose()
+    ```cs
+    public void Dispose()
+    {
+        _myConnection?.Close();
+    }
+    ```
 
-{
-
-\_myConnection__?__.Close();
-
-}
-
-- Also call GC.SuppressFinalize() in the Dispose() method, because then the garbage collector will skip a few unneeded steps in getting rid of the object.
+- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the object.
 
 #### Constructor Inheritance
 
@@ -1026,51 +956,43 @@ Different ways to append a comma only in between elements.
 
 Example 1:
 
+```cs
 string concatinatedElements = string.Join(",", elements);
+```
 
 Example 2:
 
+```cs
 var sb = new StringBuilder();
 
 int count = elements.Count;
-
 for (int i = 0; i < count; i++)
-
 {
-
-`	`string element = elements[i];
-
-`	`sb.Append(element);
-
-`	`bool isLast = i == count - 1;
-
-`	`if (!isLast)
-
-`	`{
-
-`		`sb.Append(',');
-
-`	`}
-
+    string element = elements[i];
+    
+    sb.Append(element);
+    
+    bool isLast = i == count - 1;
+    if (!isLast)
+    {
+        sb.Append(',');
+    }
 }
+```
 
 Example 3:
 
+```cs
 var sb = new StringBuilder();
 
 bool mustAppendComma = false;
-
 foreach (string element in elements)
-
 {
-
-`	`if (mustAppendComma) sb.Append(',');
-
-`	`mustAppendComma = true;
-
-`	`sb.Append(element);
-
+    if (mustAppendComma) sb.Append(',');
+    mustAppendComma = true;
+    sb.Append(element);
 }
+```
 
 #### DebuggerDisplays
 
@@ -1092,35 +1014,24 @@ This allows you to solve what inheritance promises to solve, but does not do a g
 
 A factory class is a class that constructs instances. But it usually means that it creates a concrete type, returning it as an abstract type. The concrete type that is instantiated depends on the input you pass to the factory’s method:
 
+```cs
 public static class ThingFactory
-
 {
-
-public static IThing CreateThing(int parameter)
-
-{
-
-switch (parameter)
-
-{
-
-case 0:
-
-return new NormalThing();
-
-case 1:
-
-return new SpecialThing();
-
-default:
-
-throw new Exception(String.Format("parameter value '{0}' is not supported.", parameter));
-
+    public static IThing CreateThing(int parameter)
+    {
+        switch (parameter)
+        {
+            case 0:
+                return new NormalThing();
+            case 1:
+                return new SpecialThing();
+            default:
+                throw new Exception(
+                  String.Format("parameter value '{0}' is not supported.", parameter));
+        }
+    }
 }
-
-}
-
-}
+```
 
 A factory class is used if you want to instantiate an implementation of a base class or interface, but it depends on conditions which implementation it has to be or if you wish to abstract away knowledge of the specific concrete types it produces.
 
@@ -1148,65 +1059,45 @@ TryGet can throw other exceptions, even though it does not throw an exception if
 
 Often you need a combination of the three methods that either get a list, a single item but allow null or get a single item and insist it is not null. You can implement the plural variation and base the Get and TryGet on it using the same kind of code every time:
 
+```cs
 public Item GetItem(string searchText)
-
 {
+    Item item = TryGetItem(searchText);
 
-`    `Item item = TryGetItem(searchText);
+    if (item == null)
+    {
+        throw new Exception(String.Format("Item with searchText '{0}' not found.", searchText));
+    }
 
-`    `if (item == null)
-
-`    `{
-
-`        `throw new Exception(String.Format("Item with searchText '{0}' not found.", searchText));
-
-`    `}
-
-`    `return item;
-
+    return item;
 }
 
 public Item TryGetItem(string searchText)
-
 {
+    IList<Item> items = GetItems(searchText);
+    switch (items.Count)
+    {
+        case 0:
+            return null;
 
-`    `IList<Item> items = GetItems(searchText);
+        case 1:
+            return items[0];
 
-`    `switch (items.Count)
-
-`    `{
-
-`        `case 0:
-
-`            `return null;
-
-`        `case 1:
-
-`            `return items[0];
-
-`        `default:
-
-`            `throw new Exception(String.Format(
-
-"Multiple items found for searchText '{0}'.", searchText));
-
-`    `}
-
+        default:
+            throw new Exception(String.Format(
+                "Multiple items found for searchText '{0}'.", searchText));
+    }
 }
 
 public IList<Item> GetItems(string searchText)
-
 {
-
-`    `return \_items.Where(x => !String.IsNullOrEmpty(x.Name) &&
-
-`                             `x.Name.Contains(searchText))
-
-`                 `.ToArray();
-
+    return _items.Where(x => !String.IsNullOrEmpty(x.Name) &&
+                             x.Name.Contains(searchText))
+                 .ToArray();
 }
+```
 
-The GetItem and TryGetItem methods are the same in any situation, except for names and exception messages. Only the plural method is different depending on the situation. 
+The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and exception messages. Only the plural method is different depending on the situation. 
 
 #### Helper
 
@@ -1220,9 +1111,11 @@ Info objects are like DTO’s in that they are usually used for yielding over in
 
 A service environment may contain the same interface for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different interfaces, but that would make the service layer more difficult to use, because you would not know which interface to use. Instead, you could also add ‘IsSupported’ properties to the interface to make an implementation communicate back if it supports a feature at all, for instance:
 
+```cs
 OrderStatusEnum IOrderFacade.GetOrderStatus();
 
 bool IOrderFacade.GetOrderStatusIsSupported { get; }
+```
 
 Then when running price updates for multiple systems, you can simply skip the ones that do not support it. Possible a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The IsSupported booleans keeps complexity at bay, more than introducing a large number of interfaces that would all need to be handled separately.
 
@@ -1236,14 +1129,12 @@ To prevent typing in a lot of strings in code, make a static class with constant
 
 e.g. ViewNames, with constants in it like this:
 
-
+```cs
 public static class ViewNames
-
 {
-
-`    `public const string Edit = "Edit";
-
+    public const string Edit = "Edit";
 }
+```
 
 the name of the constant should be exactly the same as the string text.
 
@@ -1265,28 +1156,22 @@ This prevents typing errors and makes ‘find all references’ possible.
 
 To make a process cancellable and report process without being dependent on the presentation framework, you can simply pass a few callback delegates to a method or class.
 
-`    `public Excute(Action<string> progressCallback, Func<bool> isCanceledCallback
+```cs
+public Excute(Action<string> progressCallback, Func<bool> isCanceledCallback)
+{
+    progressCallback("Starting.");
 
-`    `{
+    if (isCanceledCallback())
+    {
+        progressCallback("Cancelled.");
+        return;
+    }
 
-`                  `progressCallback("Starting.");
+    // ...
 
-`            `if (isCanceledCallback())
-
-`            `{
-
-`                `progressCallback("Cancelled.");
-
-`                `return;
-
-`            `}
-
-
-`        `// ...
-
-`        `progressCallback("Finished.");
-
-`    `}
+    progressCallback("Finished.");
+}
+```
 
 It depends on your problem whether those callbacks are nullable and you should do the appropriate null-checks depending on the situation.
 
@@ -1315,77 +1200,49 @@ Finer details about the Singular form:
 
 Here is an example of some Singular, Plural, Non-Recursive and Recursive methods. Note that the words ‘Singular’ and ‘Plural’ are not used in the method names.
 
+```cs
 private class MyProcess
-
 {
+    private StringBuilder _sb = new StringBuilder();
+    public string ProcessRecipeRecursive(Recipe recipe)
+    {
+        if (recipe == null) throw new NullException(() => recipe);
+        ProcessRecipe(recipe);
+        ProcessIngredients(recipe.Ingredients);
+        ProcessRecipesRecursive(recipe.SubRecipes);
+        return _sb.ToString();
+    }
 
-`    `private StringBuilder \_sb = new StringBuilder();
+    private void ProcessIngredients(IList<Ingredient> ingredients)
+    {
+        _sb.AppendLine("Ingredients:");
+        foreach (Ingredient ingredient in ingredients)
+        {
+            ProcessIngredient(ingredient);
+        }
+    }
 
-`    `public string ProcessRecipeRecursive(Recipe recipe)
+    private void ProcessIngredient(Ingredient ingredient)
+    {
+        _sb.AppendLine(String.Format("{0} {1} ({2})", ingredient.QuantityDescription, ingredient.Name, ingredient.ID));
+    }
 
-`    `{
+    private void ProcessRecipesRecursive(IList<Recipe> recipes)
+    {
+        _sb.AppendLine("Sub-Recipes:");
+        foreach (Recipe recipe in recipes)
+        {
+            ProcessRecipeRecursive(recipe);
+        }
+    }
 
-`        `if (recipe == null) throw new NullException(() => recipe);
-
-`        `ProcessRecipe(recipe);
-
-`        `ProcessIngredients(recipe.Ingredients);
-
-`        `ProcessRecipesRecursive(recipe.SubRecipes);
-
-`        `return \_sb.ToString();
-
-`    `}
-
-`    `private void ProcessIngredients(IList<Ingredient> ingredients)
-
-`    `{
-
-`        `\_sb.AppendLine("Ingredients:");
-
-`        `foreach (Ingredient ingredient in ingredients)
-
-`        `{
-
-`            `ProcessIngredient(ingredient);
-
-`        `}
-
-`    `}
-
-`    `private void ProcessIngredient(Ingredient ingredient)
-
-`    `{
-
-`        `\_sb.AppendLine(String.Format("{0} {1} ({2})", ingredient.QuantityDescription, ingredient.Name, ingredient.ID));
-
-`    `}
-
-`    `private void ProcessRecipesRecursive(IList<Recipe> recipes)
-
-`    `{
-
-`        `\_sb.AppendLine("Sub-Recipes:");
-
-`        `foreach (Recipe recipe in recipes)
-
-`        `{
-
-`            `ProcessRecipeRecursive(recipe);
-
-`        `}
-
-`    `}
-
-`    `private void ProcessRecipe(Recipe recipe)
-
-`    `{
-
-`        `\_sb.AppendLine(String.Format("Recipe: {0} ({1})", recipe.Name, recipe.ID));
-
-`    `}
+    private void ProcessRecipe(Recipe recipe)
+    {
+        _sb.AppendLine(String.Format("Recipe: {0} ({1})", recipe.Name, recipe.ID));
+    }
 
 }
+```
 
 #### Wrapper
 

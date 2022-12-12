@@ -211,70 +211,56 @@ This is why the explicit status management solution won over the entity status m
 - Use the ‘Enum’ suffix for enum types e.g. OrderStatus**Enum**.
 - Always give an enum the enum member Undefined with value 0:
 
+```cs
 enum MyEnum
-
 {
-
-__Undefined = 0__
-
+  Undefined = 0
 }
+```
 
 This prevents you from accidently forgetting to assign the enum value.
 
 - Prefer not using specific underlying enum types. Enums ‘derive’ from int by default, but you can e.g. do the following, which is not recommended:
 
-enum MyEnum __: long__
-
+```cs
+enum MyEnum : long
 {
-
 }
+```
 
 - When taking action depending on an enum value, you might use a switch statement.
   In that case always specify the default case and throw an exception in the default case:
 
+```cs
 MyEnum myEnum;
 
 switch (myEnum)
-
 {
-
-case MyEnum.MyEnumMember1:
-
-// Do something
-
-break;
-
-case MyEnum.MyEnumMember2:
-
-// Do something
-
-break;
-
-default:
-
-throw new InvalidValueException(myEnum);
-
-// OR:
-
-throw new ValueNotSupportedException(myEnum);
-
+    case MyEnum.MyEnumMember1:
+        // Do something
+        break;
+    case MyEnum.MyEnumMember2:
+        // Do something
+        break;
+    default:
+        throw new InvalidValueException(myEnum);
+        // OR:
+        throw new ValueNotSupportedException(myEnum);
 }
+```
 
 Not only is it informative for the programmer debugging a problem and does it prevent processing invalid or incomplete data, it is also a fail-safe for the fact that an enum is a very weak type. You can assign any int value to it, even ones that are not an enum member!
 
+```cs
 enum MyEnum
-
 {
-
-Undefined = 0,
-
-MyEnumMember1 = 1,
-
-MyEnumMember2 = 2
-
+    Undefined = 0,
+    MyEnumMember1 = 1,
+    MyEnumMember2 = 2
 }
 
-__var myEnum = (MyEnum)3; // WORKS!__
+var myEnum = (MyEnum)3; // WORKS!
+```
 
 The difference between throwing an InvalidValueException or a ValueNotSupportedException is that you would use InvalidValueException if all enum members except Undefined were part of the switch, because then it was not a sensible enum value. You would throw ValueNotSupportedException if the switch uses only some of the enum members, but other perfectly sensible members were not relevant in this particular case. But it is not a disaster to use these exception types interchangedly.
 
@@ -284,16 +270,13 @@ The difference between throwing an InvalidValueException or a ValueNotSupportedE
 
 - Entity models often contain enum-like entities:
 
-
+```cs
 public class SectionType
-
 {
-
-public virtual int ID { get; set; }
-
-public virtual string Name { get; set; } 
-
+    public virtual int ID { get; set; }
+    public virtual string Name { get; set; } 
 }
+```
 
 Often you do not need more than these two properties.
 
@@ -301,166 +284,127 @@ It is common to end the enum-like entity type with the suffix ‘Type’ (not a 
 
 The Name property will be filled with the string that is exactly the enum member name:
 
+```cs
 new SectionType 
-
 { 
-
-ID = 5, 
-
-Name ="SubChapter" 
-
+    ID = 5, 
+    Name ="SubChapter" 
 }
+```
 
 - Enum-like entities have an enum-equivalent in the *Business* Layer:
 
+```cs
 public enum SectionType
-
 {
-
-Undefined = 0,
-
-Book = 1,
-
-Article = 2,
-
-Paragraph = 3,
-
-Chapter = 4,
-
-SubChapter = 5
-
+    Undefined = 0,
+    Book = 1,
+    Article = 2,
+    Paragraph = 3,
+    Chapter = 4,
+    SubChapter = 5
 }
+```
 
 Note that the enums themselves do not belong in the entity model, but in the Business layer.
 
 - It is *not* recommended to give enum-like entities an inverse property to the entities that use it.
 
+```cs
 public class SectionType
-
 {
-
-// NOT RECOMMENDED!
-
-public virtual IList<Section> Sections { get; set; }
-
+    // NOT RECOMMENDED!
+    public virtual IList<Section> Sections { get; set; }
 }
+```
 
 The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the LinkTo methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
 
 - To make assigning an enum-like entity easier, you can put extension methods in your *Business* layer. You can put this in the *Extensions* folder and call the class *EnumExtensions*. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like entities:
 
+```cs
 SectionTypeEnum sectionTypeEnum = section.GetSectionTypeEnum();
 
-section.SetSectionTypeEnum(SectionTypeEnum.Paragraph, \_sectionTypeRepository);
+section.SetSectionTypeEnum(SectionTypeEnum.Paragraph, _sectionTypeRepository);
+```
 
 Here is an example implementation of the extension methods:
 
-`        `public static SectionTypeEnum GetSectionTypeEnum(this Section section)
+```cs
+public static SectionTypeEnum GetSectionTypeEnum(this Section section)
+{
+    if (section == null) throw new NullException(() => section);
+    if (section.SectionType == null) return SectionTypeEnum.Undefined;
 
-`        `{
+    return (SectionTypeEnum)section.SectionType.ID;
+}
 
-`            `if (section == null) throw new NullException(() => section);
+public static void SetSectionTypeEnum(this Section entity, SectionTypeEnum enumValue, ISectionTypeRepository repository)
+{
+    if (repository == null) throw new NullException(() => repository);
 
-`            `if (section.SectionType == null) return SectionTypeEnum.Undefined;
-
-`            `return (SectionTypeEnum)section.SectionType.ID;
-
-`        `}
-
-`        `public static void SetSectionTypeEnum(this Section entity, SectionTypeEnum enumValue, ISectionTypeRepository repository)
-
-`        `{
-
-`            `if (repository == null) throw new NullException(() => repository);
-
-`            `if (enumValue == SectionTypeEnum.Undefined)
-
-`            `{
-
-`                `entity.UnlinkSectionType();
-
-`            `}
-
-`            `else
-
-`            `{
-
-`                `SectionType sectionType = repository.Get((int)enumValue);
-
-`                `entity.LinkTo(sectionType);
-
-`            `}
-
-`        `}
+    if (enumValue == SectionTypeEnum.Undefined)
+    {
+        entity.UnlinkSectionType();
+    }
+    else
+    {
+        SectionType sectionType = repository.Get((int)enumValue);
+        entity.LinkTo(sectionType);
+    }
+}
+```
 
 #### Localization
 
 - Localization of the enum member display names is done by means of resources, usually in the Resources.resx  in the Business layer. (See the ‘Resources’ pattern and Appendix B for explanations on how to manage resources). The key of the resource should exactly match the enum member name.
 - The following code allows you to retrieve an enum member display name:
 
+```cs
 Resources.ResourceManager.GetString(SectionTypeEnum.Paragraph.ToString())
+```
 
 But a helper extension methods can make the code much more readable.  This allows you to for instance use:
 
-`            `string str1 = ResourceHelper.GetSectionTypeDisplayName(section);
-
-`            `string str2 = ResourceHelper.GetPropertyDisplayName(sectionType);
-
-`            `string str3 = ResourceHelper.GetPropertyDisplayName(sectionTypeEnum);
-
-`            `string str4 = ResourceHelper.GetPropertyDisplayName("Paragraph");
+```cs
+  string str1 = ResourceHelper.GetSectionTypeDisplayName(section);
+  string str2 = ResourceHelper.GetPropertyDisplayName(sectionType);
+  string str3 = ResourceHelper.GetPropertyDisplayName(sectionTypeEnum);
+  string str4 = ResourceHelper.GetPropertyDisplayName("Paragraph");
+```
 
 Put a class in your Business.Resouces namespace, can it for instance ResourceHelper.  These are examples of such ResourceHelper methods:
 
-`    `public static class ResourceHelper
+```cs
+public static class ResourceHelper
+{
+    public static string GetSectionTypeDisplayName(Section section)
+    {
+        if (section == null) throw new NullException(() => section);
+        string str = GetPropertyDisplayName(section.SectionType);
+        return str;
+    }
 
-`    `{
+    public static string GetPropertyDisplayName(SectionType sectionType)
+    {
+        if (sectionType == null) throw new NullException(() => sectionType);
+        string str = Resources.ResourceManager.GetString(sectionType.Name);
+        return str;
+    }
 
-`        `public static string GetSectionTypeDisplayName(Section section)
+    public static string GetPropertyDisplayName(SectionTypeEnum sectionTypeEnum)
+    {
+        string str = Resources.ResourceManager.GetString(sectionTypeEnum.ToString());
+        return str;
+    }
 
-`        `{
-
-`            `if (section == null) throw new NullException(() => section);
-
-`            `string str = GetPropertyDisplayName(section.SectionType);
-
-`            `return str;
-
-`        `}
-
-`        `public static string GetPropertyDisplayName(SectionType sectionType)
-
-`        `{
-
-`            `if (sectionType == null) throw new NullException(() => sectionType);
-
-`            `string str = Resources.ResourceManager.GetString(sectionType.Name);
-
-`            `return str;
-
-`        `}
-
-`        `public static string GetPropertyDisplayName(SectionTypeEnum sectionTypeEnum)
-
-`        `{
-
-`            `string str = Resources.ResourceManager.GetString(sectionTypeEnum.ToString());
-
-`            `return str;
-
-`        `}
-
-`        `public static string GetPropertyDisplayName(string resourceName)
-
-`        `{
-
-`            `string str = Resources.ResourceManager.GetString(resourceName);
-
-`            `return str;
-
-`        `}
-
-`    `}
+    public static string GetPropertyDisplayName(string resourceName)
+    {
+        string str = Resources.ResourceManager.GetString(resourceName);
+        return str;
+    }
+}
+```
 
 #### TODO
 
@@ -495,7 +439,9 @@ Put a class in your Business.Resouces namespace, can it for instance ResourceHel
 - Mention the ID of an object in the exception message.
 - You can put alternative keys or other data in the exception by using anonymous types:
 
+```cs
 throw new Exception($"Item with {new { name }} not found");
+```
 
 This will produce a message like: Item with { name = "Item 1" } not found.
 
@@ -504,21 +450,18 @@ This will produce a message like: Item with { name = "Item 1" } not found.
 - Put exceptions at the beginning of a method if possible.
 - Do not use exception filtering (catching specific exception types) unless you absolutely have to:
 
+```cs
 try
-
 {
-
-// Do something
-
+    // Do something
 }
-
 catch (IOException)
-
 {
 }
+```
 
 In fact, prefer not to retrieve information by catching an exception at all.
--
+
 - To show a full exception message Exception.ToString() does a pretty good job including inner exceptions. If you like you can use ExceptionHelper from Framework.Logging to get a neatly formatted exception text. It also has a GetInnermostException helper method.
 
 ### Facades
@@ -564,35 +507,26 @@ For logging we will use our own API: Framework.Logging. It has an easy interface
 
 Config example:
 
+```cs
 <configuration>
+  <configSections>
+    <section name="jj.framework.logging" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration"/>
+    <section name="jj.framework.logging.file" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration"/>
+  </configSections>
 
-`  `<configSections>
+  <jj.framework.logging>
+    <loggers>
+      <logger type="DebugOutput" level="Debug" />
+      <logger type="File" level="Exception" />
+    </loggers>
+  </jj.framework.logging>
 
-`    `<section name="jj.framework.logging" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration"/>
-
-`    `<section name="jj.framework.logging.file" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration"/>
-
-`  `</configSections>
-
-`  `<jj.framework.logging>
-
-`    `<loggers>
-
-`      `<logger type="DebugOutput" level="Debug" />
-
-`      `<logger type="File" level="Exception" />
-
-`    `</loggers>
-
-`  `</jj.framework.logging>
-
-`  `<jj.framework.logging.file
-
-`    `filePathFormat="C:\Log\JJ.Utilities.MyUtility-DEV-{0}.log"
-
-`    `filePathDateFormat="yyyy\_MM\_dd\_HH" /> 
+  <jj.framework.logging.file
+    filePathFormat="C:\Log\JJ.Utilities.MyUtility-DEV-{0}.log"
+    filePathDateFormat="yyyy\_MM\_dd\_HH" /> 
 
 </configuration>
+```
 
 If you insist on using Log4Net, make a separate ILogger implementation behind which you hide Log4Net. The downside of Log4Net is that its configuration can be quite verbose and complicated. Framework.Logging is simple and can run on all platforms.
 
@@ -610,9 +544,11 @@ One option to support multi-language, is for a content item to be only available
 
 One possible solution is each possble naming / grammar structure to each have a generic entity type, that can be tied to an arbitrary entity:
 
+```
 NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityID }
 
 SingularAndPlural { ID, Singular, Plural, CultureName, EntityTypeName, EntityID }
+```
 
 The combination { EntityTypeName, EntityID } is a alternative key to the entity. This makes the translation item structure independent on the model it is applied to, which can be a benefit.
 
@@ -704,75 +640,52 @@ Authentication, authorization and user rights management in the application arch
 
 There are the following interfaces:
 
+```cs
 IAuthenticator
-
 IAuthorizer
-
 IRightsManager
+```
 
 The interfaces might have different implementations, depending on the underlying security technology used.
 
-IAuthenticator will validate if a user’s credentials are correct.
+`IAuthenticator` will validate if a user’s credentials are correct.
 
-IAuthorizer will verify if that user is permitted to access certain parts of the system.
+`IAuthorizer` will verify if that user is permitted to access certain parts of the system.
 
-IRightsManager will allow you to manage and change the users’ rights.
+`IRightsManager` will allow you to manage and change the users’ rights.
 
+```cs
 IAuthenticator 
-
 { 
-
-bool IsAuthentic(string userName, …); 
-
-void AssertAuthentication(string userName, …);
-
+    bool IsAuthentic(string userName, …); 
+    void AssertAuthentication(string userName, …);
 }
 
 IAuthorizer
-
 {
-
-bool IsAuthorized(string userName, params string[] securablePathElements);
-
-void AssertAuthorization(string userName, params string[] securablePathElements);
-
+    bool IsAuthorized(string userName, params string[] securablePathElements);
+    void AssertAuthorization(string userName, params string[] securablePathElements);
 }
 
 IRightsManager
-
 {
-
-bool UserExists(string userName);
-
-bool UserIsLocked(string userName);
-
-void CreateUser(string userName, string password);
-
-void DeleteUser(string userName);
-
-bool ChangePassword(string userName, string oldPassword, string newPassword);
-
-bool ChangeUserName(string oldUserName, string newUserName);
-
-string ResetPassword(string userName);
-
-bool UnlockUser(string userName);
-
-void Grant(string userName, params string[] securablePathElements);
-
-void Revoke(string userName, params string[] securablePathElements);
-
-void CreateSecurable(params string[] securablePathElements);
-
-void DeleteSecurable(params string[] securablePathElements);
-
-bool SecurableExists(params string[] securablePathElements);
-
-IList<string> GetPageOfUserNames(int pageNumber, int pageSize);
-
-int GetUserCount();
-
+    bool UserExists(string userName);
+    bool UserIsLocked(string userName);
+    void CreateUser(string userName, string password);
+    void DeleteUser(string userName);
+    bool ChangePassword(string userName, string oldPassword, string newPassword);
+    bool ChangeUserName(string oldUserName, string newUserName);
+    string ResetPassword(string userName);
+    bool UnlockUser(string userName);
+    void Grant(string userName, params string[] securablePathElements);
+    void Revoke(string userName, params string[] securablePathElements);
+    void CreateSecurable(params string[] securablePathElements);
+    void DeleteSecurable(params string[] securablePathElements);
+    bool SecurableExists(params string[] securablePathElements);
+    IList<string> GetPageOfUserNames(int pageNumber, int pageSize);
+    int GetUserCount();
 }
+```
 
 #### User Rights Models
 
@@ -780,37 +693,29 @@ There are several ways you can subdivide your use rights to your application or 
 
 ##### Organize by Entity and CRUD
 
+```
 Order List
-
 Order Read
-
 Order Insert
-
 Order Delete
-
 Order Execute
-
 Product List
-
 Product Read
-
 Product Insert
-
 Product Delete
-
 Product Execute
+```
 
 Do note that this subdivision could lead to a massive amount of securables that you do not even need. It may seem flexible, but might also be poorly overviewable and a pain to maintain. Consider other models of user rights.
 
 ##### Organize by Access Level
 
+```
 Visitor
-
 User
-
 Admin
-
 Super Admin
+```
 
 ##### Access Yes or No
 
@@ -818,11 +723,11 @@ Being allowed or disallowed access to an application, with no futher subdivision
 
 ##### Organize by Feature
 
+```
 Ordering
-
 Email Campaigns
-
 Calculation Module
+```
 
 ### Side Effects
 
@@ -920,109 +825,73 @@ Here is a code example:
 
 public partial class MainForm : SimpleProcessForm
 
+```cs
 {
+    public MainForm()
+    {
+        InitializeComponent();
+    }
 
-`    `public MainForm()
-
-`    `{
-
-`        `InitializeComponent();
-
-`    `}
-
-`    `private void MainForm\_OnRunProcess(object sender, OnRunProcessEventArgs e)
-
-`    `{
-
-`        `var executor = new MyExecutor (x => ShowProgress(x), () => !IsRunning);
-
-`        `executor.Execute();
-
-`    `}
-
+    private void MainForm_OnRunProcess(object sender, OnRunProcessEventArgs e)
+    {
+        var executor = new MyExecutor (x => ShowProgress(x), () => !IsRunning);
+        executor.Execute();
+    }
 }
+```
 
-The MyExecutor class may look as follows and can call its callbacks at its own discretion:
+The `MyExecutor` class may look as follows and can call its callbacks at its own discretion:
 
+```cs
 internal class ExecutorDemo
-
 {
+    private Action<string> _progressCallback;
+    private Func<bool> _isCancelledCallback;
+    public ExecutorDemo(Action<string> progressCallback = null, Func<bool> isCancelledCallback = null)
+    {
+        _progressCallback = progressCallback;
+        _isCancelledCallback = isCancelledCallback;
+    }
 
-`    `private Action<string> \_progressCallback;
+    public void Excecute(IList<MyClass> list)
+    {
+        if (list == null) throw new NullException(() => list);
 
-`    `private Func<bool> \_isCancelledCallback;
+        DoProgressCallback("Starting.");
 
-`    `public ExecutorDemo(Action<string> progressCallback = null, Func<bool> isCancelledCallback = null)
+        foreach (MyClass item in list)
+        {
+            DoProgressCallback("Busy..."); // TODO: include percentage or '3/100' in the text.
 
-`    `{
+            if (DoIsCancelledCallback())
+            {
+                DoProgressCallback("Cancelled.");
+                return;
+            }
+        }
 
-`        `\_progressCallback = progressCallback;
+        DoProgressCallback("Finished.");
+    }
 
-`        `\_isCancelledCallback = isCancelledCallback;
+    private void DoProgressCallback(string message)
+    {
+        if (_progressCallback != null)
+        {
+            _progressCallback(message);
+        }
+    }
 
-`    `}
+    private bool DoIsCancelledCallback()
+    {
+        if (_isCancelledCallback != null)
+        {
+            return _isCancelledCallback();
+        }
 
-`    `public void Excecute(IList<MyClass> list)
-
-`    `{
-
-`        `if (list == null) throw new NullException(() => list);
-
-`        `DoProgressCallback("Starting.");
-
-`        `foreach (MyClass item in list)
-
-`        `{
-
-`            `DoProgressCallback("Busy..."); // TODO: include percentage or '3/100' in the text.
-
-`            `if (DoIsCancelledCallback())
-
-`            `{
-
-`                `DoProgressCallback("Cancelled.");
-
-`                `return;
-
-`            `}
-
-`        `}
-
-`        `DoProgressCallback("Finished.");
-
-`    `}
-
-`    `private void DoProgressCallback(string message)
-
-`    `{
-
-`        `if (\_progressCallback != null)
-
-`        `{
-
-`            `\_progressCallback(message);
-
-`        `}
-
-`    `}
-
-`    `private bool DoIsCancelledCallback()
-
-`    `{
-
-`        `if (\_isCancelledCallback != null)
-
-`        `{
-
-`            `return \_isCancelledCallback();
-
-`        `}
-
-`        `return false;
-
-`    `}
-
+        return false;
+    }
 }
+```
 
 ### Validation
 

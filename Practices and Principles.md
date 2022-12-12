@@ -160,7 +160,6 @@ Practices & Principles
     - [Whirlpool Anti-Pattern / Inappropriate Conversions](#whirlpool-anti-pattern--inappropriate-conversions)
   - [SOLID](#solid)
 
-
 ### Introduction
 
 This chapter describes abstract principles and practices for software design. Each of the principles, has pros and cons, that need to be weighed off in every situation.
@@ -218,25 +217,18 @@ The separation into technical and functional concerns extends further than the c
 
 These are the functional concerns:
 
-JJ.Data.__Ordering__.NHibernate
-
-JJ.Business.__Ordering__.Validation
-
-JJ.Presentation.__Cms__
-
-JJ.Presentation.__Cms__.Mvc
+- JJ.Data.__Ordering__.NHibernate
+- JJ.Business.__Ordering__.Validation
+- JJ.Presentation.__Cms__
+- JJ.Presentation.__Cms__.Mvc
 
 And these are the technical concerns:
 
-JJ.__Data__.Ordering.__NHibernate__
-
-JJ.__Business__.Ordering.__Validation__
-
-JJ.__Presentation__.Cms
-
-JJ.__Presentation__.Cms.__Mvc__
-
-JJ.__Presentation__.Cms.__Mobile__
+- JJ.__Data__.Ordering.__NHibernate__
+- JJ.__Business__.Ordering.__Validation__
+- JJ.__Presentation__.Cms
+- JJ.__Presentation__.Cms.__Mvc__
+- JJ.__Presentation__.Cms.__Mobile__
 
 The assemblies are split up by functional domains.
 
@@ -432,17 +424,16 @@ For entity models, consider the name Order.OrderProducts, not Order.Products if 
 
 Often combining a domain term with a design pattern gives you a more specific name:
 
-CustomerViewModel
-
+    CustomerViewModel
 
 This instead of calling it just Customer or just ViewModel.
 
 Here are a few more examples:
 
-- CustomerListReload
+- `CustomerListReload`
     - It was a controller action name intended to be a AJAX variation of the Index action. Not only should CustomerList be replaced with Index, but also the word Reload is not clear. It may have something to do with reloading some piece of index, but it really is the AJAX variation of Index, so perhaps a suffix Ajax would be more appropriate. IndexAjax would have been a better name.
-- A class name Cooking is also a good example of an conceptual name. Cooking? If you have to ask ‘What about it?’, you got a conceptual name, that should be made more specific.
-- A view named \_CollectionListAction.cshtml: The name Action is a conceptual name. It has something to do with an Action. More specifically: multiple actions, and more specifically: it is an ActionBar. The word Action is too general. It can refer to a Controller Action, the .NET Action<T> class, etc.  Perhaps \_IndexActionBar.cshtml would have been better.
+- A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask ‘What about it?’, you got a conceptual name, that should be made more specific.
+- A view named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a Controller Action, the .NET `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
 
 #### CRUD
@@ -453,55 +444,39 @@ Here are a few more examples:
 
 This is over-use of delegates, mostly as parameters. Here is an example of a method with too many delegates passed to it. The problem is that it is very unreadable:
 
+```cs
 public void MyDelegator(
-
-`    `Func<Child, Parent> getParent, Action<Child, Parent> setParent,
-
-`    `string parentPropertyName, string listPropertyName,
-
-`    `Func<Parent> createParent, Func<Child> createChild)
-
+    Func<Child, Parent> getParent, Action<Child, Parent> setParent,
+    string parentPropertyName, string listPropertyName,
+    Func<Parent> createParent, Func<Child> createChild)
 {
-
-`    `// ...
-
+    // ...
 }
+```
 
 Solution: create a base class and a derived class that overrides the methods with specific implementations. This may create more classes, but it might be better overviewable.
 
+```cs
 abstract class MyBase
-
 {
+    private string \_propertyName;
+    private string \_listPropertyName;
+    public MyBase(string propertyName, string listPropertyName)
+    {
+        // ...
+    }
 
-`    `private string \_propertyName;
+    public void Execute()
+    {
+        // ...
+    }
 
-`    `private string \_listPropertyName;
-
-`    `public MyBase(string propertyName, string listPropertyName)
-
-`    `{
-
-`        `// ...
-
-`    `}
-
-`    `public void Execute()
-
-`    `{
-
-`        `// ...
-
-`    `}
-
-`    `protected abstract Parent GetParent(Child child);
-
-`    `protected abstract void SetParent(Child child, Parent parent);
-
-`    `protected abstract Parent CreateParent();
-
-`    `protected abstract Child CreateChild();
-
+    protected abstract Parent GetParent(Child child);
+    protected abstract void SetParent(Child child, Parent parent);
+    protected abstract Parent CreateParent();
+    protected abstract Child CreateChild();
 }
+```
 
 #### Dependency Injection
 
@@ -509,29 +484,21 @@ abstract class MyBase
 
 For dependency injection we will not use frameworks like Ninject anymore. Ninject uses a ‘magic hat’ principle: an object came from somewhere and you have no idea where it came from or if the object is even there. NInject allows you to define a set of implementations of several interfaces centrally and retrieve that implementation from arbitrary places in the code:
 
+```cs
 // Bind it
-
 Bind<IMyDependency>().To<MyDependency>();
 
 // Use it
-
 MyClass obj = new MyClass();
-
 class MyClass
-
 {
-
-private IMyDependency \_myDependency;
-
-public MyClass()
-
-{
-
-myDependency = ServiceLocator.Resolve<IMyDependency>()
-
+    private IMyDependency \_myDependency;
+    public MyClass()
+    {
+        myDependency = ServiceLocator.Resolve<IMyDependency>()
+    }
 }
-
-}
+```
 
 We will not use this technique anymore, because it has serious disadvantages and the object oriented paradigm completely falls apart:
 
@@ -549,27 +516,22 @@ We will not use this technique anymore, because it has serious disadvantages and
 
 Here is the proper alternative:
 
+```cs
 IMyDependency myDependency = new MyDependency(); // Or another means of instantiation.
 
 MyClass obj = new MyClass(myDependency);
 
 class MyClass
-
 {
+    private IMyDependency _myDependency;
 
-private IMyDependency \_myDependency;
-
-public MyClass(IMyDependency myDependency)
-
-{
-
-if (myDependency == null) throw new NullException(() => myDependency);
-
-\_myDependency = myDependency;
-
+    public MyClass(IMyDependency myDependency)
+    {
+        if (myDependency == null) throw new NullException(() => myDependency);
+        _myDependency = myDependency;
+    }
 }
-
-}
+```
 
 It is simply a combination of interfaces and constructor arguments.
 
@@ -634,9 +596,9 @@ Not making assumptions about its use or its implementation can help.
 
 Input/output transparency can both help and harm. By always passing input as parameters to the method, you take away assumptions about where that data came from, and makes it less hard to adapt when the data comes from elsewhere. But by passing input as parameters, you also increase the interface’s awareness of things that should just be implementation details and makes it harder to make the interface that work when implementations change. Leaky abstractions are the worst example of this. It is an art. You cannot apply a single solution to all problems here.
 
-Interface stability can also be improved by choosing neutral collection types over specific ones, for instance using IList<T> and not Dictionary<Something, Something>. This can have a small performance trade-off, but does improve interface stability. Again: it is a trade off, an art of picking the right tool for the job.
+Interface stability can also be improved by choosing neutral collection types over specific ones, for instance using `IList<T>` and not `Dictionary<Something, Something>`. This can have a small performance trade-off, but does improve interface stability. Again: it is a trade off, an art of picking the right tool for the job.
 
-(Stable abstraction principle is also one of the ‘secondary’ SOLID principles. Although, I (Jan-Joost van Zon) personally find anything I can find on the topic vague about whether they mean stability as in ‘does not change much’, or stability as in ‘does not have many bugs’. I also find things poorly explained, often written in a way that makes me feel you already need to understand the topic in order to understand the explanation, as if the author was just writing it for himself.)
+(Stable abstraction principle is also one of the ‘secondary’ SOLID principles. Although, I (JJ van Zon) personally find anything I can find on the topic vague about whether they mean stability as in ‘does not change much’, or stability as in ‘does not have many bugs’. I also find things poorly explained, often written in a way that makes me feel you already need to understand the topic in order to understand the explanation, as if the author was just writing it for himself.)
 
 #### IO Transparency
 
@@ -656,27 +618,23 @@ An interface tries to abstract / generalize multiple similar problems into one s
 
 For example: this repository interface exposes the underlying NHibernate technology:
 
+```cs
 interface IMyRepository
-
 {
-
-Entity TryGetByCriterion(NHibernate.Criterion.AbstractCriterion);
-
+  Entity TryGetByCriterion(NHibernate.Criterion.AbstractCriterion);
 }
+```
 
 The repository interface should not have shown NHibernate-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the repository’s job is to offer a set of optimal queries. With the leaky interface above, a repository cannot do its job anymore.
 
 The following example is better.
 
+```cs
 interface IMyRepository
-
 {
-
-Entity TryGetByCriteria(string name, DateTime dateCreated);
-
+  Entity TryGetByCriteria(string name, DateTime dateCreated);
 }
-
-}
+```
 
 You might add extra methods or parameters if more filtering options are needed.
 
@@ -746,23 +704,21 @@ Syntactic sugar is creating a notation that does not add anything, other than a 
 
 Object initializers are an example of syntactic sugar. In C# 2.0 you had to initialize an object’s properties as follows:
 
+```cs
 Cat cat = new Cat();
-
 cat.Age = 7;
-
 cat.Name = "Nala";
+```
 
 In later versions of C# you are able to do the same thing with the following code:
 
+```cs
 var cat = new Cat 
-
 {
-
-Age = 7,
-
-Name = "Nala"
-
+    Age = 7,
+    Name = "Nala"
 };
+```
 
 These two pieces of code do exactly the same thing. The shorter notation introduced is ‘syntactic sugar’.
 
@@ -815,19 +771,17 @@ Use the same name for something everywhere. For instance if the business domain 
 
 Here is a code example with a name that changes out of the blue:
 
+```cs
 int id = 1234;
 
 string sourcePageName = PageService.GetPageName(id);
-
 string destPageName = ConvertPageName(sourcePageName);
 
 private string ConvertPageName(string sourceTitle)
-
 {
-
-// …
-
+  // ...
 }
+```
 
 PageName all of a sudden turned into Title. This confuses everybody. You might not think there is much of a difference in meaning, but for all I know it can be a totally different property and what could also be the case is that someone was mistaken in taking the wrong property. Keep it consistent.
 
@@ -853,29 +807,26 @@ Polluting a whole call stack of methods with variables only used to assign it to
 
 Do not return a parameter again. If you write directly to a passed object, there is not need to return it again. So this is wrong:
 
+```cs
 A x = Bla(x);
 
 private A Bla(A x)
-
 {
-
-x.Y = 10;
-
-return x;
-
+    x.Y = 10;
+    return x;
 }
+```
 
 Do this instead:
 
+```cs
 Bla(x);
 
 private void Bla(A x)
-
 {
-
-x.Y = 10;
-
+    x.Y = 10;
 }
+```
 
 Returning a parameter suggests that new output is created and the parameter is not written to, while neither is true: the input and output are the same object and the input object is changed. This is very unintuitive.
 
@@ -885,29 +836,26 @@ To clarify yourself in code, and to make expressions better readable. Use tempor
 
 For instance this:
 
-bool isSameControllerAndAction = string.Equals(names.ControllerName, GetControllerName()) &&
-
-`                                 `string.Equals(names.ActionName, sourceActionName);
+```cs
+bool isSameControllerAndAction = 
+    string.Equals(names.ControllerName, GetControllerName()) &&
+    string.Equals(names.ActionName, sourceActionName);
 
 if (isSameControllerAndAction)
-
 {
-
-`    `return View(names.ViewName, viewModel);
-
+    return View(names.ViewName, viewModel);
 }
+```
 
 Is more readable than this:
 
+```cs
 if (string.Equals(names.ControllerName, GetControllerName()) &&
-
-`    `string.Equals(names.ActionName, sourceActionName);)
-
+    string.Equals(names.ActionName, sourceActionName);)
 {
-
-`    `return View(names.ViewName, viewModel);
-
+    return View(names.ViewName, viewModel);
 }
+```
 
 Because it clarifies your reasoning to the next programmer who reads it.
 
@@ -915,15 +863,13 @@ The problem with programming is not writing code, it is reading it.
 
 Most of the time it is a good idea to first put a returned value in a variable before returning it, because this makes debugging easier, because you can inspect the value before returning it, instead of only being able to see the value several frames up the call stack to conclude that a must deeper, now out of sight method did not do its job. Then you are already not in the piece of code you were trying to debug anymore. From a performance point of view it does not matter, because if compiled for release, the compiler will optimize out such temporary variables:
 
+```cs
 public bool MustExecute(MyClass myParameter)
-
 {
-
-bool __mustExecute__ = myParameter.IsSpecial || myParameter.Items.Count > 3;
-
-return mustDoIt;
-
+    bool __mustExecute__ = myParameter.IsSpecial || myParameter.Items.Count > 3;
+    return mustDoIt;
 }
+```
 
 It is not black and white when to use temporary variables just for the sake of giving something a name. It is an art to make your code as readable as possible for the next person.
 
@@ -955,47 +901,34 @@ Sometimes auto-instantiation on first use can be replaced by initializing a fiel
 
 Calling an overridable member in a base constructor breaks inheritance principles. It creates a chicken and egg problem. Fields in the derived class need to be initialized before running a method, but the field can only be initialized after the base constructor went off, which runs the method! See the following code: 
 
+```cs
 abstract class MyBase
-
 {
+    public MyBase()
+    {
+        Execute();
+    }
 
-public MyBase()
-
-{
-
-Execute();
-
-}
-
-protected abstract Execute();
-
+    protected abstract Execute();
 }
 
 class MyDerivedClass()
-
 {
+    private int _value;
 
-private int \_value;
+    public MyDerivedClass(int value)
+    {
+        _value = value;
+    }
 
-public MyDerivedClass(int value)
-
-{
-
-\_value = value;
-
+    protected override Execute()
+    {
+          // PROBLEM: _value is not initialized yet!
+    }
 }
+```
 
-protected override Execute()
-
-{
-
-`      `// PROBLEM: \_value is not initialized yet!
-
-}
-
-}
-
-The solution is to make Execute() public and insist that that it is called explicitly in the code that creates the instance. Ofcourse if the method is not overridable it would be no problem, and if the method was not called in the base constructor it would be no problem, but calling an overridable member from the base class’s constructor could mean trouble.
+The solution is to make `Execute()` public and insist that that it is called explicitly in the code that creates the instance. Ofcourse if the method is not overridable it would be no problem, and if the method was not called in the base constructor it would be no problem, but calling an overridable member from the base class’s constructor could mean trouble.
 
 <TODO: Update the remark below. Another solution is to actually do all ‘the work’ in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above.>
 
@@ -1009,43 +942,36 @@ The solution is to make Execute() public and insist that that it is called expli
 
 Do not do this:
 
+```cs
 if (condition)
-
 {
-
-__<<No code>>__
-
+    << No code >>
 }
-
 else
-
 {
-
-<<Some code>>
-
+    << Some code >>
 }
+```
 
 It looks like you forgot to write code. It looks weird. Either use negation:
 
+```cs
 if (!condition)
-
 {
-
-// (Some code)
-
+    // (Some code)
 }
+```
 
 Or do an early return:
 
+```cs
 if (condition)
-
 {
-
-return;
-
+    return;
 }
 
 // (Some code)
+```
 
 #### Foreach with i
 
@@ -1069,79 +995,60 @@ This code smell can also apply to other code than C# classes and methods.
 
 This is a nested loop:
 
+```cs
 foreach (var x in list1)
-
 {
-
-foreach (var y in list2)
-
-{
-
-// ...
-
+    foreach (var y in list2)
+    {
+        // ...
+    }
 }
-
-}
+```
 
 Nested loops usually come with a performance penalty, because compared to a single loop with *n* iterations it might have *n2*  iterations. It is not always wrong to have a loop in a loop, but you are only comparing two lists, using a hashset or dictionary might be a better solution, changing the *n2* problem back to a *2n* problem:
 
+```cs
 Dictionary<int, X> dictionary = list1.ToDictionary(x => x.ID);
 
 foreach (var y in list2)
-
 {
-
-var x = dictionary[y.ID];
-
-// ...
-
+    var x = dictionary[y.ID];
+    // ...
 }
+```
 
 #### Nesting too Deep
 
 Too much nesting in code can be confusing. It can be prevented by splitting the code up into multiple methods. It can also be prevented by using early returns. So instead of:
 
+```cs
 if (condition)
-
 {
-
-`    `// A lot of code…
-
-`    `// …
-
-`    `// …
-
-`    `// …
-
+    // A lot of code…
+    // ...
+    // ...
+    // ...
 }
-
 else
-
 {
-
-`    `validationMessages = …;
-
+    validationMessages = …;
 }
+```
 
 You could do the following:
 
+```cs
 if (!condition)
-
 {
-
-`   `validationMessages = …;
-
-`   `return;
-
+    validationMessages = …;
+    return;
 }
 
 // A lot of code
-
-// …
-
-// …
-
-// …
+// ...
+// ...
+// ...
+```
 
 This keeps cause and effect closer together, making alternative flows in code less confusing.
 
@@ -1227,7 +1134,7 @@ If you are faced with a problem and you do not really know what the cause is and
 
 You could add some *Logging* or improve *DebuggerDisplays.* You could also improve *Error Checking*. You can also improve user input validation, which could give you a clue as to what’s wrong.
 
-(*DebuggerDisplays* are handy things that can also improve your debugging experience.)
+(`DebuggerDisplays` are handy things that can also improve your debugging experience.)
 
 You could also try and look for the already existing diagnostics to help you. Are the loggings, is there something in the windows event log. Can I see error messages in Windows Task Scheduler. Can you get a clearer error message?
 

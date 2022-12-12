@@ -48,63 +48,53 @@ For configuration we will use our own API: Framework.Configuration. It makes it 
 
 If your configuration requires more than a flat list of key value pairs, you might make a custom configuration section. In a configuration section you can add as much hierarchy as you like. You can read out structures like the following:
 
+```xml
 <jj.demos.configuration>
-
-`  `<items>
-
-`    `<item name="Name1" value="1" />
-
-`    `<item name="Name2" value="2" >
-
-`      `<childItem name="Child" value="3" />
-
-`    `</item>
-
-`  `</items>
-
+  <items>
+    <item name="Name1" value="1" />
+    <item name="Name2" value="2" >
+      <childItem name="Child" value="3" />
+    </item>
+  </items>
 </jj.demos.configuration>
-
-
+```
 
 You can create any kind of nesting you want. With classic .NET, reading out nested configurations requires about 1 ½ hours of programming for a simple structure. With our own framework, it is easy.
 
 You have to include the following line in the configSections element in your config file:
 
+```xml
 <section name="jj.demos.configuration" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration"/>
+```
 
 You only need to replace the name ‘jj.demos.configuration’ with your assembly name converted to lower case. (You can also use a custom name, which you then have to use explicitly in your code, but that is not advised.)
 
 To read out the config you call:
 
+```cs
 var config = CustomConfigurationManager.GetSection<ConfigurationSection>();
+```
 
 MyConfigurationSection is a class you have to program yourself. Its structure of properties corresponds 1-to-1 to the XML structure. The specific behavior of the mapping is documented in the summary of CustomConfigurationManager. In short: properties map to XML elements unless you mark the property with [XmlAttribute]. Array items are expected to have the class name as the XML element name, but the element name of the array items can be specified explicty with [XmlArrayItem]. Here is an example:
 
+```cs
 internal class ConfigurationSection
-
 {
-
-`    `[XmlArrayItem("item")]
-
-`    `public ItemConfig[] Items { get; set; }
-
+    [XmlArrayItem("item")]
+    public ItemConfig[] Items { get; set; }
 }
 
 internal class ItemConfig
-
 {
+    [XmlAttribute]
+    public string Name { get; set; }
 
-`    `[XmlAttribute]
+    [XmlAttribute]
+    public string Value { get; set; }
 
-`    `public string Name { get; set; }
-
-`    `[XmlAttribute]
-
-`    `public string Value { get; set; }
-
-`    `public ItemConfig ChildItem { get; set; }
-
+    public ItemConfig ChildItem { get; set; }
 }
+```
 
 Note that C# will follow the convention that property names are pascal case, while this automatically maps to the convention in XML, in which element and attribute names are camel case.
 
@@ -112,31 +102,32 @@ Note that C# will follow the convention that property names are pascal case, whi
 
 An appSetting looks as follows in the App.config or Web.config:
 
+```xml
 <appSettings>
-
-`  `<add key="TestInt32" value="10"/>
-
+  <add key="TestInt32" value="10"/>
 </appSettings>
-
-
+```
 
 Reading out the appSettings classically, is done as follows:
 
+```cs
 int testInt32 = Convert.ToInt32(ConfigurationManager.AppSettings["TestInt32"]);
+```
 
 But you get errors if you mistype the string and an invalid cast exception if you convert to the wrong type. The alternative in Framework.Configuration is strongly typed. You first need to define an interface:
 
-`    `internal interface IAppSettings
-
-`    `{
-
-`        `int TestInt32 { get; }
-
-`    `}
+```cs
+internal interface IAppSettings
+{
+    int TestInt32 { get; }
+}
+```
 
 This interface defines the names and types of the settings. To retrieve a setting you use:
 
+```cs
 int testInt32 = AppSettings<IAppSettings>.GetValue(x => x.TestInt32);
+```
 
 It automatically converts to the right data type and allows you to use strongly-typed names.
 
@@ -144,11 +135,11 @@ It automatically converts to the right data type and allows you to use strongly-
 
 Reading out connectionStrings is similar to reading out the appSettings. Connection strings in the App.config or Web.config look as follows:
 
+```xml
 <connectionStrings>
-
-`  `<add name="OrderDB" connectionString="data source=10.40.XX.XX;Initial Catalog=OrderDB..." />
-
+  <add name="OrderDB" connectionString="data source=10.40.XX.XX;Initial Catalog=OrderDB..." />
 </connectionStrings>
+```
 
 This is the classic way of reading it out:
 
@@ -156,17 +147,18 @@ string connectionString = ConfigurationManager.ConnectionStrings["OrderDB"].Conn
 
 This is the alternative in Framework.Configuration:
 
+```cs
 string connectionString = ConnectionStrings<IConnectionStrings>.Get(x => x.OrderDB);
+```
 
 You need to define an interface to be able to use the strongly-typed name:
 
+```cs
 internal interface IConnectionStrings
-
 {
-
-`    `string OrderDB { get; }
-
+    string OrderDB { get; }
 }
+```
 
 ### Embedded Resources
 
@@ -246,65 +238,62 @@ update Ingredient set Name = @name where ID = @id;
 
 Then put an enum in the SQL folder in your .NET project:
 
-
-
 ![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.003.png)
 
 Add enum members that exactly correspond to the file names of the sql files:
 
+```cs
 namespace JJ.Demos.SqlExecutor.Sql
-
 {
-
-`    `internal enum SqlEnum
-
-`    `{
-
-`        `Ingredient\_UpdateName
-
-`    `}
-
+    internal enum SqlEnum
+    {
+      Ingredient_UpdateName
+    }
 }
+```
 
 You need to create an SqlExecutor as follows:
 
+```cs
 ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.EmbeddedResource, connection, transaction);
+```
 
 We passed the SqlConnection and SqlTransaction to it.
 
 Then you can call a method that executes the SQL:
 
-sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient\_UpdateName, new { id, name });
+```cs
+sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
+```
 
 The method names are similar to what you might be used to using SqlCommand. You pass SQL parameters along with the SqlExecutor as an anonymous type:
 
+```cs
 new { id, name }
+```
 
 The name and type of the variables id and name correspond to the parameters of the SQL. You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the SQL parameters, they will be correctly used:
 
+```cs
 var ingredient = new IngredientDto
-
 {
-
-`    `ID = 10,
-
-`    `Name = "My ingredient"
-
+    ID = 10,
+    Name = "My ingredient"
 };
 
-sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient\_Update, ingredient);
+sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_Update, ingredient);
+```
 
 You can also retrieve records as a collection of strongly typed objects:
 
-IList<IngredientDto> records = sqlExecutor.ExecuteReader<IngredientDto>(SqlEnum.Ingredient\_GetAll).ToArray();
+```cs
+IList<IngredientDto> records = sqlExecutor.ExecuteReader<IngredientDto>(SqlEnum.Ingredient_GetAll).ToArray();
 
 foreach (IngredientDto record in records)
-
 {
-
-`    `// ...
-
+    // ...
 }
+```
 
 The column names in the SQL are *case sensitive!*
 
@@ -313,33 +302,43 @@ It is smart to let the SQL file names begin with the entity type name, so they s
 ![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.004.png)
 
 #### With NHibernate
-If you use SqlExecutor in combination with NHibernate you have to use the NHibernateSqlExecutorFactory instead of the default SqlExecutorFactory:
 
+If you use SqlExecutor in combination with NHibernate you have to 
+use the NHibernateSqlExecutorFactory instead of the default SqlExecutorFactory:
+
+```cs
 ISession session = ...;
 
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.EmbeddedResource, session);
+```
 
 This version uses an NHibernate ISession. In order for the SQL to run in the same transaction as the SQL that NHibernate executes, it needs to be aware of the ISession.
 
 It is usually the best choice to include the SQL as an embedded resource, but you can also use files or literal strings.
+
 #### Files instead of Embedded Resources
 
 ![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.005.png)
 
 The is the code to create the SqlExecutor and execute an SQL file:
 
+```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.FileName, session);
 
 sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient\_Update.sql", new { id, name });
+```
 
 So the SqlEnum cannot be used anymore. You have to use the (relative) file path.
+
 #### Strings instead of Embedded Resources:
 
 It is not recommended to use SQL strings in your code! But it is possible all the same using the following code:
 
+```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.String, session);
 
 sqlExecutor.ExecuteNonQuery("update Ingredient set Name = @name where ID = @id", new { id, name });
+```
 
 In that case no SQL files have to be included in your project.
 
@@ -349,7 +348,7 @@ Always choose XElement (LINQ to XML) over XmlDocument except when you have to us
 
 Prefer the XmlHelper methods over using the API’s directly, because the helper will handle nullability and unicity better.
 
-`	`XmlToObjectConverter and ObjectToXmlConverter are also acceptable XML API’s.
+XmlToObjectConverter and ObjectToXmlConverter are also acceptable XML API’s.
 
 ### Framework.Business Relationships
 
