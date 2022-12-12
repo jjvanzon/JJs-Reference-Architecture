@@ -163,8 +163,8 @@ You might loosely link the tags:
 
 < TODO: Service Architecture: Three-Stage KeyMapping vs. Custom KeyMapping may be something to write about. It may explains why you do not need an even more generic Key mapping, for intance:
 
-- CustomerOrderNumber
-- SupplierOrderNumber
-- InternalID
+    CustomerOrderNumber
+    SupplierOrderNumber
+    InternalID
 
 Cannot remember how and why it worked exactly. >

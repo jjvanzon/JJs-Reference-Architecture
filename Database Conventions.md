@@ -7,18 +7,18 @@ Database Conventions
 <h3>Contents</h3>
 
 - [Database Conventions](#database-conventions)
-  - [Developing a Database](#developing-a-database)
-  - [Naming Conventions](#naming-conventions)
-  - [Rules](#rules)
-  - [Upgrade Scripts](#upgrade-scripts)
-    - [Excel Sheet](#excel-sheet)
-      - [Exceptional Cases](#exceptional-cases)
-      - [Summary](#summary)
-    - [Scripts](#scripts)
-    - [Deployment](#deployment)
-      - [Summary](#summary-1)
-    - [SqlScripts Table](#sqlscripts-table)
-  - [C#-Based Migrations](#c-based-migrations)
+    - [Developing a Database](#developing-a-database)
+    - [Naming Conventions](#naming-conventions)
+    - [Rules](#rules)
+    - [Upgrade Scripts](#upgrade-scripts)
+        - [Excel Sheet](#excel-sheet)
+            - [Exceptional Cases](#exceptional-cases)
+            - [Summary](#summary)
+        - [Scripts](#scripts)
+        - [Deployment](#deployment)
+            - [Summary](#summary-1)
+        - [SqlScripts Table](#sqlscripts-table)
+    - [C#-Based Migrations](#c-based-migrations)
 
 ### Developing a Database
 
@@ -125,12 +125,11 @@ Always edit the Excel in the dev branch, because Excels cannot be merged.
 
 The name of an SQL file has a specific format:
 
-2014-08-28 040 ShopDB Supplier.Name not null.sql
+    2014-08-28 040 ShopDB Supplier.Name not null.sql
 
 So it has the format:
 
-{Date} {Number} {DatabaseStructureName} {DatabaseObject}{SubDatabaseObject} {Change}.sql
-
+    {Date} {Number} {DatabaseStructureName} {DatabaseObject}{SubDatabaseObject} {Change}.sql
 
 | Element                   | Description | Examples |
 |---------------------------|-------------|----------|
@@ -153,17 +152,16 @@ For upgrades that should only be executed on a specific database, put ‘N/A’ 
 
 You can also add something to the SQL file name to indicate this:
 
-2015-01-23 010 OrderDB SHOPDB ONLY Order.DeliveryDateTimeUtc.sql
+    2015-01-23 010 OrderDB SHOPDB ONLY Order.DeliveryDateTimeUtc.sql
 
 Some things should be done manually and not with SQL. Those actions should also be mentioned in the Excel:
 
-2015-01-23 020 OrderDB OrderID Identity Yes DO MANUALLY
+    2015-01-23 020 OrderDB OrderID Identity Yes DO MANUALLY
 
 If a script requires that you be extra careful, you can mention this as follows:
 
-2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc.sql CHECK MANUALLY
-
-2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc.sql EXECUTE SEPARATELY
+    2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc.sql CHECK MANUALLY
+    2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc.sql EXECUTE SEPARATELY
 
 But be sparse with that, because the person running the script might not actually know what it is he is supposed to check and will feel uneasy executing this script since it is obviously so dangerous, while he has no idea why.
 
@@ -211,88 +209,60 @@ You could execute the scripts one by one, but there is a handier, safer way to d
 
 With some creative copying and pasting the SQL file names, you can create a composite upgrade script like this:
 
+```sql
 begin try
+    print 'Begin transaction.';
+    begin transaction;
+    declare @verbose bit = 0;
+    declare @folder varchar(255) = 'C:\JJ\Install\SqlScripts';
 
-`	 `print 'Begin transaction.';
+    exec spExecuteSqlFile @folder, '2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc.sql', @verbose;
+    exec spExecuteSqlFile @folder, '2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc not null.sql', @verbose;
+    
+    --print 'Rolling back transaction.';
+      --rollback transaction;
 
-`	 `begin transaction;
-
-`	 `declare @verbose bit = 0;
-
-`	 `declare @folder varchar(255) = 'C:\JJ\Install\SqlScripts';
-
-`	 `exec spExecuteSqlFile @folder, '2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc.sql', @verbose;
-
-`	 `exec spExecuteSqlFile @folder, '2015-01-23 010 OrderDB Order.DeliveryDateTimeUtc not null.sql', @verbose;
-
-`	 `--print 'Rolling back transaction.';
-
-`    `--rollback transaction;
-
-
-
-`	 `print 'Committing transaction.';
-
-`    `commit transaction;
-
+    print 'Committing transaction.';
+    commit transaction;
 end try
-
 begin catch
-
-`    `print Error\_Message();
-
-`    `print 'Rolling back transaction.';
-
-`    `rollback transaction;
-
+    print Error\_Message();
+    print 'Rolling back transaction.';
+    rollback transaction;
 end catch
+```
 
 This safely executes all changes in a single transaction and shows error information if something goes wrong.
 
 This does require you to add the following stored procedure to the database:
 
+```sql
 create procedure spExecuteSqlFile(@folderPath varchar(255), @fileName varchar(255), @verbose bit = 0) as
-
 begin
+    set nocount on;
 
-`	`set nocount on;
+    print 'Executing ''' + @fileName + '''';
+    declare @filePath varchar(255) = @folderPath + '\' + @fileName;
+    declare @readFileSql varchar(1024) = 'select BulkColumn from openrowset(bulk ''' + @filePath + ''', single\_blob) x;'
+    declare @temp table (contents varchar(max));
+    insert into @temp exec (@readFileSql);
+    declare @sql varchar(max);
+    set @sql = (select top 1 contents FROM @temp);
 
+    -- Remove BOM from UTF-8.
+    if (LEFT(@sql, 3) = 'ï»¿') set @sql = RIGHT(@sql, LEN(@sql) - 3);
 
-
-`	`print 'Executing ''' + @fileName + '''';
-
-`	`declare @filePath varchar(255) = @folderPath + '\' + @fileName;
-
-`	`declare @readFileSql varchar(1024) = 'select BulkColumn from openrowset(bulk ''' + @filePath + ''', single\_blob) x;'
-
-`	`declare @temp table (contents varchar(max));
-
-`	`insert into @temp exec (@readFileSql);
-
-`	`declare @sql varchar(max);
-
-`	`set @sql = (select top 1 contents FROM @temp);
-
-
-
-`	`-- Remove BOM from UTF-8.
-
-`	`if (LEFT(@sql, 3) = 'ï»¿') set @sql = RIGHT(@sql, LEN(@sql) - 3);
-
-
-
-`	`exec (@sql);
-
-`	`if (@verbose = 1) print @sql;
-
+    exec (@sql);
+    if (@verbose = 1) print @sql;
 end
+```
 
 ##### Summary
 
 This section covered:
 
 - Composite upgrade scripts
-- spExecuteSqlScript
+- `spExecuteSqlScript`
 
 #### SqlScripts Table
 
