@@ -8,7 +8,23 @@ Code Style
 
 - [Code Style](#code-style)
     - [Introduction](#introduction)
-    - [Casing, Punctuation and Spacing](#casing-punctuation-and-spacing)
+    - [Casing & Punctuation](#casing--punctuation)
+    - [Spacing & Punctuation](#spacing--punctuation)
+        - [Default Auto-Formatting](#default-auto-formatting)
+        - [No Extra Enters Between Braces](#no-extra-enters-between-braces)
+        - [Enters between `switch` Cases](#enters-between-switch-cases)
+        - [No Braces for Single-Line `if` Statements](#no-braces-for-single-line-if-statements)
+        - [Loops on Multiple Lines](#loops-on-multiple-lines)
+        - [Braces for Multi-Line `if`s and Loops](#braces-for-multi-line-ifs-and-loops)
+        - [Enters between Methods](#enters-between-methods)
+        - [A Property at Least on Own Line](#a-property-at-least-on-own-line)
+        - [Enters inside Methods between ‘Pieces that do Something’](#enters-inside-methods-between-pieces-that-do-something)
+        - [Variable Declarations on Individual Lines](#variable-declarations-on-individual-lines)
+        - ['Tabular Form' Less Preferred](#tabular-form-less-preferred)
+        - [Aligning Elements of Linq Queries](#aligning-elements-of-linq-queries)
+        - [Proper indentation](#proper-indentation)
+        - [Generic Constraints on Next Line](#generic-constraints-on-next-line)
+        - [A One-Liner with Generic Constraints on Same Line](#a-one-liner-with-generic-constraints-on-same-line)
     - [Trivial Rules](#trivial-rules)
     - [Miscellaneous Rules](#miscellaneous-rules)
         - [Namespace Tips](#namespace-tips)
@@ -36,7 +52,7 @@ Coding standards mostly conform to the Microsoft standard described in the follo
 
 Use Resharper. Seriously. Finetune it to automatically check your coding style. Use it to keep code clean as write code or change existing code.
 
-### Casing, Punctuation and Spacing
+### Casing & Punctuation
 
 | Rule                                                                | Examples                       |
 |---------------------------------------------------------------------|--------------------------------|
@@ -53,28 +69,379 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 | Start interface names with `I`.                                     | `IMyInterface`
 | Partial view names in MVC should begin with an underscore           | `_MyPartialView`
 
+### Spacing & Punctuation
 
-| Rule | Not Recommended | Recommended |
-|------|-----------------|------------ |
-| Keep Visual Studio’s autoformatting enabled and set to its defaults. |
-| No extra enters between braces.                | `  `}<br><br>} | `  `}<br>}
-| Put enters between switch cases.               | switch (x)<br>{<br>case 1:<br>break;<br>case 2:<br>break;<br>}<br> | switch (x)<br>{<br>case 1:<br>break;<br><br>case 2:<br>break;<br>}<br>
-| No braces for single-line if-statements.       | if (condition) { Bla(); }<br> | if (condition) Bla();
-| Loops always on multiple lines.                | foreach (var x in list) { Bla(); } | foreach (var x in list)<br>{ <br>Bla();<br>}<br>
-| Use braces for multi-line if’s and loops.      | foreach (var x in list)<br>Bla();<br><br>if (condition)<br>Bla(); | foreach (var x in list)<br>{<br>Bla();<br>}<br><br>if (condition)<br>{<br>Bla();<br>}<br>
-| Put enters between methods.                    | void Bla()<br>{<br>}<br>void Bla2()<br>{<br>}<br> | void Bla()<br>{<br>}<br><br>void Bla2()<br>{<br>}<br>
-| Each property at least its own line.           | int A { get; set; } int B { get; set; } | int A { get; set; } <br>int B { get; set; }<br><br>int C<br>{<br>get { ... }<br>set { ... }<br>}<br><br>int D<br>{<br>get <br>{<br>... <br>}<br>set <br>{ <br>...<br>}<br>}<br>
-| Put enters inside methods between ‘pieces that do something’ (that is vague, but that is the rule). | void Bla()<br>{<br>var x = new X();<br>x.A = 10;<br>var y = new Y();<br>y.B = 20;<br>y.X = x;<br>Bla2(x, y);<br>} | void Bla()<br>{<br>var x = new X();<br>x.A = 10;<br><br>var y = new Y();<br>y.B = 20;<br>y.X = x;<br><br>Bla2(x, y);<br>}<br>
-| Each variable declaration on its own line.     | int i, j; | int i;<br>int j;<br>
-| Avoid ‘tabular form’. It should only rarely be used. This tabular form will often be undone by auto-formatting. It is non-standard, so it is better to get your eyes used to non-tabular form. | public int    ID       { get; set; }<br>public bool   IsActive { get; set; }<br>public string Text     { get; set; }<br>public string Answer   { get; set; }<br>public bool   IsManual { get; set; } | public int ID { get; set; }<br>public bool IsActive { get; set; }<br>public string Text { get; set; }<br>public string Answer { get; set; }<br>public bool IsManual { get; set; }
-| Align the elements of linq queries as follows: | var arr = coll.Where(x => x...).<br>`   `OrderBy(x => x...).ToArray() | var arr = coll.Where(x => x...)<br>`              `.OrderBy(x => x...)<br>`              `.ToArray()<br>
-| Use proper indentation                         | <TODO: Example.> | <TODO: Example.>
-| Generic constraints on next line.<br>(So they stand out)| class MyGenericClass<T> where T: MyInterface<br>{<br>}<br> | class MyGenericClass<T><br>where T: MyInterface<br>{<br>}
-| For one-liners, but generic constraints on same line instead.     | interface IMyInterface<br>{<br>void MyMethod(T param) <br>where T : ISomething<br>} | interface IMyInterface<br>{<br>void MyMethod(T param) where T : ISomething<br>}
+Suggestions:
+
+> [Default Auto-Formatting](#default-auto-formatting)  
+> [No Extra Enters Between Braces](#no-extra-enters-between-braces)  
+> [Enters between `switch` Cases](#enters-between-switch-cases)  
+> [No Braces for Single-Line `if` Statements](#no-braces-for-single-line-if-statements)  
+> [Loops on Multiple Lines](#loops-on-multiple-lines)  
+> [Braces for Multi-Line `if`s and Loops](#braces-for-multi-line-ifs-and-loops)  
+> [Enters between Methods](#enters-between-methods)  
+> [A Property at Least on Own Line](#a-property-at-least-on-own-line)  
+> [Enters inside Methods between ‘Pieces that do Something’](#enters-inside-methods-between-pieces-that-do-something)  
+> [Variable Declarations on Individual Lines](#variable-declarations-on-individual-lines)  
+> ['Tabular Form' Less Preferred](#tabular-form-less-preferred)  
+> [Aligning Elements of Linq Queries](#aligning-elements-of-linq-queries)  
+> [Proper indentation](#proper-indentation)  
+> [Generic Constraints on Next Line](#generic-constraints-on-next-line)  
+> [A One-Liner with Generic Constraints on Same Line](#a-one-liner-with-generic-constraints-on-same-line)  
+
+#### Default Auto-Formatting
+
+Keep Visual Studio’s autoformatting enabled and set to its defaults.
+
+#### No Extra Enters Between Braces
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+    }
+}
+```
+
+</td><td>
+
+```cs
+	}
+    
+}
+```
+
+</td></tr></table>
+
+#### Enters between `switch` Cases           
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+switch (x)
+{
+    case 1:
+        break;
+
+    case 2:
+        break;
+}
+```
+
+</td><td>
+
+```cs
+switch (x)
+{
+    case 1:
+        break;
+    case 2:
+        break;
+}
+```
+
+</td></tr></table>
+
+#### No Braces for Single-Line `if` Statements
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+if (condition) Bla();
+```
+ 
+</td><td>
+
+```cs
+if (condition) { Bla(); }
+```
+
+</td></tr></table>
+
+#### Loops on Multiple Lines
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+foreach (var x in list)
+{ 
+    Bla();
+}
+```
+
+</td><td>
+
+```cs
+foreach (var x in list) { Bla(); } 
+```
+
+</td></tr></table>
+
+#### Braces for Multi-Line `if`s and Loops
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+foreach (var x in list)
+{
+    Bla();
+}
+
+if (condition)
+{
+    Bla();
+}
+```
+
+</td><td>
+
+```cs
+foreach (var x in list)
+    Bla();
+
+if (condition)
+    Bla(); 
+```
+
+</td></tr></table>
+
+#### Enters between Methods
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+void Bla()
+{
+   
+}
+
+void Bla2()
+{
+   
+}
+```
+
+</td><td>
+
+```cs
+void Bla()
+{
+    
+}
+void Bla2()
+{
+    
+}
+```
+
+</td></tr></table>
+
+#### A Property at Least on Own Line
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+int A { get; set; } 
+int B { get; set; }
+
+int C
+{
+    get { ... }
+    set { ... }
+}
+
+int D
+{
+    get 
+    {
+        ... 
+    }
+    set 
+    { 
+        ...
+    }
+}
+            
+```
+
+</td><td>
+
+```cs
+int A { get; set; } int B { get; set; } 
+```
+
+</td></tr></table>
+
+#### Enters inside Methods between ‘Pieces that do Something’
+
+(That might be a vague description, but that's the idea.)
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+void Bla()
+{
+    var x = new X();
+    x.A = 10;
+    
+    var y = new Y();
+    y.B = 20;
+    y.X = x;
+    
+    Bla2(x, y);
+}
+   
+```
+
+</td><td>
+
+```cs
+void Bla()
+{
+    var x = new X();
+    x.A = 10;
+    var y = new Y();
+    y.B = 20;
+    y.X = x;
+    Bla2(x, y);
+} 
+```
+
+</td></tr></table>
+
+#### Variable Declarations on Individual Lines
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+int i;
+int j;
+```
+
+</td><td>
+
+```cs
+int i, j; 
+```
+
+</td></tr></table>
+
+#### 'Tabular Form' Less Preferred
+
+It should only rarely be used. This tabular form will often be undone by auto-formatting. It is non-standard, so it is better to get your eyes used to non-tabular form.
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+public int ID { get; set; }
+public bool IsActive { get; set; }
+public string Text { get; set; }
+public string Answer { get; set; }
+public bool IsManual { get; set; }
+```
+
+</td><td>
+
+```cs
+public int    ID       { get; set; }
+public bool   IsActive { get; set; }
+public string Text     { get; set; }
+public string Answer   { get; set; }
+public bool   IsManual { get; set; } 
+```
+
+</td></tr></table>
+
+#### Aligning Elements of Linq Queries
+
+Align the elements of linq queries as follows: 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+var arr = coll.Where(x => x...)
+              .OrderBy(x => x...)
+              .ToArray()
+```
+
+</td><td>
+
+```cs
+var arr = coll.Where(x => x...).
+   OrderBy(x => x...).ToArray() 
+```
+
+</td></tr></table>
+
+#### Proper indentation
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+<TODO: Example.> 
+```
+
+</td><td>
+
+```cs
+<TODO: Example.>
+```
+
+</td></tr></table>
+
+#### Generic Constraints on Next Line
+
+(So they stand out.) 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+class MyGenericClass<T>
+    where T: MyInterface
+{
+    ...
+}
+```
+
+</td><td>
+
+```cs
+class MyGenericClass<T> where T: MyInterface
+{
+    ...
+}
+ 
+```
+
+</td></tr></table>
+
+#### A One-Liner with Generic Constraints on Same Line
+
+For one-liners, put generic constraints on same line instead. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+interface IMyInterface
+{
+    void MyMethod(T param) where T : ISomething
+}
+```
+
+</td><td>
+
+```cs
+interface IMyInterface
+{
+    void MyMethod(T param) 
+        where T : ISomething
+} 
+```
+
+</td></tr></table>
 
 ### Trivial Rules
 
-| Rule | Not Recommended | Recommended |
+| Rule | Less Preferred | Recommended |
 |------|-----------------|-------------|
 | Give each class (or enum) its own file (except nested classes).
 | Keep members private as much as possible. | | private void Bla()<br>{<br>}<br>
@@ -99,7 +466,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 ### Miscellaneous Rules
 
-| Description | Not Recommended | Recommended |
+| Description | Less Preferred | Recommended |
 |-------------|-----------------|-------------|
 | Test class names end with ‘Tests’. | [TestClass]<br>public class **Tests\_**Validator()<br>{<br>}<br> | [TestClass]<br>public class Validator**Tests**()<br>{<br>}<br>
 | Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. | [TestMethod]<br>public void **Test** ()<br>{ <br>...<br>} | [TestMethod]<br>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()<br>{ <br>...<br>}<br>
@@ -123,7 +490,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 Avoid using full namespaces in code, because that makes the code line very hard to read:
 
-NOT RECOMMENDED:
+Less Preferred:
 
 ```cs
 JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository = PersistenceHelper.CreatCmsRepository< JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
@@ -131,7 +498,7 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository = Persistenc
 
 Using half a namespace is also not great, because when you need to rename a namespace, you will have a lot of manual work:
 
-NOT RECOMMENDED:
+Less Preferred:
 
 ```cs
 Business.Cms.RepositoryInterfaces.IUserRepository userRepository = PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
