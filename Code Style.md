@@ -38,16 +38,16 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 ### Casing, Punctuation and Spacing
 
-| Rule                                                                | Examples        |
-|---------------------------------------------------------------------|-----------------|
-| Properties, methods, class names and events are in pascal case.     | `MyProperty`<br/>`MyMethod`
-| Local variables and parameters are in camel case.                   | `myLocalVariable`<br/>`myParameter`
+| Rule                                                                | Examples                       |
+|---------------------------------------------------------------------|--------------------------------|
+| Properties, methods, class names and events are in pascal case.     | `MyProperty` `MyMethod`
+| Local variables and parameters are in camel case.                   | `myLocalVariable` `myParameter`
 | Fields are in camel case and start with underscore.                 | `_myField`
 | Constants in capitals with underscores in between words.            | `MY_CONSTANT`
-| No prefixes, such as `strName`.                                    |
+| No prefixes, such as `strName`.                                     |
 | Avoid abbreviations.                                                |
 | For long identifiers, use underscores to separate ‘the pieces’.     | `Sine_OperatorCalculator_VarFrequency_WithPhaseTracking`
-| Type arguments start with the letter `T` or are just the letter `T` | `T TEntity TViewModel`
+| Type arguments start with the letter `T` or are just the letter `T` | `T` `TEntity` `TViewModel`
 | Abbreviations of 2 letters with capitals.                           | `ID`
 | Abbreviations of 3 letters or more in pascal case.                  | `Mvc`
 | Start interface names with `I`.                                     | `IMyInterface`
@@ -57,43 +57,43 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 | Rule | Not Recommended | Recommended |
 |------|-----------------|------------ |
 | Keep Visual Studio’s autoformatting enabled and set to its defaults. |
-| No extra enters between braces.                | `  `}<br/><br/>} | `  `}<br/>}
-| Put enters between switch cases.               | switch (x)<br/>{<br/>case 1:<br/>break;<br/>case 2:<br/>break;<br/>}<br/> | switch (x)<br/>{<br/>case 1:<br/>break;<br/><br/>case 2:<br/>break;<br/>}<br/>
-| No braces for single-line if-statements.       | if (condition) { Bla(); }<br/> | if (condition) Bla();
-| Loops always on multiple lines.                | foreach (var x in list) { Bla(); } | foreach (var x in list)<br/>{ <br/>Bla();<br/>}<br/>
-| Use braces for multi-line if’s and loops.      | foreach (var x in list)<br/>Bla();<br/><br/>if (condition)<br/>Bla(); | foreach (var x in list)<br/>{<br/>Bla();<br/>}<br/><br/>if (condition)<br/>{<br/>Bla();<br/>}<br/>
-| Put enters between methods.                    | void Bla()<br/>{<br>}<br/>void Bla2()<br/>{<br>}<br/> | void Bla()<br/>{<br>}<br/><br/>void Bla2()<br/>{<br>}<br/>
-| Each property at least its own line.           | int A { get; set; } int B { get; set; } | int A { get; set; } <br/>int B { get; set; }<br/><br/>int C<br/>{<br/>get { ... }<br/>set { ... }<br/>}<br/><br/>int D<br/>{<br/>get <br/>{<br/>... <br/>}<br/>set <br/>{ <br/>...<br/>}<br/>}<br/>
-| Put enters inside methods between ‘pieces that do something’ (that is vague, but that is the rule). | void Bla()<br/>{<br/>var x = new X();<br/>x.A = 10;<br/>var y = new Y();<br/>y.B = 20;<br/>y.X = x;<br/>Bla2(x, y);<br/>} | void Bla()<br/>{<br/>var x = new X();<br/>x.A = 10;<br/><br/>var y = new Y();<br/>y.B = 20;<br/>y.X = x;<br/><br/>Bla2(x, y);<br/>}<br/>
-| Each variable declaration on its own line.     | int i, j; | int i;<br/>int j;<br/>
-| Avoid ‘tabular form’. It should only rarely be used. This tabular form will often be undone by auto-formatting. It is non-standard, so it is better to get your eyes used to non-tabular form. | public int    ID       { get; set; }<br/>public bool   IsActive { get; set; }<br/>public string Text     { get; set; }<br/>public string Answer   { get; set; }<br/>public bool   IsManual { get; set; } | public int ID { get; set; }<br/>public bool IsActive { get; set; }<br/>public string Text { get; set; }<br/>public string Answer { get; set; }<br/>public bool IsManual { get; set; }
-| Align the elements of linq queries as follows: | var arr = coll.Where(x => x...).<br/>`   `OrderBy(x => x...).ToArray() | var arr = coll.Where(x => x...)<br/>`              `.OrderBy(x => x...)<br/>`              `.ToArray()<br/>
+| No extra enters between braces.                | `  `}<br><br>} | `  `}<br>}
+| Put enters between switch cases.               | switch (x)<br>{<br>case 1:<br>break;<br>case 2:<br>break;<br>}<br> | switch (x)<br>{<br>case 1:<br>break;<br><br>case 2:<br>break;<br>}<br>
+| No braces for single-line if-statements.       | if (condition) { Bla(); }<br> | if (condition) Bla();
+| Loops always on multiple lines.                | foreach (var x in list) { Bla(); } | foreach (var x in list)<br>{ <br>Bla();<br>}<br>
+| Use braces for multi-line if’s and loops.      | foreach (var x in list)<br>Bla();<br><br>if (condition)<br>Bla(); | foreach (var x in list)<br>{<br>Bla();<br>}<br><br>if (condition)<br>{<br>Bla();<br>}<br>
+| Put enters between methods.                    | void Bla()<br>{<br>}<br>void Bla2()<br>{<br>}<br> | void Bla()<br>{<br>}<br><br>void Bla2()<br>{<br>}<br>
+| Each property at least its own line.           | int A { get; set; } int B { get; set; } | int A { get; set; } <br>int B { get; set; }<br><br>int C<br>{<br>get { ... }<br>set { ... }<br>}<br><br>int D<br>{<br>get <br>{<br>... <br>}<br>set <br>{ <br>...<br>}<br>}<br>
+| Put enters inside methods between ‘pieces that do something’ (that is vague, but that is the rule). | void Bla()<br>{<br>var x = new X();<br>x.A = 10;<br>var y = new Y();<br>y.B = 20;<br>y.X = x;<br>Bla2(x, y);<br>} | void Bla()<br>{<br>var x = new X();<br>x.A = 10;<br><br>var y = new Y();<br>y.B = 20;<br>y.X = x;<br><br>Bla2(x, y);<br>}<br>
+| Each variable declaration on its own line.     | int i, j; | int i;<br>int j;<br>
+| Avoid ‘tabular form’. It should only rarely be used. This tabular form will often be undone by auto-formatting. It is non-standard, so it is better to get your eyes used to non-tabular form. | public int    ID       { get; set; }<br>public bool   IsActive { get; set; }<br>public string Text     { get; set; }<br>public string Answer   { get; set; }<br>public bool   IsManual { get; set; } | public int ID { get; set; }<br>public bool IsActive { get; set; }<br>public string Text { get; set; }<br>public string Answer { get; set; }<br>public bool IsManual { get; set; }
+| Align the elements of linq queries as follows: | var arr = coll.Where(x => x...).<br>`   `OrderBy(x => x...).ToArray() | var arr = coll.Where(x => x...)<br>`              `.OrderBy(x => x...)<br>`              `.ToArray()<br>
 | Use proper indentation                         | <TODO: Example.> | <TODO: Example.>
-| Generic constraints on next line.<br/>(So they stand out)| class MyGenericClass<T> where T: MyInterface<br/>{<br/>}<br/> | class MyGenericClass<T><br/>where T: MyInterface<br/>{<br/>}
-| For one-liners, but generic constraints on same line instead.     | interface IMyInterface<br/>{<br/>void MyMethod(T param) <br/>where T : ISomething<br/>} | interface IMyInterface<br/>{<br/>void MyMethod(T param) where T : ISomething<br/>}
+| Generic constraints on next line.<br>(So they stand out)| class MyGenericClass<T> where T: MyInterface<br>{<br>}<br> | class MyGenericClass<T><br>where T: MyInterface<br>{<br>}
+| For one-liners, but generic constraints on same line instead.     | interface IMyInterface<br>{<br>void MyMethod(T param) <br>where T : ISomething<br>} | interface IMyInterface<br>{<br>void MyMethod(T param) where T : ISomething<br>}
 
 ### Trivial Rules
 
 | Rule | Not Recommended | Recommended |
 |------|-----------------|-------------|
 | Give each class (or enum) its own file (except nested classes).
-| Keep members private as much as possible. | | private void Bla()<br/>{<br>}<br/>
-| Keep types internal as much as possible. | | internal class MyClass<br/>{<br>}<br/>
+| Keep members private as much as possible. | | private void Bla()<br>{<br>}<br>
+| Keep types internal as much as possible. | | internal class MyClass<br>{<br>}<br>
 | Use explicit access modifiers (except for interface members). | int Bla() { ... } | __public__ int Bla() { ... }
-| No public fields. Use properties instead. | public int X; | __public__ int X __{ get; set; }__<br/>
-| Put nested classes at the top of the parent class’s code. | internal class A<br/>{<br/>public int X { get; set; }<br/><br/>private class B<br/>{<br/>}<br/>}<br/> | internal class A<br/>{<br/>private class B<br/>{<br/>}<br/><br/>public int X { get; set; }<br/>}<br/>
-| Avoid getting information by catching an exception. Prefer getting your information without using exception handling. | bool FileExists(string path)<br/>{<br/>try<br/>{<br/>File.Open(path, ...);<br/>return true;<br/>}<br/>catch (IOException)<br/>{<br/>return false;<br/>}<br/>}<br/> | bool FileExists(string path)<br/>{<br/>return File.Exists(path);<br/>}<br/>
-| Do not use type arguments that can be inferred. | References__<Child>__(x => x.Child)<br/> | References(x => x.Child)
+| No public fields. Use properties instead. | public int X; | __public__ int X __{ get; set; }__<br>
+| Put nested classes at the top of the parent class’s code. | internal class A<br>{<br>public int X { get; set; }<br><br>private class B<br>{<br>}<br>}<br> | internal class A<br>{<br>private class B<br>{<br>}<br><br>public int X { get; set; }<br>}<br>
+| Avoid getting information by catching an exception. Prefer getting your information without using exception handling. | bool FileExists(string path)<br>{<br>try<br>{<br>File.Open(path, ...);<br>return true;<br>}<br>catch (IOException)<br>{<br>return false;<br>}<br>}<br> | bool FileExists(string path)<br>{<br>return File.Exists(path);<br>}<br>
+| Do not use type arguments that can be inferred. | References__<Child>__(x => x.Child)<br> | References(x => x.Child)
 | Use interface types as variable types when they are present. | __List__<int> list = new List<int>; | __IList__<int> list = new List<int>;
 | Prefer ToArray over ToList. | IList<int> collection = x.__ToList__() | IList<int> collection = x.__ToArray__()
-| Use object initializers for readability. | var x = new X();<br/>x.A = 10;<br/>x.B = 20; | var x = new X<br/>{<br/>A = 10,<br/>B = 20<br/>}<br/>
-| Put comment for members in <summary> tags. | // This is the x-coordinate.<br/>int X { get; set; } | __/// <summary>__<br/>__///__ This is the x coordinate.<br/>__/// </summary>__<br/>int X { get; set; }<br/>
-| Comment in English. | // Dit is een ding. | // This is a thing.<br/>
-| Do not write comment that does not add information | __// This is x__<br/>int x;<br/> | int x;<br/>
-| Avoid compiler directives<br/><br/>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  | __#if FEATURE\_X\_ENABLED__<br/>__// ...__<br/>__#endif__ | if (config.FeatureXEnabled)<br/>{<br/>// ...<br/>}<br/>
-| An internal class should not have internal members.<br/><br/>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. | __internal class A__<br/>__{__<br/>__internal void B__<br/>__{__<br/>__}__<br/>__}__<br/> | internal class A<br/>{<br/>public void B<br/>{<br/>}<br/>}<br/>
-| Default switch case at the bottom. | __switch (x)__<br/>__{__<br/>__default:__<br/>__break;__<br/><br/>__case 0:__<br/>__break;__<br/><br/>__case 1:__<br/>__break;__<br/>__}__ | switch (x)<br/>{<br/>case 0:<br/>break;<br/><br/>case 1:<br/>break;<br/><br/>__default:__<br/>__break;__<br/>}
-| Prefer .Value and .HasValue for nullable types. | __int? number;__<br/>__if (number != null)<br>{__<br/>__string message = String.Format(__<br/>__"Number = {0}", number);__<br/>__}__ | int? number;<br/>if (number.HasValue)<br>{<br/>string message = String.Format(<br/>"Number = {0}", number.Value);<br/>}
+| Use object initializers for readability. | var x = new X();<br>x.A = 10;<br>x.B = 20; | var x = new X<br>{<br>A = 10,<br>B = 20<br>}<br>
+| Put comment for members in <summary> tags. | // This is the x-coordinate.<br>int X { get; set; } | __/// <summary>__<br>__///__ This is the x coordinate.<br>__/// </summary>__<br>int X { get; set; }<br>
+| Comment in English. | // Dit is een ding. | // This is a thing.<br>
+| Do not write comment that does not add information | __// This is x__<br>int x;<br> | int x;<br>
+| Avoid compiler directives<br><br>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  | __#if FEATURE\_X\_ENABLED__<br>__// ...__<br>__#endif__ | if (config.FeatureXEnabled)<br>{<br>// ...<br>}<br>
+| An internal class should not have internal members.<br><br>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. | __internal class A__<br>__{__<br>__internal void B__<br>__{__<br>__}__<br>__}__<br> | internal class A<br>{<br>public void B<br>{<br>}<br>}<br>
+| Default switch case at the bottom. | __switch (x)__<br>__{__<br>__default:__<br>__break;__<br><br>__case 0:__<br>__break;__<br><br>__case 1:__<br>__break;__<br>__}__ | switch (x)<br>{<br>case 0:<br>break;<br><br>case 1:<br>break;<br><br>__default:__<br>__break;__<br>}
+| Prefer .Value and .HasValue for nullable types. | __int? number;__<br>__if (number != null)<br>{__<br>__string message = String.Format(__<br>__"Number = {0}", number);__<br>__}__ | int? number;<br>if (number.HasValue)<br>{<br>string message = String.Format(<br>"Number = {0}", number.Value);<br>}
 | Do not leave unused (outcommented) around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.
 | it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.
 
@@ -101,8 +101,8 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 | Description | Not Recommended | Recommended |
 |-------------|-----------------|-------------|
-| Test class names end with ‘Tests’. | [TestClass]<br/>public class **Tests\_**Validator()<br/>{<br/>}<br/> | [TestClass]<br/>public class Validator**Tests**()<br/>{<br/>}<br/>
-| Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. | [TestMethod]<br/>public void **Test** ()<br/>{ <br/>...<br/>} | [TestMethod]<br/>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()<br/>{ <br/>...<br/>}<br/>
+| Test class names end with ‘Tests’. | [TestClass]<br>public class **Tests\_**Validator()<br>{<br>}<br> | [TestClass]<br>public class Validator**Tests**()<br>{<br>}<br>
+| Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. | [TestMethod]<br>public void **Test** ()<br>{ <br>...<br>} | [TestMethod]<br>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()<br>{ <br>...<br>}<br>
 | var should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are: | __var__ x = y.X;
 | - An anonymous type is used. | __X__ q = from x in list select __new { A = x.A }__; | __var__ q = from x in list select __new { A = x.A }__;
 | - The code line is a ‘new’ statement. | __X__ x = new __X__() | __var__ x = new __X__()
@@ -113,11 +113,11 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 | To check if a string is filled use IsNullOrEmpty. | str == null | String.IsNullOrEmpty(str)
 | To equate string use String.Equals. | str == "bla" | String.Equals(str, "bla")
 | Avoid using Activator.CreateInstance. Prefer using the ‘new’ keyword. Using generics you can avoid some of the Activator.CreateInstance calls. A call to Activator.CreateInstance should be rare and the last choice for instantiating an object. | Activator.CreateInstance(typeof(T)) | T = new T()
-| Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. | if (entity1 == entity2) | if (entity1.ID == entity2.ID)<br/><br/>// (Also do null checks if applicable.)
-| The following data types are not CLR-complient and sould be avoided | Unsigned types such as:<br/>uint<br/>ulong<br/><br/>And also:<br/>sbyte<br/> | int<br/>long<br/>byte
-| Parameter order:<br/>When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. | | class MyPresenter<br/>{<br/>public MyPresenter(<br/>MyEntity entity, <br/>IMyRepository repository,<br/>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)<br/>{<br/>...<br/>}<br/>}
+| Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. | if (entity1 == entity2) | if (entity1.ID == entity2.ID)<br><br>// (Also do null checks if applicable.)
+| The following data types are not CLR-complient and sould be avoided | Unsigned types such as:<br>uint<br>ulong<br><br>And also:<br>sbyte<br> | int<br>long<br>byte
+| Parameter order:<br>When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. | | class MyPresenter<br>{<br>public MyPresenter(<br>MyEntity entity, <br>IMyRepository repository,<br>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)<br>{<br>...<br>}<br>}
 | No long code lines<br><TODO: Describe better.>
-| When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second. | if (x <= 100 && x >= 10)<br/>if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)<br/>if (x > 10 && x < 100)
+| When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second. | if (x <= 100 && x >= 10)<br>if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)<br>if (x > 10 && x < 100)
 
 #### Namespace Tips
 
@@ -320,7 +320,7 @@ Common verbs:
 
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | E.g.<br/><br/>List.Add(item)<br/>ListManager.Add(list, item)<br/><br/>In cases such as the last example, it is best to make the list the first parameter.
+| `Add`       | E.g.<br><br>List.Add(item)<br>ListManager.Add(list, item)<br><br>In cases such as the last example, it is best to make the list the first parameter.
 | `Assert`    | A method that throws __exceptions__ if input is invalid.
 | `Calculate` |
 | `Clear`     |
@@ -359,26 +359,26 @@ Variable names that indicate parts of file paths can easily become ambiguous. He
 | AbsoluteFilePath         | "C:\MyFolder\MyFile.txt"
 | AbsoluteFolderPath       | "C:\MyFolder"
 | AbsoluteFileName         | DOES NOT EXIST
-| FileName**Pattern**, FilePath**Pattern**, etc. | **\***.xml<br/>C:\temp\BLA\_**????**.csv
-| FileName**Format**, FilePath**Format**, etc. | order-__{0}__.txt<br/>orders-__{0:dd-MM-yyyy}__\\*.\*
+| FileName**Pattern**, FilePath**Pattern**, etc. | **\***.xml<br>C:\temp\BLA\_**????**.csv
+| FileName**Format**, FilePath**Format**, etc. | order-__{0}__.txt<br>orders-__{0:dd-MM-yyyy}__\\*.\*
 
 __Prefixes and Suffixes__ 
 
 | Suffix                      | Description
 |-----------------------------|--------------------
-| source..<br/>dest… | In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.
+| source..<br>dest… | In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.
 | existing...                 | Denotes that something already existed (in the data store) before starting this transaction.
 | new…                        | Denotes that the object was just newly created.
 | original…                   | Denotes that this is an original value that was (temporarily) replaced.
-| …WithRelatedEntities<br/>…WithRelatedObjects | Indicates that not only a single object is handled, but the object including the underlying related objects.
+| …WithRelatedEntities<br>…WithRelatedObjects | Indicates that not only a single object is handled, but the object including the underlying related objects.
 | Versatile…                  | A class that handles a multitude of types or situations.
-| …With…                      | When tou make a specialized class that works well for a specific situation, you could use the word ‘With’ in the class name like this:<br/>- CostCalculator<br/>- CostWithTaxCalculator
+| …With…                      | When tou make a specialized class that works well for a specific situation, you could use the word ‘With’ in the class name like this:<br>- CostCalculator<br>- CostWithTaxCalculator
 | ...Polymorphic              | Handles a multitude of differrent derived types, possibly each in a different way.
 | …IfNeeded                   | If something is executed conditionally. This is a nice alternative for the less pretty suffixes ‘Conditionnally’ or a prefix ‘Conditional’, which obscures the name that comes after.
 | …Unsafe                     | When it lacks e.g. thread-safety or executes unmanaged code, or lacks a lot of checks.
 | …Recursive                  | (Some people tend to use ‘Recursively’ instead, probably insisting it is better grammer, but Recursive is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
-| To…                         | For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:<br/><br/>array.ToHashSet()<br/><br/>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:<br/><br/>MyConverter.ToHashSet(object[] array)<br/><br/>The Convert or ConvertTo verbs might be more appropriate there:<br/><br/>MyConverter.ConvertToHashSet(object[] array)<br/>
-| From…                       | For conversion from one to another thing. A lot like ‘To…’ executed on the dest object instead:<br/><br/>dest.FromSource(source)<br/><br/>The ‘To…’ prefix is more common, and usually more readable.
+| To…                         | For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:<br><br>array.ToHashSet()<br><br>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:<br><br>MyConverter.ToHashSet(object[] array)<br><br>The Convert or ConvertTo verbs might be more appropriate there:<br><br>MyConverter.ConvertToHashSet(object[] array)<br>
+| From…                       | For conversion from one to another thing. A lot like ‘To…’ executed on the dest object instead:<br><br>dest.FromSource(source)<br><br>The ‘To…’ prefix is more common, and usually more readable.
 
 #### Miscellaneous Names
 
