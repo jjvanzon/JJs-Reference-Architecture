@@ -71,13 +71,13 @@ Only if you need a bigger range:
 | Tables            | MyTable
 | Columns           | MyColumn
 | ID column         | ThingID
-| Indexes           | IX\_MyTable\_MyColumn
-| Primary keys      | PK\_MyTable
-| Foreign keys      | FK\_MyTable\_OtherTable<br><br>Or when there are multiple relations between the same tables:<br><br>FK\_MyTable\_<*OtherTable\_ColumnName\_MinusID*><br>FK\_MyTable\_ThingA<br>FK\_MyTable\_ThingB
-| Unique keys       | When not many columns:<br>IX\_MyTable\_MyColumn\_Unique<br><br>When many columns and only one constraint in the table:<br>IX\_MyTable\_Unique
-| Stored procedures | SP\_DoSomething / spDoSomething
-| Functions         | FN\_DoSomething / fnDoSomething
-| Triggers          | TR\_MyTable\_OnInsert / trgMyTable\_Insert / …
+| Indexes           | `IX_MyTable_MyColumn`
+| Primary keys      | `PK_MyTable`
+| Foreign keys      | `FK_MyTable_OtherTable`<br><br>Or when there are multiple relations between the same tables:<br><br>`FK_MyTable_<OtherTable_ColumnName_MinusID>`<br>`FK_MyTable_ThingA`<br>`FK_MyTable_ThingB`
+| Unique keys       | When not many columns:<br>`IX_MyTable_MyColumn_Unique`<br><br>When many columns and only one constraint in the table:<br>`IX_MyTable_Unique`
+| Stored procedures | `SP_DoSomething` / `spDoSomething`
+| Functions         | `FN_DoSomething` / `fnDoSomething`
+| Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `…`
 
 - Avoid using keywords as column names. Think of a different name instead.
 - ‘Index’ is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
@@ -133,12 +133,12 @@ So it has the format:
 
 | Element                   | Description | Examples |
 |---------------------------|-------------|----------|
-| __Date__                  | Use the format yyyy-mm-dd | 2014-08-28
-| __Number__                | Use 3 digits and count in 10’s so you might insert one in betweeen | 040
-| __DatabaseStructureName__ | | ShopDB
-| __DatabaseObject__        | A table name or index name or other database object name | Supplier<br>IX\_Supplier\_Name<br>FK\_Supplier\_Branch
-| __SubDatabaseObject__     | Optional. Usually a column name | .Name
-| __Change__                | Optional. Usually left out. You can sometimes mention a specific change, but be brief. | not null
+| __Date__                  | Use the format `yyyy-mm-dd` | `2014-08-28`
+| __Number__                | Use 3 digits and count in 10’s so you might insert one in betweeen | `040`
+| __DatabaseStructureName__ | | `ShopDB`
+| __DatabaseObject__        | A table name or index name or other database object name | `Supplier`<br>`IX_Supplier_Name`<br>`FK_Supplier_Branch`
+| __SubDatabaseObject__     | Optional. Usually a column name | `.Name`
+| __Change__                | Optional. Usually left out. You can sometimes mention a specific change, but be brief. | `not null`
 
 In the Excel, add a column for each database instance for that database structure. There can be different databases with the same structure for different staging areas (dev, test, acc, prod) or a database for different customers or databases running on different servers. Put ‘TRUE’ (or ‘WAAR’ in Dutch) where the upgrade script has been executed. For instance:
 
