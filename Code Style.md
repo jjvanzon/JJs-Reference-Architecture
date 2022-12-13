@@ -87,7 +87,7 @@ Keep Visual Studio’s autoformatting enabled and set to its defaults.
 </td><td>
 
 ```cs
-	}
+    }
     
 }
 ```
@@ -227,19 +227,19 @@ int B { get; set; }
 
 int C
 {
-    get { ... }
-    set { ... }
+    get { /*...*/ }
+    set { /*...*/ }
 }
 
 int D
 {
     get 
     {
-        ... 
+        // ... 
     }
     set 
     { 
-        ...
+        // ...
     }
 }
 ```
