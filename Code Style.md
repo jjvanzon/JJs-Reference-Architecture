@@ -17,7 +17,7 @@ Code Style
         - [Loops on Multiple Lines](#loops-on-multiple-lines)
         - [Braces for Multi-Line `if`s and Loops](#braces-for-multi-line-ifs-and-loops)
         - [Enters between Methods](#enters-between-methods)
-        - [A Property at Least on Own Line](#a-property-at-least-on-own-line)
+        - [Properties on Individual Lines at Least](#properties-on-individual-lines-at-least)
         - [Enters inside Methods between ‘Pieces that do Something’](#enters-inside-methods-between-pieces-that-do-something)
         - [Variable Declarations on Individual Lines](#variable-declarations-on-individual-lines)
         - ['Tabular Form' Less Preferred](#tabular-form-less-preferred)
@@ -70,24 +70,6 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 | Partial view names in MVC should begin with an underscore           | `_MyPartialView`
 
 ### Spacing & Punctuation
-
-Suggestions:
-
-> [Default Auto-Formatting](#default-auto-formatting)  
-> [No Extra Enters Between Braces](#no-extra-enters-between-braces)  
-> [Enters between `switch` Cases](#enters-between-switch-cases)  
-> [No Braces for Single-Line `if` Statements](#no-braces-for-single-line-if-statements)  
-> [Loops on Multiple Lines](#loops-on-multiple-lines)  
-> [Braces for Multi-Line `if`s and Loops](#braces-for-multi-line-ifs-and-loops)  
-> [Enters between Methods](#enters-between-methods)  
-> [A Property at Least on Own Line](#a-property-at-least-on-own-line)  
-> [Enters inside Methods between ‘Pieces that do Something’](#enters-inside-methods-between-pieces-that-do-something)  
-> [Variable Declarations on Individual Lines](#variable-declarations-on-individual-lines)  
-> ['Tabular Form' Less Preferred](#tabular-form-less-preferred)  
-> [Aligning Elements of Linq Queries](#aligning-elements-of-linq-queries)  
-> [Proper indentation](#proper-indentation)  
-> [Generic Constraints on Next Line](#generic-constraints-on-next-line)  
-> [A One-Liner with Generic Constraints on Same Line](#a-one-liner-with-generic-constraints-on-same-line)  
 
 #### Default Auto-Formatting
 
@@ -235,7 +217,7 @@ void Bla2()
 
 </td></tr></table>
 
-#### A Property at Least on Own Line
+#### Properties on Individual Lines at Least
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -260,7 +242,6 @@ int D
         ...
     }
 }
-            
 ```
 
 </td><td>
