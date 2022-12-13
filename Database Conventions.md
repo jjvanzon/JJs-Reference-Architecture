@@ -73,8 +73,8 @@ Only if you need a bigger range:
 | ID column         | ThingID
 | Indexes           | IX\_MyTable\_MyColumn
 | Primary keys      | PK\_MyTable
-| Foreign keys      | <p>FK\_MyTable\_OtherTable</p><p></p><p>Or when there are multiple relations between the same tables:</p><p></p><p>FK\_MyTable\_<*OtherTable\_ColumnName\_MinusID*></p><p>FK\_MyTable\_ThingA</p><p>FK\_MyTable\_ThingB</p>
-| Unique keys       | <p>When not many columns:</p><p>IX\_MyTable\_MyColumn\_Unique</p><p></p><p>When many columns and only one constraint in the table:</p><p>IX\_MyTable\_Unique</p>
+| Foreign keys      | FK\_MyTable\_OtherTable<br/><br/>Or when there are multiple relations between the same tables:<br/><br/>FK\_MyTable\_<*OtherTable\_ColumnName\_MinusID*><br/>FK\_MyTable\_ThingA<br/>FK\_MyTable\_ThingB
+| Unique keys       | When not many columns:<br/>IX\_MyTable\_MyColumn\_Unique<br/><br/>When many columns and only one constraint in the table:<br/>IX\_MyTable\_Unique
 | Stored procedures | SP\_DoSomething / spDoSomething
 | Functions         | FN\_DoSomething / fnDoSomething
 | Triggers          | TR\_MyTable\_OnInsert / trgMyTable\_Insert / …
@@ -136,7 +136,7 @@ So it has the format:
 | __Date__                  | Use the format yyyy-mm-dd | 2014-08-28
 | __Number__                | Use 3 digits and count in 10’s so you might insert one in betweeen | 040
 | __DatabaseStructureName__ | | ShopDB
-| __DatabaseObject__        | A table name or index name or other database object name | <p>Supplier</p><p>IX\_Supplier\_Name</p><p>FK\_Supplier\_Branch</p>
+| __DatabaseObject__        | A table name or index name or other database object name | Supplier<br/>IX\_Supplier\_Name<br/>FK\_Supplier\_Branch
 | __SubDatabaseObject__     | Optional. Usually a column name | .Name
 | __Change__                | Optional. Usually left out. You can sometimes mention a specific change, but be brief. | not null
 
@@ -282,7 +282,7 @@ This problem with C#-based migrations can be mitigated in several ways. Here are
 
 |                           |    |
 |---------------------------|----|
-| Always rerunnable tool    | <p>Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.</p><p></p><p>For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.</p>
+| Always rerunnable tool    | Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.<br/><br/>For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
 | Get specific version, build, get specific version, build | You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
 | Snapshots of entity model | Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
 | Any other ideas           | are welcome.
