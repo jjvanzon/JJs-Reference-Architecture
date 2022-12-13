@@ -62,7 +62,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 | Constants in capitals with underscores in between words.            | `MY_CONSTANT`
 | No prefixes, such as `strName`.                                     |
 | Avoid abbreviations.                                                |
-| For long identifiers, use underscores to separate ‘the pieces’.     | `Sine_OperatorCalculator_VarFrequency_WithPhaseTracking`
+| For long identifiers, use underscores to separate ‘the pieces’.     | `Sine_OperatorCalculator_VarFrequency`
 | Type arguments start with the letter `T` or are just the letter `T` | `T` `TEntity` `TViewModel`
 | Abbreviations of 2 letters with capitals.                           | `ID`
 | Abbreviations of 3 letters or more in pascal case.                  | `Mvc`
