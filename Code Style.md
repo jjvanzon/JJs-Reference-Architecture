@@ -8,8 +8,8 @@ Code Style
 
 - [Code Style](#code-style)
     - [Introduction](#introduction)
-    - [Casing & Punctuation](#casing--punctuation)
-    - [Spacing & Punctuation](#spacing--punctuation)
+    - [Casing (and Punctuation)](#casing-and-punctuation)
+    - [Spacing (and Punctuation)](#spacing-and-punctuation)
         - [Default Auto-Formatting](#default-auto-formatting)
         - [No Extra Enters Between Braces](#no-extra-enters-between-braces)
         - [Enters between `switch` Cases](#enters-between-switch-cases)
@@ -26,7 +26,38 @@ Code Style
         - [Generic Constraints on Next Line](#generic-constraints-on-next-line)
         - [A One-Liner with Generic Constraints on Same Line](#a-one-liner-with-generic-constraints-on-same-line)
     - [Trivial Rules](#trivial-rules)
+        - [A File a Type](#a-file-a-type)
+        - [Members Private](#members-private)
+        - [Types Internal](#types-internal)
+        - [Explicit Access Modifiers](#explicit-access-modifiers)
+        - [No Public Fields](#no-public-fields)
+        - [Nested Classes on Top](#nested-classes-on-top)
+        - [No Decisions from Exceptions](#no-decisions-from-exceptions)
+        - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
+        - [Use Interface Types](#use-interface-types)
+        - [Prefer ToArray](#prefer-toarray)
+        - [Object Initializers](#object-initializers)
+        - [Comments in Summaries](#comments-in-summaries)
+        - [Comments in English](#comments-in-english)
+        - [No Comments without Info](#no-comments-without-info)
+        - [Avoiding Compiler Directives](#avoiding-compiler-directives)
+        - [No Internal Members for Internal Classes](#no-internal-members-for-internal-classes)
+        - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
+        - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
+        - [No Unused / Outcommented Code](#no-unused--outcommented-code)
+        - [FileOpen: Specify FileMode, FileAccess and FileShare](#fileopen-specify-filemode-fileaccess-and-fileshare)
     - [Miscellaneous Rules](#miscellaneous-rules)
+        - [Test class names end with ‘Tests’.](#test-class-names-end-with-tests)
+        - [Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.](#test-method-names-start-with-test_-and-use-a-lot-of-underscores-in-the-name-because-they-will-be-long-because-they-will-be-very-specific)
+        - [Avoid `var`](#avoid-var)
+        - [Use `string.IsNullOrEmpty`](#use-stringisnullorempty)
+        - [Equate strings with `String.Equals`](#equate-strings-with-stringequals)
+        - [Avoiding `Activator.CreateInstance`](#avoiding-activatorcreateinstance)
+        - [Entity Equality by ID](#entity-equality-by-id)
+        - [CLR Data Types](#clr-data-types)
+        - [Parameter Order](#parameter-order)
+        - [Long Code Lines](#long-code-lines)
+        - [Ordered `if` Range](#ordered-if-range)
         - [Namespace Tips](#namespace-tips)
     - [Member Order](#member-order)
     - [Naming](#naming)
@@ -52,7 +83,7 @@ Coding standards mostly conform to the Microsoft standard described in the follo
 
 Use Resharper. Seriously. Finetune it to automatically check your coding style. Use it to keep code clean as write code or change existing code.
 
-### Casing & Punctuation
+### Casing (and Punctuation)
 
 | Rule                                                                | Examples                       |
 |---------------------------------------------------------------------|--------------------------------|
@@ -69,7 +100,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 | Start interface names with `I`.                                     | `IMyInterface`
 | Partial view names in MVC should begin with an underscore           | `_MyPartialView`
 
-### Spacing & Punctuation
+### Spacing (and Punctuation)
 
 #### Default Auto-Formatting
 
@@ -422,50 +453,332 @@ interface IMyInterface
 
 ### Trivial Rules
 
-| Rule | Less Preferred | Recommended |
-|------|-----------------|-------------|
-| Give each class (or enum) its own file (except nested classes).
-| Keep members private as much as possible. | | private void Bla()<br>{<br>}<br>
-| Keep types internal as much as possible. | | internal class MyClass<br>{<br>}<br>
-| Use explicit access modifiers (except for interface members). | int Bla() { ... } | __public__ int Bla() { ... }
-| No public fields. Use properties instead. | public int X; | __public__ int X __{ get; set; }__<br>
-| Put nested classes at the top of the parent class’s code. | internal class A<br>{<br>public int X { get; set; }<br><br>private class B<br>{<br>}<br>}<br> | internal class A<br>{<br>private class B<br>{<br>}<br><br>public int X { get; set; }<br>}<br>
-| Avoid getting information by catching an exception. Prefer getting your information without using exception handling. | bool FileExists(string path)<br>{<br>try<br>{<br>File.Open(path, ...);<br>return true;<br>}<br>catch (IOException)<br>{<br>return false;<br>}<br>}<br> | bool FileExists(string path)<br>{<br>return File.Exists(path);<br>}<br>
-| Do not use type arguments that can be inferred. | References__<Child>__(x => x.Child)<br> | References(x => x.Child)
-| Use interface types as variable types when they are present. | __List__<int> list = new List<int>; | __IList__<int> list = new List<int>;
-| Prefer ToArray over ToList. | IList<int> collection = x.__ToList__() | IList<int> collection = x.__ToArray__()
-| Use object initializers for readability. | var x = new X();<br>x.A = 10;<br>x.B = 20; | var x = new X<br>{<br>A = 10,<br>B = 20<br>}<br>
-| Put comment for members in <summary> tags. | // This is the x-coordinate.<br>int X { get; set; } | __/// <summary>__<br>__///__ This is the x coordinate.<br>__/// </summary>__<br>int X { get; set; }<br>
-| Comment in English. | // Dit is een ding. | // This is a thing.<br>
-| Do not write comment that does not add information | __// This is x__<br>int x;<br> | int x;<br>
-| Avoid compiler directives<br><br>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  | __#if FEATURE\_X\_ENABLED__<br>__// ...__<br>__#endif__ | if (config.FeatureXEnabled)<br>{<br>// ...<br>}<br>
-| An internal class should not have internal members.<br><br>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. | __internal class A__<br>__{__<br>__internal void B__<br>__{__<br>__}__<br>__}__<br> | internal class A<br>{<br>public void B<br>{<br>}<br>}<br>
-| Default switch case at the bottom. | __switch (x)__<br>__{__<br>__default:__<br>__break;__<br><br>__case 0:__<br>__break;__<br><br>__case 1:__<br>__break;__<br>__}__ | switch (x)<br>{<br>case 0:<br>break;<br><br>case 1:<br>break;<br><br>__default:__<br>__break;__<br>}
-| Prefer .Value and .HasValue for nullable types. | __int? number;__<br>__if (number != null)<br>{__<br>__string message = String.Format(__<br>__"Number = {0}", number);__<br>__}__ | int? number;<br>if (number.HasValue)<br>{<br>string message = String.Format(<br>"Number = {0}", number.Value);<br>}
-| Do not leave unused (outcommented) around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.
-| it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.
+#### A File a Type 
+
+Give each class (or interface or enum) its own file (except nested classes).
+
+#### Members Private
+
+Keep members private as much as possible. 
+
+```cs
+private void Bla()
+{
+    ...
+}
+```
+
+#### Types Internal 
+
+Keep types internal as much as possible. 
+
+```cs
+internal class MyClass
+{
+    ...   
+}
+```
+
+#### Explicit Access Modifiers
+
+Use explicit access modifiers (except for interface members). 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+public int Bla() { ... }
+```
+
+</td><td>
+
+```cs
+int Bla() { ... } 
+```
+
+</td></tr></table>
+
+#### No Public Fields
+
+No public fields. Use properties instead. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+***`public`***` int X `***`{ get; set; }`***
+
+</td><td>
+
+`public int X;`
+
+</td></tr></table>
+
+#### Nested Classes on Top
+
+Put nested classes at the top of the parent class’s code. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+internal class A
+{
+    private class B
+    {
+        
+    }
+    
+    public int X { get; set; }
+}
+```
+
+</td><td>
+
+```cs
+internal class A
+{
+    public int X { get; set; }
+    
+    private class B
+    {
+        
+    }
+}
+```
+
+</td></tr></table>
+
+#### No Decisions from Exceptions
+
+Avoid getting information by catching an exception. Prefer getting your information without using exception handling. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+bool FileExists(string path)
+{
+    return File.Exists(path);
+}
+```
+
+</td><td>
+
+```cs
+bool FileExists(string path)
+{
+    try
+    {
+        File.Open(path, ...);
+        return true;
+    }
+    catch (IOException)
+    {
+        return false;
+    }
+}
+```
+
+</td></tr></table>
+
+#### No Inferrable Type Arguments
+
+Do not use type arguments that can be inferred. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+`References(x => x.Child)`
+
+</td><td>
+
+`Reference`***`<Child>`***`(x => x.Child)`
+
+</td></tr></table>
+
+#### Use Interface Types
+
+Use interface types as variable types when they are present. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+***`IList`***`<int> list = new List<int>;`
+
+</td><td>
+
+***`List`***`<int> list = new List<int>; `
+
+</td></tr></table>
+
+#### Prefer ToArray
+
+Prefer ToArray over ToList. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+`IList<int> collection = x.`***`ToArray`***`();`
+
+</td><td>
+
+`IList<int> collection = x.`***`ToList`***`();`
+
+</td></tr></table>
+
+#### Object Initializers
+
+Use object initializers for readability. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+var x = new X
+{
+    A = 10,
+    B = 20
+}
+```
+
+</td><td>
+
+```cs
+var x = new X();
+x.A = 10;
+x.B = 20; 
+```
+
+</td></tr></table>
+
+#### Comments in Summaries
+
+Put comment for members in <summary> tags. 
+
+__/// <summary>__<br>__///__ This is the x coordinate.<br>__/// </summary>__<br>int X { get; set; }<br>
+
+// This is the x-coordinate.<br>int X { get; set; } 
+
+#### Comments in English
+
+// This is a thing.<br>
+// Dit is een ding. 
+
+#### No Comments without Info
+
+Do not write comment that does not add information 
+
+int x;<br>
+
+__// This is x__<br>int x;<br> 
+
+#### Avoiding Compiler Directives
+
+Avoid compiler directives<br><br>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  
+
+if (config.FeatureXEnabled)<br>{<br>// ...<br>}<br>
+
+__#if FEATURE\_X\_ENABLED__<br>__// ...__<br>__#endif__ 
+
+#### No Internal Members for Internal Classes
+
+An internal class should not have internal members.<br><br>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. 
+
+internal class A<br>{<br>public void B<br>{<br>}<br>}<br>
+
+__internal class A__<br>__{__<br>__internal void B__<br>__{__<br>__}__<br>__}__<br> 
+
+#### Default Switch Case at the Bottom
+
+switch (x)<br>{<br>case 0:<br>break;<br><br>case 1:<br>break;<br><br>__default:__<br>__break;__<br>}
+
+__switch (x)__<br>__{__<br>__default:__<br>__break;__<br><br>__case 0:__<br>__break;__<br><br>__case 1:__<br>__break;__<br>__}__ 
+
+#### Prefer Value and HasValue for Nullable Types
+
+Prefer `.Value` and `.HasValue` for nullable types. 
+
+int? number;<br>if (number.HasValue)<br>{<br>string message = String.Format(<br>"Number = {0}", number.Value);<br>}
+
+__int? number;__<br>__if (number != null)<br>{__<br>__string message = String.Format(__<br>__"Number = {0}", number);__<br>__}__ 
+
+#### No Unused / Outcommented Code
+
+Do not leave unused (outcommented) code around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.
+
+#### FileOpen: Specify FileMode, FileAccess and FileShare
+
+it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.
 
 ### Miscellaneous Rules
 
-| Description | Less Preferred | Recommended |
-|-------------|-----------------|-------------|
-| Test class names end with ‘Tests’. | [TestClass]<br>public class **Tests\_**Validator()<br>{<br>}<br> | [TestClass]<br>public class Validator**Tests**()<br>{<br>}<br>
-| Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. | [TestMethod]<br>public void **Test** ()<br>{ <br>...<br>} | [TestMethod]<br>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()<br>{ <br>...<br>}<br>
-| var should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are: | __var__ x = y.X;
+#### Test class names end with ‘Tests’. 
+
+[TestClass]<br>public class **Tests\_**Validator()<br>{<br>}<br> 
+[TestClass]<br>public class Validator**Tests**()<br>{<br>}<br>
+
+#### Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. 
+
+[TestMethod]<br>public void **Test** ()<br>{ <br>...<br>} 
+[TestMethod]<br>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()<br>{ <br>...<br>}<br>
+
+#### Avoid `var`
+
+`var` should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are: 
+
+__var__ x = y.X;
+
+| | | |
+|-|-|-|
 | - An anonymous type is used. | __X__ q = from x in list select __new { A = x.A }__; | __var__ q = from x in list select __new { A = x.A }__;
 | - The code line is a ‘new’ statement. | __X__ x = new __X__() | __var__ x = new __X__()
 | - The code line is a direct cast. | __X__ x = (__X__)y; | __var__ x = (__X__)y;
 | - The code line is WAAAY too long and unreadable without ‘var’. | foreach (__KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>__ entry in dictionary) | foreach (__var__ entry in dictionary)
 | - Use var in your __view__ code. | <% foreach (__OrderViewModel__ order in Model.Orders) %> | <% foreach (__var__ order in Model.Orders) %>
-| Handle null and empty string the same way everywhere.
-| To check if a string is filled use IsNullOrEmpty. | str == null | String.IsNullOrEmpty(str)
-| To equate string use String.Equals. | str == "bla" | String.Equals(str, "bla")
-| Avoid using Activator.CreateInstance. Prefer using the ‘new’ keyword. Using generics you can avoid some of the Activator.CreateInstance calls. A call to Activator.CreateInstance should be rare and the last choice for instantiating an object. | Activator.CreateInstance(typeof(T)) | T = new T()
-| Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. | if (entity1 == entity2) | if (entity1.ID == entity2.ID)<br><br>// (Also do null checks if applicable.)
-| The following data types are not CLR-complient and sould be avoided | Unsigned types such as:<br>uint<br>ulong<br><br>And also:<br>sbyte<br> | int<br>long<br>byte
-| Parameter order:<br>When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. | | class MyPresenter<br>{<br>public MyPresenter(<br>MyEntity entity, <br>IMyRepository repository,<br>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)<br>{<br>...<br>}<br>}
-| No long code lines<br><TODO: Describe better.>
-| When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second. | if (x <= 100 && x >= 10)<br>if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)<br>if (x > 10 && x < 100)
+
+#### Use `string.IsNullOrEmpty`
+
+Handle null and empty string the same way everywhere  
+To check if a string is filled use `IsNullOrEmpty`. 
+
+str == null 
+String.IsNullOrEmpty(str)
+
+#### Equate strings with `String.Equals`
+
+To equate string use String.Equals. 
+
+str == "bla" 
+String.Equals(str, "bla")
+
+#### Avoiding `Activator.CreateInstance`
+
+Avoid using Activator.CreateInstance. Prefer using the ‘new’ keyword. Using generics you can avoid some of the Activator.CreateInstance calls. A call to Activator.CreateInstance should be rare and the last choice for instantiating an object. 
+
+Activator.CreateInstance(typeof(T)) 
+T = new T()
+
+#### Entity Equality by ID
+
+Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. 
+
+if (entity1 == entity2) 
+if (entity1.ID == entity2.ID)<br><br>// (Also do null checks if applicable.)
+
+#### CLR Data Types
+
+The following data types are not CLR-complient and sould be avoided:
+
+Unsigned types such as:<br>uint<br>ulong<br><br>And also:<br>sbyte<br> 
+int<br>long<br>byte
+
+#### Parameter Order
+
+When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
+
+class MyPresenter<br>{<br>public MyPresenter(<br>MyEntity entity, <br>IMyRepository repository,<br>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)<br>{<br>...<br>}<br>}
+
+#### Long Code Lines
+
+<TODO: Describe better.>
+
+#### Ordered `if` Range 
+
+When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.
+
+if (x <= 100 && x >= 10)<br>if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)<br>if (x > 10 && x < 100)
 
 #### Namespace Tips
 
@@ -497,7 +810,6 @@ IUserRepository_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IU
 ### Member Order
 
 Try giving the members in your code file a logical order, instead of mixing them all up. Suggested possibilities for organizing your members:
-
 
 |                      | |
 |----------------------|-|
