@@ -50,14 +50,19 @@ Code Style
         - [Test class names end with ‘Tests’.](#test-class-names-end-with-tests)
         - [Text Method Names](#text-method-names)
         - [Avoid var](#avoid-var)
-        - [Use `string.IsNullOrEmpty`](#use-stringisnullorempty)
-        - [Equate strings with `String.Equals`](#equate-strings-with-stringequals)
+            - [An anonymous type is used.](#an-anonymous-type-is-used)
+            - [The code line is a ‘new’ statement.](#the-code-line-is-a-new-statement)
+            - [The code line is a direct cast.](#the-code-line-is-a-direct-cast)
+            - [The code line is WAAAY too long and unreadable without ‘var’.](#the-code-line-is-waaay-too-long-and-unreadable-without-var)
+            - [Use var in your view code](#use-var-in-your-view-code)
+        - [string.IsNullOrEmpty](#stringisnullorempty)
+        - [string.Equals](#stringequals)
         - [Avoiding Activator.CreateInstance](#avoiding-activatorcreateinstance)
         - [Entity Equality by ID](#entity-equality-by-id)
         - [CLR Data Types](#clr-data-types)
         - [Parameter Order](#parameter-order)
         - [Long Code Lines](#long-code-lines)
-        - [Ordered `if` Range](#ordered-if-range)
+        - [Ordered if Range](#ordered-if-range)
         - [Namespace Tips](#namespace-tips)
     - [Member Order](#member-order)
     - [Naming](#naming)
@@ -889,15 +894,67 @@ var x = y.X;
 
 Exceptions are: 
 
-| | | |
-|-|-|-|
-| - An anonymous type is used. | __X__ q = from x in list select __new { A = x.A }__; | __var__ q = from x in list select __new { A = x.A }__;
-| - The code line is a ‘new’ statement. | __X__ x = new __X__() | __var__ x = new __X__()
-| - The code line is a direct cast. | __X__ x = (__X__)y; | __var__ x = (__X__)y;
-| - The code line is WAAAY too long and unreadable without ‘var’. | foreach (__KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>__ entry in dictionary) | foreach (__var__ entry in dictionary)
-| - Use var in your __view__ code. | <% foreach (__OrderViewModel__ order in Model.Orders) %> | <% foreach (__var__ order in Model.Orders) %>
+##### An anonymous type is used. 
 
-#### Use `string.IsNullOrEmpty`
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+***`X`***`q = from x in list select `***`new { A = x.A }`***`;`
+
+</td><td>
+
+***`var`***` q = from x in list select `***`new { A = x.A }`***`;`
+
+</td></tr></table>
+
+##### The code line is a ‘new’ statement. 
+
+ <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+***`X`***` x = new `***`X`***`();`
+
+</td><td>
+
+***`var`***` x = new `***`X`***`();`
+
+</td></tr></table>
+
+##### The code line is a direct cast. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+***`X`***` x = (`***`X`***`)y;`
+
+</td><td>
+
+***`var`***` x = (`***`X`***`)y;`
+
+</td></tr></table>
+
+##### The code line is WAAAY too long and unreadable without ‘var’. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+`foreach (`***`KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>`***` entry in dictionary)`
+
+</td><td>
+
+`foreach (`***`var`***` entry in dictionary)`
+
+</td></tr></table>
+
+##### Use var in your view code
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+`<% foreach (`***`OrderViewModel`***` order in Model.Orders) %>`
+
+</td><td>
+
+`<% foreach (`***`var`***` order in Model.Orders) %>`
+
+</td></tr></table>
+
+#### string.IsNullOrEmpty
 
 Handle null and empty string the same way everywhere  
 To check if a string is filled use `IsNullOrEmpty`. 
@@ -916,14 +973,14 @@ str == null
 
 </td></tr></table>
 
-#### Equate strings with `String.Equals`
+#### string.Equals
 
 To equate string use String.Equals. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
 ```cs
-String.Equals(str, "bla")
+string.Equals(str, "bla")
 ```
 
 </td><td>
@@ -1020,7 +1077,7 @@ class MyPresenter
 
 <TODO: Describe better.>
 
-#### Ordered `if` Range 
+#### Ordered if Range 
 
 When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.
 
