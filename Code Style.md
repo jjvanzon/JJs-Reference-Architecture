@@ -11,30 +11,30 @@ Code Style
     - [Casing (and Punctuation)](#casing-and-punctuation)
     - [Spacing (and Punctuation)](#spacing-and-punctuation)
         - [Default Auto-Formatting](#default-auto-formatting)
-        - [No Extra Enters Between Braces](#no-extra-enters-between-braces)
-        - [Enters between `switch` Cases](#enters-between-switch-cases)
-        - [No Braces for Single-Line `if` Statements](#no-braces-for-single-line-if-statements)
+        - [Surplus Enters Between Braces](#surplus-enters-between-braces)
+        - [Enters between switch Cases](#enters-between-switch-cases)
+        - [No Braces for Single-Line if Statements](#no-braces-for-single-line-if-statements)
         - [Loops on Multiple Lines](#loops-on-multiple-lines)
-        - [Braces for Multi-Line `if`s and Loops](#braces-for-multi-line-ifs-and-loops)
+        - [Braces for Multi-Line if's and Loops](#braces-for-multi-line-ifs-and-loops)
         - [Enters between Methods](#enters-between-methods)
-        - [Properties on Individual Lines at Least](#properties-on-individual-lines-at-least)
-        - [Enters inside Methods between ‘Pieces that do Something’](#enters-inside-methods-between-pieces-that-do-something)
-        - [Variable Declarations on Individual Lines](#variable-declarations-on-individual-lines)
+        - [Properties on Separate Lines](#properties-on-separate-lines)
+        - [Enters in Methods](#enters-in-methods)
+        - [Variables on Separate Lines](#variables-on-separate-lines)
         - ['Tabular Form' Less Preferred](#tabular-form-less-preferred)
-        - [Aligning Elements of Linq Queries](#aligning-elements-of-linq-queries)
-        - [Proper indentation](#proper-indentation)
-        - [Generic Constraints on Next Line](#generic-constraints-on-next-line)
-        - [A One-Liner with Generic Constraints on Same Line](#a-one-liner-with-generic-constraints-on-same-line)
+        - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
+        - [Indentation](#indentation)
+        - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
+        - [One-Liners' Generic Constraints on Same Line](#one-liners-generic-constraints-on-same-line)
     - [Trivial Rules](#trivial-rules)
         - [A File a Type](#a-file-a-type)
         - [Members Private](#members-private)
         - [Types Internal](#types-internal)
         - [Explicit Access Modifiers](#explicit-access-modifiers)
         - [No Public Fields](#no-public-fields)
-        - [Nested Classes on Top](#nested-classes-on-top)
+        - [Nested Class on Top](#nested-class-on-top)
         - [No Decisions from Exceptions](#no-decisions-from-exceptions)
         - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
-        - [Use Interface Types](#use-interface-types)
+        - [Prefer Interface Types](#prefer-interface-types)
         - [Prefer ToArray](#prefer-toarray)
         - [Object Initializers](#object-initializers)
         - [Comments in Summaries](#comments-in-summaries)
@@ -45,7 +45,7 @@ Code Style
         - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
         - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
         - [No Unused / Outcommented Code](#no-unused--outcommented-code)
-        - [FileOpen: Specify FileMode, FileAccess and FileShare](#fileopen-specify-filemode-fileaccess-and-fileshare)
+        - [FileOpen: FileMode, FileAccess and FileShare](#fileopen-filemode-fileaccess-and-fileshare)
     - [Miscellaneous Rules](#miscellaneous-rules)
         - [Test class names end with ‘Tests’.](#test-class-names-end-with-tests)
         - [Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.](#test-method-names-start-with-test_-and-use-a-lot-of-underscores-in-the-name-because-they-will-be-long-because-they-will-be-very-specific)
@@ -106,7 +106,7 @@ Use Resharper. Seriously. Finetune it to automatically check your coding style. 
 
 Keep Visual Studio’s autoformatting enabled and set to its defaults.
 
-#### No Extra Enters Between Braces
+#### Surplus Enters Between Braces
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -125,7 +125,7 @@ Keep Visual Studio’s autoformatting enabled and set to its defaults.
 
 </td></tr></table>
 
-#### Enters between `switch` Cases           
+#### Enters between switch Cases           
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -154,7 +154,7 @@ switch (x)
 
 </td></tr></table>
 
-#### No Braces for Single-Line `if` Statements
+#### No Braces for Single-Line if Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -189,7 +189,7 @@ foreach (var x in list) { Bla(); }
 
 </td></tr></table>
 
-#### Braces for Multi-Line `if`s and Loops
+#### Braces for Multi-Line if's and Loops
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -248,7 +248,7 @@ void Bla2()
 
 </td></tr></table>
 
-#### Properties on Individual Lines at Least
+#### Properties on Separate Lines
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -283,9 +283,10 @@ int A { get; set; } int B { get; set; }
 
 </td></tr></table>
 
-#### Enters inside Methods between ‘Pieces that do Something’
+#### Enters in Methods
 
-(That might be a vague description, but that's the idea.)
+Putting enters inside Methods between ‘Pieces that do Something’.  
+(That might be a vague description, but this is the idea.)
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -320,7 +321,9 @@ void Bla()
 
 </td></tr></table>
 
-#### Variable Declarations on Individual Lines
+#### Variables on Separate Lines
+
+Prefer putting variable Declarations on separate lines.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -363,7 +366,7 @@ public bool   IsManual { get; set; }
 
 </td></tr></table>
 
-#### Aligning Elements of Linq Queries
+#### Align Elements of Linq Queries
 
 Align the elements of linq queries as follows: 
 
@@ -384,7 +387,9 @@ var arr = coll.Where(x => x...).
 
 </td></tr></table>
 
-#### Proper indentation
+#### Indentation
+
+Use proper indentation.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -400,7 +405,7 @@ var arr = coll.Where(x => x...).
 
 </td></tr></table>
 
-#### Generic Constraints on Next Line
+#### Generic Constraints on Separate Line
 
 (So they stand out.) 
 
@@ -426,7 +431,7 @@ class MyGenericClass<T> where T: MyInterface
 
 </td></tr></table>
 
-#### A One-Liner with Generic Constraints on Same Line
+#### One-Liners' Generic Constraints on Same Line
 
 For one-liners, put generic constraints on same line instead. 
 
@@ -511,7 +516,7 @@ No public fields. Use properties instead.
 
 </td></tr></table>
 
-#### Nested Classes on Top
+#### Nested Class on Top
 
 Put nested classes at the top of the parent class’s code. 
 
@@ -591,9 +596,9 @@ Do not use type arguments that can be inferred.
 
 </td></tr></table>
 
-#### Use Interface Types
+#### Prefer Interface Types
 
-Use interface types as variable types when they are present. 
+Prefer interface types as variable types when they are present. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -645,74 +650,203 @@ x.B = 20;
 
 #### Comments in Summaries
 
-Put comment for members in <summary> tags. 
+Put comment for members in `<summary>` tags. 
 
-__/// <summary>__<br>__///__ This is the x coordinate.<br>__/// </summary>__<br>int X { get; set; }<br>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-// This is the x-coordinate.<br>int X { get; set; } 
+```cs
+/// <summary> This is the x coordinate. </summary>
+int X { get; set; }
+```
+
+</td><td>
+
+```cs
+// This is the x-coordinate.
+int X { get; set; } 
+```
+
+</td></tr></table>
 
 #### Comments in English
 
-// This is a thing.<br>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+// This is a thing.
+```
+
+</td><td>
+
+```cs
 // Dit is een ding. 
+```
+
+</td></tr></table>
 
 #### No Comments without Info
 
-Do not write comment that does not add information 
+Do not write comment that does not add information.
 
-int x;<br>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-__// This is x__<br>int x;<br> 
+```cs
+int x;
+```
+
+</td><td>
+
+```cs
+// This is x
+int x;`
+```
+
+</td></tr></table>
 
 #### Avoiding Compiler Directives
 
-Avoid compiler directives<br><br>Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  
+Avoid compiler directives
 
-if (config.FeatureXEnabled)<br>{<br>// ...<br>}<br>
+Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  
 
-__#if FEATURE\_X\_ENABLED__<br>__// ...__<br>__#endif__ 
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+if (config.FeatureXEnabled)
+{
+    // ...
+}
+```
+
+</td><td>
+
+```cs
+#if FEATURE_X_ENABLED
+    // ...
+#endif
+```
+
+</td></tr></table>
 
 #### No Internal Members for Internal Classes
 
-An internal class should not have internal members.<br><br>The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. 
+An internal class should not have internal members.
 
-internal class A<br>{<br>public void B<br>{<br>}<br>}<br>
+The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. 
 
-__internal class A__<br>__{__<br>__internal void B__<br>__{__<br>__}__<br>__}__<br> 
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+`internal class A { `***`public`***`void B { } }`
+
+</td><td>
+
+`internal class A { `***`internal`***` void B { } }`
+
+</td></tr></table>
+
 
 #### Default Switch Case at the Bottom
 
-switch (x)<br>{<br>case 0:<br>break;<br><br>case 1:<br>break;<br><br>__default:__<br>__break;__<br>}
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-__switch (x)__<br>__{__<br>__default:__<br>__break;__<br><br>__case 0:__<br>__break;__<br><br>__case 1:__<br>__break;__<br>__}__ 
+```cs
+switch (x)
+{
+    case 0:
+        break;
+    
+    case 1:
+        break;
+    
+    default:
+        break;
+}
+```
+
+</td><td>
+
+```cs
+switch (x)
+{
+    default:
+        break;
+
+    case 0:
+        break;
+
+    case 1:
+        break;
+} 
+```
+
+</td></tr></table>
 
 #### Prefer Value and HasValue for Nullable Types
 
 Prefer `.Value` and `.HasValue` for nullable types. 
 
-int? number;<br>if (number.HasValue)<br>{<br>string message = String.Format(<br>"Number = {0}", number.Value);<br>}
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-__int? number;__<br>__if (number != null)<br>{__<br>__string message = String.Format(__<br>__"Number = {0}", number);__<br>__}__ 
+```cs
+int? number;
+if (number.HasValue)
+{
+    string message = string.Format(
+        "Number = {0}", number.Value);
+}
+```
+
+</td><td>
+
+```cs
+int? number;
+if (number != null)
+{
+    string message = string.Format(
+        "Number = {0}", number);
+} 
+```
+
+</td></tr></table>
 
 #### No Unused / Outcommented Code
 
 Do not leave unused (outcommented) code around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.
 
-#### FileOpen: Specify FileMode, FileAccess and FileShare
+#### FileOpen: FileMode, FileAccess and FileShare
 
-it is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.
+It is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.
 
 ### Miscellaneous Rules
 
 #### Test class names end with ‘Tests’. 
 
-[TestClass]<br>public class **Tests\_**Validator()<br>{<br>}<br> 
-[TestClass]<br>public class Validator**Tests**()<br>{<br>}<br>
+[TestClass]
+public class **Tests\_**Validator()
+{
+    
+}
+ 
+[TestClass]
+public class Validator**Tests**()
+{
+    
+}
+
 
 #### Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. 
 
-[TestMethod]<br>public void **Test** ()<br>{ <br>...<br>} 
-[TestMethod]<br>public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()<br>{ <br>...<br>}<br>
+[TestMethod]
+public void **Test** ()
+{ 
+    ...
+    } 
+[TestMethod]
+public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()
+{ 
+    ...
+    }
+    
 
 #### Avoid `var`
 
@@ -755,20 +889,41 @@ T = new T()
 Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. 
 
 if (entity1 == entity2) 
-if (entity1.ID == entity2.ID)<br><br>// (Also do null checks if applicable.)
+if (entity1.ID == entity2.ID)
+
+// (Also do null checks if applicable.)
 
 #### CLR Data Types
 
 The following data types are not CLR-complient and sould be avoided:
 
-Unsigned types such as:<br>uint<br>ulong<br><br>And also:<br>sbyte<br> 
-int<br>long<br>byte
+Unsigned types such as:
+uint
+ulong
+
+And also:
+sbyte
+ 
+int
+long
+byte
 
 #### Parameter Order
 
 When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
 
-class MyPresenter<br>{<br>public MyPresenter(<br>MyEntity entity, <br>IMyRepository repository,<br>IAuthenticator authenticator,<br>string cultureName,<br>int pageSize)<br>{<br>...<br>}<br>}
+class MyPresenter
+{
+    public MyPresenter(
+        MyEntity entity, 
+        IMyRepository repository,
+        IAuthenticator authenticator,
+        string cultureName,
+        int pageSize)
+        {
+            ...
+            }
+            }
 
 #### Long Code Lines
 
@@ -778,7 +933,9 @@ class MyPresenter<br>{<br>public MyPresenter(<br>MyEntity entity, <br>IMyReposit
 
 When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.
 
-if (x <= 100 && x >= 10)<br>if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)<br>if (x > 10 && x < 100)
+if (x <= 100 && x >= 10)
+if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)
+if (x > 10 && x < 100)
 
 #### Namespace Tips
 
