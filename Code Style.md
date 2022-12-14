@@ -48,11 +48,11 @@ Code Style
         - [FileOpen: FileMode, FileAccess and FileShare](#fileopen-filemode-fileaccess-and-fileshare)
     - [Miscellaneous Rules](#miscellaneous-rules)
         - [Test class names end with ‘Tests’.](#test-class-names-end-with-tests)
-        - [Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific.](#test-method-names-start-with-test_-and-use-a-lot-of-underscores-in-the-name-because-they-will-be-long-because-they-will-be-very-specific)
-        - [Avoid `var`](#avoid-var)
+        - [Text Method Names](#text-method-names)
+        - [Avoid var](#avoid-var)
         - [Use `string.IsNullOrEmpty`](#use-stringisnullorempty)
         - [Equate strings with `String.Equals`](#equate-strings-with-stringequals)
-        - [Avoiding `Activator.CreateInstance`](#avoiding-activatorcreateinstance)
+        - [Avoiding Activator.CreateInstance](#avoiding-activatorcreateinstance)
         - [Entity Equality by ID](#entity-equality-by-id)
         - [CLR Data Types](#clr-data-types)
         - [Parameter Order](#parameter-order)
@@ -821,38 +821,73 @@ It is appreciated when a file stream is opened specifying all three aspects File
 
 #### Test class names end with ‘Tests’. 
 
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
 [TestClass]
-public class **Tests\_**Validator()
+public class ValidatorTests()
 {
     
 }
- 
+```
+
+</td><td>
+
+```cs
 [TestClass]
-public class Validator**Tests**()
+public class Tests_Validator()
 {
     
 }
+```
 
+</td></tr></table>
 
-#### Test method names start with Test\_ and use a lot of underscores in the name because they will be long, because they will be very specific. 
+#### Text Method Names
 
+Test method names start with `Test_` and use a lot of underscores in the name because they will be long, because they will be very specific. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
 [TestMethod]
-public void **Test** ()
+public void Test_Validator_NotNullOrEmpty_NotValid()
 { 
     ...
-    } 
+}
+```
+
+</td><td>
+
+```cs
 [TestMethod]
-public void __Test\_Validator\_NotNullOrEmpty\_NotValid__()
+public void Test ()
 { 
     ...
-    }
-    
+} 
+```
 
-#### Avoid `var`
+</td></tr></table>
 
-`var` should be avoided. The variable type should be visible in the code line instead of ‘var’. Exceptions are: 
+#### Avoid var
 
-__var__ x = y.X;
+`var` should be avoided.The variable type should be visible in the code line instead of ‘var’. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+int x = y.X;
+```
+
+</td><td>
+
+```cs
+var x = y.X;
+```
+
+</td></tr></table>
+
+Exceptions are: 
 
 | | | |
 |-|-|-|
@@ -867,51 +902,106 @@ __var__ x = y.X;
 Handle null and empty string the same way everywhere  
 To check if a string is filled use `IsNullOrEmpty`. 
 
-str == null 
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
 String.IsNullOrEmpty(str)
+```
+
+</td><td>
+
+```cs
+str == null 
+```
+
+</td></tr></table>
 
 #### Equate strings with `String.Equals`
 
 To equate string use String.Equals. 
 
-str == "bla" 
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
 String.Equals(str, "bla")
+```
 
-#### Avoiding `Activator.CreateInstance`
+</td><td>
 
-Avoid using Activator.CreateInstance. Prefer using the ‘new’ keyword. Using generics you can avoid some of the Activator.CreateInstance calls. A call to Activator.CreateInstance should be rare and the last choice for instantiating an object. 
+```cs
+str == "bla"
+```
 
-Activator.CreateInstance(typeof(T)) 
+</td></tr></table>
+
+#### Avoiding Activator.CreateInstance
+
+Avoid using `Activator.CreateInstance`. Prefer using the `new` keyword. Using generics you can avoid some of the `Activator.CreateInstance` calls. A call to Activator.CreateInstance should be rare and the last choice for instantiating an object. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
 T = new T()
+```
+
+</td><td>
+
+```cs
+Activator.CreateInstance(typeof(T)) 
+```
+
+</td></tr></table>
 
 #### Entity Equality by ID
 
 Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. 
 
-if (entity1 == entity2) 
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
 if (entity1.ID == entity2.ID)
 
 // (Also do null checks if applicable.)
+```
+
+</td><td>
+
+```cs
+if (entity1 == entity2) 
+```
+
+</td></tr></table>
 
 #### CLR Data Types
 
-The following data types are not CLR-complient and sould be avoided:
+Some data types are not CLR-complient and should be avoided:
 
-Unsigned types such as:
-uint
-ulong
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-And also:
-sbyte
- 
+```cs
 int
 long
 byte
+```
+
+</td><td>
+
+```cs
+// Unsigned types such as:
+uint
+ulong
+
+// And also:
+sbyte
+```
+
+</td></tr></table>
 
 #### Parameter Order
 
 When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
 
+```cs
 class MyPresenter
 {
     public MyPresenter(
@@ -920,10 +1010,11 @@ class MyPresenter
         IAuthenticator authenticator,
         string cultureName,
         int pageSize)
-        {
-            ...
-            }
-            }
+    {
+        ...
+    }
+}
+```
 
 #### Long Code Lines
 
@@ -933,9 +1024,21 @@ class MyPresenter
 
 When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.
 
-if (x <= 100 && x >= 10)
-if (x >= 11 && x <= 99) |if (x >= 10 && x <= 100)
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+if (x >= 10 && x <= 100)
 if (x > 10 && x < 100)
+```
+
+</td><td>
+
+```cs
+if (x <= 100 && x >= 10)
+if (x >= 11 && x <= 99) 
+```
+
+</td></tr></table>
 
 #### Namespace Tips
 
@@ -944,7 +1047,8 @@ Avoid using full namespaces in code, because that makes the code line very hard 
 Less Preferred:
 
 ```cs
-JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository = PersistenceHelper.CreatCmsRepository< JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
+JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
+    PersistenceHelper.CreatCmsRepository<JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
 Using half a namespace is also not great, because when you need to rename a namespace, you will have a lot of manual work:
@@ -952,7 +1056,8 @@ Using half a namespace is also not great, because when you need to rename a name
 Less Preferred:
 
 ```cs
-Business.Cms.RepositoryInterfaces.IUserRepository userRepository = PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
+Business.Cms.RepositoryInterfaces.IUserRepository userRepository = 
+    PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
 Instead, try giving a class a unique name or use aliases:
