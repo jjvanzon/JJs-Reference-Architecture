@@ -55,8 +55,8 @@ Code Style
             - [The code line is a direct cast.](#the-code-line-is-a-direct-cast)
             - [The code line is WAAAY too long and unreadable without ‘var’.](#the-code-line-is-waaay-too-long-and-unreadable-without-var)
             - [Use var in your view code](#use-var-in-your-view-code)
-        - [string.IsNullOrEmpty](#stringisnullorempty)
-        - [string.Equals](#stringequals)
+        - [String.IsNullOrEmpty](#stringisnullorempty)
+        - [String.Equals](#stringequals)
         - [Avoiding Activator.CreateInstance](#avoiding-activatorcreateinstance)
         - [Entity Equality by ID](#entity-equality-by-id)
         - [CLR Data Types](#clr-data-types)
@@ -898,23 +898,23 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-***`X`***`q = from x in list select `***`new { A = x.A }`***`;`
+***`var`***` q = from x in list select `***`new { A = x.A }`***`;`
 
 </td><td>
 
-***`var`***` q = from x in list select `***`new { A = x.A }`***`;`
+***`X`***`q = from x in list select `***`new { A = x.A }`***`;`
 
 </td></tr></table>
 
 ##### The code line is a ‘new’ statement. 
 
- <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-***`X`***` x = new `***`X`***`();`
+***`var`***` x = new `***`X`***`();`
 
 </td><td>
 
-***`var`***` x = new `***`X`***`();`
+***`X`***` x = new `***`X`***`();`
 
 </td></tr></table>
 
@@ -922,11 +922,11 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-***`X`***` x = (`***`X`***`)y;`
+***`var`***` x = (`***`X`***`)y;`
 
 </td><td>
 
-***`var`***` x = (`***`X`***`)y;`
+***`X`***` x = (`***`X`***`)y;`
 
 </td></tr></table>
 
@@ -934,11 +934,11 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-`foreach (`***`KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>`***` entry in dictionary)`
+`foreach (`***`var`***` entry in dictionary)`
 
 </td><td>
 
-`foreach (`***`var`***` entry in dictionary)`
+`foreach (`***`KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>`***` entry in dictionary)`
 
 </td></tr></table>
 
@@ -946,15 +946,15 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-`<% foreach (`***`OrderViewModel`***` order in Model.Orders) %>`
+`<% foreach (`***`var`***` order in Model.Orders) %>`
 
 </td><td>
 
-`<% foreach (`***`var`***` order in Model.Orders) %>`
+`<% foreach (`***`OrderViewModel`***` order in Model.Orders) %>`
 
 </td></tr></table>
 
-#### string.IsNullOrEmpty
+#### String.IsNullOrEmpty
 
 Handle null and empty string the same way everywhere  
 To check if a string is filled use `IsNullOrEmpty`. 
@@ -973,7 +973,7 @@ str == null
 
 </td></tr></table>
 
-#### string.Equals
+#### String.Equals
 
 To equate string use String.Equals. 
 
