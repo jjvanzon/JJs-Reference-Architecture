@@ -55,6 +55,7 @@ Code Style
             - [The code line is a direct cast.](#the-code-line-is-a-direct-cast)
             - [The code line is WAAAY too long and unreadable without ‘var’.](#the-code-line-is-waaay-too-long-and-unreadable-without-var)
             - [Use var in your view code](#use-var-in-your-view-code)
+        - [null / empty strings](#null--empty-strings)
         - [String.IsNullOrEmpty](#stringisnullorempty)
         - [String.Equals](#stringequals)
         - [Avoiding Activator.CreateInstance](#avoiding-activatorcreateinstance)
@@ -898,11 +899,11 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-***`var`***` q = from x in list select `***`new { A = x.A }`***`;`
+***`var`***` q = from x in list select new { A = x.A };`
 
 </td><td>
 
-***`X`***`q = from x in list select `***`new { A = x.A }`***`;`
+***`X`***`q = from x in list select new { A = x.A };`
 
 </td></tr></table>
 
@@ -910,11 +911,11 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-***`var`***` x = new `***`X`***`();`
+***`var`***` x = new X();`
 
 </td><td>
 
-***`X`***` x = new `***`X`***`();`
+***`X`***` x = new X();`
 
 </td></tr></table>
 
@@ -922,11 +923,11 @@ Exceptions are:
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-***`var`***` x = (`***`X`***`)y;`
+***`var`***` x = (X)y;`
 
 </td><td>
 
-***`X`***` x = (`***`X`***`)y;`
+***`X`***` x = (X)y;`
 
 </td></tr></table>
 
@@ -954,9 +955,12 @@ Exceptions are:
 
 </td></tr></table>
 
-#### String.IsNullOrEmpty
+#### null / empty strings
 
 Handle null and empty string the same way everywhere  
+
+#### String.IsNullOrEmpty
+
 To check if a string is filled use `IsNullOrEmpty`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
