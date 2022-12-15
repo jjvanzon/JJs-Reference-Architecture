@@ -26,7 +26,7 @@ Code Style
         - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
         - [Generic Constraints on Same Line for One-Liners](#generic-constraints-on-same-line-for-one-liners)
     - [Trivial Recommendations](#trivial-recommendations)
-        - [A File a Type](#a-file-a-type)
+        - [1 Type 1 File](#1-type-1-file)
         - [Members Private](#members-private)
         - [Types Internal](#types-internal)
         - [Explicit Access Modifiers](#explicit-access-modifiers)
@@ -493,7 +493,7 @@ It might have been a one-liner for readability reasons so perhaps let's keep it 
 
 ### Trivial Recommendations
 
-#### A File a Type 
+#### 1 Type 1 File
 
 Preferably give each class (or interface or enum) its own file (except nested classes).
 
@@ -668,7 +668,7 @@ Prefer interface types as variable types.
 
 </td></tr></table>
 
-Reason: Less refactoring when changing interface type.
+Reason: Less refactoring when changing variable type.
 
 #### Prefer ToArray
 
@@ -685,7 +685,7 @@ Prefer `ToArray` over `ToList`.
 </td></tr></table>
 
 Reason: More performance?  
-Downside: The Add method does not work for an Array.
+Downside: The `Add` method does not work for an `Array`.
 
 #### Object Initializers
 
@@ -1048,7 +1048,7 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 Prefer handling both `null` and `""` the same way.
 
-Reason: No surprises when using eithwe `null` or `""`.
+Reason: No surprises when using either `null` or `""`.
 
 #### String.IsNullOrEmpty
 
@@ -1209,7 +1209,7 @@ if (x >= 11 && x <= 99)
 
 </td></tr></table>
 
-Reason: Readability. More ofvious what the range limits are.
+Reason: Readability. More obvious what the range limits are.
 
 #### Namespace Tips
 
