@@ -84,8 +84,7 @@ This article lists trivial coding style preferenced, that might be followed in c
 
 Coding standards mostly conform to the Microsoft standard described in the following documents:
 
-<http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>
-
+<http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
 Using a tool like ReSharper may help. It's settings can be finetuned to closely match your preferences. It then checks the check code style and can auto-format. It can be used to keep code clean as you write and change your code.
@@ -113,6 +112,8 @@ Using a tool like ReSharper may help. It's settings can be finetuned to closely 
 
 Prefer Visual Studio’s autoformatting enabled and set to its defaults.
 
+Reason: Less surprizing to the next developer.
+
 #### Surplus Enters Between Braces
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
@@ -131,6 +132,9 @@ Prefer Visual Studio’s autoformatting enabled and set to its defaults.
 ```
 
 </td></tr></table>
+
+Reason:  
+Tidiness.
 
 #### Enters between switch Cases           
 
@@ -161,6 +165,9 @@ switch (x)
 
 </td></tr></table>
 
+Reason:  
+A bit tidier perhaps?
+
 #### No Braces for Single-Line if Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
@@ -176,6 +183,9 @@ if (condition) { Bla(); }
 ```
 
 </td></tr></table>
+
+Reason:  
+Less visual clutter.
 
 #### Loops Multi-Line
 
@@ -195,6 +205,9 @@ foreach (var x in list) { Bla(); }
 ```
 
 </td></tr></table>
+
+Reason:  
+Just if you'r not used to it, it may look odd.
 
 #### Braces for Multi-Line Statements
 
@@ -220,9 +233,13 @@ foreach (var x in list)
 
 if (condition)
     Bla(); 
+    Something();
 ```
 
 </td></tr></table>
+
+Reason:  
+Without braces, only the next line is looped or executed conditionally. The line after that would be outside the loop, which is sort of not obvious and might lead to error.
 
 #### Enters between Methods
 
@@ -254,6 +271,9 @@ void Bla2()
 ```
 
 </td></tr></table>
+
+Reason:  
+Just tidy?
 
 #### Properties on Separate Lines
 
@@ -289,6 +309,9 @@ int A { get; set; } int B { get; set; }
 ```
 
 </td></tr></table>
+
+Reason:  
+Might be easy to overlook that there is another property.
 
 #### Enters in Methods
 
@@ -327,6 +350,9 @@ void Bla()
 
 </td></tr></table>
 
+Reason:  
+Visible separation of steps inside methods.
+
 #### Variables on Separate Lines
 
 Putting variable declarations on separate lines.
@@ -346,9 +372,12 @@ int i, j;
 
 </td></tr></table>
 
+Reason:  
+Just a preference, when not used to it, it may be overlooked, and "Find..." may not show the results expected.
+
 #### 'Tabular Form' Less Preferred
 
-Tabular form not preferred. This tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
+Tabular form not preferred.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -372,6 +401,9 @@ public bool   IsManual { get; set; }
 
 </td></tr></table>
 
+Reason:
+This tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
+
 #### Aligned Elements of Linq Queries
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
@@ -391,6 +423,9 @@ var arr = coll.Where(x => x...).
 
 </td></tr></table>
 
+Reason:  
+Readability.
+
 #### Indentation
 
 Use proper indentation.
@@ -409,9 +444,10 @@ Use proper indentation.
 
 </td></tr></table>
 
-#### Generic Constraints on Separate Line
+Reason:  
+Just readability.
 
-So they stand out.
+#### Generic Constraints on Separate Line
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -433,6 +469,9 @@ class MyGenericClass<T> where T: MyInterface
 ```
 
 </td></tr></table>
+
+Reason:  
+So they stand out.
 
 #### Generic Constraints for One-Liners on Same Line
 
@@ -457,14 +496,16 @@ interface IMyInterface
 
 </td></tr></table>
 
+Reason:  
+It might have been a one-liner for readability reasons so perhaps let's keep it that way.
+
 ### Trivial Recommendations
 
 #### A File a Type 
 
 Preferably give each class (or interface or enum) its own file (except nested classes).
 
-Reason:
-
+Reason:  
 One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
 
 #### Members Private
