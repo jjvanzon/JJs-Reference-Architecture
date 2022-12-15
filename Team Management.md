@@ -16,7 +16,7 @@
 - [Direction](#direction)
     - [Miscellaneous Pointers](#miscellaneous-pointers)
     - [Behavior to Expect](#behavior-to-expect)
-    - [Vary a Developer’s Tasks](#vary-a-developers-tasks)
+    - [Varying Developer’s Tasks](#varying-developers-tasks)
     - [Upward Management](#upward-management)
     - [Budgeting](#budgeting)
 - [Planning](#planning)
@@ -186,7 +186,7 @@ Or less annoying (because you cannot really blame anyone):
 - Someone spends a week on something, while asking for advice, could have made that a couple of hours.
 - Someone extremely talented will keep beating him or herself up over tiny details or just will not assert his opinion or be scared of other peoples’ criticism.
 
-### Vary a Developer’s Tasks
+### Varying Developer’s Tasks
 
 What I often see, is that each developer is assigned to his application and never changes focus, because everyone feels, that this person is the ‘go-to guy’ for this topic. The motivation behind this is that it would be more economical to let the guy that knows most about it, do the work. That makes sense intuitively, but what’s intuitive, isn’t always what’s right. It is an over-simplified view on the issue that will cost you money. You lose something when you do not vary a programmer’s work.
 

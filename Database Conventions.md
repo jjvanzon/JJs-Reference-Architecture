@@ -8,11 +8,8 @@
 - [Rules](#rules)
 - [Upgrade Scripts](#upgrade-scripts)
     - [Excel Sheet](#excel-sheet)
-        - [Exceptional Cases](#exceptional-cases)
-        - [Summary](#summary)
     - [Scripts](#scripts)
     - [Deployment](#deployment)
-        - [Summary](#summary-1)
     - [SqlScripts Table](#sqlscripts-table)
 - [C#-Based Migrations](#c-based-migrations)
 
@@ -150,7 +147,7 @@ In the Excel, add a column for each database instance for that database structur
 
 Also include a column saying whether you have scripted it at all (for if you are in a hurry and have no time to script it). A release date column is also handy, to get some sense of when things went live.
 
-#### Exceptional Cases
+<h4>Exceptional Cases</h4>
 
 For upgrades that should only be executed on a specific database, put ‘N/A’ (or ‘N.V.T.’ in Dutch) in the appropriate spread sheet cell.
 
@@ -169,7 +166,7 @@ If a script requires that you be extra careful, you can mention this as follows:
 
 But be sparse with that, because the person running the script might not actually know what it is he is supposed to check and will feel uneasy executing this script since it is obviously so dangerous, while he has no idea why.
 
-#### Summary
+<h4>Summary</h4>
 
 This section covered:
 
@@ -261,7 +258,7 @@ begin
 end
 ```
 
-#### Summary
+<h4>Summary</h4>
 
 This section covered:
 

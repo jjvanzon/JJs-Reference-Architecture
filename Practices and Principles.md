@@ -26,7 +26,6 @@
     - [Be Strict](#be-strict)
     - [Error Hiding / Null-Tolerance (bad)](#error-hiding--null-tolerance-bad)
     - [Null-Checks](#null-checks)
-        - [Alternatives](#alternatives)
     - [Process that Checks Itself (generally bad)](#process-that-checks-itself-generally-bad)
     - [Reject, Don’t Correct](#reject-dont-correct)
 - [Interfacing](#interfacing)
@@ -374,7 +373,7 @@ Here are rules for null-checks for other constructs:
 | Your own application code | Conform to that same pattern in your own application code, so you know when you can expect null.<br>
 | Third-party API’s         | Some .NET API’s and third party API’s may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
-#### Alternatives
+<h4>Alternatives</h4>
 
 Nullability problems might be solved next to automatically by newer C# versions.
 
