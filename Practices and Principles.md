@@ -26,6 +26,15 @@
     - [Be Strict](#be-strict)
     - [Error Hiding / Null-Tolerance (bad)](#error-hiding--null-tolerance-bad)
     - [Null-Checks](#null-checks)
+        - [Basic Guidelines](#basic-guidelines)
+        - [DTOs](#dtos)
+        - [Strings](#strings)
+        - [Value types](#value-types)
+        - [Parameters](#parameters)
+        - [ViewModels](#viewmodels)
+        - [Custom-Programmed Framework API’s](#custom-programmed-framework-apis)
+        - [Your Own Application Code](#your-own-application-code)
+        - [Third-party API’s](#third-party-apis)
     - [Process that Checks Itself (generally bad)](#process-that-checks-itself-generally-bad)
     - [Reject, Don’t Correct](#reject-dont-correct)
 - [Interfacing](#interfacing)
@@ -343,6 +352,8 @@ If something is null, that should not be null, an exception MUST be thrown. You 
 
 Code should be strict when it comes to nullability. The general message is: check for null if you expect it. But sometimes you can omit the null-checks to keep your code clean. Here are the rules:
 
+#### Basic Guidelines
+
 - Entity models are anti-encapsulated: none of the data is protected.
 - A data store often guards nullability.
 - Validators should also guard nullability.
@@ -362,41 +373,56 @@ Allow nulls as little as possible. Similar rules also apply to other integrity c
 
 Here are rules for null-checks for other constructs:
 
-- __DTOs__
-    - Usually the same rules apply to DTO’s as do for entities. Especially if they just transfer data from SQL statements to application logic.
-- __Strings__
-    - To check if a string is filled in, use `IsNullOrEmpty`:
-    - `if (String.IsNullOrEmpty(str)) throw new NullOrEmptyException(() => str);`
-    - So this is wrong: `if (str == null) throw new NullException(() => str);`
-    - Another common mistake is this:
-    - `obj.ToString()`
-    - This will crash if the object can be null. This is the solution:
-    - `Convert.ToString(obj)`
-- __Value types__
-    - Value types, for instance int and decimal, cannot be null unless they are nullable, for instance `int?` and `decimal?`, so do not execute null-checks on non-nullable value types.
-- __Parameters__
-    - Execute null-checks on arguments of public methods. Use `NullException` (out of `JJ.Framework.Reflection`). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
-    - Avoid allowing null parameters.
-    - But if a parameter *is* nullable, you can denote this in several ways.
-    - Assign null as the default value of the parameter, so it is clear that it can accept null:  
-      `private void MyMethod(object myParameter = null)`
-    - Document with XML tags, that it is nullable:  
-      `/// <param name="myParameter ">nullable</param>`  
-      `private void MyMethod(object myParameter)`
-    - Add an overload that does not have the parameter:  
-      `private void MyMethod() { }`  
-      `private void MyMethod(object myParameter) { }`
-    - Ideally in the overload with the parameter, do a null-check.
-- __ViewModels__
-    - `ViewModels` that are passed to `Presenters` may contain nulls.
-    - You can use the `NullCoalesce` pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.
-- __Our own framework API’s__
-    - For API’s in our own framework you can count on an object when you call a `Get` method.
-    - You have to take `null` into consideration when you call `TryGet`.
-- __Your own application code__
-    - Conform to that same pattern in your own application code, so you know when you can expect null.
-- __Third-party API’s__
-    - Some .NET API’s and third party API’s may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+#### DTOs
+
+- Usually the same rules apply to DTO’s as do for entities. Especially if they just transfer data from SQL statements to application logic.
+
+#### Strings
+    
+- To check if a string is filled in, use `IsNullOrEmpty`:
+- `if (String.IsNullOrEmpty(str)) throw new NullOrEmptyException(() => str);`
+- So this is wrong: `if (str == null) throw new NullException(() => str);`
+- Another common mistake is this:
+- `obj.ToString()`
+- This will crash if the object can be null. This is the solution:
+- `Convert.ToString(obj)`
+
+#### Value types
+
+- Value types, for instance int and decimal, cannot be null unless they are nullable, for instance `int?` and `decimal?`, so do not execute null-checks on non-nullable value types.
+
+#### Parameters
+
+- Execute null-checks on arguments of public methods. Use `NullException` (out of `JJ.Framework.Reflection`). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
+- Avoid allowing null parameters.
+- But if a parameter *is* nullable, you can denote this in several ways.
+- Assign null as the default value of the parameter, so it is clear that it can accept null:  
+    `private void MyMethod(object myParameter = null)`
+- Document with XML tags, that it is nullable:  
+    `/// <param name="myParameter ">nullable</param>`  
+    `private void MyMethod(object myParameter)`
+- Add an overload that does not have the parameter:  
+    `private void MyMethod() { }`  
+    `private void MyMethod(object myParameter) { }`
+- Ideally in the overload with the parameter, do a null-check.
+
+#### ViewModels
+
+- `ViewModels` that are passed to `Presenters` may contain nulls.
+- You can use the `NullCoalesce` pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.
+
+#### Custom-Programmed Framework API’s
+
+- For API’s in our own framework you can count on an object when you call a `Get` method.
+- You have to take `null` into consideration when you call `TryGet`.
+
+#### Your Own Application Code
+    
+- Conform to that same pattern in your own application code, so you know when you can expect null.
+
+#### Third-party API’s
+    
+- Some .NET API’s and third party API’s may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 
