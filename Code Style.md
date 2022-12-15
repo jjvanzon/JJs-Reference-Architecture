@@ -45,11 +45,11 @@ Code Style
         - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
         - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
         - [No Unused / Outcommented Code](#no-unused--outcommented-code)
-        - [FileOpen, FileMode, FileAccess and FileShare](#fileopen-filemode-fileaccess-and-fileshare)
+        - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
     - [Misc Preferences](#misc-preferences)
         - [Test Class Names Ending With 'Tests'](#test-class-names-ending-with-tests)
         - [Test Method Names](#test-method-names)
-        - [Using var](#using-var)
+        - [Using Var](#using-var)
             - [Anonymous Types](#anonymous-types)
             - [New Statements](#new-statements)
             - [Direct Casts](#direct-casts)
@@ -463,6 +463,8 @@ interface IMyInterface
 
 Preferably give each class (or interface or enum) its own file (except nested classes).
 
+Reason: One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
+
 #### Members Private
 
 Prefer keeping members private. 
@@ -474,9 +476,11 @@ private void Bla()
 }
 ```
 
+Reason: Other code might become dependent on publically accessible things. Managing dependencies like that seems to be quite a thing in software programming.
+
 #### Types Internal 
 
-Prefer to keep types internal 
+Prefer to keep types `internal`.
 
 ```cs
 internal class MyClass
@@ -484,6 +488,8 @@ internal class MyClass
     ...   
 }
 ```
+
+Reason: External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software programming.
 
 #### Explicit Access Modifiers
 
@@ -503,6 +509,8 @@ int Bla() { ... }
 
 </td></tr></table>
 
+Reason: One might be confused what is the default.
+
 #### No Public Fields
 
 Prefer not to use public fields. Use either private fields or use properties instead. 
@@ -516,6 +524,10 @@ Prefer not to use public fields. Use either private fields or use properties ins
 `public int X;`
 
 </td></tr></table>
+
+__Reason__
+
+People may say the interface stability comes in jeopardy when you use public fields. The fields seem to look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
 
 #### Nested Class on Top
 
@@ -551,9 +563,13 @@ internal class A
 
 </td></tr></table>
 
+__Reason:__
+
+It may not be obvious there are nested classes, unless they are put at the top.
+
 #### No Decisions from Exceptions
 
-Avoid getting information by catching an exception. Prefer getting your information without using exception handling. 
+Avoid getting information by catching an exception. Prefer getting your information without using exception handling.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -582,6 +598,10 @@ bool FileExists(string path)
 ```
 
 </td></tr></table>
+
+__Reason__
+
+`Exception` handling is more performance intensive than might be anticipated. Compared to an `if` statement. When no `exception` goes off, `exception` handling might perform well, but when an `exception` goes off, quite a few things happen, like gathering stack trace information.
 
 #### No Inferrable Type Arguments
 
@@ -613,7 +633,7 @@ Prefer interface types as variable types.
 
 #### Prefer ToArray
 
-Prefer ToArray over ToList. 
+Prefer `ToArray` over `ToList`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -627,7 +647,7 @@ Prefer ToArray over ToList.
 
 #### Object Initializers
 
-Using object initializers for readability. 
+Using object initializers. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -648,6 +668,10 @@ x.B = 20;
 ```
 
 </td></tr></table>
+
+__Reason:__
+
+Might be more readable.
 
 #### Comments in Summaries
 
@@ -727,7 +751,7 @@ if (config.FeatureXEnabled)
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
 When using these compiling directives, a compilation might succeed, without all the code being compilable.
 
@@ -745,9 +769,9 @@ Prefer for internal classes not to have internal members.
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
-The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to correct the access modifiers of the methods.
+The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods.
 
 #### Default Switch Case at the Bottom
 
@@ -785,9 +809,9 @@ switch (x)
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
-The default switch case is often the 'last resort', so may make sense to be put 'last' too.
+The default `switch` case is often the 'last resort', so may make sense to be put 'last' too.
 
 #### Prefer Value and HasValue for Nullable Types
 
@@ -817,13 +841,13 @@ if (number != null)
 
 #### No Unused / Outcommented Code
 
-Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an Archive folder, or Outtakes.txt.
+Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder, or `Outtakes.txt`.
 
-__Reason:__
+__Reason__
 
 Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
 
-#### FileOpen, FileMode, FileAccess and FileShare
+#### FileOpen, FileMode, FileAccess, FileShare
 
 It is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation. Otherwise these aspects may use surprizing defaults.
 
@@ -879,13 +903,13 @@ public void Test()
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
 If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read and digest.
 
-#### Using var
+#### Using Var
 
-Prefer not to use var.
+Prefer not to use `var`.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -901,15 +925,14 @@ var x = y.X;
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
-It would be nice to see the variable type in the code line instead of `var`. 
-
+It would be nice to see the variable type in the code line instead of `var`.  
 There may be a few exceptions, where var may be preferred
 
 ##### Anonymous Types
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Not Preferred</th></tr><tr><td>
 
 ***`var`***` q = from x in list select new { A = x.A };`
 
@@ -969,11 +992,11 @@ There may be a few exceptions, where var may be preferred
 
 #### Null / Empty Strings
 
-Prefer handling both null and empty string the same way.
+Prefer handling both `null` and empty string the same way.
 
 #### String.IsNullOrEmpty
 
-To check if a string is filled prefer `string.IsNullOrEmpty`. 
+To check if a `string` is filled prefer `string.IsNullOrEmpty`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -989,7 +1012,7 @@ str == null
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
 In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
 
@@ -1011,7 +1034,7 @@ str == "bla"
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
 In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
 
@@ -1054,7 +1077,7 @@ if (entity1 == entity2)
 
 </td></tr></table>
 
-__Reason:__
+__Reason__
 
 Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
 
@@ -1081,6 +1104,10 @@ sbyte
 ```
 
 </td></tr></table>
+
+__Reason__
+
+For compatibility with more variations of .NET.
 
 #### Parameter Order
 
@@ -1129,7 +1156,7 @@ if (x >= 11 && x <= 99)
 
 Full namespaces in code, might make the code line difficult to read:
 
-__Less Preferred:__
+__Less Preferred__
 
 ```cs
 JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
@@ -1138,7 +1165,7 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 
 Using half a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
 
-__Less Preferred:__
+__Less Preferred__
 
 ```cs
 Business.Cms.RepositoryInterfaces.IUserRepository userRepository = 
@@ -1147,7 +1174,7 @@ Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 
 An alternative is to give a class a more unique name. Or use an alias instead:
 
-__Recommended:__
+__Recommended__
 
 ```cs
 using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
@@ -1192,9 +1219,15 @@ Suggestions for boolean variable name prefixes and suffixes:
 | `Never...`      |                 |
 | `Only...`       |                 |
 
-If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: `LinesAreCopied` instead of `AreLinesCopied`.
+If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: 
 
-Some boolean names are so common, that they do not really need a prefix:
+    LinesAreCopied
+
+instead of 
+    
+    AreLinesCopied
+
+Some boolean names are so common, that they might not need a prefix:
 
     Visible
     Enabled
@@ -1269,9 +1302,9 @@ But that might look less nice when you add the Local and Utc suffices again:
 
 #### Enum Names
 
-This architecture tends to use the `Enum` suffix for enum types e.g. `OrderStatus`***`Enum`***.
+This architecture tends to use the `Enum` suffix for enum types e.g. `OrderStatusEnum`.
 
-Another alternative might be the suffix `Mode`, e.g. `Connection`***`Mode`***, but at some point the preference really went for the suffix `Enum` because it was found so important to see clearly that something is an enum.
+Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference really went for the suffix `Enum` because it was found so important to see clearly that something is an enum.
 
 #### Event Names / Delegate Names
 
@@ -1311,11 +1344,11 @@ Or the suffix `Requested`, if your event looks like a method name.
 
 Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives.
 
-Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`, because `ing` and `On` both already indicate that it's an event. `OnMouseUp` might be shortened to just `MouseUp`, because that is an established event name.
+Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be an established event name.
 
 #### Method Names
 
-Method names might start with verbs, e.g. ***`Create`***`Order`. 
+Method names might start with verbs, e.g. `CreateOrder`. 
 
 For clarity, perhaps not start with a verb for constructs that are not methods.
 
@@ -1323,7 +1356,7 @@ Suggestions for verbs:
 
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | E.g.<br>`List.Add(item)`<br>`ListManager.Add(list, item)`<br>In cases such as the last example, `list` may be made the first parameter.
+| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>In cases such as the last example, `list` may be made the first parameter.
 | `Assert`    | A method throwing `Exceptions` if input is invalid.
 | `Calculate` |
 | `Clear`     |
@@ -1331,7 +1364,7 @@ Suggestions for verbs:
 | `ConvertTo` |
 | `Create`    | When a method returns a new object.
 | `Delete`    |
-| `Ensure`    | May set up a state if it is not set up yet.<br>If `Ensure` means throw an exception if a state is not there, consider using the verb `Assert` instead.
+| `Ensure`    | May set up a state if it is not set up yet.<br>If `Ensure` means throw an exception if a state is not there,<br>consider using the verb `Assert` instead.
 | `Execute`   |
 | `Generate`  |
 | `Get`       |
@@ -1392,4 +1425,4 @@ For number sequences these names might be used:
     SortOrder
     Rank
 
-(Perhaps avoid `Index` because it is an SQL keyword.)
+Perhaps avoid `Index` because it is an SQL keyword.
