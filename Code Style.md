@@ -1380,17 +1380,16 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less pretty suffixes like `Conditionally` or a prefix `Conditional`, that might obscuring the name that comes after.
 | `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
 | `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
-
 | `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
 #### Misc Names
 
-- For number sequences these names might be used:
+For number sequences these names might be used:
 
-    - `ListIndex`
-    - `IndexNumber`
-    - `SortOrder`
-    - `Rank`
+    ListIndex
+    IndexNumber
+    SortOrder
+    Rank
 
 (Perhaps avoid `Index` because it is an SQL keyword.)
