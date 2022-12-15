@@ -1,84 +1,81 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Code Style | JJ's Reference Architecture
+========================================
 
-Code Style
-----------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
+- [Introduction](#introduction)
+- [Casing (and Punctuation)](#casing-and-punctuation)
+- [Spacing (and Punctuation)](#spacing-and-punctuation)
+    - [Auto-Formatting](#auto-formatting)
+    - [Surplus Enters Between Braces](#surplus-enters-between-braces)
+    - [Enters between Switch Cases](#enters-between-switch-cases)
+    - [No Braces for Single-Line If Statements](#no-braces-for-single-line-if-statements)
+    - [Loops Multi-Line](#loops-multi-line)
+    - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
+    - [Enters between Methods](#enters-between-methods)
+    - [Properties on Separate Lines](#properties-on-separate-lines)
+    - [Enters in Methods](#enters-in-methods)
+    - [Variables on Separate Lines](#variables-on-separate-lines)
+    - [Tabular Form Less Preferred](#tabular-form-less-preferred)
+    - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
+    - [Indentation](#indentation)
+    - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
+    - [Generic Constraints on Same Line for One-Liners](#generic-constraints-on-same-line-for-one-liners)
+- [Trivial Recommendations](#trivial-recommendations)
+    - [1 Type 1 File](#1-type-1-file)
+    - [Members Private](#members-private)
+    - [Types Internal](#types-internal)
+    - [Explicit Access Modifiers](#explicit-access-modifiers)
+    - [No Public Fields](#no-public-fields)
+    - [Nested Class on Top](#nested-class-on-top)
+    - [No Decisions from Exceptions](#no-decisions-from-exceptions)
+    - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
+    - [Prefer Interface Types](#prefer-interface-types)
+    - [Prefer ToArray](#prefer-toarray)
+    - [Object Initializers](#object-initializers)
+    - [Comments in Summaries](#comments-in-summaries)
+    - [Comments in English](#comments-in-english)
+    - [No Comments without Info](#no-comments-without-info)
+    - [Avoiding Compiler Directives](#avoiding-compiler-directives)
+    - [Public Members for Internal Classes](#public-members-for-internal-classes)
+    - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
+    - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
+    - [No Unused / Outcommented Code](#no-unused--outcommented-code)
+    - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
+- [Misc Preferences](#misc-preferences)
+    - [Test Class Names to End with 'Tests'](#test-class-names-to-end-with-tests)
+    - [Test Method Names](#test-method-names)
+    - [Using Var](#using-var)
+        - [Anonymous Types](#anonymous-types)
+        - [New Statements](#new-statements)
+        - [Direct Casts](#direct-casts)
+        - [Code Line Quite Long and Better Readable](#code-line-quite-long-and-better-readable)
+        - [View Code](#view-code)
+    - [Null / Empty Strings](#null--empty-strings)
+    - [String.IsNullOrEmpty](#stringisnullorempty)
+    - [String.Equals](#stringequals)
+    - [Activator.CreateInstance](#activatorcreateinstance)
+    - [Entity Equality by ID](#entity-equality-by-id)
+    - [CLR Data Types](#clr-data-types)
+    - [Parameter Order](#parameter-order)
+    - [Long Code Lines](#long-code-lines)
+    - [Ordered If Range](#ordered-if-range)
+    - [Namespace Tips](#namespace-tips)
+- [Member Order](#member-order)
+- [Naming](#naming)
+    - [Boolean Names](#boolean-names)
+    - [Class Names](#class-names)
+    - [Collection Names](#collection-names)
+    - [DateTime Names](#datetime-names)
+    - [Enum Names](#enum-names)
+    - [Event Names / Delegate Names](#event-names--delegate-names)
+    - [Method Names](#method-names)
+    - [File-Related Variable Names](#file-related-variable-names)
+    - [Prefixes and Suffixes](#prefixes-and-suffixes)
+    - [Misc Names](#misc-names)
 
-- [Code Style](#code-style)
-    - [Introduction](#introduction)
-    - [Casing (and Punctuation)](#casing-and-punctuation)
-    - [Spacing (and Punctuation)](#spacing-and-punctuation)
-        - [Auto-Formatting](#auto-formatting)
-        - [Surplus Enters Between Braces](#surplus-enters-between-braces)
-        - [Enters between Switch Cases](#enters-between-switch-cases)
-        - [No Braces for Single-Line If Statements](#no-braces-for-single-line-if-statements)
-        - [Loops Multi-Line](#loops-multi-line)
-        - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
-        - [Enters between Methods](#enters-between-methods)
-        - [Properties on Separate Lines](#properties-on-separate-lines)
-        - [Enters in Methods](#enters-in-methods)
-        - [Variables on Separate Lines](#variables-on-separate-lines)
-        - [Tabular Form Less Preferred](#tabular-form-less-preferred)
-        - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
-        - [Indentation](#indentation)
-        - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
-        - [Generic Constraints on Same Line for One-Liners](#generic-constraints-on-same-line-for-one-liners)
-    - [Trivial Recommendations](#trivial-recommendations)
-        - [1 Type 1 File](#1-type-1-file)
-        - [Members Private](#members-private)
-        - [Types Internal](#types-internal)
-        - [Explicit Access Modifiers](#explicit-access-modifiers)
-        - [No Public Fields](#no-public-fields)
-        - [Nested Class on Top](#nested-class-on-top)
-        - [No Decisions from Exceptions](#no-decisions-from-exceptions)
-        - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
-        - [Prefer Interface Types](#prefer-interface-types)
-        - [Prefer ToArray](#prefer-toarray)
-        - [Object Initializers](#object-initializers)
-        - [Comments in Summaries](#comments-in-summaries)
-        - [Comments in English](#comments-in-english)
-        - [No Comments without Info](#no-comments-without-info)
-        - [Avoiding Compiler Directives](#avoiding-compiler-directives)
-        - [Public Members for Internal Classes](#public-members-for-internal-classes)
-        - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
-        - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
-        - [No Unused / Outcommented Code](#no-unused--outcommented-code)
-        - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
-    - [Misc Preferences](#misc-preferences)
-        - [Test Class Names to End with 'Tests'](#test-class-names-to-end-with-tests)
-        - [Test Method Names](#test-method-names)
-        - [Using Var](#using-var)
-            - [Anonymous Types](#anonymous-types)
-            - [New Statements](#new-statements)
-            - [Direct Casts](#direct-casts)
-            - [Code Line Quite Long and Better Readable](#code-line-quite-long-and-better-readable)
-            - [View Code](#view-code)
-        - [Null / Empty Strings](#null--empty-strings)
-        - [String.IsNullOrEmpty](#stringisnullorempty)
-        - [String.Equals](#stringequals)
-        - [Activator.CreateInstance](#activatorcreateinstance)
-        - [Entity Equality by ID](#entity-equality-by-id)
-        - [CLR Data Types](#clr-data-types)
-        - [Parameter Order](#parameter-order)
-        - [Long Code Lines](#long-code-lines)
-        - [Ordered If Range](#ordered-if-range)
-        - [Namespace Tips](#namespace-tips)
-    - [Member Order](#member-order)
-    - [Naming](#naming)
-        - [Boolean Names](#boolean-names)
-        - [Class Names](#class-names)
-        - [Collection Names](#collection-names)
-        - [DateTime Names](#datetime-names)
-        - [Enum Names](#enum-names)
-        - [Event Names / Delegate Names](#event-names--delegate-names)
-        - [Method Names](#method-names)
-        - [File-Related Variable Names](#file-related-variable-names)
-        - [Prefixes and Suffixes](#prefixes-and-suffixes)
-        - [Misc Names](#misc-names)
-
-### Introduction
+Introduction
+------------
 
 This article lists coding style preferenced, that might be followed in certain projects.
 
@@ -89,7 +86,9 @@ It mostlys conform to the Microsoft standard described in the following document
 
 Using a tool like ReSharper may help. It's settings can be finetuned to closely match your preferences. It then checks the check code style and can auto-format. It can be used to keep code clean as you write and change your code.
 
-### Casing (and Punctuation)
+
+Casing (and Punctuation)
+------------------------
 
 | Suggestion                                                      | Examples                       |
 |-----------------------------------------------------------------|--------------------------------|
@@ -106,15 +105,16 @@ Using a tool like ReSharper may help. It's settings can be finetuned to closely 
 | For long identifiers, underscores to separate ‘the pieces’      | `Sine_OperatorCalculator_VarFrequency`
 | No prefixes, such as `strName`                                  |
 
-### Spacing (and Punctuation)
+Spacing (and Punctuation)
+-------------------------
 
-#### Auto-Formatting
+### Auto-Formatting
 
 Prefer Visual Studio’s autoformatting enabled and set to its defaults.
 
 Reason: Less surprizing to the next developer.
 
-#### Surplus Enters Between Braces
+### Surplus Enters Between Braces
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -135,7 +135,7 @@ Reason: Less surprizing to the next developer.
 
 Reason: More tidy.
 
-#### Enters between Switch Cases
+### Enters between Switch Cases
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -166,7 +166,7 @@ switch (x)
 
 Reason: A bit tidier?
 
-#### No Braces for Single-Line If Statements
+### No Braces for Single-Line If Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -184,7 +184,7 @@ if (condition) { Bla(); }
 
 Reason: Less visual clutter.
 
-#### Loops Multi-Line
+### Loops Multi-Line
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -205,7 +205,7 @@ foreach (var x in list) { Bla(); }
 
 Reason: May look odd if you're not used to it.
 
-#### Braces for Multi-Line Statements
+### Braces for Multi-Line Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -237,7 +237,7 @@ if (condition)
 Reason:  
 Without braces, only the next line is looped or executed conditionally. The line after that would be outside the loop, which is sort of not obvious and might lead to error.
 
-#### Enters between Methods
+### Enters between Methods
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -270,7 +270,7 @@ void Bla2()
 
 Reason: Just a bit more tidy?
 
-#### Properties on Separate Lines
+### Properties on Separate Lines
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -308,7 +308,7 @@ int A { get; set; } int B { get; set; }
 Reason:  
 Might be easy to overlook that there is another property.
 
-#### Enters in Methods
+### Enters in Methods
 
 Putting enters inside methods between ‘Pieces that do Something’.  
 
@@ -348,7 +348,7 @@ void Bla()
 Reason:  
 Visible separation of steps inside methods.
 
-#### Variables on Separate Lines
+### Variables on Separate Lines
 
 Putting variable declarations on separate lines.
 
@@ -370,7 +370,7 @@ int i, j;
 Reason:  
 Just a preference, when not used to it, it may be overlooked, and "Find..." may not show the results expected.
 
-#### Tabular Form Less Preferred
+### Tabular Form Less Preferred
 
 Tabular form not preferred.
 
@@ -399,7 +399,7 @@ public bool   IsManual { get; set; }
 Reason:  
 This tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
 
-#### Align Elements of Linq Queries
+### Align Elements of Linq Queries
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -420,7 +420,7 @@ var arr = coll.Where(x => x...).
 
 Reason: readability.
 
-#### Indentation
+### Indentation
 
 Use proper indentation.
 
@@ -440,7 +440,7 @@ Use proper indentation.
 
 Reason: Just readability.
 
-#### Generic Constraints on Separate Line
+### Generic Constraints on Separate Line
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -465,7 +465,7 @@ class MyGenericClass<T> where T: MyInterface
 
 Reason: So they stand out.
 
-#### Generic Constraints on Same Line for One-Liners
+### Generic Constraints on Same Line for One-Liners
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -491,16 +491,17 @@ interface IMyInterface
 Reason:  
 It might have been a one-liner for readability reasons so perhaps let's keep it that way.
 
-### Trivial Recommendations
+Trivial Recommendations
+-----------------------
 
-#### 1 Type 1 File
+### 1 Type 1 File
 
 Preferably give each class (or interface or enum) its own file (except nested classes).
 
 Reason:  
 One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
 
-#### Members Private
+### Members Private
 
 Prefer keeping members private. 
 
@@ -514,7 +515,7 @@ private void Bla()
 Reason:  
 Other code might become dependent on publically accessible things. Managing dependencies like that seems to be quite a thing in software programming.
 
-#### Types Internal 
+### Types Internal 
 
 Prefer to keep types `internal`.
 
@@ -528,7 +529,7 @@ internal class MyClass
 Reason:    
 External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software programming.
 
-#### Explicit Access Modifiers
+### Explicit Access Modifiers
 
 Using explicit access modifiers (except for interface members). 
 
@@ -549,7 +550,7 @@ int Bla() { ... }
 Reason:  
 One might be confused what is the default.
 
-#### No Public Fields
+### No Public Fields
 
 Prefer not to use public fields. Use either private fields or use properties instead. 
 
@@ -566,7 +567,7 @@ Prefer not to use public fields. Use either private fields or use properties ins
 Reason:  
 People may say the interface stability comes in jeopardy when you use public fields. The fields seem to look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
 
-#### Nested Class on Top
+### Nested Class on Top
 
 Putting nested classes at the top of the parent class' code. 
 
@@ -603,7 +604,7 @@ internal class A
 Reason:  
 It may not be obvious there are nested classes, unless they are put at the top.
 
-#### No Decisions from Exceptions
+### No Decisions from Exceptions
 
 Avoid getting information by catching an exception. Prefer getting your information without using exception handling.
 
@@ -638,7 +639,7 @@ bool FileExists(string path)
 Reason:  
 `Exception` handling is more performance intensive than might be expected. Compared to an `if` statement. When no `exception` goes off, `exception` handling might perform well, but when an `exception` goes off, quite a few things happen, like gathering stack trace information.
 
-#### No Inferrable Type Arguments
+### No Inferrable Type Arguments
 
 Prefer not to use type arguments that can be inferred. 
 
@@ -654,7 +655,7 @@ Prefer not to use type arguments that can be inferred.
 
 Reason: Less visual clutter.
 
-#### Prefer Interface Types
+### Prefer Interface Types
 
 Prefer interface types as variable types. 
 
@@ -670,7 +671,7 @@ Prefer interface types as variable types.
 
 Reason: Less refactoring when changing variable type.
 
-#### Prefer ToArray
+### Prefer ToArray
 
 Prefer `ToArray` over `ToList`. 
 
@@ -687,7 +688,7 @@ Prefer `ToArray` over `ToList`.
 Reason: More performance?  
 Downside: The `Add` method does not work for an `Array`.
 
-#### Object Initializers
+### Object Initializers
 
 Using object initializers. 
 
@@ -713,7 +714,7 @@ x.B = 20;
 
 Reason: Might be more readable.
 
-#### Comments in Summaries
+### Comments in Summaries
 
 Putting comment for members in `<summary>` tags. 
 
@@ -736,7 +737,7 @@ int X { get; set; }
 Reason:  
 Your comment might be valuable to see from the outside, when hovering over the name of the member.
 
-#### Comments in English
+### Comments in English
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -754,7 +755,7 @@ Your comment might be valuable to see from the outside, when hovering over the n
 
 Reason: English is sort of the main language in IT. Broader reach of people might be able to read your comments.
 
-#### No Comments without Info
+### No Comments without Info
 
 No comments that do not add information.
 
@@ -775,7 +776,7 @@ int x;`
 
 Reason: Less visual clutter. Gives things to read that don't seem worth it.
 
-#### Avoiding Compiler Directives
+### Avoiding Compiler Directives
 
 Prefer not to use them, unless the code cannot run on a platform without excluding that piece of code. Otherwise a boolean variable might be preferred, a configuration setting or different concrete implementations of classes.
 
@@ -801,7 +802,7 @@ if (config.FeatureXEnabled)
 Reason:  
 When using these compiling directives, a compilation might succeed, without all the code being compilable.
 
-#### Public Members for Internal Classes
+### Public Members for Internal Classes
 
 Prefer for internal classes not to have internal members.
 
@@ -818,7 +819,7 @@ Prefer for internal classes not to have internal members.
 Reason:  
 The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods.
 
-#### Default Switch Case at the Bottom
+### Default Switch Case at the Bottom
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -857,7 +858,7 @@ switch (x)
 Reason:  
 The default `switch` case is often the 'last resort', so may make sense to be put 'last' too.
 
-#### Prefer Value and HasValue for Nullable Types
+### Prefer Value and HasValue for Nullable Types
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -886,23 +887,25 @@ if (number != null)
 Reason:  
 Changing the variable to type object, changes how the code behaves.
 
-#### No Unused / Outcommented Code
+### No Unused / Outcommented Code
 
 Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder, or `Outtakes.txt`.
 
 Reason:  
 Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
 
-#### FileOpen, FileMode, FileAccess, FileShare
+### FileOpen, FileMode, FileAccess, FileShare
 
 It is appreciated when a file stream is opened specifying all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly with the most logical and most limiting values appropriate for the particular situation.
 
 Reason:  
 Otherwise these aspects may have surprizing defaults.
 
-### Misc Preferences
 
-#### Test Class Names to End with 'Tests'
+Misc Preferences
+----------------
+
+### Test Class Names to End with 'Tests'
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -928,7 +931,7 @@ public class Tests_Validator()
 
 Reason: Just convention.
 
-#### Test Method Names
+### Test Method Names
 
 Prefer to start test method names with `Test_` and do not hold back on underscores in the name.
 
@@ -957,7 +960,7 @@ public void Test()
 Reason:  
 If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read and digest.
 
-#### Using Var
+### Using Var
 
 Prefer not to use `var`.
 
@@ -979,7 +982,7 @@ Reason:
 It would be nice to see the variable type in the code line instead of `var`.  
 There may be a few exceptions, where var may be preferred, when the type is sort of obvious, or it might be more readable.
 
-##### Anonymous Types
+#### Anonymous Types
 
 <table><tr><th>Recommended</th><th>Not Preferred</th></tr><tr><td>
 
@@ -991,7 +994,7 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 </td></tr></table>
 
-##### New Statements
+#### New Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1003,7 +1006,7 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 </td></tr></table>
 
-##### Direct Casts
+#### Direct Casts
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1015,7 +1018,7 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 </td></tr></table>
 
-##### Code Line Quite Long and Better Readable
+#### Code Line Quite Long and Better Readable
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1032,7 +1035,7 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 </td></tr></table>
 
-##### View Code
+#### View Code
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1044,13 +1047,13 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 </td></tr></table>
 
-#### Null / Empty Strings
+### Null / Empty Strings
 
 Prefer handling both `null` and `""` the same way.
 
 Reason: No surprises when using either `null` or `""`.
 
-#### String.IsNullOrEmpty
+### String.IsNullOrEmpty
 
 To check if a `string` is filled prefer `string.IsNullOrEmpty`. 
 
@@ -1071,7 +1074,7 @@ str == null
 Reason:  
 In exceptional cases reference equality (`==`) may fail even if strings are equal.
 
-#### String.Equals
+### String.Equals
 
 To equate string prefer `string.Equals`. 
 
@@ -1092,7 +1095,7 @@ str == "bla"
 Reason:  
 In exceptional cases reference equality (`==`) may fail even if strings are equal.
 
-#### Activator.CreateInstance
+### Activator.CreateInstance
 
 Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using generics' `new` constraint  might avoid some of the `Activator.CreateInstance` calls.
 
@@ -1115,7 +1118,7 @@ A call to `Activator.CreateInstance` might be the last choice for instantiating 
 Reason:  
 New statements are strongly typed and less likely to fail.
 
-#### Entity Equality by ID
+### Entity Equality by ID
 
 Entity equality checks might be better done by ID than by reference.
 
@@ -1137,7 +1140,7 @@ if (entity1 == entity2)
 Reason:  
 Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
 
-#### CLR Data Types
+### CLR Data Types
 
 Prefer using CLR-complient data types. Some aren't CLR-complient.
 
@@ -1164,7 +1167,7 @@ sbyte
 Reason:
 For compatibility with more variations of .NET.
 
-#### Parameter Order
+### Parameter Order
 
 An idea for passing infrastructure-related parameters to constructors or methods, is to first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
 
@@ -1183,13 +1186,13 @@ class MyPresenter
 }
 ```
 
-#### Long Code Lines
+### Long Code Lines
 
 It might be an idea to avoid long code lines.
 
 Reason: readability.
 
-#### Ordered If Range 
+### Ordered If Range 
 
 When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
 
@@ -1211,7 +1214,7 @@ if (x >= 11 && x <= 99)
 
 Reason: Readability. More obvious what the range limits are.
 
-#### Namespace Tips
+### Namespace Tips
 
 Full namespaces in code, might make the code line difficult to read:
 
@@ -1245,7 +1248,8 @@ IUserRepository_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IU
 Reason:  
 Long visually cluttered code lines might be harder to read.
 
-### Member Order
+Member Order
+------------
 
 Try giving the members in your code file a logical order, instead of putting them in a random order. Suggested possibilities for organizing your members:
 
@@ -1258,13 +1262,14 @@ Try giving the members in your code file a logical order, instead of putting the
 
 The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever's most appropriate for your code.
 
-### Naming
+Naming
+------
 
 See also: Casing, Punctuation and Spacing.
 
 Reasons for naming conventions might just be knowing what kind of system elements they are really.
 
-#### Boolean Names
+### Boolean Names
 
 Suggestions for boolean variable name prefixes and suffixes:
 
@@ -1296,7 +1301,7 @@ Some boolean names are so common, that they might not need a prefix:
     Visible
     Enabled
 
-#### Class Names
+### Class Names
 
 In this architecture, class names may end with the pattern name or a verb converted to a noun, e.g.:
 
@@ -1334,7 +1339,7 @@ Some other suggested ‘last names’ for classes apart form the pattern names m
 | `Asserter`   | A class meant to throw exceptions under certain conditions.
 |              | Any method verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
 
-#### Collection Names
+### Collection Names
 
 Plural words are preferred for collections:
 
@@ -1347,7 +1352,7 @@ Variable names for amounts of elements in the collection might be named:
 
 So perhaps avoid plural words to denote a count and avoid plural words for things other than collections.
 
-#### DateTime Names
+### DateTime Names
 
 A `DateTime` property might be suffixed with `Utc` or `Local`:
 
@@ -1364,13 +1369,13 @@ But that might look less nice when you add the Local and Utc suffices again:
     ModifiedWhenUtc
     OrderedWhenLocal
 
-#### Enum Names
+### Enum Names
 
 This architecture tends to use the `Enum` suffix for enum types e.g. `OrderStatusEnum`.
 
 Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference really went for the suffix `Enum` because it was found so important to see clearly that something is an enum.
 
-#### Event Names / Delegate Names
+### Event Names / Delegate Names
 
 Event names and delegate names, that indicate what just happened might have the following form:
 
@@ -1410,7 +1415,7 @@ Pardon the ambiguity, but the naming above can be used for the names of events, 
 
 Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be an established event name.
 
-#### Method Names
+### Method Names
 
 Method names might start with verbs, e.g. `CreateOrder`. 
 
@@ -1442,7 +1447,7 @@ Suggestions for verbs:
 | `TryGet`    |
 | `Validate`  | A method for generating *validation messages* for user-input errors.
 
-#### File-Related Variable Names
+### File-Related Variable Names
 
 Variable names that indicate parts of file paths might easily become ambiguous. Here is a list of names that might disambiguate those:
 
@@ -1462,7 +1467,7 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `FileNamePattern` /<br>`FilePathPattern` / etc.<br>wildcards like `*` and `?` | `*.xml`<br>`C:\temp\BLA_???.csv`
 | `FileNameFormat` /<br>`FilePathFormat` / etc.<br>placeholders like `{0}` and `{0:dd-MM-yyyy}` | `order-{0}.txt`<br>`orders-{0:dd-MM-yyyy}\*.*`
 
-#### Prefixes and Suffixes
+### Prefixes and Suffixes
 
 | Example                  | Description
 |--------------------------|--------------------
@@ -1480,7 +1485,7 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
-#### Misc Names
+### Misc Names
 
 For number sequences these names might be used:
 
