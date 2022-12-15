@@ -51,11 +51,11 @@ Code Style
         - [Test Method Names](#test-method-names)
         - [Using var](#using-var)
             - [Anonymous Types](#anonymous-types)
-            - [new Statements](#new-statements)
+            - [New Statements](#new-statements)
             - [Direct Casts](#direct-casts)
             - [Code Line Quite Long and Better Readable with var](#code-line-quite-long-and-better-readable-with-var)
             - [View Code](#view-code)
-        - [null / empty strings](#null--empty-strings)
+        - [Null / Empty Strings](#null--empty-strings)
         - [String.IsNullOrEmpty](#stringisnullorempty)
         - [String.Equals](#stringequals)
         - [Avoiding Activator.CreateInstance](#avoiding-activatorcreateinstance)
@@ -63,7 +63,7 @@ Code Style
         - [CLR Data Types](#clr-data-types)
         - [Parameter Order](#parameter-order)
         - [Long Code Lines](#long-code-lines)
-        - [Ordered if Range](#ordered-if-range)
+        - [Ordered If Range](#ordered-if-range)
         - [Namespace Tips](#namespace-tips)
     - [Member Order](#member-order)
     - [Naming](#naming)
@@ -291,7 +291,7 @@ int A { get; set; } int B { get; set; }
 
 #### Enters in Methods
 
-Putting enters inside Methods between ‘Pieces that do Something’.  
+Putting enters inside methods between ‘Pieces that do Something’.  
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -410,7 +410,7 @@ Use proper indentation.
 
 #### Generic Constraints on Separate Line
 
-(So they stand out.) 
+So they stand out.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -598,7 +598,7 @@ Prefer not to use type arguments that can be inferred.
 
 #### Prefer Interface Types
 
-Prefer interface types as variable types when they are present. 
+Prefer interface types as variable types. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -705,7 +705,7 @@ int x;`
 
 #### Avoiding Compiler Directives
 
-Prefer not to use them unless the code cannot run on a platform without excluding that piece of code. Otherwise a boolean variable might be preferred, a configuration setting or different concrete implementations of classes for instance.
+Prefer not to use them, unless the code cannot run on a platform without excluding that piece of code. Otherwise a boolean variable might be preferred, a configuration setting or different concrete implementations of classes.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -746,7 +746,7 @@ Prefer for internal classes not to have internal members.
 
 __Reason:__
 
-The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. 
+The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to correct the access modifiers of the methods.
 
 #### Default Switch Case at the Bottom
 
@@ -820,7 +820,7 @@ Prefer not to leave unused (or outcommented) code around. If needed, it might be
 
 __Reason:__
 
-Unused code might clutter your vision or may make the suggestion that it was outcommented in error (for a test).
+Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
 
 #### FileOpen, FileMode, FileAccess and FileShare
 
@@ -884,7 +884,7 @@ If the test names mean to be descriptive, they might become long, and underscore
 
 #### Using var
 
-It would bes nice to see the variable type in the code line instead of `var`. 
+Prefer not to use var.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -900,6 +900,10 @@ var x = y.X;
 
 </td></tr></table>
 
+__Reason:__
+
+It would be nice to see the variable type in the code line instead of `var`. 
+
 There may be a few exceptions, where var may be preferred
 
 ##### Anonymous Types
@@ -914,7 +918,7 @@ There may be a few exceptions, where var may be preferred
 
 </td></tr></table>
 
-##### new Statements
+##### New Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -962,7 +966,7 @@ There may be a few exceptions, where var may be preferred
 
 </td></tr></table>
 
-#### null / empty strings
+#### Null / Empty Strings
 
 Prefer handling both null and empty string the same way.
 
@@ -984,6 +988,10 @@ str == null
 
 </td></tr></table>
 
+__Reason:__
+
+In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
+
 #### String.Equals
 
 To equate string prefer `string.Equals`. 
@@ -1002,9 +1010,13 @@ str == "bla"
 
 </td></tr></table>
 
+__Reason:__
+
+In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
+
 #### Avoiding Activator.CreateInstance
 
-Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using generics' `new` constraint  might avoid some of the `Activator.CreateInstance` calls. A call to `Activator.CreateInstance` might be the last choice for instantiating an object.
+Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using generics' `new` constraint  might avoid some of the `Activator.CreateInstance` calls.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1020,7 +1032,11 @@ Activator.CreateInstance(typeof(T))
 
 </td></tr></table>
 
+A call to `Activator.CreateInstance` might be the last choice for instantiating an object.
+
 #### Entity Equality by ID
+
+Entity equality checks might be better done by ID than by reference.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1039,11 +1055,11 @@ if (entity1 == entity2)
 
 __Reason:__
 
-Entity equality checks might be better done by ID than by reference, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. 
+Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
 
 #### CLR Data Types
 
-Prefer using CLR-complient data types. Some aren't.
+Prefer using CLR-complient data types. Some aren't CLR-complient.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1088,7 +1104,7 @@ class MyPresenter
 
 It might be an idea to avoid long code lines.
 
-#### Ordered if Range 
+#### Ordered If Range 
 
 When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
 
@@ -1112,7 +1128,7 @@ if (x >= 11 && x <= 99)
 
 Full namespaces in code, might make the code line difficult to read:
 
-Less Preferred:
+__Less Preferred:__
 
 ```cs
 JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
@@ -1121,7 +1137,7 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 
 Using half a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
 
-Less Preferred:
+__Less Preferred:__
 
 ```cs
 Business.Cms.RepositoryInterfaces.IUserRepository userRepository = 
@@ -1129,6 +1145,8 @@ Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 ```
 
 An alternative is to give a class a more unique name. Or use an alias instead:
+
+__Recommended:__
 
 ```cs
 using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
@@ -1167,7 +1185,7 @@ Suggestions for boolean variable name prefixes and suffixes:
 | `Are...`        | `AreEqual`      | For plural things.
 | `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability’s sake. See ‘Double Negatives’.
 | `Include...`    | `IncludeHidden` | Even though it is verb, it may make sense for booleans.
-| `Exclude...`    |                 | Even though it is verb, it may make sense for booleans.
+| `Exclude...`    |                 | "
 | `...Exists`     | `FileExists`    |
 | `Always...`     |                 |
 | `Never...`      |                 |
@@ -1182,47 +1200,41 @@ Some boolean names are so common, that they do not really need a prefix:
 
 #### Class Names
 
-In this architecture, class names may usually end with the pattern name or a verb converted to a noun, e.g.:
+In this architecture, class names may end with the pattern name or a verb converted to a noun, e.g.:
 
     Converter
     Validator
     Calculator
 
-And they may start with a term out of the domain:
+And they may start with a term out of the domain (like `Order`, `Product` or `Price`):
 
     OrderConverter
     ProductValidator
     PriceCalculator
 
-More specialized classes might get prefixes or suffixes as follows:
+More specialized classes might get prefixes or suffixes (like `Optimized` or `WithPriorityShipping`):
 
     OptimizedPriceCalculator
-    OrderWithPriorityShippingValidator
-
-Or alternatively:
-
     OrderValidatorWithPriorityShipping
 
-Abstract classes might get the preferred suffix `Base`:
+Abstract classes might prefer the suffix `Base`:
 
     ProductValidatorBase
 
 This is because it might be quite important to see in code whether something is a base class. Exceptions to the suffix idea might be made, if it would otherwise result in less readable code. For instance, base classes in entity models might not look good with the `Base` suffix.
 
-Variables might be kept similar to the class names, ending them with the pattern name.
+Variables might be kept similar to the class names and include the prefixes and suffixes, so it stays clear what they are.
 
 Some other suggested ‘last names’ for classes apart form the pattern names might be:
-
-[ ... ]
 
 |              | |
 |--------------|-|
 | `Resolver`   | A class that does lookups that require complex keys or different ways of looking up depending on the situations, fuzzy lookups, etc.
 | `Dispatcher` | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
-| `Invoker`    | Something that invokes another method, probably based on input or specific conditions.
-| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider can also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
+| `Invoker`    | Something that invokes another method, possibly based on input or specific conditions.
+| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider might also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
 | `Asserter`   | A class meant to throw exceptions under certain conditions.
-|              | Any method verb could become a class name, by turning it into a verby noun, e.g. Convert à Converter.
+|              | Any method verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
 
 #### Collection Names
 
@@ -1231,85 +1243,90 @@ Plural words are preferred for collections:
     Products
     Orders
 
-Variable names for amounts of elements in the collection are named:
+Variable names for amounts of elements in the collection might be named:
 
     Count
 
-So avoid using plural words to denote a count and avoid plural words for things other than collections.
+So perhaps avoid plural words to denote a count and avoid plural words for things other than collections.
 
 #### DateTime Names
 
-A `DateTime` property should be suffixed with `Utc` or `Local`:
+A `DateTime` property might be suffixed with `Utc` or `Local`:
 
     StartDateLocal
     OrderDateTimeUtc
 
-An alternative possible suffix for `DateTimes` would be `When`:
+An alternative suffix for `DateTimes` could be `When`:
 
     ModifiedWhen
     OrderedWhen
 
-But that looks less nice when you add the Local and Utc suffices again:
+But that might look less nice when you add the Local and Utc suffices again:
 
     ModifiedWhenUtc
     OrderedWhenLocal
 
 #### Enum Names
 
-Use the `Enum` suffix for enum types e.g. OrderStatus**Enum**.
-Another acceptable alternative is the suffix `Mode`, e.g. Connection**Mode**, but the first choice should be the suffix `Enum`.
+This architecture tends to use the `Enum` suffix for enum types e.g. `OrderStatus`***`Enum`***.
+
+Another alternative might be the suffix `Mode`, e.g. `Connection`***`Mode`***, but at some point the preference really went for the suffix `Enum` because it was found so important to see clearly that something is an enum.
 
 #### Event Names / Delegate Names
 
-Event names and delegate names, that indicate what just happened have the following form:
+Event names and delegate names, that indicate what just happened might have the following form:
 
     Deleted
     TransactionCompleted
 
-Event names and delegate names, that indicate what is about to happen have the following form:
+Event names and delegate names, that indicate what is about to happen might have the following form:
 
     Deleting
     TransactionCompleting
 
-UI-related event names do not have to follow that pattern:
+User-initiated events might not follow that pattern:
 
     Click
     DoubleClick
     KeyPress
 
-Delegate names can also have the suffix Callback or Delegate:
+Delegate names might also have the suffix `Callback` or `Delegate`:
 
     ProgressInfoCallback
     AddItemDelegate
 
-Sometimes the word ‘On’ is used:
+Sometimes the word `On` might beused:
 
     OnSelectedIndexChanged
     OnClick
 
-Or the prefix Handle:
+Or the prefix `Handle`:
 
     HandleMouseDown
 
-Or the suffix Requested, if your event looks like a method name.
+Or the suffix `Requested`, if your event looks like a method name.
 
     RemoveRequested
 
-Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix ‘On’ for instance and the prefix ‘Handle’ may very well be used for the methods that actually raise the event. ‘Fire’ and ‘Do’ are also alternatives.
+Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives.
 
-Avoid event names that indicate that it is an event in two different ways. For instance ‘OnDragging’ can be shortened to just ‘Dragging’, because the suffix -ing is already an indication that it is an event. ‘OnMouseUp’ can be shortened to just ‘MouseUp’, because that is an established event name.
+Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`, because `ing` and `On` both already indicate that it's an event. `OnMouseUp` might be shortened to just `MouseUp`, because that is an established event name.
 
 #### Method Names
 
-Method names start with verbs, e.g. CreateOrder. 
+[ ... ]
 
-Names for other constructs should not start with a verb.
+Method names might start with verbs, e.g. ***`Create`***`Order`. 
 
-Common verbs:
+For clarity, perhaps not start with a verb for constructs that are not methods.
+
+Suggestions for verbs:
+
+[ ... ]
 
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | E.g.<br><br>List.Add(item)<br>ListManager.Add(list, item)<br><br>In cases such as the last example, it is best to make the list the first parameter.
+| `Add`       | E.g.<br><br>List.Add(item)<br>ListManager.Add(list, item)<br><br>In cases such as the last example, list may be made the first parameter.
 | `Assert`    | A method that throws __exceptions__ if input is invalid.
 | `Calculate` |
 | `Clear`     |
