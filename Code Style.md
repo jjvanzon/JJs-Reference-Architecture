@@ -463,7 +463,9 @@ interface IMyInterface
 
 Preferably give each class (or interface or enum) its own file (except nested classes).
 
-Reason: One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
+Reason:
+
+One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
 
 #### Members Private
 
@@ -476,7 +478,9 @@ private void Bla()
 }
 ```
 
-Reason: Other code might become dependent on publically accessible things. Managing dependencies like that seems to be quite a thing in software programming.
+Reason:
+
+Other code might become dependent on publically accessible things. Managing dependencies like that seems to be quite a thing in software programming.
 
 #### Types Internal 
 
@@ -489,7 +493,9 @@ internal class MyClass
 }
 ```
 
-Reason: External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software programming.
+Reason:
+
+External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software programming.
 
 #### Explicit Access Modifiers
 
@@ -509,7 +515,9 @@ int Bla() { ... }
 
 </td></tr></table>
 
-Reason: One might be confused what is the default.
+Reason:
+
+One might be confused what is the default.
 
 #### No Public Fields
 
@@ -525,7 +533,7 @@ Prefer not to use public fields. Use either private fields or use properties ins
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 People may say the interface stability comes in jeopardy when you use public fields. The fields seem to look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
 
@@ -563,7 +571,7 @@ internal class A
 
 </td></tr></table>
 
-__Reason:__
+Reason:
 
 It may not be obvious there are nested classes, unless they are put at the top.
 
@@ -599,7 +607,7 @@ bool FileExists(string path)
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 `Exception` handling is more performance intensive than might be anticipated. Compared to an `if` statement. When no `exception` goes off, `exception` handling might perform well, but when an `exception` goes off, quite a few things happen, like gathering stack trace information.
 
@@ -669,7 +677,7 @@ x.B = 20;
 
 </td></tr></table>
 
-__Reason:__
+Reason:
 
 Might be more readable.
 
@@ -751,7 +759,7 @@ if (config.FeatureXEnabled)
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 When using these compiling directives, a compilation might succeed, without all the code being compilable.
 
@@ -769,7 +777,7 @@ Prefer for internal classes not to have internal members.
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods.
 
@@ -809,7 +817,7 @@ switch (x)
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 The default `switch` case is often the 'last resort', so may make sense to be put 'last' too.
 
@@ -843,7 +851,7 @@ if (number != null)
 
 Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder, or `Outtakes.txt`.
 
-__Reason__
+Reason:
 
 Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
 
@@ -903,7 +911,7 @@ public void Test()
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read and digest.
 
@@ -925,7 +933,7 @@ var x = y.X;
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 It would be nice to see the variable type in the code line instead of `var`.  
 There may be a few exceptions, where var may be preferred
@@ -1012,7 +1020,7 @@ str == null
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
 
@@ -1034,7 +1042,7 @@ str == "bla"
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
 
@@ -1077,7 +1085,7 @@ if (entity1 == entity2)
 
 </td></tr></table>
 
-__Reason__
+Reason:
 
 Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
 
