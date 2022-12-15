@@ -1,20 +1,18 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Layers | JJ's Reference Architecture
+====================================
 
-Layers
-------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
+- [Introduction](#introduction)
+- [Data Layer](#data-layer)
+- [Presentation Layer](#presentation-layer)
+- [Business Layer](#business-layer)
+- [Perpendicular Layers](#perpendicular-layers)
+- [Alternatives](#alternatives)
 
-- [Layers](#layers)
-    - [Introduction](#introduction)
-    - [Data Layer](#data-layer)
-    - [Presentation Layer](#presentation-layer)
-    - [Business Layer](#business-layer)
-    - [Perpendicular Layers](#perpendicular-layers)
-    - [Alternatives](#alternatives)
 
-### Introduction
+Introduction
+------------
 
 This is a suggestion of how to split up your software into layers.
 
@@ -36,7 +34,9 @@ The business layer is also referred to as ‘business logic’.
 
 The presentation layer is sometimes referred to as the ‘front-end’.
 
-### Data Layer
+
+Data Layer
+----------
 
 The data layer is built up of the following sub-layers:
 
@@ -57,7 +57,9 @@ Because the architecture is multi-platform, the labels in the diagram are actual
 - ‘DB’ can actually be any __data store__ – that is the proper term for it: ‘data store’: an XML file, flat file or even just in-memory data.
 - ‘NHibernate’ can be an any __persistence technology__: another ‘ORM’ (‘object relational mapper’), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
 
-### Presentation Layer
+
+Presentation Layer
+------------------
 
 The presentation layer is built up of the following sub-layers:
 
@@ -101,7 +103,9 @@ Because the architecture is multi-platform, the labels in the diagram above are 
 - The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have ‘code-behind’ to only put dumb code in it and delegate the real work elsewhere.
 - ‘Html’ can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
 
-### Business Layer
+
+Business Layer
+--------------
 
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.004.png)
 
@@ -123,7 +127,9 @@ The business layer is platform independent and the code can be deployed anywhere
 
 - Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already.>
 
-### Perpendicular Layers
+
+Perpendicular Layers
+--------------------
 
 The subdivision into data, business and presentation is just about the most important subdivision in software design. But there are other additional layers, called perpendicular layers:
 
@@ -139,7 +145,9 @@ Services expose business logic through a network interface, often through the SO
 
 Another funny thing about infrastructure, for example user right management, is that a program navigation model in the presenter layer can actually adapt itself to what rights the user has. In that respect the platform-independent presentation layer is dependent on the infrastructure, which is a paradox. The reason the presenter layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
 
-### Alternatives
+
+Alternatives
+------------
 
 |                                | Benefits                      | Downsides |
 |--------------------------------|-------------------------------|-----------|

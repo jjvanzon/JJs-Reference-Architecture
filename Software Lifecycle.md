@@ -1,21 +1,21 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Software Lifecycle | JJ's Reference Architecture
+================================================
 
-Software Lifecycle
-------------------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
+- [Branching, Versioning & Release Management](#branching-versioning--release-management)
+- [Tech Test / Short Code Review Checklist](#tech-test--short-code-review-checklist)
 
-- [Software Lifecycle](#software-lifecycle)
-  - [Branching, Versioning & Release Management](#branching-versioning--release-management)
-  - [Tech Test / Short Code Review Checklist](#tech-test--short-code-review-checklist)
 
-### Branching, Versioning & Release Management
+Branching, Versioning & Release Management
+------------------------------------------
 
 <TODO: Describe a versioning methodology. >  
 <TODO: Assembly versions.>
 
-### Tech Test / Short Code Review Checklist
+
+Tech Test / Short Code Review Checklist
+---------------------------------------
 
 - Functional:
     - Read the work item text, including parent work items.

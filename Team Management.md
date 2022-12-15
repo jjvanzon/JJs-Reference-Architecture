@@ -1,38 +1,38 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Team Management | JJ's Reference Architecture
+=============================================
 
-Team Management
----------------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
-
-- [Team Management](#team-management)
-  - [Introduction](#introduction)
-  - [Focus Points](#focus-points)
-  - [Dialog](#dialog)
+- [Introduction](#introduction)
+- [Focus Points](#focus-points)
+- [Dialog](#dialog)
     - [Periodic Individual Meetings](#periodic-individual-meetings)
     - [Reporting to Management](#reporting-to-management)
-  - [Limiting Dialog](#limiting-dialog)
-  - [Support](#support)
+- [Limiting Dialog](#limiting-dialog)
+- [Support](#support)
     - [Question Rotation](#question-rotation)
-  - [Support & Direction](#support--direction)
+- [Support & Direction](#support--direction)
     - [Developer Skills](#developer-skills)
-  - [Direction](#direction)
+- [Direction](#direction)
     - [Miscellaneous Pointers](#miscellaneous-pointers)
     - [Behavior to Expect](#behavior-to-expect)
     - [Vary a Developer’s Tasks](#vary-a-developers-tasks)
     - [Upward Management](#upward-management)
     - [Budgeting](#budgeting)
-  - [Planning](#planning)
+- [Planning](#planning)
     - [Tasks](#tasks)
-  - [Strategy](#strategy)
-  - [Keep Your Cool, Be Open to Other Views](#keep-your-cool-be-open-to-other-views)
+- [Strategy](#strategy)
+- [Keep Your Cool, Be Open to Other Views](#keep-your-cool-be-open-to-other-views)
 
-### Introduction
+
+Introduction
+------------
 
 This documentation section describes techniques you can employ for the hands-on technical leading of a software development team.
 
-### Focus Points
+
+Focus Points
+------------
 
 It is still debatable, whether everything falls into these key areas. I am trying to structure this…
 
@@ -44,7 +44,9 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Keep your cool
 - Be open to other views
 
-### Dialog
+
+Dialog
+------
 
 - Is the one I might forget about, but if I put extra focus on it, it would help a lot.
 - Exchange ideas between team lead and team member.
@@ -54,7 +56,7 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Dialog should sometimes be limited too, because this job requires focus and quiet often, in order to do it well.
 - Periodic workshops mostly from team lead, but could be from someone else, to present an idea.
 
-#### Periodic Individual Meetings
+### Periodic Individual Meetings
 
 - Periodically talk to each developer individually about work done. Ask:
 - Currently working on
@@ -71,12 +73,14 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Good question: ‘Can you tell me some interesting new things you found out?’
 - The team lead also asks himself the same questions.
 
-#### Reporting to Management
+### Reporting to Management
 
 - Lead makes a report of issues discussed, preferably not grouped by employee, but grouped by development area. Employees can be mentioned with tasks.
 - Lead discusses report with management.
 
-### Limiting Dialog
+
+Limiting Dialog
+---------------
 
 - Prevent people from getting distracted by too much dialog.
 - Promote sympathy for people that have ear plugs with music on.
@@ -88,7 +92,9 @@ It is still debatable, whether everything falls into these key areas. I am tryin
 - Consider moving a conversation to another room, so others can focus.
 - Not speaking too loudly also helps a lot.
 
-### Support
+
+Support
+-------
 
 Support from the team lead is mostly inward directed toward the team members. But support is also has an outward direction from the team towards the rest of the organization or to the customer.
 
@@ -107,20 +113,22 @@ Support from the team lead is mostly inward directed toward the team members. Bu
 - Accept that someone else knows a thing or two you can learn from him or her.
 - Do not be afraid to admit your weaker points, and work together to come to a solution.
 
-#### Question Rotation
+### Question Rotation
 
 - Questions from outside the development department are handled on a rotating basis.
 - Everyone takes turns in a day of being the one to ask questions.
 - This will make sure most of the time developers can continue undisturbed with their programming work.
 
-### Support & Direction
+
+Support & Direction
+-------------------
 
 - Support and Direction are very closely related.
 - Support is more oriented towards the coworker: what can you do to make him do a better job and feel better doing it and advance in his job.
 - Direction is more about how can I make the work be beneficial to the client or rest of the organization. It is more outward directed.
 - Both are about how can we do the work optimally to serve the goals.
 
-#### Developer Skills
+### Developer Skills
 
 You can test someone’s skills in something by giving them a specific task, that requires one skill in particular.
 
@@ -142,9 +150,11 @@ Tools & techniques:
 
 <TODO: Add more… Could be a pretty extensive list.>
 
-### Direction
 
-#### Miscellaneous Pointers
+Direction
+---------
+
+### Miscellaneous Pointers
 
 - Guard the main outlines
 - Accept that people work outside the borders.
@@ -160,7 +170,7 @@ Tools & techniques:
 - API choice: Medior developers and juniors are *not* free to choose any API without collaborating with seniors, leads and architects. It just has too high an impact. Not that we should not be open to new API’s.
 - Framework development: Same point as API choice: juniors and mediors only adapt framework in collaboration with seniors, leads and architects.
 
-#### Behavior to Expect
+### Behavior to Expect
 
 There are a lot of undesirable situations you can be confronted with as a team lead. While others would not dare do anything, you are expected to do something about it.
 
@@ -176,7 +186,7 @@ Or less annoying (because you cannot really blame anyone):
 - Someone spends a week on something, while asking for advice, could have made that a couple of hours.
 - Someone extremely talented will keep beating him or herself up over tiny details or just will not assert his opinion or be scared of other peoples’ criticism.
 
-#### Vary a Developer’s Tasks
+### Vary a Developer’s Tasks
 
 What I often see, is that each developer is assigned to his application and never changes focus, because everyone feels, that this person is the ‘go-to guy’ for this topic. The motivation behind this is that it would be more economical to let the guy that knows most about it, do the work. That makes sense intuitively, but what’s intuitive, isn’t always what’s right. It is an over-simplified view on the issue that will cost you money. You lose something when you do not vary a programmer’s work.
 
@@ -243,22 +253,24 @@ Here are suggestions of how to spread and vary the work over multiple team membe
         - Repetitive tasks, but only ones the junior can handle.
         - This may sound a bit deprecating, but sometimes a junior developer, when asked to do something in a very specific way, apply it the same all over the place, do it totally differently when you turn your back. That says something about the need for guidance. You have to monitor junior developers.
 
-#### Upward Management
+### Upward Management
 
 - Lead does ask critical questions to management about strategy and decisions.
 - Lead advises management about (future) employees to hire.
 
-#### Budgeting
+### Budgeting
 
 - Lead investigates software and hardware requirements and opportunities to use newer software, offer better quality, quantity, service or reduce costs.
 
 <TODO: Write a little more about it.>
 
-### Planning
+
+Planning
+--------
 
 Borders the topic of ‘Direction’.
 
-#### Tasks
+### Tasks
 
 - Split up tasks into multiple distinct pieces of work.
 
@@ -294,13 +306,17 @@ If you need to mention everything in a task, this is too much of a burden on the
 
 Also: the lead may not have all the details, that the developer finds out while doing the job.
 
-### Strategy
+
+Strategy
+--------
 
 - Strategy is broad. It takes anything you could do and molds it to fit your current goal.
 
 <TODO: Write something about it.>
 
-### Keep Your Cool, Be Open to Other Views
+
+Keep Your Cool, Be Open to Other Views
+--------------------------------------
 
 <TODO: Write some more about it.>
 

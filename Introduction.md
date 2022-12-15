@@ -1,21 +1,19 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Introduction | JJ's Reference Architecture
+==========================================
 
-Introduction
-------------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
+- [Definition of Software Architecture](#definition-of-software-architecture)
+- [Inter-Disciplinary Aspects](#inter-disciplinary-aspects)
+- [Possible Choices over Definite Choices](#possible-choices-over-definite-choices)
+- [Technical over Functional](#technical-over-functional)
+- [Application Architecture vs Service Architecture](#application-architecture-vs-service-architecture)
+- [Fundamental Principles](#fundamental-principles)
+- [Top 12 Improvements](#top-12-improvements)
 
-- [Introduction](#introduction)
-    - [Definition of Software Architecture](#definition-of-software-architecture)
-    - [Inter-Disciplinary Aspects](#inter-disciplinary-aspects)
-    - [Possible Choices over Definite Choices](#possible-choices-over-definite-choices)
-    - [Technical over Functional](#technical-over-functional)
-    - [Application Architecture vs Service Architecture](#application-architecture-vs-service-architecture)
-    - [Fundamental Principles](#fundamental-principles)
-    - [Top 12 Improvements](#top-12-improvements)
 
-### Definition of Software Architecture
+Definition of Software Architecture
+-----------------------------------
 
 Software architecture has thousands of definitions. If you believe them all, then software architecture is about everything that has to do with software development.
 
@@ -27,7 +25,9 @@ Software architecture also has a strong focus on maintainability and being prepa
 
 The programming side of software architecture is about making frameworks, coding the functionalities, combining different technologies and using best practices. It also involves technical design, which by the way you can do in your head as well as on paper.
 
-### Inter-Disciplinary Aspects
+
+Inter-Disciplinary Aspects
+--------------------------
 
 Software architecture also involves technical details outside of software programming, such as the basic outlining of hardware infrastructure, collaborating with infrastructure technicians, server administrators, hosting providers, software vendors.
 
@@ -35,7 +35,9 @@ Software architecture also includes soft-skills that do not have much to do with
 
 Fortunately this does not need to come down to one person. Even though a software architect can overview the whole process, lots of tasks can be delegated to other team members, so you can make software architecture work as a team.
 
-### Possible Choices over Definite Choices
+
+Possible Choices over Definite Choices
+--------------------------------------
 
 This is kind of a personal note on where this document stands right now.
 
@@ -51,7 +53,9 @@ Currently (2017-06-28) it is full of TODO’s that indicate texts I still want t
 
 But, now: back to business.
 
-### Technical over Functional
+
+Technical over Functional
+-------------------------
 
 This document mostly goes into detail about technical aspects of software architecture: those aspect of software development, that go beyond the individual application: techniques and best practices that can be applied to the development of *any* application.
 
@@ -65,7 +69,9 @@ To also accommodate for quickly changing technology, we use abstractions of thes
 
 This gives us a subdivision into parts into which everything fits, even when not everything is put in yet.
 
-### Application Architecture vs Service Architecture
+
+Application Architecture vs Service Architecture
+------------------------------------------------
 
 There are two parts of this software architecture:
 
@@ -76,7 +82,9 @@ The *application architecture* is the main part. It is about business domains an
 
 The way of working described here is just a suggestion. It describes *a* way of working, not *the* way of working. The described principles and practices can be used at will.
 
-### Fundamental Principles
+
+Fundamental Principles
+----------------------
 
 The main principles of this software architecture are:
 
@@ -92,7 +100,9 @@ Platform and protocol independence is something given extra attention in this so
 
 This software architecture also puts a lot of focus on fixed patterns of working. These patterns are proven to work well, and if we all work the same way and understand the system of organization, we can more easily navigate the code, regardless of who wrote it.
 
-### Top 12 Improvements
+
+Top 12 Improvements
+-------------------
 
 This document goes into detail about a lot of best practices. But to keep focus on what goes wrong most of the time, and would offer the greatest improvement of code, here is a list of practices, that if done right, may greatly increase the quality of your software.
 

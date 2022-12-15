@@ -3,7 +3,7 @@
 Multi-Platform Compatibility Issues
 ===================================
 
-*Date: January 2014 – May 2014*
+*JJ van Zon, 2014*
 
 <h2>Contents</h2>
 

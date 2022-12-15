@@ -1,24 +1,22 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Namespaces, Assemblies and Folder Structure | JJ's Reference Architecture
+=========================================================================
 
-Namespaces, Assemblies and Folder Structure
--------------------------------------------
+<h2> Contents</h2>
 
-<h3> Contents</h3>
+- [General Structure](#general-structure)
+- [Root Namespace / Company Name](#root-namespace--company-name)
+- [Main Layers](#main-layers)
+- [Business Domains](#business-domains)
+- [Technologies](#technologies)
+- [Test Projects](#test-projects)
+- [Details](#details)
+    - [One Class, One File](#one-class-one-file)
+    - [Lone Classes (bad)](#lone-classes-bad)
+    - [‘Scramled’ Technical and Functional Concerns](#scramled-technical-and-functional-concerns)
 
-- [Namespaces, Assemblies and Folder Structure](#namespaces-assemblies-and-folder-structure)
-    - [General Structure](#general-structure)
-    - [Root Namespace / Company Name](#root-namespace--company-name)
-    - [Main Layers](#main-layers)
-    - [Business Domains](#business-domains)
-    - [Technologies](#technologies)
-    - [Test Projects](#test-projects)
-    - [Details](#details)
-        - [One Class, One File](#one-class-one-file)
-        - [Lone Classes (bad)](#lone-classes-bad)
-        - [‘Scramled’ Technical and Functional Concerns](#scramled-technical-and-functional-concerns)
 
-### General Structure
+General Structure
+-----------------
 
 Solution files are put in the code root.
 
@@ -38,13 +36,17 @@ When a project gets big, a design pattern folder might again be split up into pa
 
     Company.SoftwareLayer.BusinessDomain [.Technology] [.Test] [.DesignPattern] [.PartialDomain]
 
-### Root Namespace / Company Name
+
+Root Namespace / Company Name
+-----------------------------
 
 In this architecture the root namespace will be the ‘company name’, for instance:
 
     JJ
 
-### Main Layers
+
+Main Layers
+-----------
 
 The second level in the namespacing consists of the following parts:
 
@@ -62,7 +64,9 @@ And the less important:
 | JJ.__Demos__     | Demo code for educational purposes
 | JJ.__Utilities__ | Processes that are not run very often. Utilities contains small programs for IT. E.g. load translations, things to run for deployment.
 
-### Business Domains
+
+Business Domains
+----------------
 
 The third level in the namespacing is the business domain. A business domain can be present in multiple layers, or missing in a specific layer, an app can use multiple business domains, a single business domain can have multiple front-ends. Examples:
 
@@ -76,7 +80,9 @@ The ‘business domain’ of the framework layer is usually a technical aspect. 
 - JJ.Framework.__Security__  
 - JJ.Framework.__Logging__  
 
-### Technologies
+
+Technologies
+------------
 
 The fourth level in the namespacing denotes the used technology. It is kind of analogus to a file extension. You can often find two assemblies: platform-independent and one platform-specific.
 
@@ -89,24 +95,28 @@ The fourth level in the namespacing denotes the used technology. It is kind of a
 
 This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that much of the code is shared between platforms. It also means, that we can be very specific about which technologies we want to be dependent on.
 
-### Test Projects
+
+Test Projects
+-------------
 
 Every assembly can get a Test assembly, which contains unit tests. For instance:
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
 
-### Details
 
-#### One Class, One File
+Details
+-------
+
+### One Class, One File
 
 The general rule is that all classes, interfaces, enums, etc. get their own file. The rule can be broken if the amount of classes really becomes big and also the rule does not count for nested classes. Also a single class can be spread among files, if they are partial classes.
 
-#### Lone Classes (bad)
+### Lone Classes (bad)
 
 It is unhandy to have a whole bunch of your assembly’s folders just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called ‘Helpers’, if they indeed are just simple helper classes.
 
-#### ‘Scramled’ Technical and Functional Concerns
+### ‘Scramled’ Technical and Functional Concerns
 
 In our namespacing, the technical and functional pieces seem scrambled:
 

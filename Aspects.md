@@ -1,10 +1,7 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Aspects | JJ's Reference Architecture
+=====================================
 
-Aspects
--------
-
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Aspects](#aspects)
   - [Introduction](#introduction)
