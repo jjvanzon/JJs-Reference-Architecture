@@ -75,7 +75,8 @@ Code Style
         - [Event Names / Delegate Names](#event-names--delegate-names)
         - [Method Names](#method-names)
         - [File-Related Variable Names](#file-related-variable-names)
-        - [Miscellaneous Names](#miscellaneous-names)
+        - [Prefixes and Suffixes](#prefixes-and-suffixes)
+        - [Misc Names](#misc-names)
 
 ### Introduction
 
@@ -1344,8 +1345,6 @@ Suggestions for verbs:
 | `TryGet`    |
 | `Validate`  | A method for generating *validation messages* for user-input errors.
 
-[ ... ]
-
 #### File-Related Variable Names
 
 Variable names that indicate parts of file paths might easily become ambiguous. Here is a list of names that might disambiguate those:
@@ -1366,24 +1365,26 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `FileNamePattern` /<br>`FilePathPattern` / etc.<br>wildcards like `*` and `?` | `*.xml`<br>`C:\temp\BLA_???.csv`
 | `FileNameFormat` /<br>`FilePathFormat` / etc.<br>placeholders like `{0}` and `{0:dd-MM-yyyy}` | `order-{0}.txt`<br>`orders-{0:dd-MM-yyyy}\*.*`
 
-__Prefixes and Suffixes__ 
+[ ... ]
 
-| Suffix                      | Description
-|-----------------------------|--------------------
-| source..<br>dest… | In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.
-| existing...                 | Denotes that something already existed (in the data store) before starting this transaction.
-| new…                        | Denotes that the object was just newly created.
-| original…                   | Denotes that this is an original value that was (temporarily) replaced.
-| …WithRelatedEntities<br>…WithRelatedObjects | Indicates that not only a single object is handled, but the object including the underlying related objects.
-| Versatile…                  | A class that handles a multitude of types or situations.
-| …With…                      | When tou make a specialized class that works well for a specific situation, you could use the word ‘With’ in the class name like this:<br>- CostCalculator<br>- CostWithTaxCalculator
-| ...Polymorphic              | Handles a multitude of differrent derived types, possibly each in a different way.
-| …IfNeeded                   | If something is executed conditionally. This is a nice alternative for the less pretty suffixes ‘Conditionnally’ or a prefix ‘Conditional’, which obscures the name that comes after.
-| …Unsafe                     | When it lacks e.g. thread-safety or executes unmanaged code, or lacks a lot of checks.
-| …Recursive                  | (Some people tend to use ‘Recursively’ instead, probably insisting it is better grammer, but Recursive is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
-| To…                         | For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:<br><br>array.ToHashSet()<br><br>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:<br><br>MyConverter.ToHashSet(object[] array)<br><br>The Convert or ConvertTo verbs might be more appropriate there:<br><br>MyConverter.ConvertToHashSet(object[] array)<br>
-| From…                       | For conversion from one to another thing. A lot like ‘To…’ executed on the dest object instead:<br><br>dest.FromSource(source)<br><br>The ‘To…’ prefix is more common, and usually more readable.
+#### Prefixes and Suffixes
 
-#### Miscellaneous Names
+| Example                  | Description
+|--------------------------|--------------------
+| `source...`<br>`dest...` | In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.
+| `existing...`            | Denotes that something already existed (in the data store) before starting this transaction.
+| `new...`                 | Denotes that the object was just newly created.
+| `original...`            | Denotes that this is an original value that was (temporarily) replaced.
+| `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicates that not only a single object is handled, but the object including the underlying related objects.
+| `Versatile...`           | A class that handles a multitude of types or situations.
+| `...With...`             | When tou make a specialized class that works well for a specific situation, you could use the word ‘With’ in the class name like this:<br>- CostCalculator<br>- CostWithTaxCalculator
+| `...Polymorphic`         | Handles a multitude of differrent derived types, possibly each in a different way.
+| `...IfNeeded`            | If something is executed conditionally. This is a nice alternative for the less pretty suffixes ‘Conditionnally’ or a prefix ‘Conditional’, which obscures the name that comes after.
+| `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks a lot of checks.
+| `...Recursive`           | (Some people tend to use ‘Recursively’ instead, probably insisting it is better grammer, but Recursive is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
+| `To...`                  | For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:<br>array.ToHashSet()<br>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:<br>MyConverter.ToHashSet(object[] array)<br>The Convert or ConvertTo verbs might be more appropriate there:<br>MyConverter.ConvertToHashSet(object[] array)<br>
+| `From...`                | For conversion from one to another thing. A lot like ‘To...’ executed on the dest object instead:<br>dest.FromSource(source)<br>The `To...` prefix is more common, and usually more readable.
+
+#### Misc Names
 
 - For number sequences you can use names like: `ListIndex`, `IndexNumber`, `SortOrder` or `Rank`. (Perhaps avoid `Index` because it is an SQL keyword.)
