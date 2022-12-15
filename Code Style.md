@@ -1363,8 +1363,8 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `AbsoluteFilePath`         | `"C:\MyFolder\MyFile.txt"`
 | `AbsoluteFolderPath`       | `"C:\MyFolder"`
 | `AbsoluteFileName`         | DOES NOT EXIST
-| `FileName`***`Pattern`***,<br>`FilePath`***`Pattern`***, etc. | **\***.xml<br>C:\temp\BLA\_**????**.csv
-| `FileName`***`Format`***,<br>`FilePath`***`Format`***, etc. | `order-`***`{0}`***`.txt`<br>`orders-`***`{0:dd-MM-yyyy}`***`\\*.\*`
+| `FileName`***`Pattern`***,<br>`FilePath`***`Pattern`***, etc. | ***`*`***`.xml`<br>`C:\temp\BLA_`***`????`***`.csv`
+| `FileName`***`Format`***,<br>`FilePath`***`Format`***, etc. | `order-`***`{0}`***`.txt`<br>`orders-`***`{0:dd-MM-yyyy}`***`\*.*`
 
 __Prefixes and Suffixes__ 
 
