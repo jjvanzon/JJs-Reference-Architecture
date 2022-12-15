@@ -18,6 +18,7 @@
     - [LinkTo](#linkto)
     - [Cascading Extensions](#cascading-extensions)
     - [Facade](#facade)
+        - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
     - [Visitor](#visitor)
     - [String Resources](#string-resources)
 - [Presentation Patterns](#presentation-patterns)
@@ -33,6 +34,7 @@
     - [Temporary ID’s](#temporary-ids)
     - [Stateless and Stateful](#stateless-and-stateful)
     - [Considerations](#considerations)
+        - [ToEntity / ToViewModel](#toentity--toviewmodel)
 - [Presentation Patterns (MVC)](#presentation-patterns-mvc)
     - [Controller](#controller)
     - [Post-Redirect-Get](#post-redirect-get)
@@ -45,6 +47,7 @@
     - [Converter](#converter)
     - [TryGet-Insert-Update](#tryget-insert-update)
     - [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
+        - [Alternative: Flagging](#alternative-flagging)
     - [DocumentModel](#documentmodel)
     - [Selector-Model-Generator-Result](#selector-model-generator-result)
         - [Generating a Document](#generating-a-document)
@@ -257,7 +260,7 @@ A Facade combines several related (usually CRUD) operations into one class that 
 
 It is a combinator class: a facade combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial business domain, so manages a set of entity types together. You could also call it a combinator class.
 
-<h4>Get by ID not in the Facade</h4>
+#### Get by ID not in the Facade
 
 Even though Facades typically contain CRUD methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your Facade. Execute a simple Get by ID onto the repository. The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a facade, which is a combinator class, meaning it is dependent on many repositories and other objects. So a simple Get goes through the repository.
 
@@ -518,7 +521,7 @@ You will be making assumptions in your Presenter code when you program a statefu
 
 ### Considerations
 
-<h4>ToEntity / ToViewModel</h4>
+#### ToEntity / ToViewModel
 
 <TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works.>
 
@@ -796,7 +799,7 @@ Used for managing complex conversions between data structures, that require inse
 - Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
 - Then you loop through that collection and delete each item.
 
-<h4>Considerations<h4>
+<h4>Considerations</h4>
 
 Converting one collection to another may involve more than creating a destination object for each source object. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the TryGet-Insert-Update pattern on each item, while the delete operations are done separately after that by comparing collections of entities to figure out which items are obsolete.
 
@@ -850,7 +853,7 @@ Each variation has either overhead or elegance depending on the situation. If yo
 
 The general forms above is a good starting point. Then it needs to work correctly. The next quality demand is a tie between readability and performance.
 
-<h4>Alternative: Flagging</h4>
+#### Alternative: Flagging
 
 An alternative to TryGet-Insert-Update-Delete pattern, which kind of does a full diff of a source and destination structure, is maintaining a kind of flagging in the source structure: Added, Modified, Deleted and Unmodified.
 
