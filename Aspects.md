@@ -14,14 +14,12 @@
 - [Collections / List Processing](#collections--list-processing)
     - [Specialized Lists](#specialized-lists)
 - [Concurrency](#concurrency)
-    - [Alternatives](#alternatives)
 - [Configuration](#configuration)
 - [Conversion](#conversion)
 - [Defaults](#defaults)
 - [Debugging](#debugging)
 - [Entity Model / Data Model](#entity-model--data-model)
 - [Entity Status Management](#entity-status-management)
-    - [Alternatives](#alternatives-1)
 - [Enums](#enums)
     - [General Rules](#general-rules)
     - [Enum-Like Entities](#enum-like-entities)
@@ -30,7 +28,7 @@
 - [Errors](#errors)
 - [Exceptions](#exceptions)
 - [Facades](#facades)
-- [Inverse Relationship Management / Inverse Property Management](#inverse-relationship-management--inverse-property-management)
+- [Bidirectional Relationships](#bidirectional-relationships)
 - [IO](#io)
 - [Logging](#logging)
 - [Multi-Language / Translations / Culture](#multi-language--translations--culture)
@@ -58,9 +56,6 @@
 - [Transactions](#transactions)
 - [Type Safety](#type-safety)
 - [Unit Testing](#unit-testing)
-    - [Efficiently Writing Unit Tests](#efficiently-writing-unit-tests)
-    - [More Thorough Unit Tests](#more-thorough-unit-tests)
-    - [Readable & Debuggable Unit Tests](#readable--debuggable-unit-tests)
 - [User Interface](#user-interface)
 - [Utilities](#utilities)
 - [Validation](#validation)
@@ -160,7 +155,7 @@ In a web-based application time elapses between retrieving data to edit and savi
 
 In this architecture the concurrency strategy is: the last user wins. This is accomplished in code using TryGet-Insert-Update-Delete pattern, that results in readable saving code and restoration of state, regardless of what another user did to it.
 
-### Alternatives
+<h3>Alternatives</h3>
 
 This paragraph is not that important to read. It is a longer story about the benefits and downsides of several ways to handle concurrency.
 
@@ -226,7 +221,7 @@ Entity status management (or ‘object status management’) is the recording of
 
 There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every business domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
 
-### Alternatives
+<h3>Alternatives</h3>
 
 The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an ORM or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, Framework.Persistence should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make Framework.Persistence much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating Framework.Persistence also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
@@ -515,8 +510,10 @@ In an architecture with many different business logic objects, that each take an
 These are all options to choose from. You can just mess around and do whatever. Or you can actively think about the choices you make about where you put your facades.
 
 
-Inverse Relationship Management / Inverse Property Management
--------------------------------------------------------------
+Bidirectional Relationships
+---------------------------
+
+Akak "Inverse Relationship Management" or "Inverse Property Management".
 
 See ‘LinkTo’ under ‘Design Patterns’.
 
@@ -845,7 +842,7 @@ Another case where unit testing may come in handy, might be when a calculation m
 
 But in some cases simply debugging and testing functionally may be a better choice, for efficiency’s sake.
 
-### Efficiently Writing Unit Tests
+<h3>Efficiently Writing Unit Tests</h3>
 
 Possible strategies for writing unit tests more efficiently:
 
@@ -865,14 +862,14 @@ Possible strategies for writing unit tests more efficiently:
 - When following these guidelines, adding a feature might not 'explode' the number of tests.
 - If there is the desire to limit the amount of time developing automated tests, but wanting to have a comprehensive testing after all, it may be an idea to think: "What would I test if I would manually test?" and perhaps like that keep you from going into technical details and edge-cases too much.
 
-### More Thorough Unit Tests
+<h3>More Thorough Unit Tests</h3>
 
 Possible things to do that might make tests adequately thorough:
 
 - Perhaps contradictory: not using the same values for trivial values but varying them may prevent some unexpected false positives. (The opposite has been seen recommended, but thoughts may differ on the topic.) Sometimes though, it may just be confusing to use many different values. (The argument some times found somewhere: It may shift focus away from the main intent of the test.)
 - Perhaps try to incorporate multiplicity: instead just testing 1 item, what would happen for multiple items?
 
-### Readable & Debuggable Unit Tests
+<h3>Readable & Debuggable Unit Tests</h3>
 
 Possible strategies for making unit tests easier to debug and read:
 
