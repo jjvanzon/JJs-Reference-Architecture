@@ -1314,27 +1314,23 @@ Perhaps avoid event names that use two event-indications in the name. For instan
 
 #### Method Names
 
-[ ... ]
-
 Method names might start with verbs, e.g. ***`Create`***`Order`. 
 
 For clarity, perhaps not start with a verb for constructs that are not methods.
 
 Suggestions for verbs:
 
-[ ... ]
-
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | E.g.<br><br>List.Add(item)<br>ListManager.Add(list, item)<br><br>In cases such as the last example, list may be made the first parameter.
-| `Assert`    | A method that throws __exceptions__ if input is invalid.
+| `Add`       | E.g.<br>`List.Add(item)`<br>`ListManager.Add(list, item)`<br>In cases such as the last example, `list` may be made the first parameter.
+| `Assert`    | A method throwing `Exceptions` if input is invalid.
 | `Calculate` |
 | `Clear`     |
 | `Convert`   |
 | `ConvertTo` |
 | `Create`    | When a method returns a new object.
 | `Delete`    |
-| `Ensure`    | Sets up a state if it is not set up yet. If Ensure means throw an exception if a state is not there, then consider using the verb ‘Assert’ instead.
+| `Ensure`    | May set up a state if it is not set up yet.<br>If `Ensure` means throw an exception if a state is not there, consider using the verb `Assert` instead.
 | `Execute`   |
 | `Generate`  |
 | `Get`       |
@@ -1346,27 +1342,29 @@ Suggestions for verbs:
 | `Set`       |
 | `Try`       |
 | `TryGet`    |
-| `Validate`  | A method that generates __validation messages__ for user-input errors
+| `Validate`  | A method for generating *validation messages* for user-input errors.
+
+[ ... ]
 
 #### File-Related Variable Names
 
-Variable names that indicate parts of file paths can easily become ambiguous. Here is a list of names that can be used to disambiguate it all:
+Variable names that indicate parts of file paths might easily become ambiguous. Here is a list of names that might disambiguate it all:
 
 | Name                     | Value          
 |--------------------------|--------------------------
-| FileName                 | "MyFile.txt"
-| FilePath                 | "C:\MyFolder\MyFile.txt"
-| FolderPath               | "C:\MyFolder"
-| SubFolder                | "MyFolder"
-| RelativeFolderPath<br>(sometimes also called ‘SubFolder’ or ‘SubFolderPath’) | "MyFolder\MyFolder2"
-| RelativeFilePath         | "MyFolder\MyFile.txt"
-| FileNameWithoutExtension | "MyFile"
-| FileExtension            | ".txt"
-| AbsoluteFilePath         | "C:\MyFolder\MyFile.txt"
-| AbsoluteFolderPath       | "C:\MyFolder"
-| AbsoluteFileName         | DOES NOT EXIST
-| FileName**Pattern**, FilePath**Pattern**, etc. | **\***.xml<br>C:\temp\BLA\_**????**.csv
-| FileName**Format**, FilePath**Format**, etc. | order-__{0}__.txt<br>orders-__{0:dd-MM-yyyy}__\\*.\*
+| `FileName`                 | `"MyFile.txt"`
+| `FilePath`                 | `"C:\MyFolder\MyFile.txt"`
+| `FolderPath`               | `"C:\MyFolder"`
+| `SubFolder`                | `"MyFolder"`
+| `RelativeFolderPath`<br>(sometimes also called `SubFolder` or `SubFolderPath`) | `"MyFolder\MyFolder2"`
+| `RelativeFilePath`         | `"MyFolder\MyFile.txt"`
+| `FileNameWithoutExtension` | `"MyFile"`
+| `FileExtension`            | `".txt"`
+| `AbsoluteFilePath`         | `"C:\MyFolder\MyFile.txt"`
+| `AbsoluteFolderPath`       | `"C:\MyFolder"`
+| `AbsoluteFileName`         | DOES NOT EXIST
+| `FileName`***`Pattern`***,<br>`FilePath`***`Pattern`***, etc. | **\***.xml<br>C:\temp\BLA\_**????**.csv
+| `FileName`***`Format`***,<br>`FilePath`***`Format`***, etc. | `order-`***`{0}`***`.txt`<br>`orders-`***`{0:dd-MM-yyyy}`***`\\*.\*`
 
 __Prefixes and Suffixes__ 
 
