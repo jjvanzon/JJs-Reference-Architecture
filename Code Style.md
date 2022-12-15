@@ -15,7 +15,7 @@ Code Style
         - [Enters between switch Cases](#enters-between-switch-cases)
         - [No Braces for Single-Line if Statements](#no-braces-for-single-line-if-statements)
         - [Loops on Multiple Lines](#loops-on-multiple-lines)
-        - [Braces for Multi-Line if's and Loops](#braces-for-multi-line-ifs-and-loops)
+        - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
         - [Enters between Methods](#enters-between-methods)
         - [Properties on Separate Lines](#properties-on-separate-lines)
         - [Enters in Methods](#enters-in-methods)
@@ -24,8 +24,8 @@ Code Style
         - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
         - [Indentation](#indentation)
         - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
-        - [One-Liners' Generic Constraints on Same Line](#one-liners-generic-constraints-on-same-line)
-    - [Trivial Rules](#trivial-rules)
+        - [Generic Constraints for One-Liners on Same Line](#generic-constraints-for-one-liners-on-same-line)
+    - [Trivial Recommendations](#trivial-recommendations)
         - [A File a Type](#a-file-a-type)
         - [Members Private](#members-private)
         - [Types Internal](#types-internal)
@@ -45,16 +45,16 @@ Code Style
         - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
         - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
         - [No Unused / Outcommented Code](#no-unused--outcommented-code)
-        - [FileOpen: FileMode, FileAccess and FileShare](#fileopen-filemode-fileaccess-and-fileshare)
-    - [Miscellaneous Rules](#miscellaneous-rules)
-        - [Test class names end with ‘Tests’.](#test-class-names-end-with-tests)
-        - [Text Method Names](#text-method-names)
-        - [Avoid var](#avoid-var)
-            - [An anonymous type is used.](#an-anonymous-type-is-used)
-            - [The code line is a ‘new’ statement.](#the-code-line-is-a-new-statement)
-            - [The code line is a direct cast.](#the-code-line-is-a-direct-cast)
-            - [The code line is WAAAY too long and unreadable without ‘var’.](#the-code-line-is-waaay-too-long-and-unreadable-without-var)
-            - [Use var in your view code](#use-var-in-your-view-code)
+        - [FileOpen, FileMode, FileAccess and FileShare](#fileopen-filemode-fileaccess-and-fileshare)
+    - [Misc Preferences](#misc-preferences)
+        - [Test Class Names Ending With 'Tests'](#test-class-names-ending-with-tests)
+        - [Test Method Names](#test-method-names)
+        - [Using var](#using-var)
+            - [Anonymous Types](#anonymous-types)
+            - [new Statements](#new-statements)
+            - [Direct Casts](#direct-casts)
+            - [Code Line Quite Long and Better Readable with var](#code-line-quite-long-and-better-readable-with-var)
+            - [View Code](#view-code)
         - [null / empty strings](#null--empty-strings)
         - [String.IsNullOrEmpty](#stringisnullorempty)
         - [String.Equals](#stringequals)
@@ -79,7 +79,7 @@ Code Style
 
 ### Introduction
 
-This section lists trivial coding rules, that should be followed throughout the code.
+This article lists trivial coding style preferenced, that might be followed in certain projects.
 
 Coding standards mostly conform to the Microsoft standard described in the following documents:
 
@@ -87,30 +87,30 @@ Coding standards mostly conform to the Microsoft standard described in the follo
 
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
-Use Resharper. Seriously. Finetune it to automatically check your coding style. Use it to keep code clean as write code or change existing code.
+Using a tool like ReSharper may help. It's settings can be finetuned to closely match your preferences. It then checks the check code style and can auto-format. It can be used to keep code clean as you write and change your code.
 
 ### Casing (and Punctuation)
 
-| Rule                                                                | Examples                       |
-|---------------------------------------------------------------------|--------------------------------|
-| Properties, methods, class names and events are in pascal case.     | `MyProperty` `MyMethod`
-| Local variables and parameters are in camel case.                   | `myLocalVariable` `myParameter`
-| Fields are in camel case and start with underscore.                 | `_myField`
-| Constants in capitals with underscores in between words.            | `MY_CONSTANT`
-| No prefixes, such as `strName`.                                     |
-| Avoid abbreviations.                                                |
-| For long identifiers, use underscores to separate ‘the pieces’.     | `Sine_OperatorCalculator_VarFrequency`
-| Type arguments start with the letter `T` or are just the letter `T` | `T` `TEntity` `TViewModel`
-| Abbreviations of 2 letters with capitals.                           | `ID`
-| Abbreviations of 3 letters or more in pascal case.                  | `Mvc`
-| Start interface names with `I`.                                     | `IMyInterface`
-| Partial view names in MVC should begin with an underscore           | `_MyPartialView`
+| Suggestion                                                      | Examples                       |
+|-----------------------------------------------------------------|--------------------------------|
+| Properties, methods, class names and events in pascal case      | `MyProperty` `MyMethod`
+| Local variables and parameters in camel case                    | `myLocalVariable` `myParameter`
+| Fields in camel case starting with underscore                   | `_myField`
+| Constants in capitals with underscores between words            | `MY_CONSTANT`
+| Type arguments just the letter `T` or start with the letter `T` | `T` `TEntity` `TViewModel`
+| Interface names start with `I`.                                 | `IMyInterface`
+| Abbreviations not preferred                                     |
+| Abbreviations of 2 letters with capitals.                       | `ID`
+| Abbreviations of 3 letters or more in pascal case.              | `Mvc`
+| MVC partial view names in pascal case, starting with underscore | `_MyPartialView`
+| For long identifiers, underscores to separate ‘the pieces’      | `Sine_OperatorCalculator_VarFrequency`
+| No prefixes, such as `strName`                                  |
 
 ### Spacing (and Punctuation)
 
 #### Default Auto-Formatting
 
-Keep Visual Studio’s autoformatting enabled and set to its defaults.
+Prefer Visual Studio’s autoformatting enabled and set to its defaults.
 
 #### Surplus Enters Between Braces
 
@@ -195,7 +195,7 @@ foreach (var x in list) { Bla(); }
 
 </td></tr></table>
 
-#### Braces for Multi-Line if's and Loops
+#### Braces for Multi-Line Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -292,7 +292,6 @@ int A { get; set; } int B { get; set; }
 #### Enters in Methods
 
 Putting enters inside Methods between ‘Pieces that do Something’.  
-(That might be a vague description, but this is the idea.)
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -329,7 +328,7 @@ void Bla()
 
 #### Variables on Separate Lines
 
-Prefer putting variable Declarations on separate lines.
+Putting variable declarations on separate lines.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -348,7 +347,7 @@ int i, j;
 
 #### 'Tabular Form' Less Preferred
 
-It should only rarely be used. This tabular form will often be undone by auto-formatting. It is non-standard, so it is better to get your eyes used to non-tabular form.
+Tabular form not preferred. This tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -373,8 +372,6 @@ public bool   IsManual { get; set; }
 </td></tr></table>
 
 #### Align Elements of Linq Queries
-
-Align the elements of linq queries as follows: 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -432,14 +429,11 @@ class MyGenericClass<T> where T: MyInterface
 {
     ...
 }
- 
 ```
 
 </td></tr></table>
 
-#### One-Liners' Generic Constraints on Same Line
-
-For one-liners, put generic constraints on same line instead. 
+#### Generic Constraints for One-Liners on Same Line
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -462,15 +456,15 @@ interface IMyInterface
 
 </td></tr></table>
 
-### Trivial Rules
+### Trivial Recommendations
 
 #### A File a Type 
 
-Give each class (or interface or enum) its own file (except nested classes).
+Preferably give each class (or interface or enum) its own file (except nested classes).
 
 #### Members Private
 
-Keep members private as much as possible. 
+Prefer keeping members private. 
 
 ```cs
 private void Bla()
@@ -481,7 +475,7 @@ private void Bla()
 
 #### Types Internal 
 
-Keep types internal as much as possible. 
+Prefer to keep types internal 
 
 ```cs
 internal class MyClass
@@ -492,7 +486,7 @@ internal class MyClass
 
 #### Explicit Access Modifiers
 
-Use explicit access modifiers (except for interface members). 
+Using explicit access modifiers (except for interface members). 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -510,7 +504,7 @@ int Bla() { ... }
 
 #### No Public Fields
 
-No public fields. Use properties instead. 
+Prefer not to use public fields. Use either private fields or use properties instead. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -524,7 +518,7 @@ No public fields. Use properties instead.
 
 #### Nested Class on Top
 
-Put nested classes at the top of the parent class’s code. 
+Putting nested classes at the top of the parent class' code. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -590,7 +584,7 @@ bool FileExists(string path)
 
 #### No Inferrable Type Arguments
 
-Do not use type arguments that can be inferred. 
+Prefer not to use type arguments that can be inferred. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -632,7 +626,7 @@ Prefer ToArray over ToList.
 
 #### Object Initializers
 
-Use object initializers for readability. 
+Using object initializers for readability. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -656,7 +650,7 @@ x.B = 20;
 
 #### Comments in Summaries
 
-Put comment for members in `<summary>` tags. 
+Putting comment for members in `<summary>` tags. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -692,7 +686,7 @@ int X { get; set; }
 
 #### No Comments without Info
 
-Do not write comment that does not add information.
+No comments that do not add information.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -711,9 +705,7 @@ int x;`
 
 #### Avoiding Compiler Directives
 
-Avoid compiler directives
-
-Do not use them unless you absolutely cannot run the code on a platform unless you exclude a piece of code. Otherwise use a boolean variable, a configuration setting, different concrete implementations of classes or, anything.  
+Prefer not to use them unless the code cannot run on a platform without excluding that piece of code. Otherwise a boolean variable might be preferred, a configuration setting or different concrete implementations of classes for instance.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -734,11 +726,13 @@ if (config.FeatureXEnabled)
 
 </td></tr></table>
 
+__Reason:__
+
+When using these compiling directives, a compilation might succeed, without all the code being compilable.
+
 #### No Internal Members for Internal Classes
 
-An internal class should not have internal members.
-
-The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. 
+Prefer for internal classes not to have internal members.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -750,6 +744,9 @@ The members are automatically internal if the class is internal. If you have to 
 
 </td></tr></table>
 
+__Reason:__
+
+The members are automatically internal if the class is internal. If you have to make the class public, you do not want to have to correct the access modifiers of the methods. 
 
 #### Default Switch Case at the Bottom
 
@@ -787,9 +784,11 @@ switch (x)
 
 </td></tr></table>
 
-#### Prefer Value and HasValue for Nullable Types
+__Reason:__
 
-Prefer `.Value` and `.HasValue` for nullable types. 
+The default switch case is often the 'last resort', so may make sense to be put 'last' too.
+
+#### Prefer Value and HasValue for Nullable Types
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -817,15 +816,19 @@ if (number != null)
 
 #### No Unused / Outcommented Code
 
-Do not leave unused (outcommented) code around. If needed, move it to an Archive folder, or Outtakes.txt, but do not bug your coworkers with out-of-use junk lying around.
+Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an Archive folder, or Outtakes.txt.
 
-#### FileOpen: FileMode, FileAccess and FileShare
+__Reason:__
 
-It is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation.
+Unused code might clutter your vision or may make the suggestion that it was outcommented in error (for a test).
 
-### Miscellaneous Rules
+#### FileOpen, FileMode, FileAccess and FileShare
 
-#### Test class names end with ‘Tests’. 
+It is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation. Otherwise these aspects may use surprizing defaults.
+
+### Misc Preferences
+
+#### Test Class Names Ending With 'Tests'
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -849,9 +852,9 @@ public class Tests_Validator()
 
 </td></tr></table>
 
-#### Text Method Names
+#### Test Method Names
 
-Test method names start with `Test_` and use a lot of underscores in the name because they will be long, because they will be very specific. 
+Prefer to start test method names with `Test_` and do not hold back on underscores in the name.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -867,7 +870,7 @@ public void Test_Validator_NotNullOrEmpty_NotValid()
 
 ```cs
 [TestMethod]
-public void Test ()
+public void Test()
 { 
     ...
 } 
@@ -875,9 +878,13 @@ public void Test ()
 
 </td></tr></table>
 
-#### Avoid var
+__Reason:__
 
-`var` should be avoided.The variable type should be visible in the code line instead of ‘var’. 
+If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read and digest.
+
+#### Using var
+
+It would bes nice to see the variable type in the code line instead of `var`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -893,9 +900,9 @@ var x = y.X;
 
 </td></tr></table>
 
-Exceptions are: 
+There may be a few exceptions, where var may be preferred
 
-##### An anonymous type is used. 
+##### Anonymous Types
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -907,7 +914,7 @@ Exceptions are:
 
 </td></tr></table>
 
-##### The code line is a ‘new’ statement. 
+##### new Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -919,7 +926,7 @@ Exceptions are:
 
 </td></tr></table>
 
-##### The code line is a direct cast. 
+##### Direct Casts
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -931,7 +938,7 @@ Exceptions are:
 
 </td></tr></table>
 
-##### The code line is WAAAY too long and unreadable without ‘var’. 
+##### Code Line Quite Long and Better Readable with var
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -943,7 +950,7 @@ Exceptions are:
 
 </td></tr></table>
 
-##### Use var in your view code
+##### View Code
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -957,11 +964,11 @@ Exceptions are:
 
 #### null / empty strings
 
-Handle null and empty string the same way everywhere  
+Prefer handling both null and empty string the same way.
 
 #### String.IsNullOrEmpty
 
-To check if a string is filled use `IsNullOrEmpty`. 
+To check if a string is filled prefer `string.IsNullOrEmpty`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -979,7 +986,7 @@ str == null
 
 #### String.Equals
 
-To equate string use String.Equals. 
+To equate string prefer `string.Equals`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -997,7 +1004,7 @@ str == "bla"
 
 #### Avoiding Activator.CreateInstance
 
-Avoid using `Activator.CreateInstance`. Prefer using the `new` keyword. Using generics you can avoid some of the `Activator.CreateInstance` calls. A call to Activator.CreateInstance should be rare and the last choice for instantiating an object. 
+Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using generics' `new` constraint  might avoid some of the `Activator.CreateInstance` calls. A call to `Activator.CreateInstance` might be the last choice for instantiating an object.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1015,13 +1022,10 @@ Activator.CreateInstance(typeof(T))
 
 #### Entity Equality by ID
 
-Entity equality checks are better done by ID than by reference comparison, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. 
-
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
 ```cs
 if (entity1.ID == entity2.ID)
-
 // (Also do null checks if applicable.)
 ```
 
@@ -1033,9 +1037,13 @@ if (entity1 == entity2)
 
 </td></tr></table>
 
+__Reason:__
+
+Entity equality checks might be better done by ID than by reference, because persistence frameworks do not always provide instance integrity, so code that compares identities is less likely to break. 
+
 #### CLR Data Types
 
-Some data types are not CLR-complient and should be avoided:
+Prefer using CLR-complient data types. Some aren't.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1051,7 +1059,6 @@ byte
 // Unsigned types such as:
 uint
 ulong
-
 // And also:
 sbyte
 ```
@@ -1060,7 +1067,7 @@ sbyte
 
 #### Parameter Order
 
-When passing infrastructure-related parameters to constructors or methods, first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
+An idea for passing infrastructure-related parameters to constructors or methods, is to first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
 
 ```cs
 class MyPresenter
@@ -1079,11 +1086,11 @@ class MyPresenter
 
 #### Long Code Lines
 
-<TODO: Describe better.>
+It might be an idea to avoid long code lines.
 
 #### Ordered if Range 
 
-When evaluating a range in an ‘if’, mention the limits of the range and mention the start of the range first and the end of the range second.
+When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1103,7 +1110,7 @@ if (x >= 11 && x <= 99)
 
 #### Namespace Tips
 
-Avoid using full namespaces in code, because that makes the code line very hard to read:
+Full namespaces in code, might make the code line difficult to read:
 
 Less Preferred:
 
@@ -1112,7 +1119,7 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
     PersistenceHelper.CreatCmsRepository<JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
-Using half a namespace is also not great, because when you need to rename a namespace, you will have a lot of manual work:
+Using half a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
 
 Less Preferred:
 
@@ -1121,7 +1128,7 @@ Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
     PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
-Instead, try giving a class a unique name or use aliases:
+An alternative is to give a class a more unique name. Or use an alias instead:
 
 ```cs
 using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
@@ -1132,7 +1139,7 @@ IUserRepository_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IU
 
 ### Member Order
 
-Try giving the members in your code file a logical order, instead of mixing them all up. Suggested possibilities for organizing your members:
+Try giving the members in your code file a logical order, instead of putting them in a random order. Suggested possibilities for organizing your members:
 
 |                      | |
 |----------------------|-|
@@ -1141,7 +1148,7 @@ Try giving the members in your code file a logical order, instead of mixing them
 | By technical aspect  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
 | By layer             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
 
-The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Pick the one most appropriate for your code.
+The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever's  most appropriate for your code.
 
 ### Naming
 
@@ -1149,48 +1156,45 @@ See also: Casing, Punctuation and Spacing.
 
 #### Boolean Names
 
-Use common boolean variable name prefixes and suffixes:
+Suggestions for boolean variable name prefixes and suffixes:
 
+| Prefix / Suffix | Example         | Comment |
+|-----------------|-----------------|---------|
+| `Is...`         | `IsDeleted`     | Might be the most common prefix.
+| `Must...`       | `MustDelete`    |
+| `Can...`        | `CanDelete`     | Might indicate what *user* can do.
+| `Has...`        | `HasRecords`    |
+| `Are...`        | `AreEqual`      | For plural things.
+| `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability’s sake. See ‘Double Negatives’.
+| `Include...`    | `IncludeHidden` | Even though it is verb, it may make sense for booleans.
+| `Exclude...`    |                 | Even though it is verb, it may make sense for booleans.
+| `...Exists`     | `FileExists`    |
+| `Always...`     |                 |
+| `Never...`      |                 |
+| `Only...`       |                 |
 
-| Prefix / Suffix | Example       | Comment |
-|-----------------|---------------|---------|
-| Is…             | IsDeleted     | This is the most common prefix.
-| Must…           | MustDelete    |
-| Can…            | CanDelete     | Usually indicates what *user* can do.
-| Has…            | HasRecords    |
-| Are…            | AreEqual      | For plural things.
-| Not…            | NotNull       | A valid prefix, but be careful with negative names for readability’s sake. See ‘Double Negatives’.
-| Include…        | IncludeHidden | Even though it is verb, it makes sense for booleans.
-| Exclude…        |               | Even though it is verb, it makes sense for booleans.
-| …Exists         | FileExists    |
-| Always…         |               | You might use the word ‘Is’ along with it anyway.
-| Never…          |               | You might use the word ‘Is’ along with it anyway.
-| Only…           |               |
+If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: `LinesAreCopied` instead of `AreLinesCopied`.
 
-If it is ugly to put the prefix at the beginning, you can put it in the middle, e.g.: LinesAreCopied instead of AreLinesCopied.
+Some boolean names are so common, that they do not really need a prefix:
 
-Some boolean names are so common that they do not get any prefixes:
-
-|         |
-|---------|
-| Visible |
-| Enabled |
+    Visible
+    Enabled
 
 #### Class Names
 
-Class names usually end with the pattern name or a verb converted to a noun, e.g.:
+In this architecture, class names may usually end with the pattern name or a verb converted to a noun, e.g.:
 
     Converter
     Validator
     Calculator
 
-And they start with a term out of the domain:
+And they may start with a term out of the domain:
 
     OrderConverter
     ProductValidator
     PriceCalculator
 
-A more specialized class can get prefixes or suffixes as follows:
+More specialized classes might get prefixes or suffixes as follows:
 
     OptimizedPriceCalculator
     OrderWithPriorityShippingValidator
@@ -1199,15 +1203,17 @@ Or alternatively:
 
     OrderValidatorWithPriorityShipping
 
-Abstract classes get the preferred suffix ‘Base’:
+Abstract classes might get the preferred suffix `Base`:
 
     ProductValidatorBase
 
-This is because it is very important to see in code whether something is a base class. Exceptions to the suffix rule can be made if it would otherwise result in less readable code. For instance, base classes in entity models might not look good with the ‘Base’ suffix.
+This is because it might be quite important to see in code whether something is a base class. Exceptions to the suffix idea might be made, if it would otherwise result in less readable code. For instance, base classes in entity models might not look good with the `Base` suffix.
 
-Keep variable names similar to the class names, and end them with the pattern name.
+Variables might be kept similar to the class names, ending them with the pattern name.
 
-Common ‘last names’ for classes apart form the pattern names are:
+Some other suggested ‘last names’ for classes apart form the pattern names might be:
+
+[ ... ]
 
 |              | |
 |--------------|-|
@@ -1215,12 +1221,12 @@ Common ‘last names’ for classes apart form the pattern names are:
 | `Dispatcher` | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
 | `Invoker`    | Something that invokes another method, probably based on input or specific conditions.
 | `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider can also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
-| `Asserter`   | <TODO: Describe>
+| `Asserter`   | A class meant to throw exceptions under certain conditions.
 |              | Any method verb could become a class name, by turning it into a verby noun, e.g. Convert à Converter.
 
 #### Collection Names
 
-Collection names are plural words, e.g.:
+Plural words are preferred for collections:
 
     Products
     Orders
@@ -1265,7 +1271,7 @@ Event names and delegate names, that indicate what is about to happen have the f
     Deleting
     TransactionCompleting
 
-UI-related event names do not have to follow that rule:
+UI-related event names do not have to follow that pattern:
 
     Click
     DoubleClick
