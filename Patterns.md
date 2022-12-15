@@ -6,8 +6,6 @@
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
     - [Entity](#entity)
-        - [Alternatives](#alternatives)
-        - [Considerations](#considerations)
     - [Mapping](#mapping)
     - [DTO](#dto)
     - [Repository](#repository)
@@ -20,12 +18,10 @@
     - [LinkTo](#linkto)
     - [Cascading Extensions](#cascading-extensions)
     - [Facade](#facade)
-        - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
     - [Visitor](#visitor)
     - [String Resources](#string-resources)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
-        - [Considerations](#considerations-1)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -36,12 +32,10 @@
     - [First Full Load – Then Partial Load – Then Native Code](#first-full-load--then-partial-load--then-native-code)
     - [Temporary ID’s](#temporary-ids)
     - [Stateless and Stateful](#stateless-and-stateful)
-    - [Considerations](#considerations-2)
-        - [ToEntity / ToViewModel](#toentity--toviewmodel)
+    - [Considerations](#considerations)
 - [Presentation Patterns (MVC)](#presentation-patterns-mvc)
     - [Controller](#controller)
     - [Post-Redirect-Get](#post-redirect-get)
-        - [Considerations](#considerations-3)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
     - [Html.BeginCollection](#htmlbegincollection)
@@ -51,8 +45,6 @@
     - [Converter](#converter)
     - [TryGet-Insert-Update](#tryget-insert-update)
     - [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
-        - [Considerations](#considerations-4)
-        - [Alternative: Flagging](#alternative-flagging)
     - [DocumentModel](#documentmodel)
     - [Selector-Model-Generator-Result](#selector-model-generator-result)
         - [Generating a Document](#generating-a-document)
@@ -84,7 +76,7 @@
     - [Progress and Cancel Callbacks](#progress-and-cancel-callbacks)
     - [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](#singular-plural-non-recursive-recursive-and-withrelatedentities)
     - [Wrapper](#wrapper)
-- [Alternatives](#alternatives-1)
+- [Alternatives](#alternatives)
     - [Rich Models](#rich-models)
 
 
@@ -111,7 +103,7 @@ All public members should be virtual, otherwise persistence technologies can oft
 
 Do not use inheritance within your entity model, because it can make using persistence technologies harder, error prone, and it can actually harm performance of queries.
 
-#### Alternatives
+<h4>Alternatives</h4>
 
 Generally avoided, but not prohibited:
 
@@ -119,7 +111,7 @@ Generally avoided, but not prohibited:
 - Use interfaces for polymorphism instead.
 - Instead of inheritance, consider a composition solution, rather than an inheritance solution.
 
-#### Considerations
+<h4>Considerations</h4>
 
 <TODO: Write some more about the difficulties of inheritance in entity models.>
 
@@ -265,7 +257,7 @@ A Facade combines several related (usually CRUD) operations into one class that 
 
 It is a combinator class: a facade combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial business domain, so manages a set of entity types together. You could also call it a combinator class.
 
-#### Get by ID not in the Facade
+<h4>Get by ID not in the Facade</h4>
 
 Even though Facades typically contain CRUD methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your Facade. Execute a simple Get by ID onto the repository. The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a facade, which is a combinator class, meaning it is dependent on many repositories and other objects. So a simple Get goes through the repository.
 
@@ -347,7 +339,7 @@ For instance: if the business logic tells us that an entity is a very special en
 
 <TODO: Describe the ViewModel pattern more strictly: entity view models, partial view models and screen view models and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen view model, not an entity or partial view model. LoginViewModel may be an exception. >
 
-#### Considerations
+<h4>Considerations</h4>
 
 The reason there should be no inheritance is because that would create an unwanted n2 dependency between views and the base view model: *n* views could be dependent on 1 view model and *m* view models could be dependent on 1 base view model, making *n* \* *m* views dependent on the same base view model. This means that if the base view model changes *n* \* *m* views could break, instead of just *n*. *m* is even likely to become greater than *n*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a view model could only break *n* views (the number of views that use that view model).
 
@@ -526,7 +518,7 @@ You will be making assumptions in your Presenter code when you program a statefu
 
 ### Considerations
 
-#### ToEntity / ToViewModel
+<h4>ToEntity / ToViewModel</h4>
 
 <TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works.>
 
@@ -583,7 +575,7 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 - Mention that return View in case of validation messages is the way to go, because otherwise MVC will not remember un-mappable wrong input values, like Guids and dates entered as strings. (In one case this lead to the browser asking for resending postdata upon clicking the back button, so check whether this is actually a good idea.) 
 - Not using return View() in a post action makes old values not be remembered.> 
 
-#### Considerations
+<h4>Considerations</h4>
 
 If you do not conform to the Post-Redirect-Get pattern in MVC, you may get to see ugly URL’s. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that MVC keeps complaining about validation errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
@@ -804,7 +796,7 @@ Used for managing complex conversions between data structures, that require inse
 - Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
 - Then you loop through that collection and delete each item.
 
-#### Considerations
+<h4>Considerations<h4>
 
 Converting one collection to another may involve more than creating a destination object for each source object. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the TryGet-Insert-Update pattern on each item, while the delete operations are done separately after that by comparing collections of entities to figure out which items are obsolete.
 
@@ -858,7 +850,7 @@ Each variation has either overhead or elegance depending on the situation. If yo
 
 The general forms above is a good starting point. Then it needs to work correctly. The next quality demand is a tie between readability and performance.
 
-#### Alternative: Flagging
+<h4>Alternative: Flagging</h4>
 
 An alternative to TryGet-Insert-Update-Delete pattern, which kind of does a full diff of a source and destination structure, is maintaining a kind of flagging in the source structure: Added, Modified, Deleted and Unmodified.
 
