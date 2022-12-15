@@ -10,18 +10,18 @@ Code Style
     - [Introduction](#introduction)
     - [Casing (and Punctuation)](#casing-and-punctuation)
     - [Spacing (and Punctuation)](#spacing-and-punctuation)
-        - [Default Auto-Formatting](#default-auto-formatting)
+        - [Auto-Formatting](#auto-formatting)
         - [Surplus Enters Between Braces](#surplus-enters-between-braces)
         - [Enters between switch Cases](#enters-between-switch-cases)
         - [No Braces for Single-Line if Statements](#no-braces-for-single-line-if-statements)
-        - [Loops on Multiple Lines](#loops-on-multiple-lines)
+        - [Loops Multi-Line](#loops-multi-line)
         - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
         - [Enters between Methods](#enters-between-methods)
         - [Properties on Separate Lines](#properties-on-separate-lines)
         - [Enters in Methods](#enters-in-methods)
         - [Variables on Separate Lines](#variables-on-separate-lines)
         - ['Tabular Form' Less Preferred](#tabular-form-less-preferred)
-        - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
+        - [Aligned Elements of Linq Queries](#aligned-elements-of-linq-queries)
         - [Indentation](#indentation)
         - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
         - [Generic Constraints for One-Liners on Same Line](#generic-constraints-for-one-liners-on-same-line)
@@ -109,7 +109,7 @@ Using a tool like ReSharper may help. It's settings can be finetuned to closely 
 
 ### Spacing (and Punctuation)
 
-#### Default Auto-Formatting
+#### Auto-Formatting
 
 Prefer Visual Studio’s autoformatting enabled and set to its defaults.
 
@@ -177,7 +177,7 @@ if (condition) { Bla(); }
 
 </td></tr></table>
 
-#### Loops on Multiple Lines
+#### Loops Multi-Line
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -372,7 +372,7 @@ public bool   IsManual { get; set; }
 
 </td></tr></table>
 
-#### Align Elements of Linq Queries
+#### Aligned Elements of Linq Queries
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1365,26 +1365,32 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `FileNamePattern` /<br>`FilePathPattern` / etc.<br>wildcards like `*` and `?` | `*.xml`<br>`C:\temp\BLA_???.csv`
 | `FileNameFormat` /<br>`FilePathFormat` / etc.<br>placeholders like `{0}` and `{0:dd-MM-yyyy}` | `order-{0}.txt`<br>`orders-{0:dd-MM-yyyy}\*.*`
 
-[ ... ]
-
 #### Prefixes and Suffixes
 
 | Example                  | Description
 |--------------------------|--------------------
-| `source...`<br>`dest...` | In code that converts one structure to the other, it is often clear to use the prefixes ‘source’ and ‘dest’ in the variable names to keep track of where data comes from and goes to.
-| `existing...`            | Denotes that something already existed (in the data store) before starting this transaction.
-| `new...`                 | Denotes that the object was just newly created.
-| `original...`            | Denotes that this is an original value that was (temporarily) replaced.
-| `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicates that not only a single object is handled, but the object including the underlying related objects.
-| `Versatile...`           | A class that handles a multitude of types or situations.
-| `...With...`             | When tou make a specialized class that works well for a specific situation, you could use the word ‘With’ in the class name like this:<br>- CostCalculator<br>- CostWithTaxCalculator
-| `...Polymorphic`         | Handles a multitude of differrent derived types, possibly each in a different way.
-| `...IfNeeded`            | If something is executed conditionally. This is a nice alternative for the less pretty suffixes ‘Conditionnally’ or a prefix ‘Conditional’, which obscures the name that comes after.
-| `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks a lot of checks.
-| `...Recursive`           | (Some people tend to use ‘Recursively’ instead, probably insisting it is better grammer, but Recursive is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
-| `To...`                  | For conversion from one to another thing. Usually ‘this’ is source of the conversion, for example:<br>array.ToHashSet()<br>Less commonly the ‘To’ prefix is used when the ‘this’ is not the source, for instance:<br>MyConverter.ToHashSet(object[] array)<br>The Convert or ConvertTo verbs might be more appropriate there:<br>MyConverter.ConvertToHashSet(object[] array)<br>
-| `From...`                | For conversion from one to another thing. A lot like ‘To...’ executed on the dest object instead:<br>dest.FromSource(source)<br>The `To...` prefix is more common, and usually more readable.
+| `source...`<br>`dest...` | In code that converts one structure to the other, it might ben clear to use the prefixes `source` and `dest` consistently in the variable names to keep track of where data comes from and where to it goes.
+| `existing...`            | Denoting that something already existed (in the data store) before starting a transaction.
+| `new...`                 | Denoting that the object was just newly created.
+| `original...`            | Denoting that this is an original value that was (temporarily) replaced.
+| `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that not only a single object is handled, but the object including the underlying related objects.
+| `Versatile...`           | A class that might handle a multitude of types or situations.
+| `...With...`             | When making a specialized class that works well for a specific situation, you could use the word `With` in the class name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
+| `...Polymorphic`         | Handling a multitude of differrent (derived) types, possibly each in a different way.
+| `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less pretty suffixes like `Conditionally` or a prefix `Conditional`, that might obscuring the name that comes after.
+| `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
+| `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
+
+| `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
+| `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
 #### Misc Names
 
-- For number sequences you can use names like: `ListIndex`, `IndexNumber`, `SortOrder` or `Rank`. (Perhaps avoid `Index` because it is an SQL keyword.)
+- For number sequences these names might be used:
+
+    - `ListIndex`
+    - `IndexNumber`
+    - `SortOrder`
+    - `Rank`
+
+(Perhaps avoid `Index` because it is an SQL keyword.)
