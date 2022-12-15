@@ -12,19 +12,19 @@ Code Style
     - [Spacing (and Punctuation)](#spacing-and-punctuation)
         - [Auto-Formatting](#auto-formatting)
         - [Surplus Enters Between Braces](#surplus-enters-between-braces)
-        - [Enters between switch Cases](#enters-between-switch-cases)
-        - [No Braces for Single-Line if Statements](#no-braces-for-single-line-if-statements)
+        - [Enters between Switch Cases](#enters-between-switch-cases)
+        - [No Braces for Single-Line If Statements](#no-braces-for-single-line-if-statements)
         - [Loops Multi-Line](#loops-multi-line)
         - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
         - [Enters between Methods](#enters-between-methods)
         - [Properties on Separate Lines](#properties-on-separate-lines)
         - [Enters in Methods](#enters-in-methods)
         - [Variables on Separate Lines](#variables-on-separate-lines)
-        - ['Tabular Form' Less Preferred](#tabular-form-less-preferred)
-        - [Aligned Elements of Linq Queries](#aligned-elements-of-linq-queries)
+        - [Tabular Form Less Preferred](#tabular-form-less-preferred)
+        - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
         - [Indentation](#indentation)
         - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
-        - [Generic Constraints for One-Liners on Same Line](#generic-constraints-for-one-liners-on-same-line)
+        - [Generic Constraints on Same Line for One-Liners](#generic-constraints-on-same-line-for-one-liners)
     - [Trivial Recommendations](#trivial-recommendations)
         - [A File a Type](#a-file-a-type)
         - [Members Private](#members-private)
@@ -41,24 +41,24 @@ Code Style
         - [Comments in English](#comments-in-english)
         - [No Comments without Info](#no-comments-without-info)
         - [Avoiding Compiler Directives](#avoiding-compiler-directives)
-        - [No Internal Members for Internal Classes](#no-internal-members-for-internal-classes)
+        - [Public Members for Internal Classes](#public-members-for-internal-classes)
         - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
         - [Prefer Value and HasValue for Nullable Types](#prefer-value-and-hasvalue-for-nullable-types)
         - [No Unused / Outcommented Code](#no-unused--outcommented-code)
         - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
     - [Misc Preferences](#misc-preferences)
-        - [Test Class Names Ending With 'Tests'](#test-class-names-ending-with-tests)
+        - [Test Class Names to End with 'Tests'](#test-class-names-to-end-with-tests)
         - [Test Method Names](#test-method-names)
         - [Using Var](#using-var)
             - [Anonymous Types](#anonymous-types)
             - [New Statements](#new-statements)
             - [Direct Casts](#direct-casts)
-            - [Code Line Quite Long and Better Readable with var](#code-line-quite-long-and-better-readable-with-var)
+            - [Code Line Quite Long and Better Readable](#code-line-quite-long-and-better-readable)
             - [View Code](#view-code)
         - [Null / Empty Strings](#null--empty-strings)
         - [String.IsNullOrEmpty](#stringisnullorempty)
         - [String.Equals](#stringequals)
-        - [Avoiding Activator.CreateInstance](#avoiding-activatorcreateinstance)
+        - [Activator.CreateInstance](#activatorcreateinstance)
         - [Entity Equality by ID](#entity-equality-by-id)
         - [CLR Data Types](#clr-data-types)
         - [Parameter Order](#parameter-order)
@@ -135,7 +135,7 @@ Reason: Less surprizing to the next developer.
 
 Reason: More tidy.
 
-#### Enters between switch Cases           
+#### Enters between Switch Cases
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -166,7 +166,7 @@ switch (x)
 
 Reason: A bit tidier?
 
-#### No Braces for Single-Line if Statements
+#### No Braces for Single-Line If Statements
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -370,7 +370,7 @@ int i, j;
 Reason:  
 Just a preference, when not used to it, it may be overlooked, and "Find..." may not show the results expected.
 
-#### 'Tabular Form' Less Preferred
+#### Tabular Form Less Preferred
 
 Tabular form not preferred.
 
@@ -399,7 +399,7 @@ public bool   IsManual { get; set; }
 Reason:  
 This tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
 
-#### Aligned Elements of Linq Queries
+#### Align Elements of Linq Queries
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -465,7 +465,7 @@ class MyGenericClass<T> where T: MyInterface
 
 Reason: So they stand out.
 
-#### Generic Constraints for One-Liners on Same Line
+#### Generic Constraints on Same Line for One-Liners
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -801,7 +801,7 @@ if (config.FeatureXEnabled)
 Reason:  
 When using these compiling directives, a compilation might succeed, without all the code being compilable.
 
-#### No Internal Members for Internal Classes
+#### Public Members for Internal Classes
 
 Prefer for internal classes not to have internal members.
 
@@ -902,7 +902,7 @@ Otherwise these aspects may have surprizing defaults.
 
 ### Misc Preferences
 
-#### Test Class Names Ending With 'Tests'
+#### Test Class Names to End with 'Tests'
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1015,7 +1015,7 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 </td></tr></table>
 
-##### Code Line Quite Long and Better Readable with var
+##### Code Line Quite Long and Better Readable
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1092,7 +1092,7 @@ str == "bla"
 Reason:  
 In exceptional cases reference equality (`==`) may fail even if strings are equal.
 
-#### Avoiding Activator.CreateInstance
+#### Activator.CreateInstance
 
 Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using generics' `new` constraint  might avoid some of the `Activator.CreateInstance` calls.
 
