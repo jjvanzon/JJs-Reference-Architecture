@@ -80,9 +80,9 @@ Code Style
 
 ### Introduction
 
-This article lists trivial coding style preferenced, that might be followed in certain projects.
+This article lists coding style preferenced, that might be followed in certain projects.
 
-Coding standards mostly conform to the Microsoft standard described in the following documents:
+It mostlys conform to the Microsoft standard described in the following documents:
 
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
