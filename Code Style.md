@@ -636,7 +636,7 @@ bool FileExists(string path)
 </td></tr></table>
 
 Reason:  
-`Exception` handling is more performance intensive than might be anticipated. Compared to an `if` statement. When no `exception` goes off, `exception` handling might perform well, but when an `exception` goes off, quite a few things happen, like gathering stack trace information.
+`Exception` handling is more performance intensive than might be expected. Compared to an `if` statement. When no `exception` goes off, `exception` handling might perform well, but when an `exception` goes off, quite a few things happen, like gathering stack trace information.
 
 #### No Inferrable Type Arguments
 
@@ -652,6 +652,8 @@ Prefer not to use type arguments that can be inferred.
 
 </td></tr></table>
 
+Reason: Less visual clutter.
+
 #### Prefer Interface Types
 
 Prefer interface types as variable types. 
@@ -666,6 +668,8 @@ Prefer interface types as variable types.
 
 </td></tr></table>
 
+Reason: Less refactoring when changing interface type.
+
 #### Prefer ToArray
 
 Prefer `ToArray` over `ToList`. 
@@ -679,6 +683,9 @@ Prefer `ToArray` over `ToList`.
 `IList<int> collection = x.`***`ToList`***`();`
 
 </td></tr></table>
+
+Reason: More performance?  
+Downside: The Add method does not work for an Array.
 
 #### Object Initializers
 
@@ -726,6 +733,9 @@ int X { get; set; }
 
 </td></tr></table>
 
+Reason:  
+Your comment might be valuable to see from the outside, when hovering over the name of the member.
+
 #### Comments in English
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
@@ -741,6 +751,8 @@ int X { get; set; }
 ```
 
 </td></tr></table>
+
+Reason: English is sort of the main language in IT. Broader reach of people might be able to read your comments.
 
 #### No Comments without Info
 
@@ -760,6 +772,8 @@ int x;`
 ```
 
 </td></tr></table>
+
+Reason: Less visual clutter. Gives things to read that don't seem worth it.
 
 #### Avoiding Compiler Directives
 
@@ -869,6 +883,9 @@ if (number != null)
 
 </td></tr></table>
 
+Reason:  
+Changing the variable to type object, changes how the code behaves.
+
 #### No Unused / Outcommented Code
 
 Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder, or `Outtakes.txt`.
@@ -878,7 +895,10 @@ Unused code might clutter your vision or may make the suggestion that it was out
 
 #### FileOpen, FileMode, FileAccess, FileShare
 
-It is appreciated when a file stream is opened specifying all three aspects FileMode, FileAccess and FileShare explicitly with the most logical and most limiting values appropriate for the particular situation. Otherwise these aspects may use surprizing defaults.
+It is appreciated when a file stream is opened specifying all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly with the most logical and most limiting values appropriate for the particular situation.
+
+Reason:  
+Otherwise these aspects may have surprizing defaults.
 
 ### Misc Preferences
 
@@ -905,6 +925,8 @@ public class Tests_Validator()
 ```
 
 </td></tr></table>
+
+Reason: Just convention.
 
 #### Test Method Names
 
@@ -955,7 +977,7 @@ var x = y.X;
 
 Reason:  
 It would be nice to see the variable type in the code line instead of `var`.  
-There may be a few exceptions, where var may be preferred
+There may be a few exceptions, where var may be preferred, when the type is sort of obvious, or it might be more readable.
 
 ##### Anonymous Types
 
@@ -997,11 +1019,16 @@ There may be a few exceptions, where var may be preferred
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-`foreach (`***`var`***` entry in dictionary)`
+```cs
+foreach (var entry in dictionary)
+```
 
 </td><td>
 
-`foreach (`***`KeyValuePair<Canonical.ValidationMessage,  Tuple<NonPhysicalOrderProductList, Guid>>`***` entry in dictionary)`
+```cs
+foreach (KeyValuePair<Canonical.ValidationMessage,  
+         Tuple<NonPhysicalOrderProductList, Guid>> entry in dictionary)
+```
 
 </td></tr></table>
 
@@ -1019,7 +1046,9 @@ There may be a few exceptions, where var may be preferred
 
 #### Null / Empty Strings
 
-Prefer handling both `null` and empty string the same way.
+Prefer handling both `null` and `""` the same way.
+
+Reason: No surprises when using eithwe `null` or `""`.
 
 #### String.IsNullOrEmpty
 
@@ -1040,7 +1069,7 @@ str == null
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
+In exceptional cases reference equality (`==`) may fail even if strings are equal.
 
 #### String.Equals
 
@@ -1061,7 +1090,7 @@ str == "bla"
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) can fail even if `strings` are equal.
+In exceptional cases reference equality (`==`) may fail even if strings are equal.
 
 #### Avoiding Activator.CreateInstance
 
@@ -1082,6 +1111,9 @@ Activator.CreateInstance(typeof(T))
 </td></tr></table>
 
 A call to `Activator.CreateInstance` might be the last choice for instantiating an object.
+
+Reason:  
+New statements are strongly typed and less likely to fail.
 
 #### Entity Equality by ID
 
@@ -1129,8 +1161,7 @@ sbyte
 
 </td></tr></table>
 
-__Reason__
-
+Reason:
 For compatibility with more variations of .NET.
 
 #### Parameter Order
@@ -1156,6 +1187,8 @@ class MyPresenter
 
 It might be an idea to avoid long code lines.
 
+Reason: readability.
+
 #### Ordered If Range 
 
 When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
@@ -1175,6 +1208,8 @@ if (x >= 11 && x <= 99)
 ```
 
 </td></tr></table>
+
+Reason: Readability. More ofvious what the range limits are.
 
 #### Namespace Tips
 
@@ -1207,6 +1242,9 @@ using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository
 IUserRepository_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IUserRepository_Cms>(cmsContext);
 ```
 
+Reason:  
+Long visually cluttered code lines might be harder to read.
+
 ### Member Order
 
 Try giving the members in your code file a logical order, instead of putting them in a random order. Suggested possibilities for organizing your members:
@@ -1218,11 +1256,13 @@ Try giving the members in your code file a logical order, instead of putting the
 | By technical aspect  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
 | By layer             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
 
-The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever's  most appropriate for your code.
+The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever's most appropriate for your code.
 
 ### Naming
 
 See also: Casing, Punctuation and Spacing.
+
+Reasons for naming conventions might just be knowing what kind of system elements they are really.
 
 #### Boolean Names
 
