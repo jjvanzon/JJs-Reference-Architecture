@@ -362,16 +362,41 @@ Allow nulls as little as possible. Similar rules also apply to other integrity c
 
 Here are rules for null-checks for other constructs:
 
-|                           |     |
-|---------------------------|-----|
-| DTOs                     | Usually the same rules apply to DTO’s as do for entities. Especially if they just transfer data from SQL statements to application logic.<br>
-| Strings                   | To check if a string is filled in, use `IsNullOrEmpty`:<br>`if (String.IsNullOrEmpty(str)) throw new NullOrEmptyException(() => str);`<br>So this is wrong: `if (str == null) throw new NullException(() => str);`<br><br>Another common mistake is this:<br>`obj.ToString()`<br>This will crash if the object can be null. This is the solution:<br>`Convert.ToString(obj)`<br>
-| Value types               | Value types, for instance int and decimal, cannot be null unless they are nullable, for instance `int?` and `decimal?`, so do not execute null-checks on non-nullable value types.<br>
-| Parameters                | Execute null-checks on arguments of public methods. Use `NullException` (out of `JJ.Framework.Reflection`). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.<br><br>Avoid allowing null parameters. But if a parameter *is* nullable, you can denote this in several ways.<br><br>- Assign null as the default value of the parameter, so it is clear that it can accept null:<br>`private void MyMethod(object myParameter = null)`<br><br>- Document with XML tags, that it is nullable:<br>`/// <param name="myParameter ">nullable</param>`<br>`private void MyMethod(object myParameter)`<br><br>- Add an overload that does not have the parameter:<br>`private void MyMethod() { }`<br>`private void MyMethod(object myParameter) { }`<br>Ideally in the overload with the parameter, do a null-check.<br>
-| ViewModels                | `ViewModels` that are passed to `Presenters` may contain nulls. You can use the `NullCoalesce` pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.<br>
-| Our own framework API’s   | For API’s in our own framework you can count on an object when you call a `Get` method. You have to take `null` into consideration when you call `TryGet`.<br>
-| Your own application code | Conform to that same pattern in your own application code, so you know when you can expect null.<br>
-| Third-party API’s         | Some .NET API’s and third party API’s may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+- __DTOs__
+    - Usually the same rules apply to DTO’s as do for entities. Especially if they just transfer data from SQL statements to application logic.
+- __Strings__
+    - To check if a string is filled in, use `IsNullOrEmpty`:
+    - `if (String.IsNullOrEmpty(str)) throw new NullOrEmptyException(() => str);`
+    - So this is wrong: `if (str == null) throw new NullException(() => str);`
+    - Another common mistake is this:
+    - `obj.ToString()`
+    - This will crash if the object can be null. This is the solution:
+    - `Convert.ToString(obj)`
+- __Value types__
+    - Value types, for instance int and decimal, cannot be null unless they are nullable, for instance `int?` and `decimal?`, so do not execute null-checks on non-nullable value types.
+- __Parameters__
+    - Execute null-checks on arguments of public methods. Use `NullException` (out of `JJ.Framework.Reflection`). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
+    - Avoid allowing null parameters.
+    - But if a parameter *is* nullable, you can denote this in several ways.
+    - Assign null as the default value of the parameter, so it is clear that it can accept null:  
+      `private void MyMethod(object myParameter = null)`
+    - Document with XML tags, that it is nullable:  
+      `/// <param name="myParameter ">nullable</param>`  
+      `private void MyMethod(object myParameter)`
+    - Add an overload that does not have the parameter:  
+      `private void MyMethod() { }`  
+      `private void MyMethod(object myParameter) { }`
+    - Ideally in the overload with the parameter, do a null-check.
+- __ViewModels__
+    - `ViewModels` that are passed to `Presenters` may contain nulls.
+    - You can use the `NullCoalesce` pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.
+- __Our own framework API’s__
+    - For API’s in our own framework you can count on an object when you call a `Get` method.
+    - You have to take `null` into consideration when you call `TryGet`.
+- __Your own application code__
+    - Conform to that same pattern in your own application code, so you know when you can expect null.
+- __Third-party API’s__
+    - Some .NET API’s and third party API’s may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 
