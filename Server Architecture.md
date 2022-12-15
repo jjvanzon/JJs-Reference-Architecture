@@ -1,19 +1,17 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Server Architecture | JJ's Reference Architecture
+=================================================
 
-Server Architecture
--------------------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
+- [Introduction](#introduction)
+- [DTAP](#dtap)
+- [Folders](#folders)
+    - [Development Workstation](#development-workstation)
+- [Backups](#backups)
 
-- [Server Architecture](#server-architecture)
-    - [Introduction](#introduction)
-    - [DTAP](#dtap)
-    - [Folders](#folders)
-        - [Development Workstation](#development-workstation)
-    - [Backups](#backups)
 
-### Introduction
+Introduction
+------------
 
 The server subdivision is subject to the needs of the organization, so this overview is just a suggestion. The main concerns are safeguarding and keeping things optimal. Economics might force you to look for alternatives, but from a technical point of view the full set of servers with recommended configuration is advised. Cutting corners might make your IT run less efficiently, which would translate to cost overhead too.
 
@@ -37,13 +35,17 @@ The server subdivision is subject to the needs of the organization, so this over
 | Test        | Database server
 | Test        | App server
 
-### DTAP
+
+DTAP
+----
 
 <TODO: Write something about this. Include:
 
 - Explain DEV, TEST and PROD. And ACC. And then also the INTERNAL and EXTERNAL production environments and their benefits, mostly with regards to publishing. Use the prefix ACC, instead of ACCEPTANCE, because the prefix goes all over the place e.g. ACC\_MySystemDB instead of ACCEPTANCE\_MySystemsDB. But then again I like this better: acceptance.mysystem.jjvanzon.io >
 
-### Folders
+
+Folders
+-------
 
 If your servers and all your development workstations have a D: drive for data, then put the folders on the D: drive, otherwise put the the folders on the C: drive. Make a folder in the root of the drive with your company name:
 
@@ -94,7 +96,7 @@ The resolutions above are simply examples. You can have different sizes per appl
 
 <TODO: Describe the Utilities folder, that you use fully qualified application names and version sub folders. Same for the Web folder, and add to that that it contains both web services as well as web applications.>
 
-#### Development Workstation
+### Development Workstation
 
 Development workstations should have the same kind of folder subdivision, also put on the same drives as on the servers. You might not put web sites in these folders, but Imags, IO Files and Logs should be present in the same folder structure as the servers.
 
@@ -102,6 +104,8 @@ Put the source code folders in the same spot as all your coworkers. Then things 
 
 <TODO: Use this phrasing? -	TODO: If servers store data files on C, then development worktations had better store it on C too, because it is incredibly confusing to have it in a different spot in development, for instance when you try to emulate a TEST or PROD environment on your development workstation and the letter C or D can be overlooked so easily in configuration files that you keep on making mistakes.>
 
-### Backups
+
+Backups
+-------
 
 <TODO: Write something.>

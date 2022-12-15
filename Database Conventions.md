@@ -1,26 +1,24 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Database Conventions | JJ's Reference Architecture
+==================================================
 
-Database Conventions
---------------------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
+- [Developing a Database](#developing-a-database)
+- [Naming Conventions](#naming-conventions)
+- [Rules](#rules)
+- [Upgrade Scripts](#upgrade-scripts)
+    - [Excel Sheet](#excel-sheet)
+        - [Exceptional Cases](#exceptional-cases)
+        - [Summary](#summary)
+    - [Scripts](#scripts)
+    - [Deployment](#deployment)
+        - [Summary](#summary-1)
+    - [SqlScripts Table](#sqlscripts-table)
+- [C#-Based Migrations](#c-based-migrations)
 
-- [Database Conventions](#database-conventions)
-    - [Developing a Database](#developing-a-database)
-    - [Naming Conventions](#naming-conventions)
-    - [Rules](#rules)
-    - [Upgrade Scripts](#upgrade-scripts)
-        - [Excel Sheet](#excel-sheet)
-            - [Exceptional Cases](#exceptional-cases)
-            - [Summary](#summary)
-        - [Scripts](#scripts)
-        - [Deployment](#deployment)
-            - [Summary](#summary-1)
-        - [SqlScripts Table](#sqlscripts-table)
-    - [C#-Based Migrations](#c-based-migrations)
 
-### Developing a Database
+Developing a Database
+---------------------
 
 Developing a database generally involves the following steps:
 
@@ -63,7 +61,9 @@ Only if you need a bigger range:
 - bigint
 - datetime2
 
-### Naming Conventions
+
+Naming Conventions
+------------------
 
 | Object Type       | Example Name |
 |-------------------|--------------|
@@ -82,7 +82,9 @@ Only if you need a bigger range:
 - Avoid using keywords as column names. Think of a different name instead.
 - ‘Index’ is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
 
-### Rules
+
+Rules
+-----
 
 Do not use the following object types, because these things are managed in .NET:
 
@@ -111,11 +113,13 @@ For test use the prefix “TEST\_” and for acceptance use the prefix “ACC\_�
 
 On development databases add the user dev with password dev. For test add the user test with password test. For acceptance you might use specific user names depending on security demands, otherwise add user name acc with password acc. In production databases use the administrator user’s password with the administrator password for databases or create a separate user name for production with a strong password.
 
-### Upgrade Scripts
+
+Upgrade Scripts
+---------------
 
 Database upgrade scripts are managed as follows.
 
-#### Excel Sheet
+### Excel Sheet
 
 Each database structure gets an Excel in which all the upgrade SQL scripts are registered.
 
@@ -146,7 +150,7 @@ In the Excel, add a column for each database instance for that database structur
 
 Also include a column saying whether you have scripted it at all (for if you are in a hurry and have no time to script it). A release date column is also handy, to get some sense of when things went live.
 
-##### Exceptional Cases
+#### Exceptional Cases
 
 For upgrades that should only be executed on a specific database, put ‘N/A’ (or ‘N.V.T.’ in Dutch) in the appropriate spread sheet cell.
 
@@ -165,7 +169,7 @@ If a script requires that you be extra careful, you can mention this as follows:
 
 But be sparse with that, because the person running the script might not actually know what it is he is supposed to check and will feel uneasy executing this script since it is obviously so dangerous, while he has no idea why.
 
-##### Summary
+#### Summary
 
 This section covered:
 
@@ -174,7 +178,7 @@ This section covered:
 - SQL script name format
 - Upgrades for specific databases and manual upgrades
 
-#### Scripts
+### Scripts
 
 The individual upgrade SQL scripts should not contain GO statements. GO is not an SQL keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple SQL files in the database upgrade scripts.
 
@@ -193,7 +197,7 @@ This section covered:
 - Incremental scripts (no ‘if exists’ checks or drop and recreate).
 - DO NOT script Identity Yes and Identity No
 
-#### Deployment
+### Deployment
 
 To deploy multiple database structure changes you can use the Excel. 
 
@@ -257,20 +261,22 @@ begin
 end
 ```
 
-##### Summary
+#### Summary
 
 This section covered:
 
 - Composite upgrade scripts
 - `spExecuteSqlScript`
 
-#### SqlScripts Table
+### SqlScripts Table
 
 Consider maintaining a list of executed database upgrade SQL scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
 
 If you do this, then the stored procedure above would have to be changed so it inserts a record in this database table.
 
-### C#-Based Migrations
+
+C#-Based Migrations
+-------------------
 
 Some data migrations are easier to program using C# than SQL scripts.
 

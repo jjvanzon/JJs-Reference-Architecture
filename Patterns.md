@@ -1,22 +1,18 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Patterns | JJ's Reference Architecture
+======================================
 
-Patterns
---------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
-
-- [Patterns](#patterns)
-  - [Introduction](#introduction)
-  - [Data Access Patterns](#data-access-patterns)
+- [Introduction](#introduction)
+- [Data Access Patterns](#data-access-patterns)
     - [Entity](#entity)
-      - [Alternatives](#alternatives)
-      - [Considerations](#considerations)
+        - [Alternatives](#alternatives)
+        - [Considerations](#considerations)
     - [Mapping](#mapping)
     - [DTO](#dto)
     - [Repository](#repository)
     - [Repository Interfaces](#repository-interfaces)
-  - [Business Logic Patterns](#business-logic-patterns)
+- [Business Logic Patterns](#business-logic-patterns)
     - [Business layer](#business-layer)
     - [Repository Wrappers](#repository-wrappers)
     - [Validators](#validators)
@@ -24,12 +20,12 @@ Patterns
     - [LinkTo](#linkto)
     - [Cascading Extensions](#cascading-extensions)
     - [Facade](#facade)
-      - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
+        - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
     - [Visitor](#visitor)
     - [String Resources](#string-resources)
-  - [Presentation Patterns](#presentation-patterns)
+- [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
-      - [Considerations](#considerations-1)
+        - [Considerations](#considerations-1)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -41,30 +37,30 @@ Patterns
     - [Temporary ID’s](#temporary-ids)
     - [Stateless and Stateful](#stateless-and-stateful)
     - [Considerations](#considerations-2)
-      - [ToEntity / ToViewModel](#toentity--toviewmodel)
-  - [Presentation Patterns (MVC)](#presentation-patterns-mvc)
+        - [ToEntity / ToViewModel](#toentity--toviewmodel)
+- [Presentation Patterns (MVC)](#presentation-patterns-mvc)
     - [Controller](#controller)
     - [Post-Redirect-Get](#post-redirect-get)
-      - [Considerations](#considerations-3)
+        - [Considerations](#considerations-3)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
     - [Html.BeginCollection](#htmlbegincollection)
     - [Return URL’s](#return-urls)
     - [Back Buttons](#back-buttons)
-  - [Data Transformation Patterns](#data-transformation-patterns)
+- [Data Transformation Patterns](#data-transformation-patterns)
     - [Converter](#converter)
     - [TryGet-Insert-Update](#tryget-insert-update)
     - [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
-      - [Considerations](#considerations-4)
-      - [Alternative: Flagging](#alternative-flagging)
+        - [Considerations](#considerations-4)
+        - [Alternative: Flagging](#alternative-flagging)
     - [DocumentModel](#documentmodel)
     - [Selector-Model-Generator-Result](#selector-model-generator-result)
-      - [Generating a Document](#generating-a-document)
-      - [Data Source Independence](#data-source-independence)
-      - [Multiple Import Formats](#multiple-import-formats)
-      - [Limiting Complexity](#limiting-complexity)
-      - [MVC](#mvc)
-  - [Other Patterns](#other-patterns)
+        - [Generating a Document](#generating-a-document)
+        - [Data Source Independence](#data-source-independence)
+        - [Multiple Import Formats](#multiple-import-formats)
+        - [Limiting Complexity](#limiting-complexity)
+        - [MVC](#mvc)
+- [Other Patterns](#other-patterns)
     - [Accessor](#accessor)
     - [Adapter](#adapter)
     - [Anti-encapsulation](#anti-encapsulation)
@@ -88,16 +84,20 @@ Patterns
     - [Progress and Cancel Callbacks](#progress-and-cancel-callbacks)
     - [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](#singular-plural-non-recursive-recursive-and-withrelatedentities)
     - [Wrapper](#wrapper)
-  - [Alternatives](#alternatives-1)
+- [Alternatives](#alternatives-1)
     - [Rich Models](#rich-models)
 
-### Introduction
+
+Introduction
+------------
 
 Design patterns are coding techniques to solve common programming problems. They bring consistency to the code. They help us reuse best practices and prevent code from becoming messy. They also are an extension to the software layering.
 
-### Data Access Patterns
 
-#### Entity
+Data Access Patterns
+--------------------
+
+### Entity
 
 These are the classes that represent the domain model.
 
@@ -111,7 +111,7 @@ All public members should be virtual, otherwise persistence technologies can oft
 
 Do not use inheritance within your entity model, because it can make using persistence technologies harder, error prone, and it can actually harm performance of queries.
 
-##### Alternatives
+#### Alternatives
 
 Generally avoided, but not prohibited:
 
@@ -119,15 +119,15 @@ Generally avoided, but not prohibited:
 - Use interfaces for polymorphism instead.
 - Instead of inheritance, consider a composition solution, rather than an inheritance solution.
 
-##### Considerations
+#### Considerations
 
 <TODO: Write some more about the difficulties of inheritance in entity models.>
 
-#### Mapping
+### Mapping
 
 Mappings are classes programmed for a particular persistence technology, e.g. NHibernate, that map the entity model to how the objects are persisted in the data store (e.g. an SQL Server database).
 
-#### DTO
+### DTO
 
 DTO = Data transfer object. DTO’s only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an entity is not handy or efficient.
 
@@ -135,7 +135,7 @@ For instance: A specialized, optimized SQL query may return a result with a part
 
 DTO’s can also be used for other data transfers than for SQL queries.
 
-#### Repository
+### Repository
 
 A repository is like a set of queries. Repositories return or save entities in the data store. Parameters of the methods must be simple types, not entities. The repository pattern is a way to put queries in a single place. The repository’s job is also to provide an *optimal* set of queries.
 
@@ -143,13 +143,15 @@ Typically, every entity type gets its own repository.
 
 DO NOT expose types from the underlying persistence technology.
 
-#### Repository Interfaces
+### Repository Interfaces
 
 Any repository type will get an associated repository interface. This keeps our system loosely coupled to the underlying persistence technology.
 
-### Business Logic Patterns
 
-#### Business layer
+Business Logic Patterns
+-----------------------
+
+### Business layer
 
 Presentation, entity model and persistence should be straightforward. If anything special needs to happen this belongs in the business layer. Any number of different patterns can be used.
 
@@ -157,7 +159,7 @@ The business layer externally speaks a language of entities or sometimes data tr
 
 It is preferred that business logic works with entities rather than repositories (even though there is a large gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of repository variables.
 
-#### Repository Wrappers
+### Repository Wrappers
 
 Passing around lots of repositories creates long parameter lists, that are prone to change. To combat that problem, combine sets of repositories into repository wrappers and pass those around instead. This keeps the parameter lists short and less prone to change.
 
@@ -169,7 +171,7 @@ Also, you may want to create different, more limited repository wrappers. For in
 
 An alternative to repository wrappers is dependency injection. See ‘dependency injection’. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection API. Repository wrappers and dependency injection could well be used in combination with eachother.
 
-#### Validators
+### Validators
 
 Use separate validator classes for validation. Make specialized classes derived from JJ.Framework.Validation.FluentValidator<T>.
 
@@ -183,7 +185,7 @@ Next to validators saying that user input is wrong, validators can be used to ge
 
 Validators can also be used for (complex) delete constraints, for instance when an entity is still in use, you might not be able to delete it.
 
-#### Side Effects
+### Side Effects
 
 The business layer executes *side effects*, when altering data, for instance storing the date time modified or setting default values, or automatically generating a name.
 
@@ -193,7 +195,7 @@ Using separate classes for side effects, creates overview over those pieces of b
 
 Side effects should evaluate the conditions internally as much as possible. So the called of the side effect class does not know what conditions are tied to it doing anything at all. This makes the side effect fully responsible for what happens. The side effect’s doing anything can also be dependent on entity status. See ‘Entity Status Management’.
 
-#### LinkTo
+### LinkTo
 
 This pattern is about inverse property management. Inverse property management means for instance that if a parent property is set: Product.Supplier = mySupplier, then automatically the product is added to the child collection too: Supplier.Products.Add(myProduct).
 
@@ -253,21 +255,21 @@ public static void NewLinkTo(this Child child, Parent parent)
 
 Be aware that executing `NewLinkTo` onto *existing* objects will result in a corrupted object graph.
 
-#### Cascading Extensions
+### Cascading Extensions
 
 <TODO: Describe how to organize your DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions. >
 
-#### Facade
+### Facade
 
 A Facade combines several related (usually CRUD) operations into one class that also performs additional business logic and validation, side effects, integrity constraints, conversions, etc. It delegates to other classes to do the work. If you do it using a facade you should be able to count on it that the integrity is maintained.
 
 It is a combinator class: a facade combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial business domain, so manages a set of entity types together. You could also call it a combinator class.
 
-##### Get by ID not in the Facade
+#### Get by ID not in the Facade
 
 Even though Facades typically contain CRUD methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your Facade. Execute a simple Get by ID onto the repository. The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a facade, which is a combinator class, meaning it is dependent on many repositories and other objects. So a simple Get goes through the repository.
 
-#### Visitor
+### Visitor
 
 A Visitor class processes a recursive structure that might involve many objects and multiple types of objects. Usually a visitor translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole object graph by complex criteria. Visitors also give great performance when programmed well.
 
@@ -293,7 +295,7 @@ A good example of a Visitor class is .NET’s own ExpressionVisitor, however we 
 
 <TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required.>
 
-#### String Resources
+### String Resources
 
 For button texts, translations of model properties in different languages, etc., use resx files in your .NET projects.
 
@@ -315,9 +317,11 @@ Framework.Resources contains reusable resource strings for common titles such as
 
 Extra information in Dutch about how to structure your resource files can be read in Appendix B.
 
-### Presentation Patterns
 
-#### ViewModel
+Presentation Patterns
+---------------------
+
+### ViewModel
 
 A ViewModel class holds the data shown on screen.
 
@@ -343,11 +347,11 @@ For instance: if the business logic tells us that an entity is a very special en
 
 <TODO: Describe the ViewModel pattern more strictly: entity view models, partial view models and screen view models and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen view model, not an entity or partial view model. LoginViewModel may be an exception. >
 
-##### Considerations
+#### Considerations
 
 The reason there should be no inheritance is because that would create an unwanted n2 dependency between views and the base view model: *n* views could be dependent on 1 view model and *m* view models could be dependent on 1 base view model, making *n* \* *m* views dependent on the same base view model. This means that if the base view model changes *n* \* *m* views could break, instead of just *n*. *m* is even likely to become greater than *n*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a view model could only break *n* views (the number of views that use that view model).
 
-#### Lookup Lists
+### Lookup Lists
 
 In a stateless environment, lookup lists in views can be expensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your HTML. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
@@ -359,7 +363,7 @@ For lookup lists up until say 100 items you might want to have a single list in 
 
 For big lookup list the only viable option seems to AJAX the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once AJAX’ed you might cache the popup to be reused each time you need to select something from it.
 
-#### ToViewModel
+### ToViewModel
 
 An extension method that convert an entity to a view model. You can make simple ToViewModel methods per entity, converting it to a simple view model that represents the entity. You can also have methods returning more complex view models, such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
@@ -398,7 +402,7 @@ public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orde
 
 Some view models do not take one primary entity as input. So it does not make sense to turn it into an extension method, because you cannot decide which entity is the this argument. In that case we put it in a ViewModelHelper class with static classes without this arguments. ViewModelHelper is also part of the ToViewModel layer.
 
-#### ToEntity
+### ToEntity
 
 Extension methods that convert a view model to an entity.
 
@@ -410,7 +414,7 @@ A ToEntity method takes on much of the resposibility of a Save action.
 
 <TODO: Describe the organization of the ToEntity extensions.>
 
-#### Presenter
+### Presenter
 
 Each view gets its own presenter.
 
@@ -428,7 +432,7 @@ Internally a presenter can use business logic and repositories to access the dom
 
 All view model creation should be delegated to the ToViewModel layer (rather than inlining it in the Presenter layer), because then when the ViewModel creation aspect should be adapted, there is but one place in the code to look. It does not make the presenter a needless hatch (‘doorgeefluik’), because the presenter is responsible for more than just view model creation, it is also resposible for retrieving data, calling business logic and converting view models to entities.
 
-#### ToEntity-Business-ToViewModel Round-Trip
+### ToEntity-Business-ToViewModel Round-Trip
 
 A presenter is a combinator class, in that it combines multiple smaller aspects of the presentation logic, by delegating to other classes. It also combines it with calls to the business layer.
 
@@ -462,7 +466,7 @@ Even though the actual call to the business logic might be trivial, it is still 
 
 <TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern ‘ToEntity-Business-ToViewModel-NonPersisted’ sometimes it is way more efficient to execute the essence of the user action onto the user input view model. Sometimes it is even the only way to execute the essense of the user action onto the user input view model. Examples are removing a row an uncommitted row or collapsing a node in a tree view.>
 
-#### NullCoalesce (ViewModels)
+### NullCoalesce (ViewModels)
 
 When you user input back as a ViewModel from your presentation framework of choice, for instance MVC, you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing null-coalescing or instead tripping over the nulls, you can centralize the null-coalescing of pieces of view model and call it in the presenter.
 
@@ -472,7 +476,7 @@ When you user input back as a ViewModel from your presentation framework of choi
 - Consider making a separate pattern description for `NullCoalesce` methods in general and move it to the Other Patterns section to which you then refer from this section `NullCoalesce` (ViewModels).
 - Null-coalesce. Applied to viewmodels that are passed to presenters. The choice is made here to only null-coalesce things that a view / client technology might leave out. Theoretically it might be better to null-coalesce everything in the view model, but this does take full traversal of the tree, which comes with a (small) performance penalty. Also: the null-coalesce procedures take some typing time for the programmer, and requires maintenance when the structure changes. That is why the choice is made to only null-coalesce a select set of things, that is adapted to our specific needs, rather than something that will always work. >
 
-#### Views
+### Views
 
 A template for rendering the view.
 
@@ -484,7 +488,7 @@ In MVC it can be an aspx or cshtml.
 
 Any code used in the view should be dumb. That is: most tasks should be done by the presenter, which produces the view model, which is simply shown on screen. The view should not contain business logic.
 
-#### First Full Load – Then Partial Load – Then Native Code
+### First Full Load – Then Partial Load – Then Native Code
 
 You could also call it: first choice full load.
 
@@ -502,7 +506,7 @@ Furthermore AJAX’ing comes with extra difficulties. For instance that MVC `<in
 
 Some of the difficulties with AJAX have been solved by employing a specific way of working, as described under AJAX  in the Aspects section.
 
-#### Temporary ID’s
+### Temporary ID’s
 
 When you edit a list, and between actions you do not commit you may need to generate ID’s for the rows that are not committed, otherwise you cannot identify them individually to for instance delete a specific uncommitted row. For this you can add a TemporaryID to the view model, that are typically Guids.
 
@@ -514,25 +518,27 @@ An alternative is to let a data store generate the ID’s by flushing pendings s
 
 Another alternative is a different ID generation scheme. You may use an SQL Sequence, or use GUID’s, which you assign from your code. Switching from int ID’s to GUID’s is a high impact change though, and does come with performance and storage penalties.
 
-#### Stateless and Stateful
+### Stateless and Stateful
 
 The presentation patterns may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that Presenters have action methods that take a ViewModel and output a new ViewModel is still useful in that setting. In a stateless environment such as web, it is needed, because the input view model only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new ViewModel has to be created. You cannot just return the user input ViewModel. You would think that in a stateful environment, such as a Windows application, this would not be necessary anymore, because the read-only view data does not get lost between user actions. However, creating a new view model is still useful, because it creates a kind of transaction, so that when something fails in the action, the original view model remains untouched.
 
 You will be making assumptions in your Presenter code when you program a stateful or stateful application. Some things in a stateful environment environment will not work in a stateless environment and you might make some objects long-lived in a stateful environment, such as Context, Repositories and Presenters. But even if you build code around those assumptions, then when switching to a stateless environment –  if that will ever happen – the code is still so close to what’s needed for stateless, that it will not come with any insurmountable problems. I would not beforehand worry about ‘will this work in stateless’, because then you would write a lot of logic and waste a lot of energy programming something that will probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
-#### Considerations
+### Considerations
 
-##### ToEntity / ToViewModel
+#### ToEntity / ToViewModel
 
 <TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works.>
 
-### Presentation Patterns (MVC)
+
+Presentation Patterns (MVC)
+---------------------------
 
 <TODO: Mention ModelState.ClearErrors.>
 
 <TODO: Mention: Using Request.UrlReferrer in Http Get actions crashes. Use Request.RawUrl. >
 
-#### Controller
+### Controller
 
 In an ASP.NET MVC application a controller has a lot of responsibilities, but in this architecture most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
 
@@ -540,7 +546,7 @@ The controller may use multiple presenters and view models, since it is about mu
 
 Entity names put in controller should be plural. So Customer__s__Controller not CustomerController.
 
-#### Post-Redirect-Get
+### Post-Redirect-Get
 
 This is a quirk intrinsic to ASP.NET MVC. We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
 
@@ -577,11 +583,11 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 - Mention that return View in case of validation messages is the way to go, because otherwise MVC will not remember un-mappable wrong input values, like Guids and dates entered as strings. (In one case this lead to the browser asking for resending postdata upon clicking the back button, so check whether this is actually a good idea.) 
 - Not using return View() in a post action makes old values not be remembered.> 
 
-##### Considerations
+#### Considerations
 
 If you do not conform to the Post-Redirect-Get pattern in MVC, you may get to see ugly URL’s. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that MVC keeps complaining about validation errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
-#### ValidationMessages in ModelState
+### ValidationMessages in ModelState
 
 For the architecture to integrate well with MVC, you have to make MVC aware that there are validation messages, after you have gotten a `ViewModel` from a `Presenter`. If you do not do this, you will get strange application navigation in case of validation errors.
 
@@ -600,7 +606,7 @@ if (viewModel.ValidationMessages.Any())
 
 In theory we could communicate all validation messages to MVC instead of just communicating a single generic error message. In theory MVC could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a validation summary, we simply render all the validation messages from the view model ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have validation errors, then the view model should give the information that the appearance of the field should be different. Our view’s content is totally managed by the view model.
 
-#### Polymorphic RedirectToAction / View()
+### Polymorphic RedirectToAction / View()
 
 A Presenter action method may return different types of view models.
 
@@ -630,7 +636,7 @@ throw new UnexpectedTypeException(() => viewModel);
 
 To prevent repeating this code for each controller action, you could program a generalized method that returns the right ActionResult depending on the ViewModel type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
-#### Html.BeginCollection
+### Html.BeginCollection
 
 In MVC it is not straightforeward to post a collection of items or nested structures.
 
@@ -703,7 +709,7 @@ The limitation of that API is that you can only send one collection over the lin
 
 Beware that currently the different solutions do not mix well and you should only use one solution for each screen of you program.
 
-#### Return URL’s
+### Return URL’s
 
 - Return URL’s indicate what page to go back to when you are done in another page.
 - It is used when you are redirected to a login screen, so it knows what page to go back to after you login.
@@ -758,19 +764,21 @@ ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR AJAX CALL.
 
 <TODO: Incorporate this: Ret parameters can be done with new { ret = Request.RawUrl } for full load, and for AJAX this works: { ret = Url.Action(ActionNames.Index) } if you always make sure you have an Index action in your controller, which is advisable.>
 
-#### Back Buttons
+### Back Buttons
 
 There is a pitfall in builing back buttons. If you mix back buttons being handled at the server side, compared to window.history.back() at the client-side, you run the risk that the back button at one point keeps flipping back and foreward between pages.
 
-### Data Transformation Patterns
 
-#### Converter
+Data Transformation Patterns
+----------------------------
+
+### Converter
 
 A class that converts one data structure to another. Typically more is involved than just converting a single object. A whole object graph might be converted to another, or a flat list or raw data to be parsed might be converted to an object structure or the other way around.
 
 By implementing it as a converter, it simplifies the code. You can then say that the only responsibility of the class is to simply transform one data structure to another: nothing more, nothing less and leave other responsibilities to other classes.
 
-#### TryGet-Insert-Update
+### TryGet-Insert-Update
 
 When converting one type to another one might use the TryGet-Insert-Update pattern. Especially when converting an entity with related entities from one structure to another this pattern will make the code easier to read.
 
@@ -784,7 +792,7 @@ When you do these actions one by one for one destination entity after another, y
 
 Note that deletion of destination objects is not managed by the TryGet-Insert-Update pattern.
 
-#### TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion
+### TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion
 
 Used for managing complex conversions between data structures, that require insert, update and delete operations. There is no one way of implementing it, but generally it will involve the following steps:
 
@@ -796,7 +804,7 @@ Used for managing complex conversions between data structures, that require inse
 - Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
 - Then you loop through that collection and delete each item.
 
-##### Considerations
+#### Considerations
 
 Converting one collection to another may involve more than creating a destination object for each source object. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the TryGet-Insert-Update pattern on each item, while the delete operations are done separately after that by comparing collections of entities to figure out which items are obsolete.
 
@@ -850,7 +858,7 @@ Each variation has either overhead or elegance depending on the situation. If yo
 
 The general forms above is a good starting point. Then it needs to work correctly. The next quality demand is a tie between readability and performance.
 
-##### Alternative: Flagging
+#### Alternative: Flagging
 
 An alternative to TryGet-Insert-Update-Delete pattern, which kind of does a full diff of a source and destination structure, is maintaining a kind of flagging in the source structure: Added, Modified, Deleted and Unmodified.
 
@@ -860,13 +868,13 @@ Another downside to flagging is that the source structure must be adapted to it,
 
 The TryGet-Insert-Update-Delete pattern, though, creates a last-user-wins situation, because not flagging determines whether it is an update or insert, but actual existence of dest object determines it.
 
-#### DocumentModel
+### DocumentModel
 
 An analog of a view model, but then for document generation, rather than view rendering. It is a class that contains all data that should be displayed in the document. It can end with the suffix ‘Model’ instead of ‘DocumentModel’ for brevity, but then it must be clear from the context that we are talking about a document model.
 
 Just as with view models, inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the DocumentClasses classes sealed.
 
-#### Selector-Model-Generator-Result
+### Selector-Model-Generator-Result
 
 For data transformations you may want to split up the transformation in two parts:
 
@@ -879,40 +887,42 @@ This basic pattern is present in many architectures and can be applied to many d
 
 Her follow some examples.
 
-##### Generating a Document
+#### Generating a Document
 
 An example of where it is useful, is generating a document in multiple format e.g. XLSX, CSV and PDF. In that case the data selection and basic tranformations are programmed once (a Selector that produces a Model) and exporting three different file formats would require programming three different generators. Reusable generators for specific file formats such as CSV may be programmed. Those will make programming a specialized generators very easy. So then basically exporting a document is mostly reading out a data source and producing an object graph.
 
-##### Data Source Independence
+#### Data Source Independence
 
 The Selector-Model-Generator-Result pattern is also useful when the same document can have different data sources. Let’s say you want to print an invoice out of the system, but print another invoice out of an ordering system in the same formatting e.g. a PDF. This requires 2 selectors, 1 model and 1 generator, instead of 2 generators with complex code and potentially different-looking PDF’s.
 
-##### Multiple Import Formats
+#### Multiple Import Formats
 
 You might want to import similar data out of multiple different data sources or multiple file formats. By splitting the work up into a Selector and a generator you can share must of the code between the two imports, and reduce the complexity of the code.
 
-##### Limiting Complexity
+#### Limiting Complexity
 
 Even if you do not expect multiple input formats or multiple output formats or a change in input or output format, the split up in a Selector and a Generator can be used to make the code less complicated to write, and subsequently also prevent errors and save time programming and maintaining the code.
 
-##### MVC
+#### MVC
 
 MVC itself contains a specialized version of this very pattern. The following layering stacks are completely analogus to eachother:
 
 - Selector - Model - Generator – Result
 - Controller - ViewModel - view engine – View
 
-### Other Patterns
 
-#### Accessor
+Other Patterns
+--------------
+
+### Accessor
 
 An accessor class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. JJ.Framework.Reflection has an implementation of a reusable Accessor class.
 
-#### Adapter
+### Adapter
 
 <TODO: Describe what an adapter is in general and what kind of variations you can think of.>
 
-#### Anti-encapsulation
+### Anti-encapsulation
 
 Encapsulation makes sure a class protects its own data integrity. Anti-encapsulation is the design choice to let a class check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the class itself will guard none of it.
 
@@ -920,7 +930,7 @@ The reason not to use encapsulation is that it can go against the grain of many 
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the class cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the class and the other half in another place.
 
-#### Initialization and Finalization
+### Initialization and Finalization
 
 Cleanup code should be symmetric to the set-up code. Build something up in the constuctor then dispose things in the finalizer, start a service at startup then stop a service at shutdown, etc. If in the constructor you bind an event, then in the destructor you unbind it.
 
@@ -946,11 +956,11 @@ You can also choose to implement IDisposable. This is useful if you want to be a
 
 - Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the object.
 
-#### Constructor Inheritance
+### Constructor Inheritance
 
 Sort of forces a derived class to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a base class that has specific constructors forces your derived class to call that base constructor, often leading to exposing a similar constructor in the derived class.
 
-#### Comma Appending
+### Comma Appending
 
 Different ways to append a comma only in between elements.
 
@@ -994,23 +1004,23 @@ foreach (string element in elements)
 }
 ```
 
-#### DebuggerDisplays
+### DebuggerDisplays
 
 <TODO: Describe how I handle DebuggerDisplays. Snippet of text: DebuggerDisplays with private property DebuggerDisplay.>
 
-#### Executor
+### Executor
 
 Executor classes are classes that encapsulate a whole process to run. For processes that involve more than just a single function, for instance downloading a file, transforming it and then importing it, involving infrastructure end-points and possibly multiple back-end libraries.
 
 By giving each of those processes its own executor class, you make the code overviewable, and also make the process more easily runnable from different contexts, e.g. in a scheduler, behind a service method or by means of a button in a UI or in a utility.
 
-#### Inheritance-Helper
+### Inheritance-Helper
 
 A weakness of inheritance in .NET is that there is no multiple inheritance: you can only derive from one base class. This often leads to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the ‘Cartesian Product of Features Problem’.) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program helper classes (static classes with static methods) that implement each feature, and then use inheritance, letting derived classes delegate to the helpers, to give each class a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived classes, but no arbitrary spreading of features over the base classes, and no code repetition either.
 
 This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the Cartesian Product of Features problem, the problem that there is no multiple inheritance and the problem with god base classes, all weakneses of inheritance.
 
-#### Factory
+### Factory
 
 A factory class is a class that constructs instances. But it usually means that it creates a concrete type, returning it as an abstract type. The concrete type that is instantiated depends on the input you pass to the factory’s method:
 
@@ -1039,11 +1049,11 @@ A class that returns instances with various states is also simply called a Facto
 
 (The classic implementation is not used here, which is a static method in a base class.)
 
-#### Factory-Base-Interface
+### Factory-Base-Interface
 
 The Factory-Base-Interface pattern is a common way the factory pattern is applied. Next to a factory, as described above in the ‘Factory’ pattern, you give each concrete implementation that the factory can return a mutual interface, which also becomes the return type of the factory method. To also give each concrete implementation a mutual base class, with common functionality in it, and also to sort of force an implementation to have a specific constructor (see ‘Constructor Inheritance’).
 
-#### TryGet
+### TryGet
 
 A combination of a TryGet method and a Get method (e.g. TryGetObject and GetObject) means that TryGet will return null if the object does not exist and Get will throw an exception if the object does not exist.
 
@@ -1055,7 +1065,7 @@ If you call a TryGet you should handle the null value that could be returned.
 
 TryGet can throw other exceptions, even though it does not throw an exception if the object does not exist.
 
-#### Get-TryGet-GetMany
+### Get-TryGet-GetMany
 
 Often you need a combination of the three methods that either get a list, a single item but allow null or get a single item and insist it is not null. You can implement the plural variation and base the Get and TryGet on it using the same kind of code every time:
 
@@ -1099,15 +1109,15 @@ public IList<Item> GetItems(string searchText)
 
 The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and exception messages. Only the plural method is different depending on the situation. 
 
-#### Helper
+### Helper
 
 Helper classes are static classes with static methods that help with a particular aspect of programming. They can make other code shorter or prevent repeating of code, for functions that do not require any more structure than a flat list of methods.
 
-#### Info
+### Info
 
 Info objects are like DTO’s in that they are usually used for yielding over information from one place to another. Info objects can be used in limited scopes, internal or private classes and serve as a temporary place of storing info. But info objects can also have a broader scope, such as in frameworks, and unlike DTO’s they can have constructor parameters, auto-instantiation, encapsulation and other implementation code.
 
-#### IsSupported
+### IsSupported
 
 A service environment may contain the same interface for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different interfaces, but that would make the service layer more difficult to use, because you would not know which interface to use. Instead, you could also add ‘IsSupported’ properties to the interface to make an implementation communicate back if it supports a feature at all, for instance:
 
@@ -1119,11 +1129,11 @@ bool IOrderFacade.GetOrderStatusIsSupported { get; }
 
 Then when running price updates for multiple systems, you can simply skip the ones that do not support it. Possible a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The IsSupported booleans keeps complexity at bay, more than introducing a large number of interfaces that would all need to be handled separately.
 
-#### Mock
+### Mock
 
 A mock object is used in testing as a replacement for a object used in production. This could be an entity model, an alternative repository implementation (that returns mock entities instead of data out of a database). A mock object could even be a database record. Unlike other patterns the convention is to put the word ‘Mock’ at the beginning of the class rather than at the end.
 
-#### Name Constants
+### Name Constants
 
 To prevent typing in a lot of strings in code, make a static class with constants in it, that become placeholders for the name.
 
@@ -1144,15 +1154,15 @@ This prevents typing errors and makes ‘find all references’ possible.
 
 <TODO: Consider not assinging the string value at all, but using nameof(ViewNames.Edit). Consider using nameof() over an existing member to begin with.>
 
-#### NullCoalesce
+### NullCoalesce
 
 <TODO: See NullCoalesce (ViewModels) and write some good text here.>
 
-#### Plug-In Model
+### Plug-In Model
 
 <TODO: Describe my implementation of a nice plug-in model including the ReflectionHelper.GetImplementation methods.>
 
-#### Progress and Cancel Callbacks
+### Progress and Cancel Callbacks
 
 To make a process cancellable and report process without being dependent on the presentation framework, you can simply pass a few callback delegates to a method or class.
 
@@ -1179,7 +1189,7 @@ It depends on your problem whether those callbacks are nullable and you should d
 
 Sometimes it is useful to separate Cancel into two: Canceling and Canceled. This is because a process might not cancel immediately. A UI should not immediately enable a Start button again after the user pressed Cancel. A isCancelingCallback then allows the client to signal to the process that cancellation is requested. And an isCanceledCallback will let the process signal the client that cancelation has complete, so it can enable the start button again.
 
-#### Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities
+### Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities
 
 When processing object structures, it is best to split everything up into separate methods.
 
@@ -1244,13 +1254,15 @@ private class MyProcess
 }
 ```
 
-#### Wrapper
+### Wrapper
 
 A wrapper class is a class that wraps one or more other objects. This can be useful in various situations. You might give the wrapper additional helper methods that the wrapped object does not have. You might dispose the underlying wrapper object and create a new one, keeping the references to the wrapper object in tact even though the wrapped object does not exist anymore. You may hide a specific object in a wrapper and give it an alternative interface, you might wrap multiple objects in one wrapper to pass them around as a single object for convenience.
 
-### Alternatives
 
-#### Rich Models
+Alternatives
+------------
+
+### Rich Models
 
 <TODO: Write story with pros and cons. Include:
 

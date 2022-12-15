@@ -1,77 +1,75 @@
-﻿JJ's Reference Architecture
-===========================
+﻿Aspects | JJ's Reference Architecture
+=====================================
 
-Aspects
--------
+<h2>Contents</h2>
 
-<h3>Contents</h3>
-
-- [Aspects](#aspects)
-  - [Introduction](#introduction)
-  - [Authoring & Reviewing](#authoring--reviewing)
-  - [Caching](#caching)
-  - [Calculation](#calculation)
-  - [Cascading](#cascading)
-  - [Circular References](#circular-references)
-  - [Cloning](#cloning)
-  - [Code Style](#code-style)
-  - [Collections / List Processing](#collections--list-processing)
+- [Introduction](#introduction)
+- [Authoring & Reviewing](#authoring--reviewing)
+- [Caching](#caching)
+- [Calculation](#calculation)
+- [Cascading](#cascading)
+- [Circular References](#circular-references)
+- [Cloning](#cloning)
+- [Code Style](#code-style)
+- [Collections / List Processing](#collections--list-processing)
     - [Specialized Lists](#specialized-lists)
-  - [Concurrency](#concurrency)
+- [Concurrency](#concurrency)
     - [Alternatives](#alternatives)
-  - [Configuration](#configuration)
-  - [Conversion](#conversion)
-  - [Defaults](#defaults)
-  - [Debugging](#debugging)
-  - [Entity Model / Data Model](#entity-model--data-model)
-  - [Entity Status Management](#entity-status-management)
+- [Configuration](#configuration)
+- [Conversion](#conversion)
+- [Defaults](#defaults)
+- [Debugging](#debugging)
+- [Entity Model / Data Model](#entity-model--data-model)
+- [Entity Status Management](#entity-status-management)
     - [Alternatives](#alternatives-1)
-  - [Enums](#enums)
+- [Enums](#enums)
     - [General Rules](#general-rules)
     - [Enum-Like Entities](#enum-like-entities)
     - [Localization](#localization)
     - [TODO](#todo)
-  - [Errors](#errors)
-  - [Exceptions](#exceptions)
-  - [Facades](#facades)
-  - [Inverse Relationship Management / Inverse Property Management](#inverse-relationship-management--inverse-property-management)
-  - [IO](#io)
-  - [Logging](#logging)
-  - [Multi-Language / Translations / Culture](#multi-language--translations--culture)
+- [Errors](#errors)
+- [Exceptions](#exceptions)
+- [Facades](#facades)
+- [Inverse Relationship Management / Inverse Property Management](#inverse-relationship-management--inverse-property-management)
+- [IO](#io)
+- [Logging](#logging)
+- [Multi-Language / Translations / Culture](#multi-language--translations--culture)
     - [Separate Content Items](#separate-content-items)
     - [Loosely Linked Translation Entities](#loosely-linked-translation-entities)
     - [Many Foreign Keys](#many-foreign-keys)
     - [Comparison Loosely Linked vs Many Foreign Keys](#comparison-loosely-linked-vs-many-foreign-keys)
-  - [Naming](#naming)
-  - [Paging](#paging)
-  - [Parsing](#parsing)
-  - [Performance](#performance)
-  - [Persistence](#persistence)
-  - [Platform Compatibility](#platform-compatibility)
-  - [Reflection](#reflection)
-  - [Scheduling](#scheduling)
-  - [Security](#security)
+- [Naming](#naming)
+- [Paging](#paging)
+- [Parsing](#parsing)
+- [Performance](#performance)
+- [Persistence](#persistence)
+- [Platform Compatibility](#platform-compatibility)
+- [Reflection](#reflection)
+- [Scheduling](#scheduling)
+- [Security](#security)
     - [User Rights Models](#user-rights-models)
-      - [Organize by Entity and CRUD](#organize-by-entity-and-crud)
-      - [Organize by Access Level](#organize-by-access-level)
-      - [Access Yes or No](#access-yes-or-no)
-      - [Organize by Feature](#organize-by-feature)
-  - [Side Effects](#side-effects)
-  - [Styling](#styling)
-  - [Text Processing](#text-processing)
-  - [Transactions](#transactions)
-  - [Type Safety](#type-safety)
-  - [Unit Testing](#unit-testing)
+        - [Organize by Entity and CRUD](#organize-by-entity-and-crud)
+        - [Organize by Access Level](#organize-by-access-level)
+        - [Access Yes or No](#access-yes-or-no)
+        - [Organize by Feature](#organize-by-feature)
+- [Side Effects](#side-effects)
+- [Styling](#styling)
+- [Text Processing](#text-processing)
+- [Transactions](#transactions)
+- [Type Safety](#type-safety)
+- [Unit Testing](#unit-testing)
     - [Efficiently Writing Unit Tests](#efficiently-writing-unit-tests)
     - [More Thorough Unit Tests](#more-thorough-unit-tests)
     - [Readable & Debuggable Unit Tests](#readable--debuggable-unit-tests)
-  - [User Interface](#user-interface)
-  - [Utilities](#utilities)
-  - [Validation](#validation)
-  - [Versioning (Data)](#versioning-data)
-  - [Workflow](#workflow)
+- [User Interface](#user-interface)
+- [Utilities](#utilities)
+- [Validation](#validation)
+- [Versioning (Data)](#versioning-data)
+- [Workflow](#workflow)
 
-### Introduction
+
+Introduction
+------------
 
 What are called ‘Aspects’ here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you are going to have to make a decision about many of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API’s and are a level of abstraction that hovers above them.
 
@@ -79,7 +77,9 @@ Some aspects might not be mentioned here, because they are for instance automati
 
 (The word ‘aspect’ is related to the ‘aspect’ construct in aspect oriented programming languages or frameworks, but you can think in terms of aspects even regardless of these tools and constructs.)
 
-### Authoring & Reviewing
+
+Authoring & Reviewing
+---------------------
 
 This aspect covers things such as marking objects with creation dates, modification dates, etcetera, adding an author’s comment to objects and managing multiple versions of objects and logging which user made which change.
 
@@ -87,17 +87,23 @@ This aspect covers things such as marking objects with creation dates, modificat
 
 <TODO: Add specific solutions. >
 
-### Caching
+
+Caching
+-------
 
 <TODO: Write texts. Include: The use of a dictionaries, TryGetValue for performance, locking static dictionaries or other dictionaries used by multiple threads. Kentico also has caching.>
 
-### Calculation
+
+Calculation
+-----------
 
 <TODO: Write a text. Include:
 
 Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those ‘Calculators’. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a visitor to simplify, but isolate complex recursive calculations.>
 
-### Cascading
+
+Cascading
+---------
 
 <TODO: Write texts. Include:
 
@@ -109,15 +115,21 @@ See ‘LinkTo’ under ‘Patterns’.
 
 Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions?>
 
-### Circular References
+
+Circular References
+-------------------
 
 <TODO: An example of a check procedure. Mention that it must be checked when writing data, not when reading data, so only writing has a performance penalty, but reading does not. >
 
-### Cloning
+
+Cloning
+-------
 
 <TODO: Describe.>
 
-### Code Style
+
+Code Style
+----------
 
 Code style an be enforced with different methods:
 
@@ -126,7 +138,9 @@ Code style an be enforced with different methods:
 - Using Visual Studio’s code style options from the Options screen.
 - Resharper!
 
-### Collections / List Processing
+
+Collections / List Processing
+-----------------------------
 
 <TODO: Write text. Include:
 
@@ -134,17 +148,19 @@ Code style an be enforced with different methods:
 - Functions in JJ.Framework.Common.The extension methods and the KeyValuePairHelper.
 - ToArray() trick when you adapt the list within the loop.>
 
-#### Specialized Lists
+### Specialized Lists
 
 <TODO: Talk about constrained lists and how to program a specialized list if a normal list does not suffice.>
 
-### Concurrency
+
+Concurrency
+-----------
 
 In a web-based application time elapses between retrieving data to edit and saving changes. Between these actions the data may have been changed by another user.
 
 In this architecture the concurrency strategy is: the last user wins. This is accomplished in code using TryGet-Insert-Update-Delete pattern, that results in readable saving code and restoration of state, regardless of what another user did to it.
 
-#### Alternatives
+### Alternatives
 
 This paragraph is not that important to read. It is a longer story about the benefits and downsides of several ways to handle concurrency.
 
@@ -158,7 +174,9 @@ The way this strategy of ‘last user wins’ is accomplished, is by running the
 
 Another strategy that will not be used, is trying to keep all users’ additions of related entities. However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related entity is not in user A’s list and it is in user B’s list, does this mean it is user B’s addition of the related entity, or user A’s removal of the related entity? The ambiguity could be solved by marking which entities are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user’s changes. However, it is much harder to manage and the benefits are little.
 
-### Configuration
+
+Configuration
+-------------
 
 For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET’s System.Configuration directly can be quite a lot of work. For details see the document *API's*.
 
@@ -170,19 +188,27 @@ We will use 3 ways of storing configuration settings:
 
 There is another configuration method in .NET: the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
 
-### Conversion
+
+Conversion
+----------
 
 See: 'Converter', 'TryGet-Insert-Update', 'TryGet-Insert-Update-Delete / Collection Conversion', 'Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities' under 'Design Patterns'.
 
-### Defaults
+
+Defaults
+--------
 
 Implemented as side-effects that go off in a Facades’s Create methods. See ‘Side Effects’, ‘Facade’ under ‘Design Patterns’.
 
-### Debugging
+
+Debugging
+---------
 
 See DebuggerDisplays under Patterns.
 
-### Entity Model / Data Model
+
+Entity Model / Data Model
+-------------------------
 
 <TODO: Discuss different data modeling options. Among which entity models.>
 
@@ -192,21 +218,25 @@ See DebuggerDisplays under Patterns.
 
 <TODO: Explain No polymorphism in entity models + the solution.>
 
-### Entity Status Management
+
+Entity Status Management
+------------------------
 
 Entity status management (or ‘object status management’) is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the presentation and business layer for a particular functional domain.
 
 There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every business domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
 
-#### Alternatives
+### Alternatives
 
 The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an ORM or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, Framework.Persistence should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make Framework.Persistence much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating Framework.Persistence also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
 This is why the explicit status management solution won over the entity status management in the persistence framework.
 
-### Enums
 
-#### General Rules
+Enums
+-----
+
+### General Rules
 
 - Use the ‘Enum’ suffix for enum types e.g. OrderStatus**Enum**.
 - Always give an enum the enum member Undefined with value 0:
@@ -266,7 +296,7 @@ The difference between throwing an InvalidValueException or a ValueNotSupportedE
 
 - Use enum member *Undefined* in place of *null*, so also *avoid nullable enum* types.
 
-#### Enum-Like Entities
+### Enum-Like Entities
 
 - Entity models often contain enum-like entities:
 
@@ -355,7 +385,7 @@ public static void SetSectionTypeEnum(this Section entity, SectionTypeEnum enumV
 }
 ```
 
-#### Localization
+### Localization
 
 - Localization of the enum member display names is done by means of resources, usually in the Resources.resx  in the Business layer. (See the ‘Resources’ pattern and Appendix B for explanations on how to manage resources). The key of the resource should exactly match the enum member name.
 - The following code allows you to retrieve an enum member display name:
@@ -406,7 +436,7 @@ public static class ResourceHelper
 }
 ```
 
-#### TODO
+### TODO
 
 <TODO: The following things are not  yet discussed there:
 
@@ -414,7 +444,9 @@ public static class ResourceHelper
 - ID’s columns of enum-like entities are never auto-increment.
 - Indexes on enum-like columns are not necessary because they do not have a lot of variation in values, which makes an index not very effective, and also you will not often join or search on an enum-like column.>
 
-### Errors
+
+Errors
+------
 
 <TODO: Describe that there are several ways to handle errors: Exceptions, validation messages, status enums and booleans.>
 
@@ -424,7 +456,9 @@ public static class ResourceHelper
 - But also sounds like a pattern.
 - But it also sounds like the philosophical case of the aspect of validation and error handling, which is quite polymorphic in sofware development these days: string messages, booleans, status enums and exceptions. A lot of different ways of handling similar things, really. It works out OK in practice, but it does not seem very elegant.>
 
-### Exceptions
+
+Exceptions
+----------
 
 - Do null-checks on arguments of public methods.
 - Sometimes miscellaneous checks need to be performed on public methods.
@@ -464,7 +498,9 @@ In fact, prefer not to retrieve information by catching an exception at all.
 
 - To show a full exception message Exception.ToString() does a pretty good job including inner exceptions. If you like you can use ExceptionHelper from Framework.Logging to get a neatly formatted exception text. It also has a GetInnermostException helper method.
 
-### Facades
+
+Facades
+-------
 
 Facades might sound like a pattern to you, but regardless of whether you use the facade pattern or not, your system has facades whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
 
@@ -478,7 +514,9 @@ In an architecture with many different business logic objects, that each take an
 
 These are all options to choose from. You can just mess around and do whatever. Or you can actively think about the choices you make about where you put your facades.
 
-### Inverse Relationship Management / Inverse Property Management
+
+Inverse Relationship Management / Inverse Property Management
+-------------------------------------------------------------
 
 See ‘LinkTo’ under ‘Design Patterns’.
 
@@ -495,11 +533,15 @@ An alternative is the OneToManyRelationship and ManyToOneRelationship classes fr
         - 1-to-1 relationship
         - The inverse relationship would result in ridiculously enormous lists. >
 
-### IO
+
+IO
+--
 
 <TODO: Write description. Mention CsvReader e.d. The use of .NET serialization API’s XML, etc. Mention the StreamHelper. >
 
-### Logging
+
+Logging
+-------
 
 Be careful how much you log. Logging unhandled exceptions is usually good enough. If you log a lot, it creates a performance penalty and can impose a serious strain on your infrastructure. Servers have crashed under the pressure of logging. A simple try-catch on a main level and a call to the logger will usually suffice.
 
@@ -530,17 +572,19 @@ Config example:
 
 If you insist on using Log4Net, make a separate ILogger implementation behind which you hide Log4Net. The downside of Log4Net is that its configuration can be quite verbose and complicated. Framework.Logging is simple and can run on all platforms.
 
-### Multi-Language / Translations / Culture
+
+Multi-Language / Translations / Culture
+---------------------------------------
 
 For button texts and other labels in an application: see ‘Resources’ under ‘Other Patterns’. That does not solve multi-lingual user data, for which multiple solutions are possible.
 
 <TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >
 
-#### Separate Content Items
+### Separate Content Items
 
 One option to support multi-language, is for a content item to be only available in a specific language. That means a different language gets totally separate content items.
 
-#### Loosely Linked Translation Entities
+### Loosely Linked Translation Entities
 
 One possible solution is each possble naming / grammar structure to each have a generic entity type, that can be tied to an arbitrary entity:
 
@@ -552,7 +596,7 @@ SingularAndPlural { ID, Singular, Plural, CultureName, EntityTypeName, EntityID 
 
 The combination { EntityTypeName, EntityID } is a alternative key to the entity. This makes the translation item structure independent on the model it is applied to, which can be a benefit.
 
-#### Many Foreign Keys
+### Many Foreign Keys
 
 Another alternative is to give the translation item entity a whole bunch of foreign keys: one for each possible translatable entity type.
 
@@ -560,7 +604,7 @@ NameAndDescription { ID, Name, Description, CultureName, __ProductID, Department
 
 A downside of that is that the table structure is dependent on the domain model you applied it to. This can be a problem if you want your translation structure to be very isolated from the other business domains or used by business domains that you do not develop yourself. It really depends on your requirements whether this is a problem at all.
 
-#### Comparison Loosely Linked vs Many Foreign Keys
+### Comparison Loosely Linked vs Many Foreign Keys
 
 The foreign key solution does have a big benefit over the generic key solution, because ORM’s will cache the entities in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
@@ -568,11 +612,15 @@ To work with non-flushed loosely linked translation items, you would have to do 
 
 A lot of work to use the loosely linked entities. This is not unique to loosely linked translation entities. It is a problem with any alternative key, that non-flushed entities cannot be retrieved with a (LINQ) query.
 
-### Naming
+
+Naming
+------
 
 See ‘Names’ under ‘Coding Style’.
 
-### Paging
+
+Paging
+------
 
 All page numbering starts at 1. Even though we usually start counting at 0 as programmers, to the user the first page is still 1 and it is very confusing if you do not carry through the same numbering throughout the whole software layering. Only right before you retrieve something from a data store you may convert the numbers to fit your data store’s needs.
 
@@ -580,11 +628,15 @@ Throughout the software layering we pass through 1-based page numbers and page c
 
 <TODO: Describe programming practices for working with paging in views.>
 
-### Parsing
+
+Parsing
+-------
 
 <TODO: Explain how you could structure your parser code? >
 
-### Performance
+
+Performance
+-----------
 
 <TODO: Give a few pointers to performance issues. Like reflection has a performance penalty compared to literal values, so do expressions. Pre-calculation and caching. >
 
@@ -596,7 +648,9 @@ Throughout the software layering we pass through 1-based page numbers and page c
 
 <TODO: Aspects, Performance: Detail about nested loops: just traversing multiple levels is not a bad nested loop. Lookups of 5 to 7 items do not require a dictionary.>
 
-### Persistence
+
+Persistence
+-----------
 
 To access a data store (usually a database), Framework.Persistence will be used. Through that framework you can access data using different underlying persistence technologies, such as NHibernate and Entity Framework or even flat files or XML. The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
 
@@ -604,15 +658,21 @@ The main interface of the framework is IContext.
 
 See also: ‘ORM’.
 
-### Platform Compatibility
+
+Platform Compatibility
+----------------------
 
 <TODO: Short description of that there are platform compatibility helpers. >
 
-### Reflection
+
+Reflection
+----------
 
 <TODO: You might go into the important utilities we have in the JJ.Framework and basics of System.Reflection including tips of when to use reflection. The use of the ReflectionCache.>
 
-### Scheduling
+
+Scheduling
+----------
 
 Various solutions are available for scheduling a process (periodically) in time.
 
@@ -622,7 +682,9 @@ Various solutions are available for scheduling a process (periodically) in time.
 
 <TODO: Go into the various options and explain a little further.>
 
-### Security
+
+Security
+--------
 
 <TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection… >
 
@@ -687,11 +749,11 @@ IRightsManager
 }
 ```
 
-#### User Rights Models
+### User Rights Models
 
 There are several ways you can subdivide your use rights to your application or system. None of them are silver bullets. They are all just options. The lists below indicate things a user could be separately granted or denied access to.
 
-##### Organize by Entity and CRUD
+#### Organize by Entity and CRUD
 
 ```
 Order List
@@ -708,7 +770,7 @@ Product Execute
 
 Do note that this subdivision could lead to a massive amount of securables that you do not even need. It may seem flexible, but might also be poorly overviewable and a pain to maintain. Consider other models of user rights.
 
-##### Organize by Access Level
+#### Organize by Access Level
 
 ```
 Visitor
@@ -717,11 +779,11 @@ Admin
 Super Admin
 ```
 
-##### Access Yes or No
+#### Access Yes or No
 
 Being allowed or disallowed access to an application, with no futher subdivision in securables.
 
-##### Organize by Feature
+#### Organize by Feature
 
 ```
 Ordering
@@ -729,11 +791,15 @@ Email Campaigns
 Calculation Module
 ```
 
-### Side Effects
+
+Side Effects
+------------
 
 See ‘Side Effects’ under ‘Design Patterns’.
 
-### Styling
+
+Styling
+-------
 
 Possible API’s:
 
@@ -741,11 +807,15 @@ Possible API’s:
 - Less
 - Gulp
 
-### Text Processing
+
+Text Processing
+---------------
 
 <TODO: Write text. Include: Functions in JJ.Framework.Common, including StringSplit and the StringSplit with quotation.>
 
-### Transactions
+
+Transactions
+------------
 
 <TODO: Write text. Include: Discuss what NHibernate does, explicit and implicit commit, IContext, how to use the SqlExecutor API. Discuss view model transaction and how to work transactionally regardless of how a database does it.
 
@@ -753,11 +823,15 @@ Possible API’s:
 
 - Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I’m not sure. >
 
-### Type Safety
+
+Type Safety
+-----------
 
 C# has type-safety built in. For type safety in JavaScript, use TypeScript.
 
-### Unit Testing
+
+Unit Testing
+------------
 
 If you would unit test everything, it might cost you 60% of your development time, which may be quite a tax to pay. Therefore, unit testing may not be seen as mandatory. It might only *support* the goal of testing. However, in certain cases, unit testing might be an efficient way of testing.
 
@@ -771,7 +845,7 @@ Another case where unit testing may come in handy, might be when a calculation m
 
 But in some cases simply debugging and testing functionally may be a better choice, for efficiency’s sake.
 
-#### Efficiently Writing Unit Tests
+### Efficiently Writing Unit Tests
 
 Possible strategies for writing unit tests more efficiently:
 
@@ -791,14 +865,14 @@ Possible strategies for writing unit tests more efficiently:
 - When following these guidelines, adding a feature might not 'explode' the number of tests.
 - If there is the desire to limit the amount of time developing automated tests, but wanting to have a comprehensive testing after all, it may be an idea to think: "What would I test if I would manually test?" and perhaps like that keep you from going into technical details and edge-cases too much.
 
-#### More Thorough Unit Tests
+### More Thorough Unit Tests
 
 Possible things to do that might make tests adequately thorough:
 
 - Perhaps contradictory: not using the same values for trivial values but varying them may prevent some unexpected false positives. (The opposite has been seen recommended, but thoughts may differ on the topic.) Sometimes though, it may just be confusing to use many different values. (The argument some times found somewhere: It may shift focus away from the main intent of the test.)
 - Perhaps try to incorporate multiplicity: instead just testing 1 item, what would happen for multiple items?
 
-#### Readable & Debuggable Unit Tests
+### Readable & Debuggable Unit Tests
 
 Possible strategies for making unit tests easier to debug and read:
 
@@ -809,11 +883,15 @@ Possible strategies for making unit tests easier to debug and read:
 - *'Particularness'* of a case may be a reason for an added test.
 - A *'complex example'*, as a sort of summary of the code's usages, might be nice to have.
 
-### User Interface
+
+User Interface
+--------------
 
 <TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my views to view models, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under ‘Presentation Patterns’. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API’s or consumed as json in JavaScript UI’s. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base.>
 
-### Utilities
+
+Utilities
+---------
 
 Utilities are processes that are not run very often. Utilities contains small programs for IT. For example: load translations, things to run for deployment.
 
@@ -893,15 +971,21 @@ internal class ExecutorDemo
 }
 ```
 
-### Validation
+
+Validation
+----------
 
 See ‘Validators’ under ‘Design Patterns’.
 
-### Versioning (Data)
+
+Versioning (Data)
+-----------------
 
 <TODO: Describe.>
 
-### Workflow
+
+Workflow
+--------
 
 <TODO: Describe some more thoughts about this and about the different API’s.>
 
