@@ -187,11 +187,11 @@ If the amount of practices and principles  is too overwhelming, and wonder how y
 Responsibilities
 ----------------
 
-<TODO: Write an intro on the kind of topics you will find here.>
+`[ TODO: Write an intro on the kind of topics you will find here.]`
 
 ### Separation of Concerns
 
-<TODO: Use this phrase: Keep it separated.>
+`[ TODO: Use this phrase: Keep it separated. ]`
 
 (Related SOLID principles: Single Responsibility Principle (SRP), Interface Segregation Principle (ISP) and Do Not Repeat Yourself (DRY)).
 
@@ -254,7 +254,7 @@ By further splitting up our assemblies we can reuse the Ordering back-end in mul
 
 #### Framework Assemblies
 
-- <TODO: Describe: Split up in Framework assemblies: when a framework assembly extends a .NET API, make a different framework assembly for each part of .NET you extend. A framework API should only hook into one specific part of  .NET. That way we have control over what parts of .NET we make our application dependent on, which makes it possible to develop for multiple platforms.>
+`[ TODO: Describe: Split up in Framework assemblies: when a framework assembly extends a .NET API, make a different framework assembly for each part of .NET you extend. A framework API should only hook into one specific part of  .NET. That way we have control over what parts of .NET we make our application dependent on, which makes it possible to develop for multiple platforms. ]`
 
 ### Big Hairy Base Class (bad)
 
@@ -262,7 +262,7 @@ A base that that is a union of the functionality needed in the derived classes, 
 
 Consider moving code to the derived classes that need it, delegating to different helper classes instead of putting everything in the base class, or as a last resort add intermediate inheritance levels, gradually extending functionality.
 
-<TODO: Rephrase this and make it part of the main text: You should use inheritance to share behavior / private implementation, not as a way make methods available from multiple places, or to give a generalized name to a set of types, even though they still have separate unique behavior. You should also not create a base class, that is about a side-issue, because then you have reserved your one inheritance slot with something unimportant. >
+`[ TODO: Rephrase this and make it part of the main text: You should use inheritance to share behavior / private implementation, not as a way make methods available from multiple places, or to give a generalized name to a set of types, even though they still have separate unique behavior. You should also not create a base class, that is about a side-issue, because then you have reserved your one inheritance slot with something unimportant. ]`
 
 ### Big Hairy Object (bad)
 
@@ -290,7 +290,7 @@ But keep in mind that there are exceptions. Very trivial things can be repeated,
 
 ### Dump Code Line Here (bad)
 
-<TODO: Strategic mistake: Don't just put a line of code somewhere that gets rid of the symptom. Ask yourself the question if it is the responsibility of that class or whether it really belongs elsewhere. TODO: Describe that in more detail.>
+`[ TODO: Strategic mistake: Don't just put a line of code somewhere that gets rid of the symptom. Ask yourself the question if it is the responsibility of that class or whether it really belongs elsewhere. TODO: Describe that in more detail. ]
 
 ### Granularity
 
@@ -320,17 +320,17 @@ If you see that a single problem area has two different ways of handling it, thi
 
 ### Vague Justification (bad)
 
-<TODO: Describe this. Do not try to justify putting a piece of code in a spot where it does not seem to belong with some vague explanation. The separation of responsibilities in a system should be crystal clear. People have a tendency to look for vague reasoning that justifies what they just did, and will take that very far. It is called rationalization. Be critical. Can you clearly explain why some piece of code belongs there? If not? Where should it belong? Try the stategy of 'Ideal Solution'. (There is a topic for that in this document.) That could help you figure out a better separation of concerns.>
+`[ TODO: Describe this. Do not try to justify putting a piece of code in a spot where it does not seem to belong with some vague explanation. The separation of responsibilities in a system should be crystal clear. People have a tendency to look for vague reasoning that justifies what they just did, and will take that very far. It is called rationalization. Be critical. Can you clearly explain why some piece of code belongs there? If not? Where should it belong? Try the stategy of 'Ideal Solution'. (There is a topic for that in this document.) That could help you figure out a better separation of concerns. ]`
 
 
 Error Checking
 --------------
 
-<TODO: Write an intro on the kind of topics you will find here.>
+`[ TODO: Write an intro on the kind of topics you will find here. ]`
 
 ### Be Strict
 
-<TODO: Describe the 'be strict' concept.>
+`[ TODO: Describe the 'be strict' concept. ]`
 
 ### Error Hiding / Null-Tolerance (bad)
 
@@ -342,11 +342,11 @@ If something is null, that should not be null, an exception MUST be thrown. You 
 
 ### Null-Checks
 
-<TODO: The rule 'no null checks on lists' is not true for the canonical model. >
+`[ TODO: The rule 'no null checks on lists' is not true for the canonical model. ]`
 
-<TODO: If GetByID returns null and you expected something, throw EntityNotFoundException<T>(id).>
+`[ TODO: If GetByID returns null and you expected something, throw EntityNotFoundException<T>(id). ]`
 
-<TODO: null-checks on parameters that the class uses directly, not if it is only passed to a method that does a proper null-check itself.>
+`[ TODO: null-checks on parameters that the class uses directly, not if it is only passed to a method that does a proper null-check itself. ]`
 
 *The most common programming error is a missing null-check.*
 
@@ -444,13 +444,13 @@ Do not correct input data, but require that input data is correctly entered. Cod
 Interfacing
 -----------
 
-<TODO: Write an intro on the kind of topics you will find here.>
+`[ TODO: Write an intro on the kind of topics you will find here.]`
 
 ### 'All' and 'Many'
 
 The word 'All' is often misused in repository method names. Once just a selection is returned, it is not 'All' anymore. Use the word 'Many'. So not GetAllBySearchText. Instead use GetManyBySearchText.
 
-<TODO: If multiple items are returned by for instance repository methods, remember that the multiplicity should be reflected in the method name. For instance a method GetByCritia could be intended to return a list, but you cannot really see it from the name. One could assume it returns a single item. You could for instance call it GetManyByCriteria in that case, so you can see from the name that can return more than one. There are other ways to express multiplicity, such as the word 'List' or 'Collection' or a plural name, but as long as it is clear.>
+`[ TODO: If multiple items are returned by for instance repository methods, remember that the multiplicity should be reflected in the method name. For instance a method GetByCritia could be intended to return a list, but you cannot really see it from the name. One could assume it returns a single item. You could for instance call it GetManyByCriteria in that case, so you can see from the name that can return more than one. There are other ways to express multiplicity, such as the word 'List' or 'Collection' or a plural name, but as long as it is clear. ]`
 
 ### Blackboxing and Whiteboxing
 
@@ -492,7 +492,7 @@ Here are a few more examples:
 
 ### CRUD
 
-<TODO: Explain.>
+`[ TODO: Explain. ]`
 
 ### Delegitis (bad)
 
@@ -534,7 +534,7 @@ abstract class MyBase
 
 ### Dependency Injection
 
-<TODO: Change your view on dependency injection and rewrite that section. This is because SimpleInjector takes away a lot of drawbacks that Ninject has.>
+`[ TODO: Change your view on dependency injection and rewrite that section. This is because SimpleInjector takes away a lot of drawbacks that Ninject has. ]`
 
 For dependency injection we will not use frameworks like Ninject anymore. Ninject uses a 'magic hat' principle: an object came from somewhere and you have no idea where it came from or if the object is even there. NInject allows you to define a set of implementations of several interfaces centrally and retrieve that implementation from arbitrary places in the code:
 
@@ -658,7 +658,7 @@ Interface stability can also be improved by choosing neutral collection types ov
 
 Input / ouput transparency.
 
-<TODO: Describe. >
+`[ TODO: Describe. ]`
 
 ### Kama-Sutra Pattern (bad)
 
@@ -716,11 +716,11 @@ Solution: execute the side effects explicitly, so you see what is going on, inst
 
 ### Magic Defaults (generally bad)
 
-<TODO: Describe. >
+`[ TODO: Describe. ]`
 
 ### Magic Numbers / Magic Strings (bad)
 
-<TODO: Describe. >
+`[ TODO: Describe. ]`
 
 ### Method Self-Sufficient
 
@@ -732,7 +732,7 @@ It is worse for the method to only work if you do very specific work beforehand.
 
 When an object has multiple properties that could each be considered the parent, only one parent is filled in at a time. Null reference exceptions on the horizon. A possible solution might be to have two different types that each have a different parent. It really depends on the situation what restructuring is better.
 
-<TODO Needs an example.>
+`[ TODO Needs an example. ]`
 
 ### Ripple-Effect
 
@@ -744,11 +744,11 @@ The name of a method should say what it does. It should not be inferred from the
 
 ### Spooky Action (at a Distance) / Cause and Effect too Far Apart
 
-<TODO: Describe>
+`[ TODO: Describe ]`
 
 ### Structuring with no Purpose
 
-<TODO: Describe.>
+`[ TODO: Describe.]`
 
 ### Syntactic Sugar
 
@@ -797,7 +797,7 @@ Examples of unclear interfaces are:
 
 Two seemingly independent pieces of code only work if one piece of code makes assumptions about the implementation of the other piece of code. Another example of a code smell, that points to an unwritten agreement, is when an interface has elements to it, that are not obviously necessary. For instance a Dictionary parameter where it does not seem to be needed, perhaps because the calling code just so happens to be using a dictionary. You should generally avoid such scenarios. Different pieces of code should be self-sufficient and non-assumptious, but ofcouse it can depend on other trade-offs, such as performance and readability.
 
-<TODO: Consider some of these phrases: 'Onderonsje' anti-pattern: polluting the interface of a method or class with members that break a pattern or with non-neutral types such as dictionaries, simply to make something maybe more efficient or another purpose. Usually the pollution can be prevented, because you can just do it higher in the call stack, rather than just passing things on to other methods.>
+`[ TODO: Consider some of these phrases: 'Onderonsje' anti-pattern: polluting the interface of a method or class with members that break a pattern or with non-neutral types such as dictionaries, simply to make something maybe more efficient or another purpose. Usually the pollution can be prevented, because you can just do it higher in the call stack, rather than just passing things on to other methods. ]`
 
 ### Wrapperitis (bad)
 
@@ -811,7 +811,7 @@ There can be a good reason to wrap something though: loose coupling and polymorp
 Variables and Parameters
 ------------------------
 
-<TODO: Write an intro on the kind of topics you will find here.>
+`[ TODO: Write an intro on the kind of topics you will find here.]`
 
 ### Double Negatives (bad)
 
@@ -853,7 +853,7 @@ The reason for this is that preferring properties over parameters, you have less
 
 Sometimes you see a lot of parameters in a method, that require (a lot of) if's inside the method. This makes the use of the method harder, and the implementation too. Sometimes the solution is simple: make a separate method for every option. This can make the implementation so much simpler and the use of it too. You might thing this is less flexible, because then you have to know in advance which method to call and you cannot just call one method for different situations. But here's a secret: most of the times that is not a problem. Most of the times the programmer really only needs that one thing in that part of the code, not a single method full of feature switches.
 
-<TODO: A good example would help.>
+`[ TODO: A good example would help. ]`
 
 ### Pass on and Assign (generally bad)
 
@@ -947,13 +947,13 @@ When you use a variable for one thing and later overwrite it with semantically s
 Method Bodies
 -------------
 
-<TODO: Write an intro on the kind of topics you will find here.>
+`[ TODO: Write an intro on the kind of topics you will find here.]`
 
 ### Auto-Instantiation
 
 Sometimes auto-instantiation on first use can be replaced by initializing a field in a constructor or type initializer. This performs better because it prevents the auto-instantiation 'if' and might make the field only initialize once in the lifetime of the app domain.
 
-<TODO: Auto-instantiation variations: benefits and downsides.>
+`[ TODO: Auto-instantiation variations: benefits and downsides. ]`
 
 ### Constructor Calls an Overridable (bad)
 
@@ -988,13 +988,13 @@ class MyDerivedClass()
 
 The solution is to make `Execute()` public and insist that that it is called explicitly in the code that creates the instance. Ofcourse if the method is not overridable it would be no problem, and if the method was not called in the base constructor it would be no problem, but calling an overridable member from the base class's constructor could mean trouble.
 
-<TODO: Update the remark below. Another solution is to actually do all 'the work' in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above.>
+`[ TODO: Update the remark below. Another solution is to actually do all 'the work' in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above. ]`
 
 (Validation framework uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
 
 ### Cross-Referencing (generally bad)
 
-<TODO: Practices: Cross-referencing prevention. Do not pass 2 arrays and process them side-by-side, but look for a 'singular form' to process and pass along a tuple. Even better: look for something you can execute onto each tuple element separately.>
+`[ TODO: Practices: Cross-referencing prevention. Do not pass 2 arrays and process them side-by-side, but look for a 'singular form' to process and pass along a tuple. Even better: look for something you can execute onto each tuple element separately. ]`
 
 ### Empty If-Block (generally bad)
 
@@ -1033,11 +1033,11 @@ if (condition)
 
 ### Foreach with i
 
-<TODO: Describe: Patterns / code style: for int i met vervolgens het item direct eerst in een variabele.>
+`[ TODO: Describe: Patterns / code style: for int i met vervolgens het item direct eerst in een variabele. ]`
 
 ### Last Loop Item
 
-<TODO: Describe different ways of handling the last array item that you can think of, in cases where the last loop item needs to be handled a little bit different from the others.>
+`[ TODO: Describe different ways of handling the last array item that you can think of, in cases where the last loop item needs to be handled a little bit different from the others. ]`
 
 ### Method too Long / Class too Long
 
@@ -1120,9 +1120,9 @@ Problem Solving
 
 ### Core of the Problem
 
-<TODO: Write text. Incorporate:
+`[ TODO: Write text. Incorporate:`
 
-Solve the root of the problem. Do not work around a problem, because it will catch up with you later, very soon.>
+`Solve the root of the problem. Do not work around a problem, because it will catch up with you later, very soon. ]`
 
 ### Environmental Causes
 
@@ -1170,7 +1170,7 @@ Information gathering:
 
 ### Reproduce the Bug
 
-<TODO: Write something about it. Look if other texts are present already in this document and use them / move them.>
+`[ TODO: Write something about it. Look if other texts are present already in this document and use them / move them. ]`
 
 ### Smaller Test
 
@@ -1182,11 +1182,11 @@ Even if your hypothesis does not turn out to be true, this is still useful infor
 
 ### Solve by Refactoring
 
-<TODO: Explain how refactoring code can actually help you solve a bug.>
+`[ TODO: Explain how refactoring code can actually help you solve a bug. ]`
 
 ### Solve by Simplifying
 
-<TODO: Explain how simplifying a solution can help you solve a problem.>
+`[ TODO: Explain how simplifying a solution can help you solve a problem. ]`
 
 ### Use Diagnostics / Improve Diagnostics
 
@@ -1208,7 +1208,7 @@ You could also try and look for the already existing diagnostics to help you. Ar
 Strategy
 --------
 
-<TODO: Write an intro on the kind of topics you will find here.>
+`[ TODO: Write an intro on the kind of topics you will find here.]`
 
 ### Abstract / Concrete
 
@@ -1248,11 +1248,11 @@ Even though this may seem a vague point, symmetry in code is very important for 
 
 ### Blind Faith Methodology (bad)
 
-<TODO: Describe.>
+`[ TODO: Describe. ]`
 
 ### 'Blind Staren' (bad)
 
-<TODO: That's the Dutch term. Not sure how to translate that to English.>
+`[ TODO: That's the Dutch term. Not sure how to translate that to English. ]`
 
 To fixate so much onto a problem or possible solution, that you cannot all the alternatives that are available.
 
@@ -1268,7 +1268,7 @@ No method is best. They are simply two different strategies to attack a problem.
 
 To solve a bug, first reproduce it.
 
-<TODO: Make more extensive description.>
+`[ TODO: Make more extensive description. ]`
 
 ### Cartesian Product of Features Problem
 
@@ -1282,7 +1282,7 @@ The Inheritance-Helper pattern may solve some of the issues.
 
 ### Chicken and Egg
 
-<TODO: Describe.>
+`[ TODO: Describe. ]`
 
 ### Consistent Stupidity (bad)
 
@@ -1324,7 +1324,7 @@ If the correctness of data is described by trivial rules, you might not say ther
 
 ### Featuritis
 
-<TODO: Describe.>
+`[ TODO: Describe. ]`
 
 ### First Try Specific, Then Try Generic
 
@@ -1348,7 +1348,7 @@ An anti-pattern where a GUID (Globally Unique Identifier) is used as an identifi
 
 ### Hard-Coding and Soft-Coding
 
-<TODO: Describe.>
+`[ TODO: Describe. ]`
 
 ### Head in the Sand (bad)
 
@@ -1372,7 +1372,7 @@ Sometimes it is hard to know what has most priority and what is the most appropr
 
 ### Inheritance not Always Good
 
-<TODO: Point to other pieces of this document that explains this point and perhaps add a few more arguments to it.>
+`[ TODO: Point to other pieces of this document that explains this point and perhaps add a few more arguments to it. ]`
 
 ### It Works, Doesn't It? ('Maar het werkt toch?') (bad)
 
@@ -1403,15 +1403,15 @@ Another false argument against doing all this work is the claim that these are j
 
 ### Lack of Choice = Guarantees
 
-<TODO: Describe.>
+`[ TODO: Describe. ]`
 
 ### Least Possible Effort Strategy (bad)
 
-<TODO: Describe. Something like laziness may in the end cost you more, then it is not efficiency.>
+`[ TODO: Describe. Something like laziness may in the end cost you more, then it is not efficiency. ]`
 
 ### Liskov-Substution Principle (SOLID)
 
-<TODO: Describe my take and my solutions on it.>
+`[ TODO: Describe my take and my solutions on it. ]`
 
 ### Make it Look Logical
 
@@ -1423,15 +1423,15 @@ If you are not sure what route to take, it may help to formulate multiple soluti
 
 ### Use It or Lose It
 
-<TODO: Describe:
+`[ TODO: Describe:`  
 
-- Unused functions (bad)
-- (Dutch) Ik heb de policy om niet gebruikte code weg te halen en pas als het echt opgelost moet worden opnieuw te bouwen, omdat de situatie dan weer dusdanig veranderd is en ideeën veranderd zijn, dat er toch niets over blijft van de oude oplossing, die dan in de tussentijd alleen maar in de weg staat en onderhoudslast tot gevolg heeft.
-- It also never gets tested.
-- Go into how the people might be afraid to throw away something valuable and that's why they keep unused stuff lying around. But counterintuitively it is more economic to just throw it away and rebuild it later.
-- Things that are not used are also not tested very well and may well not work anymore when you take another look at it a year later. Also you could be releasing buggy functionality, that nobody tests, but you can still access the faulty functionality, so the customer finds this buggy thing in your programs. Not good>
-- All of this can be such a hindrance, that it pays off better to just put that code in an Archive and just rebuild if ever needed again.
-- Flip side: reusable framework components. There 'might use' is enough, especially if it makes a tool complete. But there it almost takes on a similar form as a user interface. The user interface should be complete and tested. For a programmer, its being in a user interface means it is in use. Whether a user will actually use and appreciate this function is up to other people. If they do not use it, and will not ever use it or think it is unlikely they will use it in the foreseeable future, this can better be scratched too. So 'used' has more fine definition. Anyway, exposure through an API might be interpreted as 'used' code. Who is the judge? The 'user', which is not always the same people.>
+`- Unused functions (bad)`  
+`- (Dutch) Ik heb de policy om niet gebruikte code weg te halen en pas als het echt opgelost moet worden opnieuw te bouwen, omdat de situatie dan weer dusdanig veranderd is en ideeën veranderd zijn, dat er toch niets over blijft van de oude oplossing, die dan in de tussentijd alleen maar in de weg staat en onderhoudslast tot gevolg heeft.`  
+`- It also never gets tested.`  
+`- Go into how the people might be afraid to throw away something valuable and that's why they keep unused stuff lying around. But counterintuitively it is more economic to just throw it away and rebuild it later.`  
+`- Things that are not used are also not tested very well and may well not work anymore when you take another look at it a year later. Also you could be releasing buggy functionality, that nobody tests, but you can still access the faulty functionality, so the customer finds this buggy thing in your programs. Not good.`  
+`- All of this can be such a hindrance, that it pays off better to just put that code in an Archive and just rebuild if ever needed again.`  
+`- Flip side: reusable framework components. There 'might use' is enough, especially if it makes a tool complete. But there it almost takes on a similar form as a user interface. The user interface should be complete and tested. For a programmer, its being in a user interface means it is in use. Whether a user will actually use and appreciate this function is up to other people. If they do not use it, and will not ever use it or think it is unlikely they will use it in the foreseeable future, this can better be scratched too. So 'used' has more fine definition. Anyway, exposure through an API might be interpreted as 'used' code. Who is the judge? The 'user', which is not always the same people. ]`
 
 ### One Extra Step
 
@@ -1466,13 +1466,13 @@ However, by doing it you can save a lot of work and complexity.
 
 ### Quick and Dirty / Dirty (usually bad)
 
-<TODO: Describe.>
+`[ TODO: Describe. ]`
 
 ### Readable, Writable and Rewritable Code
 
-<TODO: Use this phrase: Code should be about expressing your intentions as much as instruct the computer what to do. >
+`[ TODO: Use this phrase: Code should be about expressing your intentions as much as instruct the computer what to do. ]`
 
-<TODO: Incorporate this phrase: “the difficult part of programming is not writing code, but reading it.">
+`[ TODO: Incorporate this phrase: “the difficult part of programming is not writing code, but reading it." ]`
 
 Code should be written so clearly that it is easy to read, which also makes it easy to adapt. It is more important that code is easy to read than easy to write. It is not the startup cost, but the maintenance cost that will kill you. Following good design principles, such as loose coupling, good naming, can make code adaptable. You should write code that you should not be afraid to change. You should not be afraid to change code or refactor. If you are afraid to change the code, then it might be poorly written and a digital time bomb. Time to change that. Or if you are afraid to change code, then there might be something wrong with the testing phase of your software development lifecycle, or lack thereof?
 
@@ -1573,14 +1573,14 @@ See also: Patterns, TryGet-Insert-Update.
 
 The architecture contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
 
-<TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations.>
+`[ TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. ]`
 
 
 SOLID
 -----
 
-<TODO: Move all comparisons to SOLID to here, because I want to cover it once centrally.>
+`[ TODO: Move all comparisons to SOLID to here, because I want to cover it once centrally. ]`
 
-<TODO: write my take on it. Admit that it might be a single sided view and that you are open to different opinions. It will show you know them and thought about them.?
+`[ TODO: write my take on it. Admit that it might be a single sided view and that you are open to different opinions. It will show you know them and thought about them. ]`
 
-<TODO: Interface seggregation principle from SOLID.>
+`[ TODO: Interface seggregation principle from SOLID. ]`

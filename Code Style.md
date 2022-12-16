@@ -427,13 +427,13 @@ Use proper indentation.
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
 ```cs
-<TODO: Example.> 
+[ TODO: Example. ]
 ```
 
 </td><td>
 
 ```cs
-<TODO: Example.>
+[ TODO: Example. ]
 ```
 
 </td></tr></table>

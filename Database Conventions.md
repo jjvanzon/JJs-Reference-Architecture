@@ -102,11 +102,11 @@ For new databases, prefer int's as primary keys over guids, because guids create
 
 Only use additional guid columns as an alternative key for entities that need to be unique across multiple systems or databases. Do not forget to put an index on the guid column. Prefer surrogate keys rather than complicated composite keys. Prefer auto-incremented ID's, except for enum-like tables.
 
-<TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.>
+`[ TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked. ]`
 
 For development databases use the “DEV\_" prefix, e.g. DEV\_ShopDB.
 
-For test use the prefix “TEST\_" and for acceptance use the prefix “ACC\_". For production use no prefix at all.
+For test use the prefix `TEST_` and for acceptance use the prefix `ACC_`. For production use no prefix at all.
 
 On development databases add the user dev with password dev. For test add the user test with password test. For acceptance you might use specific user names depending on security demands, otherwise add user name acc with password acc. In production databases use the administrator user's password with the administrator password for databases or create a separate user name for production with a strong password.
 
