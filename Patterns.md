@@ -539,7 +539,7 @@ In an ASP.NET MVC application a controller has a lot of responsibilities, but in
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
 
-Entity names put in controller should be plural. So Customer__s__Controller not CustomerController.
+Entity names put in controller should be plural. So Customer**s**Controller not CustomerController.
 
 ### Post-Redirect-Get
 
