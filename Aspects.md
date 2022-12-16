@@ -207,7 +207,7 @@ Entity Model / Data Model
 
 `< TODO: Discuss different data modeling options. Among which entity models. >`
 
-`< TODO: Unintended n -> 1 relationships. \`
+`< TODO: Unintended n -> 1 relationships. >`
 
 `< TODO: Is this statement true? When there is a 1-to-1 relationship, not to be confused with a 0-to-1 relationship, there is never a technical necessesity to have 2 entities, they may just as well have been 1. >`
 
@@ -683,7 +683,7 @@ Various solutions are available for scheduling a process (periodically) in time.
 Security
 --------
 
-`< TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection... \`
+`< TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection... >`
 
 `< TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web? >`
 
