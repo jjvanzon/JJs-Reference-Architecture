@@ -49,7 +49,7 @@ Much of the document is still described in definites, rather than suggestions. A
 
 What you will also find is that I describe a lot of things you could do wrong. The suggestion is often that there is a better way to do it. I will try to reformulate things so they start with a positive approach rather than starting with the negative.
 
-Currently (2017-06-28) it is full of TODO’s that indicate texts I still want to write or rough texts to polish up. So please be forgiving of those.
+Currently (2017-06-28) it is full of TODO's that indicate texts I still want to write or rough texts to polish up. So please be forgiving of those.
 
 But, now: back to business.
 
@@ -59,9 +59,9 @@ Technical over Functional
 
 This document mostly goes into detail about technical aspects of software architecture: those aspect of software development, that go beyond the individual application: techniques and best practices that can be applied to the development of *any* application.
 
-You could call it *‘functionality-independent software architecture’*.
+You could call it *'functionality-independent software architecture'*.
 
-You could also call this architecture a *‘pattern stack’*, because it takes a technical-first approach, rather than functional-first in that a layering is described where fixed design patterns are used from one layer to the next.
+You could also call this architecture a *'pattern stack'*, because it takes a technical-first approach, rather than functional-first in that a layering is described where fixed design patterns are used from one layer to the next.
 
 The idea behind this is that even though technology changes fast, functionality changes faster. So a technical-first order will be less likely to change, and this results in a more stable subdivision into parts upon which the functionality builds.
 
@@ -92,7 +92,7 @@ The main principles of this software architecture are:
 - Code scalability
 - Platform and protocol independence
 
-Code scalability does not refer to hardware scalability, but rather that the code base can grow and grow, while keeping it maintainable. 50 apps should be as maintainable as 5. This means that quality demands are high. As a companies’ amount of software products grows, software architecture is necessary to create an economically viable amount of software maintenance, or a company might run into problems.
+Code scalability does not refer to hardware scalability, but rather that the code base can grow and grow, while keeping it maintainable. 50 apps should be as maintainable as 5. This means that quality demands are high. As a companies' amount of software products grows, software architecture is necessary to create an economically viable amount of software maintenance, or a company might run into problems.
 
 Another way of putting this is: The next software change should not be more difficult than the previous one, regardless of how large the system has become.
 
@@ -115,9 +115,9 @@ This document goes into detail about a lot of best practices. But to keep focus 
 
 And second in line:
 
-1. Reject, don’t correct
+1. Reject, don't correct
 1. Clear interfaces
-1. ‘No handy extras’ / ‘Ya ain’t gonna need it’
+1. 'No handy extras' / 'Ya ain't gonna need it'
 1. Solve a problem at its core, instead of making work-arounds.
 1. To solve a bug, first reproduce it
 1. Proper use of encoding

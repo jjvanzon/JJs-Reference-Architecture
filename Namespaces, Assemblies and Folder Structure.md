@@ -12,7 +12,7 @@
 - [Details](#details)
     - [One Class, One File](#one-class-one-file)
     - [Lone Classes (bad)](#lone-classes-bad)
-    - [‘Scramled’ Technical and Functional Concerns](#scramled-technical-and-functional-concerns)
+    - ['Scramled' Technical and Functional Concerns](#scramled-technical-and-functional-concerns)
 
 
 General Structure
@@ -20,7 +20,7 @@ General Structure
 
 Solution files are put in the code root.
 
-Assembly names, namespaces and folder structure are similar to eachother. An assembly’s name will be its root namespace. The folder structure will also correspond to the namespacing.
+Assembly names, namespaces and folder structure are similar to eachother. An assembly's name will be its root namespace. The folder structure will also correspond to the namespacing.
 
 An assembly name is built up as follows:
 
@@ -30,7 +30,7 @@ Internally in an assembly each pattern can get its own sub-folder:
 
     Company.SoftwareLayer.BusinessDomain [.Technology] [.Test] [.DesignPattern]
 
-If a project is very small, you might use a single sub-folder ‘Helpers’, instead of a folder for each design pattern.
+If a project is very small, you might use a single sub-folder 'Helpers', instead of a folder for each design pattern.
 
 When a project gets big, a design pattern folder might again be split up into partial domains or main entities:
 
@@ -40,7 +40,7 @@ When a project gets big, a design pattern folder might again be split up into pa
 Root Namespace / Company Name
 -----------------------------
 
-In this architecture the root namespace will be the ‘company name’, for instance:
+In this architecture the root namespace will be the 'company name', for instance:
 
     JJ
 
@@ -74,7 +74,7 @@ The third level in the namespacing is the business domain. A business domain can
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The ‘business domain’ of the framework layer is usually a technical aspect. Examples:
+The 'business domain' of the framework layer is usually a technical aspect. Examples:
 
 - JJ.Framework.__Validation__  
 - JJ.Framework.__Security__  
@@ -114,9 +114,9 @@ The general rule is that all classes, interfaces, enums, etc. get their own file
 
 ### Lone Classes (bad)
 
-It is unhandy to have a whole bunch of your assembly’s folders just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called ‘Helpers’, if they indeed are just simple helper classes.
+It is unhandy to have a whole bunch of your assembly's folders just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called 'Helpers', if they indeed are just simple helper classes.
 
-### ‘Scramled’ Technical and Functional Concerns
+### 'Scramled' Technical and Functional Concerns
 
 In our namespacing, the technical and functional pieces seem scrambled:
 
@@ -130,7 +130,7 @@ These are the technical concerns:
 
 - JJ.__Business__.Ordering.__Validation__.Products
 
-The reason for ‘scrambling’ of technical and functional concerns, is rooted in that we are trying to project something 2-dimensional (funtional vs. technical) onto something sequential (written text). We could artificially keep functionality together and technical things together:
+The reason for 'scrambling' of technical and functional concerns, is rooted in that we are trying to project something 2-dimensional (funtional vs. technical) onto something sequential (written text). We could artificially keep functionality together and technical things together:
 
 - __JJ.Ordering.Products__.Business.NHibernate.Validation
 - JJ.Ordering.Products.__Business.NHibernate.Validation__
@@ -145,4 +145,4 @@ Another problem with starting with `JJ.Ordering.Products` instead of `JJ.Busines
 
 It is less confusing from a software design perspective to have all layers present and whether a business domain is present in a layer is optional. That makes it more obvious that there is an n-to-n relationship between layers and business domains.
 
-But the ordering in the namespace is arbitrary. It just helps us to ‘scramble’ the namespace parts wisely, so that it goes from one level of detail to the next.
+But the ordering in the namespace is arbitrary. It just helps us to 'scramble' the namespace parts wisely, so that it goes from one level of detail to the next.

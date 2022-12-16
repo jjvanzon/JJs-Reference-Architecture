@@ -102,7 +102,7 @@ Casing (and Punctuation)
 | Abbreviations of 2 letters with capitals.                       | `ID`
 | Abbreviations of 3 letters or more in pascal case.              | `Mvc`
 | MVC partial view names in pascal case, starting with underscore | `_MyPartialView`
-| For long identifiers, underscores to separate ‘the pieces’      | `Sine_OperatorCalculator_VarFrequency`
+| For long identifiers, underscores to separate 'the pieces'      | `Sine_OperatorCalculator_VarFrequency`
 | No prefixes, such as `strName`                                  |
 
 Spacing (and Punctuation)
@@ -110,7 +110,7 @@ Spacing (and Punctuation)
 
 ### Auto-Formatting
 
-Prefer Visual Studio’s autoformatting enabled and set to its defaults.
+Prefer Visual Studio's autoformatting enabled and set to its defaults.
 
 Reason: Less surprizing to the next developer.
 
@@ -310,7 +310,7 @@ Might be easy to overlook that there is another property.
 
 ### Enters in Methods
 
-Putting enters inside methods between ‘Pieces that do Something’.  
+Putting enters inside methods between 'Pieces that do Something'.  
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
@@ -1280,7 +1280,7 @@ Suggestions for boolean variable name prefixes and suffixes:
 | `Can...`        | `CanDelete`     | Might indicate what *user* can do.
 | `Has...`        | `HasRecords`    |
 | `Are...`        | `AreEqual`      | For plural things.
-| `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability’s sake. See ‘Double Negatives’.
+| `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability's sake. See 'Double Negatives'.
 | `Include...`    | `IncludeHidden` | Even though it is verb, it may make sense for booleans.
 | `Exclude...`    |                 | "
 | `...Exists`     | `FileExists`    |
@@ -1328,7 +1328,7 @@ This is because it might be quite important to see in code whether something is 
 
 Variables might be kept similar to the class names and include the prefixes and suffixes, so it stays clear what they are.
 
-Some other suggested ‘last names’ for classes apart form the pattern names might be:
+Some other suggested 'last names' for classes apart form the pattern names might be:
 
 |              | |
 |--------------|-|
@@ -1481,7 +1481,7 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `...Polymorphic`         | Handling a multitude of differrent (derived) types, possibly each in a different way.
 | `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less pretty suffixes like `Conditionally` or a prefix `Conditional`, that might obscuring the name that comes after.
 | `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
-| `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in ‘Is it *recursive*?’.)
+| `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in 'Is it *recursive*?'.)
 | `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 

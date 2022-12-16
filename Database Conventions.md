@@ -32,14 +32,14 @@ Developing a database generally involves the following steps:
 - Make foreign keys on columns that link to other tables
 - Add indexes on foreign keys columns
 - Add unique indexes
-    - However, sometimes ORM’s will trip over unique keys at which we promptly remove the unique constraint.
+    - However, sometimes ORM's will trip over unique keys at which we promptly remove the unique constraint.
     - Note that you do not need an additional index when there is already a unique constriant whose first column is the column you would like to index.
 - Add indexes to search columns and alternative keys
 - Add indexes for problem queries
 
-Keep in mind to limit the use of ‘exotic’ data types.
+Keep in mind to limit the use of 'exotic' data types.
 
-For instance: if a number would fit in a tinyint, use an ‘int’ anyway, because this saves the system a lot of casting, and a 32-bit number is better for memory / disk alignment, which is better for performance. Chances are, a system will reserve 32 bit for a 8-bit number anyway to accomplish this memory alignment. But this is just an example.
+For instance: if a number would fit in a tinyint, use an 'int' anyway, because this saves the system a lot of casting, and a 32-bit number is better for memory / disk alignment, which is better for performance. Chances are, a system will reserve 32 bit for a 8-bit number anyway to accomplish this memory alignment. But this is just an example.
 
 Here are the recommended data types:
 
@@ -77,7 +77,7 @@ Naming Conventions
 | Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `…`
 
 - Avoid using keywords as column names. Think of a different name instead.
-- ‘Index’ is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
+- 'Index' is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
 
 
 Rules
@@ -98,9 +98,9 @@ Do not use the following object types, because these things are managed in .NET:
 - Types
 - Rules
 
-For new databases, prefer int’s as primary keys over guids, because guids create performance penalties throughout the software stack.
+For new databases, prefer int's as primary keys over guids, because guids create performance penalties throughout the software stack.
 
-Only use additional guid columns as an alternative key for entities that need to be unique across multiple systems or databases. Do not forget to put an index on the guid column. Prefer surrogate keys rather than complicated composite keys. Prefer auto-incremented ID’s, except for enum-like tables.
+Only use additional guid columns as an alternative key for entities that need to be unique across multiple systems or databases. Do not forget to put an index on the guid column. Prefer surrogate keys rather than complicated composite keys. Prefer auto-incremented ID's, except for enum-like tables.
 
 <TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.>
 
@@ -108,7 +108,7 @@ For development databases use the “DEV\_” prefix, e.g. DEV\_ShopDB.
 
 For test use the prefix “TEST\_” and for acceptance use the prefix “ACC\_”. For production use no prefix at all.
 
-On development databases add the user dev with password dev. For test add the user test with password test. For acceptance you might use specific user names depending on security demands, otherwise add user name acc with password acc. In production databases use the administrator user’s password with the administrator password for databases or create a separate user name for production with a strong password.
+On development databases add the user dev with password dev. For test add the user test with password test. For acceptance you might use specific user names depending on security demands, otherwise add user name acc with password acc. In production databases use the administrator user's password with the administrator password for databases or create a separate user name for production with a strong password.
 
 
 Upgrade Scripts
@@ -135,13 +135,13 @@ So it has the format:
 | Element                   | Description | Examples |
 |---------------------------|-------------|----------|
 | __Date__                  | Use the format `yyyy-mm-dd` | `2014-08-28`
-| __Number__                | Use 3 digits and count in 10’s so you might insert one in betweeen | `040`
+| __Number__                | Use 3 digits and count in 10's so you might insert one in betweeen | `040`
 | __DatabaseStructureName__ | | `ShopDB`
 | __DatabaseObject__        | A table name or index name or other database object name | `Supplier`<br>`IX_Supplier_Name`<br>`FK_Supplier_Branch`
 | __SubDatabaseObject__     | Optional. Usually a column name | `.Name`
 | __Change__                | Optional. Usually left out. You can sometimes mention a specific change, but be brief. | `not null`
 
-In the Excel, add a column for each database instance for that database structure. There can be different databases with the same structure for different staging areas (dev, test, acc, prod) or a database for different customers or databases running on different servers. Put ‘TRUE’ (or ‘WAAR’ in Dutch) where the upgrade script has been executed. For instance:
+In the Excel, add a column for each database instance for that database structure. There can be different databases with the same structure for different staging areas (dev, test, acc, prod) or a database for different customers or databases running on different servers. Put 'TRUE' (or 'WAAR' in Dutch) where the upgrade script has been executed. For instance:
 
 ![](images/Aspose.Words.0aeae50c-3cfd-43e3-a87f-3418f3232d31.001.png)
 
@@ -149,7 +149,7 @@ Also include a column saying whether you have scripted it at all (for if you are
 
 <h4>Exceptional Cases</h4>
 
-For upgrades that should only be executed on a specific database, put ‘N/A’ (or ‘N.V.T.’ in Dutch) in the appropriate spread sheet cell.
+For upgrades that should only be executed on a specific database, put 'N/A' (or 'N.V.T.' in Dutch) in the appropriate spread sheet cell.
 
 You can also add something to the SQL file name to indicate this:
 
@@ -181,7 +181,7 @@ The individual upgrade SQL scripts should not contain GO statements. GO is not a
 
 Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of SQL Server anyway.
 
-The upgrade scripts should be incremental: DO make assumptions about the previous state of the database structure and script a specific change. Do not write scripts like ‘if not exists’ then add, or ‘drop and create table’ scripts, because you may be throwing away data, or execute things on the wrong database. It is better to make a specific change and *not* be tolerant to differences.
+The upgrade scripts should be incremental: DO make assumptions about the previous state of the database structure and script a specific change. Do not write scripts like 'if not exists' then add, or 'drop and create table' scripts, because you may be throwing away data, or execute things on the wrong database. It is better to make a specific change and *not* be tolerant to differences.
 
 DO NOT script changes from Identity Yes to Identity No or the other way around. Changes in the Identity property of a column require recreating the whole database table. If you script it now, executing it onto a database does not only add the Identity Yes property, it will also restore the whole table structure to the state it had at the time you scripted the Identity.
 
@@ -191,7 +191,7 @@ This section covered:
 
 - No GO statements
 - Split up into separate files
-- Incremental scripts (no ‘if exists’ checks or drop and recreate).
+- Incremental scripts (no 'if exists' checks or drop and recreate).
 - DO NOT script Identity Yes and Identity No
 
 ### Deployment
@@ -287,7 +287,7 @@ This problem with C#-based migrations can be mitigated in several ways. Here are
 
 Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.
 
-For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
+For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. 'Run the resaver' would be the description in the list of data migrations to execute.
 
 <h3>Get Specific Version, Build, Get Specific Version, Build</h3>
 

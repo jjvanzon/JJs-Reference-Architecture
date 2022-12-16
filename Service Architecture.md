@@ -69,7 +69,7 @@ It gets better with each system you introduce in your ESB. When messages from a 
 Clearer Integration Code
 ------------------------
 
-But it gets better. You save yourself even more work. The conversion code from message to canonical model is often easier than converting from one system’s format to the other system’s format, because instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforeward format, which is quite a lot easier to program.
+But it gets better. You save yourself even more work. The conversion code from message to canonical model is often easier than converting from one system's format to the other system's format, because instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforeward format, which is quite a lot easier to program.
 
 
 In Practice
@@ -81,7 +81,7 @@ In practice not every system sends every type of message back and forth to every
 Standard ESB vs Custom ESB
 --------------------------
 
-There are standard Enterprise Service Bus software packages available. Yet, you might choose to build a custom one yourself. The concepts are not that hard to implement. And generic ESB’s are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own canonical model, which is basically all of the work. Therefore building it yourself seems a viable option.
+There are standard Enterprise Service Bus software packages available. Yet, you might choose to build a custom one yourself. The concepts are not that hard to implement. And generic ESB's are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own canonical model, which is basically all of the work. Therefore building it yourself seems a viable option.
 
 
 ESB Model
@@ -121,7 +121,7 @@ The implementation of a service would involve mostly message transformation and 
 Multi-Dispatch
 --------------
 
-The content of a canonical model might determine what service to send it to. For instance, one canonical Order has to be sent to one supplier using their own specific integration protocol, another order might simply be e-mailed to the supplier. This service architecture enables you to retrieve a message from one system, for instance an order, and then send that message to an arbitrary other system. That is part of the power of the canonical model, where multiple systems’ messages being converted to canonical model, enables all those systems to communicate with each other.
+The content of a canonical model might determine what service to send it to. For instance, one canonical Order has to be sent to one supplier using their own specific integration protocol, another order might simply be e-mailed to the supplier. This service architecture enables you to retrieve a message from one system, for instance an order, and then send that message to an arbitrary other system. That is part of the power of the canonical model, where multiple systems' messages being converted to canonical model, enables all those systems to communicate with each other.
 
 
 Namespaces
@@ -142,7 +142,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Services.Ordering.Interface__            | Defines interfaces (the C# kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
 | __JJ.Services.Ordering.Dispatcher__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
 | __JJ.Services.Ordering.Email__                | A specific implementation of an ordering interface, behind which we send the order by e-mail.
-| __JJ.Services.Ordering.SuperAwesomeProtocol__ | A specific implementation of an ordering interface, behind which we implement the hypothetical ‘super awesome protocol’ for sending orders.
+| __JJ.Services.Ordering.SuperAwesomeProtocol__ | A specific implementation of an ordering interface, behind which we implement the hypothetical 'super awesome protocol' for sending orders.
 | __JJ.Services.Ordering.Wcf__                  | A WCF service that allows you to communicate with the multi-dispatch ordering system.
 | __JJ.Services.Ordering.Wcf.Interface__        | Defines the interface of the WCF service that allows you to communicate with the multi-dispatch ordering system. This service interface can is used by both service and client.
 | __JJ.Services.Ordering.Wcf.Client__           | Allows code to connect to the WCF service using the strongly typed service interface.

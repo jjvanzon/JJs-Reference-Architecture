@@ -66,17 +66,17 @@
 Introduction
 ------------
 
-What are called ‘Aspects’ here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you are going to have to make a decision about many of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API’s and are a level of abstraction that hovers above them.
+What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you are going to have to make a decision about many of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API's and are a level of abstraction that hovers above them.
 
 Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te Visual Studio IDE.
 
-(The word ‘aspect’ is related to the ‘aspect’ construct in aspect oriented programming languages or frameworks, but you can think in terms of aspects even regardless of these tools and constructs.)
+(The word 'aspect' is related to the 'aspect' construct in aspect oriented programming languages or frameworks, but you can think in terms of aspects even regardless of these tools and constructs.)
 
 
 Authoring & Reviewing
 ---------------------
 
-This aspect covers things such as marking objects with creation dates, modification dates, etcetera, adding an author’s comment to objects and managing multiple versions of objects and logging which user made which change.
+This aspect covers things such as marking objects with creation dates, modification dates, etcetera, adding an author's comment to objects and managing multiple versions of objects and logging which user made which change.
 
 <TODO: Describe better: Reviewing: Like rating content. So closely related to authoring I find that it should be grouped together. >
 
@@ -94,7 +94,7 @@ Calculation
 
 <TODO: Write a text. Include:
 
-Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those ‘Calculators’. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a visitor to simplify, but isolate complex recursive calculations.>
+Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those 'Calculators'. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a visitor to simplify, but isolate complex recursive calculations.>
 
 
 Cascading
@@ -106,7 +106,7 @@ Talk about DeleteWithRelatedEntities and UnlinkRelatedEntities.
 
 Do mention NHibernate cascading. 
 
-See ‘LinkTo’ under ‘Patterns’. 
+See 'LinkTo' under 'Patterns'. 
 
 Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions?>
 
@@ -130,7 +130,7 @@ Code style an be enforced with different methods:
 
 - The Code Style handbook, such as is part of this Reference Architecture.
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
-- Using Visual Studio’s code style options from the Options screen.
+- Using Visual Studio's code style options from the Options screen.
 - Resharper!
 
 
@@ -163,17 +163,17 @@ One possiblity is locking access to the data. This might not be such a good choi
 
 Another technique for handling concurrency is to assume that other users probably will not change the data, but if he had, the save procedure fails. Just before saving, the system checks if the data in the data store was changed since the data was retrieved. If the data is different, this will result in an error message. This requires quite some checks by the system, and remembering original values. Furthermore, in high concurrency situations the number of error messages may increases. And an error message basically means that the user needs to discard his changes and start again, which does not sound ideal.
 
-The preferred technique in this architecture works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user’s changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user’s changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user’s save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
+The preferred technique in this architecture works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user's changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user's changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user's save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
 
-The way this strategy of ‘last user wins’ is accomplished, is by running the save operation in a transaction, adopting a TryGet-Insert-Update pattern for entities. There wll be no checks regarding whether an object is new or already existed. Not-found objects are simple recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
+The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a TryGet-Insert-Update pattern for entities. There wll be no checks regarding whether an object is new or already existed. Not-found objects are simple recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
 
-Another strategy that will not be used, is trying to keep all users’ additions of related entities. However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related entity is not in user A’s list and it is in user B’s list, does this mean it is user B’s addition of the related entity, or user A’s removal of the related entity? The ambiguity could be solved by marking which entities are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user’s changes. However, it is much harder to manage and the benefits are little.
+Another strategy that will not be used, is trying to keep all users' additions of related entities. However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related entity is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related entity, or user A's removal of the related entity? The ambiguity could be solved by marking which entities are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
 
 
 Configuration
 -------------
 
-For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET’s System.Configuration directly can be quite a lot of work. For details see the document *API's*.
+For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document *API's*.
 
 We will use 3 ways of storing configuration settings:
 
@@ -193,7 +193,7 @@ See: 'Converter', 'TryGet-Insert-Update', 'TryGet-Insert-Update-Delete / Collect
 Defaults
 --------
 
-Implemented as side-effects that go off in a Facades’s Create methods. See ‘Side Effects’, ‘Facade’ under ‘Design Patterns’.
+Implemented as side-effects that go off in a Facades's Create methods. See 'Side Effects', 'Facade' under 'Design Patterns'.
 
 
 Debugging
@@ -217,7 +217,7 @@ Entity Model / Data Model
 Entity Status Management
 ------------------------
 
-Entity status management (or ‘object status management’) is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the presentation and business layer for a particular functional domain.
+Entity status management (or 'object status management') is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the presentation and business layer for a particular functional domain.
 
 There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every business domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
 
@@ -245,7 +245,7 @@ enum MyEnum
 
 This prevents you from accidently forgetting to assign the enum value.
 
-- Prefer not using specific underlying enum types. Enums ‘derive’ from int by default, but you can e.g. do the following, which is not recommended:
+- Prefer not using specific underlying enum types. Enums 'derive' from int by default, but you can e.g. do the following, which is not recommended:
 
 ```cs
 enum MyEnum : long
@@ -305,7 +305,7 @@ public class SectionType
 
 Often you do not need more than these two properties.
 
-It is common to end the enum-like entity type with the suffix ‘Type’ (not a strict requirement).
+It is common to end the enum-like entity type with the suffix 'Type' (not a strict requirement).
 
 The Name property will be filled with the string that is exactly the enum member name:
 
@@ -382,7 +382,7 @@ public static void SetSectionTypeEnum(this Section entity, SectionTypeEnum enumV
 
 ### Localization
 
-- Localization of the enum member display names is done by means of resources, usually in the Resources.resx  in the Business layer. (See the ‘Resources’ pattern and Appendix B for explanations on how to manage resources). The key of the resource should exactly match the enum member name.
+- Localization of the enum member display names is done by means of resources, usually in the Resources.resx  in the Business layer. (See the 'Resources' pattern and Appendix B for explanations on how to manage resources). The key of the resource should exactly match the enum member name.
 - The following code allows you to retrieve an enum member display name:
 
 ```cs
@@ -435,8 +435,8 @@ public static class ResourceHelper
 
 <TODO: The following things are not  yet discussed there:
 
-- If you use Guids as primary keys, you cannot use enums for the ID’s of enum-like entities.
-- ID’s columns of enum-like entities are never auto-increment.
+- If you use Guids as primary keys, you cannot use enums for the ID's of enum-like entities.
+- ID's columns of enum-like entities are never auto-increment.
 - Indexes on enum-like columns are not necessary because they do not have a lot of variation in values, which makes an index not very effective, and also you will not often join or search on an enum-like column.>
 
 
@@ -475,7 +475,7 @@ throw new Exception($"Item with {new { name }} not found");
 This will produce a message like: Item with { name = "Item 1" } not found.
 
 - Possibly mention the invalid value in the exception message.
-- For most exceptions, use dry formulations such as ‘not found’, ‘cannot be null’ and ‘must be greater than 0’.
+- For most exceptions, use dry formulations such as 'not found', 'cannot be null' and 'must be greater than 0'.
 - Put exceptions at the beginning of a method if possible.
 - Do not use exception filtering (catching specific exception types) unless you absolutely have to:
 
@@ -503,7 +503,7 @@ If you have an MVC web app and you think you do not have facades, then it is pro
 
 If you have a poorly layered Windows app, you probably have a lot of facades: each form probably is one.
 
-You could even say that a very flat, unstructured user app’s facade is the user interface itself, which combines all the underlying code together into a simpler view on it.
+You could even say that a very flat, unstructured user app's facade is the user interface itself, which combines all the underlying code together into a simpler view on it.
 
 In an architecture with many different business logic objects, that each take an arbitrary set of dependencies, all of those business logic objects are facades. You could ask yourself questions about the large gedree of interdependence in your system, and if the responsibilities are separated clearly enough. You could try to make your business logic objects operate as independent from eachother as possble, and only have a few that combine a lot aspects of together by delegating to smaller business logic objects.
 
@@ -515,7 +515,7 @@ Bidirectional Relationships
 
 Akak "Inverse Relationship Management" or "Inverse Property Management".
 
-See ‘LinkTo’ under ‘Design Patterns’.
+See 'LinkTo' under 'Design Patterns'.
 
 An alternative is the OneToManyRelationship and ManyToOneRelationship classes from the  Framework.Business assembly.
 
@@ -534,7 +534,7 @@ An alternative is the OneToManyRelationship and ManyToOneRelationship classes fr
 IO
 --
 
-<TODO: Write description. Mention CsvReader e.d. The use of .NET serialization API’s XML, etc. Mention the StreamHelper. >
+<TODO: Write description. Mention CsvReader e.d. The use of .NET serialization API's XML, etc. Mention the StreamHelper. >
 
 
 Logging
@@ -573,7 +573,7 @@ If you insist on using Log4Net, make a separate ILogger implementation behind wh
 Multi-Language / Translations / Culture
 ---------------------------------------
 
-For button texts and other labels in an application: see ‘Resources’ under ‘Other Patterns’. That does not solve multi-lingual user data, for which multiple solutions are possible.
+For button texts and other labels in an application: see 'Resources' under 'Other Patterns'. That does not solve multi-lingual user data, for which multiple solutions are possible.
 
 <TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >
 
@@ -603,9 +603,9 @@ A downside of that is that the table structure is dependent on the domain model 
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
-The foreign key solution does have a big benefit over the generic key solution, because ORM’s will cache the entities in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
+The foreign key solution does have a big benefit over the generic key solution, because ORM's will cache the entities in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
-To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the repositories / data access layer, but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around entity cache objects or translation facades around your business layer, as a substitute for getting them from a repository directly, which would not work for non-flushed (‘uncommitted’) entities.
+To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the repositories / data access layer, but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around entity cache objects or translation facades around your business layer, as a substitute for getting them from a repository directly, which would not work for non-flushed ('uncommitted') entities.
 
 A lot of work to use the loosely linked entities. This is not unique to loosely linked translation entities. It is a problem with any alternative key, that non-flushed entities cannot be retrieved with a (LINQ) query.
 
@@ -613,13 +613,13 @@ A lot of work to use the loosely linked entities. This is not unique to loosely 
 Naming
 ------
 
-See ‘Names’ under ‘Coding Style’.
+See 'Names' under 'Coding Style'.
 
 
 Paging
 ------
 
-All page numbering starts at 1. Even though we usually start counting at 0 as programmers, to the user the first page is still 1 and it is very confusing if you do not carry through the same numbering throughout the whole software layering. Only right before you retrieve something from a data store you may convert the numbers to fit your data store’s needs.
+All page numbering starts at 1. Even though we usually start counting at 0 as programmers, to the user the first page is still 1 and it is very confusing if you do not carry through the same numbering throughout the whole software layering. Only right before you retrieve something from a data store you may convert the numbers to fit your data store's needs.
 
 Throughout the software layering we pass through 1-based page numbers and page count. Our data store may need a first index instead, but we only convert to that number as deeply into the layering as possible.
 
@@ -653,7 +653,7 @@ To access a data store (usually a database), Framework.Persistence will be used.
 
 The main interface of the framework is IContext.
 
-See also: ‘ORM’.
+See also: 'ORM'.
 
 
 Platform Compatibility
@@ -675,7 +675,7 @@ Various solutions are available for scheduling a process (periodically) in time.
 
 - Windows Task Scheduler
 - Immediately running a process in the background in a web application.
-- Using a job scheduling API. For instance ‘Quartz’ scheduling.
+- Using a job scheduling API. For instance 'Quartz' scheduling.
 
 <TODO: Go into the various options and explain a little further.>
 
@@ -685,7 +685,7 @@ Security
 
 <TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection… >
 
-<TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API’s, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web?>
+<TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web?>
 
 <TODO: -	Aspects, Security: If content is to be protected with authorization, then for partial presenters you need to do authorization checks if the presenter cass is public, and do not have to do authorization if the presenter class is internal.>
 
@@ -693,7 +693,7 @@ for enum-like tables.
 
 <TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.
 
-In other words: If you can enter ID’s of child objects by inspecting HTML, you can screw up another user’s data or another document’s data if you do not check if the original belongs to the right document / user.>
+In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user.>
 
 Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an IContext and repositories in the top-level project, often an MVC app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
@@ -707,11 +707,11 @@ IRightsManager
 
 The interfaces might have different implementations, depending on the underlying security technology used.
 
-`IAuthenticator` will validate if a user’s credentials are correct.
+`IAuthenticator` will validate if a user's credentials are correct.
 
 `IAuthorizer` will verify if that user is permitted to access certain parts of the system.
 
-`IRightsManager` will allow you to manage and change the users’ rights.
+`IRightsManager` will allow you to manage and change the users' rights.
 
 ```cs
 IAuthenticator 
@@ -792,13 +792,13 @@ Calculation Module
 Side Effects
 ------------
 
-See ‘Side Effects’ under ‘Design Patterns’.
+See 'Side Effects' under 'Design Patterns'.
 
 
 Styling
 -------
 
-Possible API’s:
+Possible API's:
 
 - CSS
 - Less
@@ -818,7 +818,7 @@ Transactions
 
 - Describe transactionality: usage of rollback and commit. Document that flush is an exception and dangerous and if used, must be commented with the reason why you use it.
 
-- Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I’m not sure. >
+- Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I'm not sure. >
 
 
 Type Safety
@@ -840,7 +840,7 @@ Unit testing may also be handy for important functionality that you may want to 
 
 Another case where unit testing may come in handy, might be when a calculation may have quite a few different variations. Sometimes manual testing might only cover 10%, while 50 unit test might cover 95% of the situations and could be run each time you release the software.
 
-But in some cases simply debugging and testing functionally may be a better choice, for efficiency’s sake.
+But in some cases simply debugging and testing functionally may be a better choice, for efficiency's sake.
 
 <h3>Efficiently Writing Unit Tests</h3>
 
@@ -884,7 +884,7 @@ Possible strategies for making unit tests easier to debug and read:
 User Interface
 --------------
 
-<TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my views to view models, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under ‘Presentation Patterns’. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API’s or consumed as json in JavaScript UI’s. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base.>
+<TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my views to view models, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under 'Presentation Patterns'. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API's or consumed as json in JavaScript UI's. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base.>
 
 
 Utilities
@@ -972,7 +972,7 @@ internal class ExecutorDemo
 Validation
 ----------
 
-See ‘Validators’ under ‘Design Patterns’.
+See 'Validators' under 'Design Patterns'.
 
 
 Versioning (Data)
@@ -984,9 +984,9 @@ Versioning (Data)
 Workflow
 --------
 
-<TODO: Describe some more thoughts about this and about the different API’s.>
+<TODO: Describe some more thoughts about this and about the different API's.>
 
-Possible API’s:
+Possible API's:
 
 - Windows Workflow Foundation
 - Captaris Workflow

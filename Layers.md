@@ -28,11 +28,11 @@ The business layer talks to the data layer, which models the business domain but
 
 Data layer and presentation layer are programmed using fixed patterns. The business layer uses patterns too, but it gets a little more creative. If anything special needs to happen, this belongs in the business layer, since that is the machinery of the system.
 
-The data layer is also called the ‘data access layer’ or ‘persistence layer’.
+The data layer is also called the 'data access layer' or 'persistence layer'.
 
-The business layer is also referred to as ‘business logic’.
+The business layer is also referred to as 'business logic'.
 
-The presentation layer is sometimes referred to as the ‘front-end’.
+The presentation layer is sometimes referred to as the 'front-end'.
 
 
 Data Layer
@@ -54,8 +54,8 @@ The dashed line going right through the diagram separates the platform-specific 
 
 Because the architecture is multi-platform, the labels in the diagram are actually too specific:
 
-- ‘DB’ can actually be any __data store__ – that is the proper term for it: ‘data store’: an XML file, flat file or even just in-memory data.
-- ‘NHibernate’ can be an any __persistence technology__: another ‘ORM’ (‘object relational mapper’), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
+- 'DB' can actually be any __data store__ – that is the proper term for it: 'data store': an XML file, flat file or even just in-memory data.
+- 'NHibernate' can be an any __persistence technology__: another 'ORM' ('object relational mapper'), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
 
 
 Presentation Layer
@@ -100,8 +100,8 @@ The dashed line going right through the diagram separates the platform-specific 
 Because the architecture is multi-platform, the labels in the diagram above are actually too specific:
 
 - The *controller* is very specific to MVC and an equivalent might not even be present on other presentation platforms, even though it is advisable to have a central place to manage calls to the presenter and showing the right views depending on its result.
-- The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have ‘code-behind’ to only put dumb code in it and delegate the real work elsewhere.
-- ‘Html’ can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
+- The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have 'code-behind' to only put dumb code in it and delegate the real work elsewhere.
+- 'Html' can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
 
 
 Business Layer
@@ -113,15 +113,15 @@ What is business logic? Basically anything that is not presentation or data acce
 
 <TODO: Layers: Say something about infrastructure, next to persistence, business and presentation. Because then you can say: everything that is not persistence, presentation or infrastructure, is business logic.>
 
-The business layer resides in between the data access and the presentation layer. The presentation layer calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are ‘CRUD-oriented facades’.
+The business layer resides in between the data access and the presentation layer. The presentation layer calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
 
 The business layer executes validations that verify, that the data corresponds to all the rules. Also, the business layer executes side effects when altering data, for instance storing the date time modified or setting default values when you create an entity, or for instance automatically generating a name. The business layer is also responsible for calculations and many other things as represented in the diagram above.
 
 The business layer uses entities, but sometimes will call repositories out of the data access layer, even though your first choice should be to just use the entities. The presentation layer uses the business layer for anything special that needs to be done. Often when something special is programmed in the presentation layer, it actually belongs in the business layer instead.
 
-The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API’s. These choices are inherently part of this architecture. But because most things are built on entities and repository interfaces, the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
+The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and repository interfaces, the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
 
-<TODO: Add ‘Cloning‘ to big block in the diagram? It might stay too vague if you mention it there. >
+<TODO: Add 'Cloning' to big block in the diagram? It might stay too vague if you mention it there. >
 
 <TODO: Consider this: 
 
@@ -135,7 +135,7 @@ The subdivision into data, business and presentation is just about the most impo
 
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.005.png)
 
-The Framework layer consists of API’s that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
+The Framework layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
 
 Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the presentation layer, because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the presentation layer in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
 
