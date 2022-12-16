@@ -330,7 +330,7 @@ You can also reuse simple view models that represent a single entity, e.g. Produ
 
 ViewModels may only use simple types and references to other view models. A ViewModel should never reference data-store bound entities directly.
 
-Inheritance is *not* allowed, so it is a good plan to make the ViewModel classes sealed.
+Inheritance is *not* advisable, so it is a good plan to make the ViewModel classes sealed.
 
 Do not convert view models to other view models (except for yielding over non-persisted properties). Always convert from business domain to view model and from view model to business domain, never from view model to view model.
 
@@ -344,7 +344,7 @@ For instance: if the business logic tells us that an entity is a very special en
 
 <h4>Considerations</h4>
 
-The reason there should be no inheritance is because that would create an unwanted n2 dependency between views and the base view model: *n* views could be dependent on 1 view model and *m* view models could be dependent on 1 base view model, making *n* \* *m* views dependent on the same base view model. This means that if the base view model changes *n* \* *m* views could break, instead of just *n*. *m* is even likely to become greater than *n*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a view model could only break *n* views (the number of views that use that view model).
+The reason there should be no inheritance is because that would create an unwanted n² dependency between views and the base view model: *n* views could be dependent on 1 view model and *m* view models could be dependent on 1 base view model, making *n* \* *m* views dependent on the same base view model. This means that if the base view model changes *n* \* *m* views could break, instead of just *n*. *m* is even likely to become greater than *n*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a view model could only break *n* views (the number of views that use that view model).
 
 ### Lookup Lists
 

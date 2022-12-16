@@ -16,7 +16,7 @@
     - [Copy-Paste Programming (bad)](#copy-paste-programming-bad)
     - [Do Not Repeat Yourself (DRY)](#do-not-repeat-yourself-dry)
     - [Dump Code Line Here (bad)](#dump-code-line-here-bad)
-    - [Granularity*](#granularity)
+    - [Granularity](#granularity)
     - [Helperitis (bad)](#helperitis-bad)
     - [Spread Responsibility (bad)](#spread-responsibility-bad)
     - [Too Many Responsibilities (bad)](#too-many-responsibilities-bad)
@@ -292,7 +292,7 @@ But keep in mind that there are exceptions. Very trivial things can be repeated,
 
 <TODO: Strategic mistake: Don’t just put a line of code somewhere that gets rid of the symptom. Ask yourself the question if it is the responsibility of that class or whether it really belongs elsewhere. TODO: Describe that in more detail.>
 
-### Granularity*
+### Granularity
 
 Granularity can be compared to sand. Large pebbles are large granules, while fine sand is made up of a small granules. In code it means that a piece of code might tap into a big object, while it really only needs to depend on a smaller object. A piece of code may use a specialized object, while it can tap into a more generalized form. It can also be expressed as ‘defined at the wrong level’.
 
@@ -1063,7 +1063,7 @@ foreach (var x in list1)
 }
 ```
 
-Nested loops usually come with a performance penalty, because compared to a single loop with *n* iterations it might have *n2*  iterations. It is not always wrong to have a loop in a loop, but you are only comparing two lists, using a hashset or dictionary might be a better solution, changing the *n2* problem back to a *2n* problem:
+Nested loops usually come with a performance penalty, because compared to a single loop with *n* iterations it might have *n²*  iterations. It is not always wrong to have a loop in a loop, but you are only comparing two lists, using a hashset or dictionary might be a better solution, changing the *n²* problem back to a *2n* problem:
 
 ```cs
 Dictionary<int, X> dictionary = list1.ToDictionary(x => x.ID);
@@ -1192,7 +1192,7 @@ Even if your hypothesis does not turn out to be true, this is still useful infor
 
 If you are faced with a problem and you do not really know what the cause is and trying to *Narrow the Scope* is not getting you anywhere, you can also adopt a strategy of improving diagnostics.
 
-You could add some *Logging* or improve *DebuggerDisplays.* You could also improve *Error Checking*. You can also improve user input validation, which could give you a clue as to what’s wrong.
+You could add some *Logging* or improve *DebuggerDisplays*. You could also improve *Error Checking*. You can also improve user input validation, which could give you a clue as to what’s wrong.
 
 (`DebuggerDisplays` are handy things that can also improve your debugging experience.)
 

@@ -48,20 +48,20 @@ Folders
 
 If your servers and all your development workstations have a D: drive for data, then put the folders on the D: drive, otherwise put the the folders on the C: drive. Make a folder in the root of the drive with your company name:
 
-D:\\**JJ**
+D:\\__JJ__
 
 In this folder, each environment gets a sub-folder written in all capitals.
 
-D:\JJ\\**TEST**  
-D:\JJ\\**PROD**  
-D:\JJ\\**DEV**  
+D:\JJ\\__TEST__  
+D:\JJ\\__PROD__  
+D:\JJ\\__DEV__  
 
 Even machines with only one environment on it, should get a sub folder with the environment. That makes it better visible what environment you are working on, you can easily emulate the situation on a development workstation without additional configuration and it allows you to move environments from one server to the other.
 
 Also add the following folders:
 
-D:\JJ\\**Install**  
-D:\JJ\\**Backup**
+D:\JJ\\__Install__  
+D:\JJ\\__Backup__
 
 <TODO: Add descriptions to each folder above.>
 
@@ -69,18 +69,18 @@ Those are not put in the environment folder.
 
 The environment folder can contain the following sub folders:
 
-D:\JJ\PROD\\**Images**  
-D:\JJ\PROD\\**IO Files**  
-D:\JJ\PROD\\**Log**  
-D:\JJ\PROD\\**Utilities**  
-D:\JJ\PROD\\**Web**  
+D:\JJ\PROD\\__Images__  
+D:\JJ\PROD\\__IO Files__  
+D:\JJ\PROD\\__Log__  
+D:\JJ\PROD\\__Utilities__  
+D:\JJ\PROD\\__Web__  
 
 <TODO: Add descriptions to each folder above.>
 
 The Images folder contains images e.g. uploaded from an application, not images that are content of the application, so not icons or basic content of the web site, but user-uploaded images or images uploaded by content management systems. The Images folder can contain sub-folders to keep images apart from eachother, that belong to a different application or set of applications.
 
-D:\JJ\PROD\Images\\**QuestionAndAnswer**  
-D:\JJ\PROD\Images\\**Synthesizer**  
+D:\JJ\PROD\Images\\__QuestionAndAnswer__  
+D:\JJ\PROD\Images\\__Synthesizer__  
 
 An application image sub-folder can contain again sub-folders, for resized images with particular dimensions:
 

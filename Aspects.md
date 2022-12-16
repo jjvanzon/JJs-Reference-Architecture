@@ -233,8 +233,8 @@ Enums
 
 ### General Rules
 
-- Use the ‘Enum’ suffix for enum types e.g. OrderStatus**Enum**.
-- Always give an enum the enum member Undefined with value 0:
+- Use the `Enum` suffix for enum types e.g. OrderStatus**Enum**.
+- Always give an enum the enum member `Undefined` with value `0`:
 
 ```cs
 enum MyEnum
@@ -289,7 +289,7 @@ var myEnum = (MyEnum)3; // WORKS!
 
 The difference between throwing an InvalidValueException or a ValueNotSupportedException is that you would use InvalidValueException if all enum members except Undefined were part of the switch, because then it was not a sensible enum value. You would throw ValueNotSupportedException if the switch uses only some of the enum members, but other perfectly sensible members were not relevant in this particular case. But it is not a disaster to use these exception types interchangedly.
 
-- Use enum member *Undefined* in place of *null*, so also *avoid nullable enum* types.
+- Use enum member `Undefined` in place of `null`, so also *avoid nullable enum* types.
 
 ### Enum-Like Entities
 
@@ -345,7 +345,7 @@ public class SectionType
 
 The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the LinkTo methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
 
-- To make assigning an enum-like entity easier, you can put extension methods in your *Business* layer. You can put this in the *Extensions* folder and call the class *EnumExtensions*. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like entities:
+- To make assigning an enum-like entity easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like entities:
 
 ```cs
 SectionTypeEnum sectionTypeEnum = section.GetSectionTypeEnum();

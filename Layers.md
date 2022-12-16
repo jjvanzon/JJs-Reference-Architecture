@@ -71,7 +71,7 @@ The presentation layer calls the business layer, which contains all the rules th
 
 The data that is exactly shown on screen is called the *view model*.
 
-*Presenter* classes combine several responsibilities around the presentation logic. I
+*Presenter* classes combine several responsibilities around the presentation logic.
 
 The presenter layer forms a model of your program navigation. Each screen has its own presenter and each method in that presenter is a specific user action.
 

@@ -59,9 +59,9 @@ Technical over Functional
 
 This document mostly goes into detail about technical aspects of software architecture: those aspect of software development, that go beyond the individual application: techniques and best practices that can be applied to the development of *any* application.
 
-You could call it ‘*functionality-independent software architecture’*.
+You could call it *‘functionality-independent software architecture’*.
 
-You could also call this architecture a ‘*pattern stack’*, because it takes a technical-first approach, rather than functional-first in that a layering is described where fixed design patterns are used from one layer to the next.
+You could also call this architecture a *‘pattern stack’*, because it takes a technical-first approach, rather than functional-first in that a layering is described where fixed design patterns are used from one layer to the next.
 
 The idea behind this is that even though technology changes fast, functionality changes faster. So a technical-first order will be less likely to change, and this results in a more stable subdivision into parts upon which the functionality builds.
 

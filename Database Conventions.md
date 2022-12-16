@@ -185,7 +185,7 @@ The upgrade scripts should be incremental: DO make assumptions about the previou
 
 DO NOT script changes from Identity Yes to Identity No or the other way around. Changes in the Identity property of a column require recreating the whole database table. If you script it now, executing it onto a database does not only add the Identity Yes property, it will also restore the whole table structure to the state it had at the time you scripted the Identity.
 
-***Summary***
+<h4>Summary</h4>
 
 This section covered:
 
