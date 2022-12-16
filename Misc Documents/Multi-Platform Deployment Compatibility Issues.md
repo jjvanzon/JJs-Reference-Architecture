@@ -163,9 +163,9 @@ The items below are compatibility problems related to how Unity interoperates wi
 
   To make translations in resource files work, you need to check the supported cultures in the Properties editor in the Windows Phone 8 Visual Studio project.
 
-- ### “Development Build” Keeps Showing
+- ### “Development Build" Keeps Showing
 
-  In the Visual Studio project, select the Configuration “Master” instead of “Release” or “Debug” to make the text “Development Build” disappear from the application running on the phone.
+  In the Visual Studio project, select the Configuration “Master" instead of “Release" or “Debug" to make the text “Development Build" disappear from the application running on the phone.
 
 - ### System.ServiceModel
 

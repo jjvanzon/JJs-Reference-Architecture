@@ -801,7 +801,7 @@ Two seemingly independent pieces of code only work if one piece of code makes as
 
 ### Wrapperitis (bad)
 
-Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an API into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder “What does this do?” and the answer turns out to be “nothing really”.
+Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an API into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder “What does this do?" and the answer turns out to be “nothing really".
 
 This is closely trelated to the 'Hatch' anti-pattern.
 
@@ -1178,7 +1178,7 @@ You could be faced with a problem and not be exactly sure what the cause is, but
 
 This only really works if you already have some sort of clue as to where the problem lies. A smaller test is a good step after you have narrowed the scope already and want to test if one of your remaining hypotheses is true.
 
-Even if your hypothesis does not turn out to be true, this is still useful information, because it further excludes possible causes, which narrows the scope of the problem. You can then say: “Well we can know for sure, it's not that.”
+Even if your hypothesis does not turn out to be true, this is still useful information, because it further excludes possible causes, which narrows the scope of the problem. You can then say: “Well we can know for sure, it's not that."
 
 ### Solve by Refactoring
 
@@ -1290,7 +1290,7 @@ Too much effort into making code consistent can result in nonsensical code when 
 
 It is better for each piece of code to make as much sense as possible individually.
 
-“Consistent stupidity is still stupidity.”
+“Consistent stupidity is still stupidity."
 
 ### False Generic Solution (usually bad)
 
@@ -1439,7 +1439,7 @@ If you are done with a task, take one extra step to make it a little better. Oft
 
 ### Open/Closed Principe (SOLID)
 
-“Open for extension, closed for modification.” is one of the SOLID software design principles.
+“Open for extension, closed for modification." is one of the SOLID software design principles.
 
 This is my personal take on it, and I am very sceptical about this principle. And I am not alone. I think it is outdated, like the waterfall method, or only works in theory, but is not practical at all. It sounds like people that believe in this principle are blindly following some authority, without having an opinion of their own.
 
@@ -1472,7 +1472,7 @@ However, by doing it you can save a lot of work and complexity.
 
 <TODO: Use this phrase: Code should be about expressing your intentions as much as instruct the computer what to do. >
 
-<TODO: Incorporate this phrase: “the difficult part of programming is not writing code, but reading it.”>
+<TODO: Incorporate this phrase: “the difficult part of programming is not writing code, but reading it.">
 
 Code should be written so clearly that it is easy to read, which also makes it easy to adapt. It is more important that code is easy to read than easy to write. It is not the startup cost, but the maintenance cost that will kill you. Following good design principles, such as loose coupling, good naming, can make code adaptable. You should write code that you should not be afraid to change. You should not be afraid to change code or refactor. If you are afraid to change the code, then it might be poorly written and a digital time bomb. Time to change that. Or if you are afraid to change code, then there might be something wrong with the testing phase of your software development lifecycle, or lack thereof?
 
