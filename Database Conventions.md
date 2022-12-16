@@ -12,10 +12,6 @@
     - [Deployment](#deployment)
     - [SqlScripts Table](#sqlscripts-table)
 - [C#-Based Migrations](#c-based-migrations)
-    - [Always Rerunnable Tool](#always-rerunnable-tool)
-    - [Get Specific Version, Build, Get Specific Version, Build](#get-specific-version-build-get-specific-version-build)
-    - [Snapshots of Entity Model](#snapshots-of-entity-model)
-    - [Any Other Ideas](#any-other-ideas)
 
 
 Developing a Database
@@ -287,20 +283,20 @@ A benefit of SQL scripts is that it always operates on the right intermediate ve
 
 This problem with C#-based migrations can be mitigated in several ways. Here are a few ideas:
 
-### Always Rerunnable Tool
+<h3>Always Rerunnable Tool</h3>
 
 Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.
 
 For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
 
-### Get Specific Version, Build, Get Specific Version, Build
+<h3>Get Specific Version, Build, Get Specific Version, Build</h3>
 
 You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
 
-### Snapshots of Entity Model
+<h3>Snapshots of Entity Model</h3>
 
 Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
 
-### Any Other Ideas
+<h3>Any Other Ideas</h3>
 
 Are welcome.
