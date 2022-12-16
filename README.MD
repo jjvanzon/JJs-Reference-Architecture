@@ -1,7 +1,7 @@
 JJ's Reference Architecture
 ===========================
 
-*Copyright 2014 – 2022 Jan Joost van Zon*
+*2014 - 2022, JJ van Zon*
 
 - [Introduction](Introduction.md)
 - [Layers](Layers.md)

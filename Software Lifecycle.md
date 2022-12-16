@@ -10,9 +10,9 @@
 Branching, Versioning & Release Management
 ------------------------------------------
 
-`[ TODO: Describe a versioning methodology. ]`
+`< TODO: Describe a versioning methodology. >`
 
-`[ TODO: Assembly versions. ]`
+`< TODO: Assembly versions. >`
 
 
 Tech Test / Short Code Review Checklist

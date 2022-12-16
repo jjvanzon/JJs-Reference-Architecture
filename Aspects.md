@@ -78,29 +78,29 @@ Authoring & Reviewing
 
 This aspect covers things such as marking objects with creation dates, modification dates, etcetera, adding an author's comment to objects and managing multiple versions of objects and logging which user made which change.
 
-`[ TODO: Describe better: Reviewing: Like rating content. So closely related to authoring I find that it should be grouped together. ]`
+`< TODO: Describe better: Reviewing: Like rating content. So closely related to authoring I find that it should be grouped together. >`
 
-`[ TODO: Add specific solutions. ]`
+`< TODO: Add specific solutions. >`
 
 
 Caching
 -------
 
-`[ TODO: Write texts. Include: The use of a dictionaries, TryGetValue for performance, locking static dictionaries or other dictionaries used by multiple threads. Kentico also has caching. ]`
+`< TODO: Write texts. Include: The use of a dictionaries, TryGetValue for performance, locking static dictionaries or other dictionaries used by multiple threads. Kentico also has caching. >`
 
 
 Calculation
 -----------
 
-`[ TODO: Write a text. Include:` 
+`< TODO: Write a text. Include:` 
 
-`Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those 'Calculators'. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a visitor to simplify, but isolate complex recursive calculations. ]`
+`Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those 'Calculators'. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a visitor to simplify, but isolate complex recursive calculations. >`
 
 
 Cascading
 ---------
 
-`[ TODO: Write texts. Include: `
+`< TODO: Write texts. Include: `
 
 `Talk about DeleteWithRelatedEntities and UnlinkRelatedEntities.`
 
@@ -108,19 +108,19 @@ Cascading
 
 `See 'LinkTo' under 'Patterns'. `
 
-`Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions? ]`
+`Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions? >`
 
 
 Circular References
 -------------------
 
-`[ TODO: An example of a check procedure. Mention that it must be checked when writing data, not when reading data, so only writing has a performance penalty, but reading does not. ]`
+`< TODO: An example of a check procedure. Mention that it must be checked when writing data, not when reading data, so only writing has a performance penalty, but reading does not. >`
 
 
 Cloning
 -------
 
-`[ TODO: Describe. ]`
+`< TODO: Describe. >`
 
 
 Code Style
@@ -137,7 +137,7 @@ Code style an be enforced with different methods:
 Collections / List Processing
 -----------------------------
 
-`[ TODO: Write text. Include: ]`
+`< TODO: Write text. Include: >`
 
 - When to use which, interface types, array / list, KeyValuePair / Tuple / custom tuple class.
 - Functions in JJ.Framework.Common.The extension methods and the KeyValuePairHelper.
@@ -145,7 +145,7 @@ Collections / List Processing
 
 ### Specialized Lists
 
-`[ TODO: Talk about constrained lists and how to program a specialized list if a normal list does not suffice. ]`
+`< TODO: Talk about constrained lists and how to program a specialized list if a normal list does not suffice. >`
 
 
 Concurrency
@@ -205,13 +205,13 @@ See DebuggerDisplays under Patterns.
 Entity Model / Data Model
 -------------------------
 
-`[ TODO: Discuss different data modeling options. Among which entity models. ]`
+`< TODO: Discuss different data modeling options. Among which entity models. >`
 
-`[ TODO: Unintended n -> 1 relationships. \`
+`< TODO: Unintended n -> 1 relationships. >`
 
-`[ TODO: Is this statement true? When there is a 1-to-1 relationship, not to be confused with a 0-to-1 relationship, there is never a technical necessesity to have 2 entities, they may just as well have been 1. ]`
+`< TODO: Is this statement true? When there is a 1-to-1 relationship, not to be confused with a 0-to-1 relationship, there is never a technical necessesity to have 2 entities, they may just as well have been 1. >`
 
-`[ TODO: Explain No polymorphism in entity models + the solution. ]`
+`< TODO: Explain No polymorphism in entity models + the solution. >`
 
 
 Entity Status Management
@@ -433,7 +433,7 @@ public static class ResourceHelper
 
 ### TODO
 
-`[ TODO: The following things are not yet discussed there:
+`< TODO: The following things are not yet discussed there:
 
 - If you use Guids as primary keys, you cannot use enums for the ID's of enum-like entities.
 - ID's columns of enum-like entities are never auto-increment.
@@ -443,13 +443,13 @@ public static class ResourceHelper
 Errors
 ------
 
-`[ TODO: Describe that there are several ways to handle errors: Exceptions, validation messages, status enums and booleans. ]`
+`< TODO: Describe that there are several ways to handle errors: Exceptions, validation messages, status enums and booleans. >`
 
-`[ TODO: Practices or patterns: Introduce returning a bool as an alternative for returning success or failure.`
+`< TODO: Practices or patterns: Introduce returning a bool as an alternative for returning success or failure.`
 
 `- Sounds like a practice.`  
 `- But also sounds like a pattern.`  
-`- But it also sounds like the philosophical case of the aspect of validation and error handling, which is quite polymorphic in sofware development these days: string messages, booleans, status enums and exceptions. A lot of different ways of handling similar things, really. It works out OK in practice, but it does not seem very elegant. ]`
+`- But it also sounds like the philosophical case of the aspect of validation and error handling, which is quite polymorphic in sofware development these days: string messages, booleans, status enums and exceptions. A lot of different ways of handling similar things, really. It works out OK in practice, but it does not seem very elegant. >`
 
 
 Exceptions
@@ -519,7 +519,7 @@ See 'LinkTo' under 'Design Patterns'.
 
 An alternative is the OneToManyRelationship and ManyToOneRelationship classes from the  Framework.Business assembly.
 
-`[ TODO: Consider incorporating these ideas here: ]`
+`< TODO: Consider incorporating these ideas here: >`
 
 - Idea 2015-04-29: Inverse property management with a List and a HashSet to make operations not n-problems...
 - make story about inverse property management in property setters. A general description and maybe later mention the helper classes like OneToManyHandler if they are programmed. (They are.)
@@ -534,7 +534,7 @@ An alternative is the OneToManyRelationship and ManyToOneRelationship classes fr
 IO
 --
 
-`[ TODO: Write description. Mention CsvReader e.d. The use of .NET serialization API's XML, etc. Mention the StreamHelper. ]`
+`< TODO: Write description. Mention CsvReader e.d. The use of .NET serialization API's XML, etc. Mention the StreamHelper. >`
 
 
 Logging
@@ -575,7 +575,7 @@ Multi-Language / Translations / Culture
 
 For button texts and other labels in an application: see 'Resources' under 'Other Patterns'. That does not solve multi-lingual user data, for which multiple solutions are possible.
 
-`[ TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. ]`
+`< TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >`
 
 ### Separate Content Items
 
@@ -623,27 +623,27 @@ All page numbering starts at 1. Even though we usually start counting at 0 as pr
 
 Throughout the software layering we pass through 1-based page numbers and page count. Our data store may need a first index instead, but we only convert to that number as deeply into the layering as possible.
 
-`[ TODO: Describe programming practices for working with paging in views. ]`
+`< TODO: Describe programming practices for working with paging in views. >`
 
 
 Parsing
 -------
 
-`[ TODO: Explain how you could structure your parser code? ]`
+`< TODO: Explain how you could structure your parser code? >`
 
 
 Performance
 -----------
 
-`[ TODO: Give a few pointers to performance issues. Like reflection has a performance penalty compared to literal values, so do expressions. Pre-calculation and caching. ]`
+`< TODO: Give a few pointers to performance issues. Like reflection has a performance penalty compared to literal values, so do expressions. Pre-calculation and caching. >`
 
-`[ TODO: Describe: When you use a dictionary and when to use a list (there is a tipping point) ]`
+`< TODO: Describe: When you use a dictionary and when to use a list (there is a tipping point) >`
 
-`[ TODO: Aspects, Performance: Some optimizations seem only possible with inheritance and many classes, such as the fastest static dispatch and e.g. preventing dictionary lookups by having only one value stored per object instead of a dictionary for multiple objects. Oh, that is not necessarly inheritance. But why is inheritance the only construct that can do that, because inheritance also comes with downsides. ]`
+`< TODO: Aspects, Performance: Some optimizations seem only possible with inheritance and many classes, such as the fastest static dispatch and e.g. preventing dictionary lookups by having only one value stored per object instead of a dictionary for multiple objects. Oh, that is not necessarly inheritance. But why is inheritance the only construct that can do that, because inheritance also comes with downsides. >`
 
 \> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in C# for structures that complex, while inheritance syntax is clearer in C#. Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
 
-`[ TODO: Aspects, Performance: Detail about nested loops: just traversing multiple levels is not a bad nested loop. Lookups of 5 to 7 items do not require a dictionary. ]`
+`< TODO: Aspects, Performance: Detail about nested loops: just traversing multiple levels is not a bad nested loop. Lookups of 5 to 7 items do not require a dictionary. >`
 
 
 Persistence
@@ -659,13 +659,13 @@ See also: 'ORM'.
 Platform Compatibility
 ----------------------
 
-`[ TODO: Short description of that there are platform compatibility helpers. ]`
+`< TODO: Short description of that there are platform compatibility helpers. >`
 
 
 Reflection
 ----------
 
-`[ TODO: You might go into the important utilities we have in the JJ.Framework and basics of System.Reflection including tips of when to use reflection. The use of the ReflectionCache. ]`
+`< TODO: You might go into the important utilities we have in the JJ.Framework and basics of System.Reflection including tips of when to use reflection. The use of the ReflectionCache. >`
 
 
 Scheduling
@@ -677,23 +677,23 @@ Various solutions are available for scheduling a process (periodically) in time.
 - Immediately running a process in the background in a web application.
 - Using a job scheduling API. For instance 'Quartz' scheduling.
 
-`[ TODO: Go into the various options and explain a little further.]`
+`< TODO: Go into the various options and explain a little further.]`
 
 
 Security
 --------
 
-`[ TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection... \`
+`< TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection... >`
 
-`[ TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web? ]`
+`< TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web? >`
 
-`[ TODO: Aspects, Security: If content is to be protected with authorization, then for partial presenters you need to do authorization checks if the presenter cass is public, and do not have to do authorization if the presenter class is internal. ]`
+`< TODO: Aspects, Security: If content is to be protected with authorization, then for partial presenters you need to do authorization checks if the presenter cass is public, and do not have to do authorization if the presenter class is internal. >`
 
 for enum-like tables.
 
-`[ TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.`
+`< TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.`
 
-`In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. ]`
+`In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. >`
 
 Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an IContext and repositories in the top-level project, often an MVC app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
@@ -808,17 +808,17 @@ Possible API's:
 Text Processing
 ---------------
 
-`[ TODO: Write text. Include: Functions in JJ.Framework.Common, including StringSplit and the StringSplit with quotation. ]`
+`< TODO: Write text. Include: Functions in JJ.Framework.Common, including StringSplit and the StringSplit with quotation. >`
 
 
 Transactions
 ------------
 
-`[ TODO: Write text. Include: Discuss what NHibernate does, explicit and implicit commit, IContext, how to use the SqlExecutor API. Discuss view model transaction and how to work transactionally regardless of how a database does it.`
+`< TODO: Write text. Include: Discuss what NHibernate does, explicit and implicit commit, IContext, how to use the SqlExecutor API. Discuss view model transaction and how to work transactionally regardless of how a database does it.`
 
 `- Describe transactionality: usage of rollback and commit. Document that flush is an exception and dangerous and if used, must be commented with the reason why you use it.`
 
-`- Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I'm not sure. ]`
+`- Framework: The way Commit and Rollback work now, an intermediate commit means you cannot use previously gotten entities. You cannot use entities gotten from a previous transaction, because under the hood the NHibernate session is replaced by a new one, meaning the previously gotten entities are connected to a closed session. I do not know how much of a problem that actually is. Perhaps it is OK. Perhaps I should have opened another transaction on the same session somehow. I'm not sure. >`
 
 
 Type Safety
@@ -884,7 +884,7 @@ Possible strategies for making unit tests easier to debug and read:
 User Interface
 --------------
 
-`[ TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my views to view models, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under 'Presentation Patterns'. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API's or consumed as json in JavaScript UI's. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base. ]`
+`< TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my views to view models, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under 'Presentation Patterns'. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API's or consumed as json in JavaScript UI's. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base. >`
 
 
 Utilities
@@ -978,13 +978,13 @@ See 'Validators' under 'Design Patterns'.
 Versioning (Data)
 -----------------
 
-`[ TODO: Describe. ]`
+`< TODO: Describe. >`
 
 
 Workflow
 --------
 
-`[ TODO: Describe some more thoughts about this and about the different API's. ]`
+`< TODO: Describe some more thoughts about this and about the different API's. >`
 
 Possible API's:
 

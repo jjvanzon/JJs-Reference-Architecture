@@ -65,7 +65,7 @@ The presentation layer is built up of the following sub-layers:
 
 ![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.003.png)
 
-`[ TODO: ToEntity is in a really odd spot if you read the diagram from top to bottom. ]`
+`< TODO: ToEntity is in a really odd spot if you read the diagram from top to bottom. >`
 
 The presentation layer calls the business layer, which contains all the rules that surround the system.
 
@@ -111,7 +111,7 @@ Business Layer
 
 What is business logic? Basically anything that is not presentation or data access, is business logic.
 
-`[ TODO: Layers: Say something about infrastructure, next to persistence, business and presentation. Because then you can say: everything that is not persistence, presentation or infrastructure, is business logic. ]`
+`< TODO: Layers: Say something about infrastructure, next to persistence, business and presentation. Because then you can say: everything that is not persistence, presentation or infrastructure, is business logic. >`
 
 The business layer resides in between the data access and the presentation layer. The presentation layer calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
 
@@ -121,11 +121,11 @@ The business layer uses entities, but sometimes will call repositories out of th
 
 The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and repository interfaces, the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
 
-`[ TODO: Add 'Cloning' to big block in the diagram? It might stay too vague if you mention it there. ]`
+`< TODO: Add 'Cloning' to big block in the diagram? It might stay too vague if you mention it there. >`
 
-`[ TODO: Consider this: `
+`< TODO: Consider this: `
 
-`- Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already. ]`
+`- Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already. >`
 
 
 Perpendicular Layers
@@ -139,7 +139,7 @@ The Framework layer consists of API's that could support any aspect of software 
 
 Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the presentation layer, because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the presentation layer in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
 
-`[ TODO: Encorporate this phrase: It is hard to explain what the position of infrastructure is in the architecture. One thing you can say is that the infrastructure should be loose coupled. ]`
+`< TODO: Encorporate this phrase: It is hard to explain what the position of infrastructure is in the architecture. One thing you can say is that the infrastructure should be loose coupled. >`
 
 Services expose business logic through a network interface, often through the SOAP protocol. A service might also expose a presentation model to the outside world. Because it is about a specific network / communication protocol, the service layer is considered part of the infrastructure too.
 

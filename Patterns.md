@@ -116,7 +116,7 @@ Generally avoided, but not prohibited:
 
 <h4>Considerations</h4>
 
-`[ TODO: Write some more about the difficulties of inheritance in entity models. ]`
+`< TODO: Write some more about the difficulties of inheritance in entity models. >`
 
 ### Mapping
 
@@ -252,7 +252,7 @@ Be aware that executing `NewLinkTo` onto *existing* objects will result in a cor
 
 ### Cascading Extensions
 
-`[ TODO: Describe how to organize your DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions. ]`
+`< TODO: Describe how to organize your DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions. >`
 
 ### Facade
 
@@ -280,15 +280,15 @@ The classic visitor pattern has a design flaw in it, that we will not use. The c
 
 A good example of a Visitor class is .NET's own ExpressionVisitor, however we follow additional rules.
 
-`[ TODO: Make a good text out of this, covering handling polymorphism in visitors. Merge this with the main text: `
+`< TODO: Make a good text out of this, covering handling polymorphism in visitors. Merge this with the main text: `
 
 `- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.`
 
-`- Visitor pattern: mention that you always need to call polymorphic, otherwise you will not get all the objects when you override the polymorphic. ]`
+`- Visitor pattern: mention that you always need to call polymorphic, otherwise you will not get all the objects when you override the polymorphic. >`
 
-`[ TODO: Code example. ]`
+`< TODO: Code example. >`
 
-`[ TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. ]`
+`< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
 
 ### String Resources
 
@@ -304,7 +304,7 @@ The culture-inspecific resx has the en-US language.
 
 The key should be representative of the text itself.
 
-`[ TODO: Mention the resource formatter pattern, e.g. MessageFormatter. ]`
+`< TODO: Mention the resource formatter pattern, e.g. MessageFormatter. >`
 
 Resources seem part of the presentation, but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
 
@@ -340,7 +340,7 @@ As such it is better to call a property CanDelete, than calling it DeleteButtonV
 A ViewModel should say *what* is shown on screen, not *why*:
 For instance: if the business logic tells us that an entity is a very special entity, and it should be displayed read-only, the view model should contain a property IsReadOnly, not a property named ThisIsAVerySpecialEntity. Why it should be displayed read-only should not be part of the view model.
 
-`[ TODO: Describe the ViewModel pattern more strictly: entity view models, partial view models and screen view models and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen view model, not an entity or partial view model. LoginViewModel may be an exception. ]`
+`< TODO: Describe the ViewModel pattern more strictly: entity view models, partial view models and screen view models and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen view model, not an entity or partial view model. LoginViewModel may be an exception. >`
 
 <h4>Considerations</h4>
 
@@ -407,7 +407,7 @@ A more complex ToEntity method might also update related entities. In that case 
 
 A ToEntity method takes on much of the resposibility of a Save action.
 
-`[ TODO: Describe the organization of the ToEntity extensions. ]`
+`< TODO: Describe the organization of the ToEntity extensions. >`
 
 ### Presenter
 
@@ -459,17 +459,17 @@ DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 
 Even though the actual call to the business logic might be trivial, it is still necessary to convert from entity to view model and back. This is due to the stateless nature of the web. It requires restoring state from the view to the entity model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do JavaScript or other native code.
 
-`[ TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input view model. Sometimes it is even the only way to execute the essense of the user action onto the user input view model. Examples are removing a row an uncommitted row or collapsing a node in a tree view. ]`
+`< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input view model. Sometimes it is even the only way to execute the essense of the user action onto the user input view model. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
 ### NullCoalesce (ViewModels)
 
 When you user input back as a ViewModel from your presentation framework of choice, for instance MVC, you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing null-coalescing or instead tripping over the nulls, you can centralize the null-coalescing of pieces of view model and call it in the presenter.
 
-`[ TODO: Better description. Also incorporate:`
+`< TODO: Better description. Also incorporate:`
 
 `- Also add a code example.`  
 `- Consider making a separate pattern description for NullCoalesce methods in general and move it to the Other Patterns section to which you then refer from this section NullCoalesce (ViewModels).`
-`- Null-coalesce. Applied to viewmodels that are passed to presenters. The choice is made here to only null-coalesce things that a view / client technology might leave out. Theoretically it might be better to null-coalesce everything in the view model, but this does take full traversal of the tree, which comes with a (small) performance penalty. Also: the null-coalesce procedures take some typing time for the programmer, and requires maintenance when the structure changes. That is why the choice is made to only null-coalesce a select set of things, that is adapted to our specific needs, rather than something that will always work. ]`
+`- Null-coalesce. Applied to viewmodels that are passed to presenters. The choice is made here to only null-coalesce things that a view / client technology might leave out. Theoretically it might be better to null-coalesce everything in the view model, but this does take full traversal of the tree, which comes with a (small) performance penalty. Also: the null-coalesce procedures take some typing time for the programmer, and requires maintenance when the structure changes. That is why the choice is made to only null-coalesce a select set of things, that is adapted to our specific needs, rather than something that will always work. >`
 
 ### Views
 
@@ -523,15 +523,15 @@ You will be making assumptions in your Presenter code when you program a statefu
 
 #### ToEntity / ToViewModel
 
-`[ TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works. ]`
+`< TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works. >`
 
 
 Presentation Patterns (MVC)
 ---------------------------
 
-`[ TODO: Mention ModelState.ClearErrors. ]`
+`< TODO: Mention ModelState.ClearErrors. >`
 
-`[ TODO: Mention: Using Request.UrlReferrer in Http Get actions crashes. Use Request.RawUrl. ]`
+`< TODO: Mention: Using Request.UrlReferrer in Http Get actions crashes. Use Request.RawUrl. >`
 
 ### Controller
 
@@ -573,10 +573,10 @@ public ActionResult Edit(EditViewModel viewModel)
 
 There might be an exception to the rule to always `RedirectToAction` at the end of a Post. When you would redirect to a page that you can never go to directly, you might return `View()` instead, because there is no `Get` method. This may be the case for a `NotFoundViewModel` or a `DeleteConfirmedViewModel`.
 
-`[ TODO:`
+`< TODO:`
 
 `- Mention that return View in case of validation messages is the way to go, because otherwise MVC will not remember un-mappable wrong input values, like Guids and dates entered as strings. (In one case this lead to the browser asking for resending postdata upon clicking the back button, so check whether this is actually a good idea.)`  
-`- Not using return View() in a post action makes old values not be remembered. ]`
+`- Not using return View() in a post action makes old values not be remembered. >`
 
 <h4>Considerations</h4>
 
@@ -757,7 +757,7 @@ ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR AJAX CALL.
 
 - There is a built-in error proneness in return URLs'. If you pass the same return URL along multiple HTTP requests, only one action has to forget to pass along the return URL and a back or close button is broken and you will find out very late that it is, because it is not an obvious thing to test. The same error-proneness is there for return actions with return actions with return actions, or with bread-crumb like structures with multiple return actions built in.
 
-`[ TODO: Incorporate this: Ret parameters can be done with new { ret = Request.RawUrl } for full load, and for AJAX this works: { ret = Url.Action(ActionNames.Index) } if you always make sure you have an Index action in your controller, which is advisable. ]`
+`< TODO: Incorporate this: Ret parameters can be done with new { ret = Request.RawUrl } for full load, and for AJAX this works: { ret = Url.Action(ActionNames.Index) } if you always make sure you have an Index action in your controller, which is advisable. >`
 
 ### Back Buttons
 
@@ -915,7 +915,7 @@ An accessor class allows access to non-public members of a class. This can be us
 
 ### Adapter
 
-`[ TODO: Describe what an adapter is in general and what kind of variations you can think of. ]`
+`< TODO: Describe what an adapter is in general and what kind of variations you can think of. >`
 
 ### Anti-encapsulation
 
@@ -1001,7 +1001,7 @@ foreach (string element in elements)
 
 ### DebuggerDisplays
 
-`[ TODO: Describe how I handle DebuggerDisplays. Snippet of text: DebuggerDisplays with private property DebuggerDisplay. ]`
+`< TODO: Describe how I handle DebuggerDisplays. Snippet of text: DebuggerDisplays with private property DebuggerDisplay. >`
 
 ### Executor
 
@@ -1147,15 +1147,15 @@ Everywhere you need to use the name, refer to the constant instead of putting a 
 
 This prevents typing errors and makes 'find all references' possible.
 
-`[ TODO: Consider not assinging the string value at all, but using nameof(ViewNames.Edit). Consider using nameof() over an existing member to begin with. ]`
+`< TODO: Consider not assinging the string value at all, but using nameof(ViewNames.Edit). Consider using nameof() over an existing member to begin with. >`
 
 ### NullCoalesce
 
-`[ TODO: See NullCoalesce (ViewModels) and write some good text here. ]`
+`< TODO: See NullCoalesce (ViewModels) and write some good text here. >`
 
 ### Plug-In Model
 
-`[ TODO: Describe my implementation of a nice plug-in model including the ReflectionHelper.GetImplementation methods. ]`
+`< TODO: Describe my implementation of a nice plug-in model including the ReflectionHelper.GetImplementation methods. >`
 
 ### Progress and Cancel Callbacks
 
@@ -1180,7 +1180,7 @@ public Excute(Action<string> progressCallback, Func<bool> isCanceledCallback)
 
 It depends on your problem whether those callbacks are nullable and you should do the appropriate null-checks depending on the situation.
 
-`[ TODO: Add explanations and code examples about the client code. ]`
+`< TODO: Add explanations and code examples about the client code. >`
 
 Sometimes it is useful to separate Cancel into two: Canceling and Canceled. This is because a process might not cancel immediately. A UI should not immediately enable a Start button again after the user pressed Cancel. A isCancelingCallback then allows the client to signal to the process that cancellation is requested. And an isCanceledCallback will let the process signal the client that cancelation has complete, so it can enable the start button again.
 
@@ -1259,7 +1259,7 @@ Alternatives
 
 ### Rich Models
 
-`[ TODO: Write story with pros and cons. Include:`
+`< TODO: Write story with pros and cons. Include:`
 
 `>> Arch: another downside of rich models is the magic of it. You are not sure what happens and all sorts of non-obvious side-effects may go off.`
 
@@ -1269,6 +1269,6 @@ Alternatives
 `  Problems with putting the specialized classes in the persistence layer include that the entity model must stay as clean as possible: anything you put in the data layer is hard to get rid of.`  
 `  When you do need an business logic interfacing that is comprised of an 'extended' entity model, then you cannot really use inheritance. You might be able to create a facade class that creates a wrapper class around the 'base' class out of the entity model.`  
 `  Currently the choice is to not make an extended entity model in the business layer.`  
-`- Arch: against rich models: You want your entity model to be a direct depiction of what is actually stored, so that you have control over that. If it is obscured, this means less control over what is going on. ]`
+`- Arch: against rich models: You want your entity model to be a direct depiction of what is actually stored, so that you have control over that. If it is obscured, this means less control over what is going on. >`
 
-`[ TODO: Compare rich models with the 2D separation of concerns. ]`
+`< TODO: Compare rich models with the 2D separation of concerns. >`
