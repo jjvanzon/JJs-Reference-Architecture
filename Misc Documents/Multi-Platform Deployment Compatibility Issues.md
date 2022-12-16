@@ -44,7 +44,7 @@ The following things needed to be taken into consideration to make the .NET code
 
 - ### Copy Mono .NET Assemblies
 
-  You might need to use the Mono versions of .NET assemblies that are not included by default in your Unity projects. To work with .NET assemblies not standardly included by Unity (for instance System.ServiceModel and System.Runtime.Serialization) you need to copy the dll’s from the Unity program files to your Unity project. The location of these dll’s is the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0`. They have to be copied to your Unity project somewhere in the Assets folder. You might want to create a new sub-folder in your `Assets` folder, possibly named `Plugins`.
+  You might need to use the Mono versions of .NET assemblies that are not included by default in your Unity projects. To work with .NET assemblies not standardly included by Unity (for instance System.ServiceModel and System.Runtime.Serialization) you need to copy the dll's from the Unity program files to your Unity project. The location of these dll's is the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0`. They have to be copied to your Unity project somewhere in the Assets folder. You might want to create a new sub-folder in your `Assets` folder, possibly named `Plugins`.
 
 
 Unity Free 4.3.4 Compatibility Issues
@@ -129,7 +129,7 @@ The items below are compatibility problems related to how Unity interoperates wi
 
 - ### Application.persistentDataPath (in Unity)
 
-  Persistent data path cannot be an absolute path on Windows Phone. Unity’s `Application.persistentDataPath` returns an absolute path, which the Windows Phone `System.Linq.Xml` API cannot handle. The alternative for now is to do an `if` in the Unity code:
+  Persistent data path cannot be an absolute path on Windows Phone. Unity's `Application.persistentDataPath` returns an absolute path, which the Windows Phone `System.Linq.Xml` API cannot handle. The alternative for now is to do an `if` in the Unity code:
 
   ```cs
   string folderPath;
@@ -142,30 +142,30 @@ The items below are compatibility problems related to how Unity interoperates wi
 - ### Type.GetProperties(BindingFlags)
 
   In runtime it says the method `Type.GetProperties(BindingFlags)` is not found.  
-  This post says they know about the bug, they found the problem, but they won’t fix it; just copy a file from an earlier Unity version...  
+  This post says they know about the bug, they found the problem, but they won't fix it; just copy a file from an earlier Unity version...  
   <http://forum.unity3d.com/threads/223065-Unity-4-3-3-Type-GetMembers%28BindingFlags%29-crash>  
   Basically, the programmers of Unity added types to their library of .NET stubs (or something) that are already present in the Windows Phone 8.0 version of the .NET framework and this results in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it crashes with a method not found exception.  
-  The workaround mentioned in the post is to install version 4.3.2 of Unity in a seperate folder and replace the original Unity (4.3.3) installation’s:  
+  The workaround mentioned in the post is to install version 4.3.2 of Unity in a seperate folder and replace the original Unity (4.3.3) installation's:  
   `Editor\Data\PlaybackEngines\wp8support\Managed\Win RTLegacy.dll`
   with the one from version 4.3.2.  
   It also works if your original Unity version is 4.3.4.  
 
 - ### Mono .NET Assemblies
 
-  It won’t deploy to Windows Phone with the mono `System.Runtime.Serialization` in the `Assets` folder.  
+  It won't deploy to Windows Phone with the mono `System.Runtime.Serialization` in the `Assets` folder.  
   Probably any .NET Mono assembly you put in the `Assets` folder will give you problems when deploying to Windows Phone (not tested).
 
 - ### Resource Assemblies
 
-  Unity does not automatically deploy the ‘satellite assemblies’ with translations of texts into multiple languages. The trick is to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of your Unity project. The 'language' folders should be placed right beside where the Unity puts the `.csproj` file when you do a Windows Phone build.
+  Unity does not automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. The trick is to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of your Unity project. The 'language' folders should be placed right beside where the Unity puts the `.csproj` file when you do a Windows Phone build.
 
 - ### Resource Assemblies
 
   To make translations in resource files work, you need to check the supported cultures in the Properties editor in the Windows Phone 8 Visual Studio project.
 
-- ### “Development Build” Keeps Showing
+- ### “Development Build" Keeps Showing
 
-  In the Visual Studio project, select the Configuration “Master” instead of “Release” or “Debug” to make the text “Development Build” disappear from the application running on the phone.
+  In the Visual Studio project, select the Configuration “Master" instead of “Release" or “Debug" to make the text “Development Build" disappear from the application running on the phone.
 
 - ### System.ServiceModel
 
@@ -192,7 +192,7 @@ Mac OS / Unity 4.3.4 Compatibility Issues
 
   On Mac OS, the Unity emulator will not run a program that requires `System.Runtime`.Serialization if you do not copy the Mono version of the DLL to the `Assets` folder of the Unity project.
 
-  The location of these dll’s in the Unity program files on Windows is (the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0` (The location on Mac OS might be similar.)
+  The location of these dll's in the Unity program files on Windows is (the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0` (The location on Mac OS might be similar.)
 
 - ### Mac OS Version
 
@@ -204,7 +204,7 @@ Mac OS / Unity 4.3.4 Compatibility Issues
 
 - ### Errors in Unity that can be Ignored
 
-  You can get the following errors in Unity. The deployment will still work, even when you ignore the errors (if you use the ‘Build’ button, not ‘Build and Run’ and then run it from XCode):
+  You can get the following errors in Unity. The deployment will still work, even when you ignore the errors (if you use the 'Build' button, not 'Build and Run' and then run it from XCode):
 
     - `Socket: bind failed, error: Address already in use (48)`
     - `Unable to join player connection multicast group` 

@@ -16,7 +16,7 @@
 - [Direction](#direction)
     - [Miscellaneous Pointers](#miscellaneous-pointers)
     - [Behavior to Expect](#behavior-to-expect)
-    - [Varying Developer’s Tasks](#varying-developers-tasks)
+    - [Varying Developer's Tasks](#varying-developers-tasks)
     - [Upward Management](#upward-management)
     - [Budgeting](#budgeting)
 - [Planning](#planning)
@@ -34,7 +34,7 @@ This documentation section describes techniques you can employ for the hands-on 
 Focus Points
 ------------
 
-It is still debatable, whether everything falls into these key areas. I am trying to structure this…
+It is still debatable, whether everything falls into these key areas. I am trying to structure this...
 
 - Dialog
 - Support
@@ -51,8 +51,8 @@ Dialog
 - Is the one I might forget about, but if I put extra focus on it, it would help a lot.
 - Exchange ideas between team lead and team member.
 - Exchange ideas between team members.
-- Get to know each other to make optimal ‘use’ of skills but also to enhance morale and good feeling, mutual understanding and promote openness.
-- Assess what the team member’s problems are, regarding the way he feels about the work.
+- Get to know each other to make optimal 'use' of skills but also to enhance morale and good feeling, mutual understanding and promote openness.
+- Assess what the team member's problems are, regarding the way he feels about the work.
 - Dialog should sometimes be limited too, because this job requires focus and quiet often, in order to do it well.
 - Periodic workshops mostly from team lead, but could be from someone else, to present an idea.
 
@@ -68,9 +68,9 @@ Dialog
 - Look for solutions to the problems
 - Next work to do
 - Compliment on good work
-- Good question: ‘What way of working, would make you enthusiastic? Not looking at the way we work here.’
-- Good question (similar, but different formulation): ‘What have you found to be a good way of working?’ (‘Even though it differs from how [I / the team lead] might view it.’)
-- Good question: ‘Can you tell me some interesting new things you found out?’
+- Good question: 'What way of working, would make you enthusiastic? Not looking at the way we work here.'
+- Good question (similar, but different formulation): 'What have you found to be a good way of working?' ('Even though it differs from how [I / the team lead] might view it.')
+- Good question: 'Can you tell me some interesting new things you found out?'
 - The team lead also asks himself the same questions.
 
 ### Reporting to Management
@@ -103,7 +103,7 @@ Support from the team lead is mostly inward directed toward the team members. Bu
 - Support with solutions and techniques.
 - Give examples
 - Lead by example.
-- Formulate suggestions with prefixes like “I would do it like this.” or “In my experience this works well.”
+- Formulate suggestions with prefixes like “I would do it like this." or “In my experience this works well."
 - So do not talk in definites, allowing the other person to form their own opinion and understand why or why not to take a certain route.
 - You are going to have to accept that things will be programmed in a less than perfect way, or not precisely the way you would do it, and allow programmers to grow into making things better on their own.
 - Look for a compliment to go along with it.
@@ -130,7 +130,7 @@ Support & Direction
 
 ### Developer Skills
 
-You can test someone’s skills in something by giving them a specific task, that requires one skill in particular.
+You can test someone's skills in something by giving them a specific task, that requires one skill in particular.
 
 Meta-skills:
 
@@ -148,7 +148,7 @@ Tools & techniques:
 - Database development
 - SQL
 
-<TODO: Add more… Could be a pretty extensive list.>
+`[ TODO: Add more... Could be a pretty extensive list. ]`
 
 
 Direction
@@ -167,7 +167,7 @@ Direction
     - On the other hand I dislike it, when the response to a proposal is: "That is not what this meeting is about."
     - The intermediate version would be brief attention to off-topics and main focus on the topic at hand.
     - It also depends on whether it is a general meeting or a conversation about a specific topic.
-- API choice: Medior developers and juniors are *not* free to choose any API without collaborating with seniors, leads and architects. It just has too high an impact. Not that we should not be open to new API’s.
+- API choice: Medior developers and juniors are *not* free to choose any API without collaborating with seniors, leads and architects. It just has too high an impact. Not that we should not be open to new API's.
 - Framework development: Same point as API choice: juniors and mediors only adapt framework in collaboration with seniors, leads and architects.
 
 ### Behavior to Expect
@@ -184,24 +184,24 @@ Or less annoying (because you cannot really blame anyone):
 
 - Someone thinks he or she is an expert, but the truth is he is not.
 - Someone spends a week on something, while asking for advice, could have made that a couple of hours.
-- Someone extremely talented will keep beating him or herself up over tiny details or just will not assert his opinion or be scared of other peoples’ criticism.
+- Someone extremely talented will keep beating him or herself up over tiny details or just will not assert his opinion or be scared of other peoples' criticism.
 
-### Varying Developer’s Tasks
+### Varying Developer's Tasks
 
-What I often see, is that each developer is assigned to his application and never changes focus, because everyone feels, that this person is the ‘go-to guy’ for this topic. The motivation behind this is that it would be more economical to let the guy that knows most about it, do the work. That makes sense intuitively, but what’s intuitive, isn’t always what’s right. It is an over-simplified view on the issue that will cost you money. You lose something when you do not vary a programmer’s work.
+What I often see, is that each developer is assigned to his application and never changes focus, because everyone feels, that this person is the 'go-to guy' for this topic. The motivation behind this is that it would be more economical to let the guy that knows most about it, do the work. That makes sense intuitively, but what's intuitive, isn't always what's right. It is an over-simplified view on the issue that will cost you money. You lose something when you do not vary a programmer's work.
 
 - There is the risk that comes a developer becomes ill or falling away for another reason.
-- It excludes other developer’s ideas from the subject.
-- It will limit the developer’s personal development, because he never gets to do something else.
-- It will encourage developers to not think about: “What if someone else had to work with my code?”
+- It excludes other developer's ideas from the subject.
+- It will limit the developer's personal development, because he never gets to do something else.
+- It will encourage developers to not think about: “What if someone else had to work with my code?"
 - The lack of critical peer-review could make the code quirky and hard to maintain.
 - There is no opportunity for developers to learn from each other.
-- There is less incentive to review each other’s code, which can translate to bugs and increased development time.
+- There is less incentive to review each other's code, which can translate to bugs and increased development time.
 - It will be more difficult to scale up the amount of developers on a job.
 - It will be more difficult to move a developer from one project to another, for instance when there is not much work in one area anymore, or higher priority work in another area.
-- It does not promote a joint way of working, that makes it easier for others to pick up each other’s work.
+- It does not promote a joint way of working, that makes it easier for others to pick up each other's work.
 
-I cannot stress enough that it is a bad idea to let a only one developer work on a specific thing all the time. Did I mention that the software developer’s personal development is slowed down? I have never been in a situation where this costs more and I have seen productivity go up doing it.
+I cannot stress enough that it is a bad idea to let a only one developer work on a specific thing all the time. Did I mention that the software developer's personal development is slowed down? I have never been in a situation where this costs more and I have seen productivity go up doing it.
 
 Here are suggestions of how to spread and vary the work over multiple team members. Variations can be mixed and mingled at will. That is the point. Be flexible.
 
@@ -230,7 +230,7 @@ Here are suggestions of how to spread and vary the work over multiple team membe
 - Variation:
     - A developer gets a similar task as before because he is now proficient at it.
 - Variation 7:
-    - A developer gets intentionally different tasks than before, to spread knowledge over the team and enriching the developer’s knowledge.
+    - A developer gets intentionally different tasks than before, to spread knowledge over the team and enriching the developer's knowledge.
 - Variation 8:
     - Some developers work on high-risk experiments.
     - Other developers work on low-risk productive feature development.
@@ -262,13 +262,13 @@ Here are suggestions of how to spread and vary the work over multiple team membe
 
 - Lead investigates software and hardware requirements and opportunities to use newer software, offer better quality, quantity, service or reduce costs.
 
-<TODO: Write a little more about it.>
+`[ TODO: Write a little more about it. ]`
 
 
 Planning
 --------
 
-Borders the topic of ‘Direction’.
+Borders the topic of 'Direction'.
 
 ### Tasks
 
@@ -290,11 +290,11 @@ This will make someone aware of expectations, and of how deep to go.
 - No Task -> Go to lead
 - Questions/unclarities -> Go to lead.
 
-Fill in the lead’s name and basically hang up the wall.
+Fill in the lead's name and basically hang up the wall.
 
 - Data model extension task should mention:
 
-‘+ Add the basics around this data model to all the architectural layers.’ Discuss verbally which layers. Use the Layering Checklist from the Software Architecture document’s Appendices to make a selection.
+'+ Add the basics around this data model to all the architectural layers.' Discuss verbally which layers. Use the Layering Checklist from the Software Architecture document's Appendices to make a selection.
 
 - A task should involve all the required work, but what is not asked should be left out
 
@@ -312,16 +312,16 @@ Strategy
 
 - Strategy is broad. It takes anything you could do and molds it to fit your current goal.
 
-<TODO: Write something about it.>
+`[ TODO: Write something about it. ]`
 
 
 Keep Your Cool, Be Open to Other Views
 --------------------------------------
 
-<TODO: Write some more about it.>
+`[ TODO: Write some more about it. ]`
 
-<TODO: Use this phrase? All this heated discussion about subjective things. Can't we just keep calm and discuss pros and cons and try to solve the problem together? Nothing is black and white in the choice of tools and techniques. It is always a trade off.>
+`[ TODO: Use this phrase? All this heated discussion about subjective things. Can't we just keep calm and discuss pros and cons and try to solve the problem together? Nothing is black and white in the choice of tools and techniques. It is always a trade off. ]`
 
-<TODO: Use this phrase? Be less sarcastic.>
+`[ TODO: Use this phrase? Be less sarcastic. ]`
 
-<TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid.>
+`[ TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid. ]`

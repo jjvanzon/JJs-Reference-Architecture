@@ -1,10 +1,7 @@
 JJ's Reference Architecture
 ===========================
 
-`[ Under Construction ]`
-
-*Author: Jan Joost van Zon*  
-*Date: December 2014 – July 2017*
+*Copyright 2014 – 2022 Jan Joost van Zon*
 
 - [Introduction](Introduction.md)
 - [Layers](Layers.md)
