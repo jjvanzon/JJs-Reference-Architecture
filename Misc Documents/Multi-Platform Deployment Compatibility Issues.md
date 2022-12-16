@@ -169,7 +169,7 @@ The items below are compatibility problems related to how Unity interoperates wi
 
 - ### System.ServiceModel
 
-  `[ NOT TESTED >`
+  `[ NOT TESTED ]`
 
   Does not seem to work. When trying to instantiate a service client, you get the exception: `Entry point not found`. A solution might be to program our own SOAP client based on `System.Xml.Linq`.
 
@@ -245,14 +245,14 @@ iOS 6 / Unity 4.3.4 Compatibility Issues
 
 - ### System.ServiceModel
 
-  `[ NOT TESTED >`
+  `[ NOT TESTED ]`
 
   Not supported. Cross-compilation fails because the Mono implementation of `System.ServiceModel` references parts of `Mono.WebBrowser`, which is not supported on iOS 6.  
 A solution is to program your own SOAP client based on `System.Xml.Linq`.
 
 - ### System.Web.Services
 
-  `[ NOT TESTED >`
+  `[ NOT TESTED ]`
 
   Not supported. When trying to send a message, the `XmlSerializer` is used, which calls `MonoProperty.GetValue`, which attempts to JIT Compile, which is not supported.  
 A solution is to program your own SOAP client based on `System.Xml.Linq`.  
