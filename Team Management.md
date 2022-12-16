@@ -34,7 +34,7 @@ This documentation section describes techniques you can employ for the hands-on 
 Focus Points
 ------------
 
-It is still debatable, whether everything falls into these key areas. I am trying to structure this…
+It is still debatable, whether everything falls into these key areas. I am trying to structure this...
 
 - Dialog
 - Support
@@ -148,7 +148,7 @@ Tools & techniques:
 - Database development
 - SQL
 
-`[ TODO: Add more… Could be a pretty extensive list. ]`
+`[ TODO: Add more... Could be a pretty extensive list. ]`
 
 
 Direction

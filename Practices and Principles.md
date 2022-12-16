@@ -1082,14 +1082,14 @@ Too much nesting in code can be confusing. It can be prevented by splitting the 
 ```cs
 if (condition)
 {
-    // A lot of code…
+    // A lot of code...
     // ...
     // ...
     // ...
 }
 else
 {
-    validationMessages = …;
+    validationMessages = ...;
 }
 ```
 
@@ -1098,7 +1098,7 @@ You could do the following:
 ```cs
 if (!condition)
 {
-    validationMessages = …;
+    validationMessages = ...;
     return;
 }
 
@@ -1529,7 +1529,7 @@ When you code keeps producing errors when you make a change, this could be an in
 
 ### Tooleritis
 
-Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and WinForms apps… while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
+Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and WinForms apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
 
 ### Tools to make Tools to make Tools
 

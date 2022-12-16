@@ -73,7 +73,7 @@ This checklist might be used if you want to bulk-program the architecture for an
     - (Edit Presenters)
     - Save methods in Detail (or Edit) Presenters.
     - MainPresenter (optional)
-- Presentation: Views (Mvc / UserControls…)
+- Presentation: Views (Mvc / UserControls...)
     - List Views
     - Detail Views
     - Main View (optional)

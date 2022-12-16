@@ -716,8 +716,8 @@ The interfaces might have different implementations, depending on the underlying
 ```cs
 IAuthenticator 
 { 
-    bool IsAuthentic(string userName, …); 
-    void AssertAuthentication(string userName, …);
+    bool IsAuthentic(string userName, ...); 
+    void AssertAuthentication(string userName, ...);
 }
 
 IAuthorizer

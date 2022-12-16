@@ -74,7 +74,7 @@ Naming Conventions
 | Unique keys       | When not many columns:<br>`IX_MyTable_MyColumn_Unique`<br><br>When many columns and only one constraint in the table:<br>`IX_MyTable_Unique`
 | Stored procedures | `SP_DoSomething` / `spDoSomething`
 | Functions         | `FN_DoSomething` / `fnDoSomething`
-| Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `…`
+| Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `...`
 
 - Avoid using keywords as column names. Think of a different name instead.
 - 'Index' is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
