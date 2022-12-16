@@ -6,8 +6,6 @@
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
     - [Entity](#entity)
-        - [Alternatives](#alternatives)
-        - [Considerations](#considerations)
     - [Mapping](#mapping)
     - [DTO](#dto)
     - [Repository](#repository)
@@ -25,7 +23,6 @@
     - [String Resources](#string-resources)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
-        - [Considerations](#considerations-1)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -36,12 +33,11 @@
     - [First Full Load – Then Partial Load – Then Native Code](#first-full-load--then-partial-load--then-native-code)
     - [Temporary ID’s](#temporary-ids)
     - [Stateless and Stateful](#stateless-and-stateful)
-    - [Considerations](#considerations-2)
+    - [Considerations](#considerations)
         - [ToEntity / ToViewModel](#toentity--toviewmodel)
 - [Presentation Patterns (MVC)](#presentation-patterns-mvc)
     - [Controller](#controller)
     - [Post-Redirect-Get](#post-redirect-get)
-        - [Considerations](#considerations-3)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
     - [Html.BeginCollection](#htmlbegincollection)
@@ -51,7 +47,6 @@
     - [Converter](#converter)
     - [TryGet-Insert-Update](#tryget-insert-update)
     - [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
-        - [Considerations](#considerations-4)
         - [Alternative: Flagging](#alternative-flagging)
     - [DocumentModel](#documentmodel)
     - [Selector-Model-Generator-Result](#selector-model-generator-result)
@@ -84,7 +79,7 @@
     - [Progress and Cancel Callbacks](#progress-and-cancel-callbacks)
     - [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](#singular-plural-non-recursive-recursive-and-withrelatedentities)
     - [Wrapper](#wrapper)
-- [Alternatives](#alternatives-1)
+- [Alternatives](#alternatives)
     - [Rich Models](#rich-models)
 
 
@@ -111,7 +106,7 @@ All public members should be virtual, otherwise persistence technologies can oft
 
 Do not use inheritance within your entity model, because it can make using persistence technologies harder, error prone, and it can actually harm performance of queries.
 
-#### Alternatives
+<h4>Alternatives</h4>
 
 Generally avoided, but not prohibited:
 
@@ -119,7 +114,7 @@ Generally avoided, but not prohibited:
 - Use interfaces for polymorphism instead.
 - Instead of inheritance, consider a composition solution, rather than an inheritance solution.
 
-#### Considerations
+<h4>Considerations</h4>
 
 <TODO: Write some more about the difficulties of inheritance in entity models.>
 
@@ -347,7 +342,7 @@ For instance: if the business logic tells us that an entity is a very special en
 
 <TODO: Describe the ViewModel pattern more strictly: entity view models, partial view models and screen view models and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen view model, not an entity or partial view model. LoginViewModel may be an exception. >
 
-#### Considerations
+<h4>Considerations</h4>
 
 The reason there should be no inheritance is because that would create an unwanted n2 dependency between views and the base view model: *n* views could be dependent on 1 view model and *m* view models could be dependent on 1 base view model, making *n* \* *m* views dependent on the same base view model. This means that if the base view model changes *n* \* *m* views could break, instead of just *n*. *m* is even likely to become greater than *n*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a view model could only break *n* views (the number of views that use that view model).
 
@@ -583,7 +578,7 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 - Mention that return View in case of validation messages is the way to go, because otherwise MVC will not remember un-mappable wrong input values, like Guids and dates entered as strings. (In one case this lead to the browser asking for resending postdata upon clicking the back button, so check whether this is actually a good idea.) 
 - Not using return View() in a post action makes old values not be remembered.> 
 
-#### Considerations
+<h4>Considerations</h4>
 
 If you do not conform to the Post-Redirect-Get pattern in MVC, you may get to see ugly URL’s. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that MVC keeps complaining about validation errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
@@ -804,7 +799,7 @@ Used for managing complex conversions between data structures, that require inse
 - Generally you can use an Except operation on the collections of existing items and items to keep, to get the collection of items to delete.
 - Then you loop through that collection and delete each item.
 
-#### Considerations
+<h4>Considerations</h4>
 
 Converting one collection to another may involve more than creating a destination object for each source object. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the TryGet-Insert-Update pattern on each item, while the delete operations are done separately after that by comparing collections of entities to figure out which items are obsolete.
 

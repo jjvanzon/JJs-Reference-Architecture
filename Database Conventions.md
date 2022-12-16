@@ -8,11 +8,8 @@
 - [Rules](#rules)
 - [Upgrade Scripts](#upgrade-scripts)
     - [Excel Sheet](#excel-sheet)
-        - [Exceptional Cases](#exceptional-cases)
-        - [Summary](#summary)
     - [Scripts](#scripts)
     - [Deployment](#deployment)
-        - [Summary](#summary-1)
     - [SqlScripts Table](#sqlscripts-table)
 - [C#-Based Migrations](#c-based-migrations)
 
@@ -67,13 +64,13 @@ Naming Conventions
 
 | Object Type       | Example Name |
 |-------------------|--------------|
-| Database name     | ShopDB
-| Tables            | MyTable
-| Columns           | MyColumn
-| ID column         | ThingID
+| Database name     | `ShopDB`
+| Tables            | `MyTable`
+| Columns           | `MyColumn`
+| ID column         | `ThingID`
 | Indexes           | `IX_MyTable_MyColumn`
 | Primary keys      | `PK_MyTable`
-| Foreign keys      | `FK_MyTable_OtherTable`<br><br>Or when there are multiple relations between the same tables:<br><br>`FK_MyTable_<OtherTable_ColumnName_MinusID>`<br>`FK_MyTable_ThingA`<br>`FK_MyTable_ThingB`
+| Foreign keys      | `FK_MyTable_OtherTable`3<br>Or when there are multiple relations between the same tables:<br><br>`FK_MyTable_<OtherTable_ColumnName_MinusID>`<br>`FK_MyTable_ThingA`<br>`FK_MyTable_ThingB`
 | Unique keys       | When not many columns:<br>`IX_MyTable_MyColumn_Unique`<br><br>When many columns and only one constraint in the table:<br>`IX_MyTable_Unique`
 | Stored procedures | `SP_DoSomething` / `spDoSomething`
 | Functions         | `FN_DoSomething` / `fnDoSomething`
@@ -150,7 +147,7 @@ In the Excel, add a column for each database instance for that database structur
 
 Also include a column saying whether you have scripted it at all (for if you are in a hurry and have no time to script it). A release date column is also handy, to get some sense of when things went live.
 
-#### Exceptional Cases
+<h4>Exceptional Cases</h4>
 
 For upgrades that should only be executed on a specific database, put ‘N/A’ (or ‘N.V.T.’ in Dutch) in the appropriate spread sheet cell.
 
@@ -169,7 +166,7 @@ If a script requires that you be extra careful, you can mention this as follows:
 
 But be sparse with that, because the person running the script might not actually know what it is he is supposed to check and will feel uneasy executing this script since it is obviously so dangerous, while he has no idea why.
 
-#### Summary
+<h4>Summary</h4>
 
 This section covered:
 
@@ -261,7 +258,7 @@ begin
 end
 ```
 
-#### Summary
+<h4>Summary</h4>
 
 This section covered:
 
@@ -286,9 +283,20 @@ A benefit of SQL scripts is that it always operates on the right intermediate ve
 
 This problem with C#-based migrations can be mitigated in several ways. Here are a few ideas:
 
-|                           |    |
-|---------------------------|----|
-| Always rerunnable tool    | Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.<br><br>For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
-| Get specific version, build, get specific version, build | You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
-| Snapshots of entity model | Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
-| Any other ideas           | are welcome.
+<h3>Always Rerunnable Tool</h3>
+
+Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.
+
+For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
+
+<h3>Get Specific Version, Build, Get Specific Version, Build</h3>
+
+You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
+
+<h3>Snapshots of Entity Model</h3>
+
+Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
+
+<h3>Any Other Ideas</h3>
+
+Are welcome.
