@@ -102,7 +102,7 @@ For new databases, prefer int's as primary keys over guids, because guids create
 
 Only use additional guid columns as an alternative key for entities that need to be unique across multiple systems or databases. Do not forget to put an index on the guid column. Prefer surrogate keys rather than complicated composite keys. Prefer auto-incremented ID's, except for enum-like tables.
 
-`[ TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked. ]`
+`< TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked. >`
 
 For development databases use the “DEV\_" prefix, e.g. DEV\_ShopDB.
 

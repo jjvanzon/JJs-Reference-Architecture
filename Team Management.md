@@ -148,7 +148,7 @@ Tools & techniques:
 - Database development
 - SQL
 
-`[ TODO: Add more... Could be a pretty extensive list. ]`
+`< TODO: Add more... Could be a pretty extensive list. >`
 
 
 Direction
@@ -262,7 +262,7 @@ Here are suggestions of how to spread and vary the work over multiple team membe
 
 - Lead investigates software and hardware requirements and opportunities to use newer software, offer better quality, quantity, service or reduce costs.
 
-`[ TODO: Write a little more about it. ]`
+`< TODO: Write a little more about it. >`
 
 
 Planning
@@ -312,16 +312,16 @@ Strategy
 
 - Strategy is broad. It takes anything you could do and molds it to fit your current goal.
 
-`[ TODO: Write something about it. ]`
+`< TODO: Write something about it. >`
 
 
 Keep Your Cool, Be Open to Other Views
 --------------------------------------
 
-`[ TODO: Write some more about it. ]`
+`< TODO: Write some more about it. >`
 
-`[ TODO: Use this phrase? All this heated discussion about subjective things. Can't we just keep calm and discuss pros and cons and try to solve the problem together? Nothing is black and white in the choice of tools and techniques. It is always a trade off. ]`
+`< TODO: Use this phrase? All this heated discussion about subjective things. Can't we just keep calm and discuss pros and cons and try to solve the problem together? Nothing is black and white in the choice of tools and techniques. It is always a trade off. >`
 
-`[ TODO: Use this phrase? Be less sarcastic. ]`
+`< TODO: Use this phrase? Be less sarcastic. >`
 
-`[ TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid. ]`
+`< TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid. >`
