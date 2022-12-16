@@ -12,6 +12,10 @@
     - [Deployment](#deployment)
     - [SqlScripts Table](#sqlscripts-table)
 - [C#-Based Migrations](#c-based-migrations)
+    - [Always Rerunnable Tool](#always-rerunnable-tool)
+    - [Get Specific Version, Build, Get Specific Version, Build](#get-specific-version-build-get-specific-version-build)
+    - [Snapshots of Entity Model](#snapshots-of-entity-model)
+    - [Any Other Ideas](#any-other-ideas)
 
 
 Developing a Database
@@ -64,13 +68,13 @@ Naming Conventions
 
 | Object Type       | Example Name |
 |-------------------|--------------|
-| Database name     | ShopDB
-| Tables            | MyTable
-| Columns           | MyColumn
-| ID column         | ThingID
+| Database name     | `ShopDB`
+| Tables            | `MyTable`
+| Columns           | `MyColumn`
+| ID column         | `ThingID`
 | Indexes           | `IX_MyTable_MyColumn`
 | Primary keys      | `PK_MyTable`
-| Foreign keys      | `FK_MyTable_OtherTable`<br><br>Or when there are multiple relations between the same tables:<br><br>`FK_MyTable_<OtherTable_ColumnName_MinusID>`<br>`FK_MyTable_ThingA`<br>`FK_MyTable_ThingB`
+| Foreign keys      | `FK_MyTable_OtherTable`3<br>Or when there are multiple relations between the same tables:<br><br>`FK_MyTable_<OtherTable_ColumnName_MinusID>`<br>`FK_MyTable_ThingA`<br>`FK_MyTable_ThingB`
 | Unique keys       | When not many columns:<br>`IX_MyTable_MyColumn_Unique`<br><br>When many columns and only one constraint in the table:<br>`IX_MyTable_Unique`
 | Stored procedures | `SP_DoSomething` / `spDoSomething`
 | Functions         | `FN_DoSomething` / `fnDoSomething`
@@ -283,9 +287,20 @@ A benefit of SQL scripts is that it always operates on the right intermediate ve
 
 This problem with C#-based migrations can be mitigated in several ways. Here are a few ideas:
 
-|                           |    |
-|---------------------------|----|
-| Always rerunnable tool    | Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.<br><br>For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
-| Get specific version, build, get specific version, build | You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
-| Snapshots of entity model | Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
-| Any other ideas           | are welcome.
+### Always Rerunnable Tool
+
+Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.
+
+For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. ‘Run the resaver’ would be the description in the list of data migrations to execute.
+
+### Get Specific Version, Build, Get Specific Version, Build
+
+You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
+
+### Snapshots of Entity Model
+
+Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
+
+### Any Other Ideas
+
+Are welcome.
