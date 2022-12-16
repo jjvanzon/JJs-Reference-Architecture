@@ -95,7 +95,7 @@ The resolutions above are simply examples. You can have different sizes per appl
 
 <TODO: Describe the Utilities folder, that you use fully qualified application names and version sub folders. Same for the Web folder, and add to that that it contains both web services as well as web applications.>
 
-<h3>Development Workstation<h3>
+<h3>Development Workstation</h3>
 
 Development workstations should have the same kind of folder subdivision, also put on the same drives as on the servers. You might not put web sites in these folders, but Imags, IO Files and Logs should be present in the same folder structure as the servers.
 
