@@ -107,7 +107,7 @@ Because the architecture is multi-platform, the labels in the diagram above are 
 Business Layer
 --------------
 
-<img src="images/business-layer.png" widh="357" />
+<img src="images/business-layer.png" width="357" />
 
 What is business logic? Basically anything that is not presentation or data access, is business logic.
 
