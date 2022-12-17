@@ -1,7 +1,7 @@
 JJ's Reference Architecture
 ===========================
 
-*JJ van Zon, 2014 - 2022*
+*JJ van Zon | 2014 - 2022*
 
 - [Introduction](Introduction.md)
 - [Layers](Layers.md)
