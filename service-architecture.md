@@ -53,7 +53,7 @@ Say you have 4 systems: A, B, C and D and you want to connect all 4 of them toge
 
 By connecting a system to the ESB, instead of connecting individual systems together, you have to implement only 8 different message conversions as you can see from the arrows below:
 
-<img src="images/esb.png" width="300"/>
+<img src="images/esb.png" width="250"/>
 
 You just saved yourself 33% of the work!
 
