@@ -18,7 +18,7 @@ This is a suggestion of how to split up your software into layers.
 
 The software is split up into 3 layers:
 
-![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.001.png)
+<img src="images/data-business-presentation.png" width="141" />
 
 The presentation layer contains the screens of the system.
 
@@ -40,7 +40,7 @@ Data Layer
 
 The data layer is built up of the following sub-layers:
 
-![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.002.png)
+<img src="images/data-layer.png" width="431" />
 
 It all starts with the database. The database is not directly accessed by the rest of the code, but the database is talked to through NHibernate, an object-relational mapper. NHibernate will translate database records to instance of classes. Those classes have properties, that map to columns in the database, and properties that point to related data. NHibernate needs to be given mappings, that define which class maps to which table and which columns map to which properties.
 
@@ -63,7 +63,7 @@ Presentation Layer
 
 The presentation layer is built up of the following sub-layers:
 
-![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.003.png)
+<img src="images/presentation-layer.png" width="449" />
 
 `< TODO: ToEntity is in a really odd spot if you read the diagram from top to bottom. >`
 
@@ -107,7 +107,7 @@ Because the architecture is multi-platform, the labels in the diagram above are 
 Business Layer
 --------------
 
-![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.004.png)
+<img src="images/business-layer.png" width="357" />
 
 What is business logic? Basically anything that is not presentation or data access, is business logic.
 
@@ -133,7 +133,7 @@ Perpendicular Layers
 
 The subdivision into data, business and presentation is just about the most important subdivision in software design. But there are other additional layers, called perpendicular layers:
 
-![](images/Aspose.Words.6a9de6bc-9cb2-4842-8ff9-541764e55a61.005.png)
+<img src="images/perpendicular-layers.png" width="325" />
 
 The Framework layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
 

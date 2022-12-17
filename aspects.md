@@ -894,7 +894,7 @@ Utilities are processes that are not run very often. Utilities contains small pr
 
 Framework.WinForms contains a reusable window, SimpleProcessForm, in to start and cancel the process and show progress information.
 
-![](images/Aspose.Words.4a7919ee-e55e-413f-8b52-c89a217cf090.001.png)
+![](images/utility.png)
 
 Here is a code example:
 
