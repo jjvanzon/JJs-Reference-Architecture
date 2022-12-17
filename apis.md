@@ -236,13 +236,13 @@ Executing queries onto a database is normally done through ORM, but if performan
 
 We will not use stored procedures or views. Instead we store SQL files directly in our .NET projects. We put the SQL files in a sub-folder named 'Sql'.
 
-![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.001.png)
+![](images/sql-sub-folder.png)
 
 The classic way of executing SQL in .NET is to use System.Data.SqlClient. Instead, we will use our own SqlExecutor API. With that we can execute SQL in a strongly-typed way, often with only a single code line.
 
 The best method of doing it is to make the SQL file embedded resources:
 
-![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.002.png)
+![](images/sql-as-embedded-resource.png)
 
 The SQL may look as follows:
 
@@ -250,7 +250,7 @@ update Ingredient set Name = @name where ID = @id;
 
 Then put an enum in the SQL folder in your .NET project:
 
-![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.003.png)
+![](images/sql-enum.png)
 
 Add enum members that exactly correspond to the file names of the sql files:
 
@@ -311,7 +311,7 @@ The column names in the SQL are *case sensitive!*
 
 It is smart to let the SQL file names begin with the entity type name, so they stay neatly grouped together:
 
-![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.004.png)
+![](images/sql-file-names.png)
 
 ### With NHibernate
 
@@ -330,7 +330,7 @@ It is usually the best choice to include the SQL as an embedded resource, but yo
 
 ### Files instead of Embedded Resources
 
-![](images/Aspose.Words.af4ea7d6-ec3f-461f-a6ff-d5692d3cb396.005.png)
+![](images/sql-as-content-file.png)
 
 The is the code to create the SqlExecutor and execute an SQL file:
 
