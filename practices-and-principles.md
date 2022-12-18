@@ -9,22 +9,22 @@
         - [Classes](#classes)
         - [Assemblies](#assemblies)
         - [Framework Assemblies](#framework-assemblies)
-    - [Big Hairy Base Class (bad)](#big-hairy-base-class-bad)
-    - [Big Hairy Object (bad)](#big-hairy-object-bad)
+    - [Big Hairy Base Class (👎)](#big-hairy-base-class-)
+    - [Big Hairy Object (👎)](#big-hairy-object-)
     - [Combination of Concerns](#combination-of-concerns)
-    - [2 API's for the Same Thing (bad)](#2-apis-for-the-same-thing-bad)
-    - [Copy-Paste Programming (bad)](#copy-paste-programming-bad)
+    - [2 API's for the Same Thing (👎)](#2-apis-for-the-same-thing-)
+    - [Copy-Paste Programming (👎)](#copy-paste-programming-)
     - [Do Not Repeat Yourself (DRY)](#do-not-repeat-yourself-dry)
-    - [Dump Code Line Here (bad)](#dump-code-line-here-bad)
+    - [Dump Code Line Here (👎)](#dump-code-line-here-)
     - [Granularity](#granularity)
-    - [Helperitis (bad)](#helperitis-bad)
-    - [Spread Responsibility (bad)](#spread-responsibility-bad)
-    - [Too Many Responsibilities (bad)](#too-many-responsibilities-bad)
-    - [Two Solutions for the Same Thing (bad)](#two-solutions-for-the-same-thing-bad)
-    - [Vague Justification (bad)](#vague-justification-bad)
+    - [Helperitis (👎)](#helperitis-)
+    - [Spread Responsibility (👎)](#spread-responsibility-)
+    - [Too Many Responsibilities (👎)](#too-many-responsibilities-)
+    - [Two Solutions for the Same Thing (👎)](#two-solutions-for-the-same-thing-)
+    - [Vague Justification (👎)](#vague-justification-)
 - [Error Checking](#error-checking)
     - [Be Strict](#be-strict)
-    - [Error Hiding / Null-Tolerance (bad)](#error-hiding--null-tolerance-bad)
+    - [Error Hiding / Null-Tolerance (👎)](#error-hiding--null-tolerance-)
     - [Null-Checks](#null-checks)
         - [Basic Guidelines](#basic-guidelines)
         - [DTOs](#dtos)
@@ -35,63 +35,63 @@
         - [Custom-Programmed Framework API's](#custom-programmed-framework-apis)
         - [Your Own Application Code](#your-own-application-code)
         - [Third-party API's](#third-party-apis)
-    - [Process that Checks Itself (generally bad)](#process-that-checks-itself-generally-bad)
+    - [Process that Checks Itself (👎)](#process-that-checks-itself-)
     - [Reject, Don't Correct](#reject-dont-correct)
 - [Interfacing](#interfacing)
     - ['All' and 'Many'](#all-and-many)
     - [Blackboxing and Whiteboxing](#blackboxing-and-whiteboxing)
     - [Clarity over Brevity](#clarity-over-brevity)
-    - [Conceptual Names (bad)](#conceptual-names-bad)
+    - [Conceptual Names (👎)](#conceptual-names-)
     - [CRUD](#crud)
-    - [Delegitis (bad)](#delegitis-bad)
+    - [Delegitis (👎)](#delegitis-)
     - [Dependency Injection](#dependency-injection)
     - [Entity Design](#entity-design)
-    - [Execution Order Dependence (bad)](#execution-order-dependence-bad)
-    - [Handy Extras / Ya Ain't Gonna Need It (bad)](#handy-extras--ya-aint-gonna-need-it-bad)
-    - [Hatch / 'Doorgeefluik' (generally bad)](#hatch--doorgeefluik-generally-bad)
+    - [Execution Order Dependence (👎)](#execution-order-dependence-)
+    - [Handy Extras / Ya Ain't Gonna Need It (👎)](#handy-extras--ya-aint-gonna-need-it-)
+    - [Hatch / 'Doorgeefluik' (👎)](#hatch--doorgeefluik-)
     - [Hollow Interface](#hollow-interface)
     - [Interface Contamination](#interface-contamination)
     - [Interface Neutrality](#interface-neutrality)
     - [Interface Stability](#interface-stability)
     - [IO Transparency](#io-transparency)
-    - [Kama-Sutra Pattern (bad)](#kama-sutra-pattern-bad)
-    - [Leaky Abstractions (bad)](#leaky-abstractions-bad)
+    - [Kama-Sutra Pattern (👎)](#kama-sutra-pattern-)
+    - [Leaky Abstractions (👎)](#leaky-abstractions-)
     - [Loose Coupling](#loose-coupling)
     - [Lying Names](#lying-names)
-    - [Magic (bad)](#magic-bad)
+    - [Magic (👎)](#magic-)
     - [Magic Defaults (generally bad)](#magic-defaults-generally-bad)
-    - [Magic Numbers / Magic Strings (bad)](#magic-numbers--magic-strings-bad)
+    - [Magic Numbers / Magic Strings (👎)](#magic-numbers--magic-strings-)
     - [Method Self-Sufficient](#method-self-sufficient)
-    - [Multiple Parents (moderately bad)](#multiple-parents-moderately-bad)
+    - [Multiple Parents (👎)](#multiple-parents-)
     - [Ripple-Effect](#ripple-effect)
     - [See from Name, not from Arguments](#see-from-name-not-from-arguments)
     - [Spooky Action (at a Distance) / Cause and Effect too Far Apart](#spooky-action-at-a-distance--cause-and-effect-too-far-apart)
     - [Structuring with no Purpose](#structuring-with-no-purpose)
     - [Syntactic Sugar](#syntactic-sugar)
     - [Unclear Interfaces](#unclear-interfaces)
-    - [The Unwritten Agreement ('het onderonsje') (bad)](#the-unwritten-agreement-het-onderonsje-bad)
-    - [Wrapperitis (bad)](#wrapperitis-bad)
+    - [The Unwritten Agreement ('het onderonsje') (👎)](#the-unwritten-agreement-het-onderonsje-)
+    - [Wrapperitis (👎)](#wrapperitis-)
 - [Variables and Parameters](#variables-and-parameters)
-    - [Double Negatives (bad)](#double-negatives-bad)
-    - [High-Throughput (bad)](#high-throughput-bad)
+    - [Double Negatives (👎)](#double-negatives-)
+    - [High-Throughput (👎)](#high-throughput-)
     - [Keep the Names Consistent](#keep-the-names-consistent)
-    - [Many Properties (generally bad)](#many-properties-generally-bad)
+    - [Many Properties (👎)](#many-properties-)
     - [Methods Instead of Parameters (good)](#methods-instead-of-parameters-good)
-    - [Pass on and Assign (generally bad)](#pass-on-and-assign-generally-bad)
-    - [Returning a Parameter (bad)](#returning-a-parameter-bad)
+    - [Pass on and Assign (👎)](#pass-on-and-assign-)
+    - [Returning a Parameter (👎)](#returning-a-parameter-)
     - [Temporary Variables (good)](#temporary-variables-good)
-    - [Unused Parameter (bad)](#unused-parameter-bad)
+    - [Unused Parameter (👎)](#unused-parameter-)
     - [Declare Variable Where it is Used](#declare-variable-where-it-is-used)
-    - [Variables that Change Meaning (bad)](#variables-that-change-meaning-bad)
+    - [Variables that Change Meaning (👎)](#variables-that-change-meaning-)
 - [Method Bodies](#method-bodies)
     - [Auto-Instantiation](#auto-instantiation)
-    - [Constructor Calls an Overridable (bad)](#constructor-calls-an-overridable-bad)
-    - [Cross-Referencing (generally bad)](#cross-referencing-generally-bad)
-    - [Empty If-Block (generally bad)](#empty-if-block-generally-bad)
+    - [Constructor Calls an Overridable (👎)](#constructor-calls-an-overridable-)
+    - [Cross-Referencing (👎)](#cross-referencing-)
+    - [Empty If-Block (👎)](#empty-if-block-)
     - [Foreach with i](#foreach-with-i)
     - [Last Loop Item](#last-loop-item)
     - [Method too Long / Class too Long](#method-too-long--class-too-long)
-    - [Nested Loops (sometimes bad)](#nested-loops-sometimes-bad)
+    - [Nested Loops (👎)](#nested-loops-)
     - [Nesting too Deep](#nesting-too-deep)
     - [Toilet-Role Principle](#toilet-role-principle)
 - [Problem Solving](#problem-solving)
@@ -112,16 +112,16 @@
     - [Abstract / Concrete](#abstract--concrete)
     - [Analysis Paralysis](#analysis-paralysis)
     - [Anti-programming](#anti-programming)
-    - [Asymmetry (bad)](#asymmetry-bad)
-    - [Blind Faith Methodology (bad)](#blind-faith-methodology-bad)
-    - ['Blind Staren' (bad)](#blind-staren-bad)
+    - [Asymmetry (👎)](#asymmetry-)
+    - [Blind Faith Methodology (👎)](#blind-faith-methodology-)
+    - ['Blind Staren' (👎)](#blind-staren-)
     - [Bottom-Up and Top-Down](#bottom-up-and-top-down)
     - [Bug Solving](#bug-solving)
     - [Cartesian Product of Features Problem](#cartesian-product-of-features-problem)
     - [Chicken and Egg](#chicken-and-egg)
-    - [Consistent Stupidity (bad)](#consistent-stupidity-bad)
-    - [False Generic Solution (usually bad)](#false-generic-solution-usually-bad)
-    - [Distortion (usually bad)](#distortion-usually-bad)
+    - [Consistent Stupidity (👎)](#consistent-stupidity-)
+    - [False Generic Solution (👎)](#false-generic-solution-)
+    - [Distortion (👎)](#distortion-)
     - [Do It Right, Or Don't Do It At All](#do-it-right-or-dont-do-it-at-all)
     - [Double Stitch](#double-stitch)
     - [Featuritis](#featuritis)
@@ -129,28 +129,29 @@
     - [Fluff](#fluff)
     - [Ghost Hunt](#ghost-hunt)
     - [Go Slower to Go Faster](#go-slower-to-go-faster)
-    - [GNUID (bad)](#gnuid-bad)
+    - [GNUID (👎)](#gnuid-)
     - [Hard-Coding and Soft-Coding](#hard-coding-and-soft-coding)
-    - [Head in the Sand (bad)](#head-in-the-sand-bad)
+    - [Head in the Sand (👎)](#head-in-the-sand-)
     - [Hypothetical Ideal Solution](#hypothetical-ideal-solution)
     - [Identify Problem, Take Action](#identify-problem-take-action)
     - [If You Don't Know Where to Start, Just Start Somewhere](#if-you-dont-know-where-to-start-just-start-somewhere)
     - [Inheritance not Always Good](#inheritance-not-always-good)
-    - [It Works, Doesn't It? ('Maar het werkt toch?') (bad)](#it-works-doesnt-it-maar-het-werkt-toch-bad)
+    - [It Works, Doesn't It? ('Maar het werkt toch?') (👎)](#it-works-doesnt-it-maar-het-werkt-toch-)
     - [Lack of Choice = Guarantees](#lack-of-choice--guarantees)
-    - [Least Possible Effort Strategy (bad)](#least-possible-effort-strategy-bad)
+    - [Least Possible Effort Strategy (👎)](#least-possible-effort-strategy-)
     - [Liskov-Substution Principle (SOLID)](#liskov-substution-principle-solid)
     - [Make it Look Logical](#make-it-look-logical)
     - [Multiple Solutions](#multiple-solutions)
     - [Use It or Lose It](#use-it-or-lose-it)
     - [One Extra Step](#one-extra-step)
     - [Open/Closed Principe (SOLID)](#openclosed-principe-solid)
-    - [Open Ends (bad)](#open-ends-bad)
+    - [Open Ends (👎)](#open-ends-)
     - [Power of Abstraction / Power of Generalization](#power-of-abstraction--power-of-generalization)
-    - [Quick and Dirty / Dirty (usually bad)](#quick-and-dirty--dirty-usually-bad)
+    - [Quick and Dirty / Dirty (👎)](#quick-and-dirty--dirty-)
     - [Readable, Writable and Rewritable Code](#readable-writable-and-rewritable-code)
     - [Reflection after a Task](#reflection-after-a-task)
     - [Replacement Easier than Modification](#replacement-easier-than-modification)
+    - [Retro-Active Work (👎)](#retro-active-work-)
     - [Right Solution Easier than Workaround](#right-solution-easier-than-workaround)
     - [Short Term / Long Term Solution](#short-term--long-term-solution)
     - [Subtractive and Additive](#subtractive-and-additive)
@@ -256,7 +257,7 @@ By further splitting up our assemblies we can reuse the Ordering back-end in mul
 
 `< TODO: Describe: Split up in Framework assemblies: when a framework assembly extends a .NET API, make a different framework assembly for each part of .NET you extend. A framework API should only hook into one specific part of  .NET. That way we have control over what parts of .NET we make our application dependent on, which makes it possible to develop for multiple platforms. >`
 
-### Big Hairy Base Class (bad)
+### Big Hairy Base Class (👎)
 
 A base that that is a union of the functionality needed in the derived classes, instead of containing just the basic functionality. 
 
@@ -264,7 +265,7 @@ Consider moving code to the derived classes that need it, delegating to differen
 
 `< TODO: Rephrase this and make it part of the main text: You should use inheritance to share behavior / private implementation, not as a way make methods available from multiple places, or to give a generalized name to a set of types, even though they still have separate unique behavior. You should also not create a base class, that is about a side-issue, because then you have reserved your one inheritance slot with something unimportant. >`
 
-### Big Hairy Object (bad)
+### Big Hairy Object (👎)
 
 An object that is used everywhere and can do anything. Consider splitting it up into multiple classes and only using the classes you need where you need them. It is an indication of bad separation of concerns.
 
@@ -272,11 +273,11 @@ An object that is used everywhere and can do anything. Consider splitting it up 
 
 After separating all different aspects of both functionality and technique, you can recombine these separated aspects in specific spots in the code: facades or presenters or in very specific classes that are a machine to perform very specific functionalities in a completely controlled way. See 'Facades' under 'Aspects ' and 'Facade' under 'Patterns'.
 
-### 2 API's for the Same Thing (bad)
+### 2 API's for the Same Thing (👎)
 
 Choose one API and stick with it. It is not recommended to use e.g. two different XML API's in your application.
 
-### Copy-Paste Programming (bad)
+### Copy-Paste Programming (👎)
 
 Also called code duplication, copy-paste programming is the practice of implementing new functionality by copying a old code and then slightly changing it. This is very bad practice and creates a lot of slightly different copies of code, that make it difficult to change their mutual functionality. The alternative is to create one generic piece of code that can be used in multiple different ways and not repeat it (see also: 'Do not repeat yourself (DRY)').
 
@@ -288,7 +289,7 @@ This is the principle that you should not repeat code. It is a general rule that
 
 But keep in mind that there are exceptions. Very trivial things can be repeated, and the same code might be repeated in placed where a change to one copy of the code, should not affect other parts of the system.
 
-### Dump Code Line Here (bad)
+### Dump Code Line Here (👎)
 
 `< TODO: Strategic mistake: Don't just put a line of code somewhere that gets rid of the symptom. Ask yourself the question if it is the responsibility of that class or whether it really belongs elsewhere. TODO: Describe that in more detail. ]
 
@@ -296,29 +297,29 @@ But keep in mind that there are exceptions. Very trivial things can be repeated,
 
 Granularity can be compared to sand. Large pebbles are large granules, while fine sand is made up of a small granules. In code it means that a piece of code might tap into a big object, while it really only needs to depend on a smaller object. A piece of code may use a specialized object, while it can tap into a more generalized form. It can also be expressed as 'defined at the wrong level'.
 
-### Helperitis (bad)
+### Helperitis (👎)
 
 Helpers are static methods with static functions that support a specific aspect of programming for which no more than a flat list of methods is required.
 
 Helpers are ofcourse helpful, but sometimes you can end up with code in which everything is delegates to helpers, obscuring what is actually going on.
 
-### Spread Responsibility (bad)
+### Spread Responsibility (👎)
 
 Keep the responsibility for one thing in one piece of code and do not spread it across multiple pieces of code. E.g. when setting defaults for a new object, try to keep that in one spot in the code.
 
 (Not to be confused with the 'single responsibility principle'.)
 
-### Too Many Responsibilities (bad)
+### Too Many Responsibilities (👎)
 
 When a class does too many different things, you might want to split it up into separate individual classes.
 
 When a method does different things depending on its input, you might want to split it up into different individual methods. Most of the time in the code calling your method, it is already clear which of those different things are needed there, and it does not need to be generic.
 
-### Two Solutions for the Same Thing (bad)
+### Two Solutions for the Same Thing (👎)
 
 If you see that a single problem area has two different ways of handling it, this is an indication that your design lacks elegance and you should go look for a single solution to solve the problem. Two solutions is maintenance overhead and it has the same downsides as other types of code duplication.
 
-### Vague Justification (bad)
+### Vague Justification (👎)
 
 `< TODO: Describe this. Do not try to justify putting a piece of code in a spot where it does not seem to belong with some vague explanation. The separation of responsibilities in a system should be crystal clear. People have a tendency to look for vague reasoning that justifies what they just did, and will take that very far. It is called rationalization. Be critical. Can you clearly explain why some piece of code belongs there? If not? Where should it belong? Try the stategy of 'Ideal Solution'. (There is a topic for that in this document.) That could help you figure out a better separation of concerns. >`
 
@@ -332,7 +333,7 @@ Error Checking
 
 `< TODO: Describe the 'be strict' concept. >`
 
-### Error Hiding / Null-Tolerance (bad)
+### Error Hiding / Null-Tolerance (👎)
 
 A lot of code contains too much null-tolerance, possibly because of being paranoid about getting exceptions. This is the wrong way to go. You MUST throw an exception. If you build in a lot of null-tolerance you will run into the problem that 'nothing happened, and we have no error message'. Or 'the data is corrupted and we have no error message'.  What otherwise would have been a clear error message just turned into a horrible problem to solve, in the worst case we will not even be able to solve it at all.
 
@@ -428,7 +429,7 @@ Here are rules for null-checks for other constructs:
 
 Nullability problems might be solved next to automatically by newer C# versions.
 
-### Process that Checks Itself (generally bad)
+### Process that Checks Itself (👎)
 
 It is an anti-pattern for a process that just ran, to check if the data it wrote was correct. Why would it check what it just did? Shouldn't the code just be correct? Those are questions you want to ask yourself. Also, perhaps it should just be unit tested, or functionally tested instead.
 
@@ -472,7 +473,7 @@ A longer name in code is better than a short, unspecific one. Even through you m
 
 For entity models, consider the name Order.OrderProducts, not Order.Products if the entity types are Order and OrderProduct, even though the first part of the expression 'Order.Products' already seems to imply it that it would be an OrderProduct. Because next to an OrderProduct entity, the model probably also has a Product entity and it would be very confusing that Order.Products would be a list of OrderProducts, as you would sooner think it is a list of Products from the name. Also it makes it harder to 'guess' what an entity model property is, if you abbreviate the names. Just use the full entity type name for property names and it will be far less confusing, especially to the ones that did not program your model. Again: yes, even when it seems obvious to *you*.
 
-### Conceptual Names (bad)
+### Conceptual Names (👎)
 
 'Conceptual names' are bad practice. It is hard to define what that means. But it has to do with the names not being specific enough or only vaguely related to what it is really about.
 
@@ -494,7 +495,7 @@ Here are a few more examples:
 
 `< TODO: Explain. >`
 
-### Delegitis (bad)
+### Delegitis (👎)
 
 This is over-use of delegates, mostly as parameters. Here is an example of a method with too many delegates passed to it. The problem is that it is very unreadable:
 
@@ -598,11 +599,11 @@ Now we have accomplished the same thing, only instantiation is explicit and not 
 - (Dutch) Aangeven dat het beperken van tabellen belangrijker is dan constraints bewaken op database niveau omdat alles wat je in de database structuur aanmaakt, daar kom je 'nooit meer' vanaf en alles wat je in business logic oplost is makkelijker aan te passen.
 - Keep models simple clean and stripped of all accessories, in particular entity models and especially canonical models. >
 
-### Execution Order Dependence (bad)
+### Execution Order Dependence (👎)
 
 If methods only work if you execute them in a particular order, why not have one method that executes them in that specific order?
 
-### Handy Extras / Ya Ain't Gonna Need It (bad)
+### Handy Extras / Ya Ain't Gonna Need It (👎)
 
 Do not add things to you code (and in particular to interfaces) 'that might be handy for the future'. The opposite is true. Extra code requires maintenance in case of changes. Also: If programmers use these 'handy things', they will be hard to get rid of and then you are stuck with it.
 
@@ -610,7 +611,7 @@ It is better to keep the code minimalistic and add the extras at the time that y
 
 Specialized case: Overloads that are never used, should be removed from the code.
 
-### Hatch / 'Doorgeefluik' (generally bad)
+### Hatch / 'Doorgeefluik' (👎)
 
 A method, that does not do anything but delegate to another method. For example: let's say there is a method GetImage in both an ImageRepository and an ImageFacade. All ImageFacade.GetImage does is call ImageRepository.GetImage.
 
@@ -660,11 +661,11 @@ Input / ouput transparency.
 
 `< TODO: Describe. >`
 
-### Kama-Sutra Pattern (bad)
+### Kama-Sutra Pattern (👎)
 
 So many overloads you cannot see which to pick.
 
-### Leaky Abstractions (bad)
+### Leaky Abstractions (👎)
 
 (Related to the Dependency Inversion Principle from SOLID.)
 
@@ -708,7 +709,7 @@ There are cases where high coupling is normal. For instance in case of base clas
 
 Names in code should tell the truth. If a method does more than what the name says, then it is a bad name. If a method name only gives an indication what it does, but in fact it does other stuff too, it is a bad name. If a programmer could not come up with a good name, so just typed something vague, then this is bad practice.
 
-### Magic (bad)
+### Magic (👎)
 
 When a call to a member does more than you would expect and has unintuitive side effects that you do not see.
 
@@ -718,7 +719,7 @@ Solution: execute the side effects explicitly, so you see what is going on, inst
 
 `< TODO: Describe. >`
 
-### Magic Numbers / Magic Strings (bad)
+### Magic Numbers / Magic Strings (👎)
 
 `< TODO: Describe. >`
 
@@ -728,7 +729,7 @@ It can be better to repeat the same work in multiple methods, rather than do the
 
 It is worse for the method to only work if you do very specific work beforehand. It is usually better to then let each of the methods repeat the same work. Performance is the trade-off here, but it makes the methods more reliable. An alternative is to create an instantiatable class that does the shared work in the constructor to not repeat it in the instance methods.
 
-### Multiple Parents (moderately bad)
+### Multiple Parents (👎)
 
 When an object has multiple properties that could each be considered the parent, only one parent is filled in at a time. Null reference exceptions on the horizon. A possible solution might be to have two different types that each have a different parent. It really depends on the situation what restructuring is better.
 
@@ -793,13 +794,13 @@ Examples of unclear interfaces are:
 - A method does nothing unless a property is assigned.
 - A property could have been a constructor argument. The class does nothing or throws exceptions unless the property is assigned, while really it could have been made a mandatory constructor parameter, so the object's state is valid right after construction.
 
-### The Unwritten Agreement ('het onderonsje') (bad)
+### The Unwritten Agreement ('het onderonsje') (👎)
 
 Two seemingly independent pieces of code only work if one piece of code makes assumptions about the implementation of the other piece of code. Another example of a code smell, that points to an unwritten agreement, is when an interface has elements to it, that are not obviously necessary. For instance a Dictionary parameter where it does not seem to be needed, perhaps because the calling code just so happens to be using a dictionary. You should generally avoid such scenarios. Different pieces of code should be self-sufficient and non-assumptious, but ofcouse it can depend on other trade-offs, such as performance and readability.
 
 `< TODO: Consider some of these phrases: 'Onderonsje' anti-pattern: polluting the interface of a method or class with members that break a pattern or with non-neutral types such as dictionaries, simply to make something maybe more efficient or another purpose. Usually the pollution can be prevented, because you can just do it higher in the call stack, rather than just passing things on to other methods. >`
 
-### Wrapperitis (bad)
+### Wrapperitis (👎)
 
 Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an API into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder “What does this do?" and the answer turns out to be “nothing really".
 
@@ -813,11 +814,11 @@ Variables and Parameters
 
 `< TODO: Write an intro on the kind of topics you will find here.]`
 
-### Double Negatives (bad)
+### Double Negatives (👎)
 
 If you give a variable name the word 'not' in it, then your code is likely to be less readable, since you might get a lot of double negations like "!not" and such. It is usually a better idea to use the 'positive' name as the variable name.
 
-### High-Throughput (bad)
+### High-Throughput (👎)
 
 It is not recommended to let a parameter be both input and output. Usually it is a better plan to let the parameter be input, and not write to it, and to return new output. A parameter's being 'througput' should be an exception, rather than the rule. The reason is that it is often confusing to a programmer calling your method. You usually do not expect the data you pass to the method to get deformed.
 
@@ -841,7 +842,7 @@ private string ConvertPageName(string sourceTitle)
 
 PageName all of a sudden turned into Title. This confuses everybody. You might not think there is much of a difference in meaning, but for all I know it can be a totally different property and what could also be the case is that someone was mistaken in taking the wrong property. Keep it consistent.
 
-### Many Properties (generally bad)
+### Many Properties (👎)
 
 It is not a good plan to substitute parameter passing with the use of properties or fields.
 
@@ -855,11 +856,11 @@ Sometimes you see a lot of parameters in a method, that require (a lot of) if's 
 
 `< TODO: A good example would help. >`
 
-### Pass on and Assign (generally bad)
+### Pass on and Assign (👎)
 
 Polluting a whole call stack of methods with variables only used to assign it to an object, that may just as well be assigned much higher in de call stack.
 
-### Returning a Parameter (bad)
+### Returning a Parameter (👎)
 
 Do not return a parameter again. If you write directly to a passed object, there is not need to return it again. So this is wrong:
 
@@ -931,7 +932,7 @@ It is not black and white when to use temporary variables just for the sake of g
 
 Do not worry about the performance implications of the extra variable. If a temporary variable is immediately used after it is assigned, it will be optimized by the compiler.
 
-### Unused Parameter (bad)
+### Unused Parameter (👎)
 
 Remove parameters from methods if they are no longer used.
 
@@ -939,7 +940,7 @@ Remove parameters from methods if they are no longer used.
 
 For instance: when a variable is used in one place and declare in a totally different place, you might want to move the variable closer to where it is used. This may apply to local variables. This may also mean that it is might be better to use a local variable *instead* of a field.
 
-### Variables that Change Meaning (bad)
+### Variables that Change Meaning (👎)
 
 When you use a variable for one thing and later overwrite it with semantically something else, it can be confusing to someone reading your code. Consider using a second variable instead.
 
@@ -955,7 +956,7 @@ Sometimes auto-instantiation on first use can be replaced by initializing a fiel
 
 `< TODO: Auto-instantiation variations: benefits and downsides. >`
 
-### Constructor Calls an Overridable (bad)
+### Constructor Calls an Overridable (👎)
 
 Calling an overridable member in a base constructor breaks inheritance principles. It creates a chicken and egg problem. Fields in the derived class need to be initialized before running a method, but the field can only be initialized after the base constructor went off, which runs the method! See the following code: 
 
@@ -992,11 +993,11 @@ The solution is to make `Execute()` public and insist that that it is called exp
 
 (Validation framework uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
 
-### Cross-Referencing (generally bad)
+### Cross-Referencing (👎)
 
 `< TODO: Practices: Cross-referencing prevention. Do not pass 2 arrays and process them side-by-side, but look for a 'singular form' to process and pass along a tuple. Even better: look for something you can execute onto each tuple element separately. >`
 
-### Empty If-Block (generally bad)
+### Empty If-Block (👎)
 
 Do not do this:
 
@@ -1049,7 +1050,7 @@ In both cases this usually means that the method or class has too many responsib
 
 This code smell can also apply to other code than C# classes and methods.
 
-### Nested Loops (sometimes bad)
+### Nested Loops (👎)
 
 This is a nested loop:
 
@@ -1240,17 +1241,17 @@ You always start out as an anti-programmer. However, as you progress, you might 
 
 Do not fall into the trap of thinking that using a third party component is always more efficient than programming it yourself.
 
-### Asymmetry (bad)
+### Asymmetry (👎)
 
 When several pieces of code that do similar things are differently structured, this is an indication that you should make these pieces of code consistent. If these pieces of code do not have a similar structure, you should have a good reason for it and understand this reason and be able to explain it.
 
 Even though this may seem a vague point, symmetry in code is very important for good software design.
 
-### Blind Faith Methodology (bad)
+### Blind Faith Methodology (👎)
 
 `< TODO: Describe. >`
 
-### 'Blind Staren' (bad)
+### 'Blind Staren' (👎)
 
 `< TODO: That's the Dutch term. Not sure how to translate that to English. >`
 
@@ -1284,7 +1285,7 @@ The Inheritance-Helper pattern may solve some of the issues.
 
 `< TODO: Describe. >`
 
-### Consistent Stupidity (bad)
+### Consistent Stupidity (👎)
 
 Too much effort into making code consistent can result in nonsensical code when looking at the individual cases. In a worst case scenario it even results in code that works incorrectly.
 
@@ -1292,7 +1293,7 @@ It is better for each piece of code to make as much sense as possible individual
 
 “Consistent stupidity is still stupidity."
 
-### False Generic Solution (usually bad)
+### False Generic Solution (👎)
 
 Attempting to replace multiple specific solutions by one generic one, but then just ending up doing a lot of iffing and switching to handle all the different cases. It is kind of a failed generalization, which was better off with multiple specialized solutions.
 
@@ -1304,7 +1305,7 @@ I cannot say if it is always a bad thing.
 
 'Contra-generic' might also be a good name for it.
 
-### Distortion (usually bad)
+### Distortion (👎)
 
 When you diverge from a pattern, you are probably not using it right. Find a way to keep the use of a pattern clean. It is an indication that your separation of concerns is not right or another design mistake. Perhaps you are using the wrong pattern, perhaps you are putting the responsibility for something in the wrong spot.
 
@@ -1342,7 +1343,7 @@ Not so much programming practice, rather than a practical concern. Seeing proble
 
 Sometimes taking your time for things will make you reach your goal faster. For instance, if you take it slowly step by step you might have a much better understanding of the problem, while rushing will make you skip steps. If you carefully put something together, you might have less problems and bugs than when you slap something together as quickly as possible. Another example is if you take twice the time to try and something, you might remember it better in the end.
 
-### GNUID (bad)
+### GNUID (👎)
 
 An anti-pattern where a GUID (Globally Unique Identifier) is used as an identifier, but is not globally unique: each occurrence of the same thing, for instance spread over different databases, will have a different ID, even though a Globally Unique Identifier has in its name that it should be the global identifier. This can easily result in programming errors, since one might make assumptions, that an object can be referenced by the same ID always, no matter what copy you are working on.
 
@@ -1350,7 +1351,7 @@ An anti-pattern where a GUID (Globally Unique Identifier) is used as an identifi
 
 `< TODO: Describe. >`
 
-### Head in the Sand (bad)
+### Head in the Sand (👎)
 
 Ignoring problems, hoping they won't be an issue. Lack of validation in code could be considered burying your head in the sand too. With proper validation code you get confronted with issues in your processing, you might otherwise overlook. Without proper validation you just have corrupt data, that customers find out at a very late stage, when the problem has escalated into a bigger concern.
 
@@ -1374,7 +1375,7 @@ Sometimes it is hard to know what has most priority and what is the most appropr
 
 `< TODO: Point to other pieces of this document that explains this point and perhaps add a few more arguments to it. >`
 
-### It Works, Doesn't It? ('Maar het werkt toch?') (bad)
+### It Works, Doesn't It? ('Maar het werkt toch?') (👎)
 
 This is the false conclusion that when the output is OK, it must mean that the program is coded well. This is often paired with the argument that additional coding work is a waste of time.
 
@@ -1405,7 +1406,7 @@ Another false argument against doing all this work is the claim that these are j
 
 `< TODO: Describe. >`
 
-### Least Possible Effort Strategy (bad)
+### Least Possible Effort Strategy (👎)
 
 `< TODO: Describe. Something like laziness may in the end cost you more, then it is not efficiency. >`
 
@@ -1425,7 +1426,7 @@ If you are not sure what route to take, it may help to formulate multiple soluti
 
 `< TODO: Describe:`  
 
-`- Unused functions (bad)`  
+`- Unused functions (👎)`  
 `- (Dutch) Ik heb de policy om niet gebruikte code weg te halen en pas als het echt opgelost moet worden opnieuw te bouwen, omdat de situatie dan weer dusdanig veranderd is en ideeën veranderd zijn, dat er toch niets over blijft van de oude oplossing, die dan in de tussentijd alleen maar in de weg staat en onderhoudslast tot gevolg heeft.`  
 `- It also never gets tested.`  
 `- Go into how the people might be afraid to throw away something valuable and that's why they keep unused stuff lying around. But counterintuitively it is more economic to just throw it away and rebuild it later.`  
@@ -1452,7 +1453,7 @@ But if interpreted more loosely, it could be something I can agree with:
 
 There is much debate about how to interpret this design principle. It is like people try to give new explanations to this principle, because the original idea does not work in practice.
 
-### Open Ends (bad)
+### Open Ends (👎)
 
 Or rather: not solving open ends is usually bad and will meet up with you in the near future.
 
@@ -1464,7 +1465,7 @@ The other side of it is, that it is difficult to abstract multiple problems into
 
 However, by doing it you can save a lot of work and complexity.
 
-### Quick and Dirty / Dirty (usually bad)
+### Quick and Dirty / Dirty (👎)
 
 `< TODO: Describe. >`
 
@@ -1489,6 +1490,10 @@ This can also be applied to redoing whole programs or to data processing.
 Do note that this also has downsides. For instance, when you replace code, you run the risk of ignoring details that were addressed in the original solution. When replacing data bluntly, you may run into the *Update != Delete + Insert* problem (see elsewhere in this documentation).
 
 Any one strategy has downsides and benefits compared to the other. It is always about trying to find the balance and just trying will improve your efficiency and efficacy.
+
+### Retro-Active Work (👎)
+
+Getting a new idea might lead you to wanting to retroactively change a lot of your previous work. But it might be an idea to hold back on that and save yourself a lot of work, and more forward.
 
 ### Right Solution Easier than Workaround
 
