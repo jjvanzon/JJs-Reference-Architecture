@@ -20,6 +20,7 @@
 - [Multi-Dispatch](#multi-dispatch)
 - [Namespaces](#namespaces)
 - [Service-Related Patterns](#service-related-patterns)
+    - [IsSupported](#issupported)
     - [Facade](#facade)
     - [Hidden Infrastructure](#hidden-infrastructure)
     - [Tag Model](#tag-model)
@@ -150,8 +151,21 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Services.Ordering.WebApi__               | There is no reason Web API should not be involved in this service architecture, in fact, the idea of WCF being the default for services, might not be a very long-lived.
 | __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes presentation logic instead of business logic and returns ViewModels.
 
+
 Service-Related Patterns
 ------------------------
+
+### IsSupported
+
+A service environment may contain the same interface for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different interfaces, but that would make the service layer more difficult to use, because you would not know which interface to use. Instead, you could also add 'IsSupported' properties to the interface to make an implementation communicate back if it supports a feature at all, for instance:
+
+```cs
+OrderStatusEnum IOrderFacade.GetOrderStatus();
+
+bool IOrderFacade.GetOrderStatusIsSupported { get; }
+```
+
+Then when running price updates for multiple systems, you can simply skip the ones that do not support it. Possible a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The IsSupported booleans keeps complexity at bay, more than introducing a large number of interfaces that would all need to be handled separately.
 
 ### Facade
 
