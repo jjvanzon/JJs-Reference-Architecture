@@ -6,8 +6,6 @@
 - [TODO](#todo)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
-  - [Custom Configuration Sections](#custom-configuration-sections)
-  - [appSettings](#appsettings)
   - [connectionStrings](#connectionstrings)
 - [Embedded Resources](#embedded-resources)
 - [Entity Framework 5](#entity-framework-5)
@@ -43,94 +41,11 @@ We choose full loads first, before resorting to AJAX. See 'First full load – t
 Configuration
 -------------
 
-For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work.
+For configuration we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) API. That might be quite a lot easier than directly using .NET's `System.Configuration`.
 
-### Custom Configuration Sections
+You might read from the README how it works, by using the link above.
 
-If your configuration requires more than a flat list of key value pairs, you might make a custom configuration section. In a configuration section you can add as much hierarchy as you like. You can read out structures like the following:
-
-```xml
-<jj.demos.configuration>
-  <items>
-    <item name="Name1" value="1" />
-    <item name="Name2" value="2" >
-      <childItem name="Child" value="3" />
-    </item>
-  </items>
-</jj.demos.configuration>
-```
-
-You can create any kind of nesting you want. With classic .NET, reading out nested configurations requires about 1 ½ hours of programming for a simple structure. With our own framework, it is easy.
-
-You have to include the following line in the configSections element in your config file:
-
-```xml
-<section name="jj.demos.configuration" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration"/>
-```
-
-You only need to replace the name 'jj.demos.configuration' with your assembly name converted to lower case. (You can also use a custom name, which you then have to use explicitly in your code, but that is not advised.)
-
-To read out the config you call:
-
-```cs
-var config = CustomConfigurationManager.GetSection<ConfigurationSection>();
-```
-
-MyConfigurationSection is a class you have to program yourself. Its structure of properties corresponds 1-to-1 to the XML structure. The specific behavior of the mapping is documented in the summary of CustomConfigurationManager. In short: properties map to XML elements unless you mark the property with [XmlAttribute]. Array items are expected to have the class name as the XML element name, but the element name of the array items can be specified explicty with [XmlArrayItem]. Here is an example:
-
-```cs
-internal class ConfigurationSection
-{
-    [XmlArrayItem("item")]
-    public ItemConfig[] Items { get; set; }
-}
-
-internal class ItemConfig
-{
-    [XmlAttribute]
-    public string Name { get; set; }
-
-    [XmlAttribute]
-    public string Value { get; set; }
-
-    public ItemConfig ChildItem { get; set; }
-}
-```
-
-Note that C# will follow the convention that property names are pascal case, while this automatically maps to the convention in XML, in which element and attribute names are camel case.
-
-### appSettings
-
-An appSetting looks as follows in the App.config or Web.config:
-
-```xml
-<appSettings>
-  <add key="TestInt32" value="10"/>
-</appSettings>
-```
-
-Reading out the appSettings classically, is done as follows:
-
-```cs
-int testInt32 = Convert.ToInt32(ConfigurationManager.AppSettings["TestInt32"]);
-```
-
-But you get errors if you mistype the string and an invalid cast exception if you convert to the wrong type. The alternative in Framework.Configuration is strongly typed. You first need to define an interface:
-
-```cs
-internal interface IAppSettings
-{
-    int TestInt32 { get; }
-}
-```
-
-This interface defines the names and types of the settings. To retrieve a setting you use:
-
-```cs
-int testInt32 = AppSettings<IAppSettings>.GetValue(x => x.TestInt32);
-```
-
-It automatically converts to the right data type and allows you to use strongly-typed names.
+It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work. would it ever be programmed.
 
 ### connectionStrings
 
