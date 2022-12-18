@@ -1,5 +1,5 @@
-﻿Service Architecture | JJ's Reference Architecture
-==================================================
+﻿Service Oriented Architecture | JJ's Reference Architecture
+===========================================================
 
 <h2>Contents</h2>
 
