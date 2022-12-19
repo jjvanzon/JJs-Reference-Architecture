@@ -21,13 +21,17 @@ Multi-Platform Compatibility Issues
 Introduction
 ------------
 
-Deploying .NET code to mobile platforms meant dealing with a variety of compatibility issues. This document lists the issues found while deploying of .NET code to iOS, Windows Phone and Android. This document may not be exhaustive and might be extended in the future as new issues come to light. The deployment was done using a tool called Unity, which is a Mono-based game engine.
+Deploying .NET code to mobile platforms meant dealing with various compatibility issues. This document lists the issues found while deploying of .NET code to iOS, Windows Phone and Android. The deployment was done using a tool called Unity, which is a Mono-based game engine.
+
+The project during which this was done was [JJ.SaveText](https://github.com/jjvanzon/JJ.SaveText).
+
+Some work-arounds had been given a place in [JJ.Framework.PlaformCompatibility](https://www.nuget.org/packages/JJ.Framework.PlatformCompatibility) to keep overview of these issues. But that package may not be relevant for later .NET versions anymore.
 
 
 Unity 4.3.4 / .NET Compatibility Issues
 ---------------------------------------
 
-The following things needed to be taken into consideration to make the .NET code work in Unity.
+The following things might need to be taken into consideration to make the .NET code work in Unity.
 
 - ### Use .NET 3.5
 
@@ -35,16 +39,16 @@ The following things needed to be taken into consideration to make the .NET code
 
 - ### Copy your Compiled Assemblies
 
-  To use self-made .NET assemblies in Unity, they were copied to the `Assets` folder or a sub-folder there in the Unity project.
+  To use self-made .NET assemblies in Unity, they were copied to the `Assets` folder or a sub-folder in there in the Unity project.
 
 - ### Target .NET 2.0
 
-  You have to target .NET 2.0 in Unity (not '.NET 2.0 Subset')  
+  ".NET 2.0" was targeted in Unity. (".NET 2.0 Subset" would not work.)  
   (<http://answers.unity3d.com/questions/30881/compiling-error-with-mysql-pls-help.html>)
 
 - ### Copy Mono .NET Assemblies
 
-  You might need to use the Mono versions of .NET assemblies that are not included by default in your Unity projects. To work with .NET assemblies not standardly included by Unity (for instance System.ServiceModel and System.Runtime.Serialization) you need to copy the dll's from the Unity program files to your Unity project. The location of these dll's is the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0`. They have to be copied to your Unity project somewhere in the Assets folder. You might want to create a new sub-folder in your `Assets` folder, possibly named `Plugins`.
+  The Mono versions of .NET assemblies might need to be used, that are not included by default in the Unity projects. To work with .NET assemblies not standardly included by Unity (for instance `System.ServiceModel` and `System.Runtime.Serialization`) the dll's were copied from the Unity program files to the Unity project. The location of these dll's was in the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0`. They were copied to the Unity project somewhere in the `Assets` folder. It might be an idea to create a new sub-folder in the `Assets` folder and possibly name it `Plugins`.
 
 
 Unity Free 4.3.4 Compatibility Issues
@@ -52,7 +56,7 @@ Unity Free 4.3.4 Compatibility Issues
 
 - ### System.Net.Sockets
 
-  Unity Free does not support deploying applications that use `System.Net.Sockets`. You would need Unity Pro for that. This also means any part of .NET that indirectly uses System.Net.Sockets. So basically connecting to a network from your .NET code is disabled. You can use it in the emulator in Unity, but you cannot deploy it to a device. If you want to deploy, you must remove the `System.ServiceModel.dll` from your Assets folder and anything else that uses `System.Net.Sockets`.
+  Unity Free did not support deploying applications that use `System.Net.Sockets`. That only seemed available in Unity Pro. This also means any part of .NET that indirectly uses `System.Net.Sockets`. So basically connecting to a network from your .NET code is disabled. You could use it in the emulator in Unity, but deploy it to a device seemed not possible. To deploy,  `System.ServiceModel.dll` was removed from the `Assets` folder and anything else that used `System.Net.Sockets`.
 
 
 Android / Unity 4.3.4 Issues
@@ -60,16 +64,16 @@ Android / Unity 4.3.4 Issues
 
 - ### Install Android SDK
 
-  For the Android deployment to work, you need to install Android SDK. 
+  For the Android deployment to work, Android SDK was installed. 
 
 - ### Build and Run may not Work
 
-  Building the APK file may work, while running it on the device directly from Untiy might not work.  
-Install the APK deployment file on the device instead.
+  Building the APK file may work, while running it on the device directly from Untiy does not.  
+  The APK deployment file might be installed on the device instead.
 
 - ### Installing Deployment Files
 
-  You can install the APK file on your Android device by simply copying the file some somewhere on the device when you have connected it to your PC. Find a file browser that works on Android (e.g. ASTRO File Manager), find the APK file and click it. 
+  The APK file can be installed on the Android device by copying the file some somewhere on the device when it is  connected it to the PC. You might find a file browser that works on Android (e.g. ASTRO File Manager), find the APK file and click it. 
 
 
 Windows Phone 8 Compatibility Issues
@@ -77,28 +81,28 @@ Windows Phone 8 Compatibility Issues
 
 - ### Windows 8
 
-  You need Windows 8 to deploy to Windows Phone 8. You cannot do it with Windows 7.
+  Windows 8 was minimally needed to deploy to Windows Phone 8. It did not seem to be possible from Windows 7.
 
 - ### System.Configuration
 
-  Not supported. (You can prevent linking problems by loading the assembly dynamically, but you cannot use it in runtime.)
+  Was not supported. (You could prevent linking problems, by loading the assembly dynamically, but it could not be used it in runtime on Windows Phone 8.)
 
 - ### System.Xml
 
-  Support limited up until the point of unusability. `System.Xml.Linq` is an alternative. 
+  Support limited up to the point that it was practically unusable. `System.Xml.Linq` was the alternative. 
 
 - ### System.Type.GetInterface(string name)
 
-  Not supported. Alternative: `System.Type.GetInterface(string name, bool ignoreCase)`
+  Not supported by Windows Phone 8. Alternative: `System.Type.GetInterface(string name, bool ignoreCase)`
 
 - ### System.Xml.Linq limitations
 
   On Windows Phone 8:
 
-    - `XDocument.Save(string fileName)` does not exist.
-    - `XElement.Save(string fileName)` does not exist either.
-    - `XElement.Save(Stream)` exists on Windows Phone 8, but not in .NET 3.5.
-    - so use `XElement.Save(TextWriter)`.
+    - `XDocument.Save(string fileName)` did not exist.
+    - `XElement.Save(string fileName)` did not exist either.
+    - `XElement.Save(Stream)` existed on Windows Phone 8, but not in .NET 3.5.
+    - so `XElement.Save(TextWriter)` was used instead.
 
 - ### CultureInfo.GetCultureInfo(string)
 
@@ -108,11 +112,11 @@ Windows Phone 8 Compatibility Issues
 Windows Phone 8 / Unity 4.3.4 Compatibility Issues
 --------------------------------------------------
 
-The items below are compatibility problems related to how Unity interoperates with Windows Phone.
+The items below were compatibility problems related to how Unity interoperated with Windows Phone.
 
 - ### System.Reflection.MemberInfo.MemberType
 
-  Threw a strange exception when deployed using Unity: `Method not found: 'System.Reflection.MemberTypes'`
+  Threw an exception when deployed using Unity: `Method not found: 'System.Reflection.MemberTypes'`
 
   Officially it is supported:  
   <http://msdn.microsoft.com/en-us/library/windowsphone/develop/system.reflection.memberinfo.membertype%28v=vs.105%29.aspx>
@@ -129,39 +133,44 @@ The items below are compatibility problems related to how Unity interoperates wi
 
 - ### Application.persistentDataPath (in Unity)
 
-  Persistent data path cannot be an absolute path on Windows Phone. Unity's `Application.persistentDataPath` returns an absolute path, which the Windows Phone `System.Linq.Xml` API cannot handle. The alternative for now is to do an `if` in the Unity code:
+  `persistentDataPath` could not be an absolute path on Windows Phone. Unity's `Application.persistentDataPath` returned an absolute path, which the Windows Phone `System.Linq.Xml` API did not appear to handle. The alternative for now would be to do an `if` in the Unity code:
 
   ```cs
   string folderPath;
-  if (Application.platform ==   RuntimePlatform.WP8Player) {   folderPath = ""; }
-  else { folderPath = Application.  persistentDataPath; }
+  if (Application.platform == RuntimePlatform.WP8Player) { folderPath = ""; }
+  else { folderPath = Application.persistentDataPath; }
   ```
 
-  A better alternative might be finding a property in the Unity framework that does return a path you can write your files to, that works on all the targeted platforms.
+  A better alternative might be finding a property in the Unity framework that does return a path you can write files to, that works on all the targeted platforms.
 
 - ### Type.GetProperties(BindingFlags)
 
-  In runtime it says the method `Type.GetProperties(BindingFlags)` is not found.  
-  This post says they know about the bug, they found the problem, but they won't fix it; just copy a file from an earlier Unity version...  
+  In runtime it said the method `Type.GetProperties(BindingFlags)` was not found.  
+
+  This post said they know about the bug, they found the problem, but they won't fix it; just copy a file from an earlier Unity version they say...  
   <http://forum.unity3d.com/threads/223065-Unity-4-3-3-Type-GetMembers%28BindingFlags%29-crash>  
-  Basically, the programmers of Unity added types to their library of .NET stubs (or something) that are already present in the Windows Phone 8.0 version of the .NET framework and this results in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it crashes with a method not found exception.  
-  The workaround mentioned in the post is to install version 4.3.2 of Unity in a seperate folder and replace the original Unity (4.3.3) installation's:  
+
+  It appeared the programmers of Unity added types to their library of .NET stubs (or something) that are already present in the Windows Phone 8 version of the .NET Framework and this seems to result in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it seems to crash with a method not found exception.  
+
+  The workaround mentioned in the post was to install version 4.3.2 of Unity in a seperate folder and replace the original Unity (4.3.3) installation's:  
   `Editor\Data\PlaybackEngines\wp8support\Managed\Win RTLegacy.dll`
   with the one from version 4.3.2.  
-  It also works if your original Unity version is 4.3.4.  
+  It also worked if the original Unity version was 4.3.4.  
 
 - ### Mono .NET Assemblies
 
-  It won't deploy to Windows Phone with the mono `System.Runtime.Serialization` in the `Assets` folder.  
-  Probably any .NET Mono assembly you put in the `Assets` folder will give you problems when deploying to Windows Phone (not tested).
+  It wouldn't deploy to Windows Phone with the mono `System.Runtime.Serialization` in the `Assets` folder.  
+  Possibly any .NET Mono assembly you put in the `Assets` folder may give you problems when deploying to Windows Phone (not tested).
 
 - ### Resource Assemblies
 
-  Unity does not automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. The trick is to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of your Unity project. The 'language' folders should be placed right beside where the Unity puts the `.csproj` file when you do a Windows Phone build.
+  Unity did not seem to automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. A trick that appeared to work, was to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of the Unity project. The 'language' folders would be placed right beside where the Unity put the `.csproj` file when doing a Windows Phone build.
 
 - ### Resource Assemblies
 
-  To make translations in resource files work, you need to check the supported cultures in the Properties editor in the Windows Phone 8 Visual Studio project.
+  To make translations in resource files work, the supported cultures in the Properties editor in the Windows Phone 8 Visual Studio project needed to be checked.
+
+[ ... ]
 
 - ### “Development Build" Keeps Showing
 
