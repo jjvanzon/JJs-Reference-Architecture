@@ -1,7 +1,7 @@
 JJ's Reference Architecture
 ===========================
 
-*JJ van Zon | 2014 - 2022*
+*JJ van Zon (2014 - 2022)*
 
 - [Introduction](introduction.md)
 - [Layers](layers.md)
@@ -10,7 +10,7 @@ JJ's Reference Architecture
 - [Aspects](aspects.md)
 - [API's](apis.md)
 - [Practices & Principles](practices-and-principles.md)
-- [Service Architecture](service-architecture.md)
+- [Service Oriented Architecture](service-oriented-architecture.md)
 - [Database Conventions](database-conventions.md)
 - [Code Style](code-style.md)
 - [Software Lifecycle](software-lifecycle.md)
