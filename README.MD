@@ -19,7 +19,7 @@ Contents
 - [Server Architecture](server-architecture.md)
 - [Appendices](appendices.md)
 
-Additional documents:
+Misc:
 
 - [Multi-Platform Deployment Compatibility Issues](misc-docs/multi-platform-deployment-compatibility-issues.md)
 - [Database Upgrade Excel Example](misc-docs/database-upgrade-excel-example.xlsx)
