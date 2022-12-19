@@ -1,7 +1,8 @@
 JJ's Reference Architecture
 ===========================
 
-*JJ van Zon (2014 - 2022)*
+Contents
+--------
 
 - [Introduction](introduction.md)
 - [Layers](layers.md)
@@ -17,3 +18,5 @@ JJ's Reference Architecture
 - [Team Management](team-management.md)
 - [Server Architecture](server-architecture.md)
 - [Appendices](appendices.md)
+
+*JJ van Zon, 2014-2022*
