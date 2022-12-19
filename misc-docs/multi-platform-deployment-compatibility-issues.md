@@ -23,9 +23,9 @@ Introduction
 
 Deploying .NET code to mobile platforms meant dealing with various compatibility issues. This document lists the issues found while deploying of .NET code to iOS, Windows Phone and Android. The deployment was done using a tool called Unity, which is a Mono-based game engine.
 
-The project during which this was done was [JJ.SaveText](https://github.com/jjvanzon/JJ.SaveText).
+The project during which this was done was [`JJ.SaveText`](https://github.com/jjvanzon/JJ.SaveText).
 
-Some work-arounds had been given a place in [JJ.Framework.PlaformCompatibility](https://www.nuget.org/packages/JJ.Framework.PlatformCompatibility) to keep overview of these issues. But that package may not be relevant for later .NET versions anymore.
+Some work-arounds had been given a place in [`JJ.Framework.PlaformCompatibility`](https://www.nuget.org/packages/JJ.Framework.PlatformCompatibility) to keep overview of these issues. But that package may not be relevant for later .NET versions anymore.
 
 
 Unity 4.3.4 / .NET Compatibility Issues
@@ -35,9 +35,9 @@ The following things might need to be taken into consideration to make the .NET 
 
 - ### Use .NET 3.5
 
-  Unity / Mono (as of 2014-05-17) seems only compatible with .NET 3.5, not 4.0 or 4.5, so things were targeted to .NET 3.5 in the .NET code and workarounds were made for missing features.
+  Unity / Mono (as of 2014-05-17) appears to be only compatible with .NET 3.5, not 4.0 or 4.5, so things were targeted to .NET 3.5 in the .NET code and workarounds were made for missing features.
 
-- ### Copy your Compiled Assemblies
+- ### Copy your own Compiled Assemblies
 
   To use self-made .NET assemblies in Unity, they were copied to the `Assets` folder or a sub-folder in there in the Unity project.
 
@@ -56,7 +56,7 @@ Unity Free 4.3.4 Compatibility Issues
 
 - ### System.Net.Sockets
 
-  Unity Free did not support deploying applications that use `System.Net.Sockets`. That only seemed available in Unity Pro. This also means any part of .NET that indirectly uses `System.Net.Sockets`. So basically connecting to a network from your .NET code is disabled. You could use it in the emulator in Unity, but deploy it to a device seemed not possible. To deploy,  `System.ServiceModel.dll` was removed from the `Assets` folder and anything else that used `System.Net.Sockets`.
+  Unity Free did not support deploying applications that use `System.Net.Sockets`. That only seemed available in Unity Pro. This also means any part of .NET that indirectly uses `System.Net.Sockets`. So basically connecting to a network from the .NET code is disabled. The emulator in Unity could use it, but deploying it to a device did not work. To make the deployment succeed, removing `System.ServiceModel.dll` from the `Assets` folder might work and anything else that uses `System.Net.Sockets`.
 
 
 Android / Unity 4.3.4 Issues
@@ -73,7 +73,7 @@ Android / Unity 4.3.4 Issues
 
 - ### Installing Deployment Files
 
-  The APK file can be installed on the Android device by copying the file some somewhere on the device when it is  connected it to the PC. You might find a file browser that works on Android (e.g. ASTRO File Manager), find the APK file and click it. 
+  The APK file can be installed on the Android device by copying the file some somewhere on the device when it is  connected it to the PC. A file file browser that works on Android may help (e.g. ASTRO File Manager). Find the APK file and click it. 
 
 
 Windows Phone 8 Compatibility Issues
@@ -81,11 +81,11 @@ Windows Phone 8 Compatibility Issues
 
 - ### Windows 8
 
-  Windows 8 was minimally needed to deploy to Windows Phone 8. It did not seem to be possible from Windows 7.
+  Windows 8 was minimally needed to deploy to Windows Phone 8. It appeared not to be possible from Windows 7.
 
 - ### System.Configuration
 
-  Was not supported. (You could prevent linking problems, by loading the assembly dynamically, but it could not be used it in runtime on Windows Phone 8.)
+  Was not supported. (Linking problems could be prevented, by loading the assembly dynamically, but it could not be used it in runtime on Windows Phone 8.)
 
 - ### System.Xml
 
@@ -150,7 +150,7 @@ The items below were compatibility problems related to how Unity interoperated w
   This post said they know about the bug, they found the problem, but they won't fix it; just copy a file from an earlier Unity version they say...  
   <http://forum.unity3d.com/threads/223065-Unity-4-3-3-Type-GetMembers%28BindingFlags%29-crash>  
 
-  It appeared the programmers of Unity added types to their library of .NET stubs (or something) that are already present in the Windows Phone 8 version of the .NET Framework and this seems to result in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it seems to crash with a method not found exception.  
+  It appeared the programmers of Unity added types to their library of .NET stubs (or something) that are already present in the Windows Phone 8 version of the .NET Framework and this seems to result in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it appears to crash with a method not found exception.  
 
   The workaround mentioned in the post was to install version 4.3.2 of Unity in a seperate folder and replace the original Unity (4.3.3) installation's:  
   `Editor\Data\PlaybackEngines\wp8support\Managed\Win RTLegacy.dll`
@@ -160,60 +160,60 @@ The items below were compatibility problems related to how Unity interoperated w
 - ### Mono .NET Assemblies
 
   It wouldn't deploy to Windows Phone with the mono `System.Runtime.Serialization` in the `Assets` folder.  
-  Possibly any .NET Mono assembly you put in the `Assets` folder may give you problems when deploying to Windows Phone (not tested).
+  Possibly any .NET Mono assembly put in the `Assets` folder may give problems when deploying to Windows Phone (not tested).
 
 - ### Resource Assemblies
 
-  Unity did not seem to automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. A trick that appeared to work, was to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of the Unity project. The 'language' folders would be placed right beside where the Unity put the `.csproj` file when doing a Windows Phone build.
+  Unity would not automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. A trick that appeared to work, was to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of the Unity project. The 'language' folders would be placed right beside where the Unity put the `.csproj` file when doing a Windows Phone build.
 
 - ### Resource Assemblies
 
   To make translations in resource files work, the supported cultures in the Properties editor in the Windows Phone 8 Visual Studio project needed to be checked.
 
-[ ... ]
+- ### "Development Build" Kept Showing
 
-- ### "Development Build" Keeps Showing
-
-  In the Visual Studio project, select the Configuration "Master" instead of "Release" or "Debug" to make the text "Development Build" disappear from the application running on the phone.
+  In the Visual Studio project, selecting the Configuration "Master" instead of "Release" or "Debug" made the text "Development Build" disappear from the application running on the phone.
 
 - ### System.ServiceModel
 
   `[ NOT TESTED ]`
 
-  Does not seem to work. When trying to instantiate a service client, you get the exception: `Entry point not found`. A solution might be to program our own SOAP client based on `System.Xml.Linq`.
+  Does not seem to work. When trying to instantiate a service client, the following exception showed: `Entry point not found`. A solution might be to program our own SOAP client based on `System.Xml.Linq`.
+
+  This was even partially achieved in the project [`JJ.Framework.Soap`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Soap/overview)
 
 - ### Constructor WWW(url, byte[], header)
 
-  The `WWW` class is a Unity framework class that allows you to send HTTP requests. The header parameter of this constructor is a `Dictionary<string, string>` for Windows Phone 8 and a `Hashtable` for Android and iOS. Use the compiler directive `UNITY_WP8` to use a variable of a different type. 
+  The `WWW` class is a Unity framework class that allows sending HTTP requests. The header parameter of this constructor is a `Dictionary<string, string>` for Windows Phone 8 and a `Hashtable` for Android and iOS. Used the compiler directive `UNITY_WP8` to use a variable of a different type. 
 
 - ### Encoding.GetString
 
-  Does not have the overload that takes `byte[]`, but does have an overload with `byte[], index and count`.
+  Was missing the overload that takes `byte[]`, but did have an overload with `byte[], index and count`.
 
 - ### System.Diagnostics.Trace Class
 
-  Not available on Windows Phone 8. (This makes `JJ.Framework.Logging` not usable.) 
+  Not available on Windows Phone 8. (This made [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging/overview) not usable.) 
 
 Mac OS / Unity 4.3.4 Compatibility Issues
 -----------------------------------------
 
 - ### Copy System.Runtime.Serialization
 
-  On Mac OS, the Unity emulator will not run a program that requires `System.Runtime`.Serialization if you do not copy the Mono version of the DLL to the `Assets` folder of the Unity project.
+  On Mac OS, the Unity emulator would not run a program that required `System.Runtime.Serialization`, unless the Mono version of the DLL is copied to the `Assets` folder of the Unity project.
 
-  The location of these dll's in the Unity program files on Windows is (the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0` (The location on Mac OS might be similar.)
+  The location of these dll's in the Unity program files on Windows was (the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0` (The location on Mac OS might be similar.)
 
 - ### Mac OS Version
 
-  Mac that is too old or whose system specs are too low, might not run the XCode version that is required to deploy to your particular version of iOS. XCode 4.6 is required for deployment to iOS 6, which requires Mac OS X 10.6.7 Lion, which requires a minimum of 2 GB of memory. XCode 4.2 is the highest version that will run on Mac OS X 10.6.8 Snow Leopard. XCode 3.2 is not a high enough version to run the project that is output by Unity.
+  Mac that is too old or whose system specs are too low, might not run the XCode version that is required to deploy to a particular version of iOS. XCode 4.6 seems to be required for deployment to iOS 6, which would require Mac OS X 10.6.7 Lion, which would require a minimum of 2 GB of memory. XCode 4.2 would be the highest version that would run on Mac OS X 10.6.8 Snow Leopard. XCode 3.2 [4.2?] was not a high enough version to run the project that is output by Unity. So quite a few conditions to meet.
 
 - ### Connecting to Windows Share
 
-  Connecting to a Windows share from Mac OS hangs on my Mac all the time. It works one time, and then not anymore. Alternatively you can turn on sharing on the Mac and connect to the shares from Windows by simply going to [\\192.168.1.1\](\\192.168.1.1\) (numbers may vary). You could also RDP from the Mac to the Windows machine, configure that you can access local local folders on the Mac from your RDP session and then copy files from the Windows PC to the Mac inside the RDP session. You can also use VNC to connect from a Windows machine to a Mac, which might be convenient, but might also have bad performance.
+  Connecting to a Windows share from Mac OS would hang on my Mac a lot. It would work one time, and then not anymore. Alternatively I turned on sharing on the Mac instead and connected to it from Windows by going to `\\192.168.1.1\` (numbers may vary). I also tried RDP'ing from the Mac to the Windows machine, configured to allow accessing local local folders on the Mac from the RDP session and then copied files from the Windows PC to the Mac inside the RDP session. I could also use VNC to connect from a Windows machine to a Mac, which might have been convenient, but performance was not great.
 
 - ### Errors in Unity that can be Ignored
 
-  You can get the following errors in Unity. The deployment will still work, even when you ignore the errors (if you use the 'Build' button, not 'Build and Run' and then run it from XCode):
+  The following errors may appear in Unity. The deployment might still work, even when ignoring the errors (using the 'Build' button, not 'Build and Run' and then run it from XCode):
 
     - `Socket: bind failed, error: Address already in use (48)`
     - `Unable to join player connection multicast group` 
@@ -224,47 +224,59 @@ iOS 6 / Unity 4.3.4 Compatibility Issues
 
 - ### Mac OS
 
-  You definitely need Mac OS in order to deploy to iOS. You cannot do it in Windows.
+  Mac OS was needed to deploy to iOS. It does not seem to be possible on Windows.
 
 - ### JIT Compilation
 
-  Any JIT compilation is not permitted on iOS. Some functions of .NET (or the Mono versions of .NET) automatically JIT something on the fly.
+  Any JIT compilation might not be permitted on iOS. Some functions of .NET (or the Mono versions of .NET) automatically seem to JIT something on the fly.
 
   (Sources: Google: "unity" "ios" "propertyinfo.GetValue" <http://forum.unity3d.com/threads/43038-ExecutionEngineException-Attempting-to-JIT-compile-method>)
 
 - ### PropertyInfo.GetValue()
 
-  Might JIT compile under the hood, which is not permitted, when it is performed on a generic type argument, e.g. `typeof(T).GetProperty().GetValue()`  
+  Might JIT compile under the hood, which was not permitted by iOS, when it is performed on a generic type argument, e.g.
+  
+  ```cs
+  typeof(T).GetProperty().GetValue()
+	```
+
   Alternative:
-  `PropertyInfo.GetGetMethod().Invoke()`  
-  There may be a faster alternative, but it is more complicated:  
+
+  ```cs
+  PropertyInfo.GetGetMethod().Invoke()
+  ```
+
+  There may be a faster alternative, but it seemed more complicated:  
   <http://whydoidoit.com/2012/04/18/faster-invoke-for-reflected-property-access-and-method-invocation-with-aot-compilation/>
 
 - ### Thread.CurrentThread.SetUICulture
 
-  Will do JIT compilation under the hood, which is not permitted. For resource texts you can set the Culture property of the resource classes themselves. If those are not public you might be able to use reflection to access them (not tested).
+  Would do JIT compilation under the hood, which is not permitted. For resource texts you can set the Culture property of the resource classes themselves. If those are not public you might be able to use reflection to access them (not tested).
 
 - ### Thread.CurrentThread.SetCulture
 
-  Will do JIT compilation under the hood, which is not permitted. Alternative for number formats etc. is yet to be determined. It might be to simply pass the culture to the formatting functions explicitly as the formatProvider.
+  Will do JIT compilation under the hood, which is not permitted. Alternative for number formats etc. is yet to be determined. It might be to simply pass the culture to the formatting functions explicitly as the `formatProvider`.
 
 - ### Compile for Release
 
   Resources might not work when you do not compile .NET assemblies for release.
+
 
 - ### System.ServiceModel
 
   `[ NOT TESTED ]`
 
   Not supported. Cross-compilation fails because the Mono implementation of `System.ServiceModel` references parts of `Mono.WebBrowser`, which is not supported on iOS 6.  
-A solution is to program your own SOAP client based on `System.Xml.Linq`.
+  A solution could be to program a SOAP client ourselves based on `System.Xml.Linq`.
+
+  This was partially achieved in the project [`JJ.Framework.Soap`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Soap/overview).
 
 - ### System.Web.Services
 
   `[ NOT TESTED ]`
 
   Not supported. When trying to send a message, the `XmlSerializer` is used, which calls `MonoProperty.GetValue`, which attempts to JIT Compile, which is not supported.  
-A solution is to program your own SOAP client based on `System.Xml.Linq`.  
+  A solution could be to program a SOAP client ourselves based on `System.Xml.Linq`.
 
 
 Information
