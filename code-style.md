@@ -1,4 +1,4 @@
-﻿<!-- Code Style | JJ's Reference Architecture -->
+﻿Code Style | JJ's Reference Architecture
 ========================================
 
 <h2>Contents</h2>
@@ -6,43 +6,43 @@
 - [Introduction](#introduction)
 - [Casing](#casing)
 - [Naming](#naming)
-    - [Boolean Names](#boolean-names)
+    - [Method Names](#method-names)
     - [Class Names](#class-names)
+    - [Boolean Names](#boolean-names)
     - [Collection Names](#collection-names)
-    - [DateTime Names](#datetime-names)
     - [Enum Names](#enum-names)
     - [Event Names / Delegate Names](#event-names--delegate-names)
-    - [Method Names](#method-names)
+    - [DateTime Names](#datetime-names)
+    - [Sort Order](#sort-order)
     - [File-Related Variable Names](#file-related-variable-names)
     - [Prefixes and Suffixes](#prefixes-and-suffixes)
-    - [Sort Order](#sort-order)
     - [Test Class Names to End with 'Tests'](#test-class-names-to-end-with-tests)
     - [Test Method Names](#test-method-names)
     - [Hungarian Notation](#hungarian-notation)
 - [Enters](#enters)
-    - [Surplus Enters Between Braces](#surplus-enters-between-braces)
-    - [Enters between Switch Cases](#enters-between-switch-cases)
-    - [Loops Multi-Line](#loops-multi-line)
-    - [Enters between Methods](#enters-between-methods)
     - [Properties on Separate Lines](#properties-on-separate-lines)
-    - [Enters in Methods](#enters-in-methods)
     - [Variables on Separate Lines](#variables-on-separate-lines)
+    - [Enters between Methods](#enters-between-methods)
+    - [Enters in Methods](#enters-in-methods)
+    - [Loops Multi-Line](#loops-multi-line)
+    - [Enters between Switch Cases](#enters-between-switch-cases)
+    - [Surplus Enters Between Braces](#surplus-enters-between-braces)
     - [Generic Constraints on Separate Line](#generic-constraints-on-separate-line)
     - [Generic Constraints on Same Line for One-Liners](#generic-constraints-on-same-line-for-one-liners)
 - [Spaces and Braces](#spaces-and-braces)
     - [Auto-Formatting](#auto-formatting)
+    - [Indentation](#indentation)
     - [No Braces for Single-Line If Statements](#no-braces-for-single-line-if-statements)
     - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
     - [Tabular Form Less Preferred](#tabular-form-less-preferred)
     - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
-    - [Indentation](#indentation)
 - [Encapsulation](#encapsulation)
     - [Members Private](#members-private)
     - [Types Internal](#types-internal)
     - [Explicit Access Modifiers](#explicit-access-modifiers)
     - [No Public Fields](#no-public-fields)
-    - [Prefer Interface Types](#prefer-interface-types)
     - [Public Members for Internal Classes](#public-members-for-internal-classes)
+    - [Prefer Interface Types](#prefer-interface-types)
     - [Nested Class on Top](#nested-class-on-top)
     - [1 Type 1 File](#1-type-1-file)
 - [Comments](#comments)
@@ -62,8 +62,8 @@
         - [View Code](#view-code)
     - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
     - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
-    - [Parameter Order](#parameter-order)
     - [Ordered If Range](#ordered-if-range)
+    - [Parameter Order](#parameter-order)
     - [Namespace Tips](#namespace-tips)
 - [Member Order](#member-order)
 - [Misc Preferences](#misc-preferences)
@@ -73,8 +73,8 @@
     - [Prefer Value and HasValue](#prefer-value-and-hasvalue)
     - [Prefer ToArray](#prefer-toarray)
     - [CLR Data Types](#clr-data-types)
-    - [Entity Equality by ID](#entity-equality-by-id)
     - [No Decisions from Exceptions](#no-decisions-from-exceptions)
+    - [Entity Equality by ID](#entity-equality-by-id)
     - [Avoiding Compiler Directives](#avoiding-compiler-directives)
     - [Activator.CreateInstance](#activatorcreateinstance)
 
@@ -113,41 +113,39 @@ Casing
 Naming
 ------
 
-See also: Casing, Punctuation and Spacing.
-
 Reasons for naming conventions might just be knowing what kind of system elements they are really.
 
-### Boolean Names
+### Method Names
 
-Suggestions for boolean variable name prefixes and suffixes:
+Method names might start with verbs, e.g. `CreateOrder`. 
 
-| Prefix / Suffix | Example         | Comment |
-|-----------------|-----------------|---------|
-| `Is...`         | `IsDeleted`     | Might be the most common prefix.
-| `Must...`       | `MustDelete`    |
-| `Can...`        | `CanDelete`     | Might indicate what *user* can do.
-| `Has...`        | `HasRecords`    |
-| `Are...`        | `AreEqual`      | For plural things.
-| `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability's sake. See 'Double Negatives'.
-| `Include...`    | `IncludeHidden` | Even though it is verb, it may make sense for booleans.
-| `Exclude...`    |                 | "
-| `...Exists`     | `FileExists`    |
-| `Always...`     |                 |
-| `Never...`      |                 |
-| `Only...`       |                 |
+For clarity, perhaps not start with a verb for constructs that are not methods.
 
-If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: 
+Suggestions for verbs:
 
-    LinesAreCopied
-
-instead of 
-    
-    AreLinesCopied
-
-Some boolean names are so common, that they might not need a prefix:
-
-    Visible
-    Enabled
+| Verb        | Description |
+|-------------|-------------|
+| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>In cases such as the last example, `list` may be made the first parameter.
+| `Assert`    | A method throwing `Exceptions` if input is invalid.
+| `Calculate` |
+| `Clear`     |
+| `Convert`   |
+| `ConvertTo` |
+| `Create`    | When a method returns a new object.
+| `Delete`    |
+| `Ensure`    | May set up a state if it is not set up yet.<br>If `Ensure` means throw an exception if a state is not there,<br>consider using the verb `Assert` instead.
+| `Execute`   |
+| `Generate`  |
+| `Get`       |
+| `Invoke`    |
+| `Parse`     |
+| `Process`   |
+| `Remove`    |
+| `Save`      |
+| `Set`       |
+| `Try`       |
+| `TryGet`    |
+| `Validate`  | A method for generating *validation messages* for user-input errors.
 
 ### Class Names
 
@@ -187,6 +185,38 @@ Some other suggested 'last names' for classes apart form the pattern names might
 | `Asserter`   | A class meant to throw exceptions under certain conditions.
 |              | Any method verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
 
+### Boolean Names
+
+Suggestions for boolean variable name prefixes and suffixes:
+
+| Prefix / Suffix | Example         | Comment |
+|-----------------|-----------------|---------|
+| `Is...`         | `IsDeleted`     | Might be the most common prefix.
+| `Must...`       | `MustDelete`    |
+| `Can...`        | `CanDelete`     | Might indicate what *user* can do.
+| `Has...`        | `HasRecords`    |
+| `Are...`        | `AreEqual`      | For plural things.
+| `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability's sake. See 'Double Negatives'.
+| `Include...`    | `IncludeHidden` | Even though it is verb, it may make sense for booleans.
+| `Exclude...`    |                 | "
+| `...Exists`     | `FileExists`    |
+| `Always...`     |                 |
+| `Never...`      |                 |
+| `Only...`       |                 |
+
+If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: 
+
+    LinesAreCopied
+
+instead of 
+    
+    AreLinesCopied
+
+Some boolean names are so common, that they might not need a prefix:
+
+    Visible
+    Enabled
+
 ### Collection Names
 
 Plural words are preferred for collections:
@@ -199,23 +229,6 @@ Variable names for amounts of elements in the collection might be named:
     Count
 
 So perhaps avoid plural words to denote a count and avoid plural words for things other than collections.
-
-### DateTime Names
-
-A `DateTime` property might be suffixed with `Utc` or `Local`:
-
-    StartDateLocal
-    OrderDateTimeUtc
-
-An alternative suffix for `DateTimes` could be `When`:
-
-    ModifiedWhen
-    OrderedWhen
-
-But that might look less nice when you add the Local and Utc suffices again:
-
-    ModifiedWhenUtc
-    OrderedWhenLocal
 
 ### Enum Names
 
@@ -263,37 +276,33 @@ Pardon the ambiguity, but the naming above can be used for the names of events, 
 
 Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be an established event name.
 
-### Method Names
+### DateTime Names
 
-Method names might start with verbs, e.g. `CreateOrder`. 
+A `DateTime` property might be suffixed with `Utc` or `Local`:
 
-For clarity, perhaps not start with a verb for constructs that are not methods.
+    StartDateLocal
+    OrderDateTimeUtc
 
-Suggestions for verbs:
+An alternative suffix for `DateTimes` could be `When`:
 
-| Verb        | Description |
-|-------------|-------------|
-| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>In cases such as the last example, `list` may be made the first parameter.
-| `Assert`    | A method throwing `Exceptions` if input is invalid.
-| `Calculate` |
-| `Clear`     |
-| `Convert`   |
-| `ConvertTo` |
-| `Create`    | When a method returns a new object.
-| `Delete`    |
-| `Ensure`    | May set up a state if it is not set up yet.<br>If `Ensure` means throw an exception if a state is not there,<br>consider using the verb `Assert` instead.
-| `Execute`   |
-| `Generate`  |
-| `Get`       |
-| `Invoke`    |
-| `Parse`     |
-| `Process`   |
-| `Remove`    |
-| `Save`      |
-| `Set`       |
-| `Try`       |
-| `TryGet`    |
-| `Validate`  | A method for generating *validation messages* for user-input errors.
+    ModifiedWhen
+    OrderedWhen
+
+But that might look less nice when you add the Local and Utc suffices again:
+
+    ModifiedWhenUtc
+    OrderedWhenLocal
+
+### Sort Order
+
+For number sequences these names might be used:
+
+    ListIndex
+    IndexNumber
+    SortOrder
+    Rank
+
+Perhaps avoid `Index` because it is an SQL keyword.
 
 ### File-Related Variable Names
 
@@ -332,17 +341,6 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in 'Is it *recursive*?'.)
 | `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
-
-### Sort Order
-
-For number sequences these names might be used:
-
-    ListIndex
-    IndexNumber
-    SortOrder
-    Rank
-
-Perhaps avoid `Index` because it is an SQL keyword.
 
 ### Test Class Names to End with 'Tests'
 
@@ -407,112 +405,6 @@ Avoid prefixes such as `strName`.
 Enters
 ------
 
-### Surplus Enters Between Braces
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-```cs
-    }
-}
-```
-
-</td><td>
-
-```cs
-    }
-    
-}
-```
-
-</td></tr></table>
-
-Reason: More tidy.
-
-### Enters between Switch Cases
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-```cs
-switch (x)
-{
-    case 1:
-        break;
-
-    case 2:
-        break;
-}
-```
-
-</td><td>
-
-```cs
-switch (x)
-{
-    case 1:
-        break;
-    case 2:
-        break;
-}
-```
-
-</td></tr></table>
-
-Reason: A bit tidier?
-
-### Loops Multi-Line
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-```cs
-foreach (var x in list)
-{ 
-    Bla();
-}
-```
-
-</td><td>
-
-```cs
-foreach (var x in list) { Bla(); } 
-```
-
-</td></tr></table>
-
-Reason: May look odd if you're not used to it.
-
-### Enters between Methods
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-```cs
-void Bla()
-{
-   
-}
-
-void Bla2()
-{
-   
-}
-```
-
-</td><td>
-
-```cs
-void Bla()
-{
-    
-}
-void Bla2()
-{
-    
-}
-```
-
-</td></tr></table>
-
-Reason: Just a bit more tidy?
-
 ### Properties on Separate Lines
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
@@ -550,6 +442,61 @@ int A { get; set; } int B { get; set; }
 
 Reason:  
 Might be easy to overlook that there is another property.
+
+### Variables on Separate Lines
+
+Putting variable declarations on separate lines.
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+int i;
+int j;
+```
+
+</td><td>
+
+```cs
+int i, j; 
+```
+
+</td></tr></table>
+
+Reason:  
+Just a preference, when not used to it, it may be overlooked, and "Find..." may not show the results expected.
+
+### Enters between Methods
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+void Bla()
+{
+   
+}
+
+void Bla2()
+{
+   
+}
+```
+
+</td><td>
+
+```cs
+void Bla()
+{
+    
+}
+void Bla2()
+{
+    
+}
+```
+
+</td></tr></table>
+
+Reason: Just a bit more tidy?
 
 ### Enters in Methods
 
@@ -591,27 +538,78 @@ void Bla()
 Reason:  
 Visible separation of steps inside methods.
 
-### Variables on Separate Lines
-
-Putting variable declarations on separate lines.
+### Loops Multi-Line
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
 ```cs
-int i;
-int j;
+foreach (var x in list)
+{ 
+    Bla();
+}
 ```
 
 </td><td>
 
 ```cs
-int i, j; 
+foreach (var x in list) { Bla(); } 
 ```
 
 </td></tr></table>
 
-Reason:  
-Just a preference, when not used to it, it may be overlooked, and "Find..." may not show the results expected.
+Reason: May look odd if you're not used to it.
+
+### Enters between Switch Cases
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+switch (x)
+{
+    case 1:
+        break;
+
+    case 2:
+        break;
+}
+```
+
+</td><td>
+
+```cs
+switch (x)
+{
+    case 1:
+        break;
+    case 2:
+        break;
+}
+```
+
+</td></tr></table>
+
+Reason: A bit tidier?
+
+### Surplus Enters Between Braces
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+    }
+}
+```
+
+</td><td>
+
+```cs
+    }
+    
+}
+```
+
+</td></tr></table>
+
+Reason: More tidy.
 
 ### Generic Constraints on Separate Line
 
@@ -673,6 +671,26 @@ Spaces and Braces
 Prefer Visual Studio's autoformatting enabled and set to its defaults.
 
 Reason: Less surprizing to the next developer.
+
+### Indentation
+
+Use proper indentation.
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+[ TODO: Example. ]
+```
+
+</td><td>
+
+```cs
+[ TODO: Example. ]
+```
+
+</td></tr></table>
+
+Reason: Just readability.
 
 ### No Braces for Single-Line If Statements
 
@@ -774,26 +792,6 @@ var arr = coll.Where(x => x...).
 
 Reason: readability.
 
-### Indentation
-
-Use proper indentation.
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-```cs
-[ TODO: Example. ]
-```
-
-</td><td>
-
-```cs
-[ TODO: Example. ]
-```
-
-</td></tr></table>
-
-Reason: Just readability.
-
 
 Encapsulation
 -------------
@@ -845,7 +843,7 @@ int Bla() { ... }
 </td></tr></table>
 
 Reason:  
-One might be confused what is the default.
+Avoiding confusion about the defaults.
 
 ### No Public Fields
 
@@ -864,22 +862,6 @@ Prefer not to use public fields. Use either private fields or use properties ins
 Reason:  
 People may say the interface stability comes in jeopardy when you use public fields. The fields seem to look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
 
-### Prefer Interface Types
-
-Prefer interface types as variable types. 
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-***`IList`***`<int> list = new List<int>;`
-
-</td><td>
-
-***`List`***`<int> list = new List<int>; `
-
-</td></tr></table>
-
-Reason: Less refactoring when changing variable type.
-
 ### Public Members for Internal Classes
 
 Prefer for internal classes not to have internal members.
@@ -896,6 +878,22 @@ Prefer for internal classes not to have internal members.
 
 Reason:  
 The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods.
+
+### Prefer Interface Types
+
+Prefer interface types as variable types. 
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+***`IList`***`<int> list = new List<int>;`
+
+</td><td>
+
+***`List`***`<int> list = new List<int>; `
+
+</td></tr></table>
+
+Reason: Less refactoring when changing the type. Less dependency on specific implementation allowing you to switch more easily to another one.
 
 ### Nested Class on Top
 
@@ -1199,25 +1197,6 @@ It is appreciated when a file stream is opened specifying all three aspects `Fil
 Reason:  
 Otherwise these aspects may have surprizing defaults.
 
-### Parameter Order
-
-An idea for passing infrastructure-related parameters to constructors or methods, is to first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
-
-```cs
-class MyPresenter
-{
-    public MyPresenter(
-        MyEntity entity, 
-        IMyRepository repository,
-        IAuthenticator authenticator,
-        string cultureName,
-        int pageSize)
-    {
-        ...
-    }
-}
-```
-
 ### Ordered If Range 
 
 When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
@@ -1239,6 +1218,25 @@ if (x >= 11 && x <= 99)
 </td></tr></table>
 
 Reason: Readability. More obvious what the range limits are.
+
+### Parameter Order
+
+An idea for passing infrastructure-related parameters to constructors or methods, is to first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
+
+```cs
+class MyPresenter
+{
+    public MyPresenter(
+        MyEntity entity, 
+        IMyRepository repository,
+        IAuthenticator authenticator,
+        string cultureName,
+        int pageSize)
+    {
+        ...
+    }
+}
+```
 
 ### Namespace Tips
 
@@ -1370,7 +1368,7 @@ if (number != null)
 </td></tr></table>
 
 Reason:  
-Changing the variable to type object, changes how the code behaves.
+Changing the variable to type `object`, would change the behavior of the code considerably.
 
 ### Prefer ToArray
 
@@ -1387,7 +1385,7 @@ Prefer `ToArray` over `ToList`.
 </td></tr></table>
 
 Reason: More performance?  
-Downside: The `Add` method does not work for an `Array`.
+Downside: The `Add` method throws an exception for an `Array`.
 
 ### CLR Data Types
 
@@ -1413,30 +1411,8 @@ sbyte
 
 </td></tr></table>
 
-Reason:
-For compatibility with more variations of .NET.
-
-### Entity Equality by ID
-
-Entity equality checks might be better done by ID than by reference.
-
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
-
-```cs
-if (entity1.ID == entity2.ID)
-// (Also do null checks if applicable.)
-```
-
-</td><td>
-
-```cs
-if (entity1 == entity2) 
-```
-
-</td></tr></table>
-
 Reason:  
-Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
+For compatibility with more variations of .NET.
 
 ### No Decisions from Exceptions
 
@@ -1472,6 +1448,28 @@ bool FileExists(string path)
 
 Reason:  
 `Exception` handling is more performance intensive than might be expected. Compared to an `if` statement. When no `exception` goes off, `exception` handling might perform well, but when an `exception` goes off, quite a few things happen, like gathering stack trace information.
+
+### Entity Equality by ID
+
+Entity equality checks might be better done by ID than by reference.
+
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+
+```cs
+if (entity1.ID == entity2.ID)
+// (Also do null checks if applicable.)
+```
+
+</td><td>
+
+```cs
+if (entity1 == entity2) 
+```
+
+</td></tr></table>
+
+Reason:  
+Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
 
 ### Avoiding Compiler Directives
 
