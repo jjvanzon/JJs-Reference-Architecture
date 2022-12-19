@@ -19,4 +19,9 @@ Contents
 - [Server Architecture](server-architecture.md)
 - [Appendices](appendices.md)
 
+Additional documents:
+
+- [Multi-Platform Deployment Compatibility Issues](misc-docs/multi-platform-deployment-compatibility-issues.md)
+- [Database Upgrade Excel Example](misc-docs/database-upgrade-excel-example.xlsx)
+
 *JJ van Zon, 2014-2022*
