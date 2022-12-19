@@ -50,7 +50,7 @@
     - [Comments in English](#comments-in-english)
     - [No Comments without Info](#no-comments-without-info)
     - [No Unused / Outcommented Code](#no-unused--outcommented-code)
-- [Other Notation](#other-notation)
+- [More Notation](#more-notation)
     - [Object Initializers](#object-initializers)
     - [Default Switch Case at the Bottom](#default-switch-case-at-the-bottom)
     - [Long Code Lines](#long-code-lines)
@@ -1013,8 +1013,8 @@ Reason:
 Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
 
 
-Other Notation
---------------
+More Notation
+-------------
 
 ### Object Initializers
 
@@ -1106,7 +1106,8 @@ var x = y.X;
 </td></tr></table>
 
 Reason:  
-It would be nice to see the variable type in the code line instead of `var`.  
+It would be nice to see the variable type in the code line instead of `var`.
+
 There may be a few exceptions, where var may be preferred, when the type is sort of obvious, or it might be more readable.
 
 #### Anonymous Types
