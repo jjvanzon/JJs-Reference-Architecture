@@ -21,7 +21,7 @@ Contents
 
 Misc:
 
-- [Multi-Platform Deployment Compatibility Issues](misc-docs/multi-platform-deployment-compatibility-issues.md)
+- [Multi-Platform Compatibility Issues](misc-docs/multi-platform-compatibility-issues.md)
 - [Database Upgrade Excel Example](misc-docs/database-upgrade-excel-example.xlsx)
 
 *JJ van Zon, 2014-2022*
