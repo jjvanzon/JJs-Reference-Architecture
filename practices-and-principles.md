@@ -56,6 +56,7 @@
     - [IO Transparency](#io-transparency)
     - [Kama-Sutra Pattern (👎)](#kama-sutra-pattern-)
     - [Leaky Abstractions (👎)](#leaky-abstractions-)
+    - [Liskov-Substution Principle (SOLID)](#liskov-substution-principle-solid)
     - [Loose Coupling](#loose-coupling)
     - [Lying Names](#lying-names)
     - [Magic (👎)](#magic-)
@@ -95,15 +96,24 @@
     - [Nesting too Deep](#nesting-too-deep)
     - [Toilet-Role Principle](#toilet-role-principle)
 - [Problem Solving](#problem-solving)
+    - [Bug Solving](#bug-solving)
     - [Core of the Problem](#core-of-the-problem)
+    - [Do It Right, Or Don't Do It At All](#do-it-right-or-dont-do-it-at-all)
+    - [Double Stitch](#double-stitch)
     - [Environmental Causes](#environmental-causes)
+    - [Ghost Hunt](#ghost-hunt)
     - [Hit F5 and See](#hit-f5-and-see)
+    - [Identify Problem, Take Action](#identify-problem-take-action)
     - [Incident or Global Problem?](#incident-or-global-problem)
     - [Look for Alternatives](#look-for-alternatives)
     - [Narrow the Scope](#narrow-the-scope)
     - [Not My Bug](#not-my-bug)
+    - [Multiple Solutions](#multiple-solutions)
     - [Questions to Ask](#questions-to-ask)
+    - [Quick and Dirty / Dirty (👎)](#quick-and-dirty--dirty-)
     - [Reproduce the Bug](#reproduce-the-bug)
+    - [Right Solution Easier than Workaround](#right-solution-easier-than-workaround)
+    - [Short Term / Long Term Solution](#short-term--long-term-solution)
     - [Smaller Test](#smaller-test)
     - [Solve by Refactoring](#solve-by-refactoring)
     - [Solve by Simplifying](#solve-by-simplifying)
@@ -116,44 +126,34 @@
     - [Blind Faith Methodology (👎)](#blind-faith-methodology-)
     - ['Blind Staren' (👎)](#blind-staren-)
     - [Bottom-Up and Top-Down](#bottom-up-and-top-down)
-    - [Bug Solving](#bug-solving)
+    - [But It Works, Doesn't It? ('Maar het werkt toch?') (👎)](#but-it-works-doesnt-it-maar-het-werkt-toch-)
     - [Cartesian Product of Features Problem](#cartesian-product-of-features-problem)
     - [Chicken and Egg](#chicken-and-egg)
     - [Consistent Stupidity (👎)](#consistent-stupidity-)
     - [False Generic Solution (👎)](#false-generic-solution-)
     - [Distortion (👎)](#distortion-)
-    - [Do It Right, Or Don't Do It At All](#do-it-right-or-dont-do-it-at-all)
-    - [Double Stitch](#double-stitch)
     - [Featuritis](#featuritis)
     - [First Try Specific, Then Try Generic](#first-try-specific-then-try-generic)
     - [Fluff](#fluff)
-    - [Ghost Hunt](#ghost-hunt)
     - [Go Slower to Go Faster](#go-slower-to-go-faster)
     - [GNUID (👎)](#gnuid-)
     - [Hard-Coding and Soft-Coding](#hard-coding-and-soft-coding)
     - [Head in the Sand (👎)](#head-in-the-sand-)
     - [Hypothetical Ideal Solution](#hypothetical-ideal-solution)
-    - [Identify Problem, Take Action](#identify-problem-take-action)
     - [If You Don't Know Where to Start, Just Start Somewhere](#if-you-dont-know-where-to-start-just-start-somewhere)
     - [Inheritance not Always Good](#inheritance-not-always-good)
-    - [It Works, Doesn't It? ('Maar het werkt toch?') (👎)](#it-works-doesnt-it-maar-het-werkt-toch-)
     - [Lack of Choice = Guarantees](#lack-of-choice--guarantees)
     - [Least Possible Effort Strategy (👎)](#least-possible-effort-strategy-)
-    - [Liskov-Substution Principle (SOLID)](#liskov-substution-principle-solid)
     - [Make it Look Logical](#make-it-look-logical)
-    - [Multiple Solutions](#multiple-solutions)
     - [Use It or Lose It](#use-it-or-lose-it)
     - [One Extra Step](#one-extra-step)
     - [Open/Closed Principe (SOLID)](#openclosed-principe-solid)
     - [Open Ends (👎)](#open-ends-)
     - [Power of Abstraction / Power of Generalization](#power-of-abstraction--power-of-generalization)
-    - [Quick and Dirty / Dirty (👎)](#quick-and-dirty--dirty-)
     - [Readable, Writable and Rewritable Code](#readable-writable-and-rewritable-code)
     - [Reflection after a Task](#reflection-after-a-task)
     - [Replacement Easier than Modification](#replacement-easier-than-modification)
     - [Retro-Active Work (👎)](#retro-active-work-)
-    - [Right Solution Easier than Workaround](#right-solution-easier-than-workaround)
-    - [Short Term / Long Term Solution](#short-term--long-term-solution)
     - [Subtractive and Additive](#subtractive-and-additive)
     - [Testing](#testing)
     - [Too Difficult / Disproportional Effort](#too-difficult--disproportional-effort)
@@ -693,6 +693,10 @@ interface IMyRepository
 
 You might add extra methods or parameters if more filtering options are needed.
 
+### Liskov-Substution Principle (SOLID)
+
+`< TODO: Describe my take and my solutions on it. >`
+
 ### Loose Coupling
 
 Loose coupling or a low coupling is the concept of keeping a low degree of dependence between things. Tight coupling or high coupling means many things are tightly dependent on eachother, making it hard to change one of those things without breaking or changing the other things. The benefit of loose coupling is that a change to one thing affects a minimum of other things.
@@ -1119,11 +1123,31 @@ Someone reading you code will look at it through the hole of a toilet-role, seei
 Problem Solving
 ---------------
 
+### Bug Solving
+
+To solve a bug, first reproduce it.
+
+`< TODO: Make more extensive description. >`
+
 ### Core of the Problem
 
 `< TODO: Write text. Incorporate:`
 
 `Solve the root of the problem. Do not work around a problem, because it will catch up with you later, very soon. >`
+
+### Do It Right, Or Don't Do It At All
+
+This is a phrase that can help you prevent a mess of half-baked things that do not work well on their own, let along work well together. This strategy can also be applied to whole features, but also separate classes and methods. If you do not have the time to program it right, you have several options. For instance postpone until you do have time or find an alternative that offers limited capabilities, but still does what it says on the tin. Still better than half-baked stuff. Do not litter the code with all sorts of stuff that does not work.
+
+### Double Stitch
+
+'A double stitch holds better.' Can also be expressed as: 'one hand washes the other'.
+
+Combatting a problem by implementing security against it at multiple levels. Sometimes this protects against a problem better, but on the other hand, you introduce spread responsibility and potentially code repetition.
+
+Here is an example. Say there is a process that writes away data. The process is in principle responsible for writing away correct data, but the validation part of the architecture may guard the overall rules. This means the intricacies around the correct data is noticable in both the process and the validation, so if one of these subsystems contains a programming error, the other subsystem acts as a fail safe.
+
+If the correctness of data is described by trivial rules, you might not say there is a spread responsibility and rather call it a double-stitched solution. But if writing away correct data and checking the correctness of that data is very intricate, you may be repeating significant logic, which does lead to spread responsibility and code repetition. So even though that solution is safer because of double-stitchedness, it is unsafe due to excessive code repetition. This goes to show that it all depends on the situation what the best strategy is.
 
 ### Environmental Causes
 
@@ -1132,11 +1156,24 @@ Problem Solving
 - Was a service updated?
 - Is it due to different versions in prod, acc and dev?
 
+### Ghost Hunt
+
+Not so much programming practice, rather than a practical concern. Seeing problems where they do not exist or investigating a potential problem, that might not be a problem at all. Early detection of seeing problems where there are none can prevent such excessive spenditure of time.
+
 ### Hit F5 and See
 
 Hitting F5 and getting rid of symptoms. This is a strategy, where rather than trying to solve all edge cases in your head or on paper, you start debugging the code and tackle the problems as you go.
 
 You might not even debug, but take a fully *symptomatic approach*. On one hand this has drawbacks, because you might not cover edge cases lurking below the surface. But sometimes sometimes there is just so much to consider that a symptomatic approach is much more productive.
+
+### Identify Problem, Take Action
+
+It is a simple phrase, but it can help you a lot. It means take a step back identify the issue and determine the most appropriate first step towards the solution.
+
+Thinking about it that way can prevent stress, anger, feeling of lack of control, working around an issue rather than solving the core of it, trying to find people to blame and prevents simply not taking action. It also makes it unnecessary to have a final solution in mind and still allows you to work towards a solution, even though you do not know it yet.
+
+Take a deep breath and identify what the problem is, and just the next step you are going to take.
+
 
 ### Incident or Global Problem?
 
@@ -1160,6 +1197,10 @@ Whether you caused it, or did not cause it, both are very interesting informatio
 
 By the way 'did you cause the bug' sounds a little accusing. It is not meant that way. There is not shame in putting bugs in software. It comes with the trade.
 
+### Multiple Solutions
+
+If you are not sure what route to take, it may help to formulate multiple solutions to your problem and compare their benefits and drawbacks. Nay, it even helps when you are already are focused on this one solution. Take a step back and think of a few different approaches before you take your pick.
+
 ### Questions to Ask
 
 Some miscellaneous things to ask:
@@ -1169,9 +1210,21 @@ Information gathering:
 - Read the error message
 - Google the error message.
 
+### Quick and Dirty / Dirty (👎)
+
+`< TODO: Describe. >`
+
 ### Reproduce the Bug
 
 `< TODO: Write something about it. Look if other texts are present already in this document and use them / move them. >`
+
+### Right Solution Easier than Workaround
+
+That the right solution might be easier than a supposedly easier intermediate solution. That is something to keep in mind.
+
+### Short Term / Long Term Solution
+
+We all find ourselves with seemingly not enough time to do everything and do them right. Often next to the best solution, there is a short-term alternative solution. While it is time-critical you can execute a short term solution and after that take some time to do it right, so it won't cause problems in the future.
 
 ### Smaller Test
 
@@ -1265,11 +1318,32 @@ Top-down design means you first desing the higher layers of the system, for inst
 
 No method is best. They are simply two different strategies to attack a problem.
 
-### Bug Solving
+### But It Works, Doesn't It? ('Maar het werkt toch?') (👎)
 
-To solve a bug, first reproduce it.
+This is the false conclusion that when the output is OK, it must mean that the program is coded well. This is often paired with the argument that additional coding work is a waste of time.
 
-`< TODO: Make more extensive description. >`
+A senior programmer might tell a junior programmer to change his code, and a junior programmer might think it is a whole lot of unnecessary work, because his program already worked.
+
+Things that could still be wrong with the program are for instance that:
+
+- Poor performance
+- Crashes in exceptional cases
+- Corrupts data in exceptional cases
+- Code not easy to understand. So that another programmer does not easily understand.
+- Poor maintainability so that a change takes ages
+- or possibly means it has to be rewritten completely 
+- or a change is error-prone.
+- Not adapted to contextual changes such as culture or when variables change. They may be hard-codedly interwoven into the code.
+- Assumptions that databases will be available when they are not.
+- Security leaks
+- Crashes when services are offline.
+- Does not give validation or exception messages when something goes wrong.
+- Does not integrate well with other technologies.
+- Etcetera. 
+
+These are all examples of what could still be wrong with the code if a program 'seems to work'.
+
+Another false argument against doing all this work is the claim that these are just unimportant details.
 
 ### Cartesian Product of Features Problem
 
@@ -1309,20 +1383,6 @@ I cannot say if it is always a bad thing.
 
 When you diverge from a pattern, you are probably not using it right. Find a way to keep the use of a pattern clean. It is an indication that your separation of concerns is not right or another design mistake. Perhaps you are using the wrong pattern, perhaps you are putting the responsibility for something in the wrong spot.
 
-### Do It Right, Or Don't Do It At All
-
-This is a phrase that can help you prevent a mess of half-baked things that do not work well on their own, let along work well together. This strategy can also be applied to whole features, but also separate classes and methods. If you do not have the time to program it right, you have several options. For instance postpone until you do have time or find an alternative that offers limited capabilities, but still does what it says on the tin. Still better than half-baked stuff. Do not litter the code with all sorts of stuff that does not work.
-
-### Double Stitch
-
-'A double stitch holds better.' Can also be expressed as: 'one hand washes the other'.
-
-Combatting a problem by implementing security against it at multiple levels. Sometimes this protects against a problem better, but on the other hand, you introduce spread responsibility and potentially code repetition.
-
-Here is an example. Say there is a process that writes away data. The process is in principle responsible for writing away correct data, but the validation part of the architecture may guard the overall rules. This means the intricacies around the correct data is noticable in both the process and the validation, so if one of these subsystems contains a programming error, the other subsystem acts as a fail safe.
-
-If the correctness of data is described by trivial rules, you might not say there is a spread responsibility and rather call it a double-stitched solution. But if writing away correct data and checking the correctness of that data is very intricate, you may be repeating significant logic, which does lead to spread responsibility and code repetition. So even though that solution is safer because of double-stitchedness, it is unsafe due to excessive code repetition. This goes to show that it all depends on the situation what the best strategy is.
-
 ### Featuritis
 
 `< TODO: Describe. >`
@@ -1334,10 +1394,6 @@ It is often a good solution to design something generic, rather than something t
 ### Fluff
 
 A lot of code that does not add much functionality is an indication that a more elegant solution might be possible.
-
-### Ghost Hunt
-
-Not so much programming practice, rather than a practical concern. Seeing problems where they do not exist or investigating a potential problem, that might not be a problem at all. Early detection of seeing problems where there are none can prevent such excessive spenditure of time.
 
 ### Go Slower to Go Faster
 
@@ -1359,14 +1415,6 @@ Ignoring problems, hoping they won't be an issue. Lack of validation in code cou
 
 You might get stuck thinking in objections, edge-cases and impossibilities. A way to part from that, is to try and formulate what would be the ideal solution regardless of (perceived) impossibilities. From there, you can then think of a less than perfect alternative that approaches that ideal. It can be a strategy that can get you unstuck. It gives you something to hold on to, to fall back on. You can formulate the ideal and then ask yourself what would be needed to accomplish that. It not only gets you unstuck in your thinking, it can also lead to the surprising conclusion that the ideal way may be easier to achieve then the alternatives you have been wrecking your brain over. But that happens a lot when you employ techniques that let you take a step back from the problem and look at it from a fresh point of view.
 
-### Identify Problem, Take Action
-
-It is a simple phrase, but it can help you a lot. It means take a step back identify the issue and determine the most appropriate first step towards the solution.
-
-Thinking about it that way can prevent stress, anger, feeling of lack of control, working around an issue rather than solving the core of it, trying to find people to blame and prevents simply not taking action. It also makes it unnecessary to have a final solution in mind and still allows you to work towards a solution, even though you do not know it yet.
-
-Take a deep breath and identify what the problem is, and just the next step you are going to take.
-
 ### If You Don't Know Where to Start, Just Start Somewhere
 
 Sometimes it is hard to know what has most priority and what is the most appropriate action to take or where the best lead to solve a problem lies. What helps in those cases is: If you don't know where to start, just start somewhere.
@@ -1374,33 +1422,6 @@ Sometimes it is hard to know what has most priority and what is the most appropr
 ### Inheritance not Always Good
 
 `< TODO: Point to other pieces of this document that explains this point and perhaps add a few more arguments to it. >`
-
-### It Works, Doesn't It? ('Maar het werkt toch?') (👎)
-
-This is the false conclusion that when the output is OK, it must mean that the program is coded well. This is often paired with the argument that additional coding work is a waste of time.
-
-A senior programmer might tell a junior programmer to change his code, and a junior programmer might think it is a whole lot of unnecessary work, because his program already worked.
-
-Things that could still be wrong with the program are for instance that:
-
-- Poor performance
-- Crashes in exceptional cases
-- Corrupts data in exceptional cases
-- Code not easy to understand. So that another programmer does not easily understand.
-- Poor maintainability so that a change takes ages
-- or possibly means it has to be rewritten completely 
-- or a change is error-prone.
-- Not adapted to contextual changes such as culture or when variables change. They may be hard-codedly interwoven into the code.
-- Assumptions that databases will be available when they are not.
-- Security leaks
-- Crashes when services are offline.
-- Does not give validation or exception messages when something goes wrong.
-- Does not integrate well with other technologies.
-- Etcetera. 
-
-These are all examples of what could still be wrong with the code if a program 'seems to work'.
-
-Another false argument against doing all this work is the claim that these are just unimportant details.
 
 ### Lack of Choice = Guarantees
 
@@ -1410,17 +1431,9 @@ Another false argument against doing all this work is the claim that these are j
 
 `< TODO: Describe. Something like laziness may in the end cost you more, then it is not efficiency. >`
 
-### Liskov-Substution Principle (SOLID)
-
-`< TODO: Describe my take and my solutions on it. >`
-
 ### Make it Look Logical
 
 Make it look correct, even when it does not matter. You can encounter situations when something works correctly, but it looks like something's wrong. In that case it might be worth it, to make it look like it makes more sense, even when it does not really matter. For instance, if a property of an object is irrelevant under certain conditions, putting data in it would seem like an error. Is that data supposed to mean something? It looks less confusing if the property would just be empty, nullable even perhaps. The problem with correctly working, but confusing things, is that someone might trip over it, if an actual problem does occur. Someone could spend considerable time trying to see if this unlogical thing is the cause of that problem, before deciding it is a dead end. Valuable time has passed by then. If you make something look like it makes sense, it prevent eating away at the brain-time of your coworkers and makes your code better overviewable.
-
-### Multiple Solutions
-
-If you are not sure what route to take, it may help to formulate multiple solutions to your problem and compare their benefits and drawbacks. Nay, it even helps when you are already are focused on this one solution. Take a step back and think of a few different approaches before you take your pick.
 
 ### Use It or Lose It
 
@@ -1465,10 +1478,6 @@ The other side of it is, that it is difficult to abstract multiple problems into
 
 However, by doing it you can save a lot of work and complexity.
 
-### Quick and Dirty / Dirty (👎)
-
-`< TODO: Describe. >`
-
 ### Readable, Writable and Rewritable Code
 
 `< TODO: Use this phrase: Code should be about expressing your intentions as much as instruct the computer what to do. >`
@@ -1494,14 +1503,6 @@ Any one strategy has downsides and benefits compared to the other. It is always 
 ### Retro-Active Work (👎)
 
 Getting a new idea might lead you to wanting to retroactively change a lot of your previous work. But it might be an idea to hold back on that and save yourself a lot of work, and more forward.
-
-### Right Solution Easier than Workaround
-
-That the right solution might be easier than a supposedly easier intermediate solution. That is something to keep in mind.
-
-### Short Term / Long Term Solution
-
-We all find ourselves with seemingly not enough time to do everything and do them right. Often next to the best solution, there is a short-term alternative solution. While it is time-critical you can execute a short term solution and after that take some time to do it right, so it won't cause problems in the future.
 
 ### Subtractive and Additive
 
