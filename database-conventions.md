@@ -104,7 +104,7 @@ Only use additional guid columns as an alternative key for entities that need to
 
 `< TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked. >`
 
-For development databases use the “DEV\_" prefix, e.g. DEV\_ShopDB.
+For development databases use the "DEV\_" prefix, e.g. DEV\_ShopDB.
 
 For test use the prefix `TEST_` and for acceptance use the prefix `ACC_`. For production use no prefix at all.
 

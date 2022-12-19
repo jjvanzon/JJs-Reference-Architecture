@@ -172,9 +172,9 @@ The items below were compatibility problems related to how Unity interoperated w
 
 [ ... ]
 
-- ### “Development Build" Keeps Showing
+- ### "Development Build" Keeps Showing
 
-  In the Visual Studio project, select the Configuration “Master" instead of “Release" or “Debug" to make the text “Development Build" disappear from the application running on the phone.
+  In the Visual Studio project, select the Configuration "Master" instead of "Release" or "Debug" to make the text "Development Build" disappear from the application running on the phone.
 
 - ### System.ServiceModel
 
