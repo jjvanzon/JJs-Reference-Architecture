@@ -145,7 +145,7 @@ A choice was made, not to use stored procedures or views. Instead the SQL files 
 
 The classic way of executing SQL in .NET would be to use `System.Data.SqlClient`. But instead, the `SqlExecutor` API might be used.
 
-A version of it is available on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient/overview).
+A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient/overview).
 
 With an API like that, we can execute SQL in a strongly-typed way, often with only a single code line.
 
@@ -239,7 +239,7 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSou
 
 This version uses an NHibernate `ISession`. In order for the SQL to run in the same transaction as the SQL that NHibernate executes, we make it aware of the `ISession` here.
 
-A variation of this was implemented here: [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview).
+A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview).
 
 ### Files instead of Embedded Resources
 
@@ -295,10 +295,7 @@ Always choose `XElement` (LINQ to XML) over `XmlDocument` except when you have t
 
 Prefer the `XmlHelper` methods over using the API's directly, because the helper will handle nullability and unicity better.
 
-`XmlToObjectConverter` and `ObjectToXmlConverter` are also acceptable XML API's.  
-
-In `JJ.Framework.Xml` available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Xml).  
-Or `JJ.Framework.Xml.Linq` available on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq/overview).
+`XmlToObjectConverter` and `ObjectToXmlConverter` are also acceptable XML API's in `JJ.Framework.Xml` available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Xml) or `JJ.Framework.Xml.Linq` available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq/overview).
 
 
 Keeping Bi-Directional Relationships in Sync
