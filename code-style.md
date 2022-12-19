@@ -11,11 +11,11 @@
     - [Boolean Names](#boolean-names)
     - [Collection Names](#collection-names)
     - [Enum Names](#enum-names)
-    - [Event Names / Delegate Names](#event-names--delegate-names)
     - [DateTime Names](#datetime-names)
     - [Sort Order](#sort-order)
     - [File-Related Variable Names](#file-related-variable-names)
     - [Prefixes and Suffixes](#prefixes-and-suffixes)
+    - [Event Names / Delegate Names](#event-names--delegate-names)
     - [Test Class Names to End with 'Tests'](#test-class-names-to-end-with-tests)
     - [Test Method Names](#test-method-names)
     - [Hungarian Notation](#hungarian-notation)
@@ -236,46 +236,6 @@ This architecture tends to use the `Enum` suffix for enum types e.g. `OrderStatu
 
 Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference really went for the suffix `Enum` because it was found so important to see clearly that something is an enum.
 
-### Event Names / Delegate Names
-
-Event names and delegate names, that indicate what just happened might have the following form:
-
-    Deleted
-    TransactionCompleted
-
-Event names and delegate names, that indicate what is about to happen might have the following form:
-
-    Deleting
-    TransactionCompleting
-
-User-initiated events might not follow that pattern:
-
-    Click
-    DoubleClick
-    KeyPress
-
-Delegate names might also have the suffix `Callback` or `Delegate`:
-
-    ProgressInfoCallback
-    AddItemDelegate
-
-Sometimes the word `On` might beused:
-
-    OnSelectedIndexChanged
-    OnClick
-
-Or the prefix `Handle`:
-
-    HandleMouseDown
-
-Or the suffix `Requested`, if your event looks like a method name.
-
-    RemoveRequested
-
-Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives.
-
-Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be an established event name.
-
 ### DateTime Names
 
 A `DateTime` property might be suffixed with `Utc` or `Local`:
@@ -341,6 +301,46 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 | `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in 'Is it *recursive*?'.)
 | `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
+
+### Event Names / Delegate Names
+
+Event names and delegate names, that indicate what just happened might have the following form:
+
+    Deleted
+    TransactionCompleted
+
+Event names and delegate names, that indicate what is about to happen might have the following form:
+
+    Deleting
+    TransactionCompleting
+
+User-initiated events might not follow that pattern:
+
+    Click
+    DoubleClick
+    KeyPress
+
+Delegate names might also have the suffix `Callback` or `Delegate`:
+
+    ProgressInfoCallback
+    AddItemDelegate
+
+Sometimes the word `On` might beused:
+
+    OnSelectedIndexChanged
+    OnClick
+
+Or the prefix `Handle`:
+
+    HandleMouseDown
+
+Or the suffix `Requested`, if your event looks like a method name.
+
+    RemoveRequested
+
+Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives.
+
+Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be an established event name.
 
 ### Test Class Names to End with 'Tests'
 
