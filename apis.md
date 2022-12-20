@@ -104,11 +104,11 @@ It may be required to enable `MSDTC`. That would be a service belonging to an `S
 JavaScript / TypeScript
 -----------------------
 
-`JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role in this choice. The strange behavior and trickiness in `JavaScript`, part due to this weak typing, gave it less appeal.
+`JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
 
-The idea behind `MVC` was lots of server-side. Views were in `Razor`. Best to keep most logic `C#` was the idea.
+The idea behind `MVC` was logic on the server-side. Views were in `Razor`. Best to keep most logic `C#` was the idea.
 
-`JavaScript` would easily get bloated code, getting out of hand from a maintainability perspective, was the opinion. In `C#` you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window instead of right in your face.
+`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In `C#` you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
 `TypeScript` may have saved the day to cover for the weak typing from `JavaScript`. But it wasn't tried yet.
 
