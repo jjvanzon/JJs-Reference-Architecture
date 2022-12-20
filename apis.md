@@ -3,11 +3,10 @@
 
 <h2>Contents</h2>
 
-- [TODO](#todo)
 - [JJ.Framework](#jjframework)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
-  - [connectionStrings](#connectionstrings)
+  - [ConnectionStrings](#connectionstrings)
 - [Embedded Resources](#embedded-resources)
 - [Entity Framework 5](#entity-framework-5)
 - [JavaScript / TypeScript](#javascript--typescript)
@@ -17,15 +16,9 @@
   - [With NHibernate](#with-nhibernate)
   - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
   - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
-  - [TODO](#todo-1)
+  - [TODO](#todo)
 - [XML](#xml)
 - [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
-
-
-TODO
-----
-
-`< TODO: API's: Make sure you mention all the important in-house API's and external API's in the documentation. >`
 
 
 JJ.Framework
@@ -39,41 +32,43 @@ They were made in the spirit of in-house developing small extensions and hiding 
 AJAX
 ----
 
-We make our own wrapper ajax methods around ones from e.g. jQuery, so we can AJAX with a single code line and handle both partial loads and full reloads.
+For AJAX'ing partial web content, our team made our own wrapper AJAX methods, around calls to jQuery, so we could AJAX with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of JavaScript code.
 
-We choose full loads first, before resorting to AJAX. See 'First full load – then partial load – then native code'.
+Our strategy was to prefer full loads, so we could keep most logic in the C# realm. This before resorting to AJAX calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 
 Configuration
 -------------
 
-For configuration we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) API. That might be quite a lot easier than directly using .NET's `System.Configuration`.
+For configuration we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) API, which might be quite a bit easier than using .NET's `System.Configuration` directly.
 
-You might read from the README how it works, by using the link above.
+You might read from its `README` how it works, by following the link above.
 
 It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work. would it ever be programmed.
 
-### connectionStrings
+### ConnectionStrings
 
-Reading out connectionStrings is similar to reading out the appSettings. Connection strings in the App.config or Web.config look as follows:
+Reading out `connectionStrings` might be made similar to reading out the `appSettings`. Connection strings in the `App.config` or `Web.config` may look as follows:
 
 ```xml
 <connectionStrings>
-  <add name="OrderDB" connectionString="data source=10.40.XX.XX;Initial Catalog=OrderDB..." />
+  <add name="OrderDB" connectionString="data source=192.168.XX.XX;Initial Catalog=OrderDB..." />
 </connectionStrings>
 ```
 
-This is the classic way of reading it out:
+This would be the *classic* way of reading it out:
 
+```cs
 string connectionString = ConfigurationManager.ConnectionStrings["OrderDB"].ConnectionString;
+```
 
-This is the alternative in Framework.Configuration:
+This could the alternative in `JJ.Framework.Configuration`:
 
 ```cs
 string connectionString = ConnectionStrings<IConnectionStrings>.Get(x => x.OrderDB);
 ```
 
-You need to define an interface to be able to use the strongly-typed name:
+You may then define an interface to be able to use the strongly-typed name:
 
 ```cs
 internal interface IConnectionStrings
@@ -82,12 +77,24 @@ internal interface IConnectionStrings
 }
 ```
 
-
 Embedded Resources
 ------------------
 
-`< TODO: Write text. >`
+Embedded resources might be handy to prevent having to include loose files with a deployment, but instead compiling the loose files right into the assembly DLL or EXE. It also protects those resources a little bit better against modifications.
 
+To include a file as an embedded resource, you could set the following property:
+
+![](images/sql-as-embedded-resource.png)
+
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a helper class `EmbeddedResourceReader` which make it a little bit easier to access those resources in your code:
+
+```cs
+string text = EmbeddedResourceReader.GetText(
+  assembly, "Ingredient_UpdateName.sql");
+```
+
+
+`[ ... ]`
 
 Entity Framework 5
 ------------------
