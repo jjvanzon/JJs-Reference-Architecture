@@ -3,12 +3,13 @@
 
 <h2>Contents</h2>
 
+- [Introduction](#introduction)
 - [JJ.Framework](#jjframework)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
   - [ConnectionStrings](#connectionstrings)
 - [Embedded Resources](#embedded-resources)
-- [Entity Framework 5](#entity-framework-5)
+- [Entity Framework](#entity-framework)
 - [JavaScript / TypeScript](#javascript--typescript)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
@@ -19,6 +20,12 @@
   - [TODO](#todo)
 - [XML](#xml)
 - [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
+
+
+Introduction
+------------
+
+This article describes some of the choices for API's in this architecture.
 
 
 JJ.Framework
@@ -94,13 +101,17 @@ string text = EmbeddedResourceReader.GetText(
 ```
 
 
+Entity Framework
+----------------
+
+Entity Framework is a framework for data access. It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview/1.7.7817.43034) and [repository interfaces](patterns.md#repository-interfaces).
+
+`JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
+
+It may be required to enable `MSDTC`. That would be a service belonging to an `SQL Server` installation that might have to be enabled. Otherwise transactions might not work.
+
+
 `[ ... ]`
-
-Entity Framework 5
-------------------
-
-`< TODO: Add story about enabling MSDTC and transactionality. '`
-
 
 JavaScript / TypeScript
 -----------------------
