@@ -104,7 +104,7 @@ It may be required to enable `MSDTC`. That would be a service belonging to an `S
 JavaScript / TypeScript
 -----------------------
 
-`JavaScript` was less preferred as an architectural choice here. `JavaScript's` weak type system was a major argument in this choice. The strange behavior and trickiness in `JavaScript` part due to this weak typing, gave it less appeal.
+`JavaScript` was less preferred as an architectural choice here. `JavaScript's` weak type system was played a major role in this choice. The strange behavior and trickiness in `JavaScript` part due to this weak typing, gave it less appeal.
 
 The idea behind `MVC` was lots of server-side. Views were in `Razor`. Best to keep most logic `C#` was the idea.
 
@@ -114,11 +114,11 @@ The idea behind `MVC` was lots of server-side. Views were in `Razor`. Best to ke
 
 But still: logic in one place in one language (`C#`) felt so nice. I guess the love for `C#` was strong.
 
-The idea was that a full page load was 1st choice, 2nd choice `AJAX'ing` content, and last in line `JavaScript` to support the user experience. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+The idea was that a full page load was 1st choice, 2nd choice `AJAX'ing`, and last in line `JavaScript` and then only to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
-This last-resort `JavaScript` code was supported by using `jQuery` and some home-programmed `JavaScript` libraries [JJ.Framwork.JavaScript](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript/overview/1.7.7817.43032) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort `JavaScript` we used `jQuery` and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript/overview/1.7.7817.43032) which had some merit, but may have been superseded by newer tech by now.
 
-I realize `JavaScript` is popuplar with a lot of people and this is a very powerful force. I don't know how my opinion would change if I would try again with a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to  the `C#` realm though.
+I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to `C#` though.
 
 
 JJ.Framework
