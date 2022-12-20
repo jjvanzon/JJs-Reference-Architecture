@@ -1,16 +1,18 @@
 ﻿API's | JJ's Reference Architecture
 ===================================
 
+This article describes some of the API choices in this architecture.
+
 <h2>Contents</h2>
 
-- [Introduction](#introduction)
-- [JJ.Framework](#jjframework)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
   - [ConnectionStrings](#connectionstrings)
 - [Embedded Resources](#embedded-resources)
 - [Entity Framework](#entity-framework)
 - [JavaScript / TypeScript](#javascript--typescript)
+- [JJ.Framework](#jjframework)
+- [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
 - [SQL](#sql)
@@ -19,21 +21,7 @@
   - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
   - [TODO](#todo)
 - [XML](#xml)
-- [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
 
-
-Introduction
-------------
-
-This article describes some of the choices for API's in this architecture.
-
-
-JJ.Framework
-------------
-
-`JJ.Framework` are extensions to `.NET`. They are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
-
-They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
 
 
 AJAX
@@ -118,6 +106,21 @@ JavaScript / TypeScript
 
 `< TODO: Describe Framework.Javascript and why you might avoid JavaScript and why you might not. Also mention TypeScript. >`
 
+
+JJ.Framework
+------------
+
+`JJ.Framework` are extensions to `.NET`. They are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+
+They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
+
+
+Keeping Bi-Directional Relationships in Sync
+--------------------------------------------
+
+The classes `ManyToOneRelationship` and `OneToManyRelationship` do inverse property management more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
+
+Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
 
 NHibernate
 ----------
@@ -319,11 +322,3 @@ Always choose `XElement` (LINQ to XML) over `XmlDocument` except when you have t
 Prefer the `XmlHelper` methods over using the API's directly, because the helper will handle nullability and unicity better.
 
 `XmlToObjectConverter` and `ObjectToXmlConverter` are also acceptable XML API's in `JJ.Framework.Xml` available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Xml) or `JJ.Framework.Xml.Linq` available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq/overview).
-
-
-Keeping Bi-Directional Relationships in Sync
---------------------------------------------
-
-The classes `ManyToOneRelationship` and `OneToManyRelationship` do inverse property management more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
-
-Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
