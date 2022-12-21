@@ -15,13 +15,13 @@ This article describes some of the API choices in this architecture.
 - [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
-  - [Interfacing though JJ.Framework.Data](#interfacing-though-jjframeworkdata)
+  - [Behind Generic Interfaces](#behind-generic-interfaces)
   - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
   - [Flush](#flush)
   - [Read-Write Order](#read-write-order)
   - [Bridge Entities](#bridge-entities)
   - [Binary Fields](#binary-fields)
-  - [Avoid Inheritance](#avoid-inheritance)
+  - [Inheritance](#inheritance)
   - [Meet in the Middle Queries](#meet-in-the-middle-queries)
   - [Conclusion](#conclusion)
 - [SQL](#sql)
@@ -165,7 +165,7 @@ Here follow some issues you could encounter while using one, and some suggestion
 
 This information was gathered while building experience with `NHibernate`. Also having experienced `NPersist`, it might be possible that the `Entity Framework` has similar issues, due to how `ORM's` seem to work. 
 
-### Interfacing though JJ.Framework.Data
+### Behind Generic Interfaces
 
 Data access in this architecture is favored behind generic interfaces, through which you cannot see what the underlying data access technology is. From the outside you would see entity models, repository interfaces and methods that say 'save it' and such. You wouldn't see from the outside that it's a database, `ORM`, `SQL Server`, `NHibernate`, `Entity Framework` or otherwise.
 
@@ -204,17 +204,17 @@ It appears to have to do with when the `ORM` goes to the database to query or sa
 
 ### Flush
 
-`Flushing` in `NHibernate` would mean that all the pending SQL statements are executed onto the database, without committing the transaction.
+`Flushing` in `NHibernate` would mean that all the pending SQL statements are executed onto the database, without committing the transaction yet.
 
 A `Flush` can help get an auto-generated ID from the database. Also when `NHibernate` is confused about the order in which to execute things, a `Flush` may help enforce the execution order.
 
-Trouble with `Flush` is that incomplete data might go to the database, upon which database constraints might go off, resulting in an error: an exception would go off and the transaction would be rolled back.
+Trouble with `Flush` is that, it might be executed when things are not done yet, and incomplete data might go to the database, upon which database constraints go off, which could result in an error: an exception would go off and the transaction might be rolled back. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
 
-`Flushes` can also go off automatically under the hood. Sometimes `NHibernate` wants to get a data-store generated ID. This can happen upon `Saving` an entity. (Which if I remember correctly, is done on a per-entity basis and does not necessarily `Flush` or `Commit` anything.) `FlushMode.Never` or `FlushMode.Commit` may not prevent intermediate flushes even when the documentation suggests otherwise.
+`Flushes` might also go off automatically. Sometimes `NHibernate` wants to get a data-store generated ID. This can happen calling `Save` an entity. Unlike the documentation might suggest, `FlushMode.Never` or `FlushMode.Commit` may not prevent thse intermediate flushes.
 
-Upon saving a parent object, child objects might be flushed too. Internally then NHibernate asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an insert statement onto the data store. This caused a `null` exception on the `ParentID` column of the child object.
+Upon saving a parent object, child objects might be flushed too. Internally then `NHibernate` asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This caused a `null` exception on the `ParentID` column of the child object.
 
-It may help to create entities in a specific order (e.g. parent object first, then the child objects) or choose a completely identity generation scheme, that does not require flushing an entity to the database pre-maturely.
+It may also help to create entities in a specific order (e.g. parent object first, then the child objects) or choose a identity generation scheme, that does not require flushing an entity pre-maturely.
 
 ### Read-Write Order
 
@@ -224,15 +224,31 @@ It seems `ORM's` like it when you first read the data out, and then start writin
 
 ### Bridge Entities 
 
-`< Mappings: do not solve n-to-n relationships with (NHibernate) mappings. Always use bridge entities. >`
+An *bridge* entity is for `n => n` relationhips, usually requiring an additional table to make the link between the entities.
 
-`< Also: always include bride entities for n-to-n relationships, never let the two sides of the n-to-n relationship refer to eachother directly. Always go through a bride entity. Always have surrogate keys in a bridge table, not just the composite key. Otherwise you will get problems with ORM mapping technologies crazy-complicated guarding of integrity of object graphs and passing around composite keys all the time, no-good hashing keys, ugly URL's, etc, in my experience. >`
+`< TODO: Screen shot of entity table definition. >`
+
+Using an `ORM`, the bridge entity might not be visible in the code, but can be managed as two collections inside the two related entity types.
+
+`< TODO: Example C# code with entities and their collections. >`
+
+The `ORM` might do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You can expect quite a few exceptions to go off unfortunately, while `ORM` tries to guard the integrity of the relationship.
+
+These problems almost all go away, if you map to a *bridge entity* instead. Instead of putting collections of the other entity in an entity, you let both entities hold a list of *bridge entities* instead, and the bridge entity would link to 1 entity of each type. This turns the `n => n` relationship into two `1 => n` relationships which ORM can manage with less hardship.
+
+`< TODO: Example C# code with bridge entities. >`
+
+It might be is advised that the bridge table not to rely on a composite key of the two ID's of the related entities. A single surrogate ID field might work better.
+
+`< TODO: Example table definition of bridge entity with surrogate key. >`
+
+This is because it gives 1 handle to the combination of 2 thing, gives ORM less difficulty managing things under the hood, prevents passing around composite keys all the time, no-good hashing keys, uglier URL's, etc.
 
 ### Binary Fields
 
 `< Do not map binary and other serialized data fields using NHibernate, because it can harm performance pretty badly. Using separate SQL statements for retrieving blobs might be an alternative.`
 
-### Avoid Inheritance
+### Inheritance
 
 Particular surprizes might emerge when using inheritance in your entity model at least while working with `NHibernate`. The main advance is to avoid inheritance at all in the entity models if you can.
 
