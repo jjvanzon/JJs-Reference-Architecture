@@ -15,6 +15,15 @@ This article describes some of the API choices in this architecture.
 - [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
+  - [Interfacing though JJ.Framework.Data](#interfacing-though-jjframeworkdata)
+  - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
+  - [Flush](#flush)
+  - [Read-Write Order](#read-write-order)
+  - [Bridge Entities](#bridge-entities)
+  - [Binary Fields](#binary-fields)
+  - [Avoid Inheritance](#avoid-inheritance)
+  - [Meet in the Middle Queries](#meet-in-the-middle-queries)
+  - [Conclusion](#conclusion)
 - [SQL](#sql)
   - [With NHibernate](#with-nhibernate)
   - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
@@ -92,14 +101,12 @@ string text = EmbeddedResourceReader.GetText(
 Entity Framework
 ----------------
 
-Entity Framework is a framework for data access. It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview/1.7.7817.43034) and [repository interfaces](patterns.md#repository-interfaces).
+Entity Framework is a framework for data access. It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview) and [repository interfaces](patterns.md#repository-interfaces).
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
 It may be required to enable `MSDTC`. That would be a service belonging to an `SQL Server` installation that might have to be enabled. Otherwise transactions might not work.
 
-
-`[ ... ]`
 
 JavaScript / TypeScript
 -----------------------
@@ -136,42 +143,122 @@ The classes `ManyToOneRelationship` and `OneToManyRelationship` do inverse prope
 
 Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
 
+There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` appears not to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code whereever.
+
+
 NHibernate
 ----------
 
-`< TODO: Describe thgis problem with polymorphism: >`
+`NHibernate` is a technology, used for data access. A so called `ORM`. It is comparable to `Entity Framework`.
 
-API's, ORM: Arch: when an entity is a proxy or not a proxy, could reference comparison fail?
+`NHibernate` is used in some projects, because an employer favored it, and some other projects joined the club.
 
-\> When you retrieved a polymorphic type from HNibernate using the base type it returns a Proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail. You can then unproxy both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds. But if you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison should also fail.
-
-\>> This I want to test.
-
-So always do ID comparisons, because reference comparisons can fail.
-
-So for polymorphic entities always Unproxy before evaluating their type.>
-
-`< TODO: describe which NHibernate methods to use and what features to avoid. Do not map binary and other serialized data fields using NHibernate, because it gives terrible performance. Use separate SQL statements for retrieving blobs. Also: always include bride entities for 1-to-n relationships, never let the two sides of the 1-to-n relationship refer to eachother directly. Always go through a bride entity. Always have surrogate keys in a bridge table, not just the composite key. Otherwise you will get problems with ORM mapping technologies crazy-complicated guarding of integrity of object graphs and passing around composite keys all the time, no-good hashing keys, ugly URL's, etc. >`
-
-`< TODO: Describe more of the pitfalls and dos and don'ts around NHibernate and also FluentNHibernate. >`
+It might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview) and through [repository interfaces](patterns.md#repository).
 
 
 ORM
 ---
 
-Here is a ubiquitous quirk of ORM:
+An `ORM` aims to make it easier to focus on the logic around an entity model, while saving things to a database is pretty much done for you.
 
-Many methods of IContext work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. But IContext.Query usually does the opposite: it only returns committed / flushed entities. This asymmetry is common in ORM's and doing it any other way would harm performance.
+Here follow some issues you could encounter while using one, and some suggestions for resolving them.
 
-`< TODO: `
+This information was gathered while building experience with `NHibernate`. Also having experienced `NPersist`, it might be possible that the `Entity Framework` has similar issues, due to how `ORM's` seem to work. 
 
-`- Reformulate the 'ubiquitous quirk of ORM': TryGet and Get MIGHT return uncommitted, non-flushed objects, but properties that lead to related entities usually return the uncommitted, non-flushed objects. IContext.Query or NHibernate's ISession.QueryOver only return flushed objects. It is still a valid point that one time you get the uncommitted objects and the other time you do not. Only the way it is formulated is not entirely accurate.`  
-`- Also find a different word for 'ubiquitous'.`  
-`- NHibernate FlushMode.Never or FlushMode.Commit does not prevent all intermediate automatic flushes. Flushes can be executed upon calling Save() even though the FlushMode.Commit's summary suggests otherwise. This happened when calling Save on a child object before calling it on the parent object. Internally then NHibernate asked itself the question if the child object was Transient and while doing so, it apparently wanted to get its identity, by executing an insert statement onto the data store. This caused a null exception on the 'ParentID' column of the child object.So the solution is either to create entities in a specific order: first the parent object, then the child object, or to choose a completely different identity generation scheme.`
-`- ORM read-write order is relevant.`  
-`- Mappings: do not solve n-to-n relationships with (NHibernate) mappings. Always use bridge entities. >`
+### Interfacing though JJ.Framework.Data
+
+Data access in this architecture is favored behind generic interfaces, through which you cannot see what the underlying data access technology is. From the outside you would see entity models, repository interfaces and methods that say 'save it' and such. You wouldn't see from the outside that it's a database, `ORM`, `SQL Server`, `NHibernate`, `Entity Framework` or otherwise.
+
+These basic interfaces are defined in:
+
+- [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/overview)
+
+There are implementations for those interfaces here:
+
+- [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview)
+- [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview)
+
+and perhaps there are some other variations too.
+
+The other interfaces you would define yourself, by implementing [repository](patterns.md#repository) interfaces and defining methods for each of the queries you might want to launch against the data store. There are base implementations for these repositories in the `JJ.Framework` packages, that start you off with the basics.
+
+`< TODO: Make it more concrete. >`
+
+
+`< TODO: Might then move it to JJ.Framework.Data README. >`
+
+### Committed / Uncommitted Objects
+
+Here is a quirk of `ORM` happening sometimes:
+
+Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it any other way might harm performance.
+
+| Method | Data |
+|--------|------|
+| `IContext.Query` | uncommitted / non-flushed
+| `IContext.Get` | 1st committed / flushed, then uncommitted / non-flushed
+| `IContext.TryGet` | 1st committed / flushed, then uncommitted / non-flushed
+| Navigation properties /<br>following the object graph | 1st committed / flushed, then uncommitted / non-flushed
+
+It appears to have to do with when the `ORM` goes to the database to query or save objects.
+
+### Flush
+
+`Flushing` in `NHibernate` would mean that all the pending SQL statements are executed onto the database, without committing the transaction.
+
+A `Flush` can help get an auto-generated ID from the database. Also when `NHibernate` is confused about the order in which to execute things, a `Flush` may help enforce the execution order.
+
+Trouble with `Flush` is that incomplete data might go to the database, upon which database constraints might go off, resulting in an error: an exception would go off and the transaction would be rolled back.
+
+`Flushes` can also go off automatically under the hood. Sometimes `NHibernate` wants to get a data-store generated ID. This can happen upon `Saving` an entity. (Which if I remember correctly, is done on a per-entity basis and does not necessarily `Flush` or `Commit` anything.) `FlushMode.Never` or `FlushMode.Commit` may not prevent intermediate flushes even when the documentation suggests otherwise.
+
+Upon saving a parent object, child objects might be flushed too. Internally then NHibernate asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an insert statement onto the data store. This caused a `null` exception on the `ParentID` column of the child object.
+
+It may help to create entities in a specific order (e.g. parent object first, then the child objects) or choose a completely identity generation scheme, that does not require flushing an entity to the database pre-maturely.
+
+### Read-Write Order
+
+It seems `ORM's` like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles committed / uncommited objects as described earlier above.
+
+`[ ... ]`
+
+### Bridge Entities 
+
+`< Mappings: do not solve n-to-n relationships with (NHibernate) mappings. Always use bridge entities. >`
+
+`< Also: always include bride entities for n-to-n relationships, never let the two sides of the n-to-n relationship refer to eachother directly. Always go through a bride entity. Always have surrogate keys in a bridge table, not just the composite key. Otherwise you will get problems with ORM mapping technologies crazy-complicated guarding of integrity of object graphs and passing around composite keys all the time, no-good hashing keys, ugly URL's, etc, in my experience. >`
+
+### Binary Fields
+
+`< Do not map binary and other serialized data fields using NHibernate, because it can harm performance pretty badly. Using separate SQL statements for retrieving blobs might be an alternative.`
+
+### Avoid Inheritance
+
+Particular surprizes might emerge when using inheritance in your entity model at least while working with `NHibernate`. The main advance is to avoid inheritance at all in the entity models if you can.
+
+When you retrieved an entity from `HNibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
+
+`< TODO: What is unproxy'ing?  >`
+
+You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
+
+But if you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison might also fail.
+
+[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem with entity equality checks.
+
+This also means that to evaluate the *type*, you are better of unproxying, or it will return the proxy type instead of your entity type, which can be confusing.
+
+By now maybe it may be clear, why the main advice is not to use inheritance in the first place in your entity models, if at all possible.
+
+An alternative for inheritance might be to use a 1-to-1 related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of 1-to-1 relationships either. Oh well, all in a day's work.
+
+### Meet in the Middle Queries
 
 `< TODO: A problem with ORM: meet-in-the-middle querties. You have two ends of a graph, you filter both ends and then want what is in the middle. >`
+
+### Conclusion
+
+If this makes you lose grip on reality and wonder whether ORM's are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in your code.
 
 
 SQL
