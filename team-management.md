@@ -103,7 +103,7 @@ Support from the team lead is mostly inward directed toward the team members. Bu
 - Support with solutions and techniques.
 - Give examples
 - Lead by example.
-- Formulate suggestions with prefixes like “I would do it like this." or “In my experience this works well."
+- Formulate suggestions with prefixes like "I would do it like this." or "In my experience this works well."
 - So do not talk in definites, allowing the other person to form their own opinion and understand why or why not to take a certain route.
 - You are going to have to accept that things will be programmed in a less than perfect way, or not precisely the way you would do it, and allow programmers to grow into making things better on their own.
 - Look for a compliment to go along with it.
@@ -193,7 +193,7 @@ What I often see, is that each developer is assigned to his application and neve
 - There is the risk that comes a developer becomes ill or falling away for another reason.
 - It excludes other developer's ideas from the subject.
 - It will limit the developer's personal development, because he never gets to do something else.
-- It will encourage developers to not think about: “What if someone else had to work with my code?"
+- It will encourage developers to not think about: "What if someone else had to work with my code?"
 - The lack of critical peer-review could make the code quirky and hard to maintain.
 - There is no opportunity for developers to learn from each other.
 - There is less incentive to review each other's code, which can translate to bugs and increased development time.
