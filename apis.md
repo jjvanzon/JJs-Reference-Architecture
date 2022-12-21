@@ -15,7 +15,12 @@ This article describes some of the API choices in this architecture.
 - [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
-  - [Behind Generic Interfaces](#behind-generic-interfaces)
+  - [Generic Interfaces](#generic-interfaces)
+    - [Context](#context)
+    - [Repository](#repository)
+    - [Mappings](#mappings)
+    - [Config](#config)
+    - [Tutorial](#tutorial)
   - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
   - [Flush](#flush)
   - [Read-Write Order](#read-write-order)
@@ -30,7 +35,7 @@ This article describes some of the API choices in this architecture.
   - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
   - [TODO](#todo)
 - [XML](#xml)
-
+- [TODO](#todo-1)
 
 
 AJAX
@@ -165,31 +170,77 @@ Here follow some issues you could encounter while using one, and some suggestion
 
 This information was gathered while building experience with `NHibernate`. Also having experienced `NPersist`, it might be possible that the `Entity Framework` has similar issues, due to how `ORM's` seem to work. 
 
-### Behind Generic Interfaces
+### Generic Interfaces
 
-Data access in this architecture is favored behind generic interfaces, through which you cannot see what the underlying data access technology is. From the outside you would see entity models, repository interfaces and methods that say 'save it' and such. You wouldn't see from the outside that it's a database, `ORM`, `SQL Server`, `NHibernate`, `Entity Framework` or otherwise.
+Data access in this architecture is favored behind generic interfaces, through which you cannot see what the underlying data access technology is. From the outside you would see entity models, repository interfaces and methods that say 'save it' and such. It's not visible from the outside that it's a database, `ORM`, `SQL Server`, `NHibernate`, `Entity Framework` or otherwise.
 
-These basic interfaces are defined in:
+Basic interfaces for this are defined in:
 
-- [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/overview)
+[`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/overview)
 
 There are implementations for those interfaces here:
 
-- [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview)
-- [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview)
+[`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview)  
+[`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview)
 
-and perhaps there are some other variations too.
+and perhaps there are some other variation of data storage too.
 
-The other interfaces you would define yourself, by implementing [repository](patterns.md#repository) interfaces and defining methods for each of the queries you might want to launch against the data store. There are base implementations for these repositories in the `JJ.Framework` packages, that start you off with the basics.
+The other interfaces you would define yourself, by implementing [repositories](patterns.md#repository) and defining methods for each of the queries you might want to launch against the data store. There are base implementations for these repositories in the `JJ.Framework` packages.
 
-`< TODO: Make it more concrete. >`
+Here follow some outlines of what to find in these libraries and what could be done set up, to make a data access layer like this work.
 
+#### Context
 
-`< TODO: Might then move it to JJ.Framework.Data README. >`
+`JJ.Framework.Data` includes an interface `IContext`, which represents the data store and allows basic operations such as `Get` an entity, `Create`, `Update` or `Delete` entities, and `Commit` and `RollBack` for transactions.
+
+`JJ.Framework.Data.EntityFramework` and `JJ.Framework.Data.NHibernate` implement specific `Contexts` to work with each of these technologies.
+
+#### Repository
+
+`JJ.Framework.Data` has base types for repositories. Each repository would be about a single entity type. Also containing the basic operations `Create`, `Get`, `Update` and `Delete`.
+
+The idea is that you can implement a `Repository` for each of your entity types (e.g. `Question`, `Category`). `JJ.Framework.Data` provides the base and it can be extended with additional methods for specialized queries.
+
+These methods are best to not expose types from the underlying data access technology. Better make the parameters / return values either *entity types* like `Question`and `Category` or *simple types* like `int` and `string`. Then it would still be possible to switch to a different data acces technology.
+
+#### Mappings
+
+`ORM` technology like `Entity Framework` or `NHibernate` might require mappings to specify how to map your entity class to a database table. The way to do this is dictated by these respective technologies.
+
+#### Config
+
+Settings for a data access, can be configured in the `web.config` or `app.config`:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="jj.framework.data" type="JJ.Framework.Configuration.ConfigurationSectionHandler, JJ.Framework.Configuration" />
+  </configSections>
+
+  <jj.framework.data
+    contextType="NHibernate"
+    dialect="SqlServer2008"
+    location="Data Source=.;Initial Catalog=DEV_QuestionAndAnswerDB;User ID=dev;Password=dev;Persist Security Info=True"
+    modelAssembly="JJ.Data.QuestionAndAnswer"
+    mappingAssembly="JJ.Data.QuestionAndAnswer.NHibernate">
+    <repositoryAssemblies>
+      <repositoryAssembly>JJ.Data.QuestionAndAnswer.NHibernate</repositoryAssembly>
+      <repositoryAssembly>JJ.Data.QuestionAndAnswer.DefaultRepositories</repositoryAssembly>
+    </repositoryAssemblies>
+  </jj.framework.data>
+</configuration>
+```
+
+There are specified where things are: the database location, ORM tech used, where your entities are, mappings and repositories. `JJ.Framework.Data` can then find all of these things when calling `ContextFactory` or `RepositoryFactory` to get the context or repositories you want.
+
+#### Tutorial
+
+A precise step-by-step guide on how to set this all up, might make it more concrete. It may be an idea to write that once.
 
 ### Committed / Uncommitted Objects
 
-Here is a quirk of `ORM` happening sometimes:
+Here is something that happens n `ORM` sometimes:
 
 Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it any other way might harm performance.
 
@@ -204,11 +255,11 @@ It appears to have to do with when the `ORM` goes to the database to query or sa
 
 ### Flush
 
-`Flushing` in `NHibernate` would mean that all the pending SQL statements are executed onto the database, without committing the transaction yet.
+`Flushing` in `NHibernate` would mean that all the pending `SQL` statements are executed onto the database, without committing the transaction yet.
 
-A `Flush` can help get an auto-generated ID from the database. Also when `NHibernate` is confused about the order in which to execute things, a `Flush` may help enforce the execution order.
+A `Flush` can help get an auto-generated `ID` from the database. Also when `NHibernate` is confused about the order in which to execute things, a `Flush` may help it execute things in the right order sometimes.
 
-Trouble with `Flush` is that, it might be executed when things are not done yet, and incomplete data might go to the database, upon which database constraints go off, which could result in an error: an exception would go off and the transaction might be rolled back. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
+The trouble with `Flush` is that, it might be executed when things are not done yet, and incomplete data might go to the database, upon which database may give an error. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
 
 `Flushes` might also go off automatically. Sometimes `NHibernate` wants to get a data-store generated ID. This can happen calling `Save` an entity. Unlike the documentation might suggest, `FlushMode.Never` or `FlushMode.Commit` may not prevent thse intermediate flushes.
 
@@ -238,15 +289,19 @@ These problems almost all go away, if you map to a *bridge entity* instead. Inst
 
 `< TODO: Example C# code with bridge entities. >`
 
-It might be is advised that the bridge table not to rely on a composite key of the two ID's of the related entities. A single surrogate ID field might work better.
+It might be is advised that the bridge table not to rely on a composite key of the two ID's of the related entities. A single surrogate ID field might do better.
 
 `< TODO: Example table definition of bridge entity with surrogate key. >`
 
-This is because it gives 1 handle to the combination of 2 thing, gives ORM less difficulty managing things under the hood, prevents passing around composite keys all the time, no-good hashing keys, uglier URL's, etc.
+This is because it gives 1 handle to the combination of 2 thing, gives ORM less difficulty managing things under the hood, prevents passing around composite keys all the time, no-good hashing keys, URL's that look more difficult, etc.
 
 ### Binary Fields
 
-`< Do not map binary and other serialized data fields using NHibernate, because it can harm performance pretty badly. Using separate SQL statements for retrieving blobs might be an alternative.`
+You might not want to map binary and other serialized data fields using `NHibernate`, because it can harm performance pretty badly.
+
+Retrieving some loose fields of an entity would also retrieve a blob in that case. As wel as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
+
+Using separate `SQL` statements for retrieving blobs might be a better alternative.
 
 ### Inheritance
 
@@ -439,3 +494,9 @@ Always choose `XElement` (LINQ to XML) over `XmlDocument` except when you have t
 Prefer the `XmlHelper` methods over using the API's directly, because the helper will handle nullability and unicity better.
 
 `XmlToObjectConverter` and `ObjectToXmlConverter` are also acceptable XML API's in `JJ.Framework.Xml` available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Xml) or `JJ.Framework.Xml.Linq` available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq/overview).
+
+
+TODO
+----
+
+`<Maybe mention some chosen tech from the architectural layering.>`
