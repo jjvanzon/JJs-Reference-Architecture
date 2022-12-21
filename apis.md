@@ -202,35 +202,61 @@ It may also help to create entities in a specific order (e.g. parent object firs
 
 It seems `ORM's` like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles committed / uncommited objects as described earlier above.
 
-`[ ... ]`
-
 ### Bridge Entities 
 
 An *bridge* entity is for `n => n` relationhips, usually requiring an additional table to make the link between the entities.
 
-`< TODO: Screen shot of entity table definition. >`
+<img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
 Using an `ORM`, the bridge entity might not be visible in the code, but can be managed as two collections inside the two related entity types.
 
-`< TODO: Example C# code with entities and their collections. >`
+```cs
+class Question
+{
+    IList<Category> Categories { get; set; }
+}
+
+class Category
+{
+    IList<Question> Questions { get; set; }
+}
+```
 
 The `ORM` might do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You can expect quite a few exceptions to go off unfortunately, while `ORM` tries to guard the integrity of the relationship.
 
 These problems almost all go away, if you map to a *bridge entity* instead. Instead of putting collections of the other entity in an entity, you let both entities hold a list of *bridge entities* instead, and the bridge entity would link to 1 entity of each type. This turns the `n => n` relationship into two `1 => n` relationships which ORM can manage with less hardship.
 
-`< TODO: Example C# code with bridge entities. >`
+```cs
+class QuestionCategory
+{
+    Question Question { get; set;}
+    Question Category { get; set;}
+}
 
-It might be is advised that the bridge table not to rely on a composite key of the two ID's of the related entities. A single surrogate ID field might do better.
+class Question
+{
+    IList<QuestionCategory> QuestionCategories { get; set; }
+}
 
-`< TODO: Example table definition of bridge entity with surrogate key. >`
+class Category
+{
+    IList<QuestionCategory> CategoryQuestions { get; set; }
+}
+```
 
-This is because it gives 1 handle to the combination of 2 thing, gives ORM less difficulty managing things under the hood, prevents passing around composite keys all the time, no-good hashing keys, URL's that look more difficult, etc.
+It might be is advised that the bridge table not to rely on a composite key of the two `ID's` of the related entities. A single surrogate `ID` field might do better.
+
+<img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
+
+This is because it gives 1 handle to the combination of 2 thing, giving `ORM` less difficulty managing things under the hood, prevents passing around composite keys all the time, less good hashing keys, URL's that look more difficult, etc.
+
+`[ ... ]`
 
 ### Binary Fields
 
-You might not want to map binary and other serialized data fields using `NHibernate`, because it can harm performance pretty badly.
+You might not want to map binary and other serialized data fields using `NHibernate`, because it can harm performance quite a bit.
 
-Retrieving some loose fields of an entity would also retrieve a blob in that case. As wel as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
+Retrieving some loose fields of an entity, would also retrieve a blob in that case. As wel as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
 Using separate `SQL` statements for retrieving blobs might be a better alternative.
 
