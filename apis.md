@@ -28,9 +28,10 @@ This article describes some of the API choices in this architecture.
   - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
   - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
   - [SQL String Concatenation](#sql-string-concatenation)
-  - [TODO](#todo)
+  - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
+  - [Database Upgrade Scripts](#database-upgrade-scripts)
 - [XML](#xml)
-- [TODO](#todo-1)
+- [TODO](#todo)
 
 
 AJAX
@@ -250,8 +251,6 @@ It might be is advised that the bridge table not to rely on a composite key of t
 
 This is because it gives 1 handle to the combination of 2 thing, giving `ORM` less difficulty managing things under the hood, prevents passing around composite keys all the time, less good hashing keys, URL's that look more difficult, etc.
 
-`[ ... ]`
-
 ### Binary Fields
 
 You might not want to map binary and other serialized data fields using `NHibernate`, because it can harm performance quite a bit.
@@ -430,7 +429,7 @@ But it might make it harder to track down all the SQL of your project, optimize 
 
 *`SQL` `string` concatenation* is sort of a no-no, because it removes a layer of protection against `SQL` injection attacks. `SqlClient` has `SqlParameters` from `.NET` to prevent unwanted insertion of scripting. `SqlExecutor` from `JJ.Framework` uses `SqlParameters` under the hood, to offer the same kind of protection. This encodes the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
-Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not, the following expression might be used in the `SQL` script's `where` clause
+Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the `SQL` script's `where` clause
 
 ```sql
 (@value is null or Value = @value)
@@ -438,26 +437,105 @@ Here is a trick to potentially prevent using string concatenation as an option: 
 
 But there might be exceptional cases where `SQL` string concatenation could be favorable. Reasons to do so might include:
 
-- If you have a (complicated) `SQL` `select` statement and wish to take the `count` of it, concatenation may prevent rewritng the `SQL` statement twice, which could cause a maintenance. Bugs would be awaiting as you'd have to change 2 SQL scripts simultaneously, to make a proper change, which may easily be overlooked.
+- If you have a (complicated) `SQL` `select` statement and wish to take the `count` of it, concatenation may prevent rewritng the `SQL` statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 SQL scripts simultaneously, to make change properly, which may easily be overlooked.
 - Another case where `string` concatenation might be helpful, is an `SQL` script where you wish to include a *database name* or *schema name* not known beforehand.
 - There might be other examples where SQL string concatenation might be used as an exception to the rule not to.
 
 One variation of `SqlExecutor` included the ability to add placeholders to the `SQL` files to insert additional scripting for this purpose. *(This feature might not be available in the JJ.Framework.)* 
 
+### Hiding SQL behind Repositories
 
-### TODO
+The `repository` pattern is used in this architecture. The pattern is roughly described [here](patterns.md#repository).
 
-`- Hiding the SQL behind a repository.`  
-`- Mention that SQL for upgrading the database structure do not belong in your project and are managed differently as described under Database Conventions.`  
+The repository pattern can be used together with `JJ.Framework.Data`, documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
+
+For SQL executing in cooperation with repositories using `SqlExecutor` there is a way described here [here](#sql).
+
+Here is a code example that attempt to put it all together:
+
+```cs
+interface IMyRepository : IRepository<MyEntity, int>
+{
+    IList<MyEntity> GetManyByCriteria(
+        int? categoryID = null,
+        int? kind = null,
+        DateTime? minStartDate = null);
+}
+
+class MyRepository : RepositoryBase<MyEntity, int>
+{
+    static MySqlExecutor _sqlExecutor = new();
+
+    public IList<MyEntity> GetManyByCriteria(
+        int? categoryID = null,
+        int? kind = null,
+        DateTime? minStartDate = null)
+    {
+        var ids = _sqlExecutor.MyEntity_GetManyIDsByCriteria(
+                      categoryID, kind, minStartDate)
+                          .ToArray();
+
+        var entities = ids.Select(Get).ToArray();
+
+        return entities
+    }
+}
+
+class MySqlExecutor
+{
+    static SqlExecutor _sqlExecutor = new();
+
+    IEnumerable<int> MyEntity_GetIDsByCriteria(
+        int? categoryID = null,
+        int? kind = null,
+        DateTime? minStartDate = null)
+    {
+        return _sqlExecutor.ExecuteReader<int>(
+            SqlEnum.MyEntity_GetIDsByCriteria, 
+            categoryID, kind, minStartDate));
+    }
+}
+
+enum SqlEnum
+{
+    MyEntity_GetIDsByCriteria
+}
+
+```
+
+`"MyEntity_GetIDsByCriteria.sql"`
+
+```sql
+select e.ID from MyEntity
+where 
+  (@categoryID is null or e.CategoryID = @categoryID) and
+  (@kind is null or e.Kind = @kind) and
+  (@minStartDate is null or e.MinStartDate >= @minStartDate);
+```
+
+This would result in:
+
+- Keeping all the queries of an entity together in a `repository`.
+- Keeping overview of all the SQL of all the entities behind an `SqlExecutor`.
+- All that data access would be hidden `repository interfaces` decoupling the persistence technology.
+ 
+It may seem overhead all the layers, but it might add up after adding more queries for more entities, that are either SQL or ORM queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
+
+`[ TODO: Test the code. ]`
+
+### Database Upgrade Scripts
+
+`SQL` executed solely for database upgrading, might not be put in the main project, but a project/folder on the side. Suggestions of how to organize database upgrading  might be found [here](database-conventions.md#upgrade-scripts).
+
 
 XML
 ---
 
-Always choose `XElement` (LINQ to XML) over `XmlDocument` except when you have to use `XPath`.
+Preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
 
-Prefer the `XmlHelper` methods over using the API's directly, because the helper will handle nullability and unicity better.
+Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml/overview) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq/overview)) over using other API's directly, because the helper will handle nullability and unicity more grafully.
 
-`XmlToObjectConverter` and `ObjectToXmlConverter` are also acceptable XML API's in `JJ.Framework.Xml` available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Xml) or `JJ.Framework.Xml.Linq` available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq/overview).
+`XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml/overview) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq/overview)). That might be a simpler way to convert XML to an object graph than other API's.
 
 
 TODO
