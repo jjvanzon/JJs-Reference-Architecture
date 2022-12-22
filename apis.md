@@ -264,9 +264,9 @@ Using separate `SQL` statements for retrieving blobs might be a better alternati
 
 Particular surprizes might emerge when using inheritance in your entity model at least while working with `NHibernate`. The main advance is to avoid inheritance at all in the entity models if you can.
 
-When you retrieved an entity from `HNibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
+When retrieving an entity through ORM, it is likely it will not return an instance of your entity type, but an instance of a type derived from your entity type, a so called ***proxy***. This proxy adds to your entity type a sort of connectedness to the database.
 
-`< TODO: What is unproxy'ing?  >`
+When you retrieved an entity from `HNibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
 
 You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
 
@@ -278,7 +278,7 @@ This also means that to evaluate the *type*, you are better of unproxying, or it
 
 By now maybe it may be clear, why the main advice is not to use inheritance in the first place in your entity models, if at all possible.
 
-An alternative for inheritance might be to use a 1-to-1 related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of 1-to-1 relationships either. Oh well, all in a day's work.
+An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two entity types use a mutual `interface` might be an alternative too.
 
 ### Meet in the Middle Queries
 
