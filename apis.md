@@ -27,6 +27,7 @@ This article describes some of the API choices in this architecture.
   - [With NHibernate](#with-nhibernate)
   - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
   - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
+  - [SQL String Concatenation](#sql-string-concatenation)
   - [TODO](#todo)
 - [XML](#xml)
 - [TODO](#todo-1)
@@ -425,18 +426,29 @@ In that case no SQL files have to be included in your project.
 
 But it might make it harder to track down all the SQL of your project, optimize it and using SQL strings also circumvents another layer of protection against SQL injection attacks.
 
+### SQL String Concatenation
+
+*`SQL` `string` concatenation* is sort of a no-no, because it removes a layer of protection against `SQL` injection attacks. `SqlClient` has `SqlParameters` from `.NET` to prevent unwanted insertion of scripting. `SqlExecutor` from `JJ.Framework` uses `SqlParameters` under the hood, to offer the same kind of protection. This encodes the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+
+Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not, the following expression might be used in the `SQL` script's `where` clause
+
+```sql
+(@value is null or Value = @value)
+```
+
+But there might be exceptional cases where `SQL` string concatenation could be favorable. Reasons to do so might include:
+
+- If you have a (complicated) `SQL` `select` statement and wish to take the `count` of it, concatenation may prevent rewritng the `SQL` statement twice, which could cause a maintenance. Bugs would be awaiting as you'd have to change 2 SQL scripts simultaneously, to make a proper change, which may easily be overlooked.
+- Another case where `string` concatenation might be helpful, is an `SQL` script where you wish to include a *database name* or *schema name* not known beforehand.
+- There might be other examples where SQL string concatenation might be used as an exception to the rule not to.
+
+One variation of `SqlExecutor` included the ability to add placeholders to the `SQL` files to insert additional scripting for this purpose. *(This feature might not be available in the JJ.Framework.)* 
+
+
 ### TODO
 
-`< No SQL strings:`  
-`    - Talk about not building up SQL strings in code.`  
-`    - No parameter concatination`  
-`    - Trick to prevent conditional blocks of sql. (@value is null or Value = @value)`  
-`- No SQL in the code. Use SqlExecutor and .sql files.`  
-`- No string concatination of sql parameters.`  
 `- Hiding the SQL behind a repository.`  
 `- Mention that SQL for upgrading the database structure do not belong in your project and are managed differently as described under Database Conventions.`  
-`- Placeholders feature to concatinate SQL anyway, in exceptional cases. Not recommended, but sometimes it a better option.`
-
 
 XML
 ---

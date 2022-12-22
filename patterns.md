@@ -961,7 +961,7 @@ Different ways to append a comma only in between elements.
 Example 1:
 
 ```cs
-string concatinatedElements = string.Join(",", elements);
+string concatenatedElements = string.Join(",", elements);
 ```
 
 Example 2:
