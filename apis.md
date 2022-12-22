@@ -22,7 +22,6 @@ This article describes some of the API choices in this architecture.
   - [Bridge Entities](#bridge-entities)
   - [Binary Fields](#binary-fields)
   - [Inheritance](#inheritance)
-  - [Meet in the Middle Queries](#meet-in-the-middle-queries)
   - [Conclusion](#conclusion)
 - [SQL](#sql)
   - [With NHibernate](#with-nhibernate)
@@ -280,13 +279,9 @@ By now maybe it may be clear, why the main advice is not to use inheritance in t
 
 An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two entity types use a mutual `interface` might be an alternative too.
 
-### Meet in the Middle Queries
-
-`< TODO: A problem with ORM: meet-in-the-middle querties. You have two ends of a graph, you filter both ends and then want what is in the middle. >`
-
 ### Conclusion
 
-If this makes you lose grip on reality and wonder whether ORM's are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in your code.
+If this makes you lose grip on reality and wonder whether `ORM's` are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in the code.
 
 
 SQL
