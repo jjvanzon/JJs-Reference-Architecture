@@ -7,7 +7,7 @@ This article describes some of the API choices in this architecture.
 
 - [AJAX](#ajax)
 - [Configuration](#configuration)
-  - [ConnectionStrings](#connectionstrings)
+    - [ConnectionStrings](#connectionstrings)
 - [Embedded Resources](#embedded-resources)
 - [Entity Framework](#entity-framework)
 - [JavaScript / TypeScript](#javascript--typescript)
@@ -15,21 +15,21 @@ This article describes some of the API choices in this architecture.
 - [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
-  - [Generic Interfaces](#generic-interfaces)
-  - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
-  - [Flush](#flush)
-  - [Read-Write Order](#read-write-order)
-  - [Bridge Entities](#bridge-entities)
-  - [Binary Fields](#binary-fields)
-  - [Inheritance](#inheritance)
-  - [Conclusion](#conclusion)
+    - [Generic Interfaces](#generic-interfaces)
+    - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
+    - [Flush](#flush)
+    - [Read-Write Order](#read-write-order)
+    - [Bridge Entities](#bridge-entities)
+    - [Binary Fields](#binary-fields)
+    - [Inheritance](#inheritance)
+    - [Conclusion](#conclusion)
 - [SQL](#sql)
-  - [With NHibernate](#with-nhibernate)
-  - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
-  - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
-  - [SQL String Concatenation](#sql-string-concatenation)
-  - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
-  - [Database Upgrade Scripts](#database-upgrade-scripts)
+    - [With NHibernate](#with-nhibernate)
+    - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
+    - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
+    - [SQL String Concatenation](#sql-string-concatenation)
+    - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
+    - [Database Upgrade Scripts](#database-upgrade-scripts)
 - [XML](#xml)
 - [TODO](#todo)
 
@@ -451,67 +451,54 @@ The repository pattern can be used together with `JJ.Framework.Data`, documentat
 
 For SQL executing in cooperation with repositories using `SqlExecutor` there is a way described here [here](#sql).
 
-Here is a code example that attempt to put it all together:
+Here is some pseudo-code to demonstrate how it is put together:
+
+`SQL:`
+
+```sql
+select ID from MyEntity
+where CategoryID = @categoryID
+and Kind = @kind
+and MinStartDate >= @minStartDate
+```
+
+`C#:`
 
 ```cs
-interface IMyRepository : IRepository<MyEntity, int>
+enum SqlEnum
 {
-    IList<MyEntity> GetManyByCriteria(
-        int? categoryID = null,
-        int? kind = null,
-        DateTime? minStartDate = null);
-}
-
-class MyRepository : RepositoryBase<MyEntity, int>
-{
-    static MySqlExecutor _sqlExecutor = new();
-
-    public IList<MyEntity> GetManyByCriteria(
-        int? categoryID = null,
-        int? kind = null,
-        DateTime? minStartDate = null)
-    {
-        var ids = _sqlExecutor.MyEntity_GetManyIDsByCriteria(
-                      categoryID, kind, minStartDate)
-                          .ToArray();
-
-        var entities = ids.Select(Get).ToArray();
-
-        return entities
-    }
+    MyEntity_FilterIDs
 }
 
 class MySqlExecutor
 {
-    static SqlExecutor _sqlExecutor = new();
-
-    IEnumerable<int> MyEntity_GetIDsByCriteria(
-        int? categoryID = null,
-        int? kind = null,
-        DateTime? minStartDate = null)
-    {
-        return _sqlExecutor.ExecuteReader<int>(
-            SqlEnum.MyEntity_GetIDsByCriteria, 
-            categoryID, kind, minStartDate));
+    public var MyEntity_FilterIDs(
+        int categoryID, int kind, DateTime minStartDate)
+        => SqlExecutor.ExecuteReader<int>(
+            SqlEnum.MyEntity_FilterIDs, 
+            new { categoryID, kind, minStartDate });
     }
 }
 
-enum SqlEnum
+class MyRepository : RepositoryBase
 {
-    MyEntity_GetIDsByCriteria
+    public var Filter(
+        int categoryID, int kind, DateTime minStartDate)
+    {
+        var ids = MySqlExecutor.MyEntity_FilterIDs(
+            categoryID, kind, minStartDate);
+        var entities = ids.Select(x => Get(x));
+        return entities;
+    }
 }
 
+interface IMyRepository : IRepository
+{
+    var Filter(
+        int categoryID, int kind, DateTime minStartDate);
+}
 ```
 
-`"MyEntity_GetIDsByCriteria.sql"`
-
-```sql
-select e.ID from MyEntity
-where 
-  (@categoryID is null or e.CategoryID = @categoryID) and
-  (@kind is null or e.Kind = @kind) and
-  (@minStartDate is null or e.MinStartDate >= @minStartDate);
-```
 
 This would result in:
 
@@ -521,7 +508,13 @@ This would result in:
  
 It may seem overhead all the layers, but it might add up after adding more queries for more entities, that are either SQL or ORM queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
 
-`[ TODO: Test the code. ]`
+In `JJ` projects you might also find split up into separate assemblies: 
+
+`MyProject.Data`  
+`MyProject.Data.EntityFramework`
+`MyProject.Data.SqlClient`
+
+Separating the general things from the technology-specific things.
 
 ### Database Upgrade Scripts
 
