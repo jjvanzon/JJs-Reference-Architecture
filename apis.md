@@ -1,10 +1,11 @@
 ﻿API's | JJ's Reference Architecture
 ===================================
 
-This article describes some of the API choices in this architecture.
+This article describes some of the API and technology choices in this architecture.
 
 <h2>Contents</h2>
 
+- [Overview](#overview)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
     - [ConnectionStrings](#connectionstrings)
@@ -32,6 +33,78 @@ This article describes some of the API choices in this architecture.
     - [Database Upgrade Scripts](#database-upgrade-scripts)
 - [XML](#xml)
 - [TODO](#todo)
+
+
+Overview
+--------
+
+Here is a list of some of the tech used in `JJ` projects.
+
+`[ TODO: More links ]`
+
+| Purpose              | Tech                         | Description
+|----------------------|------------------------------|----------------
+| Code                 | Visual Studio                | Used for the development of the code.
+|                      | VS Code                      | Used for MarkDown editing.
+|                      | .NET                         | Framework that forms a base for the programming.
+|                      | C#                           | Primary programming language.
+|                      | VB<span>.</span>NET          | Some projects might still be in this programming language.
+|                      | ReSharper                    | Tool for code formatting, refactoring and code smells and such.
+|                      | JJ.Framework                 | In-house programmed extensions to the .NET Framework.
+|                      | JJ.Framework.Conversion      | Makes it easier to convert simple types.
+|                      | JJ.Framework.Reflection      | Helps with / speeds up accessing code structure elements / ('reflection') and lambdas.
+|                      | GitHub                       | Where the source code is hosted.
+|                      | Azure DevOps                 | Build pipeline and pre-release package feed. Original planning boards.
+|                      | GitHub Issues                | Gradually using GitHub Issues more for planning.
+|                      |                              |
+| Data Access          | SQL Server                   | Primary data store technology for relational databases.
+|                      | ORM                          | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
+|                      | SQL                          | Incidentally SQL is hand-programmed, used conjoined with ORM, mostly for performance reasons.
+|                      | NHibernate                   | A type of ORM. Chosen in several `JJ` project because the employer also so happened to use it.
+|                      | QueryOver                    | A strongly-typed query language like LINQ, but then the NHibernate variation.
+|                      | FluentNHibernate             | A way to define ORM mappings, using fluent notation.
+|                      | EntityFramework              | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
+|   	               | JJ.Framework.Data            | Helps hide data access behind abstractions, that do not even expose whether it is SQL Server, SQL, ORM, NHibernate, just abstracted convenient methods instead.
+|                      | `SqlExecutor`                | An class from `JJ.Framework.Data.SqlClient` that helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
+|                      | LINQ                         | A query language usable in C#. Can be used to query several types of data store, but used here mostly onto in-memory collections.
+|                      | [JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/) | `JJ` extensions to LINQ for collections.
+|                      |                              |
+| Logic                | [JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/) | Types for supporting a business layer and/or API. Bi-directional relationship sync. Result types to pass data, succes flags and (validation) messages.
+|                      | JJ.Framework.Validation      |
+|                      | JJ.Framework.Mathematics     |
+|                      |                              |
+| Presentation         | `PagerViewModelFactory`      |
+| Presentation / Web   | IIS                          |
+|                      | MVC                          |
+|                      | Razor                        |
+|                      | Html.BeginCollection         |
+|                      | JavaScript                   |
+|                      | AJAX                         |
+|                      | jQuery                       |
+|                      | JJ.Framework.JavaScript      |
+| Presentation / Win   | WinForms                     |
+|                      | `SimpleProcessForm`          |
+|                      | JJ.Framework.VectorGraphics  |
+|                      |                              |
+| Debugging / Testing  | TestFramework `[ which ? ]`  |
+|                      | JJ.Framework.Testing         |
+|                      | DebuggerDisplays             |
+|                      | JJ.Framework.Exceptions      |
+|                      | Accessor                     | (In JJ.Framework.Reflection.)
+|                      |                              |
+| Data Processing / IO | JJ.Framework.Text            |
+|                      | JJ.Framework.IO              |
+|                      | JJ.Framework.HtmlToXml       |
+|                      | JJ.Framework.Xml             |
+|                      | JJ.Framework.Xml.Linq        |
+|                      | Embedded Resources           |
+|                      | `EmbeddedResourceReader`     |
+|                      |                              |
+| Configuration        | JJ.Framework.Configuration   |
+| Localication         | String Resources             |
+| Security             | JJ.Framework.Security        |
+| Logging              | JJ.Framework.Logging         |
+|                      | JJ.Framework.ResourceStrings |
 
 
 AJAX
@@ -487,7 +560,9 @@ class MyRepository : RepositoryBase
     {
         var ids = MySqlExecutor.MyEntity_FilterIDs(
             categoryID, kind, minStartDate);
+
         var entities = ids.Select(x => Get(x));
+
         return entities;
     }
 }
@@ -510,15 +585,15 @@ It may seem overhead all the layers, but it might add up after adding more queri
 
 In `JJ` projects you might also find split up into separate assemblies: 
 
-`MyProject.Data`  
-`MyProject.Data.EntityFramework`
-`MyProject.Data.SqlClient`
+- `MyProject.Data`  
+- `MyProject.Data.EntityFramework`
+- `MyProject.Data.SqlClient`
 
 Separating the general things from the technology-specific things.
 
 ### Database Upgrade Scripts
 
-`SQL` executed solely for database upgrading, might not be put in the main project, but a project/folder on the side. Suggestions of how to organize database upgrading  might be found [here](database-conventions.md#upgrade-scripts).
+`SQL` executed solely for database upgrading, might not be put in the main projects, but a project/folder on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
 
 
 XML

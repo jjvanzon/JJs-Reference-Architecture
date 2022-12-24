@@ -410,9 +410,11 @@ A ToEntity method takes on much of the resposibility of a Save action.
 
 ### Presenter
 
+A presenter models the user interactions. A non-visual blue-print of the user interface.
+
 Each view gets its own presenter.
 
-Each user action is a method.
+Each user action is represented by a method.
 
 A presenter represents what a user can do in a screen.
 
@@ -498,7 +500,7 @@ The reason is maintainability: programming the application navigation in C# usin
 
 Furthermore AJAX'ing comes with extra difficulties. For instance that MVC `<input>` tag ID's vary depending on the context and must be preserved after an AJAX call, big code blocks of JavaScript for doing AJAX posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full view. Things like managing the redirection to a full view from a partial action. Info from a parent view model e.g. a lookup list that is passed to the generation of a child view model is not available when you generate a partial view. Request.RawUrl cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the view depending on the outcome of the business logic. Sometimes an ajax call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
-Some of the difficulties with AJAX have been solved by employing a specific way of working, as described under AJAX  in the Aspects section.
+Some of the difficulties with AJAX have been solved by employing a specific way of working, as described under AJAX in the Aspects section.
 
 ### Temporary ID's
 
@@ -708,9 +710,9 @@ Beware that currently the different solutions do not mix well and you should onl
 - Return URL's indicate what page to go back to when you are done in another page.
 - It is used when you are redirected to a login screen, so it knows what page to go back to after you login.
 - Return URL's are encoded into a URL parameter, called 'ret' e.g.:
-  http://www.mysite.com/Login?__ret=%2FMenu%2FIndex__
+  `http://www.mysite.com/Login?`__`ret=%2FMenu%2FIndex`__
 
-The ret parameter is the following value encoded:  /Menu/Index
+The ret parameter is the following value encoded:  `/Menu/Index`  
 That is the URL you will go back to after you log in.
 
 The Login action can redirect to the ret URL like this:
@@ -1119,7 +1121,7 @@ A mock object is used in testing as a replacement for a object used in productio
 
 To prevent typing in a lot of strings in code, make a static class with constants in it, that become placeholders for the name.
 
-e.g. ViewNames, with constants in it like this:
+E.g. `ViewNames`, with constants in it like this:
 
 ```cs
 public static class ViewNames
