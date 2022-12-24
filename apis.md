@@ -10,9 +10,6 @@ This article describes some of the API and technology choices in this architectu
     - [Data Access](#data-access)
     - [Logic](#logic)
     - [Presentation](#presentation)
-        - [General](#general)
-        - [Web](#web)
-        - [Win](#win)
     - [Debugging / Testing](#debugging--testing)
     - [Data Processing / IO](#data-processing--io)
     - [Other](#other)
@@ -96,13 +93,13 @@ Organized by purpose.
 
 ### Presentation
 
-#### General
+<h4>General:</h4>
 
 |                       |                |
 |-----------------------|----------------|
 | PagerViewModelFactory |
 
-#### Web
+<h4>Web:</h4>
 
 |                         |                |
 |-------------------------|----------------|
@@ -115,7 +112,7 @@ Organized by purpose.
 | jQuery                  |
 | JJ.Framework.JavaScript |
 
-#### Win
+<h4>Win:</h4>
 
 |                             |                |
 |-----------------------------|----------------|
