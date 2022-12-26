@@ -7,7 +7,7 @@ This article describes some of the API and technology choices in this architectu
 
 - [Overview](#overview)
     - [Code](#code)
-    - [Data Access](#data-access)
+    - [Data](#data)
     - [Logic](#logic)
     - [Presentation](#presentation)
     - [Debugging / Testing](#debugging--testing)
@@ -56,18 +56,19 @@ Organized by purpose.
 |-------------------------|----------------|
 | Visual Studio           | Used for the development of the code.
 | VS Code                 | Used for MarkDown editing.
-| .NET                    | Framework that forms a base for the programming.
+| .NET                    | Framework from Microsoft that forms a base for the programming.
 | C#                      | Primary programming language.
-| `VB.NET`                | Some projects might still be in this programming language.
+| `VB.NET`                | Some projects might still use this programming language.
 | ReSharper               | Tool for code formatting, refactoring and code smells and such.
 | JJ.Framework            | In-house programmed extensions to the .NET Framework.
 | JJ.Framework.Conversion | Makes it easier to convert simple types.
-| JJ.Framework.Reflection | Helps with / speeds up accessing code structure elements / ('reflection') and lambdas.
-| GitHub                  | Where the source code is hosted.
-| Azure DevOps            | Build pipeline and pre-release package feed. Original planning boards.
+| JJ.Framework.Reflection | Helps with and speeds up accessing code structure elements through reflection and lambdas.
+| git                     | 'Source control'. Revision history, version management for the code.
+| GitHub                  | Where the source code is hosted and shared.
+| Azure DevOps            | Build pipeline and pre-release package feed. Original planning boards. Might still hose 1 project not migrated to GitHub.
 | GitHub Issues           | Gradually using GitHub Issues more for planning.
 
-### Data Access
+### Data
 
 |                   |	             |
 |-------------------|----------------|
@@ -88,8 +89,8 @@ Organized by purpose.
 |                          |                |
 |--------------------------|----------------|
 | [JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/) | Types for supporting a business layer and/or API. Bi-directional relationship sync. Result types to pass data, succes flags and (validation) messages.
-| JJ.Framework.Validation  |
-| JJ.Framework.Mathematics |
+| [JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation/overview) | For a nice fluent notation for validations.
+| [JJ.Framework.Mathematics](https://www.nuget.org/packages/JJ.Framework.Mathematics/) | Helpers for math things. See link.
 
 ### Presentation
 
@@ -97,28 +98,28 @@ Organized by purpose.
 
 |                       |                |
 |-----------------------|----------------|
-| PagerViewModelFactory |
+| PagerViewModelFactory | Can construct a pager view model with properties like CanGoToFirstPage, CanGoToPreviousPage, CanGoToNextPage, CanGoToLastPage. (See [JJ.Framework.Presentation](https://www.nuget.org/packages/JJ.Framework.Presentation/))
 
 <h4>Web:</h4>
 
 |                         |                |
 |-------------------------|----------------|
-| IIS                     |
-| MVC                     |
-| Razor                   |
-| Html.BeginCollection    |
-| JavaScript              |
-| AJAX                    |
-| jQuery                  |
-| JJ.Framework.JavaScript |
+| IIS (Internet Information Services) | For hosting web sites. Some Visual Studio projects wish to use it upon load.
+| MVC                     | A web development tech in the .NET Framework. Code runs mostly server side.
+| Razor                   | A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
+| Html.BeginCollection    | Makes it possible to send tree structures over HTTP to the server-side MVC. (See [JJ.Framework.Mvc](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc/overview))
+| JavaScript              | Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
+| AJAX                    | For retrieving / posting back partial views to the server and back.
+| jQuery                  | Used to support UI details in web. Can make some JavaScript shorter.
+| JJ.Framework.JavaScript | Used to support UI details in web. Remembering scroll position, cookie functions, url parsing.  Might be extended with one-line AJAX functions once.
 
 <h4>Win:</h4>
 
 |                             |                |
 |-----------------------------|----------------|
-| WinForms                    |
-| SimpleProcessForm           |
-| JJ.Framework.VectorGraphics |
+| WinForms                    | Used in some projects. Small utilities and `JJ.Synthesizer` uses it as the top-most layer.
+| SimpleProcessForm           | A base form for a utility that runs a process.
+| JJ.Framework.VectorGraphics | A custom-programmed vector graphics model. Can be used for user interfaces and can be programmed in a component-based style. It relies on a drawing API to actually draw out the objects. Can be used in conjunction with WinForms, for a more flexible, diagrammy user interface.
 
 ### Debugging / Testing
 
