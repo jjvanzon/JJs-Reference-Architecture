@@ -46,11 +46,15 @@ This article describes some of the API and technology choices in this architectu
 Introduction
 ------------
 
-This article lists some of the tech used in `JJ` projects. Most are listed in a table. Some technology is described in more detail, mostly data store technologies but also about web technology choices.
+This article lists some of the tech used in `JJ` projects. Most are listed in a table.
+
+Some technology is described in more detail, mostly data store technologies but also about web technology choices.
 
 
 List of API's
 -------------
+
+(And other tech).
 
 ### Code
 
