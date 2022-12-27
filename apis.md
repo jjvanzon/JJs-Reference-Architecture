@@ -5,6 +5,7 @@ This article describes some of the API and technology choices in this architectu
 
 <h2>Contents</h2>
 
+- [Introduction](#introduction)
 - [List of API's](#list-of-apis)
     - [Code](#code)
     - [Data](#data)
@@ -13,6 +14,7 @@ This article describes some of the API and technology choices in this architectu
     - [Debugging / Testing](#debugging--testing)
     - [Processing / IO](#processing--io)
     - [Other](#other)
+- [More Elaborate](#more-elaborate)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
     - [ConnectionStrings](#connectionstrings)
@@ -41,10 +43,14 @@ This article describes some of the API and technology choices in this architectu
 - [XML](#xml)
 
 
+Introduction
+------------
+
+This article lists some of the tech used in `JJ` projects. Most are listed in a table. Some technology is described in more detail, mostly data store technologies but also about web technology choices.
+
+
 List of API's
 -------------
-
-Here are tables listing some of the tech used in `JJ` projects.
 
 ### Code
 
@@ -56,11 +62,11 @@ Here are tables listing some of the tech used in `JJ` projects.
 | C#                      | Primary programming language.
 | `VB.NET`                | Some projects might still use this programming language.
 | ReSharper               | Tool for code formatting, refactoring and code smells and such.
-| git                     | 'Source control'. Revision history, version management for the code.
+| git                     | Source control, revision history, version management for the code.
 | [GitHub](https://github.com/jjvanzon) | Where the source code is hosted and shared.
-| [Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Build pipeline and pre-release package feed. Original planning boards. Might still host 1 project not migrated to GitHub.
+| [Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Build pipeline. Pre-release package feed. Original planning boards. Might still host one project not migrated to GitHub.
 | GitHub Issues           | Gradually using GitHub Issues more for planning.
-| JJ.Framework            | In-house programmed extensions to the .NET Framework: [GitHub](https://github.com/jjvanzon/JJ.Framework) / [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)
+| JJ.Framework            | In-house programmed extensions to the .NET Framework can be found in [GitHub](https://github.com/jjvanzon/JJ.Framework) / [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)
 | [JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/) | Makes it easier to convert simple types.
 | [JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/) | Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
 
@@ -70,15 +76,15 @@ Here are tables listing some of the tech used in `JJ` projects.
 |-------------------|----------------|
 | SQL Server        | Primary data store technology for relational databases.
 | ORM               | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
-| SQL               | For performance reasons SQL is hand-programmed incidentally, combined with ORM, which is often more preferred.
-| [NHibernate](https://www.nuget.org/packages/NHibernate) | A type of ORM. Chosen in several `JJ` project because the employer also so happened to use it.
+| SQL               | For performance reasons SQL is hand-programmed incidentally, combined with ORM.
+| [NHibernate](https://www.nuget.org/packages/NHibernate) | A type of ORM. Chosen in several `JJ` project because an employer also so happened to use it.
 | [QueryOver](https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html) | A strongly-typed query language like LINQ, but then the NHibernate variation.
 | [FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate) | A way to define ORM mappings, using fluent notation.
 | [EntityFramework](https://www.nuget.org/packages/EntityFramework) | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
-| [JJ.Framework.Data](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Helps hide data access behind abstractions, that do not even expose whether it is SQL Server, SQL, ORM, NHibernate, just abstracted convenient methods instead.
-| [SqlExecutor](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) | An class from `JJ.Framework.Data.SqlClient` that helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
-| LINQ              | A query language usable in C#. Can be used to query several types of data store, but used here mostly onto in-memory collections.
-| [JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/) | `JJ` extensions to LINQ for collections.
+| [JJ.Framework.Data](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Helps hide data access behind abstractions. It does notexpose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
+| [SqlExecutor](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) | Helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
+| LINQ              | A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
+| [JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/) | `JJ` extensions to LINQ.
 
 ### Logic
 
@@ -126,7 +132,7 @@ Here are tables listing some of the tech used in `JJ` projects.
 | [JJ.Framework.Testing](https://www.nuget.org/packages/JJ.Framework.Testing) | Extends the `Assert` class, but automatically includes the tested expression in the error messages.
 | DebuggerDisplays | A technique to quickly display helpful info in the ID watch screen.
 | [JJ.Framework.Exceptions](https://www.nuget.org/packages/JJ.Framework.Exceptions) | Contains exception classes for basic errors. Clear concise error messages, including tested expressions and tested values.
-| [Accessor](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) | For accessing the internals of types for instance for testing purposes. (Found in `JJ.Framework.Reflection`.)
+| [Accessor](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) | For accessing the internals of types for instance for testing purposes.
 
 ### Processing / IO
 
@@ -170,6 +176,12 @@ Here are tables listing some of the tech used in `JJ` projects.
 |-----|-----|
 | [JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. 
 | [Logging](aspects.md#logging) | Described how it might be extended to contain more other code to do with logging. 
+
+
+More Elaborate
+--------------
+
+For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology choices.
 
 
 AJAX
