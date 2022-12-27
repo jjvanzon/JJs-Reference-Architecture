@@ -20,7 +20,7 @@
     - [Facade](#facade)
         - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
     - [Visitor](#visitor)
-    - [String Resources](#string-resources)
+    - [Resource Strings](#resource-strings)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
     - [Lookup Lists](#lookup-lists)
@@ -289,7 +289,7 @@ A good example of a Visitor class is .NET's own ExpressionVisitor, however we fo
 
 `< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
 
-### String Resources
+### Resource Strings
 
 For button texts, translations of model properties in different languages, etc., use resx files in your .NET projects.
 

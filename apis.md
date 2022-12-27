@@ -142,14 +142,34 @@ Here are tables listing some of the tech used in `JJ` projects organized by purp
 
 ### Other
 
-|               |                  |                |
-|---------------|------------------|----------------|
-| Localization  | Resource Strings | For localization, resx files can be used in Visual Studio.
-| | [JJ.Framework.ResourceStrings](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings) | Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
-| [Configuration](aspects.md#configuration) | [JJ.Framework.Configuration](https://www.nuget.org/packages/JJ.Framework.Configuration) |
-| [Security](aspects.md#security) | [JJ.Framework.Security](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security) | A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
-| | [Security model](aspects.md#security) | If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the chosen security system.
-| Logging | [JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. It might be extende to contain other code to do with [logging](aspects.md#logging). 
+<h4>Localization</h4>
+
+|                  |                |
+|------------------|----------------|
+| [Resource Strings](patterns.md#resource-strings) | For localization, resx files can be used in Visual Studio.
+| [JJ.Framework.ResourceStrings](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings) | Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
+| [Localization](aspects.md#localization) | More ideas about localization.
+
+<h4>Configuration</h4>
+
+|     |     |
+|-----|-----|
+| [JJ.Framework.Configuration](https://www.nuget.org/packages/JJ.Framework.Configuration) | For working with complex configuration files, esier than `System.Configuration`.
+| [Configuration](aspects.md#configuration) | More info about configuration.
+
+<h4>Security</h4>
+
+|     |     |
+|-----|-----|
+| [JJ.Framework.Security](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security) | A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
+| [Security](aspects.md#security) | If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
+
+<h4>Logging</h4>
+
+|     |     |
+|-----|-----|
+| [JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. 
+| [Logging](aspects.md#logging) | Described how it might be extended to contain more other code to do with logging. 
 
 
 AJAX
