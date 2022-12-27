@@ -44,7 +44,7 @@ This article describes some of the API and technology choices in this architectu
 List of API's
 -------------
 
-Here are tables listing some of the tech used in `JJ` projects organized by purpose.
+Here are tables listing some of the tech used in `JJ` projects.
 
 ### Code
 
@@ -56,13 +56,13 @@ Here are tables listing some of the tech used in `JJ` projects organized by purp
 | C#                      | Primary programming language.
 | `VB.NET`                | Some projects might still use this programming language.
 | ReSharper               | Tool for code formatting, refactoring and code smells and such.
-| JJ.Framework            | In-house programmed extensions to the .NET Framework. [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) / [GitHub](https://github.com/jjvanzon/JJ.Framework)
-| [JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/) | Makes it easier to convert simple types.
-| [JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/) | Helps with and speeds up accessing code structure elements through reflection and lambdas.
 | git                     | 'Source control'. Revision history, version management for the code.
 | [GitHub](https://github.com/jjvanzon) | Where the source code is hosted and shared.
-| [Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Build pipeline and pre-release package feed. Original planning boards. Might still hose 1 project not migrated to GitHub.
+| [Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Build pipeline and pre-release package feed. Original planning boards. Might still host 1 project not migrated to GitHub.
 | GitHub Issues           | Gradually using GitHub Issues more for planning.
+| JJ.Framework            | In-house programmed extensions to the .NET Framework: [GitHub](https://github.com/jjvanzon/JJ.Framework) / [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)
+| [JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/) | Makes it easier to convert simple types.
+| [JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/) | Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
 
 ### Data
 
@@ -70,7 +70,7 @@ Here are tables listing some of the tech used in `JJ` projects organized by purp
 |-------------------|----------------|
 | SQL Server        | Primary data store technology for relational databases.
 | ORM               | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
-| SQL               | Incidentally SQL is hand-programmed, used conjoined with ORM, mostly for performance reasons.
+| SQL               | For performance reasons SQL is hand-programmed incidentally, combined with ORM, which is often more preferred.
 | [NHibernate](https://www.nuget.org/packages/NHibernate) | A type of ORM. Chosen in several `JJ` project because the employer also so happened to use it.
 | [QueryOver](https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html) | A strongly-typed query language like LINQ, but then the NHibernate variation.
 | [FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate) | A way to define ORM mappings, using fluent notation.
