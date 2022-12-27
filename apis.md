@@ -187,17 +187,17 @@ For some of these things you can find more elaborate descriptions below: mostly 
 AJAX
 ----
 
-For AJAX'ing partial web content, our team made our own wrapper AJAX methods, around calls to jQuery, so we could AJAX with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of JavaScript code.
+For `AJAX`'ing partial web content, our team made our own wrapper `AJAX` methods, around calls to `jQuery`, so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of JavaScript code.
 
-Our strategy was to prefer full loads, so we could keep most logic in the C# realm. This before resorting to AJAX calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+Our strategy was to prefer full loads, so we could keep most logic in the `C#` realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 
 Configuration
 -------------
 
-For configuration we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) API, which might be quite a bit easier than using .NET's `System.Configuration` directly.
+For configuration we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) API, which is quite a bit easier than using .NET's `System.Configuration` directly.
 
-You might read from its `README` how it works, by following the link above.
+You might read from its `README` how it works.
 
 It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work. would it ever be programmed.
 
