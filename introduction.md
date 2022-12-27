@@ -17,13 +17,13 @@ Definition of Software Architecture
 
 Software architecture has thousands of definitions. If you believe them all, then software architecture is about everything that has to do with software development.
 
-The emphasis here, is on actually building the software.
+But the emphasis here, is on actually building the software.
 
 It is about modular design of software components, which can be done by splitting up code into functionalities, like a shopping cart, or financial reports, or splitting up code into technical aspects, like validation, security and persistence. You might also split up by both technical aspects and functional aspects at the same time, giving you a more fine-grained (2-dimensional!) separation of concerns.
 
 Software architecture also has a strong focus on maintainability and being prepared the future as a system grows.
 
-The programming side of software architecture is about making frameworks, coding the functionalities, combining different technologies and using best practices. It may also involve technical design, which by the way can be done in your head as well as on paper.
+The programming side of software architecture is about making frameworks, coding the functionalities, combining different technologies and using best practices. It also involves technical design, which might be done in your head as well as on paper.
 
 
 Inter-Disciplinary Aspects
@@ -31,7 +31,7 @@ Inter-Disciplinary Aspects
 
 Software architecture also involves technical details outside of software programming, such as the basic outlining of hardware infrastructure, collaborating with infrastructure technicians, server administrators, hosting providers, software vendors.
 
-Software architecture also includes soft-skills that do not have much to do with technology. Planning the development of software both in rough outlines as well as task details, guarding that work, prioritizing, organizing and replanning, making concessions, work preparation, managing software lifecycle, going from design to implementation to test to production and after care, having proper source control in place, management of the team that codes, the team that tests, discussing functionalities, goals and planning with management, stakeholders, staff and end-users. Basically talking to anyone even slightly involved in the development of the software. Coaching, expanding the teams knowledge, having a team work optimally together and efficiently, and giving people room to focus, so a lot of work gets done well. It can involve managing budgets for hardware and software and also functional designing.
+Software architecture also includes soft-skills, that do not have much to do with technology. Planning the development of software both in rough outlines as well as task details, guarding progress, prioritizing, organizing and replanning, making concessions, work preparation, managing software lifecycle, going from design to implementation to test to production and after care, having proper source control in place, management of the team that codes, the team that tests, discussing functionalities, goals and planning with management, stakeholders, staff and end-users. Basically talking to anyone even slightly involved in the development of the software. Coaching, expanding the teams knowledge, having a team work optimally together and efficiently, and giving people room to focus, so a lot of work gets done well. It can involve managing budgets for hardware and software and also functional designing.
 
 Fortunately this does not need to come down to one person. Even though a software architect might overview the whole process, lots of tasks can be done by other team members, so you can make software architecture work as a team.
 
@@ -41,7 +41,7 @@ Possible Choices over Definite Choices
 
 This is kind of a personal note on where this documentation stands right now.
 
-Originally I described a fixed way of working here, that generally works well if you want to build large dependable systems with a lot of flexibility. I applied these methods of working in a team under my lead. It worked, but required a lot of discipline of team members to do things the way the boss wants.
+Originally I described a fixed way of working here, that generally works well if you want to build large dependable systems with a lot of flexibility. I applied these methods of working in a team under my lead and also some solo projects I worked on. It worked, but required a lot of discipline of team members to do things the way the boss wants.
 
 I want to move away from this a little bit, and see the methods described here more like a suggestion box of different ways to do things. I will try to describe different alternatives next to the one I prefer and highlight the pros and cons, so you can perhaps see why I came to the conclusion that one method is better than the other.
 
@@ -63,11 +63,11 @@ You could call it *'functionality-independent software architecture'*.
 
 You could also call this architecture a *'pattern stack'*, because it takes a technical-first approach, rather than functional-first in that a layering is described where fixed design patterns are used from one layer to the next.
 
-The idea behind this is that even though technology changes fast, functionality changes faster. So a technical-first order will be less likely to change, and this can result in a more stable subdivision into parts upon which the functionality builds.
+The idea behind this is that even though technology changes fast, functionality changes faster. So a technical-first order might be less likely to change, and this can result in a more stable subdivision into parts upon which the functionality builds.
 
 To also accommodate for quickly changing technology, we use abstractions of these technologies to be able to replace them and not have to reprogram the whole application if we make a switch.
 
-This gives us a subdivision into parts into which everything fits, but not everything is put in it yet.
+This gives us a subdivision into parts into which everything fits, even when not everything is put in it yet.
 
 
 Application Architecture vs Service Oriented Architecture
