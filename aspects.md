@@ -1,5 +1,5 @@
-﻿Aspects | JJ's Reference Architecture
-=====================================
+﻿Aspects
+=======
 
 <h2>Contents</h2>
 

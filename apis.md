@@ -1,5 +1,5 @@
-﻿API's | JJ's Reference Architecture
-===================================
+﻿API's
+=====
 
 This article describes some of the API and technology choices in this architecture.
 

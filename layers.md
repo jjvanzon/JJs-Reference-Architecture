@@ -1,5 +1,5 @@
-﻿Layers | JJ's Reference Architecture
-====================================
+﻿Layers
+======
 
 <h2>Contents</h2>
 

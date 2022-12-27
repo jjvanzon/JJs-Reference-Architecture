@@ -1,5 +1,5 @@
-﻿Database Conventions | JJ's Reference Architecture
-==================================================
+﻿Database Conventions
+====================
 
 <h2>Contents</h2>
 

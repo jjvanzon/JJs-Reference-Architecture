@@ -1,5 +1,5 @@
-﻿Code Style | JJ's Reference Architecture
-========================================
+﻿Code Style
+==========
 
 <h2>Contents</h2>
 

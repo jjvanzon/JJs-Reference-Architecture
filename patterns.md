@@ -1,5 +1,5 @@
-﻿Patterns | JJ's Reference Architecture
-======================================
+﻿Patterns
+========
 
 <h2>Contents</h2>
 

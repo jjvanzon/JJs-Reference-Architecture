@@ -1,5 +1,5 @@
-﻿Namespaces, Assemblies and Folder Structure | JJ's Reference Architecture
-=========================================================================
+﻿Namespaces, Assemblies and Folder Structure
+===========================================
 
 <h2> Contents</h2>
 

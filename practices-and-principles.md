@@ -1,5 +1,5 @@
-﻿Practices & Principles | JJ's Reference Architecture
-====================================================
+﻿Practices & Principles
+======================
 
 <h2>Contents</h2>
 

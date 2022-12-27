@@ -1,5 +1,5 @@
-﻿Introduction | JJ's Reference Architecture
-==========================================
+﻿Introduction
+============
 
 <h2>Contents</h2>
 

@@ -1,5 +1,5 @@
-﻿Appendices | JJ's Reference Architecture
-========================================
+﻿Appendices
+==========
 
 <h2>Contents</h2>
 

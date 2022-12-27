@@ -1,5 +1,5 @@
-﻿Server Architecture | JJ's Reference Architecture
-=================================================
+﻿Server Architecture
+===================
 
 <h2>Contents</h2>
 

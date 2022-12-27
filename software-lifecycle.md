@@ -1,5 +1,5 @@
-﻿Software Lifecycle | JJ's Reference Architecture
-================================================
+﻿Software Lifecycle
+==================
 
 <h2>Contents</h2>
 

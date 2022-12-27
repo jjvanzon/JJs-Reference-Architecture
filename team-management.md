@@ -1,5 +1,5 @@
-﻿Team Management | JJ's Reference Architecture
-=============================================
+﻿Team Management
+===============
 
 <h2>Contents</h2>
 
