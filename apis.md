@@ -5,13 +5,13 @@ This article describes some of the API and technology choices in this architectu
 
 <h2>Contents</h2>
 
-- [Overview](#overview)
+- [List of API's](#list-of-apis)
     - [Code](#code)
     - [Data](#data)
     - [Logic](#logic)
     - [Presentation](#presentation)
     - [Debugging / Testing](#debugging--testing)
-    - [Data Processing / IO](#data-processing--io)
+    - [Processing / IO](#processing--io)
     - [Other](#other)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
@@ -39,16 +39,12 @@ This article describes some of the API and technology choices in this architectu
     - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
     - [Database Upgrade Scripts](#database-upgrade-scripts)
 - [XML](#xml)
-- [TODO](#todo)
 
 
-Overview
---------
+List of API's
+-------------
 
-Here are tables listing some of the tech used in `JJ` projects.  
-Organized by purpose.
-
-`[ TODO: More links ]`
+Here are tables listing some of the tech used in `JJ` projects organized by purpose.
 
 ### Code
 
@@ -60,27 +56,27 @@ Organized by purpose.
 | C#                      | Primary programming language.
 | `VB.NET`                | Some projects might still use this programming language.
 | ReSharper               | Tool for code formatting, refactoring and code smells and such.
-| JJ.Framework            | In-house programmed extensions to the .NET Framework.
-| JJ.Framework.Conversion | Makes it easier to convert simple types.
-| JJ.Framework.Reflection | Helps with and speeds up accessing code structure elements through reflection and lambdas.
+| JJ.Framework            | In-house programmed extensions to the .NET Framework. [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) / [GitHub](https://github.com/jjvanzon/JJ.Framework)
+| [JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/) | Makes it easier to convert simple types.
+| [JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/) | Helps with and speeds up accessing code structure elements through reflection and lambdas.
 | git                     | 'Source control'. Revision history, version management for the code.
-| GitHub                  | Where the source code is hosted and shared.
-| Azure DevOps            | Build pipeline and pre-release package feed. Original planning boards. Might still hose 1 project not migrated to GitHub.
+| [GitHub](https://github.com/jjvanzon) | Where the source code is hosted and shared.
+| [Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Build pipeline and pre-release package feed. Original planning boards. Might still hose 1 project not migrated to GitHub.
 | GitHub Issues           | Gradually using GitHub Issues more for planning.
 
 ### Data
 
-|                   |	             |
+|                   |                |
 |-------------------|----------------|
 | SQL Server        | Primary data store technology for relational databases.
 | ORM               | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
 | SQL               | Incidentally SQL is hand-programmed, used conjoined with ORM, mostly for performance reasons.
-| NHibernate        | A type of ORM. Chosen in several `JJ` project because the employer also so happened to use it.
-| QueryOver         | A strongly-typed query language like LINQ, but then the NHibernate variation.
-| FluentNHibernate  | A way to define ORM mappings, using fluent notation.
-| EntityFramework   | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
-| JJ.Framework.Data | Helps hide data access behind abstractions, that do not even expose whether it is SQL Server, SQL, ORM, NHibernate, just abstracted convenient methods instead.
-| SqlExecutor       | An class from `JJ.Framework.Data.SqlClient` that helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
+| [NHibernate](https://www.nuget.org/packages/NHibernate) | A type of ORM. Chosen in several `JJ` project because the employer also so happened to use it.
+| [QueryOver](https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html) | A strongly-typed query language like LINQ, but then the NHibernate variation.
+| [FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate) | A way to define ORM mappings, using fluent notation.
+| [EntityFramework](https://www.nuget.org/packages/EntityFramework) | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
+| [JJ.Framework.Data](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Helps hide data access behind abstractions, that do not even expose whether it is SQL Server, SQL, ORM, NHibernate, just abstracted convenient methods instead.
+| [SqlExecutor](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) | An class from `JJ.Framework.Data.SqlClient` that helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
 | LINQ              | A query language usable in C#. Can be used to query several types of data store, but used here mostly onto in-memory collections.
 | [JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/) | `JJ` extensions to LINQ for collections.
 
@@ -89,69 +85,71 @@ Organized by purpose.
 |                          |                |
 |--------------------------|----------------|
 | [JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/) | Types for supporting a business layer and/or API. Bi-directional relationship sync. Result types to pass data, succes flags and (validation) messages.
-| [JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation/overview) | For a nice fluent notation for validations.
+| [JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation) | For a nice fluent notation for validations.
 | [JJ.Framework.Mathematics](https://www.nuget.org/packages/JJ.Framework.Mathematics/) | Helpers for math things. See link.
 
 ### Presentation
 
-<h4>General:</h4>
+<h4>General</h4>
 
 |                       |                |
 |-----------------------|----------------|
-| PagerViewModelFactory | Can construct a pager view model with properties like CanGoToFirstPage, CanGoToPreviousPage, CanGoToNextPage, CanGoToLastPage. (See [JJ.Framework.Presentation](https://www.nuget.org/packages/JJ.Framework.Presentation/))
+| [PagerViewModelFactory](https://www.nuget.org/packages/JJ.Framework.Presentation/) | Can construct a pager view model with properties like `CanGoToFirstPage`, `CanGoToPreviousPage`, `CanGoToNextPage`, `CanGoToLastPage`.
 
-<h4>Web:</h4>
+<h4>Web</h4>
 
 |                         |                |
 |-------------------------|----------------|
-| IIS (Internet Information Services) | For hosting web sites. Some Visual Studio projects wish to use it upon load.
-| MVC                     | A web development tech in the .NET Framework. Code runs mostly server side.
-| Razor                   | A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
-| Html.BeginCollection    | Makes it possible to send tree structures over HTTP to the server-side MVC. (See [JJ.Framework.Mvc](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc/overview))
-| JavaScript              | Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
-| AJAX                    | For retrieving / posting back partial views to the server and back.
-| jQuery                  | Used to support UI details in web. Can make some JavaScript shorter.
-| JJ.Framework.JavaScript | Used to support UI details in web. Remembering scroll position, cookie functions, url parsing.  Might be extended with one-line AJAX functions once.
+| IIS | (Internet Information Services.) For hosting web sites. Some Visual Studio projects wish to use it upon load.
+| MVC | A web development tech in the .NET Framework. Code runs mostly server side.
+| Razor | A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
+| [Html.BeginCollection](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) | Makes it possible to send tree structures over HTTP to the server-side MVC.
+| [JavaScript](#javascript--typescript) | Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
+| [TypeScript](#javascript--typescript) | Might be preferred over JavaScript in the future. Has not been applied
+| [AJAX](#ajax) | For retrieving / posting back partial views to the server and back.
+| jQuery | Used to support UI details in web. Can make some JavaScript shorter.
+| [JJ.Framework.JavaScript](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) | Used to support UI details in web. Remembering scroll position, cookie functions, url parsing.  Might be extended with one-line AJAX functions once.
 
-<h4>Win:</h4>
+<h4>Win</h4>
 
-|                             |                |
-|-----------------------------|----------------|
-| WinForms                    | Used in some projects. Small utilities and `JJ.Synthesizer` uses it as the top-most layer.
-| SimpleProcessForm           | A base form for a utility that runs a process.
-| JJ.Framework.VectorGraphics | A custom-programmed vector graphics model. Can be used for user interfaces and can be programmed in a component-based style. It relies on a drawing API to actually draw out the objects. Can be used in conjunction with WinForms, for a more flexible, diagrammy user interface.
+|          |          |
+|----------|----------|
+| WinForms | Used in some projects. Small utilities and `JJ.Synthesizer` uses it as the top-most layer.
+| [SimpleProcessForm](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms) | A base form for a utility that runs a process.
+| [JJ.Framework.VectorGraphics](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.VectorGraphics) | A custom-programmed vector graphics model. Can be used for component-based user interfaces.
 
 ### Debugging / Testing
 
-|                             |	               |
-|-----------------------------|----------------|
-| TestFramework `[ which ? ]` |
-| JJ.Framework.Testing        |
-| DebuggerDisplays            |
-| JJ.Framework.Exceptions     |
-| Accessor                    | (In JJ.Framework.Reflection.)
+|                  |                  |
+|------------------|------------------|
+| [MSTest](https://www.nuget.org/packages/MSTest.TestFramework) | For automated / unit testing. Seems a deprecated framework. Might upgrade, but it ain't on the top of the list.
+| [JJ.Framework.Testing](https://www.nuget.org/packages/JJ.Framework.Testing) | Extends the `Assert` class, but automatically includes the tested expression in the error messages.
+| DebuggerDisplays | A technique to quickly display helpful info in the ID watch screen.
+| [JJ.Framework.Exceptions](https://www.nuget.org/packages/JJ.Framework.Exceptions) | Contains exception classes for basic errors. Clear concise error messages, including tested expressions and tested values.
+| [Accessor](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) | For accessing the internals of types for instance for testing purposes. (Found in `JJ.Framework.Reflection`.)
 
-### Data Processing / IO
+### Processing / IO
 
 |                        |                |
 |------------------------|----------------|
-| JJ.Framework.Text      |
-| JJ.Framework.IO        |
-| JJ.Framework.HtmlToXml |
-| JJ.Framework.Xml       |
-| JJ.Framework.Xml.Linq  |
-| Embedded Resources     |
-| EmbeddedResourceReader |
+| [JJ.Framework.Text](https://www.nuget.org/packages/JJ.Framework.Text) | Basic helpers for working with text.
+| [JJ.Framework.IO](https://www.nuget.org/packages/JJ.Framework.IO) | Contains various file functions, functions for working with streams and working with CSV's.
+| [JJ.Framework.HtmlToXml](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.HtmlToXml) | The HtmlToXmlConverter class steals from SgmlReader. It does what it says.
+| [JJ.Framework.Xml](https://www.nuget.org/packages/JJ.Framework.Xml) | A convenient way to map XML to (C#) classes.<br/>Access XML nodes more safely, with null and unicity checks.
+| [JJ.Framework.Xml.Linq](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq) | "
+| [Embedded Resources](#embedded-resources) | Embedded resources allow compiling files and content right inside a DLL or EXE.
+| [EmbeddedResourceReader](https://www.nuget.org/packages/JJ.Framework.Common) | Make it a little easier to get embedded resource Streams, bytes and strings.
 
 ### Other
 
-|                      |                              |                |
-|----------------------|------------------------------|----------------|
-| Configuration        | JJ.Framework.Configuration   |
-| Localication         | String Resources             |
-| Security             | JJ.Framework.Security        |
-| Logging              | JJ.Framework.Logging         |
-|                      | JJ.Framework.ResourceStrings |
+|               |                  |                |
+|---------------|------------------|----------------|
+| Localization  | Resource Strings | For localization, resx files can be used in Visual Studio.
+| | [JJ.Framework.ResourceStrings](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings) | Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
+| [Configuration](aspects.md#configuration) | [JJ.Framework.Configuration](https://www.nuget.org/packages/JJ.Framework.Configuration) |
+| [Security](aspects.md#security) | [JJ.Framework.Security](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security) | A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
+| | [Security model](aspects.md#security) | If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the chosen security system.
+| Logging | [JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. It might be extende to contain other code to do with [logging](aspects.md#logging). 
 
 
 AJAX
@@ -222,7 +220,7 @@ string text = EmbeddedResourceReader.GetText(
 Entity Framework
 ----------------
 
-Entity Framework is a framework for data access. It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework/overview) and [repository interfaces](patterns.md#repository-interfaces).
+Entity Framework is a framework for data access. It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
@@ -244,7 +242,7 @@ But still: logic in one place in one language (`C#`) felt so nice. I guess the l
 
 The idea was that a full page load was 1st choice, 2nd choice `AJAX'ing`, and last in line `JavaScript` only to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
-For this last-resort `JavaScript` we used `jQuery` and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript/overview/1.7.7817.43032) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort `JavaScript` we used `jQuery` and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
 
 I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to `C#` though.
 
@@ -274,7 +272,7 @@ NHibernate
 
 `NHibernate` is used in some projects, because an employer favored it, and some other projects joined the club.
 
-It might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview) and through [repository interfaces](patterns.md#repository).
+It might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) and through [repository interfaces](patterns.md#repository).
 
 
 ORM
@@ -415,7 +413,7 @@ A choice was made, not to use stored procedures or views. Instead the SQL files 
 
 The classic way of executing SQL in .NET would be to use `System.Data.SqlClient`. But instead, the `SqlExecutor` API might be used.
 
-A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient/overview).
+A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
 With an API like that, we can execute SQL in a strongly-typed way, often with only a single code line.
 
@@ -509,7 +507,7 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSou
 
 This version uses an NHibernate `ISession`. In order for the SQL to run in the same transaction as the SQL that NHibernate executes, we make it aware of the `ISession` here.
 
-A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate/overview).
+A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate).
 
 ### Files instead of Embedded Resources
 
@@ -648,12 +646,6 @@ XML
 
 Preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
 
-Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml/overview) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq/overview)) over using other API's directly, because the helper will handle nullability and unicity more grafully.
+Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)) over using other API's directly, because the helper will handle nullability and unicity more grafully.
 
-`XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml/overview) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq/overview)). That might be a simpler way to convert XML to an object graph than other API's.
-
-
-TODO
-----
-
-`<Maybe mention some chosen tech from the architectural layering.>`
+`XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)). That might be a simpler way to convert XML to an object graph than other API's.
