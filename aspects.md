@@ -66,7 +66,7 @@
 Introduction
 ------------
 
-What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you are going to have to make a decision about many of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API's and are a level of abstraction that hovers above them.
+What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API's and are a level of abstraction that hovers above them.
 
 Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te Visual Studio IDE.
 
