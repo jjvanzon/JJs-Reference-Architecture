@@ -1,7 +1,7 @@
 ﻿Introduction
 ============
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -124,4 +124,4 @@ And second in line:
 - To solve a bug, first reproduce it
 - Proper use of encoding
 
-[back](./index.md)
+[back](.)
