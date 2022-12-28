@@ -1,7 +1,7 @@
 ﻿Introduction
 ============
 
-<h2>Contents</h2>
+__Contents__
 
 - [Definition of Software Architecture](#definition-of-software-architecture)
 - [Inter-Disciplinary Aspects](#inter-disciplinary-aspects)
