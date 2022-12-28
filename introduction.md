@@ -1,6 +1,8 @@
 ﻿Introduction
 ============
 
+[back](./index.md)
+
 <h3>Contents</h3>
 
 - [Definition of Software Architecture](#definition-of-software-architecture)
@@ -121,3 +123,5 @@ And second in line:
 - Solve a problem at its core, instead of a work-around.
 - To solve a bug, first reproduce it
 - Proper use of encoding
+
+[back](./index.md)
