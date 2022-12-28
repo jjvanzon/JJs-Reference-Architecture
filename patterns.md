@@ -1,7 +1,9 @@
-﻿Patterns | JJ's Reference Architecture
-======================================
+﻿Patterns
+========
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
@@ -1261,3 +1263,5 @@ Alternatives
 `- Arch: against rich models: You want your entity model to be a direct depiction of what is actually stored, so that you have control over that. If it is obscured, this means less control over what is going on. >`
 
 `< TODO: Compare rich models with the 2D separation of concerns. >`
+
+[back](.)

@@ -3,9 +3,9 @@
 Multi-Platform Compatibility Issues
 ===================================
 
-*JJ van Zon, 2014*
+[back](..)
 
-<h2>Contents</h2>
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Unity 4.3.4 / .NET Compatibility Issues](#unity-434--net-compatibility-issues)
@@ -294,3 +294,5 @@ iOS deployment using Unity:
 Google "multi-platform solutions"  
 <http://simpleprogrammer.com/2013/07/01/cross-platform-mobile-development>  
 <http://sixrevisions.com/mobile/cross-platform-mobile-apps/>
+
+[back](..)

@@ -1,7 +1,9 @@
-﻿Code Style | JJ's Reference Architecture
-========================================
+﻿Code Style
+==========
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Casing](#casing)
@@ -1520,3 +1522,5 @@ A call to `Activator.CreateInstance` might be the last choice for instantiating 
 
 Reason:  
 New statements are strongly typed and less likely to fail.
+
+[back](.)

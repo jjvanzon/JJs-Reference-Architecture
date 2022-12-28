@@ -1,7 +1,9 @@
-﻿Practices & Principles | JJ's Reference Architecture
-====================================================
+﻿Practices & Principles
+======================
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Responsibilities](#responsibilities)
@@ -1590,3 +1592,5 @@ SOLID
 `< TODO: write my take on it. Admit that it might be a single sided view and that you are open to different opinions. It will show you know them and thought about them. >`
 
 `< TODO: Interface seggregation principle from SOLID. >`
+
+[back](.)

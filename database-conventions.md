@@ -1,7 +1,9 @@
-﻿Database Conventions | JJ's Reference Architecture
-==================================================
+﻿Database Conventions
+====================
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Developing a Database](#developing-a-database)
 - [Naming Conventions](#naming-conventions)
@@ -300,3 +302,5 @@ Storing a snapshot of an entity model in a separate project specifically intende
 <h3>Any Other Ideas</h3>
 
 Are welcome.
+
+[back](.)

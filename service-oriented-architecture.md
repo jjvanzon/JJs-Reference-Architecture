@@ -1,7 +1,9 @@
-﻿Service Oriented Architecture | JJ's Reference Architecture
-===========================================================
+﻿Service Oriented Architecture
+=============================
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [The ESB Concept](#the-esb-concept)
@@ -203,3 +205,5 @@ TODO
     InternalID
 
 Cannot remember how and why it worked exactly. >
+
+[back](.)

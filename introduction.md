@@ -1,7 +1,9 @@
-﻿Introduction | JJ's Reference Architecture
-==========================================
+﻿Introduction
+============
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Definition of Software Architecture](#definition-of-software-architecture)
 - [Inter-Disciplinary Aspects](#inter-disciplinary-aspects)
@@ -106,18 +108,20 @@ Top 12 Code Improvements
 
 This documentation goes into detail about a lot that is labeled 'best practice'. But a few pointers,  might improve code quite a bit already:
 
-1. Avoid code duplication
-2. Avoid error hiding
-3. Use clear names
-4. Use correct indentation
-5. Separation of concerns
-6. Proper encapsulation
+- Avoid code duplication
+- Avoid error hiding
+- Use clear names
+- Use correct indentation
+- Separation of concerns
+- Proper encapsulation
 
 And second in line:
 
-7. Reject input: don't correct it
-8. Clear interfaces
-9. 'Ya ain't gonna need it'
-10. Solve a problem at its core, instead of a work-around.
-11. To solve a bug, first reproduce it
-12. Proper use of encoding
+- Reject input: don't correct it
+- Clear interfaces
+- 'Ya ain't gonna need it'
+- Solve a problem at its core, instead of a work-around.
+- To solve a bug, first reproduce it
+- Proper use of encoding
+
+[back](.)

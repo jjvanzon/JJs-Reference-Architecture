@@ -1,7 +1,9 @@
-﻿Server Architecture | JJ's Reference Architecture
-=================================================
+﻿Server Architecture
+===================
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [DTAP](#dtap)
@@ -108,3 +110,5 @@ Backups
 -------
 
 `< TODO: Write something. >`
+
+[back](.)

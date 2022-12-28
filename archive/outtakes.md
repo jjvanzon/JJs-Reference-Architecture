@@ -1,5 +1,7 @@
-Outtakes | JJ's Reference Architecture
-======================================
+Outtakes
+========
+
+[back](..)
 
 Archived text that didn't make the cut for some reason.
 
@@ -26,3 +28,5 @@ list = list.Where(x => x.SecondList.Any(x => ...).ToArray();
 ```
 
 `< TODO: What was the problem again? When rows materialize? Retrieving quite a few more entities than strictly needed? It seems so specific to the use case back then. >`
+
+[back](..)

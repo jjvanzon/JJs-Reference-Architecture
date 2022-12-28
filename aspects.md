@@ -1,7 +1,9 @@
-﻿Aspects | JJ's Reference Architecture
-=====================================
+﻿Aspects
+=======
 
-<h2>Contents</h2>
+[back](.)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Authoring & Reviewing](#authoring--reviewing)
@@ -991,3 +993,5 @@ Possible API's:
 - Windows Workflow Foundation
 - Captaris Workflow
 - Kentico Workflows
+
+[back](.)
