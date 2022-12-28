@@ -1,7 +1,9 @@
 ﻿Software Lifecycle
 ==================
 
-<h2>Contents</h2>
+[back](./index.md)
+
+<h3>Contents</h3>
 
 - [Branching, Versioning & Release Management](#branching-versioning--release-management)
 - [Tech Test / Short Code Review Checklist](#tech-test--short-code-review-checklist)
@@ -29,3 +31,5 @@ Tech Test / Short Code Review Checklist
     - Is the code OK?
     - Look at the code base commits.
     - Do not worry too much about minor issues. (Unless it is really unhandy. You win more by keeping the code the way a programmer wrote it.)
+
+[back](./index.md)

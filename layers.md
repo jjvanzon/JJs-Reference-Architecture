@@ -1,7 +1,9 @@
 ﻿Layers
 ======
 
-<h2>Contents</h2>
+[back](./index.md)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Data Layer](#data-layer)
@@ -153,3 +155,5 @@ Alternatives
     - *Benefit:* Might be easier to understand
     - *Downside:* More likely for data access and business to get entangled
 - No repositories
+
+[back](./index.md)

@@ -3,9 +3,7 @@
 Multi-Platform Compatibility Issues
 ===================================
 
-*JJ van Zon, 2014*
-
-<h2>Contents</h2>
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Unity 4.3.4 / .NET Compatibility Issues](#unity-434--net-compatibility-issues)

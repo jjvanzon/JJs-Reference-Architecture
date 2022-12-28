@@ -1,7 +1,9 @@
 ﻿Team Management
 ===============
 
-<h2>Contents</h2>
+[back](./index.md)
+
+<h3>Contents</h3>
 
 - [Introduction](#introduction)
 - [Focus Points](#focus-points)
@@ -325,3 +327,5 @@ Keep Your Cool, Be Open to Other Views
 `< TODO: Use this phrase? Be less sarcastic. >`
 
 `< TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid. >`
+
+[back](./index.md)
