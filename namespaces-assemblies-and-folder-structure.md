@@ -1,7 +1,7 @@
 ﻿Namespaces, Assemblies and Folder Structure
 ===========================================
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -149,4 +149,4 @@ It is less confusing from a software design perspective to have all layers prese
 
 But the ordering in the namespace is arbitrary. It just helps us to 'scramble' the namespace parts wisely, so that it goes from one level of detail to the next.
 
-[back](./index.md)
+[back](.)

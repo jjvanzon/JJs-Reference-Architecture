@@ -1,7 +1,7 @@
 ﻿Patterns
 ========
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -1264,4 +1264,4 @@ Alternatives
 
 `< TODO: Compare rich models with the 2D separation of concerns. >`
 
-[back](./index.md)
+[back](.)

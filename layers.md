@@ -1,7 +1,7 @@
 ﻿Layers
 ======
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -156,4 +156,4 @@ Alternatives
     - *Downside:* More likely for data access and business to get entangled
 - No repositories
 
-[back](./index.md)
+[back](.)

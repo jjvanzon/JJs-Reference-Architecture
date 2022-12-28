@@ -1,7 +1,7 @@
 ﻿Aspects
 =======
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -994,4 +994,4 @@ Possible API's:
 - Captaris Workflow
 - Kentico Workflows
 
-[back](./index.md)
+[back](.)

@@ -1,7 +1,7 @@
 ﻿Code Style
 ==========
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -1523,4 +1523,4 @@ A call to `Activator.CreateInstance` might be the last choice for instantiating 
 Reason:  
 New statements are strongly typed and less likely to fail.
 
-[back](./index.md)
+[back](.)

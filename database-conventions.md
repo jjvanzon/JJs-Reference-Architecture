@@ -1,7 +1,7 @@
 ﻿Database Conventions
 ====================
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -303,4 +303,4 @@ Storing a snapshot of an entity model in a separate project specifically intende
 
 Are welcome.
 
-[back](./index.md)
+[back](.)

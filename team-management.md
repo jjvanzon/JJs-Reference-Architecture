@@ -1,7 +1,7 @@
 ﻿Team Management
 ===============
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -328,4 +328,4 @@ Keep Your Cool, Be Open to Other Views
 
 `< TODO: Use this phrase? Someone with a way of working that does not promote maintainability, might not just be stupid. >`
 
-[back](./index.md)
+[back](.)

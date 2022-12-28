@@ -1,7 +1,7 @@
 ﻿Service Oriented Architecture
 =============================
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -206,4 +206,4 @@ TODO
 
 Cannot remember how and why it worked exactly. >
 
-[back](./index.md)
+[back](.)

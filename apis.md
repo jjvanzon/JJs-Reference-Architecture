@@ -1,7 +1,7 @@
 ﻿API's
 =====
 
-[back](./index.md)
+[back](.)
 
 This article describes some of the API and technology choices in this software architecture.
 
@@ -688,4 +688,4 @@ Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.az
 
 `XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)). That might be a simpler way to convert XML to an object graph than other API's.
 
-[back](./index.md)
+[back](.)

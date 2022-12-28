@@ -1,7 +1,7 @@
 ﻿Practices & Principles
 ======================
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -1593,4 +1593,4 @@ SOLID
 
 `< TODO: Interface seggregation principle from SOLID. >`
 
-[back](./index.md)
+[back](.)

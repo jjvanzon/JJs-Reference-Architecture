@@ -1,7 +1,7 @@
 ﻿Appendices
 ==========
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -123,4 +123,4 @@ Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar 
 
 *\* Resources staan niet in een database, omdat het applicaties trager maakt en kun je de code niet draaien op omgevingen waarbij je geen toegang hebt tot de database. In sommige situaties kun je niet eens compileren zonder toegang te hebben tot een specifieke database. Bovendien geeft mee compileren van resources in specifieke projecten ons de mogelijkheid dubbelzinnige termen anders te vertalen per business domein.*
 
-[back](./index.md)
+[back](.)

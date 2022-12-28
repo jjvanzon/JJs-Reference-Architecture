@@ -1,7 +1,7 @@
 ﻿Server Architecture
 ===================
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -111,4 +111,4 @@ Backups
 
 `< TODO: Write something. >`
 
-[back](./index.md)
+[back](.)

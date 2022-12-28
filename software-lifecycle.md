@@ -1,7 +1,7 @@
 ﻿Software Lifecycle
 ==================
 
-[back](./index.md)
+[back](.)
 
 <h3>Contents</h3>
 
@@ -32,4 +32,4 @@ Tech Test / Short Code Review Checklist
     - Look at the code base commits.
     - Do not worry too much about minor issues. (Unless it is really unhandy. You win more by keeping the code the way a programmer wrote it.)
 
-[back](./index.md)
+[back](.)
