@@ -78,7 +78,7 @@ Application Architecture vs Service Oriented Architecture
 There are two parts of this software architecture:
 
 - Application architecture
-- Service oriented architecture
+- [Service oriented architecture](service-oriented-architecture.md)
 
 The *application architecture* is the main part. It is about business domains and everything you could show on a screen, including a framework of reusable parts. The *service oriented architecture* is explained separately and is mostly about linking different systems together.
 
@@ -106,7 +106,7 @@ This software architecture also puts a lot of focus on fixed patterns of working
 Top 12 Code Improvements
 ------------------------
 
-This documentation goes into detail about a lot that is labeled 'best practice'. But a few pointers,  might improve code quite a bit already:
+This documentation goes into detail about a lot that is labeled 'best practice'. But a few pointers, might improve code quite a bit already:
 
 - Avoid code duplication
 - Avoid error hiding
