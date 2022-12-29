@@ -38,7 +38,7 @@
         - [Your Own Application Code](#your-own-application-code)
         - [Third-party API's](#third-party-apis)
     - [Process that Checks Itself (👎)](#process-that-checks-itself-)
-    - [Reject, Don't Correct](#reject-dont-correct)
+    - [Reject Input, Don't Correct It](#reject-input-dont-correct-it)
 - [Interfacing](#interfacing)
     - ['All' and 'Many'](#all-and-many)
     - [Blackboxing and Whiteboxing](#blackboxing-and-whiteboxing)
@@ -439,7 +439,7 @@ It is like you are writing the same logical steps twice: once for writing the da
 
 In certain cases with very sensitive, error-prone code you could opt for the process to verify its own data afterwards, but this should be the exception rather than the rule.
 
-### Reject, Don't Correct
+### Reject Input, Don't Correct It
 
 Do not correct input data, but require that input data is correctly entered. Code that creates tolerance towards user entry errors can quickly get out of hand, while simply rejecting the use input with a validation message would suffice. It also gives the user more control over what happens, instead of the system's wrongly interpreting the user input.
 
