@@ -15,6 +15,20 @@
     - [Repository Interfaces](#repository-interfaces)
     - [Platform Independence](#platform-independence)
 - [Presentation Layer](#presentation-layer)
+    - [Calls Business Layer](#calls-business-layer)
+    - [View Model](#view-model)
+    - [Presenter](#presenter)
+    - [ToViewModel](#toviewmodel)
+    - [ToEntity](#toentity)
+    - [Presenter = Facade](#presenter--facade)
+    - [Presentation Technology (MVC)](#presentation-technology-mvc)
+    - [Controllers](#controllers)
+    - [Web Requests / URLs](#web-requests--urls)
+    - [View Engine](#view-engine)
+    - [Views (Razor)](#views-razor)
+    - [Views (WinForms)](#views-winforms)
+    - [HTML](#html)
+    - [Platform Independence](#platform-independence-1)
 - [Business Layer](#business-layer)
 - [Perpendicular Layers](#perpendicular-layers)
 - [Alternatives](#alternatives)
@@ -87,13 +101,19 @@ Presentation Layer
 `[ TODO: More clarifying sentences. ]`  
 `[ TODO: Links to Patterns or API's sections. ]`
 
-The presentation layer is built up of the following sub-layers:
+A presentation layer can be built up of the following sub-layers:
 
 <img src="images/presentation-layer.png" width="449" />
 
+### Calls Business Layer
+
 The presentation layer calls the business layer, which contains all the rules that surround the system.
 
+### View Model
+
 The data that is exactly shown on screen is called the *view model*.
+
+### Presenter
 
 *Presenter* classes combine several responsibilities around the presentation logic.
 
@@ -101,31 +121,55 @@ The presenter layer forms a model of your program navigation. Each screen has it
 
 *Presenter* classes talk to the business layer.
 
+### ToViewModel
+
 A presenter delegates to the ToViewModel layer, to translating the data and the results of the business logic to a subset of data that is shown on screen: the view model.
+
+### ToEntity
 
 A presenter delegates to the ToEntity layer, to translate user input back to [entity](patterns.md#entity) data.
 
-The presenter then calls upon the business layer again to save, validate, side-effects and execute other logic around the user action.
+### Presenter = Facade
 
-Because the presenters combine several responsibilities together they are the facades / combinators of the presentation layer.
+The presenter then calls upon the business layer again to save, validate, side-effects and execute other logic around the user action. Because the presenters combine several responsibilities together they are the facades / combinators of the presentation layer.
+
+### Presentation Technology (MVC)
 
 MVC is the web technology of choice we use for programming user interfaces. In our architecture the MVC layer builds on top of the presenter layer.
 
+### Controllers
+
 In MVC we use controllers, which are similar to presenters in that they group together related user actions and each user action has a specific method.
+
+The *controller* is very specific to MVC and an equivalent might not even be present on other presentation platforms, even though it is advisable to have a central place to manage calls to the presenter and showing the right views depending on its result.
+
+### Web Requests / URLs
 
 MVC will make sure that the request from the web browser will automatically make the right controller method going off. Each method in a controller represents a URL.
 
-After the controller method is done, the view engine kicks in. It will render a piece of HTML. MVC will make sure that the view rendering automatically goes off after the controller method completes.
+### View Engine
+
+After the controller method is done, the view engine kicks in. MVC will make sure that the view rendering automatically goes off after the controller method completes.
+
+### Views (Razor)
 
 The view engine we use is Razor. It offers a concise syntax for programming views, in which you combine C# and HTML. Razor has tight integration with MVC. The view engine uses a view model as input, along with the view (template) and the output is a specific piece of HTML.
+
+### Views (WinForms)
+
+The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have 'code-behind' to only put dumb code in it and delegate the real work to the presenters.
+
+### HTML
+
+It will render a piece of HTML. 
+
+'Html' can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
+
+### Platform Independence
 
 The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with MVC, HTML and Razor, while the platform independent code is agnostic of what presentation technology we use. That means that we can use multiple presentation techniques for the same application navigation model, such as offering an application both web based as well as based on WinForms. This also provides us the flexibility we need to be able to deploy apps on mobile platforms using the same techniques as we would use for Windows or web.
 
 Because the architecture is multi-platform, the labels in the diagram above are actually too specific:
-
-- The *controller* is very specific to MVC and an equivalent might not even be present on other presentation platforms, even though it is advisable to have a central place to manage calls to the presenter and showing the right views depending on its result.
-- The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have 'code-behind' to only put dumb code in it and delegate the real work elsewhere.
-- 'Html' can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
 
 
 Business Layer
