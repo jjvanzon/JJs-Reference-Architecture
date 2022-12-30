@@ -65,15 +65,15 @@ A data layer can be built up of the following sub-layers:
 
 - ### Repositories
 
-    The entities may not be directly read out of `NHibernate` by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage a set of optimal queries, the repositories also keep the rest of the code independent of `NHibernate`, in case you would like to switch to a different data storage technology.
+    The entities may not be directly read out of `NHibernate` by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage an optimal set of queries, the repositories keep the rest of the code independent of `NHibernate`, in case you would like to switch to a different data storage technology.
 
 - ### Repository Interfaces
 
-    The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository implementation. The repository interfaces are also handy for testing, to create a fake in-memory data store, instead of connecting to a real database. `JJ.Framework.Data` is an API, that can aid in abstracting data access, providing a base for these repositories and interfaces.
+    The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository *implementation*. The repository interfaces are also handy for testing, to create a *fake* in-memory data store, instead of connecting to a real database. The API `JJ.Framework.Data` can help to abstract this data access, providing a base for these repositories and interfaces.
 
 - ### Platform Independent
 
-    The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with NHibernate and SQL Server, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an XML file under it and not use SQL Server and NHibernate at all. This allows you to program against the same model, regardless of how you store it. This also allows you to deploy this code in any environment that can run .NET code, such as a mobile phone.
+    The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with `NHibernate` and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an `XML` file under it and not use `SQL Server` and `NHibernate` at all. This allows us to program against the same model, regardless of how you store it. This platform-independence, also allows deployment of the same code in different environment that can run `.NET` code, such as a mobile phone, windows or web.
 
 
 Presentation Layer
