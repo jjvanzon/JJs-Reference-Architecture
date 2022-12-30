@@ -30,7 +30,7 @@ The presentation layer builds upon the business layer with user interface techno
 
 The business layer uses the data layer to store the data.
 
-Sometimes the presentation layer might use the data layer directly, where the business layer would not really add any functionality.
+Sometimes the presentation layer uses the data layer directly, when the business layer would not really add any functionality.
 
 The data layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
 
@@ -38,9 +38,10 @@ The data layer may be programmed with mostly fixed patterns in this architecture
 Data Layer
 ----------
 
+`[ TODO: More clarifying sentences. ]`  
 `[ TODO: Links to Patterns sections. ]`
 
-A data layer might be built up of the following sub-layers:
+A data layer can be built up of the following sub-layers:
 
 <img src="images/data-layer.png" width="431" />
 
