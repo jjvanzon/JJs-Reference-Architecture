@@ -57,9 +57,7 @@ A data layer can be built up of the following sub-layers:
 
 - ### Mappings
 
-    The entity objects can have properties, that map to columns in the database, and properties that point to related entities. `NHibernate` needs mappings, that define which class maps to which table and which columns map to which properties.
-
-    `FluentNHibernate` is an API that can help to build up these mappings.
+    The entity objects have properties, that map to columns in the database, and properties that point to related entities. `NHibernate` needs mappings, that define which class maps to which table and which columns map to which properties. `FluentNHibernate` is an API that can help to build up these mappings.
 
 - ### Entities
 
@@ -67,13 +65,11 @@ A data layer can be built up of the following sub-layers:
 
 - ### Repositories
 
-    The entities are not directly read out of NHibernate by the rest of the code. The rest of the code talks to NHibernate through the repositories. You can see the repositories as a set of queries. Next to providing a central place to manage a set of optimal queries, the repositories also keep the rest of the code independent of NHibernate, in case you would ever want to switch to a different data storage technology.
+    The entities may not be directly read out of `NHibernate` by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage a set of optimal queries, the repositories also keep the rest of the code independent of `NHibernate`, in case you would like to switch to a different data storage technology.
 
 - ### Repository Interfaces
 
-    The repository implementations are not used directly, but accessed through an interface, so that we can indeed use a different data access technology, just by instantiating a different repository implementation. The repository interfaces are also handy for testing, to create a fake in-memory data store, instead of connecting to a real database.
-
-    `JJ.Framework.Data` is an API, that can aid in abstracting access to an `ORM`.
+    The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository implementation. The repository interfaces are also handy for testing, to create a fake in-memory data store, instead of connecting to a real database. `JJ.Framework.Data` is an API, that can aid in abstracting data access, providing a base for these repositories and interfaces.
 
 - ### Platform Independent
 
