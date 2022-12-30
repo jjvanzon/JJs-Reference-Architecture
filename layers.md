@@ -47,21 +47,23 @@ A data layer can be built up of the following sub-layers:
 
 - ### Database (DB)
 
-    It starts with the database. This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an XML file, flat file or even just data in memory. It's the part where the data is stored.
+    It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an `XML` file, flat file or even just in-memory data. It's the part where the data is stored.
 
 - ### ORM (NHibernate)
 
-    The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or `ORM`), like `NHibernate`. The ORM would translate database records to objects called *entities*.
+    The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or `ORM`), like `NHibernate`. The `ORM` would translate database records to objects called *entities*.
     
-    It could also be a different data access technology, instead of `NHibernate ORM`: a different `ORM`, like `Entity Framework` or  writing `XML` files, or perhaps `SqlClient` to execute raw `SQL` (structured query language) onto a database.
+    It could also be a different data access technology, instead of `NHibernate`: a different `ORM`, like `Entity Framework` or `XML` files, or perhaps `SqlClient` to execute raw `SQL` (structured query language) onto a relational database.
 
 - ### Mappings
 
-    The objects (to which database records might be translated) can have properties, that map to columns in the database, and properties that point to related data. NHibernate needs to be given mappings, that define which class maps to which table and which columns map to which properties.
+    The entity objects can have properties, that map to columns in the database, and properties that point to related entities. `NHibernate` needs mappings, that define which class maps to which table and which columns map to which properties.
+
+    `FluentNHibernate` is an API that can help to build up these mappings.
 
 - ### Entities
 
-    The data classes are called entities.
+    With all this in place, out come objects called *entities*, loaded from the database.
 
 - ### Repositories
 
@@ -72,7 +74,7 @@ A data layer can be built up of the following sub-layers:
     The repository implementations are not used directly, but accessed through an interface, so that we can indeed use a different data access technology, just by instantiating a different repository implementation. The repository interfaces are also handy for testing, to create a fake in-memory data store, instead of connecting to a real database.
 
     `JJ.Framework.Data` is an API, that can aid in abstracting access to an `ORM`.
-    
+
 - ### Platform Independent
 
     The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with NHibernate and SQL Server, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an XML file under it and not use SQL Server and NHibernate at all. This allows you to program against the same model, regardless of how you store it. This also allows you to deploy this code in any environment that can run .NET code, such as a mobile phone.
