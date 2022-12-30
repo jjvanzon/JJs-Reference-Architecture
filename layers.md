@@ -71,9 +71,9 @@ A data layer can be built up of the following sub-layers:
 
     The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository *implementation*. The repository interfaces are also handy for testing, to create a *fake* in-memory data store, instead of connecting to a real database. The API `JJ.Framework.Data` can help to abstract this data access, providing a base for these repositories and interfaces.
 
-- ### Platform Independent
+- ### Platform Independence
 
-    The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with `NHibernate` and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an `XML` file under it and not use `SQL Server` and `NHibernate` at all. This allows us to program against the same model, regardless of how you store it. This platform-independence, also allows deployment of the same code in different environment that can run `.NET` code, such as a mobile phone, windows or web.
+    The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with `NHibernate` and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an `XML` file under it and not use `SQL Server` or `NHibernate`. This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a mobile phone, windows or web.
 
 
 Presentation Layer
