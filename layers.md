@@ -6,6 +6,7 @@
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
+- [Synonyms](#synonyms)
 - [Data Layer](#data-layer)
 - [Presentation Layer](#presentation-layer)
 - [Business Layer](#business-layer)
@@ -16,35 +17,40 @@
 Introduction
 ------------
 
-This is a suggestion of how to split up your software into layers.
-
-The software is split up into 3 layers:
+Software can be split up into 3 layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
-The presentation layer contains the screens of the system.
+The presentation layer is the visual part of a program. It is what the user sees. The screens of the system.
 
-The presentation layer calls the business layer, which is non-visual. It defines and enforces the rules of the system. Those are like the internal, mechanical parts of the system.
+The business layer can model of the functionality of a software program. You generally don't see it, but it defines and enforces the rules of the system. It is like the internal, mechanical parts of a system.
 
-The business layer talks to the data layer, which models the business domain but does not process anything: it just stores and retrieves the data.
+The data layer, models and stores the data. It models functionality, but more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
 
-Data layer and presentation layer are programmed using fixed patterns. The business layer uses patterns too, but it gets a little more creative. If anything special needs to happen, this belongs in the business layer, since that is the machinery of the system.
+The presentation layer builds upon the business layer with user interface technology.
 
-The data layer is also called the 'data access layer' or 'persistence layer'.
+The business layer uses the data layer to store the data.
 
-The business layer is also referred to as 'business logic'.
+Both data layer layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
 
-The presentation layer is sometimes referred to as the 'front-end'.
 
+Synonyms
+--------
+
+Synonyms for data layer are *persistence layer*, *data access layer* or *DAL*.
+
+Synonyms for business layer are *business logic*, *business logic layer*, *business objects layer* or *BOL*.
+
+A synonym for presentation layer is the *front-end*.
 
 Data Layer
 ----------
 
-The data layer is built up of the following sub-layers:
+A data layer might be built up of the following sub-layers:
 
 <img src="images/data-layer.png" width="431" />
 
-It all starts with the database. The database is not directly accessed by the rest of the code, but the database is talked to through NHibernate, an object-relational mapper. NHibernate will translate database records to instance of classes. Those classes have properties, that map to columns in the database, and properties that point to related data. NHibernate needs to be given mappings, that define which class maps to which table and which columns map to which properties.
+It all starts with the database. The database is not directly accessed by the rest of the code, but the database is talked to through NHibernate, an object-relational mapper. NHibernate will translate database records to instances of classes. Those classes have properties, that map to columns in the database, and properties that point to related data. NHibernate needs to be given mappings, that define which class maps to which table and which columns map to which properties.
 
 The data classes are called entities.
 
