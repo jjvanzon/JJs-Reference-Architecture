@@ -96,7 +96,6 @@ The dashed line going right through the [diagram](#data-layer), separates the *p
 Presentation Layer
 ------------------
 
-`[ TODO: More clarifying sentences. ]`  
 `[ TODO: Links to Patterns or API's sections. ]`
 
 A presentation layer in this architecture can be built up of the following sub-layers:
@@ -105,69 +104,73 @@ A presentation layer in this architecture can be built up of the following sub-l
 
 ### Calls the Business Layer
 
-The presentation layer calls the [business layer](#business-layer), which contains all the rules that surround the system. It feeds the business layer input from the user, and processes business logic output to preparate it for display on screen.
+The presentation layer calls the [business layer](#business-layer), which contains all the rules that surround the system. It feeds the business layer input from the user, and processes its output to preparate it for display on screen.
 
 ### Presenter
 
-The [`presenters`](patterns.md#presenter) together form a model of the program navigation. Each screen might have its own [`presenter`](patterns.md#presenter). Each method in that [`presenter`](patterns.md#presenter) would represent a specific *user action*. It is the [`presenter`](patterns.md#presenter) classes that talk to the [business layer](#business-layer).
+It is the [`presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`presenters`](patterns.md#presenter) together form a model of the application navigation. Each screen might get its own [`presenter`](patterns.md#presenter). Each method in that [`presenter`](patterns.md#presenter) would represent a specific *user action* in that screen.
 
 ### ViewModel
 
-A *[view model](patterns.md#viewmodel)* would contain exactly the selection of data, that is to be rendered out on a specificscreen. In this architecture it is a pure data object, no logic. 
+A [view model](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is to be rendered out on a screen. In this architecture it is a pure data object, no logic. That makes them more easily usable for different presentation technology and to send them over a wire.
 
 ### ToViewModel
 
-The [`presenters`](patterns.md#presenter) might delegate to the `ToViewModel` layer, to translate the data and the results of the [business logic](#business-layer) to a subset of data that is shown on screen.
+The [`presenters`](patterns.md#presenter) might delegate to a `ToViewModel` layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
 
 ### ToEntity
 
-The [`presenters`](patterns.md#presenter) delegates to the `ToEntity` layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
+The [`presenters`](patterns.md#presenter) also delegate to a `ToEntity` layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
 
 ### Facades
 
-[`Presenter`](patterns.md#presenter) classes combine several responsibilities around the presentation logic.
+[`Presenter`](patterns.md#presenter) classes combine several responsibilities around the presentation.
 
 The [`presenters`](patterns.md#presenter) call upon the business layer to *save*, *validate*, execute *side-effects* and other *logic* around the user action.
 
-Because the [`presenters`](patterns.md#presenter) combine several responsibilities together they can be called the *facades* or *combinators* of the presentation layer.
+Because the [`presenters`](patterns.md#presenter) combine several responsibilities together they can be called the *facades* or *combinators* in the presentation layer.
 
 ### MVC
 
-`MVC` is often the technology of choice in this architecture for programming user interfaces in web technology. In our architecture the `MVC` layer builds on top of the [`presenter`](patterns.md#presenter) layer. Most of the work is delegated to the [`presenters`](patterns.md#presenter) though.
+`MVC` is the technology of choice in this architecture for programming user interfaces in web technology. In our architecture the `MVC` layer builds on top of the [`presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
-In `MVC`, [`controllers`](patterns.md#controller) are used, which are similar to [`presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action has a specific *method*.
+`MVC` uses [`controllers`](patterns.md#controller), which are similar to [`presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns.md#controller) are quite specific to `MVC` and an equivalent might not be present on other presentation platforms, even though it might be advisable to have a central place to manage calls to the [`presenter`](patterns.md#presenter) and showing the right views depending on its result.
+[`Controllers`](patterns.md#controller) are quite specific to `MVC` and an equivalent might not be present on other presentation platforms. Howeverm even on other presentation platforms it might be advisable to have a *central spot* to manage calls to the [`presenter`](patterns.md#presenter) and showing the right view(s) depending on its result.
 
 ### URLs
 
-`MVC` takes care that the request from the web browser automatically makes the right [`controller`](patterns.md#controller) method go off. Each method in a controller tends to represent a `URL`. The parameters of a controller method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by `MVC` controller methods and are built up of post data by `MVC` automatically.
+`MVC` takes care that the request from the web browser automatically makes the right [`controller`](patterns.md#controller) method go off. Each method in a [`controller`](patterns.md#controller) tends to represent a `URL`.
+
+The parameters of a controller method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by `MVC` controller methods and are built up of post data by `MVC` automatically.
+
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) might be used to send whole tree structures of post data over the wire to be correctly parsed by `MVC`.
 
 ### View Engine (Razor)
 
-After the `controller` method is done, the view engine kicks in. `MVC` makes the view rendering automatically go off after the `controller` method completes.
+After the `controller` method is done, the view engine kicks in. The view rendering automatically goes off after the `controller` method is done.
 
 ### Views (Razor)
 
-The `view engine` of choise in this architecture is `Razor` when it comes to web technology. It can offer a concise syntax for programming views, in which you combine `C#` and `HTML`. `Razor` has tight integration with `MVC`. The view engine uses a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`cshtml`) and the output is a specific piece of `HTML`.
+A view engine of choise in this architecture is `Razor`. It can offer a concise syntax for programming views, in which you combine `C#` with `HTML`. `Razor` has tight integration with `MVC`. The view engine uses a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`cshtml`) and the output is a specific piece of `HTML`.
 
-In `WinForms` the views would be the `Forms` and `UserControls`. It is advised that even if a view can have 'code-behind', to only put simple code in `Forms` and `Controls` and delegate the real work to the [presenter](patterns.md#presenter) layer.
+In `WinForms` the *views* would be the `Forms` and `UserControls`. It is advised that even if a view can have code-behind, to only put simple code in `Forms` and `Controls` . The real work might be delegate to the [presenter](patterns.md#presenter) layer instead.
 
 ### HTML
 
-The `Razor` engine can render a piece of `HTML`. 
+The `Razor` engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In `WinForms` it might be the controls and their data. But it can also be a generated `PDF` file. Anything can come out of presentation technology really.
+`HTML` here can be replaced by the type of presentation output. In `WinForms` it might be the controls and their data. But it can be a generated `PDF` file as well. Anything that can come out of presentation any technology might be called a view.
 
 ### Platform Independence
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* code from the *platform independent* code. 
 
-The *platform-specific* code concerns itself with `MVC`, `HTML` and `Razor`, while the *platform independent* code is unaware of what presentation technology is used.
+The *platform-specific* code concerns itself with `MVC`, `HTML` and `Razor`, while the *platform independent* code is unaware of which presentation technology is used.
 
-That means that we can use the same kind of application navigation logic for multiple presentation techniques, such as offering an application both *web* based as well as on *Windows*. This helps give us the flexibility to deploy apps on *mobile* platforms using the same base techniques as we would use on *Windows* or *web*.
+That means that we can use the same kind of application logic for multiple presentation techniques, such as offering an application both *web* based as well as on *Windows*. This helps give us the flexibility to deploy apps on *mobile* platforms using the same base techniques as we would use on *Windows* or *web*.
 
 
 Business Layer
