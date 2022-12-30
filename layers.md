@@ -40,19 +40,19 @@ Software might be split up into 3 layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
-The *presentation layer* is the visual part of a program. It is what the user sees. The screens of the system.
+The [presentation layer](#presentation-layer) is the visual part of a program. It is what the user sees. The screens of the system.
 
-The *business layer* can model of the functionality of a software program, but you generally don't see it. It defines and enforces the rules of the system. It is like the internal, mechanical parts.
+The [business layer](#business-layer) can model of the functionality of a software program, but you generally don't see it. It defines and enforces the rules of the system. It is like the internal, mechanical parts.
 
 The *data layer*, models and stores the data. It models functionality, but more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
 
-The presentation layer builds upon the business layer with user interface technology.
+The [presentation layer](#presentation-layer) builds upon the [business layer](#business-layer) with user interface technology.
 
-The business layer uses the data layer to store the data.
+The [business layer](#business-layer) uses the data layer to store the data.
 
-Sometimes the presentation layer skips the business layer, and uses the data layer directly, where the business layer would not really add any functionality.
+Sometimes the [presentation layer](#presentation-layer) skips the [business layer](#business-layer), and uses the data layer directly, where the [business layer](#business-layer) would not really add any functionality.
 
-The data layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
+The data layer may be programmed with mostly fixed patterns in this architecture. The [presentation layer](#presentation-layer) is mostly fixed patterns too. The [business layer](#business-layer) can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business layer](#business-layer). It is where the magic happens, so to speak.
 
 
 Data Layer
@@ -96,53 +96,53 @@ The dashed line going right through the [diagram](#data-layer), separates the *p
 Presentation Layer
 ------------------
 
-`[ TODO: Links to Patterns or API's sections. ]`
-
 A presentation layer in this architecture can be built up of the following sub-layers:
 
 <img src="images/presentation-layer.png" width="400" />
 
 ### Calls the Business Layer
 
-The presentation layer calls the [business layer](#business-layer), which contains all the rules that surround the system. It feeds the business layer input from the user, and processes its output to preparate it for display on screen.
+The presentation layer calls the [business layer](#business-layer), which contains the rules that surround the system. It feeds the [business layer](#business-layer) input from the user, and processes its output to preparate it for display on screen.
 
 ### Presenter
 
-It is the [`presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`presenters`](patterns.md#presenter) together form a model of the application navigation. Each screen might get its own [`presenter`](patterns.md#presenter). Each method in that [`presenter`](patterns.md#presenter) would represent a specific *user action* in that screen.
+It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of the application navigation. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) would represent a specific *user action* in that screen.
 
 ### ViewModel
 
-A [view model](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is to be rendered out on a screen. In this architecture it is a pure data object, no logic. That makes them more easily usable for different presentation technology and to send them over a wire.
+A [ViewModel](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is to be rendered out on a screen. In this architecture it is a pure data object, no logic. That makes them more easily usable for different presentation technologies and can be easily sent over a wire.
 
 ### ToViewModel
 
-The [`presenters`](patterns.md#presenter) might delegate to a `ToViewModel` layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
+The [`Presenters`](patterns.md#presenter) might delegate to a [`ToViewModel`](patterns.md#toviewmodel) layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
 
 ### ToEntity
 
-The [`presenters`](patterns.md#presenter) also delegate to a `ToEntity` layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
+The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
 
 ### Facades
 
 [`Presenter`](patterns.md#presenter) classes combine several responsibilities around the presentation.
 
-The [`presenters`](patterns.md#presenter) call upon the business layer to *save*, *validate*, execute *side-effects* and other *logic* around the user action.
+The [`Presenters`](patterns.md#presenter) call upon the business layer to *save*, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects) and other *logic* around the user action.
 
-Because the [`presenters`](patterns.md#presenter) combine several responsibilities together they can be called the *facades* or *combinators* in the presentation layer.
+Because the [`Presenters`](patterns.md#presenter) combine several responsibilities together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
 
 ### MVC
 
-`MVC` is the technology of choice in this architecture for programming user interfaces in web technology. In our architecture the `MVC` layer builds on top of the [`presenter`](patterns.md#presenter) layer.
+`MVC` is the technology of choice in this architecture for programming user interfaces in web technology. In our architecture the `MVC` layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
-`MVC` uses [`controllers`](patterns.md#controller), which are similar to [`presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
+`MVC` uses [`controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns.md#controller) are quite specific to `MVC` and an equivalent might not be present on other presentation platforms. Howeverm even on other presentation platforms it might be advisable to have a *central spot* to manage calls to the [`presenter`](patterns.md#presenter) and showing the right view(s) depending on its result.
+[`Controllers`](patterns.md#controller) are quite specific to `MVC` and an equivalent might not be present on other presentation platforms. However, even on other presentation platforms it might be advisable to have a *central spot* to manage calls to the [`Presenter`](patterns.md#presenter) and showing the right view(s) depending on its result.
 
 ### URLs
 
 `MVC` takes care that the request from the web browser automatically makes the right [`controller`](patterns.md#controller) method go off. Each method in a [`controller`](patterns.md#controller) tends to represent a `URL`.
+
+`[ TODO: Links to Patterns or API's sections. ]`
 
 The parameters of a controller method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by `MVC` controller methods and are built up of post data by `MVC` automatically.
 
@@ -156,7 +156,7 @@ After the `controller` method is done, the view engine kicks in. The view render
 
 A view engine of choise in this architecture is `Razor`. It can offer a concise syntax for programming views, in which you combine `C#` with `HTML`. `Razor` has tight integration with `MVC`. The view engine uses a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`cshtml`) and the output is a specific piece of `HTML`.
 
-In `WinForms` the *views* would be the `Forms` and `UserControls`. It is advised that even if a view can have code-behind, to only put simple code in `Forms` and `Controls` . The real work might be delegate to the [presenter](patterns.md#presenter) layer instead.
+In `WinForms` the *views* would be the `Forms` and `UserControls`. It is advised that even if a view can have code-behind, to only put simple code in `Forms` and `Controls` . The real work might be delegate to the [Presenter](patterns.md#presenter) layer instead.
 
 ### HTML
 
@@ -182,11 +182,11 @@ What is business logic? Basically anything that is not presentation or data acce
 
 `< TODO: Layers: Say something about infrastructure, next to persistence, business and presentation. Because then you can say: everything that is not persistence, presentation or infrastructure, is business logic. >`
 
-The business layer resides in between the data access and the presentation layer. The presentation layer calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
+The business layer resides in between the data access and the [presentation layer](#presentation-layer). The [presentation layer](#presentation-layer) calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
 
 The business layer executes validations that verify, that the data corresponds to all the rules. Also, the business layer executes side effects when altering data, for instance storing the date time modified or setting default values when you create an [entity](patterns.md#entity), or for instance automatically generating a name. The business layer is also responsible for calculations and many other things as represented in the diagram above.
 
-The business layer uses entities, but sometimes will call [repositories](patterns.md#repository) out of the data access layer, even though your first choice should be to just use the entities. The presentation layer uses the business layer for anything special that needs to be done. Often when something special is programmed in the presentation layer, it actually belongs in the business layer instead.
+The business layer uses entities, but sometimes will call [repositories](patterns.md#repository) out of the data access layer, even though your first choice should be to just use the entities. The [presentation layer](#presentation-layer) uses the business layer for anything special that needs to be done. Often when something special is programmed in the [presentation layer](#presentation-layer), it actually belongs in the business layer instead.
 
 The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and repository interfaces, the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
 
@@ -206,13 +206,13 @@ The subdivision into data, business and presentation is just about the most impo
 
 The Framework layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
 
-Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the presentation layer, because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the presentation layer in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
+Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the [presentation layer](#presentation-layer), because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
 
 `< TODO: Encorporate this phrase: It is hard to explain what the position of infrastructure is in the architecture. One thing you can say is that the infrastructure should be loose coupled. >`
 
 Services expose business logic through a network interface, often through the SOAP protocol. A service might also expose a presentation model to the outside world. Because it is about a specific network / communication protocol, the service layer is considered part of the infrastructure too.
 
-Another funny thing about infrastructure, for example user right management, is that a program navigation model in the [`presenter`](patterns.md#presenter) layer can actually adapt itself to what rights the user has. In that respect the platform-independent presentation layer is dependent on the infrastructure, which is a paradox. The reason the [`presenter`](patterns.md#presenter) layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
+Another funny thing about infrastructure, for example user right management, is that a program navigation model in the [`Presenter`](patterns.md#presenter) layer can actually adapt itself to what rights the user has. In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the infrastructure, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
 
 
 Alternatives
