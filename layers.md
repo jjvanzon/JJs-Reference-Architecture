@@ -20,13 +20,12 @@
     - [Presenter](#presenter)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
-    - [Presenter = Facade](#presenter--facade)
-    - [Presentation Technology (MVC)](#presentation-technology-mvc)
+    - [Presenter Facade](#presenter-facade)
+    - [MVC (Presentation Technology)](#mvc-presentation-technology)
     - [Controllers](#controllers)
     - [Web Requests / URLs](#web-requests--urls)
     - [View Engine](#view-engine)
     - [Views (Razor)](#views-razor)
-    - [Views (WinForms)](#views-winforms)
     - [HTML](#html)
     - [Platform Independence](#platform-independence-1)
 - [Business Layer](#business-layer)
@@ -128,11 +127,11 @@ A presenter delegates to the ToViewModel layer, to translating the data and the 
 
 A presenter delegates to the ToEntity layer, to translate user input back to [entity](patterns.md#entity) data.
 
-### Presenter = Facade
+### Presenter Facade
 
 The presenter then calls upon the business layer again to save, validate, side-effects and execute other logic around the user action. Because the presenters combine several responsibilities together they are the facades / combinators of the presentation layer.
 
-### Presentation Technology (MVC)
+### MVC (Presentation Technology)
 
 MVC is the web technology of choice we use for programming user interfaces. In our architecture the MVC layer builds on top of the presenter layer.
 
@@ -153,8 +152,6 @@ After the controller method is done, the view engine kicks in. MVC will make sur
 ### Views (Razor)
 
 The view engine we use is Razor. It offers a concise syntax for programming views, in which you combine C# and HTML. Razor has tight integration with MVC. The view engine uses a view model as input, along with the view (template) and the output is a specific piece of HTML.
-
-### Views (WinForms)
 
 The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have 'code-behind' to only put dumb code in it and delegate the real work to the presenters.
 
