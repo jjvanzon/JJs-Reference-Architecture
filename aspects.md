@@ -57,7 +57,7 @@
 - [Text Processing](#text-processing)
 - [Transactions](#transactions)
 - [Type Safety](#type-safety)
-- [Unit Testing](#unit-testing)
+- [Automated Testing](#automated-testing)
 - [User Interface](#user-interface)
 - [Utilities](#utilities)
 - [Validation](#validation)
@@ -829,8 +829,8 @@ Type Safety
 C# has type-safety built in. For type safety in JavaScript, use TypeScript.
 
 
-Unit Testing
-------------
+Automated Testing
+-----------------
 
 If you would unit test everything, it might cost you 60% of your development time, which may be quite a tax to pay. Therefore, unit testing may not be seen as mandatory. It might only *support* the goal of testing. However, in certain cases, unit testing might be an efficient way of testing.
 

@@ -71,15 +71,15 @@ With all this in place, out come objects called [*entities*](patterns.md#entity)
 
 ### Repositories
 
-The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](apis.md#nhibernate) by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage an optimal set of queries, the repositories keep the rest of the code independent of [`NHibernate`](apis.md#nhibernate), in case you would like to switch to a different data storage technology.
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](apis.md#nhibernate) by the rest of the code, but accessed using [*repositories*](patterns.md#repository). You might see the [repositories](patterns.md#repository) as a set of queries. Each [entity](patterns.md#entity) type might have its own [repository](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [repositories](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](apis.md#nhibernate), in case you would like to switch to a different data storage technology.
 
 ### Repository Interfaces
 
-The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository *implementation*. The repository interfaces are also handy for testing, to create a *fake* in-memory data store, instead of connecting to a real database. The API `JJ.Framework.Data` can help to abstract this data access, providing a base for these repositories and interfaces.
+The [repository implementations](patterns.md#repository) might not used directly, but accessed through [*interfaces*](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [repository *implementation*](patterns.md#repository). The [repository interfaces](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [*fake*](patterns.md#mock) in-memory data store, instead of connecting to a real database. The API [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/) can help to abstract this data access, providing a base for these [repositories](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate). This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a mobile phone, windows or web.
+The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate). This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a *mobile phone*, *windows* or *web*.
 
 
 Presentation Layer
@@ -107,7 +107,7 @@ The presenter layer forms a model of your program navigation. Each screen has it
 
 A presenter delegates to the ToViewModel layer, to translating the data and the results of the business logic to a subset of data that is shown on screen: the view model.
 
-A presenter delegates to the ToEntity layer, to translate user input back to entity data.
+A presenter delegates to the ToEntity layer, to translate user input back to [entity](patterns.md#entity) data.
 
 The presenter then calls upon the business layer again to save, validate, side-effects and execute other logic around the user action.
 
@@ -143,9 +143,9 @@ What is business logic? Basically anything that is not presentation or data acce
 
 The business layer resides in between the data access and the presentation layer. The presentation layer calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
 
-The business layer executes validations that verify, that the data corresponds to all the rules. Also, the business layer executes side effects when altering data, for instance storing the date time modified or setting default values when you create an entity, or for instance automatically generating a name. The business layer is also responsible for calculations and many other things as represented in the diagram above.
+The business layer executes validations that verify, that the data corresponds to all the rules. Also, the business layer executes side effects when altering data, for instance storing the date time modified or setting default values when you create an [entity](patterns.md#entity), or for instance automatically generating a name. The business layer is also responsible for calculations and many other things as represented in the diagram above.
 
-The business layer uses entities, but sometimes will call repositories out of the data access layer, even though your first choice should be to just use the entities. The presentation layer uses the business layer for anything special that needs to be done. Often when something special is programmed in the presentation layer, it actually belongs in the business layer instead.
+The business layer uses entities, but sometimes will call [repositories](patterns.md#repository) out of the data access layer, even though your first choice should be to just use the entities. The presentation layer uses the business layer for anything special that needs to be done. Often when something special is programmed in the presentation layer, it actually belongs in the business layer instead.
 
 The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and repository interfaces, the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
 
@@ -180,6 +180,6 @@ Alternatives
 -  Data and Business in one layer
     - *Benefit:* Might be easier to understand
     - *Downside:* More likely for data access and business to get entangled
-- No repositories
+- No [repositories](patterns.md#repository)
 
 [back](.)
