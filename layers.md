@@ -6,7 +6,6 @@
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
-- [Synonyms](#synonyms)
 - [Data Layer](#data-layer)
 - [Presentation Layer](#presentation-layer)
 - [Business Layer](#business-layer)
@@ -32,16 +31,6 @@ The presentation layer builds upon the business layer with user interface techno
 The business layer uses the data layer to store the data.
 
 The data layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
-
-
-Synonyms
---------
-
-Synonyms for data layer are *persistence layer*, *data access layer* or *DAL*.
-
-Synonyms for business layer are *business logic*, *business logic layer*, *business objects layer* or *BOL*.
-
-A synonym for presentation layer is the *front-end*.
 
 
 Data Layer
