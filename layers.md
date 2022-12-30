@@ -17,13 +17,13 @@
 Introduction
 ------------
 
-Software can be split up into 3 layers:
+Software might be split up into 3 layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
 The presentation layer is the visual part of a program. It is what the user sees. The screens of the system.
 
-The business layer can model of the functionality of a software program. You generally don't see it, but it defines and enforces the rules of the system. It is like the internal, mechanical parts of a system.
+The business layer can model of the functionality of a software program, but you generally don't see it. It defines and enforces the rules of the system. It is like the internal, mechanical parts.
 
 The data layer, models and stores the data. It models functionality, but more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
 
@@ -31,7 +31,7 @@ The presentation layer builds upon the business layer with user interface techno
 
 The business layer uses the data layer to store the data.
 
-Both data layer layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
+The data layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
 
 
 Synonyms
@@ -42,6 +42,7 @@ Synonyms for data layer are *persistence layer*, *data access layer* or *DAL*.
 Synonyms for business layer are *business logic*, *business logic layer*, *business objects layer* or *BOL*.
 
 A synonym for presentation layer is the *front-end*.
+
 
 Data Layer
 ----------
