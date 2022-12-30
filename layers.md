@@ -15,16 +15,16 @@
     - [Repository Interfaces](#repository-interfaces)
     - [Platform Independence](#platform-independence)
 - [Presentation Layer](#presentation-layer)
-    - [Calls Business Layer](#calls-business-layer)
-    - [View Model](#view-model)
+    - [Calls the Business Layer](#calls-the-business-layer)
+    - [ViewModel](#viewmodel)
     - [Presenter](#presenter)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
-    - [Presenter Facade](#presenter-facade)
-    - [MVC (Presentation Technology)](#mvc-presentation-technology)
-    - [Controllers](#controllers)
-    - [Web Requests / URLs](#web-requests--urls)
-    - [View Engine](#view-engine)
+    - [Facades](#facades)
+    - [MVC](#mvc)
+    - [MVC Controllers](#mvc-controllers)
+    - [URLs](#urls)
+    - [View Engine (Razor)](#view-engine-razor)
     - [Views (Razor)](#views-razor)
     - [HTML](#html)
     - [Platform Independence](#platform-independence-1)
@@ -99,15 +99,15 @@ Presentation Layer
 `[ TODO: More clarifying sentences. ]`  
 `[ TODO: Links to Patterns or API's sections. ]`
 
-A presentation layer can be built up of the following sub-layers:
+A presentation layer in this architecture can be built up of the following sub-layers:
 
 <img src="images/presentation-layer.png" width="400" />
 
-### Calls Business Layer
+### Calls the Business Layer
 
 The presentation layer calls the business layer, which contains all the rules that surround the system.
 
-### View Model
+### ViewModel
 
 The data that is exactly shown on screen is called the *view model*.
 
@@ -127,25 +127,25 @@ A presenter delegates to the ToViewModel layer, to translating the data and the 
 
 A presenter delegates to the ToEntity layer, to translate user input back to [entity](patterns.md#entity) data.
 
-### Presenter Facade
+### Facades
 
 The presenter then calls upon the business layer again to save, validate, side-effects and execute other logic around the user action. Because the presenters combine several responsibilities together they are the facades / combinators of the presentation layer.
 
-### MVC (Presentation Technology)
+### MVC
 
 MVC is the web technology of choice we use for programming user interfaces. In our architecture the MVC layer builds on top of the presenter layer.
 
-### Controllers
+### MVC Controllers
 
 In MVC we use controllers, which are similar to presenters in that they group together related user actions and each user action has a specific method.
 
 The *controller* is very specific to MVC and an equivalent might not even be present on other presentation platforms, even though it is advisable to have a central place to manage calls to the presenter and showing the right views depending on its result.
 
-### Web Requests / URLs
+### URLs
 
 MVC will make sure that the request from the web browser will automatically make the right controller method going off. Each method in a controller represents a URL.
 
-### View Engine
+### View Engine (Razor)
 
 After the controller method is done, the view engine kicks in. MVC will make sure that the view rendering automatically goes off after the controller method completes.
 
