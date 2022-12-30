@@ -45,15 +45,13 @@ The data layer may be programmed with mostly fixed patterns in this architecture
 Data Layer
 ----------
 
-`[ TODO: Links to Patterns or API's sections. ]`
-
 A data layer can be built up of the following sub-layers:
 
 <img src="images/data-layer.png" width="400" />
 
 ### Database (DB)
 
-It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an [`XML`](apis.md#xml) file, flat file or even just in-memory data. It's the part where the data is stored.
+It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an [`XML`](apis.md#xml) file, flat file or even just in-memory data, wherever the data is *stored*.
 
 ### ORM (NHibernate)
 
@@ -63,7 +61,7 @@ It could also be a different data access technology, instead of [`NHibernate`](a
 
 ### Mappings
 
-The [entity objects](patterns.md#entity) have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *columns* map to which *properties*. `FluentNHibernate` is an `API` that can help to build up these [mappings](patterns.md#mapping).
+The [entity objects](patterns.md#entity) have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *columns* map to which *properties*. [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) is an `API` that can help to build up these [mappings](patterns.md#mapping).
 
 ### Entities
 
@@ -85,15 +83,13 @@ The dashed line going right through the [diagram](#data-layer), separates the *p
 Presentation Layer
 ------------------
 
-`[ TODO: More clarifying sentences. ]`  
 `[ TODO: Sub-sections. ]`  
-`[ TODO: Arrows in the diagram. ]`  
+`[ TODO: More clarifying sentences. ]`  
+`[ TODO: Links to Patterns or API's sections. ]`
 
 The presentation layer is built up of the following sub-layers:
 
 <img src="images/presentation-layer.png" width="449" />
-
-`< TODO: ToEntity is in a really odd spot if you read the diagram from top to bottom. >`
 
 The presentation layer calls the business layer, which contains all the rules that surround the system.
 
