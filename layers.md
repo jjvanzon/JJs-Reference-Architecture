@@ -37,7 +37,7 @@ The presentation layer builds upon the business layer with user interface techno
 
 The business layer uses the data layer to store the data.
 
-Sometimes the presentation layer uses the data layer directly, when the business layer would not really add any functionality.
+Sometimes the presentation layer skips the business layer, and uses the data layer directly, where the business layer would not really add any functionality.
 
 The data layer may be programmed with mostly fixed patterns in this architecture. The presentation layer is mostly fixed patterns too. The business layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the business layer. It is where the magic happens, so to speak.
 
@@ -45,8 +45,7 @@ The data layer may be programmed with mostly fixed patterns in this architecture
 Data Layer
 ----------
 
-`[ TODO: More clarifying sentences. ]`  
-`[ TODO: Links to Patterns sections. ]`
+`[ TODO: Links to Patterns or API's sections. ]`
 
 A data layer can be built up of the following sub-layers:
 
@@ -54,25 +53,25 @@ A data layer can be built up of the following sub-layers:
 
 ### Database (DB)
 
-It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an `XML` file, flat file or even just in-memory data. It's the part where the data is stored.
+It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an [`XML`](apis.md#xml) file, flat file or even just in-memory data. It's the part where the data is stored.
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or `ORM`), like `NHibernate`. The `ORM` would translate database records to objects called *entities*.
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](apis.md#orm)), like [`NHibernate`](apis.md#nhibernate). The [`ORM`](apis.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
     
-It could also be a different data access technology, instead of `NHibernate`: a different `ORM`, like `Entity Framework` or `XML` files, or perhaps `SqlClient` to execute raw `SQL` (structured query language) onto a relational database.
+It could also be a different data access technology, instead of [`NHibernate`](apis.md#nhibernate): a different [`ORM`](apis.md#orm), like [`Entity Framework`](apis.md#entity-framework) or [`XML` files](apis.md#xml), or perhaps [`SqlClient`](apis.md#sql) to execute raw [`SQL`](apis.md#sql) (structured query language) onto a relational database.
 
 ### Mappings
 
-The entity objects have properties, that map to columns in the database, and properties that point to related entities. `NHibernate` needs mappings, that define which class maps to which table and which columns map to which properties. `FluentNHibernate` is an API that can help to build up these mappings.
+The [entity objects](patterns.md#entity) have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *columns* map to which *properties*. `FluentNHibernate` is an `API` that can help to build up these [mappings](patterns.md#mapping).
 
 ### Entities
 
-With all this in place, out come objects called *entities*, loaded from the database.
+With all this in place, out come objects called [*entities*](patterns.md#entity), loaded from the database.
 
 ### Repositories
 
-The entities may not be directly read out of `NHibernate` by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage an optimal set of queries, the repositories keep the rest of the code independent of `NHibernate`, in case you would like to switch to a different data storage technology.
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](apis.md#nhibernate) by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage an optimal set of queries, the repositories keep the rest of the code independent of [`NHibernate`](apis.md#nhibernate), in case you would like to switch to a different data storage technology.
 
 ### Repository Interfaces
 
@@ -80,11 +79,15 @@ The repository implementations might not used directly, but accessed through *in
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with `NHibernate` and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an `XML` file under it and not use `SQL Server` or `NHibernate`. This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a mobile phone, windows or web.
+The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate). This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a mobile phone, windows or web.
 
 
 Presentation Layer
 ------------------
+
+`[ TODO: More clarifying sentences. ]`  
+`[ TODO: Sub-sections. ]`  
+`[ TODO: Arrows in the diagram. ]`  
 
 The presentation layer is built up of the following sub-layers:
 
