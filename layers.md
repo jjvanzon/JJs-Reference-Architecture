@@ -43,7 +43,7 @@ Data Layer
 
 A data layer can be built up of the following sub-layers:
 
-<img src="images/data-layer.png" width="431" />
+<img src="images/data-layer.png" width="400" />
 
 - ### Database (DB)
 
