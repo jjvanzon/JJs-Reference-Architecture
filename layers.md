@@ -97,13 +97,12 @@ The dashed line going right through the [diagram](#data-layer), separates the *p
 Presentation Layer
 ------------------
 
-`[ TODO: Sub-sections. ]`  
 `[ TODO: More clarifying sentences. ]`  
 `[ TODO: Links to Patterns or API's sections. ]`
 
 A presentation layer can be built up of the following sub-layers:
 
-<img src="images/presentation-layer.png" width="449" />
+<img src="images/presentation-layer.png" width="400" />
 
 ### Calls Business Layer
 
