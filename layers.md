@@ -7,6 +7,13 @@
 
 - [Introduction](#introduction)
 - [Data Layer](#data-layer)
+    - [Database (DB)](#database-db)
+    - [ORM (NHibernate)](#orm-nhibernate)
+    - [Mappings](#mappings)
+    - [Entities](#entities)
+    - [Repositories](#repositories)
+    - [Repository Interfaces](#repository-interfaces)
+    - [Platform Independence](#platform-independence)
 - [Presentation Layer](#presentation-layer)
 - [Business Layer](#business-layer)
 - [Perpendicular Layers](#perpendicular-layers)
@@ -45,35 +52,35 @@ A data layer can be built up of the following sub-layers:
 
 <img src="images/data-layer.png" width="400" />
 
-- ### Database (DB)
+### Database (DB)
 
-    It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an `XML` file, flat file or even just in-memory data. It's the part where the data is stored.
+It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an `XML` file, flat file or even just in-memory data. It's the part where the data is stored.
 
-- ### ORM (NHibernate)
+### ORM (NHibernate)
 
-    The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or `ORM`), like `NHibernate`. The `ORM` would translate database records to objects called *entities*.
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or `ORM`), like `NHibernate`. The `ORM` would translate database records to objects called *entities*.
     
-    It could also be a different data access technology, instead of `NHibernate`: a different `ORM`, like `Entity Framework` or `XML` files, or perhaps `SqlClient` to execute raw `SQL` (structured query language) onto a relational database.
+It could also be a different data access technology, instead of `NHibernate`: a different `ORM`, like `Entity Framework` or `XML` files, or perhaps `SqlClient` to execute raw `SQL` (structured query language) onto a relational database.
 
-- ### Mappings
+### Mappings
 
-    The entity objects have properties, that map to columns in the database, and properties that point to related entities. `NHibernate` needs mappings, that define which class maps to which table and which columns map to which properties. `FluentNHibernate` is an API that can help to build up these mappings.
+The entity objects have properties, that map to columns in the database, and properties that point to related entities. `NHibernate` needs mappings, that define which class maps to which table and which columns map to which properties. `FluentNHibernate` is an API that can help to build up these mappings.
 
-- ### Entities
+### Entities
 
-    With all this in place, out come objects called *entities*, loaded from the database.
+With all this in place, out come objects called *entities*, loaded from the database.
 
-- ### Repositories
+### Repositories
 
-    The entities may not be directly read out of `NHibernate` by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage an optimal set of queries, the repositories keep the rest of the code independent of `NHibernate`, in case you would like to switch to a different data storage technology.
+The entities may not be directly read out of `NHibernate` by the rest of the code, but accessed using *repositories*. You might see the repositories as a set of queries. Each entity type might have its own repository. Next to providing a central place to manage an optimal set of queries, the repositories keep the rest of the code independent of `NHibernate`, in case you would like to switch to a different data storage technology.
 
-- ### Repository Interfaces
+### Repository Interfaces
 
-    The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository *implementation*. The repository interfaces are also handy for testing, to create a *fake* in-memory data store, instead of connecting to a real database. The API `JJ.Framework.Data` can help to abstract this data access, providing a base for these repositories and interfaces.
+The repository implementations might not used directly, but accessed through *interfaces*, so that we can indeed use a different data access technology, just by instantiating a different repository *implementation*. The repository interfaces are also handy for testing, to create a *fake* in-memory data store, instead of connecting to a real database. The API `JJ.Framework.Data` can help to abstract this data access, providing a base for these repositories and interfaces.
 
-- ### Platform Independence
+### Platform Independence
 
-    The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with `NHibernate` and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an `XML` file under it and not use `SQL Server` or `NHibernate`. This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a mobile phone, windows or web.
+The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with `NHibernate` and `SQL Server`, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an `XML` file under it and not use `SQL Server` or `NHibernate`. This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a mobile phone, windows or web.
 
 
 Presentation Layer
