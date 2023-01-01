@@ -176,11 +176,18 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
+`< TODO: Arrows in diagram. >`  
+`< TODO: Margin in diagram. >`  
+`< TODO: Add 'Cloning' to big block in the diagram. >`  
+`< TODO: Easier term for Inverse Property Management. >`  
+`< TODO: More clarifying sentences. >`
+`< TODO: More links. >`  
+`< TODO: Inverse Property Management = LinkTo / Unlink >`  
+`< TODO: Cascading = UnlinkRelatedEntitiesExtensions / DeleteRelatedEntitiesExtensions >`
+
 <img src="images/business-layer.png" width="357" />
 
-What is business logic? Basically anything that is not presentation or data access, is business logic.
-
-`< TODO: Layers: Say something about infrastructure, next to persistence, business and presentation. Because then you can say: everything that is not persistence, presentation or infrastructure, is business logic. >`
+What is business logic? Basically anything that is not presentation, data access or infrastructure, is business logic.
 
 The business layer resides in between the data access and the [presentation layer](#presentation-layer). The [presentation layer](#presentation-layer) calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
 
@@ -189,13 +196,6 @@ The business layer executes validations that verify, that the data corresponds t
 The business layer uses entities, but sometimes will call [`Repositories`](patterns.md#repository) out of the data access layer, even though your first choice should be to just use the entities. The [presentation layer](#presentation-layer) uses the business layer for anything special that needs to be done. Often when something special is programmed in the [presentation layer](#presentation-layer), it actually belongs in the business layer instead.
 
 The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and [`Repository interfaces`](patterns.md#repository-interfaces), the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
-
-`< TODO: Add 'Cloning' to big block in the diagram? It might stay too vague if you mention it there. >`
-
-`< TODO: Consider this: `
-
-`- Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already. >`
-
 
 Perpendicular Layers
 --------------------
