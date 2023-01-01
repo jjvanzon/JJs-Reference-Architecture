@@ -55,13 +55,13 @@ Software might be split up into 3 layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
-The [presentation](#presentation-layer) layer is the visual part of a program. It is what the user sees. The screens of the system.
+The [presentation](#presentation-layer) layer is the visual part of a program. It is what the user sees.
 
-The [business](#business-layer) layer can model of the functionality of a software program, but you generally don't see it. It defines and enforces the rules of the system. It is like the internal, mechanical parts.
+The [business](#business-layer) layer can model of the functionality of a software program, but you generally don't see it. It defines the rules of the system. It is like the internal, mechanical parts.
 
-The [data](#data-layer) layer, models and stores the data. It models functionality, but more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
+The [data](#data-layer) layer models and stores the data. It models functionality more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
 
-The [](#presentation-layer) layer builds upon the [business](#business-layer) layer with user interface technology.
+The [presentation](#presentation-layer) layer builds upon the [business](#business-layer) layer with user interface technology.
 
 The [business](#business-layer) layer uses the [data](#data-layer) layer to store the data.
 
@@ -119,11 +119,11 @@ A presentation layer in this architecture can be built up of the following sub-l
 
 ### Calls the Business Layer
 
-The presentation layer calls the [business layer](#business-layer), which contains the rules that surround the system. It feeds the [business layer](#business-layer) input from the user, and processes its output to preparate it for display on screen.
+The presentation layer calls the [business](#business-layer) layer, which contains the rules that surround the system. It feeds the [business](#business-layer) layer input from the user, and processes its output to preparate it for display on screen.
 
 ### Presenter
 
-It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of the application navigation. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) would represent a specific *user action* in that screen.
+It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business](#business-layer) layer. The [`Presenters`](patterns.md#presenter) together form a model of the application navigation. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) would represent a specific *user action* in that screen.
 
 ### ViewModel
 
@@ -135,7 +135,7 @@ The [`Presenters`](patterns.md#presenter) might delegate to a [`ToViewModel`](pa
 
 ### ToEntity
 
-The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
+The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business](#business-layer) layer.
 
 ### Facades
 
@@ -143,7 +143,7 @@ The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patter
 
 The [`Presenters`](patterns.md#presenter) call upon the business layer to *save*, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects) and other *logic* around the user action.
 
-Because the [`Presenters`](patterns.md#presenter) combine several responsibilities together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
+Because the [`Presenters`](patterns.md#presenter) combine several responsibilities together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation](#presentation-layer) layer.
 
 ### MVC
 
@@ -200,21 +200,21 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 ### Layer Connections
 
-The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
+The [business](#business-layer) layer resides in between the [data access](#data-layer) and the [presentation](#presentation-layer) layer.
 
-The [business layer](#business-layer) can use [entities](patterns.md#entity), but sometimes would call [`Repositories`](patterns.md#repository) out of the [data access layer](#data-layer). But using [entity](patterns.md#entities) classes might be the first choice, to have a little less dependence on the [data access](#data-layer).
+The [business](#business-layer) layer can use [entities](patterns.md#entity), but sometimes would call [`Repositories`](patterns.md#repository) out of the [data access layer](#data-layer). But using [entity](patterns.md#entities) classes might be the first choice, to have a little less dependence on the [data access](#data-layer).
 
 ### Magic
 
-The [presentation layer](#presentation-layer) uses the [business layer](#business-layer) for anything special that might be done. The [business layer](#business-layer) executes rules and such.
+The [presentation](#presentation-layer) layer uses the [business](#business-layer) layer for anything special that might be done. The [business](#business-layer) layer executes rules and such.
 
-Often when something special is programmed in the [presentation layer](#presentation-layer), it may be worth considering moving it to the [business layer](#business-layer) instead.
+Often when something special is programmed in the [presentation](#presentation-layer) layer, it may be worth considering moving it to the [business](#business-layer) layer instead.
 
 ### Facades
 
 Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [Validators](patterns.md#validators), [SideEffects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row.
 
-The [`Facades`](patterns.md#facade) gives a few clear *entry points* into the [business layer](#business-layer).
+The [`Facades`](patterns.md#facade) gives a few clear *entry points* into the [business](#business-layer) layer.
 
 ### CRUD
 
@@ -222,27 +222,27 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations 
 
 ### Validation
 
-The [business layer](#business-layer) executes [`Validators`](patterns.md#validators) that verify, that the data corresponds to all the rules.
+The [business](#business-layer) layer executes [`Validators`](patterns.md#validators) that verify, that the data corresponds to all the rules.
 
 ### Side-Effects
 
-The [business layer](#business-layer) executes [`SideEffects`](patterns.md#side-effects) when altering data, for instance updating the *date time modified* or for instance automatically *generating a name*.
+The [business](#business-layer) layer executes [`SideEffects`](patterns.md#side-effects) when altering data, for instance updating the *date time modified* or for instance automatically *generating a name*.
 
 ### Calculations
 
-The [business layer](#business-layer) would also be responsible for [`calculations`](aspects.md#calculation) and the many other things presented in the diagram above.
+The [business](#business-layer) layer would also be responsible for [`calculations`](aspects.md#calculation) and the many other things presented in the diagram above.
 
 ### Conversions
 
-When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business layer](#business-layer). This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
+When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business](#business-layer) layer. This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
 
 ### Enums
 
-Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [enums](aspects.md#enums) in the [business layer](#business-layer), as well as some pattern-wise logic around [enums](aspects.md#enums).
+Some [entities](patterns.md#entity) in the [data](#data-layer) layer might have corresponding [enums](aspects.md#enums) in the [business](#business-layer) layer, as well as some pattern-wise logic around [enums](aspects.md#enums).
 
 ### Resources Strings
 
-[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business layer](#business-layer) to translate terms from the business domain and message texts and such.
+[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business](#business-layer) layer to translate terms from the business domain and message texts and such.
 
 ### Defaults
 
@@ -254,15 +254,15 @@ Setting [default values](aspects.md#defaults) when you create an [entity](patter
 
 ### Cloning
 
-Sometimes there is code for [cloning](aspects.md#cloning) an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business layer](#business-layer).
+Sometimes there is code for [cloning](aspects.md#cloning) an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business](#business-layer) layer.
 
 ### Relationship Syncing
 
-[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. This can be given a place in the [business layer](#business-layer) as well.
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. This can be given a place in the [business](#business-layer) layer as well.
 
 ### Platform Independence
 
-The [business layer](#business-layer) is supposed to be platform independent in this architecture, so that the code can be deployed anywhere. This might sometimes require specific API choices, the use of generic interfaces, or our own [framework API's](apis.md#jjframework). These choices may be inherently part of this architecture. But because most things are built on [entities](patterns.md#entity) and [`repository interfaces`](patterns.md#repository-interfaces), so the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable anywhere.
+The [business](#business-layer) layer is supposed to be platform independent in this architecture, so that the code can be deployed anywhere. This might sometimes require specific API choices, the use of generic interfaces, or our own [framework API's](apis.md#jjframework). These choices may be inherently part of this architecture. But because most things are built on [entities](patterns.md#entity) and [`repository interfaces`](patterns.md#repository-interfaces), so the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable anywhere.
 
 
 Perpendicular Layers
@@ -274,13 +274,13 @@ The subdivision into data, business and presentation is just about the most impo
 
 The Framework layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
 
-Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the [presentation layer](#presentation-layer), because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
+Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the [presentation](#presentation-layer) layer, because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the [presentation](#presentation-layer) layer in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
 
 `< TODO: Encorporate this phrase: It is hard to explain what the position of infrastructure is in the architecture. One thing you can say is that the infrastructure should be loose coupled. >`
 
 Services expose business logic through a network interface, often through the SOAP protocol. A service might also expose a presentation model to the outside world. Because it is about a specific network / communication protocol, the service layer is considered part of the infrastructure too.
 
-Another funny thing about infrastructure, for example user right management, is that a program navigation model in the [`Presenter`](patterns.md#presenter) layer can actually adapt itself to what rights the user has. In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the infrastructure, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
+Another funny thing about infrastructure, for example user right management, is that a program navigation model in the [`Presenter`](patterns.md#presenter) layer can actually adapt itself to what rights the user has. In that respect the platform-independent [presentation](#presentation-layer) layer is dependent on the infrastructure, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
 
 
 Alternatives
