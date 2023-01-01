@@ -176,22 +176,31 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-`< TODO: More clarifying sentences. >`
-`< TODO: More links. >`  
+`< ... TODO: More clarifying sentences. >`  
+`< ... TODO: More links. >`  
+`< TODO: Clarify each term in the diagarm. >`  
+`< TODO: Sub-sections. >`  
 `< TODO: Relationship Synching = Inverse Property Management = LinkTo / Unlink >`  
 `< TODO: Cascading = UnlinkRelatedEntitiesExtensions / DeleteRelatedEntitiesExtensions >`
 
 <img src="images/business-layer.png" width="357" />
 
-What is business logic? Basically anything that is not presentation, data access or infrastructure, might be considered business logic.
+What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered business logic.
 
-The business layer resides in between the data access and the [presentation layer](#presentation-layer). The [presentation layer](#presentation-layer) calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
+The business layer resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
-The business layer executes validations that verify, that the data corresponds to all the rules. Also, the business layer executes side effects when altering data, for instance storing the date time modified or setting default values when you create an [entity](patterns.md#entity), or for instance automatically generating a name. The business layer is also responsible for calculations and many other things as represented in the diagram above.
+The [presentation layer](#presentation-layer) calls the business layer to execute rules and such. It may happen for the most part throught the [facades](patterns.md#facade). They combine multiple aspects of the [business logic](#business-layer), by calling [validators](patterns.md#validators), [side effects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things.
 
-The business layer uses entities, but sometimes will call [`Repositories`](patterns.md#repository) out of the data access layer, even though your first choice should be to just use the entities. The [presentation layer](#presentation-layer) uses the business layer for anything special that needs to be done. Often when something special is programmed in the [presentation layer](#presentation-layer), it actually belongs in the business layer instead.
+The [facades](patterns.md#facade) might be *CRUD-oriented*. That means the methods may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This CRUD concept might not be prone to change much, and might keep the interfaces relative stable. Only for exceptional cases, additional non-CRUD operations might be added to the facades. It also gives a few clear entry points into the [business layer](#business-layer)
 
-The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and [`Repository interfaces`](patterns.md#repository-interfaces), the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
+The [business layer](#business-layer) executes [validations](patterns.md#validators) that verify, that the data corresponds to all the rules. Also, the [business layer](#business-layer) executes [side effects](patterns.md#side-effects) when altering data, for instance updating the date time modified or setting [default values](aspects.md#defaults) when you create an [entity](patterns.md#entity), or for instance automatically *generating a name*. The [business layer](#business-layer) would also be responsible for [calculations](aspects.md#calculation) and the many other things presented in the diagram above.
+
+The [business layer](#business-layer) uses [entities](patterns.md#entity), but sometimes will call [`repositories`](patterns.md#repository) out of the [data access layer](#data-layer), even though your first choice might be to just use the [entity](patterns.md#entities) classes.
+
+The [presentation layer](#presentation-layer) uses the [business layer](#business-layer) for anything special that needs to be done. Often when something special is programmed in the [presentation layer](#presentation-layer), it might actually belong in the [business layer](#business-layer) instead.
+
+The [business layer](#business-layer) is supposed to be platform independent in this architecture so the code might be deployed anywhere. This might sometimes require specific `API` choices or using our own framework `API's`. These choices may be inherently part of this architecture. But because most things are built on entities and [`repository interfaces`](patterns.md#repository-interfaces), the [business logic](#business-layer) is quite independent of everything else, which means that the magic of our software would be deployable anywhere, which is nice.
+
 
 Perpendicular Layers
 --------------------

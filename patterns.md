@@ -18,7 +18,7 @@
     - [Validators](#validators)
     - [Side Effects](#side-effects)
     - [LinkTo](#linkto)
-    - [Cascading Extensions](#cascading-extensions)
+    - [Cascading](#cascading)
     - [Facade](#facade)
         - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
     - [Visitor](#visitor)
@@ -251,9 +251,9 @@ public static void NewLinkTo(this Child child, Parent parent)
 
 Be aware that executing `NewLinkTo` onto *existing* objects will result in a corrupted object graph.
 
-### Cascading Extensions
+### Cascading
 
-`< TODO: Describe how to organize your DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions. >`
+`< TODO: Describe how the DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions are organized. >`
 
 ### Facade
 
