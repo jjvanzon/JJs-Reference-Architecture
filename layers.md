@@ -176,18 +176,14 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-`< TODO: Arrows in diagram. >`  
-`< TODO: Margin in diagram. >`  
-`< TODO: Add 'Cloning' to big block in the diagram. >`  
-`< TODO: Easier term for Inverse Property Management. >`  
 `< TODO: More clarifying sentences. >`
 `< TODO: More links. >`  
-`< TODO: Inverse Property Management = LinkTo / Unlink >`  
+`< TODO: Relationship Synching = Inverse Property Management = LinkTo / Unlink >`  
 `< TODO: Cascading = UnlinkRelatedEntitiesExtensions / DeleteRelatedEntitiesExtensions >`
 
 <img src="images/business-layer.png" width="357" />
 
-What is business logic? Basically anything that is not presentation, data access or infrastructure, is business logic.
+What is business logic? Basically anything that is not presentation, data access or infrastructure, might be considered business logic.
 
 The business layer resides in between the data access and the [presentation layer](#presentation-layer). The [presentation layer](#presentation-layer) calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
 
