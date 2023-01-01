@@ -210,13 +210,11 @@ The [presentation](#presentation-layer) layer uses the [business](#business-laye
 
 ### Facades
 
-Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [Validators](patterns.md#validators), [SideEffects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row.
-
-The [`Facades`](patterns.md#facade) gives a few clear *entry points* into the [business](#business-layer) layer.
+Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [Validators](patterns.md#validators), [SideEffects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. The [`Facades`](patterns.md#facade) give a few clear *entry points* into the [business](#business-layer) layer.
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be added.
+The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be present too.
 
 ### Validation
 
@@ -228,27 +226,27 @@ The [business](#business-layer) layer executes [`SideEffects`](patterns.md#side-
 
 ### Calculations
 
-The [business](#business-layer) layer would also be responsible for [`calculations`](aspects.md#calculation) and the many other things presented in the diagram above.
+The [business](#business-layer) layer would also be responsible for [`calculations`](aspects.md#calculation).
 
 ### Conversions
 
-When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business](#business-layer) layer. This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
+When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business](#business-layer) layer. This could be *simple objects* converted from one to the other, but also whole (tree) *structures* converted into another.
 
 ### Enums
 
-Some [entities](patterns.md#entity) in the [data](#data-layer) layer might have corresponding [enums](aspects.md#enums) in the [business](#business-layer) layer, as well as some pattern-wise logic around [enums](aspects.md#enums).
+Some [entities](patterns.md#entity) in the [data](#data-layer) layer might have corresponding [enums](aspects.md#enums) in the [business](#business-layer) layer, as well as some pattern-wise logic around [enums](aspects.md#enums). [Enums](aspects.md#enums) are like multiple choice variables.
 
 ### Resources Strings
 
-[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business](#business-layer) layer to translate terms from the business domain and message texts and such.
+[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business](#business-layer) layer to translate terms from the business domain model and other texts.
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when you create an [entity](patterns.md#entity) might be done automatically by using a [SideEffect](patterns.md#side-effects) in the [facade](patterns.md#facade).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [SideEffect](patterns.md#side-effects) class in the [facade](patterns.md#facade).
 
 ### Cascading
 
-[Cascading](aspects.md#cascading) here means the deletion of unlinking of [entities](patterns.md#entity) when they for instance are about to be deleted. Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. Other links to [entities](patterns.md#entity) are to be broken before deletion. In this architecture the choice might be made to do it in `C#` code, to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main entity is about to be deleted. It can also mean unlinking [entities](patterns.md#entity) before deleting a related entity. In this architecture it might be done in `C#`, to make it extra visible that these deletions take place.
 
 ### Cloning
 
