@@ -29,13 +29,20 @@
     - [HTML](#html)
     - [Platform Independence](#platform-independence-1)
 - [Business Layer](#business-layer)
-    - [Connecting the Layers](#connecting-the-layers)
+    - [Layer Connections](#layer-connections)
     - [Magic](#magic)
     - [Facades](#facades-1)
     - [CRUD](#crud)
     - [Validation](#validation)
     - [Side-Effects](#side-effects)
     - [Calculations](#calculations)
+    - [Conversions](#conversions)
+    - [Enums](#enums)
+    - [String Resources](#string-resources)
+    - [Defaults](#defaults)
+    - [Cascading](#cascading)
+    - [Cloning](#cloning)
+    - [Relationship Syncing](#relationship-syncing)
     - [Platform Independence](#platform-independence-2)
 - [Perpendicular Layers](#perpendicular-layers)
 - [Alternatives](#alternatives)
@@ -184,17 +191,16 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-`< ... TODO: More clarifying sentences. >`  
-`< ... TODO: More links. >`  
-`< TODO: Clarify each term in the diagarm. >`  
-`< TODO: Relationship Synching = Inverse Property Management = LinkTo / Unlink >`  
-`< TODO: Cascading = UnlinkRelatedEntitiesExtensions / DeleteRelatedEntitiesExtensions >`
+`< ... TODO: Clarify each term in the diagram. >`  
+`< TODO:  It is sometimes unclear whether to redirect to aspects.md, patterns.md or apis.md. Though I might repeat something in this section, redirecting to another article for more info. >`  
+`< TODO: Some details might belong in a different article. >`  
+`< TODO: More links. >`  
 
 <img src="images/business-layer.png" width="357" />
 
 What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered the [business logic](#business-layer).
 
-### Connecting the Layers
+### Layer Connections
 
 The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
@@ -222,11 +228,45 @@ The [business layer](#business-layer) executes [`Validators`](patterns.md#valida
 
 ### Side-Effects
 
-The [business layer](#business-layer) executes [`SideEffects`](patterns.md#side-effects) when altering data, for instance updating the *date time modified* or setting [default values](aspects.md#defaults) when you create an [entity](patterns.md#entity), or for instance automatically *generating a name*.
+The [business layer](#business-layer) executes [`SideEffects`](patterns.md#side-effects) when altering data, for instance updating the *date time modified* or for instance automatically *generating a name*.
 
 ### Calculations
 
 The [business layer](#business-layer) would also be responsible for [`calculations`](aspects.md#calculation) and the many other things presented in the diagram above.
+
+### Conversions
+
+When one thing is [converted](aspects.md#conversions) into another. This might be done in the business layer. This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
+
+### Enums
+
+Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer), as well as some pattern-wise logic around [`enums`](aspects.md#enums).
+
+### String Resources
+
+...
+
+### Defaults
+
+Setting [default values](aspects.md#defaults) when you create an [entity](patterns.md#entity) might be done automatically by using a [SideEffect](patterns.md#side-effects) in the [facade](patterns.md#facade).
+
+### Cascading
+
+...
+
+`< TODO: Cascading = UnlinkRelatedEntitiesExtensions / DeleteRelatedEntitiesExtensions >`
+
+
+### Cloning
+
+...
+
+### Relationship Syncing
+
+...
+
+`< TODO: Relationship Synching = Inverse Property Management = LinkTo / Unlink >`  
+
 
 ### Platform Independence
 

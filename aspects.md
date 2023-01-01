@@ -241,7 +241,7 @@ Enums
 ```cs
 enum MyEnum
 {
-  Undefined = 0
+    Undefined = 0
 }
 ```
 
