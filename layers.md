@@ -226,7 +226,7 @@ The [business](#business-layer) layer executes [`SideEffects`](patterns.md#side-
 
 ### Calculations
 
-The [business](#business-layer) layer would also be responsible for [`calculations`](aspects.md#calculation).
+The [business](#business-layer) layer would also be responsible for [calculations](aspects.md#calculation).
 
 ### Conversions
 
@@ -242,23 +242,23 @@ Some [entities](patterns.md#entity) in the [data](#data-layer) layer might have 
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [SideEffect](patterns.md#side-effects) class in the [facade](patterns.md#facade).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#side-effects) class in the [facade](patterns.md#facade).
 
 ### Cascading
 
-Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main entity is about to be deleted. It can also mean unlinking [entities](patterns.md#entity) before deleting a related entity. In this architecture it might be done in `C#`, to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main entity is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* [entities](patterns.md#entity) before deleting a related entity. In this architecture it might be done in `C#` to make it extra visible that these deletions take place.
 
 ### Cloning
 
-Sometimes there is code for [cloning](aspects.md#cloning) an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business](#business-layer) layer.
+Sometimes there is code for [cloning](aspects.md#cloning) / copying an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business](#business-layer) layer too.
 
 ### Relationship Syncing
 
-[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. This can be given a place in the [business](#business-layer) layer as well.
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. Inverse property management means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This can be given a place in the [business](#business-layer) layer as well.
 
 ### Platform Independence
 
-The [business](#business-layer) layer is supposed to be platform independent in this architecture, so that the code can be deployed anywhere. This might sometimes require specific API choices, the use of generic interfaces, or our own [framework API's](apis.md#jjframework). These choices may be inherently part of this architecture. But because most things are built on [entities](patterns.md#entity) and [`repository interfaces`](patterns.md#repository-interfaces), so the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable anywhere.
+The [business](#business-layer) layer might be platform independent in this architecture, so that the code can be used anywhere. This might sometimes require specific `API` choices, using generic interfaces, or our own [framework API's](apis.md#jjframework). These choices may be inherently part of this architecture. When most things are built on [entities](patterns.md#entity) and [`repository interfaces`](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable anywhere.
 
 
 Perpendicular Layers
