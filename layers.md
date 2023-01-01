@@ -191,7 +191,6 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-`< TODO: Define more terms right inside this text. >`  
 `< TODO: More links. >`  
 
 <img src="images/business-layer.png" width="357" />
@@ -202,7 +201,7 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business](#business-layer) layer resides in between the [data access](#data-layer) and the [presentation](#presentation-layer) layer.
 
-The [business](#business-layer) layer can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes would call [`Repositories`](patterns.md#repository) to execute data queries.
+The [business](#business-layer) layer can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes would call [repositories](patterns.md#repository) to execute data queries.
 
 ### Magic
 
@@ -210,7 +209,7 @@ The [presentation](#presentation-layer) layer uses the [business](#business-laye
 
 ### Facades
 
-Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [Validators](patterns.md#validators), [SideEffects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. The [`Facades`](patterns.md#facade) give a few clear *entry points* into the [business](#business-layer) layer.
+Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. The [`Facades`](patterns.md#facade) give a few clear *entry points* into the [business](#business-layer) layer.
 
 ### CRUD
 
@@ -230,35 +229,35 @@ The [business](#business-layer) layer would also be responsible for [calculation
 
 ### Conversions
 
-When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business](#business-layer) layer. This could be *simple objects* converted from one to the other, but also whole (tree) *structures* converted into another.
+When one thing is [converted](aspects.md#conversion) into another, this might be done in the [business](#business-layer) layer. This could be *simple objects* converted from one to the other, but also whole *(tree) structures* converted into another.
 
 ### Enums
 
-Some [entities](patterns.md#entity) in the [data](#data-layer) layer might have corresponding [enums](aspects.md#enums) in the [business](#business-layer) layer, as well as some pattern-wise logic around [enums](aspects.md#enums). [Enums](aspects.md#enums) are like multiple choice variables.
+[Enums](aspects.md#enums) are like multiple choice variables. Some [entities](patterns.md#entity) in the [data](#data-layer) layer might have corresponding [enums](aspects.md#enums) in the [business](#business-layer) layer, as well as some pattern-wise logic around [enums](aspects.md#enums).
 
 ### Resources Strings
 
-[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business](#business-layer) layer to translate terms from the business domain model and other texts.
+[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business](#business-layer) layer to translate terms from the business domain and other texts.
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#side-effects) class in the [facade](patterns.md#facade).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#side-effects) class in a [`Facade`](patterns.md#facade).
 
 ### Cascading
 
-Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main entity is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* [entities](patterns.md#entity) before deleting a related entity. In this architecture it might be done in `C#` to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main entity is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* [entities](patterns.md#entity) before deleting a related entity. In this architecture it might be done in `C#` to make it extra visible that these deletions take place.
 
 ### Cloning
 
-Sometimes there is code for [cloning](aspects.md#cloning) / copying an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business](#business-layer) layer too.
+Sometimes there is code for [cloning](aspects.md#cloning) or copying an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business](#business-layer) layer too.
 
 ### Relationship Syncing
 
-[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. Inverse property management means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This can be given a place in the [business](#business-layer) layer as well.
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This can be put in the [business](#business-layer) layer as well.
 
 ### Platform Independence
 
-The [business](#business-layer) layer might be platform independent in this architecture, so that the code can be used anywhere. This might sometimes require specific `API` choices, using generic interfaces, or our own [framework API's](apis.md#jjframework). These choices may be inherently part of this architecture. When most things are built on [entities](patterns.md#entity) and [`repository interfaces`](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable anywhere.
+A [business layer](#business-layer) might be platform independent in this architecture, so that the code can be used anywhere. This might sometimes require specific API choices, generic interfaces, or some in-house programmed [framework API's](apis.md#jjframework). These choices are inherently part of this architecture. When most things are built on [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms.
 
 
 Perpendicular Layers
