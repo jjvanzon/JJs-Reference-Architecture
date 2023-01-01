@@ -191,9 +191,7 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-`< TODO:  It is sometimes unclear whether to redirect to aspects.md, patterns.md or apis.md. Though I might repeat something in this section, redirecting to another article for more info. >`  
-`< TODO: Some details might belong in a different article. >`  
-`< TODO: More clariying sentences. >`  
+`< TODO: Define more terms right inside this text. >`  
 `< TODO: More links. >`  
 
 <img src="images/business-layer.png" width="357" />
@@ -204,23 +202,23 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
-The [business layer](#business-layer) can use [entities](patterns.md#entity), but sometimes will call [`Repositories`](patterns.md#repository) out of the [data access layer](#data-layer), even though your first choice might be to just use the [entity](patterns.md#entities) classes for a little less [data access](#data-layer) dependence.
-
-The [presentation layer](#presentation-layer) uses the [business layer](#business-layer) for anything special that needs to be done. The [business layer](#business-layer) executes rules and such.
+The [business layer](#business-layer) can use [entities](patterns.md#entity), but sometimes would call [`Repositories`](patterns.md#repository) out of the [data access layer](#data-layer). But using [entity](patterns.md#entities) classes might be the first choice, to have a little less dependence on the [data access](#data-layer).
 
 ### Magic
 
-Often when something special is programmed in the [presentation layer](#presentation-layer), the functionality might better be moved to the [business layer](#business-layer) instead.
+The [presentation layer](#presentation-layer) uses the [business layer](#business-layer) for anything special that might be done. The [business layer](#business-layer) executes rules and such.
+
+Often when something special is programmed in the [presentation layer](#presentation-layer), it may be worth considering moving it to the [business layer](#business-layer) instead.
 
 ### Facades
 
-Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row.
+Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [Validators](patterns.md#validators), [SideEffects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row.
 
 The [`Facades`](patterns.md#facade) gives a few clear *entry points* into the [business layer](#business-layer).
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This set of basic operations might not be prone to change much, which may keep these interfaces relative stable. Only for exceptional cases, additional non-CRUD operations might be added.
+The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be added.
 
 ### Validation
 
@@ -236,11 +234,11 @@ The [business layer](#business-layer) would also be responsible for [`calculatio
 
 ### Conversions
 
-When one thing is [converted](aspects.md#conversions) into another. This might be done in the business layer. This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
+When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business layer](#business-layer). This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
 
 ### Enums
 
-Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer), as well as some pattern-wise logic around [`enums`](aspects.md#enums).
+Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [enums](aspects.md#enums) in the [business layer](#business-layer), as well as some pattern-wise logic around [enums](aspects.md#enums).
 
 ### Resources Strings
 
