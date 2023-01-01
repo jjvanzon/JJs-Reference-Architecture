@@ -309,7 +309,7 @@ The key should be representative of the text itself.
 
 Resources seem part of the presentation, but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
 
-Framework.Resources contains reusable resource strings for common titles such as `Delete`, `Edit`, `Save` etcetera.
+`JJ.Framework.Resources` contains reusable resource strings for common titles such as `Delete`, `Edit`, `Save` etcetera.
 
 Extra information in Dutch about how to structure your resource files can be read in Appendix B.
 

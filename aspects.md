@@ -31,6 +31,11 @@
 - [Exceptions](#exceptions)
 - [Facades](#facades)
 - [Bidirectional Relationships](#bidirectional-relationships)
+    - [LinkTo](#linkto)
+    - [OneToManyRelationship](#onetomanyrelationship)
+    - [EntityFramework](#entityframework)
+    - [Omit Inverse Property](#omit-inverse-property)
+    - [TODO](#todo-1)
 - [IO](#io)
 - [Logging](#logging)
 - [Multi-Language / Translations / Culture](#multi-language--translations--culture)
@@ -110,7 +115,11 @@ Cascading
 
 `See 'LinkTo' under 'Patterns'. `
 
-`Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions? >`
+`See Cascading in Patters.`
+
+`Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions?`
+
+`It is also a mechanism known to be applicable to a relation database. In this architecture the choice is made to do it in C# code, to make it extra visible that these deletions take place, and not to accidentally delete things by accident without seeing much of it in the logic. ORM's might also not like it when you use cascade delete in the database. >`
 
 
 Circular References
@@ -515,22 +524,39 @@ These are all options to choose from. You can just mess around and do whatever. 
 Bidirectional Relationships
 ---------------------------
 
-Akak "Inverse Relationship Management" or "Inverse Property Management".
+Aka "Inverse Relationship Management" or "Inverse Property Management".
 
-See 'LinkTo' under 'Design Patterns'.
+Inverse property management means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`.
 
-An alternative is the OneToManyRelationship and ManyToOneRelationship classes from the  Framework.Business assembly.
+Here are a few methods to do this:
+
+### LinkTo
+
+[LinkTo](patterns.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
+
+### OneToManyRelationship
+
+The [OneToManyRelationship](apis.md#onetomanyrelationship) is an API from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
+
+### EntityFramework
+
+If you use [`EntityFramework`](apis.md#entity-framework) it might do it automatically for you.
+
+### Omit Inverse Property
+
+Reasons not to have an inverse property can be:
+    
+- Enum-like type
+- Loosely linked entity
+- 1-to-1 relationship
+- The inverse relationship would result in an impractically large list.
+
+### TODO
 
 `< TODO: Consider incorporating these ideas here: >`
 
+- Make story about inverse property management in property setters. A general description.
 - Idea 2015-04-29: Inverse property management with a List and a HashSet to make operations not n-problems...
-- make story about inverse property management in property setters. A general description and maybe later mention the helper classes like OneToManyHandler if they are programmed. (They are.)
-- In the software aspects section mention a summary of inverse property management methods, even though they have been individually described in other places in the document.
-    - Reasons not to have an inverse property:
-        - Enum-like type
-        - Loosely linked entity
-        - 1-to-1 relationship
-        - The inverse relationship would result in ridiculously enormous lists. >
 
 
 IO

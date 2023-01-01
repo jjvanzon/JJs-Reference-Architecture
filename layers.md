@@ -38,7 +38,7 @@
     - [Calculations](#calculations)
     - [Conversions](#conversions)
     - [Enums](#enums)
-    - [String Resources](#string-resources)
+    - [Resources Strings](#resources-strings)
     - [Defaults](#defaults)
     - [Cascading](#cascading)
     - [Cloning](#cloning)
@@ -185,15 +185,15 @@ The dashed line going right through the [diagram](#presentation-layer) above sep
 
 The *platform-specific* code concerns itself with `MVC`, `HTML` and `Razor`, while the *platform independent* code is unaware of which presentation technology is used.
 
-That means that we can use the same kind of application logic for multiple presentation techniques, such as offering an application both *web* based as well as on *Windows*. This helps give us the flexibility to deploy apps on *mobile* platforms using the same base techniques as we would use on *Windows* or *web*.
+That means that we can use the same kind of application logic for multiple presentation techniques, such as offering an application both *web* based as well as on *Windows*. This helped give us the flexibility to deploy apps on *mobile* platforms using the same base techniques as we would use on *Windows* or *web*.
 
 
 Business Layer
 --------------
 
-`< ... TODO: Clarify each term in the diagram. >`  
 `< TODO:  It is sometimes unclear whether to redirect to aspects.md, patterns.md or apis.md. Though I might repeat something in this section, redirecting to another article for more info. >`  
 `< TODO: Some details might belong in a different article. >`  
+`< TODO: More clariying sentences. >`  
 `< TODO: More links. >`  
 
 <img src="images/business-layer.png" width="357" />
@@ -242,9 +242,9 @@ When one thing is [converted](aspects.md#conversions) into another. This might b
 
 Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer), as well as some pattern-wise logic around [`enums`](aspects.md#enums).
 
-### String Resources
+### Resources Strings
 
-...
+[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business layer](#business-layer) to translate terms from the business domain and message texts and such.
 
 ### Defaults
 
@@ -252,21 +252,15 @@ Setting [default values](aspects.md#defaults) when you create an [entity](patter
 
 ### Cascading
 
-...
-
-`< TODO: Cascading = UnlinkRelatedEntitiesExtensions / DeleteRelatedEntitiesExtensions >`
-
+[Cascading](aspects.md#cascading) here means the deletion of unlinking of [entities](patterns.md#entity) when they for instance are about to be deleted. Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. Other links to [entities](patterns.md#entity) are to be broken before deletion. In this architecture the choice might be made to do it in `C#` code, to make it extra visible that these deletions take place.
 
 ### Cloning
 
-...
+Sometimes there is code for [cloning](aspects.md#cloning) an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business layer](#business-layer).
 
 ### Relationship Syncing
 
-...
-
-`< TODO: Relationship Synching = Inverse Property Management = LinkTo / Unlink >`  
-
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. This can be given a place in the [business layer](#business-layer) as well.
 
 ### Platform Independence
 
