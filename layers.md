@@ -95,7 +95,7 @@ The [entity](patterns.md#entity) objects have properties, that map to columns in
 
 ### Entities
 
-With all this in place, out come objects called [*entities*](patterns.md#entity), loaded from the database.
+With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) classes represent the domain model.
 
 ### Repositories
 
@@ -202,13 +202,11 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business](#business-layer) layer resides in between the [data access](#data-layer) and the [presentation](#presentation-layer) layer.
 
-The [business](#business-layer) layer can use [entities](patterns.md#entity), but sometimes would call [`Repositories`](patterns.md#repository) out of the [data access layer](#data-layer). But using [entity](patterns.md#entities) classes might be the first choice, to have a little less dependence on the [data access](#data-layer).
+The [business](#business-layer) layer can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes would call [`Repositories`](patterns.md#repository) to execute data queries.
 
 ### Magic
 
-The [presentation](#presentation-layer) layer uses the [business](#business-layer) layer for anything special that might be done. The [business](#business-layer) layer executes rules and such.
-
-Often when something special is programmed in the [presentation](#presentation-layer) layer, it may be worth considering moving it to the [business](#business-layer) layer instead.
+The [presentation](#presentation-layer) layer uses the [business](#business-layer) layer for anything special that might be done. The [business](#business-layer) layer executes rules and such. Sometimes when something special is programmed in the [presentation](#presentation-layer) layer, it may be worth considering moving it to the [business](#business-layer) layer instead.
 
 ### Facades
 
