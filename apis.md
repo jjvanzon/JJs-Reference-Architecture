@@ -24,7 +24,7 @@ This article describes some of the API and technology choices in this software a
 - [Entity Framework](#entity-framework)
 - [JavaScript / TypeScript](#javascript--typescript)
 - [JJ.Framework](#jjframework)
-- [Keeping Bi-Directional Relationships in Sync](#keeping-bi-directional-relationships-in-sync)
+- [OneToManyRelationship](#onetomanyrelationship)
 - [NHibernate](#nhibernate)
 - [ORM](#orm)
     - [Generic Interfaces](#generic-interfaces)
@@ -96,7 +96,7 @@ List of API's
 
 |                          |                |
 |--------------------------|----------------|
-| [JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/) | Types for supporting a business layer and/or API. Bi-directional relationship sync. Result types to pass data, succes flags and (validation) messages.
+| [JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/) | Types for supporting a business layer and/or API. Bidirectional relationship sync. Result types to pass data, succes flags and (validation) messages.
 | [JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation) | For a nice fluent notation for validations.
 | [JJ.Framework.Mathematics](https://www.nuget.org/packages/JJ.Framework.Mathematics/) | Helpers for math things. See link.
 
@@ -293,14 +293,14 @@ JJ.Framework
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
 
 
-Keeping Bi-Directional Relationships in Sync
---------------------------------------------
+OneToManyRelationship
+---------------------
 
-The classes `ManyToOneRelationship` and `OneToManyRelationship` do inverse property management more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
+The classes `ManyToOneRelationship` and `OneToManyRelationship` can keep bidirectional relationships in sync more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
 
 Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
 
-There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` appears not to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code whereever.
+There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code whereever.
 
 
 NHibernate

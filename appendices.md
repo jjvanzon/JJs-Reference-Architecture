@@ -33,7 +33,7 @@ This checklist might be used if you want to bulk-program the architecture for an
 - Business: Cascading: DeleteRelatedEntitiesExtensions
 - Business: Cascading: UnlinkRelatedEntitiesExtensions
 - Business: Enums
-- Business: String Resources
+- Business: Resources Strings
 - Business: EnumExtensions
 - Business: Validators
     - Delete Validators too

@@ -18,7 +18,7 @@
     - [Validators](#validators)
     - [Side Effects](#side-effects)
     - [LinkTo](#linkto)
-    - [Cascading Extensions](#cascading-extensions)
+    - [Cascading](#cascading)
     - [Facade](#facade)
         - [Get by ID not in the Facade](#get-by-id-not-in-the-facade)
     - [Visitor](#visitor)
@@ -251,9 +251,9 @@ public static void NewLinkTo(this Child child, Parent parent)
 
 Be aware that executing `NewLinkTo` onto *existing* objects will result in a corrupted object graph.
 
-### Cascading Extensions
+### Cascading
 
-`< TODO: Describe how to organize your DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions. >`
+`< TODO: Describe how the DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions are organized. >`
 
 ### Facade
 
@@ -309,7 +309,7 @@ The key should be representative of the text itself.
 
 Resources seem part of the presentation, but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
 
-Framework.Resources contains reusable resource strings for common titles such as `Delete`, `Edit`, `Save` etcetera.
+`JJ.Framework.Resources` contains reusable resource strings for common titles such as `Delete`, `Edit`, `Save` etcetera.
 
 Extra information in Dutch about how to structure your resource files can be read in Appendix B.
 

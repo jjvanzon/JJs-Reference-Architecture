@@ -7,8 +7,43 @@
 
 - [Introduction](#introduction)
 - [Data Layer](#data-layer)
+    - [Database (DB)](#database-db)
+    - [ORM (NHibernate)](#orm-nhibernate)
+    - [Mappings](#mappings)
+    - [Entities](#entities)
+    - [Repositories](#repositories)
+    - [Repository Interfaces](#repository-interfaces)
+    - [Platform Independence](#platform-independence)
 - [Presentation Layer](#presentation-layer)
+    - [Calls the Business Layer](#calls-the-business-layer)
+    - [Presenter](#presenter)
+    - [ViewModel](#viewmodel)
+    - [ToViewModel](#toviewmodel)
+    - [ToEntity](#toentity)
+    - [Facades](#facades)
+    - [MVC](#mvc)
+    - [MVC Controllers](#mvc-controllers)
+    - [URLs](#urls)
+    - [View Engine (Razor)](#view-engine-razor)
+    - [Views (Razor)](#views-razor)
+    - [HTML](#html)
+    - [Platform Independence](#platform-independence-1)
 - [Business Layer](#business-layer)
+    - [Layer Connections](#layer-connections)
+    - [Magic](#magic)
+    - [Facades](#facades-1)
+    - [CRUD](#crud)
+    - [Validation](#validation)
+    - [Side-Effects](#side-effects)
+    - [Calculations](#calculations)
+    - [Conversions](#conversions)
+    - [Enums](#enums)
+    - [Resources Strings](#resources-strings)
+    - [Defaults](#defaults)
+    - [Cascading](#cascading)
+    - [Cloning](#cloning)
+    - [Relationship Syncing](#relationship-syncing)
+    - [Platform Independence](#platform-independence-2)
 - [Perpendicular Layers](#perpendicular-layers)
 - [Alternatives](#alternatives)
 
@@ -16,118 +51,218 @@
 Introduction
 ------------
 
-This is a suggestion of how to split up your software into layers.
-
-The software is split up into 3 layers:
+Software might be split up into 3 layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
-The presentation layer contains the screens of the system.
+The [presentation](#presentation-layer) layer is the visual part of a program. It is what the user sees. The screens of the system.
 
-The presentation layer calls the business layer, which is non-visual. It defines and enforces the rules of the system. Those are like the internal, mechanical parts of the system.
+The [business](#business-layer) layer can model of the functionality of a software program, but you generally don't see it. It defines and enforces the rules of the system. It is like the internal, mechanical parts.
 
-The business layer talks to the data layer, which models the business domain but does not process anything: it just stores and retrieves the data.
+The [data](#data-layer) layer, models and stores the data. It models functionality, but more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
 
-Data layer and presentation layer are programmed using fixed patterns. The business layer uses patterns too, but it gets a little more creative. If anything special needs to happen, this belongs in the business layer, since that is the machinery of the system.
+The [](#presentation-layer) layer builds upon the [business](#business-layer) layer with user interface technology.
 
-The data layer is also called the 'data access layer' or 'persistence layer'.
+The [business](#business-layer) layer uses the [data](#data-layer) layer to store the data.
 
-The business layer is also referred to as 'business logic'.
+Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer, and uses the [data](#data-layer) layer directly, where the [business](#business-layer) layer would not really add any functionality.
 
-The presentation layer is sometimes referred to as the 'front-end'.
+The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly fixed patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer. It is where the magic happens, so to speak.
 
 
 Data Layer
 ----------
 
-The data layer is built up of the following sub-layers:
+A data layer can be built up of the following sub-layers:
 
-<img src="images/data-layer.png" width="431" />
+<img src="images/data-layer.png" width="400" />
 
-It all starts with the database. The database is not directly accessed by the rest of the code, but the database is talked to through NHibernate, an object-relational mapper. NHibernate will translate database records to instance of classes. Those classes have properties, that map to columns in the database, and properties that point to related data. NHibernate needs to be given mappings, that define which class maps to which table and which columns map to which properties.
+### Database (DB)
 
-The data classes are called entities.
+It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, that structuredly stores the data into tables and relationships. But the it could also be another type of data store: an [`XML`](apis.md#xml) file, flat file or even just in-memory data, wherever the data is *stored*.
 
-The entities are not directly read out of NHibernate by the rest of the code. The rest of the code talks to NHibernate through the repositories. You can see the repositories as a set of queries. Next to providing a central place to manage a set of optimal queries, the repositories also keep the rest of the code independent of NHibernate, in case you would ever want to switch to a different data storage technology.
+### ORM (NHibernate)
 
-The repository implementations are not used directly, but accessed through an interface, so that we can indeed use a different data access technology, just by instantiating a different repository implementation. The repository interfaces are also handy for testing, to create a fake in-memory data store, instead of connecting to a real database.
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](apis.md#orm)), like [`NHibernate`](apis.md#nhibernate). The [`ORM`](apis.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
+    
+It could also be a different data access technology, instead of [`NHibernate`](apis.md#nhibernate): a different [`ORM`](apis.md#orm), like [`Entity Framework`](apis.md#entity-framework) or [`XML`](apis.md#xml) files, or perhaps [`SqlClient`](apis.md#sql) to execute raw [`SQL`](apis.md#sql) onto a relational database.
 
-The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with NHibernate and SQL Server, while the platform independent code is agnostic of what the underlying storage technology is. You may as well stick an XML file under it and not use SQL Server and NHibernate at all. This allows you to program against the same model, regardless of how you store it. This also allows you to deploy this code in any environment that can run .NET code, such as a mobile phone.
+### Mappings
 
-Because the architecture is multi-platform, the labels in the diagram are actually too specific:
+The [entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *columns* map to which *properties*.
 
-- 'DB' can actually be any __data store__ – that is the proper term for it: 'data store': an XML file, flat file or even just in-memory data.
-- 'NHibernate' can be an any __persistence technology__: another 'ORM' ('object relational mapper'), like Entity Framework, a technology similar to NHibernate. The persistence technology can also be simply writing to the file system, or an XML API, or SqlClient with which you can execute raw SQL.
+[`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) is an `API` that can help to build up these [mappings](patterns.md#mapping).
+
+### Entities
+
+With all this in place, out come objects called [*entities*](patterns.md#entity), loaded from the database.
+
+### Repositories
+
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](apis.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see the [`Repositories`](patterns.md#repository) as a set of queries. Each [entity](patterns.md#entity) type might have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](apis.md#nhibernate), in case you would like to switch to a different data storage technology.
+
+### Repository Interfaces
+
+The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The API [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/) can help to abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
+
+### Platform Independence
+
+The dashed line going right through the [diagram](#data-layer), separates the *platform-specific* code from the *platform independent* code. The platform-specific code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`, while the platform independent code is unaware of what the underlying storage technology is. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate). This allows us to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code in different environment that can run `.NET`, such as a *mobile phone*, *windows* or *web*.
 
 
 Presentation Layer
 ------------------
 
-The presentation layer is built up of the following sub-layers:
+A presentation layer in this architecture can be built up of the following sub-layers:
 
-<img src="images/presentation-layer.png" width="449" />
+<img src="images/presentation-layer.png" width="400" />
 
-`< TODO: ToEntity is in a really odd spot if you read the diagram from top to bottom. >`
+### Calls the Business Layer
 
-The presentation layer calls the business layer, which contains all the rules that surround the system.
+The presentation layer calls the [business layer](#business-layer), which contains the rules that surround the system. It feeds the [business layer](#business-layer) input from the user, and processes its output to preparate it for display on screen.
 
-The data that is exactly shown on screen is called the *view model*.
+### Presenter
 
-*Presenter* classes combine several responsibilities around the presentation logic.
+It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of the application navigation. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) would represent a specific *user action* in that screen.
 
-The presenter layer forms a model of your program navigation. Each screen has its own presenter and each method in that presenter is a specific user action.
+### ViewModel
 
-*Presenter* classes talk to the business layer.
+A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is to be rendered out on a screen. In this architecture it is a pure data object, no logic. That makes them more easily usable for different presentation technologies and can be easily sent over a wire.
 
-A presenter delegates to the ToViewModel layer, to translating the data and the results of the business logic to a subset of data that is shown on screen: the view model.
+### ToViewModel
 
-A presenter delegates to the ToEntity layer, to translate user input back to entity data.
+The [`Presenters`](patterns.md#presenter) might delegate to a [`ToViewModel`](patterns.md#toviewmodel) layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
 
-The presenter then calls upon the business layer again to save, validate, side-effects and execute other logic around the user action.
+### ToEntity
 
-Because the presenters combine several responsibilities together they are the facades / combinators of the presentation layer.
+The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
 
-MVC is the web technology of choice we use for programming user interfaces. In our architecture the MVC layer builds on top of the presenter layer.
+### Facades
 
-In MVC we use controllers, which are similar to presenters in that they group together related user actions and each user action has a specific method.
+[`Presenter`](patterns.md#presenter) classes combine several responsibilities around the presentation.
 
-MVC will make sure that the request from the web browser will automatically make the right controller method going off. Each method in a controller represents a URL.
+The [`Presenters`](patterns.md#presenter) call upon the business layer to *save*, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects) and other *logic* around the user action.
 
-After the controller method is done, the view engine kicks in. It will render a piece of HTML. MVC will make sure that the view rendering automatically goes off after the controller method completes.
+Because the [`Presenters`](patterns.md#presenter) combine several responsibilities together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
 
-The view engine we use is Razor. It offers a concise syntax for programming views, in which you combine C# and HTML. Razor has tight integration with MVC. The view engine uses a view model as input, along with the view (template) and the output is a specific piece of HTML.
+### MVC
 
-The dashed line going right through the diagram separates the platform-specific code from the platform independent code. The platform-specific code concerns itself with MVC, HTML and Razor, while the platform independent code is agnostic of what presentation technology we use. That means that we can use multiple presentation techniques for the same application navigation model, such as offering an application both web based as well as based on WinForms. This also provides us the flexibility we need to be able to deploy apps on mobile platforms using the same techniques as we would use for Windows or web.
+`MVC` is the technology of choice in this architecture for programming user interfaces in web technology. In our architecture the `MVC` layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
-Because the architecture is multi-platform, the labels in the diagram above are actually too specific:
+### MVC Controllers
 
-- The *controller* is very specific to MVC and an equivalent might not even be present on other presentation platforms, even though it is advisable to have a central place to manage calls to the presenter and showing the right views depending on its result.
-- The views in WinForms would be the *Forms and UserControls*. It is advised that even if a view can have 'code-behind' to only put dumb code in it and delegate the real work elsewhere.
-- 'Html' can be replaced by the type of presentation output. In WinForms it is the controls you put on a form and their data. But it can also be a generated PDF, or anything that comes out of any presentation technology.
+`MVC` uses [`Controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
+
+[`Controllers`](patterns.md#controller) are quite specific to `MVC` and an equivalent might not be present on other presentation platforms. However, even on other presentation platforms it might be advisable to have a *central spot* to manage calls to the [`Presenter`](patterns.md#presenter) and showing the right [`ciew(s)`](patterns.md#views) depending on its result.
+
+### URLs
+
+`MVC` takes care that the request from the web browser automatically makes the right [`Controller`](patterns.md#controller) method go off. Each method in a [`Controller`](patterns.md#controller) tends to represent a `URL`.
+
+The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by `MVC` [`Controller`](patterns.md#controller) methods and are built up of post data by `MVC` automatically.
+
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) might be used to send whole tree structures of post data over the wire to be correctly parsed by `MVC`.
+
+### View Engine (Razor)
+
+After the [`Controller`](patterns.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off after the [`Controller`](patterns.md#controller) method is done.
+
+### Views (Razor)
+
+The view engine of choice in this architecture is `Razor`. It can offer a concise syntax for programming [views](patterns.md#views), in which you combine `C#` with `HTML`. `Razor` has tight integration with `MVC`. The view engine uses a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`cshtml`) and the output is a specific piece of `HTML`.
+
+In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have code-behind, to only put simple code in `Forms` and `Controls` . The real work might be delegate to the [Presenter](patterns.md#presenter) layer instead.
+
+### HTML
+
+The `Razor` engine produces a piece of `HTML` received by the web browser. 
+
+`HTML` here can be replaced by the type of presentation output. In `WinForms` it might be the controls and their data. But it can be a generated `PDF` file as well. Anything that can come out of presentation any technology might be called a [view](patterns.md#views).
+
+### Platform Independence
+
+The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* code from the *platform independent* code. 
+
+The *platform-specific* code concerns itself with `MVC`, `HTML` and `Razor`, while the *platform independent* code is unaware of which presentation technology is used.
+
+That means that we can use the same kind of application logic for multiple presentation techniques, such as offering an application both *web* based as well as on *Windows*. This helped give us the flexibility to deploy apps on *mobile* platforms using the same base techniques as we would use on *Windows* or *web*.
 
 
 Business Layer
 --------------
 
+`< TODO: Define more terms right inside this text. >`  
+`< TODO: More links. >`  
+
 <img src="images/business-layer.png" width="357" />
 
-What is business logic? Basically anything that is not presentation or data access, is business logic.
+What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered the [business logic](#business-layer).
 
-`< TODO: Layers: Say something about infrastructure, next to persistence, business and presentation. Because then you can say: everything that is not persistence, presentation or infrastructure, is business logic. >`
+### Layer Connections
 
-The business layer resides in between the data access and the presentation layer. The presentation layer calls the business layer for the most part throught the Facades. The Facades are combinators that combine multiple aspects of the business logic, by calling validators, side effects, cascadings and other things. They are 'CRUD-oriented facades'.
+The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
-The business layer executes validations that verify, that the data corresponds to all the rules. Also, the business layer executes side effects when altering data, for instance storing the date time modified or setting default values when you create an entity, or for instance automatically generating a name. The business layer is also responsible for calculations and many other things as represented in the diagram above.
+The [business layer](#business-layer) can use [entities](patterns.md#entity), but sometimes would call [`Repositories`](patterns.md#repository) out of the [data access layer](#data-layer). But using [entity](patterns.md#entities) classes might be the first choice, to have a little less dependence on the [data access](#data-layer).
 
-The business layer uses entities, but sometimes will call repositories out of the data access layer, even though your first choice should be to just use the entities. The presentation layer uses the business layer for anything special that needs to be done. Often when something special is programmed in the presentation layer, it actually belongs in the business layer instead.
+### Magic
 
-The business layer is platform independent and the code can be deployed anywhere. This does sometimes require specific API choices or using our own framework API's. These choices are inherently part of this architecture. But because most things are built on entities and repository interfaces, the business logic is very independent of everything else, which means that the magic of our software can be deployed anywhere.
+The [presentation layer](#presentation-layer) uses the [business layer](#business-layer) for anything special that might be done. The [business layer](#business-layer) executes rules and such.
 
-`< TODO: Add 'Cloning' to big block in the diagram? It might stay too vague if you mention it there. >`
+Often when something special is programmed in the [presentation layer](#presentation-layer), it may be worth considering moving it to the [business layer](#business-layer) instead.
 
-`< TODO: Consider this: `
+### Facades
 
-`- Mention in the layering diagrams that Inverse Property Management is also called LinkTo and Unlink in our architecture and that Cascading is also called UnlinkRelatedEntitiesExtensions and DeleteRelatedEntitiesExtensions. Whether you should pollute the diagrams with that is an open question, because it is a really specific choice that may be broken in the future. On the other hand, the diagrams serve to clarify and are specific to this architecture already. >`
+Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [Validators](patterns.md#validators), [SideEffects](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row.
+
+The [`Facades`](patterns.md#facade) gives a few clear *entry points* into the [business layer](#business-layer).
+
+### CRUD
+
+The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be added.
+
+### Validation
+
+The [business layer](#business-layer) executes [`Validators`](patterns.md#validators) that verify, that the data corresponds to all the rules.
+
+### Side-Effects
+
+The [business layer](#business-layer) executes [`SideEffects`](patterns.md#side-effects) when altering data, for instance updating the *date time modified* or for instance automatically *generating a name*.
+
+### Calculations
+
+The [business layer](#business-layer) would also be responsible for [`calculations`](aspects.md#calculation) and the many other things presented in the diagram above.
+
+### Conversions
+
+When one thing is [converted](aspects.md#conversions) into another, this might be done in the [business layer](#business-layer). This could be simple objects converted from one to the other, but also whole (tree) structures converted into another.
+
+### Enums
+
+Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [enums](aspects.md#enums) in the [business layer](#business-layer), as well as some pattern-wise logic around [enums](aspects.md#enums).
+
+### Resources Strings
+
+[Resource strings](patterns.md#resource-strings) can make texts in an app multi-lingual. These might be put in the [business layer](#business-layer) to translate terms from the business domain and message texts and such.
+
+### Defaults
+
+Setting [default values](aspects.md#defaults) when you create an [entity](patterns.md#entity) might be done automatically by using a [SideEffect](patterns.md#side-effects) in the [facade](patterns.md#facade).
+
+### Cascading
+
+[Cascading](aspects.md#cascading) here means the deletion of unlinking of [entities](patterns.md#entity) when they for instance are about to be deleted. Along with one [entity](patterns.md#entity) other [entities](patterns.md#entity) might be deleted. Other links to [entities](patterns.md#entity) are to be broken before deletion. In this architecture the choice might be made to do it in `C#` code, to make it extra visible that these deletions take place.
+
+### Cloning
+
+Sometimes there is code for [cloning](aspects.md#cloning) an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business layer](#business-layer).
+
+### Relationship Syncing
+
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. This can be given a place in the [business layer](#business-layer) as well.
+
+### Platform Independence
+
+The [business layer](#business-layer) is supposed to be platform independent in this architecture, so that the code can be deployed anywhere. This might sometimes require specific API choices, the use of generic interfaces, or our own [framework API's](apis.md#jjframework). These choices may be inherently part of this architecture. But because most things are built on [entities](patterns.md#entity) and [`repository interfaces`](patterns.md#repository-interfaces), so the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable anywhere.
 
 
 Perpendicular Layers
@@ -139,13 +274,13 @@ The subdivision into data, business and presentation is just about the most impo
 
 The Framework layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
 
-Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the presentation layer, because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the presentation layer in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
+Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the [presentation layer](#presentation-layer), because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
 
 `< TODO: Encorporate this phrase: It is hard to explain what the position of infrastructure is in the architecture. One thing you can say is that the infrastructure should be loose coupled. >`
 
 Services expose business logic through a network interface, often through the SOAP protocol. A service might also expose a presentation model to the outside world. Because it is about a specific network / communication protocol, the service layer is considered part of the infrastructure too.
 
-Another funny thing about infrastructure, for example user right management, is that a program navigation model in the presenter layer can actually adapt itself to what rights the user has. In that respect the platform-independent presentation layer is dependent on the infrastructure, which is a paradox. The reason the presenter layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
+Another funny thing about infrastructure, for example user right management, is that a program navigation model in the [`Presenter`](patterns.md#presenter) layer can actually adapt itself to what rights the user has. In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the infrastructure, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
 
 
 Alternatives
@@ -154,6 +289,6 @@ Alternatives
 -  Data and Business in one layer
     - *Benefit:* Might be easier to understand
     - *Downside:* More likely for data access and business to get entangled
-- No repositories
+- No [`Repositories`](patterns.md#repository)
 
 [back](.)
