@@ -188,7 +188,7 @@ In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserContr
 
 The `Razor` engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In `WinForms` it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be called a [view](patterns.md#views).
+`HTML` here can be replaced by the type of presentation output. In `WinForms` it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [view](patterns.md#views).
 
 ### Platform Independence
 
