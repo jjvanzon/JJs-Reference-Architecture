@@ -210,7 +210,7 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
-The [business layer](#business-layer) can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes would call [repositories](patterns.md#repository) to execute queries.
+The [business layer](#business-layer) can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes it would call [repositories](patterns.md#repository) to execute queries.
 
 ### Magic
 
