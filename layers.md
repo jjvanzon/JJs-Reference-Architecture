@@ -96,7 +96,7 @@ It could also be a different data access technology, instead of [`NHibernate`](a
 
 ### Mappings
 
-The [entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
 [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) is an `API` that can help build up these [mappings](patterns.md#mapping).
 
