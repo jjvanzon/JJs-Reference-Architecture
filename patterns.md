@@ -903,7 +903,7 @@ Even if you do not expect multiple input formats or multiple output formats or a
 
 #### MVC
 
-MVC itself contains a specialized version of this very pattern. The following layering stacks are completely analogus to eachother:
+MVC itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - Selector - Model - Generator – Result
 - Controller - ViewModel - view engine – View
