@@ -48,9 +48,9 @@
     - [Perpendicular](#perpendicular)
     - [Framework](#framework)
     - [Infrastructure](#infrastructure)
-    - [Infrastructure Loosely Coupled](#infrastructure-loosely-coupled)
+    - [Loosely Coupled](#loosely-coupled)
     - [Services](#services)
-- [Alternatives](#alternatives)
+- [Alternative](#alternative)
 
 
 Introduction
@@ -120,7 +120,7 @@ Presentation Layer
 
 A presentation layer in this architecture can be built up of the following sub-layers:
 
-<img src="images/presentation-layer.png" width="400" />
+<img src="images/presentation-layer.png" width="350" />
 
 ### Calls the Business Layer
 
@@ -266,17 +266,17 @@ A [business layer](#business-layer) might be platform independent in this archit
 Perpendicular Layers
 --------------------
 
-The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is fundamental in this software architecture. But there can be other additional layers, called *perpendicular* layers:
+The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is fundamental in this software architecture. But there can be additional layers, called *perpendicular* layers:
 
-<img src="images/perpendicular-layers.png" width="325" />
+<img src="images/perpendicular-layers.png" width="300" />
 
 ### Perpendicular
 
-At the bottom are the previously discussed [Data](#data-layer), [Business](#business-layer) and [Presentation](#presentation-layer) layers, layed down flat on their side. The perpendicular layers are rotated 90 degrees and placed right onto the main layering. That's why these layers are said to be perpendicular.
+At the bottom are the previously discussed [Data](#data-layer), [Business](#business-layer) and [Presentation](#presentation-layer) layers, layed down flat on their side. The perpendicular layers are rotated 90 degrees and placed right onto the main layering. That's why these layers are called *perpendicular*.
 
 ### Framework
 
-The *Framework* layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from *Data* to *Presentation* in the [diagram](#perpendicular-layers).
+The *Framework* layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
 
 ### Infrastructure
 
@@ -286,29 +286,26 @@ The infrastructure can be seen as part at the outer end of the [data layer](#dat
 
 However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code tends to operates independent of the infrastructure in this architecture and only the top-level project determines what the context will be.
 
-### Infrastructure Loosely Coupled
+### Loosely Coupled
 
-The infrastructure tends to be loosely coupled in this software architecture. Let's take [user right management](aspects.md#security) an example.
+The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this software architecture. Let's take [user right management](aspects.md#security) an example.
 
 [User right management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns.md#presenter) layer, adapting it to what rights the user has.
 
 In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an `interface`, that may have a different *implementation* depending on the infrastructural context in which it runs.
 
+Both *infrastructure implementation* and *presentation layer* are dependent on an `interface`, but neither is dependent on each other. Just shedding light on the power of `C# interfaces`.
+
 ### Services
 
-What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like with the `SOAP` protocol.
-
-A service might also expose a [presentation](#presentation-layer) model to the outside world.
+What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like with the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
 
 Because *services* are about a specific network / communication protocol here, this *service* layer might be considered part of the *infrastructure* too.
 
 
-Alternatives
-------------
+Alternative
+-----------
 
--  Data and Business in one layer
-    - *Benefit:* Might be easier to understand
-    - *Downside:* More likely for data access and business to get entangled
-- No [`Repositories`](patterns.md#repository)
+Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled. No [repositories](patterns.md#repository). Just C# interfaces for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository). It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) things and [separation between concerns](practices-and-principles.md#separation-of-concerns) would also still be there.
 
 [back](.)
