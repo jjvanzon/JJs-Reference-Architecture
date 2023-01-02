@@ -114,7 +114,9 @@ The [`Repository`](patterns.md#repository) implementations might not used direct
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
+The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
+
+This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
 
 
 Presentation Layer
