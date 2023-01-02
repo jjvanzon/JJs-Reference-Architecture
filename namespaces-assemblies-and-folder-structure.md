@@ -14,11 +14,11 @@
 - [Tests](#tests)
 - [Order of the Elements](#order-of-the-elements)
     - [Scrambling Technical and Functional](#scrambling-technical-and-functional)
-    - [1st Big, then Small](#1st-big-then-small)
-    - [1st Assembly, then Folders](#1st-assembly-then-folders)
-    - [1st Domain, then Layer](#1st-domain-then-layer)
-    - [1st Functional, then Technical](#1st-functional-then-technical)
-    - [1st Layer, then Domain](#1st-layer-then-domain)
+    - [1st Big then Small](#1st-big-then-small)
+    - [1st Assembly then Folders](#1st-assembly-then-folders)
+    - [1st Domain then Layer](#1st-domain-then-layer)
+    - [1st Functional then Technical](#1st-functional-then-technical)
+    - [1st Layer then Domain](#1st-layer-then-domain)
 
 
 Introduction
@@ -142,13 +142,13 @@ These are the technical concerns:
 
 This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
 
-### 1st Big, then Small
+### 1st Big then Small
 
 `<< simplify >>`
 
 The ordering in the namespace seems arbitrary. But it may helps us to 'scramble' the namespace elements wisely, so that it goes from one level of detail to the next. What happened here is an attempt to is organize things into bigger and smaller chunks. The split up per company may be the largest concern, while the second most important concern is the split up into main software layers (`Data`, `Business`, `Presentation`, etc.) A functional domain (`Calendar`, `Ordering`) is a larger concern than the specific technology used (e.g. `NHibernate`, `Mvc`). And a design pattern may be a level of detail even below that.
 
-### 1st Assembly, then Folders
+### 1st Assembly then Folders
 
 It might make sense to put the assembly subdivision first, and the internal folder subdivision second.
 
@@ -162,7 +162,7 @@ And this would be the folders in it:
 
 - JJ.Data.Ordering.__Mappings.Products__
 
-### 1st Domain, then Layer
+### 1st Domain then Layer
 
 In other projects, a different order of the namespace elements might make more sense:
 
@@ -172,7 +172,7 @@ In other projects, a different order of the namespace elements might make more s
 
 But not all functional domains may have all the 3 layers like that.
 
-### 1st Functional, then Technical
+### 1st Functional then Technical
 
 We could keep functionality together, and technical things together:
 
@@ -181,7 +181,7 @@ We could keep functionality together, and technical things together:
 
 Just looking at this, it does make a lot of sense. But this might get in the way of our plans to put the assembly subdivision first, and the internal folder subdivision second.
 
-### 1st Layer, then Domain
+### 1st Layer then Domain
 
 Putting the main layer (`Data`, `Business`, `Presentation`) before the functional domain (`Calendar`, `Ordering`) was a choice, that made sense, in the specific environment at the time.
 
