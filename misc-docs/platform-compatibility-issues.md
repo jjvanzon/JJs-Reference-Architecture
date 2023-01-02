@@ -1,7 +1,7 @@
 ﻿<style>table td:first-child { white-space: nowrap; vertical-align:top; }</style>
 
-Multi-Platform Compatibility Issues
-===================================
+⚠ Platform Compatibility Issues
+=================================
 
 [back](..)
 
