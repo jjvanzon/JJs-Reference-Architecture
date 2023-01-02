@@ -3,7 +3,7 @@
 
 [back](.)
 
-Software is built up of layers. This article describes how these layers might be structured. Each layer comes with different technology.
+Software might be built up of layers. This article describes how these layers might be structured. Each layer comes with different technology.
 
 <h3>Contents</h3>
 
@@ -58,7 +58,7 @@ Software is built up of layers. This article describes how these layers might be
 Three Layers
 ------------
 
-Software might be split up into `3` layers:
+Software can be split up into `3` layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
