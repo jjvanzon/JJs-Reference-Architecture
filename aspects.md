@@ -1,5 +1,5 @@
-﻿Aspects
-=======
+﻿🧱 Aspects
+===========
 
 [back](.)
 
@@ -115,7 +115,7 @@ Cascading
 
 `See 'LinkTo' under 'Patterns'. `
 
-`See Cascading in Patters.`
+`See Cascading in Patterns.`
 
 `Alternatives: In database. might not play well with ORM. Does not give the idea of control to the C# programmer. Alternative: triggers. Downside: Why would you do that if databases already have delete actions?`
 
