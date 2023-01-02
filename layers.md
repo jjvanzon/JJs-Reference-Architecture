@@ -254,7 +254,7 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Relationship Syncing
 
-[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This can be found in the [business layer](#business-layer) as well.
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This mechanism can be found in the [business layer](#business-layer) as well.
 
 ### Facades
 
