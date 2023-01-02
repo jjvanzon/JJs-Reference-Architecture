@@ -191,8 +191,6 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-`< TODO: More links. >`  
-
 <img src="images/business-layer.png" width="357" />
 
 What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered the [business logic](#business-layer).
@@ -213,7 +211,7 @@ Calling the business layer may happen for the most part through [facades](patter
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete. This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be present too.
+The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete or [CRUD](practices-and-principles.md#crud). This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be present too.
 
 ### Validation
 
