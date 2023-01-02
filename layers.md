@@ -33,8 +33,6 @@ Software can be built up of layers. This article describes how layers could be s
 - [Business Layer](#business-layer)
     - [Layer Connections](#layer-connections)
     - [Magic](#magic)
-    - [Facades](#facades-1)
-    - [CRUD](#crud)
     - [Validation](#validation)
     - [Side-Effects](#side-effects)
     - [Calculations](#calculations)
@@ -45,6 +43,8 @@ Software can be built up of layers. This article describes how layers could be s
     - [Cascading](#cascading)
     - [Cloning](#cloning)
     - [Relationship Syncing](#relationship-syncing)
+    - [Facades](#facades-1)
+    - [CRUD](#crud)
     - [Platform Independence](#platform-independence-2)
 - [Perpendicular Layers](#perpendicular-layers)
     - [Perpendicular](#perpendicular)
@@ -216,14 +216,6 @@ The [business layer](#business-layer) can use [entities](patterns.md#entity) out
 
 The [presentation layer](#presentation-layer) uses the [business layer](#business-layer) for anything special that might be done. The [business layer](#business-layer) executes rules and such. Sometimes when something special is programmed in the [presentation layer](#presentation-layer), it may be worth considering moving it to the [business layer](#business-layer).
 
-### Facades
-
-Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might give a few clear *entry points* into the [business layer](#business-layer).
-
-### CRUD
-
-The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or "[CRUD](practices-and-principles.md#crud)". This set of basic operations might not change much, keeping the interfaces relative stable. In exceptional cases, *non-CRUD* operations might be added too.
-
 ### Validation
 
 The [business layer](#business-layer) can execute [`Validators`](patterns.md#validators) that verify that the data corresponds to all the rules.
@@ -263,6 +255,14 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 ### Relationship Syncing
 
 [Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This can be found in the [business layer](#business-layer) as well.
+
+### Facades
+
+Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might give a few clear *entry points* into the [business layer](#business-layer).
+
+### CRUD
+
+The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or "[CRUD](practices-and-principles.md#crud)". This set of basic operations might not change much, keeping the interfaces relative stable. In exceptional cases, *non-CRUD* operations might be added too.
 
 ### Platform Independence
 
