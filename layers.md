@@ -180,7 +180,7 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A *view engine* that might be used in this architecture is `Razor`. It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`cshtml`). The output is a specific piece of `HTML` sent to the web browser.
+A *view engine* that might be used in this architecture is `Razor`. It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent to the web browser.
 
 In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in `Forms` and `Controls` . The real work might be delegate to  [`Presenters`](patterns.md#presenter) instead.
 
