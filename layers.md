@@ -168,7 +168,7 @@ However, even on other presentation platforms it might be advisable, to have a *
 
 ### URLs
 
-Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. `MVC` makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to represent a `URL`.
+Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. `MVC` makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to get a `URL`.
 
 The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by `MVC` [`Controllers`](patterns.md#controller). The [`ViewModels`](patterns.md#viewmodel) and are built up from post data by `MVC` automatically.
 
