@@ -47,6 +47,7 @@
     - [Prefer Interface Types](#prefer-interface-types)
     - [Nested Class on Top](#nested-class-on-top)
     - [1 Type 1 File](#1-type-1-file)
+    - [No Lone Classes](#no-lone-classes)
 - [Comments](#comments)
     - [Comments in Summaries](#comments-in-summaries)
     - [Comments in English](#comments-in-english)
@@ -940,6 +941,13 @@ Preferably give each class (or interface or enum) its own file (except nested cl
 
 Reason:  
 One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
+
+Exceptions:  
+This guideline might be ignored if the amount of classes really becomes big. Also it does not count for nested classes. Also a single class can be spread among files, if they are partial classes.
+
+### No Lone Classes
+
+It might not be handy to have a lot of folder just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called `Helpers`, if they indeed are simple helper classes.
 
 
 Comments

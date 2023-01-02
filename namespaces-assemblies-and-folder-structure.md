@@ -13,16 +13,12 @@
 - [Technologies](#technologies)
 - [Tests](#tests)
 - [Order of the Elements](#order-of-the-elements)
-    - [Scramnling Technical and Functional](#scramnling-technical-and-functional)
+    - [Scrambling Technical and Functional](#scrambling-technical-and-functional)
     - [Big 1st, Small 2nd](#big-1st-small-2nd)
     - [Assembly 1st, Folders 2nds](#assembly-1st-folders-2nds)
     - [Domain 1st, Layer 2nd](#domain-1st-layer-2nd)
     - [Functional-1st, Technical-2nd](#functional-1st-technical-2nd)
     - [Layer 1st, Domain 2nd](#layer-1st-domain-2nd)
-- [Conclusion](#conclusion)
-- [Details](#details)
-    - [One Class, One File (👍)](#one-class-one-file-)
-    - [Lone Classes (👎)](#lone-classes-)
 
 
 Introduction
@@ -130,7 +126,7 @@ Every assembly can get a `Tests` assembly, which contains automated tests. For i
 Order of the Elements
 ---------------------
 
-### Scramnling Technical and Functional
+### Scrambling Technical and Functional
 
 In this namespacing, the technical and functional concerns seem scrambled:
 
@@ -192,27 +188,5 @@ Putting the main layer (`Data`, `Business`, `Presentation`) before the functiona
 Every software product did not have a data, business or presentation layer. Most products belonged in just one of those layers. There was a certain `n-to-n` relationship between products. A functional domain could be missing a layer, an app could use multiple functional domains, a single functional domain could have multiple front-ends. 
 
 It made more sense there, to make the main layer the first subdivision, and drop in the functional domains from there.
-
-
-Conclusion
-----------
-
-`<< remove? >>`
-
-I guess it all depends on how you wish to organize things. Anyway decisions were made, reasons were given, alternatives presented. Have a great day!
-
-
-Details
--------
-
-`<< move elsewhere >>`
-
-### One Class, One File (👍)
-
-The general rule is to give each class, interface, enum, etc. their own file. The rule can be broken if the amount of classes really becomes big. Also the rule does not count for nested classes. Also a single class can be spread among files, if they are partial classes.
-
-### Lone Classes (👎)
-
-It might not be handy to have a lot of folder just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called `Helpers`, if they indeed are simple helper classes.
 
 [back](.)
