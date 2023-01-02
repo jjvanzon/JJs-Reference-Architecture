@@ -8,6 +8,9 @@ Software can be built up of layers. This article describes how layers could be s
 <h3>Contents</h3>
 
 - [3 Layers](#3-layers)
+    - [Connections Between Layers](#connections-between-layers)
+    - [Skipping Business Layer](#skipping-business-layer)
+    - [Patterns](#patterns)
 - [Data Layer](#data-layer)
     - [Database (DB)](#database-db)
     - [ORM (NHibernate)](#orm-nhibernate)
@@ -58,7 +61,7 @@ Software can be built up of layers. This article describes how layers could be s
 3 Layers
 --------
 
-Software might be split up in 3 layers:
+Software might be split up into 3 main layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
@@ -66,15 +69,21 @@ The [presentation](#presentation-layer) layer is the visual part of a program. I
 
 The [business](#business-layer) layer can model of the functionality of a software program, but you generally don't see it. It defines the rules of the system. It is like the internal, mechanical parts.
 
-The [data](#data-layer) layer models and stores data. It models functionality more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
+The [data](#data-layer) layer models and stores the data. It models functionality more passively: it does not really do anything on its own. It doesn't really process the data. It just stores it.
+
+### Connections Between Layers
 
 The [presentation](#presentation-layer) layer builds upon the [business](#business-layer) layer with user interface technology.
 
 The [business](#business-layer) layer uses the [data](#data-layer) layer to store the data.
 
+### Skipping Business Layer
+
 Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer, and uses the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, as represented with the dotted line in the [diagram](#3-layers)
 
-The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly fixed patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
+### Patterns
+
+The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
 
 
 Data Layer
