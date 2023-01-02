@@ -132,7 +132,7 @@ The [presentation layer](#presentation-layer) calls the [business layer](#busine
 
 ### Presenter
 
-It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of the *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) represents a specific *user action* in that screen.
+It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) represents a specific *user action* in that screen.
 
 ### ViewModel
 
