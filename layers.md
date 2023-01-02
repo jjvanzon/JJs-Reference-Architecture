@@ -45,6 +45,11 @@
     - [Relationship Syncing](#relationship-syncing)
     - [Platform Independence](#platform-independence-2)
 - [Perpendicular Layers](#perpendicular-layers)
+    - [Perpendicular](#perpendicular)
+    - [Framework](#framework)
+    - [Infrastructure](#infrastructure)
+    - [Infrastructure Loosely Coupled](#infrastructure-loosely-coupled)
+    - [Services](#services)
 - [Alternatives](#alternatives)
 
 
@@ -67,7 +72,7 @@ The [business](#business-layer) layer uses the [data](#data-layer) layer to stor
 
 Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer, and uses the [data](#data-layer) layer directly, where the [business](#business-layer) layer would not really add any functionality.
 
-The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly fixed patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer. It is where the magic happens, so to speak.
+The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly fixed patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
 
 
 Data Layer
@@ -199,7 +204,7 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business](#business-layer) layer resides in between the [data access](#data-layer) and the [presentation](#presentation-layer) layer.
 
-The [business](#business-layer) layer can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes would call [repositories](patterns.md#repository) to execute data queries.
+The [business](#business-layer) layer can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes would call [repositories](patterns.md#repository) to execute queries.
 
 ### Magic
 
@@ -207,15 +212,15 @@ The [presentation](#presentation-layer) layer uses the [business](#business-laye
 
 ### Facades
 
-Calling the business layer may happen for the most part through [facades](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. The [`Facades`](patterns.md#facade) give a few clear *entry points* into the [business](#business-layer) layer.
+Calling the business layer may happen for the most part through [`Facades`](patterns.md#facade). They would combine multiple aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. The [`Facades`](patterns.md#facade) give a few clear *entry points* into the [business](#business-layer) layer.
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete or [CRUD](practices-and-principles.md#crud). This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be present too.
+The [`Facades`](patterns.md#facade) may orient around the basic data operations **C**reate, **R**ead, **U**pdate and **D**elete or [CRUD](practices-and-principles.md#crud). This set of basic operations might not change much, keeping these interfaces relative stable. In exceptional cases, additional *non-CRUD* operations might be added too.
 
 ### Validation
 
-The [business](#business-layer) layer executes [`Validators`](patterns.md#validators) that verify, that the data corresponds to all the rules.
+The [business](#business-layer) layer can execute [`Validators`](patterns.md#validators) that verify, that the data corresponds to all the rules.
 
 ### Side-Effects
 
@@ -261,19 +266,41 @@ A [business layer](#business-layer) might be platform independent in this archit
 Perpendicular Layers
 --------------------
 
-The subdivision into data, business and presentation is just about the most important subdivision in software design. But there are other additional layers, called perpendicular layers:
+The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is fundamental in this software architecture. But there can be other additional layers, called *perpendicular* layers:
 
 <img src="images/perpendicular-layers.png" width="325" />
 
-The Framework layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from Data to Presentation in the diagram.
+### Perpendicular
 
-Infrastructure is things like security, network connections and storage. The infrastructure can be seen as part at the outer end of the data layer and part at the outer end of the [presentation](#presentation-layer) layer, because the outer end of the data layer is actually performing the reading and writing from specific data source. However it is the [presentation](#presentation-layer) layer in which the final decision is made what the infrastructural context will be. The rest of the code operates independent of the infrastructure and only the top-level project determines what the context will be.
+At the bottom are the previously discussed [Data](#data-layer), [Business](#business-layer) and [Presentation](#presentation-layer) layers, layed down flat on their side. The perpendicular layers are rotated 90 degrees and placed right onto the main layering. That's why these layers are said to be perpendicular.
 
-`< TODO: Encorporate this phrase: It is hard to explain what the position of infrastructure is in the architecture. One thing you can say is that the infrastructure should be loose coupled. >`
+### Framework
 
-Services expose business logic through a network interface, often through the SOAP protocol. A service might also expose a presentation model to the outside world. Because it is about a specific network / communication protocol, the service layer is considered part of the infrastructure too.
+The *Framework* layer consists of API's that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from *Data* to *Presentation* in the [diagram](#perpendicular-layers).
 
-Another funny thing about infrastructure, for example user right management, is that a program navigation model in the [`Presenter`](patterns.md#presenter) layer can actually adapt itself to what rights the user has. In that respect the platform-independent [presentation](#presentation-layer) layer is dependent on the infrastructure, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent is that it communicates with the infrastructure using an interface, that may have a different implementation depending on the infrastructural context in which it runs.
+### Infrastructure
+
+*Infrastructure* is things like security, network connections and storage.
+
+The infrastructure can be seen as part at the outer end of the [data layer](#data-layer) and part at the outer end of the [presentation](#presentation-layer) layer, because the outer end of the [data layer](#data-layer) is actually performing the reading and writing from specific data source.
+
+However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code tends to operates independent of the infrastructure in this architecture and only the top-level project determines what the context will be.
+
+### Infrastructure Loosely Coupled
+
+The infrastructure tends to be loosely coupled in this software architecture. Let's take [user right management](aspects.md#security) an example.
+
+[User right management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns.md#presenter) layer, adapting it to what rights the user has.
+
+In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an `interface`, that may have a different *implementation* depending on the infrastructural context in which it runs.
+
+### Services
+
+What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like with the `SOAP` protocol.
+
+A service might also expose a [presentation](#presentation-layer) model to the outside world.
+
+Because *services* are about a specific network / communication protocol here, this *service* layer might be considered part of the *infrastructure* too.
 
 
 Alternatives
