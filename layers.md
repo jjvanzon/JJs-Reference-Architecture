@@ -202,7 +202,7 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered business logic. It defines the *rules* of a system, like the internal, mechanical parts. It might be split up into the following things:
+What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered *business logic*. It defines the *rules* of a system, like the internal, mechanical parts. It might be split up into the following things:
 
 <img src="images/business-layer.png" width="357" />
 
