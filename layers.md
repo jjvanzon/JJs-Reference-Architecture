@@ -95,7 +95,7 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But the it could also be another type of data store: an [`XML`](apis.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](apis.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
