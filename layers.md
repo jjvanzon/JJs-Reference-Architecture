@@ -286,7 +286,7 @@ The [Framework](apis.md#jjframework) layer consists of `API's` that could suppor
 
 ### Infrastructure
 
-*Infrastructure* is things like security, network connections and storage.
+*Infrastructure* is things like [security](aspects.md#security), network connections and storage.
 
 The infrastructure can be seen as part at the outer end of the [data layer](#data-layer) and part at the outer end of the [presentation layer](#presentation-layer), because the outer end of the [data layer](#data-layer) is actually performing the reading and writing from specific data source.
 
