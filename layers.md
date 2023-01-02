@@ -266,7 +266,7 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations:
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be platform independent in this architecture, so that code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](apis.md#jjframework). Choices like are part of the software architecture.
+A [business layer](#business-layer) might be platform independent in this architecture, so that code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](apis.md#jjframework). Choices like might be part of the software architecture.
 
 
 Perpendicular Layers
