@@ -8,6 +8,6 @@ Documentation about software development techniques. Used as a base in several h
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
 - 🎁 [API's](apis.md)
-- ⚠ [Platform Compatibility Issues](misc-docs/platform-compatibility-issues.md)
+- ⚠ [Platform Compatibility](misc-docs/platform-compatibility-issues.md)
 
 [back](https://jjvanzon.github.io/)
