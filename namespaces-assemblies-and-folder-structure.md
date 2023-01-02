@@ -42,15 +42,18 @@ Assembly name is built up as follows:
 
 Internally in an assembly each pattern might get its own sub-folder:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test] [.DesignPattern]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+        [.DesignPattern]
 
 If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each design pattern:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test] [.Helpers]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+        [.Helpers]
 
 When a project gets bigger, a design pattern folder might again be split up into partial domains or main entities:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test] [.DesignPattern] [.PartialDomain]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+        [.DesignPattern] [.PartialDomain]
 
 Now each element will be described separately.
 
@@ -183,7 +186,7 @@ Just looking at this, it does make a lot of sense. But this might get in the way
 
 ### 1st Layer then Domain
 
-Putting the main layer (`Data`, `Business`, `Presentation`) before the functional domain (`Calendar`, `Ordering`) was a choice, that made sense, in the specific environment at the time.
+Putting the main layer (`Data`, `Business`, `Presentation`) before the functional domain (`Calendar`, `Ordering`) was a choice, that made sense, in a specific environment at the time.
 
 Every software product did not have a data, business or presentation layer. Most products belonged in just one of those layers. There was a certain `n-to-n` relationship between products. A functional domain could be missing a layer, an app could use multiple functional domains, a single functional domain could have multiple front-ends. 
 
