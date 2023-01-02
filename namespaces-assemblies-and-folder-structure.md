@@ -32,28 +32,31 @@ Structure
 
 Solution files are put in the code root.
 
-Assembly names, namespaces and folder structure are similar to eachother. An assembly's name is its root namespace. The folder structure also corresponds to the namespacing.
+Assembly names, namespaces and folder structure are similar to eachother.
 
-Each element of the namespacing will be described separately. But the namespace structure in a nutshell:
+An assembly's name is its root namespace.  
+The folder structure also corresponds to the namespacing.
+
+Details will follow, but the namespace structure in a nutshell:
 
 Assembly name is built up as follows:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain[.Technology][.Test]
 
-Internally in an assembly each pattern might get its own sub-folder:
+Internally in an assembly each design pattern might get its own sub-folder:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain[.Technology][.Test]
         [.DesignPattern]
 
 If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each design pattern:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain[.Technology][.Test]
         [.Helpers]
 
 When a project gets bigger, a design pattern folder might again be split up into partial domains or main entities:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.DesignPattern] [.PartialDomain]
+    Company.SoftwareLayer.FunctionalDomain[.Technology][.Test]
+        [.DesignPattern][.PartialDomain]
 
 Now each element will be described separately.
 
