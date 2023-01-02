@@ -64,7 +64,7 @@ Now each element will be described separately.
 Root Namespace / Company Name
 -----------------------------
 
-In this architecture the root namespace will be the company name, for instance:
+In this architecture the root namespace is the company name, for instance:
 
     JJ
 
@@ -72,27 +72,27 @@ In this architecture the root namespace will be the company name, for instance:
 Layers
 ------
 
-The 2nd level in the namespacing consists of the following parts:
+The 2nd level in the namespacing may consist of the following parts:
 
 |                     |                     |
 |---------------------|---------------------|
 | JJ.__Data__         | The data layer including the entity models and persistence.
 | JJ.__Business__     | The business logic layer
 | JJ.__Presentation__ | The presentation layer
-| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the software architecture can have reusable framework code to support it.
+| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the software architecture can have reusable code to support it.
 
 And second in line:
 
 |                  |                  |
 |------------------|------------------|
-| JJ.__Demos__     | Code for demonstration purposes or for trying things out.
-| JJ.__Utilities__ | Processes that are not run very often. Utilities contains small programs. E.g. load translations, things to run for deployment.
+| JJ.__Demos__     | Code for demonstration purposes or trying things out.
+| JJ.__Utilities__ | Utilities are small programs. E.g. load translations, things to run for deployment.
 
 
 Functional Domains
 ------------------
 
-The 3rd level in the namespacing is the functional domain. Examples:
+The 3rd level in the namespacing is the *functional domain*. Examples:
 
 - JJ.Data.__Calendar__  
 - JJ.Business.__Calendar__  
@@ -108,7 +108,7 @@ The 'functional domain' of the framework layer is usually a technical aspect. Ex
 Technologies
 ------------
 
-The 4th level in the namespacing denotes the used technology. It is kind of analogus to a file extension. You can might find two assemblies: platform-independent and one platform-specific.
+The 4th level in the namespacing denotes the used *technology*. It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
 
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.__NHibernate__  
@@ -117,7 +117,7 @@ The 4th level in the namespacing denotes the used technology. It is kind of anal
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that a portion of the code can be shared between platforms. It also means, that we can specifically choose  which technologies we want to be dependent on.
+This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose  which technologies we want to be dependent on.
 
 
 Tests
@@ -134,9 +134,7 @@ Order of the Elements
 
 ### Scrambling Technical and Functional
 
-In this namespacing, the technical and functional concerns seem scrambled:
-
-- JJ.Data.Ordering.NHibernate.Mappings.Products
+In this namespacing, the technical and functional concerns seem scrambled.
 
 These are the functional (or commercial) concerns:
 
@@ -150,15 +148,13 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 ### 1st Big then Small
 
-`<< simplify >>`
+The ordering in the namespace may seem arbitrary. But what happened here is an attempt to is organize things into bigger and smaller chunks.
 
-The ordering in the namespace seems arbitrary. But it may helps us to 'scramble' the namespace elements wisely, so that it goes from one level of detail to the next. What happened here is an attempt to is organize things into bigger and smaller chunks. The split up per company may be the largest concern, while the second most important concern is the split up into main software layers (`Data`, `Business`, `Presentation`, etc.) A functional domain (`Calendar`, `Ordering`) is a larger concern than the specific technology used (e.g. `NHibernate`, `Mvc`). And a design pattern may be a level of detail even below that.
+The split up per company may be the largest concern, while concern of secondary importance is the split up into main software layers (`Data`, `Business`, `Presentation`, etc.) A functional domain (`Calendar`, `Ordering`) is a larger concern than the specific technology used (e.g. `NHibernate`, `Mvc`). And a design pattern may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 
-It might make sense to put the assembly subdivision first, and the internal folder subdivision second.
-
-- JJ.Data.Ordering.Mappings.Products
+What's also done here is putting the *assembly* subdivision first, and the internal *folder* subdivision second.
 
 This would be the assembly:
 
