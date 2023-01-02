@@ -152,7 +152,7 @@ The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patter
 
 They call upon the [business layer](#business-layer) to *save*, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
-Because the [`Presenters`](patterns.md#presenter) combine several responsibilities together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of a [presentation layer](#presentation-layer).
+Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of a [presentation layer](#presentation-layer).
 
 ### MVC
 
