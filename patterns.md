@@ -434,7 +434,7 @@ All view model creation should be delegated to the ToViewModel layer (rather tha
 
 A presenter is a combinator class, in that it combines multiple smaller aspects of the presentation logic, by delegating to other classes. It also combines it with calls to the business layer.
 
-A presenter action method should be organized into phases:
+A presenter action method might be organized into phases:
 
 - Security
 - ViewModel Validation
