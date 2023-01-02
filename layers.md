@@ -304,8 +304,6 @@ In that respect the platform-independent [presentation layer](#presentation-laye
 
 What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
 
-Because *services* are about a specific network / communication protocol here, this *service* layer might be considered part of the *infrastructure* too.
-
 
 Alternatives
 ------------
