@@ -230,7 +230,7 @@ The [business layer](#business-layer) would also be responsible for [calculation
 
 ### Conversions
 
-One thing can be [converted](aspects.md#conversion) to another. Code for this might be found in the [business layer](#business-layer). This could be for *simple objects*. But you might also convert whole *trees* of objects to another.
+One thing can be [converted](aspects.md#conversion) to another. Conversions might be found in the [business layer](#business-layer). This could be for *simple objects*. But you might also convert whole *trees* of objects to another.
 
 ### Enums
 
