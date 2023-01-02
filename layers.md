@@ -234,7 +234,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Enums
 
-[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). Also some pattern-wise logic around [`enums`](aspects.md#enums) might be present.
+[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). Also some pattern-wise logic around [`enums`](aspects.md#enums) might be there.
 
 ### Resources Strings
 
