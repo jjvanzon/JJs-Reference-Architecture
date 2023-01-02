@@ -3,9 +3,11 @@
 
 [back](.)
 
+Software is built up of layers. This article describes how these layers might be structured. Each layer comes with choosing specific technology.
+
 <h3>Contents</h3>
 
-- [Introduction](#introduction)
+- [Three Layers](#three-layers)
 - [Data Layer](#data-layer)
     - [Database (DB)](#database-db)
     - [ORM (NHibernate)](#orm-nhibernate)
@@ -50,13 +52,13 @@
     - [Infrastructure](#infrastructure)
     - [Loosely Coupled](#loosely-coupled)
     - [Services](#services)
-- [Alternative](#alternative)
+- [Alternatives](#alternatives)
 
 
-Introduction
-------------
+Three Layers
+--------
 
-Software might be split up into 3 layers:
+Software might be split up into `3` layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
@@ -78,7 +80,7 @@ The [data](#data-layer) layer may be programmed with mostly fixed patterns in th
 Data Layer
 ----------
 
-A data layer can be built up of the following sub-layers:
+The *data layer* models and stores the data. It might be built up of the following sub-layers:
 
 <img src="images/data-layer.png" width="400" />
 
@@ -118,7 +120,7 @@ The dashed line going right through the [diagram](#data-layer), separates the *p
 Presentation Layer
 ------------------
 
-A presentation layer in this architecture can be built up of the following sub-layers:
+The *presentation* layer is the visual part of a program. It is what the user sees. It can be split up into the following sub-layers:
 
 <img src="images/presentation-layer.png" width="350" />
 
@@ -196,9 +198,9 @@ That means that we can use the same kind of application logic for multiple prese
 Business Layer
 --------------
 
-<img src="images/business-layer.png" width="357" />
+What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered the [business logic](#business-layer). It defines the *rules* of a system, like the internal, mechanical parts. It might be split up into the following things:
 
-What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered the [business logic](#business-layer).
+<img src="images/business-layer.png" width="357" />
 
 ### Layer Connections
 
@@ -303,9 +305,9 @@ What's meant with *services* in this architecture, is exposing [business logic](
 Because *services* are about a specific network / communication protocol here, this *service* layer might be considered part of the *infrastructure* too.
 
 
-Alternative
------------
+Alternatives
+------------
 
-Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled. No [repositories](patterns.md#repository). Just C# interfaces for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository). It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) things and [separation between concerns](practices-and-principles.md#separation-of-concerns) would also still be there.
+Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled. No [repositories](patterns.md#repository). Just C# interfaces for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository). It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation between concerns](practices-and-principles.md#separation-of-concerns) would also still be there.
 
 [back](.)
