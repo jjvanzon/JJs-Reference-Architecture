@@ -5,78 +5,98 @@
 
 <h3>Contents</h3>
 
-- [General Structure](#general-structure)
+- [Introduction](#introduction)
+- [Structure](#structure)
 - [Root Namespace / Company Name](#root-namespace--company-name)
-- [Main Layers](#main-layers)
-- [Business Domains](#business-domains)
+- [Layers](#layers)
+- [Functional Domains](#functional-domains)
 - [Technologies](#technologies)
-- [Test Projects](#test-projects)
+- [Tests](#tests)
+- [Order of the Elements](#order-of-the-elements)
+    - [Scramnling Technical and Functional](#scramnling-technical-and-functional)
+    - [Big 1st, Small 2nd](#big-1st-small-2nd)
+    - [Assembly 1st, Folders 2nds](#assembly-1st-folders-2nds)
+    - [Domain 1st, Layer 2nd](#domain-1st-layer-2nd)
+    - [Functional-1st, Technical-2nd](#functional-1st-technical-2nd)
+    - [Layer 1st, Domain 2nd](#layer-1st-domain-2nd)
+- [Conclusion](#conclusion)
 - [Details](#details)
-    - [One Class, One File](#one-class-one-file)
-    - [Lone Classes (bad)](#lone-classes-bad)
-    - ['Scramled' Technical and Functional Concerns](#scramled-technical-and-functional-concerns)
+    - [One Class, One File (👍)](#one-class-one-file-)
+    - [Lone Classes (👎)](#lone-classes-)
 
 
-General Structure
------------------
+Introduction
+------------
+
+This article describes how namespaces and folders might be structured in this software architecture.
+
+
+Structure
+---------
 
 Solution files are put in the code root.
 
-Assembly names, namespaces and folder structure are similar to eachother. An assembly's name will be its root namespace. The folder structure will also correspond to the namespacing.
+Assembly names, namespaces and folder structure are similar to eachother. An assembly's name is its root namespace. The folder structure also corresponds to the namespacing.
 
-An assembly name is built up as follows:
+Each element of the namespacing will be described separately. But the namespace structure in a nutshell:
 
-    Company.SoftwareLayer.BusinessDomain [.Technology] [.Test]
+Assembly name is built up as follows:
 
-Internally in an assembly each pattern can get its own sub-folder:
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
 
-    Company.SoftwareLayer.BusinessDomain [.Technology] [.Test] [.DesignPattern]
+Internally in an assembly each pattern might get its own sub-folder:
 
-If a project is very small, you might use a single sub-folder 'Helpers', instead of a folder for each design pattern.
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test] [.DesignPattern]
 
-When a project gets big, a design pattern folder might again be split up into partial domains or main entities:
+If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each design pattern:
 
-    Company.SoftwareLayer.BusinessDomain [.Technology] [.Test] [.DesignPattern] [.PartialDomain]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test] [.Helpers]
+
+When a project gets bigger, a design pattern folder might again be split up into partial domains or main entities:
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test] [.DesignPattern] [.PartialDomain]
+
+Now each element will be described separately.
 
 
 Root Namespace / Company Name
 -----------------------------
 
-In this architecture the root namespace will be the 'company name', for instance:
+In this architecture the root namespace will be the company name, for instance:
 
     JJ
 
 
-Main Layers
------------
+Layers
+------
 
-The second level in the namespacing consists of the following parts:
+The 2nd level in the namespacing consists of the following parts:
 
 |                     |                     |
 |---------------------|---------------------|
 | JJ.__Data__         | The data layer including the entity models and persistence.
 | JJ.__Business__     | The business logic layer
 | JJ.__Presentation__ | The presentation layer
-| JJ.__Framework__    | Contains any reusable code, that is independent from any domain model. Any layer in the software architecture can have reusable framework code to support it.
+| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the software architecture can have reusable framework code to support it.
 
-And the less important:
+And second in line:
 
 |                  |                  |
 |------------------|------------------|
-| JJ.__Demos__     | Demo code for educational purposes
-| JJ.__Utilities__ | Processes that are not run very often. Utilities contains small programs for IT. E.g. load translations, things to run for deployment.
+| JJ.__Demos__     | Code for demonstration purposes or for trying things out.
+| JJ.__Utilities__ | Processes that are not run very often. Utilities contains small programs. E.g. load translations, things to run for deployment.
 
 
-Business Domains
-----------------
+Functional Domains
+------------------
 
-The third level in the namespacing is the business domain. A business domain can be present in multiple layers, or missing in a specific layer, an app can use multiple business domains, a single business domain can have multiple front-ends. Examples:
+The 3rd level in the namespacing is the functional domain. Examples:
 
 - JJ.Data.__Calendar__  
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'business domain' of the framework layer is usually a technical aspect. Examples:
+The 'functional domain' of the framework layer is usually a technical aspect. Examples:
 
 - JJ.Framework.__Validation__  
 - JJ.Framework.__Security__  
@@ -86,7 +106,7 @@ The 'business domain' of the framework layer is usually a technical aspect. Exam
 Technologies
 ------------
 
-The fourth level in the namespacing denotes the used technology. It is kind of analogus to a file extension. You can often find two assemblies: platform-independent and one platform-specific.
+The 4th level in the namespacing denotes the used technology. It is kind of analogus to a file extension. You can might find two assemblies: platform-independent and one platform-specific.
 
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.__NHibernate__  
@@ -95,58 +115,104 @@ The fourth level in the namespacing denotes the used technology. It is kind of a
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that much of the code is shared between platforms. It also means, that we can be very specific about which technologies we want to be dependent on.
+This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that a portion of the code can be shared between platforms. It also means, that we can specifically choose  which technologies we want to be dependent on.
 
 
-Test Projects
--------------
+Tests
+-----
 
-Every assembly can get a Test assembly, which contains unit tests. For instance:
+Every assembly can get a `Tests` assembly, which contains automated tests. For instance:
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
 
 
-Details
--------
+Order of the Elements
+---------------------
 
-### One Class, One File
+### Scramnling Technical and Functional
 
-The general rule is that all classes, interfaces, enums, etc. get their own file. The rule can be broken if the amount of classes really becomes big and also the rule does not count for nested classes. Also a single class can be spread among files, if they are partial classes.
+In this namespacing, the technical and functional concerns seem scrambled:
 
-### Lone Classes (bad)
-
-It is unhandy to have a whole bunch of your assembly's folders just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called 'Helpers', if they indeed are just simple helper classes.
-
-### 'Scramled' Technical and Functional Concerns
-
-In our namespacing, the technical and functional pieces seem scrambled:
-
-- JJ.Business.Ordering.Validation.Products
+- JJ.Data.Ordering.NHibernate.Mappings.Products
 
 These are the functional (or commercial) concerns:
 
-- __JJ__.Business.__Ordering__.Validation.__Products__
+- __JJ__.Data.__Ordering__.NHibernate.Mappings.__Products__
 
 These are the technical concerns:
 
-- JJ.__Business__.Ordering.__Validation__.Products
+- JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
 
-The reason for 'scrambling' of technical and functional concerns, is rooted in that we are trying to project something 2-dimensional (funtional vs. technical) onto something sequential (written text). We could artificially keep functionality together and technical things together:
+This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
 
-- __JJ.Ordering.Products__.Business.NHibernate.Validation
-- JJ.Ordering.Products.__Business.NHibernate.Validation__
+### Big 1st, Small 2nd
 
-But this does not help us do our job.
+`<< simplify >>`
 
-What we instead try to do is organize things into bigger and smaller chunks. The split up into companies' intellectual property is the largest concern, while the second most important concern is the split up into main software layers (`Data`, `Business`, `Presentation`, etc.) A business domain is a larger concern than the specific technology used (e.g. `NHibernate`, `Mvc`). And a design pattern is a level of detail even below that.
+The ordering in the namespace seems arbitrary. But it may helps us to 'scramble' the namespace elements wisely, so that it goes from one level of detail to the next. What happened here is an attempt to is organize things into bigger and smaller chunks. The split up per company may be the largest concern, while the second most important concern is the split up into main software layers (`Data`, `Business`, `Presentation`, etc.) A functional domain (`Calendar`, `Ordering`) is a larger concern than the specific technology used (e.g. `NHibernate`, `Mvc`). And a design pattern may be a level of detail even below that.
 
-Also: in the less recommended namespacing it is not obvious that `JJ.Ordering.Products` is about validating the products, while if you put the Products sub-namespace at the end (`...Validation.Products`) this is obvious.
+### Assembly 1st, Folders 2nds
 
-Another problem with starting with `JJ.Ordering.Products` instead of `JJ.Business` is that it suggests that `Ordering` has a `Data`, `Business` and `Presentation` layer, while really `Ordering` does not need to be present in all layers. It gives a false sense that you create a `Presentation` layer it must be put into an already existing business domain or that a business domain must always have al three layers present. It would also suggests that a presentation layer in one business domain can only use one business layer. The reality is, that a presentation layer can use multiple business layers.
+It might make sense to put the assembly subdivision first, and the internal folder subdivision second.
 
-It is less confusing from a software design perspective to have all layers present and whether a business domain is present in a layer is optional. That makes it more obvious that there is an n-to-n relationship between layers and business domains.
+- JJ.Data.Ordering.Mappings.Products
 
-But the ordering in the namespace is arbitrary. It just helps us to 'scramble' the namespace parts wisely, so that it goes from one level of detail to the next.
+This would be the assembly:
+
+- __JJ.Data.Ordering__.Mappings.Products
+
+And this would be the folders in it:
+
+- JJ.Data.Ordering.__Mappings.Products__
+
+### Domain 1st, Layer 2nd
+
+In other projects, a different order of the namespace elements might make more sense:
+
+- JJ.__Calendar__.Data
+- JJ.__Calendar__.Business
+- JJ.__Calendar__.Presentation
+
+But not all functional domains may have all the 3 layers like that.
+
+### Functional-1st, Technical-2nd
+
+We could keep functionality together, and technical things together:
+
+- __JJ.Ordering.Products__.Data.NHibernate.Mappings
+- JJ.Ordering.Products.__Data.NHibernate.Mappings__
+
+Just looking at this, it does make a lot of sense. But this might get in the way of our plans to put the assembly subdivision first, and the internal folder subdivision second.
+
+### Layer 1st, Domain 2nd
+
+Putting the main layer (`Data`, `Business`, `Presentation`) before the functional domain (`Calendar`, `Ordering`) was a choice, that made sense, in the specific environment at the time.
+
+Every software product did not have a data, business or presentation layer. Most products belonged in just one of those layers. There was a certain `n-to-n` relationship between products. A functional domain could be missing a layer, an app could use multiple functional domains, a single functional domain could have multiple front-ends. 
+
+It made more sense there, to make the main layer the first subdivision, and drop in the functional domains from there.
+
+
+Conclusion
+----------
+
+`<< remove? >>`
+
+I guess it all depends on how you wish to organize things. Anyway decisions were made, reasons were given, alternatives presented. Have a great day!
+
+
+Details
+-------
+
+`<< move elsewhere >>`
+
+### One Class, One File (👍)
+
+The general rule is to give each class, interface, enum, etc. their own file. The rule can be broken if the amount of classes really becomes big. Also the rule does not count for nested classes. Also a single class can be spread among files, if they are partial classes.
+
+### Lone Classes (👎)
+
+It might not be handy to have a lot of folder just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called `Helpers`, if they indeed are simple helper classes.
 
 [back](.)
