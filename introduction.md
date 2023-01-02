@@ -80,7 +80,7 @@ There are two parts of this software architecture:
 - Application architecture
 - [Service oriented architecture](service-oriented-architecture.md)
 
-The *application architecture* is the main part. It is about business domains and everything you could show on a screen, including a framework of reusable parts. The *service oriented architecture* is explained separately and is mostly about linking different systems together.
+The *application architecture* is the main part. It is about functional domains and everything you could show on a screen, including a framework of reusable parts. The *service oriented architecture* is explained separately and is mostly about linking different systems together.
 
 The way of working described here is just a suggestion. It describes *a* way of working, not *the* way of working. The described principles and practices can be used at will.
 

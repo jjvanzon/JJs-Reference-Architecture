@@ -830,7 +830,7 @@ It is not recommended to let a parameter be both input and output. Usually it is
 
 ### Keep the Names Consistent
 
-Use the same name for something everywhere. For instance if the business domain contains one name, do not reinvent a new name for it. Use the same name everywhere in class names, property names and variable names. Do not come up with a new name for things half way the code.
+Use the same name for something everywhere. For instance if the functional domain contains one name, do not reinvent a new name for it. Use the same name everywhere in class names, property names and variable names. Do not come up with a new name for things half way the code.
 
 Here is a code example with a name that changes out of the blue:
 

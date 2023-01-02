@@ -230,7 +230,7 @@ Entity Status Management
 
 Entity status management (or 'object status management') is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the presentation and business layer for a particular functional domain.
 
-There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every business domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
+There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
 
 <h3>Alternatives</h3>
 
@@ -627,7 +627,7 @@ Another alternative is to give the translation item entity a whole bunch of fore
 
 NameAndDescription { ID, Name, Description, CultureName, __ProductID, DepartmentID__ }
 
-A downside of that is that the table structure is dependent on the domain model you applied it to. This can be a problem if you want your translation structure to be very isolated from the other business domains or used by business domains that you do not develop yourself. It really depends on your requirements whether this is a problem at all.
+A downside of that is that the table structure is dependent on the domain model you applied it to. This can be a problem if you want your translation structure to be very isolated from the other functional domains or used by functional domains that you do not develop yourself. It really depends on your requirements whether this is a problem at all.
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
