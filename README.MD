@@ -10,7 +10,7 @@ Contents
 
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
-- 🍱 [Namespaces, Assemblies & Folder Structure](namespaces-assemblies-and-folders.md)
+- 🍱 [Namespaces, Assemblies & Folders](namespaces-assemblies-and-folders.md)
 - 🧶 [Patterns](patterns.md)
 - 🧱 [Aspects](aspects.md)
 - 🎁 [API's](apis.md)
