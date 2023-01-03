@@ -682,7 +682,9 @@ Use proper indentation.
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
-object ParseValue(string input, Type type, IFormatProvider formatProvider)
+object ParseValue(
+    string input, Type type,
+    IFormatProvider formatProvider)
 {
     if (type.IsNullableType())
     {
