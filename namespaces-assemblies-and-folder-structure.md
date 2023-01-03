@@ -166,7 +166,7 @@ And this would be the folders in it:
 
 ### 1st Domain then Layer
 
-In other projects, a different order of the namespace elements could make more sense. First the *domain* then the *layer:*
+In other projects, a different order of the namespace elements might make more sense. First the *domain* then the *layer:*
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
@@ -197,9 +197,9 @@ Putting the *main layer* (`Data`, `Business`, `Presentation`) before the *functi
 - JJ.Presentation.__InternalManager__
 - JJ.Presentation.__CoolHub__
 
-Not every software had a data, business or presentation layer. Most products just had one of those layers.
+Not every software had a data, business or presentation layer. Most products just had *one* of those layers.
 
-There was a certain *n-to-n* relationship between products. A functional domain could be missing a layer, an app could use multiple functional domains, a single functional domain could have multiple front-ends. 
+There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
 It made more sense there, to make the *main layer* the first subdivision, and drop in the *functional domains* from there.
 
