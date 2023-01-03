@@ -1076,7 +1076,7 @@ int x;
 
 ```cs
 // This is x
-int x;`
+int x;
 ```
 
 </td></tr></table>
