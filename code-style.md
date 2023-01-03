@@ -87,7 +87,7 @@ Introduction
 
 This article lists coding style preferenced, that might be followed in certain projects.
 
-It mostlys conform to the Microsoft standard described in the following documents:
+It mostly conform to the Microsoft standard described in the following documents:
 
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
@@ -349,7 +349,7 @@ Perhaps avoid event names that use two event-indications in the name. For instan
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
 
-```cs
+```csharp
 [TestClass]
 public class ValidatorTests()
 {
@@ -359,7 +359,7 @@ public class ValidatorTests()
 
 </td><td>
 
-```cs
+```csharp
 [TestClass]
 public class Tests_Validator()
 {
