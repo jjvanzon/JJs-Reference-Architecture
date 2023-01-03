@@ -1190,7 +1190,7 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 #### Anonymous Types
 
-<table><tr><th>Recommended</th><th>Not Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Not Preferred</th></tr><tr><td markdown="1">
 
 ***`var`***` q = from x in list select new { A = x.A };`
 
