@@ -682,13 +682,77 @@ Use proper indentation.
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
-[ TODO: Example. ]
+object ParseValue(string input, Type type, IFormatProvider formatProvider)
+{
+    if (type.IsNullableType())
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return null;
+        }
+
+        type = type.GetUnderlyingNullableTypeFast();
+    }
+
+    if (type.IsEnum)
+    {
+        return Enum.Parse(type, input);
+    }
+
+    if (type == typeof(TimeSpan))
+    {
+        return TimeSpan.Parse(input);
+    }
+
+    if (type == typeof(Guid))
+    {
+        return new Guid(input);
+    }
+
+    return Convert.ChangeType(input, type, formatProvider);
+}
 ```
 
 </td><td markdown="1">
 
 ```cs
-[ TODO: Example. ]
+        object ParseValue(string input,
+Type type, 
+        IFormatProvider formatProvider)
+{
+        if (type.IsNullableType()) 
+        {
+    if (string.IsNullOrEmpty(input)) {
+    return null;
+}
+
+type = type.GetUnderlyingNullableTypeFast();
+    }
+
+        if (type.IsEnum) 
+    {
+return Enum.Parse(type, input);
+    }
+
+            if (type == 
+    typeof(TimeSpan))
+{
+                return TimeSpan.Parse(input);
+}
+
+            if (type == typeof(Guid))
+            { 
+    return new Guid(input);
+            }
+
+
+        return 
+    Convert.ChangeType(
+        input, 
+
+            type, formatProvider);
+                }
+                }
 ```
 
 </td></tr></table>
