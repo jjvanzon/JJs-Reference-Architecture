@@ -1345,7 +1345,8 @@ __Recommended__
 using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
 ...
 
-IUserRepository_Cms cmsUserRepository = PersistenceHelper.CreateCmsRepository<IUserRepository_Cms>(cmsContext);
+IUserRepository_Cms cmsUserRepository = 
+    PersistenceHelper.CreateCmsRepository<IUserRepository_Cms>(cmsContext);
 ```
 
 Reason:  
