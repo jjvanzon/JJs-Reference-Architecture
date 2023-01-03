@@ -1,4 +1,4 @@
-﻿🏷 Namespaces, Assemblies and Folder Structure
+﻿🍱 Namespaces, Assemblies and Folder Structure
 ===============================================
 
 [back](.)
