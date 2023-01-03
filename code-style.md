@@ -3,7 +3,7 @@
 
 [back](.)
 
-<!--<style> section, .wrapper { max-width:100% } </style>-->
+<style> section, .wrapper { max-width: 90% } </style>
 
 <h3>Contents</h3>
 
