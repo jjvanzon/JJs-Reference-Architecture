@@ -1373,8 +1373,7 @@ Misc Preferences
 
 ### Null / Empty Strings
 
-Prefer handling both `null` and `""` the same way.
-
+Prefer handling both `null` and `""` the same way.  
 Reason: No surprises when using either `null` or `""`.
 
 ### String.IsNullOrEmpty
