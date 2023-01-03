@@ -3,9 +3,7 @@
 
 [back](.)
 
-<style type="text/css" rel="stylesheet">
-section, .wrapper { max-width:100% } table { font-size: 9pt }
-</style>
+<style> section, .wrapper { max-width:100% } </style>
 
 <h3>Contents</h3>
 
