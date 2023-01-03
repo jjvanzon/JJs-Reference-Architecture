@@ -682,9 +682,7 @@ Use proper indentation.
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
-object ParseValue(
-    string input, Type type,
-    IFormatProvider formatProvider)
+object ParseValue(string input, Type type)
 {
     if (type.IsNullableType())
     {
@@ -711,7 +709,7 @@ object ParseValue(
         return new Guid(input);
     }
 
-    return Convert.ChangeType(input, type, formatProvider);
+    return Convert.ChangeType(input, type);
 }
 ```
 
@@ -719,8 +717,8 @@ object ParseValue(
 
 ```cs
         object ParseValue(string input,
-Type type, 
-        IFormatProvider formatProvider)
+Type type 
+            )
 {
         if (type.IsNullableType()) 
         {
@@ -749,11 +747,10 @@ return Enum.Parse(type, input);
 
 
         return 
-    Convert.ChangeType(
-        input, 
+        Convert.ChangeType(
+   input, 
 
-            type, formatProvider);
-                }
+        type);
                 }
 ```
 
