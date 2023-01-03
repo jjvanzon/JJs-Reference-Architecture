@@ -3,6 +3,10 @@
 
 [back](.)
 
+<style type="text/css" rel="stylesheet">
+section, .wrapper { max-width:100% } table { font-size: 9pt }
+</style>
+
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
