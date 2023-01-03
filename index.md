@@ -7,7 +7,7 @@ Documentation about software development techniques. Used as a base in several h
 
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
-- 🍱 [Namespaces, Assemblies & Folder Structure](namespaces-assemblies-and-folder-structure.md)
+- 🍱 [Namespaces, Assemblies & Folder Structure](namespaces-assemblies-and-folders.md)
 - 🎁 [API's](apis.md)
 - 🌐 [Service Oriented Architecture](service-oriented-architecture.md)
 - 👨‍💻 [Code Style](code-style.md)

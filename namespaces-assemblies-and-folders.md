@@ -1,5 +1,5 @@
-﻿🍱 Namespaces, Assemblies and Folder Structure
-===============================================
+﻿🍱 Namespaces, Assemblies & Folders
+====================================
 
 [back](.)
 
@@ -201,6 +201,6 @@ Not every software had a data, business or presentation layer. Most products jus
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
-It made more sense there, to make the *main layer* the first subdivision, and drop in the *functional domains* from there.
+It made more sense there, to make the *main layer* the first subdivision, and drop in the *functional domains* there.
 
 [back](.)
