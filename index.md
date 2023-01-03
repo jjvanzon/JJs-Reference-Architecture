@@ -7,6 +7,7 @@ Documentation about software development techniques. Used as a base in several h
 
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
+- 🏷 [Namespaces, Assemblies & Folder Structure](namespaces-assemblies-and-folder-structure.md)
 - 🎁 [API's](apis.md)
 - ⚠ [Platform Compatibility](misc-docs/platform-compatibility.md)
 
