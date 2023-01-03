@@ -347,9 +347,9 @@ Perhaps avoid event names that use two event-indications in the name. For instan
 
 ### Test Class Names to End with 'Tests'
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+__Recommended__
 
-```csharp
+```cs
 [TestClass]
 public class ValidatorTests()
 {
@@ -357,17 +357,15 @@ public class ValidatorTests()
 }
 ```
 
-</td><td>
+__Less Preferred__
 
-```csharp
+```cs
 [TestClass]
 public class Tests_Validator()
 {
     
 }
 ```
-
-</td></tr></table>
 
 Reason: Just convention.
 
