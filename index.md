@@ -9,6 +9,7 @@ Documentation about software development techniques. Used as a base in several h
 - 🧅 [Layers](layers.md)
 - 🍱 [Namespaces, Assemblies & Folder Structure](namespaces-assemblies-and-folder-structure.md)
 - 🎁 [API's](apis.md)
+- 🌐 [Service Oriented Architecture](service-oriented-architecture.md)
 - 👨‍💻 [Code Style](code-style.md)
 - ⚠ [Platform Compatibility](misc-docs/platform-compatibility.md)
 
