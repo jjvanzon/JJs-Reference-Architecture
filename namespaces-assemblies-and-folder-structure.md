@@ -123,7 +123,7 @@ This means that the platform-indepent part of the code is separate from the plat
 Tests
 -----
 
-Every assembly can get a `Tests` assembly, which contains automated tests. For instance:
+Every assembly can get a `Tests` assembly containing automated tests. For instance:
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
@@ -148,7 +148,7 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 ### 1st Big then Small
 
-The ordering in the namespace may seem arbitrary. But what happened here is an attempt to is organize things into *bigger and smaller* chunks.
+The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
 The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, `Presentation`) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. `NHibernate`, `Mvc`). And a *design pattern* may be a level of detail even below that.
 
@@ -166,7 +166,7 @@ And this would be the folders in it:
 
 ### 1st Domain then Layer
 
-In other projects, a different order of the namespace elements could make more sense. First the *domain* then the *layer*:
+In other projects, a different order of the namespace elements could make more sense. First the *domain* then the *layer:*
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
@@ -187,7 +187,7 @@ But this might get in the way of our plans to put the assembly subdivision first
 
 ### 1st Layer then Domain
 
-Putting the *main layer* (`Data`, `Business`, `Presentation`) before the *functional domain* was a choice, that made sense at the time in a specific environment.
+Putting the *main layer* (`Data`, `Business`, `Presentation`) before the *functional domain* was a choice, that made sense at the time in a specific environment:
 
 - JJ.Data.__MainEntities__
 - JJ.Business.__Magic__
