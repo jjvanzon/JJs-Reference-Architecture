@@ -79,7 +79,7 @@ The [business](#business-layer) layer uses the [data](#data-layer) layer to stor
 
 ### Skipping Business Layer
 
-Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer, and uses the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, as represented with the dotted line in the [diagram](#3-layers)
+Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer using the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, as represented with the dotted line in the [diagram](#3-layers) above.
 
 ### Patterns
 
@@ -141,7 +141,7 @@ The [presentation layer](#presentation-layer) calls the [business layer](#busine
 
 ### Presenter
 
-It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) represents a specific *user action* in that screen.
+It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each [`Presenter`](patterns.md#presenter) *method* represents a specific *user action* on that screen.
 
 ### ViewModel
 
@@ -159,7 +159,7 @@ The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patter
 
 [`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around presentation.
 
-They call upon the [business layer](#business-layer) to *save*, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
+They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
 Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of a [presentation layer](#presentation-layer).
 
@@ -185,13 +185,13 @@ The parameters of a [`Controller`](patterns.md#controller) method can be `URL` p
 
 ### View Engine (Razor)
 
-After the [`Controller`](patterns.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off after the [`Controller`](patterns.md#controller) method is done.
+After the [`Controller`](patterns.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off.
 
 ### Views (Razor)
 
-A *view engine* that might be used in this architecture is `Razor`. It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent to the web browser.
+A *view engine* that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in `Forms` and `Controls` and delegate the real work to  [`Presenters`](patterns.md#presenter) instead.
+In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter) instead.
 
 ### HTML
 
