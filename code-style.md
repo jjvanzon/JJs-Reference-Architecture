@@ -375,7 +375,7 @@ Reason: Just convention.
 
 Prefer to start test method names with `Test_` and do not hold back on underscores in the name.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 [TestMethod]
@@ -385,7 +385,7 @@ public void Test_Validator_NotNullOrEmpty_NotValid()
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 [TestMethod]
@@ -410,7 +410,7 @@ Enters
 
 ### Properties on Separate Lines
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 int A { get; set; } 
@@ -435,7 +435,7 @@ int D
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 int A { get; set; } int B { get; set; } 
@@ -450,14 +450,14 @@ Might be easy to overlook that there is another property.
 
 Putting variable declarations on separate lines.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 int i;
 int j;
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 int i, j; 
@@ -470,7 +470,7 @@ Just a preference, when not used to it, it may be overlooked, and "Find..." may 
 
 ### Enters between Methods
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 void Bla()
@@ -484,7 +484,7 @@ void Bla2()
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 void Bla()
@@ -505,7 +505,7 @@ Reason: Just a bit more tidy?
 
 Putting enters inside methods between 'Pieces that do Something'.  
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 void Bla()
@@ -522,7 +522,7 @@ void Bla()
    
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 void Bla()
@@ -543,7 +543,7 @@ Visible separation of steps inside methods.
 
 ### Loops Multi-Line
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 foreach (var x in list)
@@ -552,7 +552,7 @@ foreach (var x in list)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 foreach (var x in list) { Bla(); } 
@@ -564,7 +564,7 @@ Reason: May look odd if you're not used to it.
 
 ### Enters between Switch Cases
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 switch (x)
@@ -577,7 +577,7 @@ switch (x)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 switch (x)
@@ -595,14 +595,14 @@ Reason: A bit tidier?
 
 ### Surplus Enters Between Braces
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
     }
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
     }
@@ -616,7 +616,7 @@ Reason: More tidy.
 
 ### Generic Constraints on Separate Line
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 class MyGenericClass<T>
@@ -626,7 +626,7 @@ class MyGenericClass<T>
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 class MyGenericClass<T> where T: MyInterface
@@ -641,7 +641,7 @@ Reason: So they stand out.
 
 ### Generic Constraints on Same Line for One-Liners
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 interface IMyInterface
@@ -650,7 +650,7 @@ interface IMyInterface
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 interface IMyInterface
@@ -679,13 +679,13 @@ Reason: Less surprizing to the next developer.
 
 Use proper indentation.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 [ TODO: Example. ]
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 [ TODO: Example. ]
@@ -697,13 +697,13 @@ Reason: Just readability.
 
 ### No Braces for Single-Line If Statements
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 if (condition) Bla();
 ```
  
-</td><td>
+</td><td markdown="1">
 
 ```cs
 if (condition) { Bla(); }
@@ -715,7 +715,7 @@ Reason: Less visual clutter.
 
 ### Braces for Multi-Line Statements
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 foreach (var x in list)
@@ -729,7 +729,7 @@ if (condition)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 foreach (var x in list)
@@ -749,7 +749,7 @@ Without braces, only the next line is looped or executed conditionally. The line
 
 Tabular form not preferred.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 public int ID { get; set; }
@@ -759,7 +759,7 @@ public string Answer { get; set; }
 public bool IsManual { get; set; }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 public int    ID       { get; set; }
@@ -776,7 +776,7 @@ This tabular form might be undone by auto-formatting. It may look nice, but mayb
 
 ### Align Elements of Linq Queries
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 var arr = coll.Where(x => x...)
@@ -784,7 +784,7 @@ var arr = coll.Where(x => x...)
               .ToArray()
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 var arr = coll.Where(x => x...).
@@ -831,13 +831,13 @@ External things might otherwise become dependent on code, that was not meant to 
 
 Using explicit access modifiers (except for interface members). 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 public int Bla() { ... }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 int Bla() { ... } 
@@ -852,11 +852,11 @@ Avoiding confusion about the defaults.
 
 Prefer not to use public fields. Use either private fields or use properties instead. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ***`public`***` int X `***`{ get; set; }`***
 
-</td><td>
+</td><td markdown="1">
 
 `public int X;`
 
@@ -869,11 +869,11 @@ People may say the interface stability comes in jeopardy when you use public fie
 
 Prefer for internal classes not to have internal members.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 `internal class A { `***`public`***`void B { } }`
 
-</td><td>
+</td><td markdown="1">
 
 `internal class A { `***`internal`***` void B { } }`
 
@@ -886,11 +886,11 @@ The members are automatically `internal` if the class is `internal`. When you wi
 
 Prefer interface types as variable types. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ***`IList`***`<int> list = new List<int>;`
 
-</td><td>
+</td><td markdown="1">
 
 ***`List`***`<int> list = new List<int>; `
 
@@ -902,7 +902,7 @@ Reason: Less refactoring when changing the type. Less dependency on specific imp
 
 Putting nested classes at the top of the parent class' code. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 internal class A
@@ -916,7 +916,7 @@ internal class A
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 internal class A
@@ -957,14 +957,14 @@ Comments
 
 Putting comment for members in `<summary>` tags. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 /// <summary> This is the x coordinate. </summary>
 int X { get; set; }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 // This is the x-coordinate.
@@ -978,13 +978,13 @@ Your comment might be valuable to see from the outside, when hovering over the n
 
 ### Comments in English
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 // This is a thing.
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 // Dit is een ding. 
@@ -998,13 +998,13 @@ Reason: English is sort of the main language in IT. Broader reach of people migh
 
 No comments that do not add information.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 int x;
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 // This is x
@@ -1030,7 +1030,7 @@ More Notation
 
 Using object initializers. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 var x = new X
@@ -1040,7 +1040,7 @@ var x = new X
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 var x = new X();
@@ -1054,7 +1054,7 @@ Reason: Might be more readable.
 
 ### Default Switch Case at the Bottom
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 switch (x)
@@ -1070,7 +1070,7 @@ switch (x)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 switch (x)
@@ -1101,13 +1101,13 @@ Reason: readability.
 
 Prefer not to use `var`.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 int x = y.X;
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 var x = y.X;
@@ -1126,7 +1126,7 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 ***`var`***` q = from x in list select new { A = x.A };`
 
-</td><td>
+</td><td markdown="1">
 
 ***`X`***`q = from x in list select new { A = x.A };`
 
@@ -1134,11 +1134,11 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 #### New Statements
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ***`var`***` x = new X();`
 
-</td><td>
+</td><td markdown="1">
 
 ***`X`***` x = new X();`
 
@@ -1146,11 +1146,11 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 #### Direct Casts
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ***`var`***` x = (X)y;`
 
-</td><td>
+</td><td markdown="1">
 
 ***`X`***` x = (X)y;`
 
@@ -1158,13 +1158,13 @@ There may be a few exceptions, where var may be preferred, when the type is sort
 
 #### Code Line Quite Long and Better Readable
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 foreach (var entry in dictionary)
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 foreach (KeyValuePair<Canonical.ValidationMessage,  
@@ -1175,11 +1175,11 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 #### View Code
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 `<% foreach (`***`var`***` order in Model.Orders) %>`
 
-</td><td>
+</td><td markdown="1">
 
 `<% foreach (`***`OrderViewModel`***` order in Model.Orders) %>`
 
@@ -1189,11 +1189,11 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 Prefer not to use type arguments that can be inferred. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 `References(x => x.Child)`
 
-</td><td>
+</td><td markdown="1">
 
 `Reference`***`<Child>`***`(x => x.Child)`
 
@@ -1212,14 +1212,14 @@ Otherwise these aspects may have surprizing defaults.
 
 When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 if (x >= 10 && x <= 100)
 if (x > 10 && x < 100)
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 if (x <= 100 && x >= 10)
@@ -1312,13 +1312,13 @@ Reason: No surprises when using either `null` or `""`.
 
 To check if a `string` is filled prefer `string.IsNullOrEmpty`. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 String.IsNullOrEmpty(str)
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 str == null 
@@ -1333,13 +1333,13 @@ In exceptional cases reference equality (`==`) may fail even if strings are equa
 
 To equate string prefer `string.Equals`. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 string.Equals(str, "bla")
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 str == "bla"
@@ -1354,7 +1354,7 @@ In exceptional cases reference equality (`==`) may fail even if strings are equa
 
 For nullable types.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 int? number;
@@ -1365,7 +1365,7 @@ if (number.HasValue)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 int? number;
@@ -1385,11 +1385,11 @@ Changing the variable to type `object`, would change the behavior of the code co
 
 Prefer `ToArray` over `ToList`. 
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 `IList<int> collection = x.`***`ToArray`***`();`
 
-</td><td>
+</td><td markdown="1">
 
 `IList<int> collection = x.`***`ToList`***`();`
 
@@ -1402,7 +1402,7 @@ Downside: The `Add` method throws an exception for an `Array`.
 
 Prefer using CLR-complient data types. Some aren't CLR-complient.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 int
@@ -1410,7 +1410,7 @@ long
 byte
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 // Unsigned types such as:
@@ -1429,7 +1429,7 @@ For compatibility with more variations of .NET.
 
 Avoid getting information by catching an exception. Prefer getting your information without using exception handling.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 bool FileExists(string path)
@@ -1438,7 +1438,7 @@ bool FileExists(string path)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 bool FileExists(string path)
@@ -1464,14 +1464,14 @@ Reason:
 
 Entity equality checks might be better done by ID than by reference.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 if (entity1.ID == entity2.ID)
 // (Also do null checks if applicable.)
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 if (entity1 == entity2) 
@@ -1486,7 +1486,7 @@ Persistence frameworks do not always provide instance integrity, so code that co
 
 Prefer not to use them, unless the code cannot run on a platform without excluding that piece of code. Otherwise a boolean variable might be preferred, a configuration setting or different concrete implementations of classes.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 if (config.FeatureXEnabled)
@@ -1495,7 +1495,7 @@ if (config.FeatureXEnabled)
 }
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 #if FEATURE_X_ENABLED
@@ -1512,13 +1512,13 @@ When using these compiling directives, a compilation might succeed, without all 
 
 Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using generics' `new` constraint  might avoid some of the `Activator.CreateInstance` calls.
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td>
+<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
 T = new T()
 ```
 
-</td><td>
+</td><td markdown="1">
 
 ```cs
 Activator.CreateInstance(typeof(T)) 
