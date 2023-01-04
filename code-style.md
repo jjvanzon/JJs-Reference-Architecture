@@ -92,12 +92,12 @@ Introduction
 
 This article lists coding style preferenced, that might be followed in the `JJ`  projects.
 
-It mostly conform to the Microsoft standard described in the following documents:
+It mostly conforms to the Microsoft standard described in the following documents:
 
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
-Using a tool like `ReSharper` may help. It's settings can be finetuned to closely match your preferences. It then checks the check code style and auto-formats.
+Using a tool like `ReSharper` may help. It's settings can be finetuned to closely match preferences. It then checks the check code style and can auto-format code for you.
 
 
 Casing
@@ -668,7 +668,7 @@ interface IMyInterface
 </td></tr></table>
 
 Reason:  
-It might have been a one-liner for readability reasons so perhaps let's keep it that way.
+It might have been a one-liner for readability reasons, so perhaps we keep it in that style.
 
 
 Spaces and Braces
@@ -676,13 +676,12 @@ Spaces and Braces
 
 ### Auto-Formatting
 
-Prefer Visual Studio's autoformatting enabled and set to its defaults.
-
-Reason: Less surprizing to the next developer.
+Prefer Visual Studio's autoformatting enabled and set to its defaults.  
+Reason: Less surprising to the next developer.
 
 ### Indentation
 
-Use proper indentation.
+Apply indentation properly.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -761,7 +760,7 @@ return Enum.Parse(type, input);
 
 </td></tr></table>
 
-Reason: Just readability.
+Reason: More readable.
 
 ### No Braces for Single-Line If Statements
 
@@ -779,7 +778,7 @@ if (condition) { Bla(); }
 
 </td></tr></table>
 
-Reason: Less visual clutter.
+Reason: Less clutter.
 
 ### Braces for Multi-Line Statements
 
@@ -815,8 +814,6 @@ Without braces, only the next line is looped or executed conditionally. The line
 
 ### Tabular Form Less Preferred
 
-Tabular form not preferred.
-
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
@@ -840,7 +837,7 @@ public bool   IsManual { get; set; }
 </td></tr></table>
 
 Reason:  
-This tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
+Tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
 
 ### Align Elements of Linq Queries
 
@@ -879,7 +876,7 @@ private void Bla()
 ```
 
 Reason:  
-Other code might become dependent on publically accessible things. Managing dependencies like that seems to be quite a thing in software programming.
+Other code might become dependent on publically accessible things. Managing dependencies like that seems quite a thing in software development.
 
 ### Types Internal 
 
@@ -893,11 +890,9 @@ internal class MyClass
 ```
 
 Reason:    
-External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software programming.
+External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software.
 
 ### Explicit Access Modifiers
-
-Using explicit access modifiers (except for interface members). 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -916,13 +911,16 @@ int Bla() { ... }
 Reason:  
 Avoiding confusion about the defaults.
 
+Exception:  
+Interface members have no access modifiers.
+
 ### No Public Fields
 
-Prefer not to use public fields. Use either private fields or use properties instead. 
+Prefer not to use public fields. Use either private fields or use properties. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
-***`public`***` int X `***`{ get; set; }`***
+`public int X `***`{ get; set; }`***
 
 </td><td markdown="1">
 
@@ -931,11 +929,11 @@ Prefer not to use public fields. Use either private fields or use properties ins
 </td></tr></table>
 
 Reason:  
-People may say the interface stability comes in jeopardy when you use public fields. The fields seem to look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
+People may say the interface stability comes in jeopardy when you use public fields. The fields may look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
 
 ### Public Members for Internal Classes
 
-Prefer for internal classes not to have internal members.
+Internal classes are preferred not to have internal members.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -948,11 +946,9 @@ Prefer for internal classes not to have internal members.
 </td></tr></table>
 
 Reason:  
-The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods.
+The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods, creating an opportunity for error.
 
 ### Prefer Interface Types
-
-Prefer interface types as variable types. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -964,7 +960,8 @@ Prefer interface types as variable types.
 
 </td></tr></table>
 
-Reason: Less refactoring when changing the type. Less dependency on specific implementation allowing you to switch more easily to another one.
+Reason:  
+Less refactoring when changing the type. Less dependency on specific implementation allowing you to switch more easily to another class.
 
 ### Nested Class on Top
 
@@ -1005,17 +1002,17 @@ It may not be obvious there are nested classes, unless they are put at the top.
 
 ### 1 Type 1 File
 
-Preferably give each class (or interface or enum) its own file (except nested classes).
+Preferably give each class (or interface or enum) its own file.
 
 Reason:  
-One might be surprized to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
+One might be surprised to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
 
 Exceptions:  
-This guideline might be ignored if the amount of classes really becomes big. Also it does not count for nested classes. Also a single class can be spread among files, if they are partial classes.
+It does not count for nested classes. Also a single class can be spread among files, if they are partial classes. This guideline might also be ignored if the amount of classes really becomes big. 
 
 ### No Lone Classes
 
-It might not be handy to have a lot of folder just containing one class or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, for instance in a folder called `Helpers`, if they indeed are simple helper classes.
+It might not be handy to have a lot of folders just containing one or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, in a `Helpers` folder for instance.
 
 
 Comments
@@ -1023,7 +1020,7 @@ Comments
 
 ### Comments in Summaries
 
-Putting comment for members in `<summary>` tags. 
+You might want to put comment for members in `<summary>` tags. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1042,7 +1039,7 @@ int X { get; set; }
 </td></tr></table>
 
 Reason:  
-Your comment might be valuable to see from the outside, when hovering over the name of the member.
+Your comment might be valuable on the outside for others to see. The `<summary>` would show up when hovering over a member.
 
 ### Comments in English
 
@@ -1064,7 +1061,7 @@ Reason: English is sort of the main language in IT. Broader reach of people migh
 
 ### No Comments without Info
 
-No comments that do not add information.
+Avoid comments that do not add information.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1081,11 +1078,12 @@ int x;
 
 </td></tr></table>
 
-Reason: Less visual clutter. Gives things to read that don't seem worth it.
+Reason:  
+Less visual clutter. Reading it mightr not be worth the time.
 
 ### No Unused / Outcommented Code
 
-Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder, or `Outtakes.txt`.
+Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder.
 
 Reason:  
 Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
@@ -1095,8 +1093,6 @@ More Notation
 -------------
 
 ### Object Initializers
-
-Using object initializers. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1118,7 +1114,7 @@ x.B = 20;
 
 </td></tr></table>
 
-Reason: Might be more readable.
+Reason: More readable.
 
 ### Default Switch Case at the Bottom
 
@@ -1157,12 +1153,11 @@ switch (x)
 </td></tr></table>
 
 Reason:  
-The default `switch` case is often the 'last resort', so may make sense to be put 'last' too.
+The default `switch` case is often the "last resort" case, so it may make sense to put it last in the list.
 
 ### Long Code Lines
 
-It might be an idea to avoid long code lines.
-
+Avoid long code lines.  
 Reason: readability.
 
 ### Var
@@ -1186,7 +1181,7 @@ var x = y.X;
 Reason:  
 It would be nice to see the variable type in the code line instead of `var`.
 
-There may be a few exceptions, where var may be preferred, when the type is sort of obvious, or it might be more readable.
+There may be a few exceptions, where var may be preferred. For instance when the type is sort of obvious, or it might be more readable.
 
 #### Anonymous Types
 
@@ -1274,11 +1269,11 @@ Reason: Less visual clutter.
 It is appreciated when a file stream is opened specifying all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly with the most logical and most limiting values appropriate for the particular situation.
 
 Reason:  
-Otherwise these aspects may have surprizing defaults.
+Otherwise these aspects may have surprising defaults.
 
 ### Ordered If Range 
 
-When evaluating a range in an `if`, it may be a good idea to mention the limits of the range and mention the start of the range first and the end of the range second.
+When evaluating a range in an `if`, it may be a good idea to mention the *limits* of the range and mention the *start* of the range 1st and the *end* of the range second.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1300,7 +1295,13 @@ Reason: Readability. More obvious what the range limits are.
 
 ### Parameter Order
 
-An idea for passing infrastructure-related parameters to constructors or methods, is to first list the entities (or loose values), then the persistence related parameters, then the security related ones, then possibly the culture, then other settings. 
+An idea for passing infrastructure-related parameters to constructors or methods, is to first list:
+
+- *entities* (or loose values) then
+- *persistence* related parameters then
+- *security* related ones then
+- *culture* (optionally) then
+- *other* things. 
 
 ```cs
 class MyPresenter
@@ -1319,7 +1320,7 @@ class MyPresenter
 
 ### Namespace Tips
 
-Full namespaces in code, might make the code line difficult to read:
+*Full* namespaces in code, might make the code harder to read:
 
 __Less Preferred__
 
@@ -1328,7 +1329,7 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
     PersistenceHelper.CreatCmsRepository<JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
-Using half a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
+Using *half* a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
 
 __Less Preferred__
 
@@ -1337,7 +1338,7 @@ Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
     PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
-An alternative is to give a class a more unique name. Or use an alias instead:
+An alternative is to give a class a more *unique* name. Or use an *alias* instead:
 
 __Recommended__
 
@@ -1350,22 +1351,22 @@ IUserRepository_Cms cmsUserRepository =
 ```
 
 Reason:  
-Long visually cluttered code lines might be harder to read.
+Long, visually cluttered code lines might be harder to read.
 
 
 Member Order
 ------------
 
-Try giving the members in your code file a logical order, instead of putting them in a random order. Suggested possibilities for organizing your members:
+Try giving the members in your code file a logical order, instead of putting them in am arbitrary order. Suggestions for organizing members:
 
-|                      | |
-|----------------------|-|
-| Chronological        | When one method delegates to another in a particular order, you might order the methods chronologically.
-| By functional aspect | When your code file contains multiple functionalities, you might keep the members with the same function together, and put a comment line above it.
-| By technical aspect  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
-| By layer             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
+|                      |   |
+|----------------------|---|
+| *Chronological*        | When one method delegates to another in a particular order, you might order the methods chronologically.
+| *By functional aspect* | When your code file contains multiple functionalities, you might keep the members with the same function together, and put a comment line above it.
+| *By technical aspect*  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
+| *By layer*             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
 
-The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever's most appropriate for your code.
+The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever seems most appropriate for your code.
 
 
 Misc Preferences
@@ -1378,7 +1379,7 @@ Reason: No surprises when using either `null` or `""`.
 
 ### String.IsNullOrEmpty
 
-To check if a `string` is filled prefer `string.IsNullOrEmpty`. 
+Prefer `string.IsNullOrEmpty` to check if a `string` is filled in. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1395,11 +1396,11 @@ str == null
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) may fail even if strings are equal.
+In exceptional cases reference equality (`==`) may fail even when `strings` are equal.
 
 ### String.Equals
 
-To equate string prefer `string.Equals`. 
+Prefer `string.Equals` to check the equality of `string`. 
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1416,7 +1417,7 @@ str == "bla"
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) may fail even if strings are equal.
+In exceptional cases reference equality (`==`) may fail even if `strings` are equal.
 
 ### Prefer Value and HasValue
 
@@ -1464,11 +1465,11 @@ Prefer `ToArray` over `ToList`.
 </td></tr></table>
 
 Reason: More performance.  
-Downside: The `Add` method throws an exception for an `Array`.
+Downside: The `Add` method may throw an exception for an `Array`.
 
 ### CLR Data Types
 
-Prefer using CLR-complient data types. Some aren't CLR-complient.
+Prefer using `CLR`- complient data types. Some aren't `CLR`- complient.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1481,7 +1482,7 @@ byte
 </td><td markdown="1">
 
 ```cs
-// Unsigned types such as:
+// Unsigned types:
 uint
 ulong
 // And also:
@@ -1491,7 +1492,7 @@ sbyte
 </td></tr></table>
 
 Reason:  
-For compatibility with more variations of .NET.
+For compatibility with more variations of `.NET`.
 
 ### No Decisions from Exceptions
 
@@ -1536,7 +1537,6 @@ Entity equality checks might be better done by ID than by reference.
 
 ```cs
 if (entity1.ID == entity2.ID)
-// (Also do null checks if applicable.)
 ```
 
 </td><td markdown="1">
@@ -1548,11 +1548,13 @@ if (entity1 == entity2)
 </td></tr></table>
 
 Reason:  
-Persistence frameworks do not always provide instance integrity, so code that compares identities may be less likely to break. 
+Persistence frameworks do not always provide *instance* integrity, so code that compares *identities* may be less likely to break. 
+
+(Also consider doing *null* checks on the entities if applicable.)
 
 ### Avoiding Compiler Directives
 
-Prefer not to use them, unless the code cannot run on a platform without excluding that piece of code. Otherwise a boolean variable might be preferred, a configuration setting or different concrete implementations of classes.
+Prefer not to use compiler directives, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a *configuration* setting or different *concrete implementations* of classes.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -1597,6 +1599,6 @@ Activator.CreateInstance(typeof(T))
 A call to `Activator.CreateInstance` might be the last choice for instantiating an object.
 
 Reason:  
-New statements are strongly typed and less likely to fail.
+New statements are strongly typed and less likely to break.
 
 [back](.)
