@@ -23,7 +23,7 @@ table td { vertical-align: top; }
     - [File-Related Variable Names](#file-related-variable-names)
     - [Prefixes and Suffixes](#prefixes-and-suffixes)
     - [Event Names / Delegate Names](#event-names--delegate-names)
-    - [Test Class Names End with `Tests`](#test-class-names-end-with-tests)
+    - [Test Class Names End with "Tests"](#test-class-names-end-with-tests)
     - [Test Method Names](#test-method-names)
     - ['Hungarian' Notation](#hungarian-notation)
 - [Enters](#enters)
@@ -90,14 +90,14 @@ table td { vertical-align: top; }
 Introduction
 ------------
 
-This article lists coding style preferenced, that might be followed in the `JJ`  projects.
+This article lists coding style preferences, that might be followed in the `JJ`  projects.
 
-It mostly conforms to the Microsoft standard described in the following documents:
+It mostly conforms to the `Microsoft` standard described in the following documents:
 
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
-Using a tool like `ReSharper` may help. It's settings can be finetuned to closely match preferences. It then checks the check code style and can auto-format code for you.
+Using a tool like `ReSharper` may help. Its settings can be finetuned to closely match the preferences. It then checks the check code style and may auto-format code for you.
 
 
 Casing
@@ -125,10 +125,8 @@ Reasons for naming conventions might generally be, just knowing what kind of sys
 
 ### Method Names
 
-Method names commonly start with verbs, e.g. `CreateOrder`. 
-
-For clarity, avoid starting with a verb, for other constructs than methods.
-
+Method names commonly start with verbs, e.g. `CreateOrder`.  
+For clarity, avoid starting with a verb, for other constructs than methods.  
 Suggestions for verbs:
 
 | Verb        | Description |
@@ -335,7 +333,7 @@ Event names and delegate names, that indicate what is *about to happen* might ha
     ProgressInfoCallback
     AddItemDelegate
 
-Sometimes the word `On` may beused:
+Sometimes the word `On` may be used:
 
     OnSelectedIndexChanged
     OnClick
@@ -352,9 +350,9 @@ Pardon the ambiguity, but the naming above can be used for the names of *events*
 
 Perhaps avoid event names that use *two* event-indications in the same name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be a well established event name.
 
-### Test Class Names End with `Tests`
+### Test Class Names End with "Tests"
 
-<table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1">
 
 ```csharp
 [TestClass]
