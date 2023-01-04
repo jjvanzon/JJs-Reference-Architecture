@@ -1186,7 +1186,7 @@ There may be a few exceptions, where var may be preferred. For instance when the
 
 #### Anonymous Types
 
-<table><tr><th>Recommended</th><th>Not Preferred</th></tr><tr><td markdown="1">
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
 ***`var`***` q = from x in list select new { A = x.A };`
 
