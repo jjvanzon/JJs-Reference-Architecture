@@ -1296,13 +1296,15 @@ Reason: Readability. More obvious what the range limits are.
 
 ### Parameter Order
 
-An idea for passing infrastructure-related parameters to constructors or methods, is to first list:
+Passing infrastructure-related parameters to constructors or methods, the parameters might be listed in this order:
 
-- __entities__ (or loose values) then
-- __persistence__ related parameters then
-- __security__ related ones then
-- __culture__ (optionally) then
-- __other__ things. 
+- __entities__ (or loose values)
+- __persistence__
+- __security__
+- __culture__
+- __other__
+
+Example:
 
 ```cs
 class MyPresenter
@@ -1323,33 +1325,49 @@ class MyPresenter
 
 *Full* namespaces in code, might make the code harder to read:
 
-__Less Preferred__
+<table><tr><th class="red">
+
+Less Preferred
+
+</th></tr><tr><td markdown="1" class="red">
 
 ```cs
 JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
     PersistenceHelper.CreatCmsRepository<JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
+</td></tr></table>
 
-Using *half* a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
+*Half* a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
 
-__Less Preferred__
+<table><tr><th class="red">
+
+Less Preferred
+
+</th></tr><tr><td markdown="1" class="red">
 
 ```cs
 Business.Cms.RepositoryInterfaces.IUserRepository userRepository = 
     PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
+</td></tr></table>
+
 An alternative is to give a class a more *unique* name. Or use an *alias* instead:
 
-__Recommended__
+<table><tr><th class="green">
+
+Recommended
+
+</th></tr><tr><td markdown="1" class="green">
 
 ```cs
 using IUserRepository_Cms = JJ.Business.Cms.RepositoryInterfaces.IUserRepository;
-...
 
 IUserRepository_Cms cmsUserRepository = 
     PersistenceHelper.CreateCmsRepository<IUserRepository_Cms>(cmsContext);
 ```
+
+</td></tr></table>
 
 Reason:  
 Long, visually cluttered code lines might be harder to read.
