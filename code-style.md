@@ -23,9 +23,9 @@ table td { vertical-align: top; }
     - [File-Related Variable Names](#file-related-variable-names)
     - [Prefixes and Suffixes](#prefixes-and-suffixes)
     - [Event Names / Delegate Names](#event-names--delegate-names)
-    - [Test Class Names to End with 'Tests'](#test-class-names-to-end-with-tests)
+    - [Test Class Names End with `Tests`](#test-class-names-end-with-tests)
     - [Test Method Names](#test-method-names)
-    - [Hungarian Notation](#hungarian-notation)
+    - ['Hungarian' Notation](#hungarian-notation)
 - [Enters](#enters)
     - [Properties on Separate Lines](#properties-on-separate-lines)
     - [Variables on Separate Lines](#variables-on-separate-lines)
@@ -310,32 +310,32 @@ Variable names that indicate parts of *file paths* might easily become ambiguous
 | `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
 | `...Recursive`           | `< TODO: Make description >`
 | `To...`                  | For conversion from one thing to another. Sometimes the `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might also be used as an alternative:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
-| `From...`                | For conversion from one thing to another. A lot like `To...` executed on the `dest` object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
+| `From...`                | For conversion from one thing to another. A lot like `To...`, but executed on the `dest` object:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
 ### Event Names / Delegate Names
 
-Event names and delegate names, that indicate what just happened might have the following form:
+*Event* names and *delegate* names, that indicate what *just happened* might have the following form:
 
     Deleted
     TransactionCompleted
 
-Event names and delegate names, that indicate what is about to happen might have the following form:
+Event names and delegate names, that indicate what is *about to happen* might have the following form:
 
     Deleting
     TransactionCompleting
 
-User-initiated events might not follow that pattern:
+*User-initiated* events might not follow that pattern:
 
     Click
     DoubleClick
     KeyPress
 
-Delegate names might also have the suffix `Callback` or `Delegate`:
+*Delegate* names might also have the suffix `Callback` or `Delegate`:
 
     ProgressInfoCallback
     AddItemDelegate
 
-Sometimes the word `On` might beused:
+Sometimes the word `On` may beused:
 
     OnSelectedIndexChanged
     OnClick
@@ -348,11 +348,11 @@ Or the suffix `Requested`, if your event looks like a method name.
 
     RemoveRequested
 
-Pardon the ambiguity, but the naming above can be used for the names of events, but some of them also serve well as names for methods that fire/emulate or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives.
+Pardon the ambiguity, but the naming above can be used for the names of *events*, but some of them also serve well as names for methods that *fire/emulate* or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives for methods that raise events.
 
-Perhaps avoid event names that use two event-indications in the name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be an established event name.
+Perhaps avoid event names that use *two* event-indications in the same name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be a well established event name.
 
-### Test Class Names to End with 'Tests'
+### Test Class Names End with `Tests`
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -380,7 +380,7 @@ Reason: Just convention.
 
 ### Test Method Names
 
-Prefer to start test method names with `Test_` and do not hold back on underscores in the name.
+Prefer to start test method names with `Test_` and maybe don't hold back on underscores in the name.
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -405,9 +405,9 @@ public void Test()
 </td></tr></table>
 
 Reason:  
-If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read and digest.
+If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read.
 
-### Hungarian Notation
+### 'Hungarian' Notation
 
 Avoid prefixes such as `strName`.
 
@@ -455,8 +455,6 @@ Might be easy to overlook that there is another property.
 
 ### Variables on Separate Lines
 
-Putting variable declarations on separate lines.
-
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
 ```cs
@@ -473,7 +471,7 @@ int i, j;
 </td></tr></table>
 
 Reason:  
-Just a preference, when not used to it, it may be overlooked, and "Find..." may not show the results expected.
+Just a preference, when not used to it, it may be overlooked, doing a Search through the code, may not show the results expected.
 
 ### Enters between Methods
 
@@ -506,11 +504,11 @@ void Bla2()
 
 </td></tr></table>
 
-Reason: Just a bit more tidy?
+Reason: Just a bit more tidy.
 
 ### Enters in Methods
 
-Putting enters inside methods between 'Pieces that do Something'.  
+Putting enters inside methods between 'pieces that do something'.  
 
 <table><tr><th>Recommended</th><th>Less Preferred</th></tr><tr><td markdown="1">
 
@@ -598,7 +596,7 @@ switch (x)
 
 </td></tr></table>
 
-Reason: A bit tidier?
+Reason: A bit tidier.
 
 ### Surplus Enters Between Braces
 
@@ -1465,7 +1463,7 @@ Prefer `ToArray` over `ToList`.
 
 </td></tr></table>
 
-Reason: More performance?  
+Reason: More performance.  
 Downside: The `Add` method throws an exception for an `Array`.
 
 ### CLR Data Types
