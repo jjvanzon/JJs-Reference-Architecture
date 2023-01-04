@@ -260,9 +260,8 @@ OrderedWhen
 
 But that might look less nice when you add the Local and Utc suffices again:
 
-<div class="red">
-Less Preferred
-</div>
+<b class="red">
+Less Preferred</b>
 
 <pre class="red">
 ModifiedWhenUtc
