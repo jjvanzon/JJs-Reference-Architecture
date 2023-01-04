@@ -1298,11 +1298,11 @@ Reason: Readability. More obvious what the range limits are.
 
 An idea for passing infrastructure-related parameters to constructors or methods, is to first list:
 
-- *entities* (or loose values) then
-- *persistence* related parameters then
-- *security* related ones then
-- *culture* (optionally) then
-- *other* things. 
+- __entities__ (or loose values) then
+- __persistence__ related parameters then
+- __security__ related ones then
+- __culture__ (optionally) then
+- __other__ things. 
 
 ```cs
 class MyPresenter
