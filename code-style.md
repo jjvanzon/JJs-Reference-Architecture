@@ -1171,15 +1171,11 @@ Prefer not to use `var`.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
-```cs
-int x = y.X;
-```
+***`int`***`x = y.X;`
 
 </td><td markdown="1" class="red">
 
-```cs
-var x = y.X;
-```
+***`var`***` x = y.X;`
 
 </td></tr></table>
 
