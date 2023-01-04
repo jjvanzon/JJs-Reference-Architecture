@@ -5,7 +5,6 @@
 
 <style>
 section, .wrapper { max-width: 90% }
-table td { vertical-align: top; }
 </style>
 
 <h3>Contents</h3>

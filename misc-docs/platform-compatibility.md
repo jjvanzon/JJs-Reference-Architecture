@@ -1,4 +1,4 @@
-﻿<style>table td:first-child { white-space: nowrap; vertical-align:top; }</style>
+﻿<style>table td:first-child { white-space: nowrap; }</style>
 
 ⚠ Platform Compatibility 
 =========================

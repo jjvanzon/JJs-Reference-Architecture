@@ -60,13 +60,15 @@ List of API's
 
 ### Code:
 
-|                         |                |
-|-------------------------|----------------|
+<style>th{display:none;} </style>
+
+|                             |                |
+|-----------------------------|----------------|
 | __Visual Studio__           | Used for the development of the code.
 | __VS Code__                 | Used for MarkDown editing.
 | __.NET__                    | Framework from Microsoft that forms a base for the programming.
 | __C#__                      | Primary programming language.
-| __`VB.NET`__                | Some projects might still use this programming language.
+| __VB<span>.</span>NET__                | Some projects might still use this programming language.
 | __ReSharper__               | Tool for code formatting, refactoring and code smells and such.
 | __git__                     | Source control, revision history, version management for the code.
 | __[GitHub](https://github.com/jjvanzon)__ | Where the source code is hosted and shared.
@@ -331,6 +333,8 @@ Data access in this architecture is favored behind generic interfaces using [`JJ
 Here is something that happens n `ORM` sometimes:
 
 Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it any other way might harm performance.
+
+<style>th{display:table-cell;}</style>
 
 | Method | Data |
 |--------|------|
