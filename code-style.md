@@ -1378,14 +1378,14 @@ Member Order
 
 Try giving the members in your code file a logical order, instead of putting them in am arbitrary order. Suggestions for organizing members:
 
-|                      |   |
-|----------------------|---|
-| *Chronological*        | When one method delegates to another in a particular order, you might order the methods chronologically.
-| *By functional aspect* | When your code file contains multiple functionalities, you might keep the members with the same function together, and put a comment line above it.
-| *By technical aspect*  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
-| *By layer*             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
+|                          |     |
+|--------------------------|-----|
+| __Chronological__        | When one method delegates to another in a particular order, you might order the methods chronologically.
+| __By functional aspect__ | When your code file contains multiple functionalities, you might keep the members with the same function together, and put a comment line above it.
+| __By technical aspect__  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
+| __By layer__             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
 
-The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever seems most appropriate for your code.
+The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever seems most appropriate for the code.
 
 
 Misc Preferences
