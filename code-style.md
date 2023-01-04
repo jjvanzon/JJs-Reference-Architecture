@@ -970,7 +970,7 @@ Putting nested classes at the top of the parent class' code.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
-```cs
+```
 internal class A
 {
     private class B
@@ -984,7 +984,7 @@ internal class A
 
 </td><td markdown="1" class="red">
 
-```cs
+```
 internal class A
 {
     public int X { get; set; }
