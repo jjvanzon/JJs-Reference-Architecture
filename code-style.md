@@ -258,7 +258,7 @@ ModifiedWhen
 OrderedWhen
 </pre>
 
-But that might look less nice when you add the Local and Utc suffices again:
+But that might look less nice when you add the `Local` and `Utc` suffices again:
 
 <pre class="red">
 ModifiedWhenUtc
