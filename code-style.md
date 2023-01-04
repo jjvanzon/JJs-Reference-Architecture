@@ -310,7 +310,7 @@ Variable names that indicate parts of *file paths* might easily become ambiguous
 | `...Polymorphic`         | Handling a multitude of differrent (derived) types, possibly each in a different way.
 | `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less easy to read suffixes like `Conditionally` or a prefix `Conditional`.
 | `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
-| `...Recursive`           | `< TODO: Make description >`
+| `...Recursive`           | When the process is recursive. Meaning: A method might call *itself* directly or indirectly. Or when processing a tree or graph, the same type of data might be there deeper down the tree. 
 | `To...`                  | For conversion from one thing to another. Sometimes the `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might also be used as an alternative:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one thing to another. A lot like `To...`, but executed on the `dest` object:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
