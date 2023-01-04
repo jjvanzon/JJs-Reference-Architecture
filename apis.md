@@ -9,7 +9,7 @@ This article describes some of the API and technology choices in this software a
 
 - [Introduction](#introduction)
 - [List of API's](#list-of-apis)
-    - [Code](#code)
+    - [Code:](#code)
     - [Data](#data)
     - [Logic](#logic)
     - [Presentation](#presentation)
@@ -48,9 +48,9 @@ This article describes some of the API and technology choices in this software a
 Introduction
 ------------
 
-This article lists some of the tech used in `JJ` projects. Most are listed in a table.
+This article lists some of the tech used in `JJ` projects. Most are listed out in a table.
 
-Some technology is described in more detail, mostly data store technologies but also about web technology choices.
+Some technology is described in more detail, mostly data store technologies but also about web technology.
 
 
 List of API's
@@ -58,23 +58,23 @@ List of API's
 
 (And other tech).
 
-### Code
+### Code:
 
 |                         |                |
 |-------------------------|----------------|
-| Visual Studio           | Used for the development of the code.
-| VS Code                 | Used for MarkDown editing.
-| .NET                    | Framework from Microsoft that forms a base for the programming.
-| C#                      | Primary programming language.
-| `VB.NET`                | Some projects might still use this programming language.
-| ReSharper               | Tool for code formatting, refactoring and code smells and such.
-| git                     | Source control, revision history, version management for the code.
-| [GitHub](https://github.com/jjvanzon) | Where the source code is hosted and shared.
-| [Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Build pipeline. Pre-release package feed. Original planning boards. Might still host one project not migrated to GitHub.
-| GitHub Issues           | Gradually using GitHub Issues more for planning.
-| JJ.Framework            | In-house programmed extensions to the .NET Framework can be found in [GitHub](https://github.com/jjvanzon/JJ.Framework) / [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)
-| [JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/) | Makes it easier to convert simple types.
-| [JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/) | Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
+| __Visual Studio__           | Used for the development of the code.
+| __VS Code__                 | Used for MarkDown editing.
+| __.NET__                    | Framework from Microsoft that forms a base for the programming.
+| __C#__                      | Primary programming language.
+| __`VB.NET`__                | Some projects might still use this programming language.
+| __ReSharper__               | Tool for code formatting, refactoring and code smells and such.
+| __git__                     | Source control, revision history, version management for the code.
+| __[GitHub](https://github.com/jjvanzon)__ | Where the source code is hosted and shared.
+| __[Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)__ | Build pipeline. Pre-release package feed. Original planning boards. Might still host one project not migrated to GitHub.
+| __GitHub Issues__           | Gradually using GitHub Issues more for planning.
+| __JJ.Framework__            | In-house programmed extensions to the .NET Framework can be found in [GitHub](https://github.com/jjvanzon/JJ.Framework) / [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)
+| __[JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/)__ | Makes it easier to convert simple types.
+| __[JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/)__ | Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
 
 ### Data
 
