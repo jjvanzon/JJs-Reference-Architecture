@@ -60,7 +60,7 @@ List of API's
 
 ### Code:
 
-<style>th{display:none;} </style>
+<style>thead{display:none;}</style>
 
 |                             |                |
 |-----------------------------|----------------|
@@ -334,7 +334,7 @@ Here is something that happens n `ORM` sometimes:
 
 Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it any other way might harm performance.
 
-<style>th{display:table-cell;}</style>
+<style>thead{display:table-header-group;}</style>
 
 | Method | Data |
 |--------|------|
