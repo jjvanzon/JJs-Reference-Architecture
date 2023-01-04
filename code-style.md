@@ -90,14 +90,14 @@ table td { vertical-align: top; }
 Introduction
 ------------
 
-This article lists coding style preferenced, that might be followed in certain projects.
+This article lists coding style preferenced, that might be followed in the `JJ`  projects.
 
 It mostly conform to the Microsoft standard described in the following documents:
 
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
-Using a tool like ReSharper may help. It's settings can be finetuned to closely match your preferences. It then checks the check code style and can auto-format. It can be used to keep code clean as you write and change your code.
+Using a tool like `ReSharper` may help. It's settings can be finetuned to closely match your preferences. It then checks the check code style and auto-formats.
 
 
 Casing
@@ -105,8 +105,8 @@ Casing
 
 | Suggestion                                                      | Examples                       |
 |-----------------------------------------------------------------|--------------------------------|
-| Properties, methods, class names and events in pascal case      | `MyProperty` `MyMethod`
-| Local variables and parameters in camel case                    | `myLocalVariable` `myParameter`
+| Pascal case for properties, methods, class names and events     | `MyProperty` `MyMethod`
+| Camel case for local variables and parameters                   | `myLocalVariable` `myParameter`
 | Fields in camel case starting with underscore                   | `_myField`
 | Constants in capitals with underscores between words            | `MY_CONSTANT`
 | Type arguments just the letter `T` or start with the letter `T` | `T` `TEntity` `TViewModel`
@@ -121,27 +121,27 @@ Casing
 Naming
 ------
 
-Reasons for naming conventions might just be knowing what kind of system elements they are really.
+Reasons for naming conventions might generally be, just knowing what kind of system elements they are.
 
 ### Method Names
 
-Method names might start with verbs, e.g. `CreateOrder`. 
+Method names commonly start with verbs, e.g. `CreateOrder`. 
 
-For clarity, perhaps not start with a verb for constructs that are not methods.
+For clarity, avoid starting with a verb, for other constructs than methods.
 
 Suggestions for verbs:
 
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>In cases such as the last example, `list` may be made the first parameter.
-| `Assert`    | A method throwing `Exceptions` if input is invalid.
+| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>(List can be the `this` argument or the first argument.)
+| `Assert`    | Throws `Exceptions` if input is invalid.
 | `Calculate` |
-| `Clear`     |
+| `Clear`     | Clearing a list.
 | `Convert`   |
 | `ConvertTo` |
-| `Create`    | When a method returns a new object.
+| `Create`    | Returns a new object.
 | `Delete`    |
-| `Ensure`    | May set up a state if it is not set up yet.<br>If `Ensure` means throw an exception if a state is not there,<br>consider using the verb `Assert` instead.
+| `Ensure`    | Setting up a state, if not set up yet.<br>If `Ensure` means throw an exception,<br>consider using the `Assert` instead.
 | `Execute`   |
 | `Generate`  |
 | `Get`       |
@@ -153,23 +153,23 @@ Suggestions for verbs:
 | `Set`       |
 | `Try`       |
 | `TryGet`    |
-| `Validate`  | A method for generating *validation messages* for user-input errors.
+| `Validate`  | Generating *validation messages* for user-input errors.
 
 ### Class Names
 
-In this architecture, class names may end with the pattern name or a verb converted to a noun, e.g.:
+In this architecture, *class* names may end with the *pattern* name or a *verb* converted to a *noun*, e.g.:
 
     Converter
     Validator
     Calculator
 
-And they may start with a term out of the domain (like `Order`, `Product` or `Price`):
+And they may start with a term out of the *domain* (like `Order`, `Product` or `Price`):
 
     OrderConverter
     ProductValidator
     PriceCalculator
 
-More specialized classes might get prefixes or suffixes (like `Optimized` or `WithPriorityShipping`):
+More *specialized* classes might get prefixes or suffixes (like `Optimized` or `WithPriorityShipping`):
 
     OptimizedPriceCalculator
     OrderValidatorWithPriorityShipping
@@ -178,45 +178,45 @@ Abstract classes might prefer the suffix `Base`:
 
     ProductValidatorBase
 
-This is because it might be quite important to see in code whether something is a base class. Exceptions to the suffix idea might be made, if it would otherwise result in less readable code. For instance, base classes in entity models might not look good with the `Base` suffix.
+It might be quite important to see in code, whether something is a base class. Exceptions to the `Base` suffix might be made, if it would make the code more readable. For instance, base classes in entity models might look better without the `Base` suffix.
 
-Variables might be kept similar to the class names and include the prefixes and suffixes, so it stays clear what they are.
+*Variables* might be kept similar to the *class* names and include the prefixes and suffixes, so it stays clear what they are.
 
-Some other suggested 'last names' for classes apart form the pattern names might be:
+Other suggested 'last names' for classes apart form the pattern names:
 
 |              | |
 |--------------|-|
 | `Resolver`   | A class that does lookups that require complex keys or different ways of looking up depending on the situations, fuzzy lookups, etc.
 | `Dispatcher` | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
 | `Invoker`    | Something that invokes another method, possibly based on input or specific conditions.
-| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A provider might also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
+| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
 | `Asserter`   | A class meant to throw exceptions under certain conditions.
 |              | Any method verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
 
 ### Boolean Names
 
-Suggestions for boolean variable name prefixes and suffixes:
+Suggestions for *boolean* variable name prefixes and suffixes:
 
-| Prefix / Suffix | Example         | Comment |
-|-----------------|-----------------|---------|
-| `Is...`         | `IsDeleted`     | Might be the most common prefix.
-| `Must...`       | `MustDelete`    |
-| `Can...`        | `CanDelete`     | Might indicate what *user* can do.
-| `Has...`        | `HasRecords`    |
-| `Are...`        | `AreEqual`      | For plural things.
-| `Not...`        | `NotNull`       | A nice prefix, but perhaps be careful with negative names for readability's sake. See 'Double Negatives'.
-| `Include...`    | `IncludeHidden` | Even though it is verb, it may make sense for booleans.
-| `Exclude...`    |                 | "
-| `...Exists`     | `FileExists`    |
-| `Always...`     |                 |
-| `Never...`      |                 |
-| `Only...`       |                 |
+| Prefix / Suffix | Example               | Comment |
+|-----------------|-----------------------|---------|
+| `Is...`         | `IsDeleted`           | Might be the most common.
+| `Must...`       | `MustDelete`          |
+| `Can...`        | `CanDelete`           | Might indicate what *user* can do.
+| `Has...`        | `HasRecords`          |
+| `Are...`        | `AreEqual`            | For plural things.
+| `Not...`        | `NotNull`             | A nice prefix, but perhaps be careful with negative names for readability's sake. See [Double Negatives](practices-and-principles.md#double-negatives-)
+| `Include...`    | `IncludeHidden`       | Verb are usually be for methods, but these may make sense for booleans.
+| `Exclude...`    | `ExcludeSpecialChars` | "
+| `...Exists`     | `FileExists`          |
+| `Always...`     |                       |
+| `Never...`      |                       |
+| `Only...`       |                       |
 
 If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: 
 
     LinesAreCopied
 
-instead of 
+instead of:
     
     AreLinesCopied
 
@@ -240,9 +240,9 @@ So perhaps avoid plural words to denote a count and avoid plural words for thing
 
 ### Enum Names
 
-This architecture tends to use the `Enum` suffix for enum types e.g. `OrderStatusEnum`.
+This architecture tends to use the `Enum` suffix for `enum` types e.g. `OrderStatusEnum`.
 
-Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference really went for the suffix `Enum` because it was found so important to see clearly that something is an enum.
+Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference became `Enum` because it was found so important to see clearly that something is an `enum`.
 
 ### DateTime Names
 
@@ -258,6 +258,8 @@ An alternative suffix for `DateTimes` could be `When`:
 
 But that might look less nice when you add the Local and Utc suffices again:
 
+__Less Preferred__
+
     ModifiedWhenUtc
     OrderedWhenLocal
 
@@ -270,11 +272,11 @@ For number sequences these names might be used:
     SortOrder
     Rank
 
-Perhaps avoid `Index` because it is an SQL keyword.
+Perhaps avoid `Index` because it is an `SQL` keyword.
 
 ### File-Related Variable Names
 
-Variable names that indicate parts of file paths might easily become ambiguous. Here is a list of names that might disambiguate those:
+Variable names that indicate parts of *file paths* might easily become ambiguous. Here are suggestions to disambiguate them:
 
 | Name                     | Value          
 |--------------------------|--------------------------
@@ -296,17 +298,17 @@ Variable names that indicate parts of file paths might easily become ambiguous. 
 
 | Example                  | Description
 |--------------------------|--------------------
-| `source...`<br>`dest...` | In code that converts one structure to the other, it might ben clear to use the prefixes `source` and `dest` consistently in the variable names to keep track of where data comes from and where to it goes.
-| `existing...`            | Denoting that something already existed (in the data store) before starting a transaction.
+| `source...`<br>`dest...` | In code that converts one structure to the other, it might be clear to use the prefixes `source` and `dest` consistently in the variable names to keep track of where data comes from and where it goes.
+| `existing...`            | Denoting that something already existed (in the data store) before starting (a transaction).
 | `new...`                 | Denoting that the object was just newly created.
-| `original...`            | Denoting that this is an original value that was (temporarily) replaced.
+| `original...`            | May denote that this is an original value that was (temporarily) replaced.
 | `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that not only a single object is handled, but the object including the underlying related objects.
-| `Versatile...`           | A class that might handle a multitude of types or situations.
+| `Versatile...`           | Might handle a multitude of types or situations.
 | `...With...`             | When making a specialized class that works well for a specific situation, you could use the word `With` in the class name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
 | `...Polymorphic`         | Handling a multitude of differrent (derived) types, possibly each in a different way.
-| `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less pretty suffixes like `Conditionally` or a prefix `Conditional`, that might obscuring the name that comes after.
+| `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less easy to read suffixes like `Conditionally` or a prefix `Conditional`.
 | `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
-| `...Recursive`           | (Some people tend to use `Recursively` instead, probably insisting it is better grammer, but `Recursive` is shorter and not grammatically incorrect either. It is a characteristic, as in 'Is it *recursive*?'.)
+| `...Recursive`           | `< TODO: Make description >`
 | `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
