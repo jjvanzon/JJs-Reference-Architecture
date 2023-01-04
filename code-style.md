@@ -246,28 +246,28 @@ Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at so
 
 A `DateTime` property might be suffixed with `Utc` or `Local`:
 
-<div class="green">
-    StartDateLocal
-    OrderDateTimeUtc
-</div>
+<pre class="green">
+StartDateLocal
+OrderDateTimeUtc
+</pre>
 
 An alternative suffix for `DateTimes` could be `When`:
 
-<div class="green">
-    ModifiedWhen
-    OrderedWhen
-</div>
+<pre class="green">
+ModifiedWhen
+OrderedWhen
+</pre>
 
 But that might look less nice when you add the Local and Utc suffices again:
 
 <div class="red">
-
-__Less Preferred__
-
-    ModifiedWhenUtc
-    OrderedWhenLocal
-
+Less Preferred
 </div>
+
+<pre class="red">
+ModifiedWhenUtc
+OrderedWhenLocal
+</pre>
 
 ### Sort Order
 
