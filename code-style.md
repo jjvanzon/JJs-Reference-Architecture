@@ -384,6 +384,12 @@ Prefer to start test method names with `Test_` and maybe don't hold back on unde
 
 ```cs
 [TestMethod]
+public void Test_Validator_NotNullOrEmpty_Valid()
+{ 
+    ...
+}
+
+[TestMethod]
 public void Test_Validator_NotNullOrEmpty_NotValid()
 { 
     ...
@@ -394,7 +400,12 @@ public void Test_Validator_NotNullOrEmpty_NotValid()
 
 ```cs
 [TestMethod]
-public void Test()
+public void Test1()
+{ 
+    ...
+} 
+
+public void Test2()
 { 
     ...
 } 
