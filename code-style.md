@@ -299,7 +299,7 @@ Variable names that indicate parts of *file paths* might easily become ambiguous
 | Example                  | Description
 |--------------------------|--------------------
 | `source...`<br>`dest...` | In code that converts one structure to the other, it might be clear to use the prefixes `source` and `dest` consistently in the variable names to keep track of where data comes from and where it goes.
-| `existing...`            | Denoting that something already existed (in the data store) before starting (a transaction).
+| `existing...`            | Denoting that something already existed (in the data store) before starting.
 | `new...`                 | Denoting that the object was just newly created.
 | `original...`            | May denote that this is an original value that was (temporarily) replaced.
 | `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that not only a single object is handled, but the object including the underlying related objects.
@@ -309,8 +309,8 @@ Variable names that indicate parts of *file paths* might easily become ambiguous
 | `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less easy to read suffixes like `Conditionally` or a prefix `Conditional`.
 | `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
 | `...Recursive`           | `< TODO: Make description >`
-| `To...`                  | For conversion from one to another thing. Sometimes `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might be more appropriate there:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
-| `From...`                | For conversion from one to another thing. A lot like `To...` executed on the dest object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
+| `To...`                  | For conversion from one thing to another. Sometimes the `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might also be used as an alternative:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
+| `From...`                | For conversion from one thing to another. A lot like `To...` executed on the `dest` object instead:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
 ### Event Names / Delegate Names
 
