@@ -968,7 +968,7 @@ Less refactoring when changing the type. Less dependency on specific implementat
 
 Putting nested classes at the top of the parent class' code. 
 
-<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1">
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
 ```cs
 internal class A
@@ -982,7 +982,7 @@ internal class A
 }
 ```
 
-</td><td markdown="1">
+</td><td markdown="1" class="red">
 
 ```cs
 internal class A
