@@ -246,20 +246,28 @@ Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at so
 
 A `DateTime` property might be suffixed with `Utc` or `Local`:
 
+<div class="green">
     StartDateLocal
     OrderDateTimeUtc
+</div>
 
 An alternative suffix for `DateTimes` could be `When`:
 
+<div class="green">
     ModifiedWhen
     OrderedWhen
+</div>
 
 But that might look less nice when you add the Local and Utc suffices again:
+
+<div class="red">
 
 __Less Preferred__
 
     ModifiedWhenUtc
     OrderedWhenLocal
+
+</div>
 
 ### Sort Order
 
@@ -1186,7 +1194,7 @@ There may be a few exceptions, where var may be preferred. For instance when the
 
 #### Anonymous Types
 
-<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
+<table><tr><th class="green">Recommended</th><th class="red">Not Preferred</th></tr><tr><td markdown="1" class="green">
 
 ***`var`***` q = from x in list select new { A = x.A };`
 
