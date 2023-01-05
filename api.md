@@ -1069,15 +1069,15 @@ and MinStartDate >= @minStartDate
 ```cs
 enum SqlEnum
 {
-    MyEntity_FilterIDs
+    FilterIDs
 }
 
 class MySqlExecutor
 {
-    public var MyEntity_FilterIDs(int categoryID, DateTime minStartDate)
+    public var FilterIDs(int categoryID, DateTime minStartDate)
     {
         return SqlExecutor.ExecuteReader<int>(
-            SqlEnum.MyEntity_FilterIDs, new { categoryID, minStartDate });
+            SqlEnum.FilterIDs, new { categoryID, minStartDate });
     }
 }
 
@@ -1085,7 +1085,7 @@ class MyRepository : RepositoryBase
 {
     public var Filter(int categoryID, DateTime minStartDate)
     {
-        var ids = MySqlExecutor.MyEntity_FilterIDs(categoryID, minStartDate);
+        var ids = MySqlExecutor.FilterIDs(categoryID, minStartDate);
 
         var entities = ids.Select(x => Get(x));
 
