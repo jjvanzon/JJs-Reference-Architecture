@@ -1,4 +1,7 @@
-﻿<style>thead{display:none;}</style>
+﻿<style>
+thead{display:none;}
+section, .wrapper { max-width: 90% }
+</style>
 
 🎁 API's
 =========
