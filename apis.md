@@ -268,7 +268,7 @@ List of API's (and other tech)
 <tr>
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation">
-       JJ.Framework.Validation
+       JJ.Framework.Validation</a>
   </th>
   <td>
       A nice fluent notation for validations.
@@ -278,7 +278,7 @@ List of API's (and other tech)
 <tr>
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Mathematics">
-       JJ.Framework.Mathematics
+       JJ.Framework.Mathematics</a>
   </th>
   <td>
       Helpers for math things. See link.
@@ -296,7 +296,8 @@ List of API's (and other tech)
 <tr>
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Presentation">
-       PagerViewModelFactory</a></th>
+       PagerViewModelFactory</a>
+  </th>
   <td>
       Can construct a pager view model with properties like
       CanGoToFirstPage, CanGoToPreviousPage, CanGoToNextPage, CanGoToLastPage.
@@ -422,7 +423,8 @@ List of API's (and other tech)
 <tr>
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Testing">
-       JJ.Framework.Testing</a></th>
+       JJ.Framework.Testing</a>
+  </th>
   <td>
       Extends the Assert class, but automatically includes the tested expression in the error messages.
   </td>
@@ -436,7 +438,8 @@ List of API's (and other tech)
 <tr>
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Exceptions">
-       JJ.Framework.Exceptions</a></th>
+       JJ.Framework.Exceptions</a>
+  </th>
   <td>
       Contains exception classes for basic errors.
       Clear concise error messages,
