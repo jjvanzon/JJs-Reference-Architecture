@@ -3,7 +3,7 @@
 
 [back](.)
 
-<style>thead{display:table-header-group;}</style>
+<style>thead{display:none;}</style>
 
 This article describes some of the API and technology choices in this software architecture.
 
