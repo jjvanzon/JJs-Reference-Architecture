@@ -1,4 +1,7 @@
-﻿<style>thead{display:none;} section, .wrapper { max-width: 90% }</style>
+﻿<style>
+/* thead { display:none; } */
+section, .wrapper { max-width: 90% }
+</style>
 
 🎁 API's
 =========
@@ -11,43 +14,43 @@ This article describes some of the API and technology choices in this software a
 
 - [Introduction](#introduction)
 - [List of API's (and other tech)](#list-of-apis-and-other-tech)
-    - [Code](#code)
-    - [Data](#data)
-    - [Logic](#logic)
-    - [Presentation](#presentation)
-    - [Debugging / Testing](#debugging--testing)
-    - [Processing / IO](#processing--io)
-    - [Other](#other)
+  - [Code](#code)
+  - [Data](#data)
+  - [Logic](#logic)
+  - [Presentation](#presentation)
+  - [Debugging / Testing](#debugging--testing)
+  - [Processing / IO](#processing--io)
+  - [Other](#other)
 - [More Elaborate Descriptions](#more-elaborate-descriptions)
 - [Web](#web)
-    - [AJAX](#ajax)
-    - [JavaScript / TypeScript](#javascript--typescript)
+  - [AJAX](#ajax)
+  - [JavaScript / TypeScript](#javascript--typescript)
 - [Misc](#misc)
-    - [JJ.Framework](#jjframework)
-    - [Configuration](#configuration)
-        - [ConnectionStrings](#connectionstrings)
-    - [OneToManyRelationship](#onetomanyrelationship)
-    - [XML](#xml)
-    - [Embedded Resources](#embedded-resources)
+  - [JJ.Framework](#jjframework)
+  - [Configuration](#configuration)
+    - [ConnectionStrings](#connectionstrings)
+  - [OneToManyRelationship](#onetomanyrelationship)
+  - [XML](#xml)
+  - [Embedded Resources](#embedded-resources)
 - [Data](#data-1)
-    - [Entity Framework](#entity-framework)
-    - [NHibernate](#nhibernate)
-    - [ORM](#orm)
-        - [Generic Interfaces](#generic-interfaces)
-        - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
-        - [Flush](#flush)
-        - [Read-Write Order](#read-write-order)
-        - [Bridge Entities](#bridge-entities)
-        - [Binary Fields](#binary-fields)
-        - [Inheritance](#inheritance)
-        - [Conclusion](#conclusion)
-    - [SQL](#sql)
-        - [With NHibernate](#with-nhibernate)
-        - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
-        - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
-        - [SQL String Concatenation](#sql-string-concatenation)
-        - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
-        - [Database Upgrade Scripts](#database-upgrade-scripts)
+  - [Entity Framework](#entity-framework)
+  - [NHibernate](#nhibernate)
+  - [ORM](#orm)
+    - [Generic Interfaces](#generic-interfaces)
+    - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
+    - [Flush](#flush)
+    - [Read-Write Order](#read-write-order)
+    - [Bridge Entities](#bridge-entities)
+    - [Binary Fields](#binary-fields)
+    - [Inheritance](#inheritance)
+    - [Conclusion](#conclusion)
+  - [SQL](#sql)
+    - [With NHibernate](#with-nhibernate)
+    - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
+    - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
+    - [SQL String Concatenation](#sql-string-concatenation)
+    - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
+    - [Database Upgrade Scripts](#database-upgrade-scripts)
 
 
 Introduction
@@ -63,67 +66,312 @@ List of API's (and other tech)
 
 ### Code
 
-|                             |                |
-|-----------------------------|----------------|
-| __Visual Studio__           | Used for the development of the code.
-| __VS Code__                 | Used for MarkDown editing.
-| __.NET__                    | Framework from Microsoft that forms a base for the programming.
-| __C#__                      | Primary programming language.
-| __VB<span>.</span>NET__                | Some projects might still use this programming language.
-| __ReSharper__               | Tool for code formatting, refactoring and code smells and such.
-| __git__                     | Source control, revision history, version management for the code.
-| __[GitHub](https://github.com/jjvanzon)__ | Where the source code is hosted and shared.
-| __[Azure DevOps](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)__ | Build pipeline. Pre-release package feed. Original planning boards. Might still host one project not migrated to GitHub.
-| __GitHub Issues__           | Gradually using GitHub Issues more for planning.
-| __JJ.Framework__            | In-house programmed extensions to the .NET Framework can be found in [GitHub](https://github.com/jjvanzon/JJ.Framework) / [NuGet](https://www.nuget.org/profiles/jjvanzon) / [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)
-| __[JJ.Framework.Conversion](https://www.nuget.org/packages/JJ.Framework.Conversion/)__ | Makes it easier to convert simple types.
-| __[JJ.Framework.Reflection](https://www.nuget.org/packages/JJ.Framework.Reflection/)__ | Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
+<table>
+
+<tr>
+  <th>Visual Studio</th>
+  <td>Used for the development of the code.</td>
+</tr>
+
+<tr>
+  <th>VS Code</th>
+  <td>Used for MarkDown editing.</td>
+</tr>
+
+<tr>
+  <th>.NET</th>
+  <td>Framework from Microsoft that forms a base for the programming.</td>
+</tr>
+
+<tr>
+  <th>C#</th>
+  <td>Primary programming language.</td>
+</tr>
+
+<tr>
+  <th>VB.NET</th>
+  <td>Some projects might still use this programming language.</td>
+</tr>
+
+<tr>
+  <th>ReSharper</th>
+  <td>Tool for code formatting, refactoring and code smells and such.</td>
+</tr>
+
+<tr>
+  <th>git</th>
+  <td>Source control, revision history, version management for the code.</td>
+</tr>
+
+<tr>
+  <th><a href="https://github.com/jjvanzon">GitHub</a></th>
+  <td>Where the source code is hosted and shared.</td>
+</tr>
+
+<tr>
+  <th>
+  <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">
+      Azure DevOps</a>
+  </th>
+  <td>
+      Build pipeline. Pre-release package feed. Original planning boards. Might still host one project not migrated to GitHub.
+  </td>
+</tr>
+
+<tr>
+  <th>GitHub Issues</th>
+  <td>Gradually using GitHub Issues more for planning.</td>
+</tr>
+
+<tr>
+  <th>JJ.Framework</th>
+  <td>
+      In-house programmed extensions to the .NET Framework can be found on
+      <a href="https://github.com/jjvanzon/JJ.Framework">GitHub</a> / 
+      <a href="https://www.nuget.org/profiles/jjvanzon">NuGet</a> /
+      <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">JJs-Pre-Release-Package-Feed</a>
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Conversion">
+       JJ.Framework.Conversion</a>
+  </th>
+  <td>
+      Makes it easier to convert simple types.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Reflection">
+       JJ.Framework.Reflection</a>
+  </th>
+  <td>
+      Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
+  </td>
+</tr>
+
+<table>
+
 
 ### Data
 
-|                   |                |
-|-------------------|----------------|
-| __SQL Server__        | Primary data store technology for relational databases.
-| __ORM__               | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
-| __SQL__               | For performance reasons SQL is hand-programmed incidentally, combined with ORM.
-| __[NHibernate](https://www.nuget.org/packages/NHibernate)__ | A type of ORM. Chosen in several `JJ` project because an employer also so happened to use it.
-| __[QueryOver](https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html)__ | A strongly-typed query language like LINQ, but then the NHibernate variation.
-| __[FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate)__ | A way to define ORM mappings, using fluent notation.
-| __[EntityFramework](https://www.nuget.org/packages/EntityFramework)__ | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
-| __[JJ.Framework.Data](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)__ | Helps hide data access behind abstractions. It does notexpose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
-| __[SqlExecutor](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient)__ | Helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
-| __LINQ__              | A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
-| __[JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/)__ | `JJ` extensions to LINQ.
+<table>
+
+<tr>
+  <th>SQL Server</th>
+  <td>Primary data store technology for relational databases.</td>
+</tr>
+
+<tr>
+  <th>ORM</th>
+  <td>Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
+</tr>
+
+<tr>
+  <th>SQL</th>
+  <td>For performance reasons SQL is hand-programmed incidentally, combined with ORM.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/NHibernate">
+       NHibernate</a>
+  </th>
+  <td>
+      A type of ORM. Chosen in several JJ project because an employer also so happened to use it.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <h href="https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html">
+       QueryOver</a>
+  </th>
+  <td>
+      A strongly-typed query language like LINQ, but then the NHibernate variation.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/FluentNHibernate">
+       FluentNHibernate</a>
+  </th>
+  <td>
+      A way to define ORM mappings, using fluent notation.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/EntityFramework">
+       EntityFramework</a>
+  </th>
+  <td>
+      A type of ORM. Chosen less in the JJ projects, because of more experience with NHibernate. Worth considering though.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">
+       JJ.Framework.Data</a>
+  </th>
+  <td>
+      Helps hide data access behind abstractions. It does notexpose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient">
+      SqlExecutor</a>
+  </th>
+  <td>
+      Helps execute SQL with less code lines, and more type save than using SqlClient directly.
+  </td>
+</tr>
+
+<tr>
+  <th>LINQ</th>
+  <td>
+      A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Collections">
+        JJ.Framework.Collections</a>
+  </th>
+  <td>JJ extensions to LINQ.</td>
+</tr>
+
+<table>
+
 
 ### Logic
 
-|                          |                |
-|--------------------------|----------------|
-| __[JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/)__ | Types for supporting a business layer and/or API. Bidirectional relationship sync. Result types to pass data, succes flags and (validation) messages.
-| __[JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation)__ | For a nice fluent notation for validations.
-| __[JJ.Framework.Mathematics](https://www.nuget.org/packages/JJ.Framework.Mathematics/)__ | Helpers for math things. See link.
+<table>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Business">
+       JJ.Framework.Business</a>
+  </th>
+  <td>
+      Types for supporting a business layer and/or API. Bidirectional relationship sync. Result types to pass data, succes flags and (validation) messages.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation">
+       JJ.Framework.Validation
+  </th>
+  <td>
+      A nice fluent notation for validations.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Mathematics">
+       JJ.Framework.Mathematics
+  </th>
+  <td>
+      Helpers for math things. See link.
+  </td>
+</tr>
+
+</table>
 
 ### Presentation
 
 <h4>General</h4>
 
-|                       |                |
-|-----------------------|----------------|
-| __[PagerViewModelFactory](https://www.nuget.org/packages/JJ.Framework.Presentation/)__ | Can construct a pager view model with properties like `CanGoToFirstPage`, `CanGoToPreviousPage`, `CanGoToNextPage`, `CanGoToLastPage`.
+<table>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Presentation">
+       PagerViewModelFactory</a></th>
+  <td>
+      Can construct a pager view model with properties like
+      CanGoToFirstPage, CanGoToPreviousPage, CanGoToNextPage, CanGoToLastPage.
+  </td>
+</tr>
+
+</table>
 
 <h4>Web</h4>
 
-|                         |                |
-|-------------------------|----------------|
-| __IIS__ | (Internet Information Services.) For hosting web sites. Some Visual Studio projects wish to use it upon load.
-| __MVC__ | A web development tech in the .NET Framework. Code runs mostly server side.
-| __Razor__ | A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
-| __[Html.BeginCollection](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc)__ | Makes it possible to send tree structures over HTTP to the server-side MVC.
-| __[JavaScript](#javascript--typescript)__ | Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
-| __[TypeScript](#javascript--typescript)__ | Might be preferred over JavaScript in the future. Has not been applied
-| __[AJAX](#ajax)__ | For retrieving / posting back partial views to the server and back.
-| __jQuery__ | Used to support UI details in web. Can make some JavaScript shorter.
-| __[JJ.Framework.JavaScript](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript)__ | Used to support UI details in web. Remembering scroll position, cookie functions, url parsing.  Might be extended with one-line AJAX functions once.
+<table>
+
+<tr>
+  <th>IIS</th>
+  <td>
+      (Internet Information Services.) For hosting web sites. 
+      Some Visual Studio projects wish to use it upon load.
+  </td>
+</tr>
+
+<tr>
+  <th>MVC</th>
+  <td>A web development tech in the .NET Framework. Code runs mostly server side.</td>
+</tr>
+
+<tr>
+  <th>Razor</th>
+  <td>A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc">
+       Html.BeginCollection</a>
+  </th>
+  <td>
+      Makes it possible to send tree structures over HTTP to the server-side MVC.
+  </td>
+</tr>
+
+<tr>
+  <th><a href="#javascript--typescript">JavaScript</a></th>
+  <td>Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.</td>
+</tr>
+
+<tr>
+  <th><a href="#javascript--typescript">TypeScript</a></th>
+  <td>Might be preferred over JavaScript in the future. Has not been applied</td>
+</tr>
+
+<tr>
+  <th><a href="#ajax">AJAX</a></th>
+  <td>For retrieving / posting back partial views to the server and back.</td>
+</tr>
+
+<tr>
+  <th>jQuery</th>
+  <td>Used to support UI details in web. Can make some JavaScript shorter.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript">
+       JJ.Framework.JavaScript</a>
+  </th>
+  <td>
+      Used to support UI details in web.
+      Remembering scroll position, cookie functions, url parsing.
+      Might be extended with one-line AJAX functions once.
+  </td>
+</tr>
+
+</table>
 
 <h4>Win</h4>
 
