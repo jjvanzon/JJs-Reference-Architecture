@@ -1,7 +1,4 @@
-﻿<style>
-thead{display:none;}
-section, .wrapper { max-width: 90% }
-</style>
+﻿<style>thead{display:none;} section, .wrapper { max-width: 90% }</style>
 
 🎁 API's
 =========
@@ -13,15 +10,15 @@ This article describes some of the API and technology choices in this software a
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
-- [List of API's](#list-of-apis)
-    - [Code:](#code)
+- [List of API's (and other tech)](#list-of-apis-and-other-tech)
+    - [Code](#code)
     - [Data](#data)
     - [Logic](#logic)
     - [Presentation](#presentation)
     - [Debugging / Testing](#debugging--testing)
     - [Processing / IO](#processing--io)
     - [Other](#other)
-- [More Elaborate](#more-elaborate)
+- [More Elaborate Descriptiops](#more-elaborate-descriptiops)
 - [AJAX](#ajax)
 - [Configuration](#configuration)
     - [ConnectionStrings](#connectionstrings)
@@ -58,12 +55,10 @@ This article lists some of the tech used in `JJ` projects. Most are listed out i
 Some technology is described in more detail, mostly data store technologies but also about web technology.
 
 
-List of API's
--------------
+List of API's (and other tech)
+------------------------------
 
-(And other tech).
-
-### Code:
+### Code
 
 |                             |                |
 |-----------------------------|----------------|
@@ -85,25 +80,25 @@ List of API's
 
 |                   |                |
 |-------------------|----------------|
-| SQL Server        | Primary data store technology for relational databases.
-| ORM               | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
-| SQL               | For performance reasons SQL is hand-programmed incidentally, combined with ORM.
-| [NHibernate](https://www.nuget.org/packages/NHibernate) | A type of ORM. Chosen in several `JJ` project because an employer also so happened to use it.
-| [QueryOver](https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html) | A strongly-typed query language like LINQ, but then the NHibernate variation.
-| [FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate) | A way to define ORM mappings, using fluent notation.
-| [EntityFramework](https://www.nuget.org/packages/EntityFramework) | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
-| [JJ.Framework.Data](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed) | Helps hide data access behind abstractions. It does notexpose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
-| [SqlExecutor](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) | Helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
-| LINQ              | A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
-| [JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/) | `JJ` extensions to LINQ.
+| __SQL Server__        | Primary data store technology for relational databases.
+| __ORM__               | Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.
+| __SQL__               | For performance reasons SQL is hand-programmed incidentally, combined with ORM.
+| __[NHibernate](https://www.nuget.org/packages/NHibernate)__ | A type of ORM. Chosen in several `JJ` project because an employer also so happened to use it.
+| __[QueryOver](https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html)__ | A strongly-typed query language like LINQ, but then the NHibernate variation.
+| __[FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate)__ | A way to define ORM mappings, using fluent notation.
+| __[EntityFramework](https://www.nuget.org/packages/EntityFramework)__ | A type of ORM. Chosen less in the `JJ` projects, because more experience with NHibernate. Worth reconsidering.
+| __[JJ.Framework.Data](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed)__ | Helps hide data access behind abstractions. It does notexpose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
+| __[SqlExecutor](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient)__ | Helps execute SQL with less code lines, and more type save than using `SqlClient` directly.
+| __LINQ__              | A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
+| __[JJ.Framework.Collections](https://www.nuget.org/packages/JJ.Framework.Collections/)__ | `JJ` extensions to LINQ.
 
 ### Logic
 
 |                          |                |
 |--------------------------|----------------|
-| [JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/) | Types for supporting a business layer and/or API. Bidirectional relationship sync. Result types to pass data, succes flags and (validation) messages.
-| [JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation) | For a nice fluent notation for validations.
-| [JJ.Framework.Mathematics](https://www.nuget.org/packages/JJ.Framework.Mathematics/) | Helpers for math things. See link.
+| __[JJ.Framework.Business](https://www.nuget.org/packages/JJ.Framework.Business/)__ | Types for supporting a business layer and/or API. Bidirectional relationship sync. Result types to pass data, succes flags and (validation) messages.
+| __[JJ.Framework.Validation](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation)__ | For a nice fluent notation for validations.
+| __[JJ.Framework.Mathematics](https://www.nuget.org/packages/JJ.Framework.Mathematics/)__ | Helpers for math things. See link.
 
 ### Presentation
 
@@ -111,51 +106,51 @@ List of API's
 
 |                       |                |
 |-----------------------|----------------|
-| [PagerViewModelFactory](https://www.nuget.org/packages/JJ.Framework.Presentation/) | Can construct a pager view model with properties like `CanGoToFirstPage`, `CanGoToPreviousPage`, `CanGoToNextPage`, `CanGoToLastPage`.
+| __[PagerViewModelFactory](https://www.nuget.org/packages/JJ.Framework.Presentation/)__ | Can construct a pager view model with properties like `CanGoToFirstPage`, `CanGoToPreviousPage`, `CanGoToNextPage`, `CanGoToLastPage`.
 
 <h4>Web</h4>
 
 |                         |                |
 |-------------------------|----------------|
-| IIS | (Internet Information Services.) For hosting web sites. Some Visual Studio projects wish to use it upon load.
-| MVC | A web development tech in the .NET Framework. Code runs mostly server side.
-| Razor | A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
-| [Html.BeginCollection](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) | Makes it possible to send tree structures over HTTP to the server-side MVC.
-| [JavaScript](#javascript--typescript) | Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
-| [TypeScript](#javascript--typescript) | Might be preferred over JavaScript in the future. Has not been applied
-| [AJAX](#ajax) | For retrieving / posting back partial views to the server and back.
-| jQuery | Used to support UI details in web. Can make some JavaScript shorter.
-| [JJ.Framework.JavaScript](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) | Used to support UI details in web. Remembering scroll position, cookie functions, url parsing.  Might be extended with one-line AJAX functions once.
+| __IIS__ | (Internet Information Services.) For hosting web sites. Some Visual Studio projects wish to use it upon load.
+| __MVC__ | A web development tech in the .NET Framework. Code runs mostly server side.
+| __Razor__ | A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
+| __[Html.BeginCollection](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc)__ | Makes it possible to send tree structures over HTTP to the server-side MVC.
+| __[JavaScript](#javascript--typescript)__ | Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
+| __[TypeScript](#javascript--typescript)__ | Might be preferred over JavaScript in the future. Has not been applied
+| __[AJAX](#ajax)__ | For retrieving / posting back partial views to the server and back.
+| __jQuery__ | Used to support UI details in web. Can make some JavaScript shorter.
+| __[JJ.Framework.JavaScript](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript)__ | Used to support UI details in web. Remembering scroll position, cookie functions, url parsing.  Might be extended with one-line AJAX functions once.
 
 <h4>Win</h4>
 
 |          |          |
 |----------|----------|
-| WinForms | Used in some projects. Small utilities and `JJ.Synthesizer` uses it as the top-most layer.
-| [SimpleProcessForm](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms) | A base form for a utility that runs a process.
-| [JJ.Framework.VectorGraphics](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.VectorGraphics) | A custom-programmed vector graphics model. Can be used for component-based user interfaces.
+| __WinForms__ | Used in some projects. Small utilities and `JJ.Synthesizer` uses it as the top-most layer.
+| __[SimpleProcessForm](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms)__ | A base form for a utility that runs a process.
+| __[JJ.Framework.VectorGraphics](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.VectorGraphics)__ | A custom-programmed vector graphics model. Can be used for component-based user interfaces.
 
 ### Debugging / Testing
 
 |                  |                  |
 |------------------|------------------|
-| [MSTest](https://www.nuget.org/packages/MSTest.TestFramework) | For automated / unit testing. Seems a deprecated framework. Might upgrade, but it ain't on the top of the list.
-| [JJ.Framework.Testing](https://www.nuget.org/packages/JJ.Framework.Testing) | Extends the `Assert` class, but automatically includes the tested expression in the error messages.
-| DebuggerDisplays | A technique to quickly display helpful info in the ID watch screen.
-| [JJ.Framework.Exceptions](https://www.nuget.org/packages/JJ.Framework.Exceptions) | Contains exception classes for basic errors. Clear concise error messages, including tested expressions and tested values.
-| [Accessor](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) | For accessing the internals of types for instance for testing purposes.
+| __[MSTest](https://www.nuget.org/packages/MSTest.TestFramework)__ | For automated / unit testing. Seems a deprecated framework. Might upgrade, but it ain't on the top of the list.
+| __[JJ.Framework.Testing](https://www.nuget.org/packages/JJ.Framework.Testing)__ | Extends the `Assert` class, but automatically includes the tested expression in the error messages.
+| __DebuggerDisplays__ | A technique to quickly display helpful info in the ID watch screen.
+| __[JJ.Framework.Exceptions](https://www.nuget.org/packages/JJ.Framework.Exceptions)__ | Contains exception classes for basic errors. Clear concise error messages, including tested expressions and tested values.
+| __[Accessor](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor)__ | For accessing the internals of types for instance for testing purposes.
 
 ### Processing / IO
 
 |                        |                |
 |------------------------|----------------|
-| [JJ.Framework.Text](https://www.nuget.org/packages/JJ.Framework.Text) | Basic helpers for working with text.
-| [JJ.Framework.IO](https://www.nuget.org/packages/JJ.Framework.IO) | Contains various file functions, functions for working with streams and working with CSV's.
-| [JJ.Framework.HtmlToXml](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.HtmlToXml) | The HtmlToXmlConverter class steals from SgmlReader. It does what it says.
-| [JJ.Framework.Xml](https://www.nuget.org/packages/JJ.Framework.Xml) | A convenient way to map XML to (C#) classes.<br/>Access XML nodes more safely, with null and unicity checks.
-| [JJ.Framework.Xml.Linq](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq) | "
-| [Embedded Resources](#embedded-resources) | Embedded resources allow compiling files and content right inside a DLL or EXE.
-| [EmbeddedResourceReader](https://www.nuget.org/packages/JJ.Framework.Common) | Make it a little easier to get embedded resource Streams, bytes and strings.
+| __[JJ.Framework.Text](https://www.nuget.org/packages/JJ.Framework.Text)__ | Basic helpers for working with text.
+| __[JJ.Framework.IO](https://www.nuget.org/packages/JJ.Framework.IO)__ | Contains various file functions, functions for working with streams and working with CSV's.
+| __[JJ.Framework.HtmlToXml](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.HtmlToXml)__ | The HtmlToXmlConverter class steals from SgmlReader. It does what it says.
+| __[JJ.Framework.Xml](https://www.nuget.org/packages/JJ.Framework.Xml)__ | A convenient way to map XML to (C#) classes.<br/>Access XML nodes more safely, with null and unicity checks.
+| __[JJ.Framework.Xml.Linq](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq)__ | "
+| __[Embedded Resources](#embedded-resources)__ | Embedded resources allow compiling files and content right inside a DLL or EXE.
+| __[EmbeddedResourceReader](https://www.nuget.org/packages/JJ.Framework.Common)__ | Make it a little easier to get embedded resource Streams, bytes and strings.
 
 ### Other
 
@@ -163,36 +158,36 @@ List of API's
 
 |                  |                |
 |------------------|----------------|
-| [Resource Strings](patterns.md#resource-strings) | For localization, resx files can be used in Visual Studio.
-| [JJ.Framework.ResourceStrings](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings) | Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
-| [Localization](aspects.md#localization) | More ideas about localization.
+| __[Resource Strings](patterns.md#resource-strings)__ | For localization, resx files can be used in Visual Studio.
+| __[JJ.Framework.ResourceStrings](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings)__ | Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
+| __[Localization](aspects.md#localization)__ | More ideas about localization.
 
 <h4>Configuration</h4>
 
 |     |     |
 |-----|-----|
-| [JJ.Framework.Configuration](https://www.nuget.org/packages/JJ.Framework.Configuration) | For working with complex configuration files, esier than `System.Configuration`.
-| [Configuration](aspects.md#configuration) | More info about configuration.
+| __[JJ.Framework.Configuration](https://www.nuget.org/packages/JJ.Framework.Configuration)__ | For working with complex configuration files, esier than `System.Configuration`.
+| __[Configuration](aspects.md#configuration)__ | More info about configuration.
 
 <h4>Security</h4>
 
 |     |     |
 |-----|-----|
-| [JJ.Framework.Security](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security) | A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
-| [Security](aspects.md#security) | If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
+| __[JJ.Framework.Security](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security)__ | A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
+| __[Security](aspects.md#security)__ | If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
 
 <h4>Logging</h4>
 
 |     |     |
 |-----|-----|
-| [JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. 
-| [Logging](aspects.md#logging) | Described how it might be extended to contain more other code to do with logging. 
+| __[JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging)__ | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. 
+| __[Logging](aspects.md#logging)__ | Described how it might be extended to contain more other code to do with logging. 
 
 
-More Elaborate
---------------
+More Elaborate Descriptiops
+---------------------------
 
-For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology choices.
+For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology.
 
 
 AJAX
