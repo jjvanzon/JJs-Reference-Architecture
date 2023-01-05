@@ -3,6 +3,8 @@
 
 [back](.)
 
+<style>thead{display:table-header-group;}</style>
+
 This article describes some of the API and technology choices in this software architecture.
 
 <h3>Contents</h3>
@@ -59,8 +61,6 @@ List of API's
 (And other tech).
 
 ### Code:
-
-<style>thead{display:none;}</style>
 
 |                             |                |
 |-----------------------------|----------------|
@@ -330,11 +330,9 @@ Data access in this architecture is favored behind generic interfaces using [`JJ
 
 ### Committed / Uncommitted Objects
 
-Here is something that happens n `ORM` sometimes:
+Here is something that happens in `ORM` sometimes:
 
-Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it any other way might harm performance.
-
-<style>thead{display:table-header-group;}</style>
+Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it another way might harm performance.
 
 | Method | Data |
 |--------|------|
