@@ -536,11 +536,11 @@ Here are a few methods to do this:
 
 ### OneToManyRelationship
 
-The [OneToManyRelationship](apis.md#onetomanyrelationship) is an API from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
+The [OneToManyRelationship](api.md#onetomanyrelationship) is an API from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
 
 ### EntityFramework
 
-If you use [`EntityFramework`](apis.md#entity-framework) it might do it automatically for you.
+If you use [`EntityFramework`](api.md#entity-framework) it might do it automatically for you.
 
 ### Omit Inverse Property
 

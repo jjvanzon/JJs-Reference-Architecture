@@ -95,17 +95,17 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database. This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](apis.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](apis.md#orm)), like [`NHibernate`](apis.md#nhibernate). This [`ORM`](apis.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
     
-It could also be a different data access technology, instead of [`NHibernate`](apis.md#nhibernate): a different [`ORM`](apis.md#orm), like [`Entity Framework`](apis.md#entity-framework) or [`XML`](apis.md#xml) files, or perhaps [`SqlClient`](apis.md#sql) to execute raw [`SQL`](apis.md#sql) onto the database.
+It could also be a different data access technology, instead of [`NHibernate`](api.md#nhibernate): a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework) or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
 [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) is an `API` that can help build up these [mappings](patterns.md#mapping).
 
@@ -115,7 +115,7 @@ With all this in place, out come objects called [entities](patterns.md#entity), 
 
 ### Repositories
 
-The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](apis.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see the [`Repositories`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) type might have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](apis.md#nhibernate), in case you would like to switch to a different data storage technology.
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see the [`Repositories`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) type might have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data storage technology.
 
 ### Repository Interfaces
 
@@ -123,7 +123,7 @@ The [`Repository`](patterns.md#repository) implementations might not used direct
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
+The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](api.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use `SQL Server` or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
 
 This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
 
@@ -275,7 +275,7 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations:
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be platform independent in this architecture, so that code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](apis.md#jjframework). Choices like might be part of the software architecture.
+A [business layer](#business-layer) might be platform independent in this architecture, so that code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). Choices like might be part of the software architecture.
 
 
 Perpendicular Layers
@@ -291,7 +291,7 @@ At the bottom you can see [Data](#data-layer), [Business](#business-layer) and [
 
 ### Framework
 
-The [Framework](apis.md#jjframework) layer consists of `API's` that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
+The [Framework](api.md#jjframework) layer consists of `API's` that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
 
 ### Infrastructure
 
