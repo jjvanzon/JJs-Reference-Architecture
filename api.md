@@ -1061,7 +1061,6 @@ Here is some pseudo-code to demonstrate how it is put together:
 ```sql
 select ID from MyEntity
 where CategoryID = @categoryID
-and Kind = @kind
 and MinStartDate >= @minStartDate
 ```
 
@@ -1075,21 +1074,18 @@ enum SqlEnum
 
 class MySqlExecutor
 {
-    public var MyEntity_FilterIDs(
-        int categoryID, int kind, DateTime minStartDate)
-        => SqlExecutor.ExecuteReader<int>(
-            SqlEnum.MyEntity_FilterIDs, 
-            new { categoryID, kind, minStartDate });
+    public var MyEntity_FilterIDs(int categoryID, DateTime minStartDate)
+    {
+        return SqlExecutor.ExecuteReader<int>(
+            SqlEnum.MyEntity_FilterIDs, new { categoryID, minStartDate });
     }
 }
 
 class MyRepository : RepositoryBase
 {
-    public var Filter(
-        int categoryID, int kind, DateTime minStartDate)
+    public var Filter(int categoryID, DateTime minStartDate)
     {
-        var ids = MySqlExecutor.MyEntity_FilterIDs(
-            categoryID, kind, minStartDate);
+        var ids = MySqlExecutor.MyEntity_FilterIDs(categoryID, minStartDate);
 
         var entities = ids.Select(x => Get(x));
 
@@ -1099,11 +1095,9 @@ class MyRepository : RepositoryBase
 
 interface IMyRepository : IRepository
 {
-    var Filter(
-        int categoryID, int kind, DateTime minStartDate);
+    var Filter(int categoryID, DateTime minStartDate);
 }
 ```
-
 
 This would result in:
 
