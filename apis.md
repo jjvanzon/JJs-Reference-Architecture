@@ -1,7 +1,4 @@
-﻿<style>
-/* thead { display:none; } */
-section, .wrapper { max-width: 90% }
-</style>
+﻿<style>section, .wrapper { max-width: 90% }</style>
 
 🎁 API's
 =========
