@@ -155,7 +155,6 @@ List of API's (and other tech)
 
 </table>
 
-
 ### Data
 
 <table>
@@ -251,7 +250,6 @@ List of API's (and other tech)
 </tr>
 
 </table>
-
 
 ### Logic
 
@@ -379,7 +377,9 @@ List of API's (and other tech)
 
 <tr>
   <th>WinForms</th>
-  <td>Used in some projects. Small utilities and JJ.Synthesizer uses it as the top-most layer.</td>
+  <td>
+      Used in some projects. Small utilities and JJ.Synthesizer uses it as the top-most layer.
+  </td>
 </tr>
 
 <tr>
@@ -401,7 +401,6 @@ List of API's (and other tech)
       A custom-programmed vector graphics model. Can be used for component-based user interfaces.
   </td>
 </tr>
-
 
 </table>
 
@@ -527,35 +526,33 @@ List of API's (and other tech)
   </td>
 </tr>
 
-
 </table>
 
 ### Other
-
-<!-- TODO: Align HTML code. -->
 
 <h4>Localization</h4>
 
 <table>
 
 <tr>
-  <th>
-    <a href="patterns.md#resource-strings">Resource Strings</a></th>
+  <th><a href="patterns.md#resource-strings">Resource Strings</a></th>
   <td>For localization, resx files can be used in Visual Studio.</td>
 </tr>
 
 <tr>
   <th>
-    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings">JJ.Framework.ResourceStrings</a></th>
-  <td>Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.</td>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings">
+       JJ.Framework.ResourceStrings</a>
+  </th>
+  <td>
+      Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
+  </td>
 </tr>
 
 <tr>
-  <th>
-    <a href="aspects.md#localization">Localization</a></th>
+  <th><a href="aspects.md#localization">Localization</a></th>
   <td>More ideas about localization.</td>
 </tr>
-
 
 </table>
 
@@ -565,16 +562,18 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://www.nuget.org/packages/JJ.Framework.Configuration">JJ.Framework.Configuration</a></th>
-  <td>For working with complex configuration files, esier than System.Configuration.</td>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Configuration">
+       JJ.Framework.Configuration</a>
+  </th>
+  <td>
+      For working with complex configuration files, esier than System.Configuration.
+  </td>
 </tr>
 
 <tr>
-  <th>
-    <a href="aspects.md#configuration">Configuration</a></th>
+  <th><a href="aspects.md#configuration">Configuration</a></th>
   <td>More info about configuration.</td>
 </tr>
-
 
 </table>
 
@@ -584,14 +583,21 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security">JJ.Framework.Security</a></th>
-  <td>A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.</td>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security">
+       JJ.Framework.Security</a>
+  </th>
+  <td>
+      A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
+  </td>
 </tr>
 
 <tr>
   <th>
-    <a href="aspects.md#security">Security</a></th>
-  <td>If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.</td>
+    <a href="aspects.md#security">Security</a>
+  </th>
+  <td>
+      If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
+  </td>
 </tr>
 
 
@@ -603,14 +609,21 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging">JJ.Framework.Logging</a></th>
-  <td>For now might only contains the ExceptionHelper class, which for instance converts exception information to a string. </td>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging">
+       JJ.Framework.Logging</a>
+  </th>
+  <td>
+      For now might only contains the ExceptionHelper class, which for instance converts exception information to a string.
+  </td>
 </tr>
 
 <tr>
   <th>
-    <a href="aspects.md#logging">Logging</a></th>
-  <td>Described how it might be extended to contain more other code to do with logging. </td>
+    <a href="aspects.md#logging">Logging</a>
+  </th>
+  <td>
+      Described how it might be extended to contain more other code to do with logging.
+  </td>
 </tr>
 
 
