@@ -18,33 +18,36 @@ This article describes some of the API and technology choices in this software a
     - [Debugging / Testing](#debugging--testing)
     - [Processing / IO](#processing--io)
     - [Other](#other)
-- [More Elaborate Descriptiops](#more-elaborate-descriptiops)
-- [AJAX](#ajax)
-- [Configuration](#configuration)
-    - [ConnectionStrings](#connectionstrings)
-- [Embedded Resources](#embedded-resources)
-- [Entity Framework](#entity-framework)
-- [JavaScript / TypeScript](#javascript--typescript)
-- [JJ.Framework](#jjframework)
-- [OneToManyRelationship](#onetomanyrelationship)
-- [NHibernate](#nhibernate)
-- [ORM](#orm)
-    - [Generic Interfaces](#generic-interfaces)
-    - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
-    - [Flush](#flush)
-    - [Read-Write Order](#read-write-order)
-    - [Bridge Entities](#bridge-entities)
-    - [Binary Fields](#binary-fields)
-    - [Inheritance](#inheritance)
-    - [Conclusion](#conclusion)
-- [SQL](#sql)
-    - [With NHibernate](#with-nhibernate)
-    - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
-    - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
-    - [SQL String Concatenation](#sql-string-concatenation)
-    - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
-    - [Database Upgrade Scripts](#database-upgrade-scripts)
-- [XML](#xml)
+- [More Elaborate Descriptions](#more-elaborate-descriptions)
+- [Web](#web)
+    - [AJAX](#ajax)
+    - [JavaScript / TypeScript](#javascript--typescript)
+- [Misc](#misc)
+    - [JJ.Framework](#jjframework)
+    - [Configuration](#configuration)
+        - [ConnectionStrings](#connectionstrings)
+    - [OneToManyRelationship](#onetomanyrelationship)
+    - [Embedded Resources](#embedded-resources)
+    - [XML](#xml)
+- [Data](#data-1)
+    - [Entity Framework](#entity-framework)
+    - [NHibernate](#nhibernate)
+    - [ORM](#orm)
+        - [Generic Interfaces](#generic-interfaces)
+        - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
+        - [Flush](#flush)
+        - [Read-Write Order](#read-write-order)
+        - [Bridge Entities](#bridge-entities)
+        - [Binary Fields](#binary-fields)
+        - [Inheritance](#inheritance)
+        - [Conclusion](#conclusion)
+    - [SQL](#sql)
+        - [With NHibernate](#with-nhibernate)
+        - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
+        - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
+        - [SQL String Concatenation](#sql-string-concatenation)
+        - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
+        - [Database Upgrade Scripts](#database-upgrade-scripts)
 
 
 Introduction
@@ -184,22 +187,49 @@ List of API's (and other tech)
 | __[Logging](aspects.md#logging)__ | Described how it might be extended to contain more other code to do with logging. 
 
 
-More Elaborate Descriptiops
+More Elaborate Descriptions
 ---------------------------
 
 For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology.
 
+Web
+---
 
-AJAX
-----
+### AJAX
 
 For `AJAX`'ing partial web content, our team made our own wrapper `AJAX` methods, around calls to `jQuery`, so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of JavaScript code.
 
 Our strategy was to prefer full loads, so we could keep most logic in the `C#` realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
+### JavaScript / TypeScript
 
-Configuration
--------------
+`JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
+
+The idea behind `MVC` was logic on the server-side. Views were in `Razor`. Best to keep most logic `C#` was the idea.
+
+`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In `C#` you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
+
+`TypeScript` may have saved the day to cover for the weak typing from `JavaScript`. But it wasn't tried yet.
+
+But still: logic in one place in one language (`C#`) felt so nice. I guess the love for `C#` is strong.
+
+The idea was that a full page load was 1st choice, 2nd choice `AJAX'ing`, and last in line `JavaScript` only to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+
+For this last-resort `JavaScript` we used `jQuery` and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
+
+I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to `C#` though.
+
+
+Misc
+-----
+
+### JJ.Framework
+
+`JJ.Framework` are extensions to `.NET`. They are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+
+They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
+
+### Configuration
 
 For configuration we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) API, which is quite a bit easier than using .NET's `System.Configuration` directly.
 
@@ -207,7 +237,7 @@ You might read from its `README` how it works.
 
 It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work. would it ever be programmed.
 
-### ConnectionStrings
+#### ConnectionStrings
 
 Reading out `connectionStrings` might be made similar to reading out the `appSettings`. Connection strings in the `App.config` or `Web.config` may look as follows:
 
@@ -238,8 +268,16 @@ internal interface IConnectionStrings
 }
 ```
 
-Embedded Resources
-------------------
+### OneToManyRelationship
+
+The classes `ManyToOneRelationship` and `OneToManyRelationship` can keep bidirectional relationships in sync more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
+
+Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
+
+There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code whereever.
+
+
+### Embedded Resources
 
 Embedded resources might be handy to prevent having to include loose files with a deployment, but instead compiling the loose files right into the assembly DLL or EXE. It also protects those resources a little bit better against modifications.
 
@@ -254,67 +292,35 @@ string text = EmbeddedResourceReader.GetText(
   assembly, "Ingredient_UpdateName.sql");
 ```
 
+### XML
 
-Entity Framework
-----------------
+Preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
 
-Entity Framework is a framework for data access. It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
+Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)) over using other API's directly, because the helper will handle nullability and unicity more grafully.
+
+`XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)). That might be a simpler way to convert XML to an object graph than other API's.
+
+
+Data
+----
+
+### Entity Framework
+
+Entity Framework is a framework for data access, a so called `ORM` (__O__bject __R__elational __M__apper). It might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
 It may be required to enable `MSDTC`. That would be a service belonging to an `SQL Server` installation that might have to be enabled. Otherwise transactions might not work.
 
+### NHibernate
 
-JavaScript / TypeScript
------------------------
-
-`JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
-
-The idea behind `MVC` was logic on the server-side. Views were in `Razor`. Best to keep most logic `C#` was the idea.
-
-`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In `C#` you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
-
-`TypeScript` may have saved the day to cover for the weak typing from `JavaScript`. But it wasn't tried yet.
-
-But still: logic in one place in one language (`C#`) felt so nice. I guess the love for `C#` is strong.
-
-The idea was that a full page load was 1st choice, 2nd choice `AJAX'ing`, and last in line `JavaScript` only to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
-
-For this last-resort `JavaScript` we used `jQuery` and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
-
-I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to `C#` though.
-
-
-JJ.Framework
-------------
-
-`JJ.Framework` are extensions to `.NET`. They are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
-
-They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
-
-
-OneToManyRelationship
----------------------
-
-The classes `ManyToOneRelationship` and `OneToManyRelationship` can keep bidirectional relationships in sync more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
-
-Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
-
-There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code whereever.
-
-
-NHibernate
-----------
-
-`NHibernate` is a technology, used for data access. A so called `ORM`. It is comparable to `Entity Framework`.
+`NHibernate` is a technology, used for data access. A so called `ORM` (__O__bject __R__elational __M__apper). It is comparable to `Entity Framework`.
 
 `NHibernate` is used in some projects, because an employer favored it, and some other projects joined the club.
 
 It might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) and through [repository interfaces](patterns.md#repository).
 
-
-ORM
----
+### ORM
 
 An `ORM` aims to make it easier to focus on the logic around an entity model, while saving things to a database is pretty much done for you.
 
@@ -322,11 +328,11 @@ Here follow some issues you could encounter while using one, and some suggestion
 
 This information was gathered while building experience with `NHibernate`. Also having experienced `NPersist`, it might be possible that the `Entity Framework` has similar issues, due to how `ORM's` seem to work. 
 
-### Generic Interfaces
+#### Generic Interfaces
 
 Data access in this architecture is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
-### Committed / Uncommitted Objects
+#### Committed / Uncommitted Objects
 
 Here is something that happens in `ORM` sometimes:
 
@@ -341,7 +347,7 @@ Some methods of data retrieval work with uncommitted / non-flushed entities: so 
 
 It appears to have to do with when the `ORM` goes to the database to query or save objects.
 
-### Flush
+#### Flush
 
 `Flushing` in `NHibernate` would mean that all the pending `SQL` statements are executed onto the database, without committing the transaction yet.
 
@@ -355,11 +361,11 @@ Upon saving a parent object, child objects might be flushed too. Internally then
 
 It may also help to create entities in a specific order (e.g. parent object first, then the child objects) or choose a identity generation scheme, that does not require flushing an entity pre-maturely.
 
-### Read-Write Order
+#### Read-Write Order
 
 It seems `ORM's` like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles committed / uncommited objects as described earlier above.
 
-### Bridge Entities 
+#### Bridge Entities 
 
 An *bridge* entity is for `n => n` relationhips, usually requiring an additional table to make the link between the entities.
 
@@ -407,7 +413,7 @@ It might be is advised that the bridge table not to rely on a composite key of t
 
 This is because it gives 1 handle to the combination of 2 thing, giving `ORM` less difficulty managing things under the hood, prevents passing around composite keys all the time, less good hashing keys, URL's that look more difficult, etc.
 
-### Binary Fields
+#### Binary Fields
 
 You might not want to map binary and other serialized data fields using `NHibernate`, because it can harm performance quite a bit.
 
@@ -415,7 +421,7 @@ Retrieving some loose fields of an entity, would also retrieve a blob in that ca
 
 Using separate `SQL` statements for retrieving blobs might be a better alternative.
 
-### Inheritance
+#### Inheritance
 
 Particular surprises might emerge when using inheritance in your entity model at least while working with `NHibernate`. The main advance is to avoid inheritance at all in the entity models if you can.
 
@@ -435,43 +441,42 @@ By now maybe it may be clear, why the main advice is not to use inheritance in t
 
 An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two entity types use a mutual `interface` might be an alternative too.
 
-### Conclusion
+#### Conclusion
 
 If this makes you lose grip on reality and wonder whether `ORM's` are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in the code.
 
 
-SQL
----
+### SQL
 
-Executing queries onto a database is normally done through ORM, but if performance is an issue, it can be combined with SQL.
+Executing queries onto a database is normally done through `ORM`, but if performance is an issue, it can be combined with `SQL`.
 
-A choice was made, not to use stored procedures or views. Instead the SQL files were stored directly the .NET projects, under a sub-folder named `Sql`.
+A choice was made, not to use stored procedures or views. Instead the `SQL` files were stored directly the `.NET` projects, under a sub-folder named `Sql`.
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing SQL in .NET would be to use `System.Data.SqlClient`. But instead, the `SqlExecutor` API might be used.
+The classic way of executing `SQL` in `.NET` would be to use `System.Data.SqlClient`. But instead, the `SqlExecutor API` might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
-With an API like that, we can execute SQL in a strongly-typed way, often with only a single code line.
+With an `API` like that, we can execute `SQL` in a strongly-typed way, often with only a single code line.
 
 The first choice of doing it is to make the SQL file embedded resources:
 
 ![](images/sql-as-embedded-resource.png)
 
-This makes the SQL be deployed together with your DLL or EXE, because compiles the SQL file right into the assembly.
+This makes the `SQL` be deployed together with your `DLL` or `EXE`, because compiles the `SQL` file right into the assembly.
 
-The SQL may look as follows:
+The `SQL` may look as follows:
 
 ```sql
 update Ingredient set Name = @name where ID = @id;
 ```
 
-Then put an enum in the SQL folder in your .NET project:
+Then put an enum in the `SQL` folder in your `.NET` project:
 
 ![](images/sql-enum.png)
 
-Add enum members that exactly correspond to the file names of the sql files:
+Add `enum` members that exactly correspond to the file names of the `sql` files:
 
 ```cs
 namespace JJ.Demos.SqlExecutor.Sql
@@ -491,19 +496,19 @@ ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnu
 
 We passed the `SqlConnection` and `SqlTransaction` to it.
 
-Then you can call a method that executes the SQL:
+Then you can call a method that executes the `SQL`:
 
 ```cs
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names are similar to what you might be used to using `SqlCommand`. You pass SQL parameters along with the `SqlExecutor` as an anonymous type:
+The method names are similar to what you might be used to using `SqlCommand`. You pass `SQL` parameters along with the `SqlExecutor` as an anonymous type:
 
 ```cs
 new { id, name }
 ```
 
-The name and type of the variables `id` and `name` correspond to the parameters of the SQL. You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the SQL parameters, they are applied correctly:
+The name and type of the variables `id` and `name` correspond to the parameters of the `SQL`. You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the `SQL` parameters, they are applied correctly:
 
 ```cs
 var ingredient = new IngredientDto
@@ -526,13 +531,13 @@ foreach (IngredientDto record in records)
 }
 ```
 
-The column names in the SQL are *case sensitive!*
+The column names in the `SQL` are *case sensitive!*
 
-It might be an idea to let the SQL file names begin with the entity type name, so they stay grouped together:
+It might be an idea to let the `SQL`` file names begin with the entity type name, so they stay grouped together:
 
 ![](images/sql-file-names.png)
 
-### With NHibernate
+#### With NHibernate
 
 If you use `SqlExecutor` in combination with `NHibernate` you might want to 
 use the `NHibernateSqlExecutorFactory` instead of the default `SqlExecutorFactory`:
@@ -543,11 +548,11 @@ ISession session = ...;
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.EmbeddedResource, session);
 ```
 
-This version uses an NHibernate `ISession`. In order for the SQL to run in the same transaction as the SQL that NHibernate executes, we make it aware of the `ISession` here.
+This version uses an `NHibernate` `ISession`. In order for the SQL to run in the same transaction as the `SQL` that `NHibernate` executes, we make it aware of the `ISession` here.
 
 A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate).
 
-### Files instead of Embedded Resources
+#### Files instead of Embedded Resources
 
 *(This feature might not be available in the JJ.Framework.)*
 
@@ -565,7 +570,7 @@ sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient\_Update.sql", new { id, name });
 
 So the `SqlEnum` cannot be used here. You'd use the (relative) file path here.
 
-### Strings instead of Embedded Resources
+#### Strings instead of Embedded Resources
 
 *(This feature might not be available in the JJ.Framework.)*
 
@@ -581,7 +586,7 @@ In that case no SQL files have to be included in your project.
 
 But it might make it harder to track down all the SQL of your project, optimize it and using SQL strings also circumvents another layer of protection against SQL injection attacks.
 
-### SQL String Concatenation
+#### SQL String Concatenation
 
 *`SQL` `string` concatenation* is sort of a no-no, because it removes a layer of protection against `SQL` injection attacks. `SqlClient` has `SqlParameters` from `.NET` to prevent unwanted insertion of scripting. `SqlExecutor` from `JJ.Framework` uses `SqlParameters` under the hood, to offer the same kind of protection. This encodes the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
@@ -599,7 +604,7 @@ But there might be exceptional cases where `SQL` string concatenation could be f
 
 One variation of `SqlExecutor` included the ability to add placeholders to the `SQL` files to insert additional scripting for this purpose. *(This feature might not be available in the JJ.Framework.)* 
 
-### Hiding SQL behind Repositories
+#### Hiding SQL behind Repositories
 
 The `repository` pattern is used in this architecture. The pattern is roughly described [here](patterns.md#repository).
 
@@ -674,18 +679,8 @@ In `JJ` projects you might also find split up into separate assemblies:
 
 Separating the general things from the technology-specific things.
 
-### Database Upgrade Scripts
+#### Database Upgrade Scripts
 
 `SQL` executed solely for database upgrading, might not be put in the main projects, but a project/folder on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
-
-
-XML
----
-
-Preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
-
-Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)) over using other API's directly, because the helper will handle nullability and unicity more grafully.
-
-`XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)). That might be a simpler way to convert XML to an object graph than other API's.
 
 [back](.)
