@@ -1,9 +1,9 @@
-﻿👨‍💻 Code Style
+﻿<style>section, .wrapper { max-width: 90% }</style>
+
+👨‍💻 Code Style
 ==============
 
 [back](.)
-
-<style>section, .wrapper { max-width: 90% }</style>
 
 <h3>Contents</h3>
 

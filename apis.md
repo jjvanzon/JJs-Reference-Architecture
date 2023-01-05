@@ -1,9 +1,9 @@
-﻿🎁 API's
+﻿<style>thead{display:none;}</style>
+
+🎁 API's
 =========
 
 [back](.)
-
-<style>thead{display:none;}</style>
 
 This article describes some of the API and technology choices in this software architecture.
 
