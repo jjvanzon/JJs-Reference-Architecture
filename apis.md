@@ -153,7 +153,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<table>
+</table>
 
 
 ### Data
@@ -250,7 +250,7 @@ List of API's (and other tech)
   <td>JJ extensions to LINQ.</td>
 </tr>
 
-<table>
+</table>
 
 
 ### Logic
@@ -375,64 +375,246 @@ List of API's (and other tech)
 
 <h4>Win</h4>
 
-|          |          |
-|----------|----------|
-| __WinForms__ | Used in some projects. Small utilities and `JJ.Synthesizer` uses it as the top-most layer.
-| __[SimpleProcessForm](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms)__ | A base form for a utility that runs a process.
-| __[JJ.Framework.VectorGraphics](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.VectorGraphics)__ | A custom-programmed vector graphics model. Can be used for component-based user interfaces.
+<table>
+
+<tr>
+  <th>WinForms</th>
+  <td>Used in some projects. Small utilities and JJ.Synthesizer uses it as the top-most layer.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms">
+       SimpleProcessForm</a>
+  </th>
+  <td>
+      A base form for a utility that runs a process.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.VectorGraphics">
+       JJ.Framework.VectorGraphics</a>
+  </th>
+  <td>
+      A custom-programmed vector graphics model. Can be used for component-based user interfaces.
+  </td>
+</tr>
+
+
+</table>
 
 ### Debugging / Testing
 
-|                  |                  |
-|------------------|------------------|
-| __[MSTest](https://www.nuget.org/packages/MSTest.TestFramework)__ | For automated / unit testing. Seems a deprecated framework. Might upgrade, but it ain't on the top of the list.
-| __[JJ.Framework.Testing](https://www.nuget.org/packages/JJ.Framework.Testing)__ | Extends the `Assert` class, but automatically includes the tested expression in the error messages.
-| __DebuggerDisplays__ | A technique to quickly display helpful info in the ID watch screen.
-| __[JJ.Framework.Exceptions](https://www.nuget.org/packages/JJ.Framework.Exceptions)__ | Contains exception classes for basic errors. Clear concise error messages, including tested expressions and tested values.
-| __[Accessor](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor)__ | For accessing the internals of types for instance for testing purposes.
+<table>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/MSTest.TestFramework">
+       MSTest</a>
+  </th>
+  <td>
+      For automated / unit testing. Seems a deprecated framework.
+      Might upgrade, but it ain't on the top of the list.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Testing">
+       JJ.Framework.Testing</a></th>
+  <td>
+      Extends the Assert class, but automatically includes the tested expression in the error messages.
+  </td>
+</tr>
+
+<tr>
+  <th>DebuggerDisplays</th>
+  <td>A technique to quickly display helpful info in the watch screen.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Exceptions">
+       JJ.Framework.Exceptions</a></th>
+  <td>
+      Contains exception classes for basic errors.
+      Clear concise error messages,
+      including tested expressions and tested values.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Reflection#accessor">
+       Accessor</a>
+  </th>
+  <td>
+      For accessing the internals of types for instance for testing purposes.
+  </td>
+</tr>
+
+</table>
 
 ### Processing / IO
 
-|                        |                |
-|------------------------|----------------|
-| __[JJ.Framework.Text](https://www.nuget.org/packages/JJ.Framework.Text)__ | Basic helpers for working with text.
-| __[JJ.Framework.IO](https://www.nuget.org/packages/JJ.Framework.IO)__ | Contains various file functions, functions for working with streams and working with CSV's.
-| __[JJ.Framework.HtmlToXml](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.HtmlToXml)__ | The HtmlToXmlConverter class steals from SgmlReader. It does what it says.
-| __[JJ.Framework.Xml](https://www.nuget.org/packages/JJ.Framework.Xml)__ | A convenient way to map XML to (C#) classes.<br/>Access XML nodes more safely, with null and unicity checks.
-| __[JJ.Framework.Xml.Linq](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq)__ | "
-| __[Embedded Resources](#embedded-resources)__ | Embedded resources allow compiling files and content right inside a DLL or EXE.
-| __[EmbeddedResourceReader](https://www.nuget.org/packages/JJ.Framework.Common)__ | Make it a little easier to get embedded resource Streams, bytes and strings.
+<table>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Text">
+       JJ.Framework.Text</a>
+  </th>
+  <td>
+      Basic helpers for working with text.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.IO">
+       JJ.Framework.IO</a>
+  </th>
+  <td>
+      Contains various file functions, functions for working with streams and working with CSV's.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.HtmlToXml">
+       JJ.Framework.HtmlToXml</a>
+  </th>
+  <td>
+      The HtmlToXmlConverter class steals from SgmlReader. It does what it says.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Xml">
+       JJ.Framework.Xml</a>
+  </th>
+  <td>
+      A convenient way to map XML to (C#) classes.<br/>
+      Access XML nodes more safely, with null and unicity checks.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq">
+       JJ.Framework.Xml.Linq</a>
+  </th>
+  <td>
+      "
+  </td>
+</tr>
+
+<tr>
+  <th><a href="#embedded-resources">Embedded Resources</a></th>
+  <td>Embedded resources allow compiling files and content right inside a DLL or EXE.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Common">
+      EmbeddedResourceReader</a>
+  </th>
+  <td>
+      Make it a little easier to get embedded resource Streams, bytes and strings.
+  </td>
+</tr>
+
+
+</table>
 
 ### Other
 
+<!-- TODO: Align HTML code. -->
+
 <h4>Localization</h4>
 
-|                  |                |
-|------------------|----------------|
-| __[Resource Strings](patterns.md#resource-strings)__ | For localization, resx files can be used in Visual Studio.
-| __[JJ.Framework.ResourceStrings](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings)__ | Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.
-| __[Localization](aspects.md#localization)__ | More ideas about localization.
+<table>
+
+<tr>
+  <th>
+    <a href="patterns.md#resource-strings">Resource Strings</a></th>
+  <td>For localization, resx files can be used in Visual Studio.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings">JJ.Framework.ResourceStrings</a></th>
+  <td>Reusable button texts and such in multiple languages. For now supports Dutch, US English and some broken Polish.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="aspects.md#localization">Localization</a></th>
+  <td>More ideas about localization.</td>
+</tr>
+
+
+</table>
 
 <h4>Configuration</h4>
 
-|     |     |
-|-----|-----|
-| __[JJ.Framework.Configuration](https://www.nuget.org/packages/JJ.Framework.Configuration)__ | For working with complex configuration files, esier than `System.Configuration`.
-| __[Configuration](aspects.md#configuration)__ | More info about configuration.
+<table>
+
+<tr>
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Configuration">JJ.Framework.Configuration</a></th>
+  <td>For working with complex configuration files, esier than System.Configuration.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="aspects.md#configuration">Configuration</a></th>
+  <td>More info about configuration.</td>
+</tr>
+
+
+</table>
 
 <h4>Security</h4>
 
-|     |     |
-|-----|-----|
-| __[JJ.Framework.Security](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security)__ | A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
-| __[Security](aspects.md#security)__ | If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
+<table>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security">JJ.Framework.Security</a></th>
+  <td>A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.</td>
+</tr>
+
+<tr>
+  <th>
+    <a href="aspects.md#security">Security</a></th>
+  <td>If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.</td>
+</tr>
+
+
+</table>
 
 <h4>Logging</h4>
 
-|     |     |
-|-----|-----|
-| __[JJ.Framework.Logging](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging)__ | For now might only contains the `ExceptionHelper` class, which for instance converts exception information to a string. 
-| __[Logging](aspects.md#logging)__ | Described how it might be extended to contain more other code to do with logging. 
+<table>
+
+<tr>
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging">JJ.Framework.Logging</a></th>
+  <td>For now might only contains the ExceptionHelper class, which for instance converts exception information to a string. </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="aspects.md#logging">Logging</a></th>
+  <td>Described how it might be extended to contain more other code to do with logging. </td>
+</tr>
+
+
+</table>
 
 
 More Elaborate Descriptions
