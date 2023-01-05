@@ -186,7 +186,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <h href="https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html">
+    <a href="https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html">
        QueryOver</a>
   </th>
   <td>
