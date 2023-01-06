@@ -69,7 +69,7 @@ The [presentation](#presentation-layer) layer is the visual part of a program. I
 
 The [business](#business-layer) layer is like internal, mechanical parts. It can model the functionality of a program, but it isn't directly visible. 
 
-The [data](#data-layer) layer models and stores the data. It models functionality more passively: It does not really process anything. It just stores things.
+The [data](#data-layer) layer stores the data. It models functionality more passively: It does not really process anything. It just stores things.
 
 ### Connections Between Layers
 
@@ -79,7 +79,7 @@ The [business](#business-layer) layer uses the [data](#data-layer) layer to stor
 
 ### Skipping Business Layer
 
-Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer using the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, represented with the dotted line in the [diagram](#3-layers) above.
+Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer using the [data](#data-layer) layer directly, represented with the dotted line in the [diagram](#3-layers) above. This can happen when the [business](#business-layer) layer does not really add any functionality.
 
 ### Patterns
 
@@ -111,11 +111,11 @@ The [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) `API` 
 
 ### Entities
 
-With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) objects represent the functional domain model.
+With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) objects represent the functional domain.
 
 ### Repositories
 
-The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity type](patterns.md#entity) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
@@ -189,7 +189,7 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A *view engine* that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A view engine that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
 In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
 
@@ -205,7 +205,7 @@ The dashed line going right through the [diagram](#presentation-layer) above sep
 
 The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and `Razor`, while the *platform independent* part is unaware of which presentation technology is used.
 
-That means that we can use the same kind of application logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows*. This gives us the flexibility to deploy apps on *mobile* platforms using the same base techniques as *Windows* or *web*.
+That means that we can use the same kind of logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows*. This gives us the flexibility to deploy apps on *mobile* platforms with the same base techniques.
 
 
 Business Layer
