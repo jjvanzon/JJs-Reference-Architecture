@@ -25,7 +25,6 @@ This article describes some of the API and technology choices in this software a
 - [Misc](#misc)
   - [JJ.Framework](#jjframework)
   - [Configuration](#configuration)
-    - [ConnectionStrings](#connectionstrings)
   - [OneToManyRelationship](#onetomanyrelationship)
   - [XML](#xml)
   - [Embedded Resources](#embedded-resources)
@@ -154,7 +153,7 @@ List of API's (and other tech)
     <a href="https://www.nuget.org/profiles/jjvanzon">
        JJ.Framework</a></th>
   <td>
-      In-house programmed extensions to the .NET Framework can be found on
+      In-house programmed extensions to the .NET Framework.<br/>
       <a href="https://github.com/jjvanzon/JJ.Framework">GitHub</a> / 
       <a href="https://www.nuget.org/profiles/jjvanzon">NuGet</a> /
       <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">JJs-Pre-Release-Package-Feed</a>
@@ -610,7 +609,7 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th><a href="patterns.md#resource-strings">Resource Strings</a></th>
+  <th><a href="patterns.html#resource-strings">Resource Strings</a></th>
   <td>For localization, resx files can be used in Visual Studio.</td>
 </tr>
 
@@ -625,7 +624,7 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="aspects.md#localization">Localization</a></th>
+  <th><a href="aspects.html#localization">Localization</a></th>
   <td>More ideas about localization.</td>
 </tr>
 
@@ -646,7 +645,7 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="aspects.md#configuration">Configuration</a></th>
+  <th><a href="aspects.html#configuration">Configuration</a></th>
   <td>More info about configuration.</td>
 </tr>
 
@@ -668,7 +667,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="aspects.md#security">Security</a>
+    <a href="aspects.html#security">Security</a>
   </th>
   <td>
       If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
@@ -694,7 +693,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="aspects.md#logging">Logging</a>
+    <a href="aspects.html#logging">Logging</a>
   </th>
   <td>
       Described how it might be extended to contain more other code to do with logging.
@@ -755,7 +754,7 @@ You might read from its `README` how it works.
 
 It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work. would it ever be programmed.
 
-#### ConnectionStrings
+<h4>ConnectionStrings</h4>
 
 Reading out `connectionStrings` might be made similar to reading out the `appSettings`. Connection strings in the `App.config` or `Web.config` may look as follows:
 
