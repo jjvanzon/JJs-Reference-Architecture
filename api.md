@@ -33,13 +33,13 @@ This article describes some of the API and technology choices in this software a
   - [Entity Framework](#entity-framework)
   - [NHibernate](#nhibernate)
   - [ORM](#orm)
-    - [Generic Interfaces](#generic-interfaces)
     - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
     - [Flush](#flush)
     - [Read-Write Order](#read-write-order)
     - [Bridge Entities](#bridge-entities)
     - [Binary Fields](#binary-fields)
     - [Inheritance](#inheritance)
+    - [Generic Interfaces](#generic-interfaces)
     - [Conclusion](#conclusion)
   - [SQL](#sql)
     - [With NHibernate](#with-nhibernate)
@@ -141,8 +141,12 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>GitHub Issues</th>
-  <td>Gradually using GitHub Issues more for planning.</td>
+  <th>
+    <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/quickstart">
+       GitHub Issues</a></th>
+  <td>
+      Gradually using GitHub Issues more for planning.
+  </td>
 </tr>
 
 <tr>
@@ -194,7 +198,7 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>ORM</th>
+  <th><a href="#orm">ORM</a></th>
   <td>Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
 </tr>
 
@@ -704,7 +708,7 @@ List of API's (and other tech)
 More Elaborate Descriptions
 ---------------------------
 
-For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology.
+For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology and others.
 
 Web
 ---
@@ -788,7 +792,7 @@ The classes `ManyToOneRelationship` and `OneToManyRelationship` can keep bidirec
 
 Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
 
-There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code whereever.
+There might be other ways to do this. `Entity Framework` might do it automatically. `NHibernate` does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code.
 
 
 ### XML
@@ -820,7 +824,7 @@ Data
 
 ### Entity Framework
 
-`Entity Framework` is a framework for data access, a so called `ORM` (__O__bject __R__elational __M__apper). `Entity Framework` might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
+`Entity Framework` is a framework for data access, a so called `ORM` (**O**bject **R**elational **M**apper). `Entity Framework` might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
@@ -828,7 +832,7 @@ It may be required to enable `MSDTC`. That would be a service belonging to an `S
 
 ### NHibernate
 
-`NHibernate` is a technology, used for data access. A so called `ORM` (__O__bject __R__elational __M__apper). It is comparable to `Entity Framework`.
+`NHibernate` is a technology, used for data access. A so called `ORM` (**O**bject **R**elational **M**apper). It is comparable to `Entity Framework`.
 
 `NHibernate` is used in some projects, because an employer favored it, and some other projects joined the club.
 
@@ -841,10 +845,6 @@ An `ORM` aims to make it easier to focus on the logic around an entity model, wh
 Here follow some issues you could encounter while using an `ORM`, and some suggestions for dealing with it.
 
 This information was gathered from experience built up with `NHibernate`. Also having experienced `NPersist`, it might be possible that the `Entity Framework` has similar issues, due to how `ORM's` work. 
-
-#### Generic Interfaces
-
-Data access in this architecture is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
 #### Committed / Uncommitted Objects
 
@@ -954,6 +954,10 @@ This also means that to evaluate the *type*, you are better of unproxying, or it
 By now maybe it may be clear, why the main advice is not to use inheritance in the first place in your entity models, if at all possible.
 
 An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two entity types use a mutual `interface` might be an alternative too.
+
+#### Generic Interfaces
+
+Data access in this architecture is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
 #### Conclusion
 
