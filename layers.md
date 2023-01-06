@@ -79,7 +79,7 @@ The [business](#business-layer) layer uses the [data](#data-layer) layer to stor
 
 ### Skipping Business Layer
 
-Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer using the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, as represented with the dotted line in the [diagram](#3-layers) above.
+Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer using the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, represented with the dotted line in the [diagram](#3-layers) above.
 
 ### Patterns
 
@@ -101,29 +101,29 @@ It starts with the database. This can be a *relational database* like `Microsoft
 
 The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
     
-It could also be a different data access technology, instead of [`NHibernate`](api.md#nhibernate): a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework) or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
+It could also be a different data access technology: a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework), or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns.md#entity) objects have *properties*, that map to *columns* in the database, and properties that point to *related entities*. [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
-[`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) is an `API` that can help build up these [mappings](patterns.md#mapping).
+The [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) `API` can help build up these [mappings](patterns.md#mapping).
 
 ### Entities
 
-With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) classes represent the domain model.
+With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) objects represent the domain model.
 
 ### Repositories
 
-The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see the [`Repositories`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) type might have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data storage technology.
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
-The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The API [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [`Repository` interfaces](patterns.md#repository-interfaces).
+The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The API [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](api.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use `SQL Server` or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
+The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part. The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and `SQL Server`. The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use `SQL Server` or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
 
 This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
 
@@ -145,7 +145,7 @@ It is the [`Presenter`](patterns.md#presenter) classes that talk to this [busine
 
 ### ViewModel
 
-A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is to be shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure data objects, no logic. That makes them more easily usable for different presentation technologies. These pure data objects can also be send over a wire more easily without surprises.
+A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure data objects, no logic. So they can be more easily used with different presentation technologies. These pure data objects can also be send over a communication line more easily without many surprises.
 
 ### ToViewModel
 
@@ -161,27 +161,27 @@ The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patter
 
 They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
-Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of a [presentation layer](#presentation-layer).
+Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
 
 ### MVC
 
-`MVC` is the technology of choice in this architecture for programming *user interfaces* in *web technology*. In our architecture the `MVC` layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
+[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this architecture for programming *user interfaces* for *web technology*. In our architecture the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
-`MVC` uses [`Controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
+[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) uses [`Controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns.md#controller) are quite specific to `MVC`. An equivalent might not be present on other presentation platforms.
+[`Controllers`](patterns.md#controller) are quite specific to [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms it might be advisable, to have a *central spot* to manage calls to the [`Presenter`](patterns.md#presenter) and showing the right [`view`](patterns.md#views) depending on its result.
+However, even on other presentation platforms it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`view`](patterns.md#views) depending on their results.
 
 ### URLs
 
-Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. `MVC` makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to get a `URL`.
+Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to get a `URL`.
 
-The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by `MVC` [`Controllers`](patterns.md#controller). The [`ViewModels`](patterns.md#viewmodel) and are built up from post data by `MVC` automatically.
+The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) [`Controllers`](patterns.md#controller). The [`ViewModels`](patterns.md#viewmodel) and are built up from post data by [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) automatically.
 
-[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by `MVC`.
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc).
 
 ### View Engine (Razor)
 
@@ -189,7 +189,7 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A *view engine* that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A *view engine* that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
 In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter) instead.
 
@@ -203,7 +203,7 @@ The `Razor` engine produces a piece of `HTML` received by the web browser.
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* code from the *platform independent* code. 
 
-The *platform-specific* code concerns itself with `MVC`, `HTML` and `Razor`, while the *platform independent* code is unaware of which presentation technology is used.
+The *platform-specific* code concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and `Razor`, while the *platform independent* code is unaware of which presentation technology is used.
 
 That means that we can use the same kind of application logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows*. This gives us the flexibility to deploy apps on *mobile* platforms using the same base techniques as *Windows* or *web*.
 
