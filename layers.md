@@ -69,7 +69,7 @@ The [presentation](#presentation-layer) layer is the visual part of a program. I
 
 The [business](#business-layer) layer are like the internal, mechanical parts. They defines the rules of the system. It can model the functionality of a software program, but you generally don't see it. 
 
-The [data](#data-layer) layer models and stores the data. It models functionality more passively: it does not really do anything on its own. It doesn't really process the data. It just stores it.
+The [data](#data-layer) layer models and stores the data. It models functionality more passively: it does not really process anything. It just stores things.
 
 ### Connections Between Layers
 
