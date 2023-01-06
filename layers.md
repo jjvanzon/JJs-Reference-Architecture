@@ -107,11 +107,11 @@ It could also be a different data access technology: a different [`ORM`](api.md#
 
 [Entity](patterns.md#entity) objects have *properties*, that map to *columns* in the database, and properties that point to *related entities*. [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
-The [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) `API` can help build up these [mappings](patterns.md#mapping).
+The [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) `API` can help set up these [mappings](patterns.md#mapping).
 
 ### Entities
 
-With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) objects represent the domain model.
+With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) objects represent the functional domain model.
 
 ### Repositories
 
