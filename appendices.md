@@ -112,7 +112,7 @@ Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar 
 2. Validatiemeldingen uit `Framework.Validation`, toegankelijk via de `ValidationResourceFormatter` class.
 3. CanonicalModel: een tussenmodel voor uitwisseling van gegevens tussen verschillende systemen, toegankelijk via de `CanonicalResourceFormatter` class.
 4. Business layers bevatten alleen vertalingen voor de overige teksten die niet in het canonical model staan.
-5. Ook teksten die niet direct domeintermen zijn, maar wel in applicaties worden gebruikt op plekken waar het gaat over een bepaald business domain, mogen in de business layer, zijn resources gezet worden.
+5. Ook teksten die niet direct domeintermen zijn, maar wel in applicaties worden gebruikt op plekken waar het gaat over een bepaald functioneel domein, mogen in de business layer, zijn resources gezet worden.
 6. Presentation layer bevat over het algemeen geen teksten. Die zetten we in de business layer: we hebben al genoeg plekken waar we resources neerzetten.
 
 ### Tips

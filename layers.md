@@ -8,6 +8,9 @@ Software can be built up of layers. This article describes how layers could be s
 <h3>Contents</h3>
 
 - [3 Layers](#3-layers)
+    - [Connections Between Layers](#connections-between-layers)
+    - [Skipping Business Layer](#skipping-business-layer)
+    - [Patterns](#patterns)
 - [Data Layer](#data-layer)
     - [Database (DB)](#database-db)
     - [ORM (NHibernate)](#orm-nhibernate)
@@ -58,7 +61,7 @@ Software can be built up of layers. This article describes how layers could be s
 3 Layers
 --------
 
-Software might be split up in 3 layers:
+Software might be split up into 3 main layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
@@ -66,15 +69,21 @@ The [presentation](#presentation-layer) layer is the visual part of a program. I
 
 The [business](#business-layer) layer can model of the functionality of a software program, but you generally don't see it. It defines the rules of the system. It is like the internal, mechanical parts.
 
-The [data](#data-layer) layer models and stores data. It models functionality more passively: it does not really do anything on its own. It does not really process the data. It just stores it.
+The [data](#data-layer) layer models and stores the data. It models functionality more passively: it does not really do anything on its own. It doesn't really process the data. It just stores it.
+
+### Connections Between Layers
 
 The [presentation](#presentation-layer) layer builds upon the [business](#business-layer) layer with user interface technology.
 
 The [business](#business-layer) layer uses the [data](#data-layer) layer to store the data.
 
-Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer, and uses the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, as represented with the dotted line in the [diagram](#3-layers)
+### Skipping Business Layer
 
-The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly fixed patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
+Sometimes the [presentation](#presentation-layer) layer skips the [business](#business-layer) layer using the [data](#data-layer) layer directly, when the [business](#business-layer) layer would not really add any functionality, as represented with the dotted line in the [diagram](#3-layers) above.
+
+### Patterns
+
+The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
 
 
 Data Layer
@@ -86,17 +95,17 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database (DB). This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But the it could also be another type of data store: an [`XML`](apis.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](apis.md#orm)), like [`NHibernate`](apis.md#nhibernate). This [`ORM`](apis.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
     
-It could also be a different data access technology, instead of [`NHibernate`](apis.md#nhibernate): a different [`ORM`](apis.md#orm), like [`Entity Framework`](apis.md#entity-framework) or [`XML`](apis.md#xml) files, or perhaps [`SqlClient`](apis.md#sql) to execute raw [`SQL`](apis.md#sql) onto the database.
+It could also be a different data access technology, instead of [`NHibernate`](api.md#nhibernate): a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework) or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](apis.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns.md#entity) objects have properties, that map to columns in the database, and properties that point to related entities. [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
 [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) is an `API` that can help build up these [mappings](patterns.md#mapping).
 
@@ -106,7 +115,7 @@ With all this in place, out come objects called [entities](patterns.md#entity), 
 
 ### Repositories
 
-The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](apis.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see the [`Repositories`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) type might have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](apis.md#nhibernate), in case you would like to switch to a different data storage technology.
+The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see the [`Repositories`](patterns.md#repository) as a *set of queries*. Each [entity](patterns.md#entity) type might have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data storage technology.
 
 ### Repository Interfaces
 
@@ -114,7 +123,7 @@ The [`Repository`](patterns.md#repository) implementations might not used direct
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](apis.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](apis.md#xml) file under it and not use `SQL Server` or [`NHibernate`](apis.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
+The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* code from the *platform independent* code. The platform-*specific* code concerns itself with [`NHibernate`](api.md#nhibernate) and `SQL Server`. The platform *independent* code is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use `SQL Server` or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
 
 This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
 
@@ -132,7 +141,7 @@ The [presentation layer](#presentation-layer) calls the [business layer](#busine
 
 ### Presenter
 
-It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each method in that [`Presenter`](patterns.md#presenter) represents a specific *user action* in that screen.
+It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each [`Presenter`](patterns.md#presenter) *method* represents a specific *user action* on that screen.
 
 ### ViewModel
 
@@ -150,7 +159,7 @@ The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patter
 
 [`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around presentation.
 
-They call upon the [business layer](#business-layer) to *save*, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
+They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
 Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of a [presentation layer](#presentation-layer).
 
@@ -176,13 +185,13 @@ The parameters of a [`Controller`](patterns.md#controller) method can be `URL` p
 
 ### View Engine (Razor)
 
-After the [`Controller`](patterns.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off after the [`Controller`](patterns.md#controller) method is done.
+After the [`Controller`](patterns.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off.
 
 ### Views (Razor)
 
-A *view engine* that might be used in this architecture is `Razor`. It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent to the web browser.
+A *view engine* that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with `MVC`. The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in `Forms` and `Controls` and delegate the real work to  [`Presenters`](patterns.md#presenter) instead.
+In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advised that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter) instead.
 
 ### HTML
 
@@ -238,7 +247,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Resources Strings
 
-[Resource `strings`](patterns.md#resource-strings) can make texts in an app *multi-lingual*. These might be put in the [business layer](#business-layer) to translate terms from the business domain.
+[Resource `strings`](patterns.md#resource-strings) can make texts in an app *multi-lingual*. These might be put in the [business layer](#business-layer) to translate terms from the functional domain.
 
 ### Defaults
 
@@ -266,7 +275,7 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations:
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be platform independent in this architecture, so that code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](apis.md#jjframework). Choices like might be part of the software architecture.
+A [business layer](#business-layer) might be platform independent in this architecture, so that code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). Choices like might be part of the software architecture.
 
 
 Perpendicular Layers
@@ -282,7 +291,7 @@ At the bottom you can see [Data](#data-layer), [Business](#business-layer) and [
 
 ### Framework
 
-The [Framework](apis.md#jjframework) layer consists of `API's` that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
+The [Framework](api.md#jjframework) layer consists of `API's` that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
 
 ### Infrastructure
 

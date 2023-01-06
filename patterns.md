@@ -259,7 +259,7 @@ Be aware that executing `NewLinkTo` onto *existing* objects will result in a cor
 
 A Facade combines several related (usually CRUD) operations into one class that also performs additional business logic and validation, side effects, integrity constraints, conversions, etc. It delegates to other classes to do the work. If you do it using a facade you should be able to count on it that the integrity is maintained.
 
-It is a combinator class: a facade combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial business domain, so manages a set of entity types together. You could also call it a combinator class.
+It is a combinator class: a facade combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial functional domain, so manages a set of entity types together. You could also call it a combinator class.
 
 #### Get by ID not in the Facade
 
@@ -333,7 +333,7 @@ ViewModels may only use simple types and references to other view models. A View
 
 Inheritance is *not* advisable, so it is a good plan to make the ViewModel classes sealed.
 
-Do not convert view models to other view models (except for yielding over non-persisted properties). Always convert from business domain to view model and from view model to business domain, never from view model to view model.
+Do not convert view models to other view models (except for yielding over non-persisted properties). Always convert from functional domain to view model and from view model to functional domain, never from view model to view model.
 
 A ViewModel should say *what* is shown on screen, not *how*:
 As such it is better to call a property CanDelete, than calling it DeleteButtonVisible. Whether it is a button or a hyperlink or Visible or Enabled property is up to the view.
@@ -903,7 +903,7 @@ Even if you do not expect multiple input formats or multiple output formats or a
 
 #### MVC
 
-MVC itself contains a specialized version of this very pattern. The following layering stacks are completely analogus to eachother:
+MVC itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - Selector - Model - Generator – Result
 - Controller - ViewModel - view engine – View

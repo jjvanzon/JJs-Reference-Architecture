@@ -10,10 +10,10 @@ Contents
 
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
-- 🏷 [Namespaces, Assemblies & Folder Structure](namespaces-assemblies-and-folder-structure.md)
+- 🍱 [Namespaces, Assemblies & Folders](namespaces-assemblies-and-folders.md)
 - 🧶 [Patterns](patterns.md)
 - 🧱 [Aspects](aspects.md)
-- 🎁 [API's](apis.md)
+- 🎁 [API's](api.md)
 - 🏗 [Practices & Principles](practices-and-principles.md)
 - 🌐 [Service Oriented Architecture](service-oriented-architecture.md)
 - 📀 [Database Conventions](database-conventions.md)
@@ -25,7 +25,7 @@ Contents
 
 Misc:
 
-- ⚠ [Platform Compatibility Issues](misc-docs/platform-compatibility-issues.md)
+- ⚠ [Platform Compatibility](misc-docs/platform-compatibility.md)
 - 📰 [Database Upgrade Excel Example](misc-docs/database-upgrade-excel-example.xlsx)
 
 *JJ van Zon, 2014-2022*

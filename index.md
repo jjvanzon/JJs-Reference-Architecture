@@ -7,7 +7,10 @@ Documentation about software development techniques. Used as a base in several h
 
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
-- 🎁 [API's](apis.md)
-- ⚠ [Platform Compatibility Issues](misc-docs/platform-compatibility-issues.md)
+- 🍱 [Namespaces, Assemblies & Folders](namespaces-assemblies-and-folders.md)
+- 🎁 [API's](api.md)
+- 🌐 [Service Oriented Architecture](service-oriented-architecture.md)
+- 👨‍💻 [Code Style](code-style.md)
+- ⚠ [Platform Compatibility](misc-docs/platform-compatibility.md)
 
 [back](https://jjvanzon.github.io/)
