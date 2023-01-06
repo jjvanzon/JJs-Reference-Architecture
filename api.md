@@ -46,7 +46,7 @@ This article describes some of the API and technology choices in this software a
     - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
     - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
     - [SQL String Concatenation](#sql-string-concatenation)
-    - [Hiding SQL behind Repositories](#hiding-sql-behind-repositories)
+    - [SQL behind Repositories](#sql-behind-repositories)
     - [Database Upgrade Scripts](#database-upgrade-scripts)
 
 
@@ -66,22 +66,32 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th>Visual Studio</th>
-  <td>Used for the development of the code.</td>
+  <th>
+    <a href="https://visualstudio.microsoft.com/#vs-section">
+       Visual Studio</a>
+  </th>
+  <td>
+      Used for the development of the code.
+  </td>
 </tr>
 
 <tr>
-  <th>VS Code</th>
-  <td>Used for MarkDown editing.</td>
+  <th>
+    <a href="https://visualstudio.microsoft.com/#vscode-section">
+       VS Code</a>
+  </th>
+  <td>
+      Used for MarkDown editing.
+  </td>
 </tr>
 
 <tr>
-  <th>.NET</th>
+  <th><a href="https://dotnet.microsoft.com/">.NET</a></th>
   <td>Framework from Microsoft that forms a base for the programming.</td>
 </tr>
 
 <tr>
-  <th>C#</th>
+  <th><a href="https://dotnet.microsoft.com/en-us/languages/csharp">C#</a></th>
   <td>Primary programming language.</td>
 </tr>
 
@@ -91,12 +101,12 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>ReSharper</th>
+  <th><a href="https://www.jetbrains.com/resharper/">ReSharper</a></th>
   <td>Tool for code formatting, refactoring and code smells and such.</td>
 </tr>
 
 <tr>
-  <th>git</th>
+  <th><a href="https://git-scm.com/">Git</a></th>
   <td>Source control, revision history, version management for the code.</td>
 </tr>
 
@@ -121,7 +131,9 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>JJ.Framework</th>
+  <th>
+    <a href="https://www.nuget.org/profiles/jjvanzon">
+       JJ.Framework</a></th>
   <td>
       In-house programmed extensions to the .NET Framework can be found on
       <a href="https://github.com/jjvanzon/JJ.Framework">GitHub</a> / 
@@ -1046,13 +1058,13 @@ But there might be exceptional cases where `SQL` string concatenation could be f
 
 One variation of `SqlExecutor` included the ability to add placeholders to the `SQL` files to insert additional scripting for this purpose. *(This feature might not be available in the JJ.Framework.)* 
 
-#### Hiding SQL behind Repositories
+#### SQL behind Repositories
 
 The `repository` pattern is used in this architecture. The pattern is roughly described [here](patterns.md#repository).
 
 The repository pattern can be used together with `JJ.Framework.Data`, documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
-For SQL executing in cooperation with repositories using `SqlExecutor` there is a way described here [here](#sql).
+For `SQL` executing in cooperation with repositories using `SqlExecutor` there is a way described here [here](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
