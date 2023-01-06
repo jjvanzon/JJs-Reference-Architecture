@@ -169,7 +169,7 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th>SQL Server</th>
+  <th><a href="https://www.microsoft.com/en-us/sql-server/">SQL Server</a></th>
   <td>Primary data store technology for relational databases.</td>
 </tr>
 
@@ -179,8 +179,13 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>SQL</th>
-  <td>For performance reasons SQL is hand-programmed incidentally, combined with ORM.</td>
+  <th>
+    <a href="https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql/">
+       SQL</a>
+  </th>
+  <td>
+      For performance reasons SQL is hand-programmed incidentally, combined with ORM.
+  </td>
 </tr>
 
 <tr>
@@ -244,7 +249,10 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>LINQ</th>
+  <th>
+      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries">
+         LINQ</a>
+  </th>
   <td>
       A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
   </td>
@@ -320,7 +328,7 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th>IIS</th>
+  <th><a href="https://www.iis.net/">IIS</a></th>
   <td>
       (Internet Information Services.) For hosting web sites. 
       Some Visual Studio projects wish to use it upon load.
@@ -328,13 +336,23 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>MVC</th>
-  <td>A web development tech in the .NET Framework. Code runs mostly server side.</td>
+  <th>
+    <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc">
+       MVC</a>
+    </th>
+  <td>
+      A web development tech in the .NET Framework. Code runs mostly server side.
+  </td>
 </tr>
 
 <tr>
-  <th>Razor</th>
-  <td>A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.</td>
+  <th>
+    <a href="https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c">
+       Razor</a>
+  </th>
+  <td>
+      A view renderer for web. Give terse syntax, combining C# and HTML almost seemlessly.
+  </td>
 </tr>
 
 <tr>
@@ -363,7 +381,7 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>jQuery</th>
+  <th><a href="https://jquery.com/">jQuery</a></th>
   <td>Used to support UI details in web. Can make some JavaScript shorter.</td>
 </tr>
 
@@ -386,7 +404,10 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th>WinForms</th>
+  <th>
+    <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0">
+       WinForms</a>
+  </th>
   <td>
       Used in some projects. Small utilities and JJ.Synthesizer uses it as the top-most layer.
   </td>
@@ -440,8 +461,13 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>DebuggerDisplays</th>
-  <td>A technique to quickly display helpful info in the watch screen.</td>
+  <th>
+    <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/using-the-debuggerdisplay-attribute">
+       DebuggerDisplays</a>
+  </th>
+  <td>
+      A technique to quickly display helpful info in the watch screen.
+  </td>
 </tr>
 
 <tr>
