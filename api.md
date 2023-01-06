@@ -713,7 +713,7 @@ Web
 
 ### AJAX
 
-`AJAX` is a way to (re)load part of a web page, so the whole page does not have te be reloaded. This may make the user interface smoother, than using just full (re)loads.
+`AJAX` is a way to load part of a web page, so the whole page does not have te be reloaded. This may make the user interface smoother, than reloading the page entirely every time.
 
 For `AJAX'ing` such partial web content, our team made our own wrapper `AJAX` methods, around calls to `jQuery`, so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of `JavaScript` code.
 
@@ -804,9 +804,9 @@ There might be other ways to do this. `Entity Framework` might do it automatical
 
 ### XML
 
-`XML` is a file format for storing and transmitting data. Here are some preferences for `API's` to use for `XML`.
+`XML` is a file format for storing and transmitting information. Here are some preferences for `API's` to use for `XML`.
 
-Preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
+There is a preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
 
 Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)) over using other `API's` directly, because the helper will handle nullability and unicity more grafully.
 
