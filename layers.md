@@ -67,7 +67,7 @@ Software might be split up into 3 main layers:
 
 The [presentation](#presentation-layer) layer is the visual part of a program. It is what the user sees.
 
-The [business](#business-layer) layer is like internal, mechanical parts. It can model the functionality of a program, but you don't directly see it. 
+The [business](#business-layer) layer is like internal, mechanical parts. It can model the functionality of a program, but it isn't directly visible. 
 
 The [data](#data-layer) layer models and stores the data. It models functionality more passively: It does not really process anything. It just stores things.
 
