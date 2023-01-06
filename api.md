@@ -91,18 +91,33 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="https://dotnet.microsoft.com/en-us/languages/csharp">C#</a></th>
-  <td>Primary programming language.</td>
+  <th>
+    <a href="https://dotnet.microsoft.com/en-us/languages/csharp">
+       C#</a>
+  </th>
+  <td>
+      Primary programming language.
+  </td>
 </tr>
 
 <tr>
-  <th>VB.NET</th>
-  <td>Some projects might still use this programming language.</td>
+  <th>
+    <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/">
+       VB.NET</a>
+  </th>
+  <td>
+      Some projects might still use this programming language.
+  </td>
 </tr>
 
 <tr>
-  <th><a href="https://www.jetbrains.com/resharper/">ReSharper</a></th>
-  <td>Tool for code formatting, refactoring and code smells and such.</td>
+  <th>
+    <a href="https://www.jetbrains.com/resharper/">
+       ReSharper</a>
+  </th>
+  <td>
+      Tool for code formatting, refactoring and code smells and such.
+  </td>
 </tr>
 
 <tr>
@@ -169,8 +184,13 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th><a href="https://www.microsoft.com/en-us/sql-server/">SQL Server</a></th>
-  <td>Primary data store technology for relational databases.</td>
+  <th>
+    <a href="https://www.microsoft.com/en-us/sql-server/">
+       SQL Server</a>
+  </th>
+  <td>
+      Primary data store technology for relational databases.
+  </td>
 </tr>
 
 <tr>
@@ -328,7 +348,10 @@ List of API's (and other tech)
 <table>
 
 <tr>
-  <th><a href="https://www.iis.net/">IIS</a></th>
+  <th>
+    <a href="https://www.iis.net/">
+       IIS</a>
+  </th>
   <td>
       (Internet Information Services.) For hosting web sites. 
       Some Visual Studio projects wish to use it upon load.
@@ -366,13 +389,23 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="#javascript--typescript">JavaScript</a></th>
-  <td>Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.</td>
+  <th>
+    <a href="#javascript--typescript">
+       JavaScript</a>
+  </th>
+  <td>
+      Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
+  </td>
 </tr>
 
 <tr>
-  <th><a href="#javascript--typescript">TypeScript</a></th>
-  <td>Might be preferred over JavaScript in the future. Has not been applied</td>
+  <th>
+    <a href="#javascript--typescript">
+       TypeScript</a>
+  </th>
+  <td>
+      Might be preferred over JavaScript in the future.
+  </td>
 </tr>
 
 <tr>
