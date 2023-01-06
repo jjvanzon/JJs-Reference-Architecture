@@ -67,7 +67,7 @@ Software might be split up into 3 main layers:
 
 The [presentation](#presentation-layer) layer is the visual part of a program. It is what the user sees.
 
-The [business](#business-layer) layer can model of the functionality of a software program, but you generally don't see it. It defines the rules of the system. It is like the internal, mechanical parts.
+The [business](#business-layer) layer are like the internal, mechanical parts. They defines the rules of the system. It can model the functionality of a software program, but you generally don't see it. 
 
 The [data](#data-layer) layer models and stores the data. It models functionality more passively: it does not really do anything on its own. It doesn't really process the data. It just stores it.
 
@@ -287,7 +287,7 @@ The subdivision into [data](#data-layer), [business](#business-layer) and [prese
 
 ### Perpendicular
 
-At the bottom you can see [Data](#data-layer), [Business](#business-layer) and [Presentation](#presentation-layer) layers, layed down flat on their side. The *perpendicular* layers are rotated 90° and placed right onto the main layering. That's why these layers are called *perpendicular*.
+At the bottom you can see [Data](#data-layer), [Business](#business-layer) and [Presentation](#presentation-layer) layers, laid down flat on their side. The *perpendicular* layers are rotated 90° and placed right onto the main layering. That's why these layers are called *perpendicular*.
 
 ### Framework
 
