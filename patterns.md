@@ -321,7 +321,7 @@ Presentation Patterns
 
 A ViewModel class holds the data shown on screen.
 
-It is purely a data object. It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the viewmodels is fully responsible for it.)
+It is purely a [data objects](#dto). It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the viewmodels is fully responsible for it.)
 
 __A ViewModel should say *what* is shown, not *how* or *why*.__
 

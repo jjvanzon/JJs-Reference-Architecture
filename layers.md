@@ -126,7 +126,7 @@ The [`Repository`](patterns.md#repository) implementations might not used direct
 
 The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part. The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](https://www.microsoft.com/en-us/sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](https://www.microsoft.com/en-us/sql-server) or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
 
-This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
+This platform-independence, also allows deployment of the same code to different environments like *mobile*, *Windows* or *web*.
 
 
 Presentation Layer
@@ -146,7 +146,7 @@ It is the [`Presenter`](patterns.md#presenter) classes that talk to this [busine
 
 ### ViewModel
 
-A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure data objects, no logic. So they can be more easily used with different presentation technologies. These pure data objects can also be sent over the line without many surprises.
+A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure [data objects](patterns.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns.md#dto) can also be sent over the line without many surprises.
 
 ### ToViewModel
 
