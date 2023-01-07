@@ -85,7 +85,7 @@ Naming Conventions
 Rules
 -----
 
-Do not use the following object types, because these things are managed in .NET:
+Do not use the following object types, because these things are managed in [`.NET`](https://dotnet.microsoft.com/):
 
 - Views
 - Stored Procedures
@@ -120,9 +120,9 @@ Database upgrade scripts are managed as follows.
 
 ### Excel Sheet
 
-Each database structure gets an Excel in which all the upgrade SQL scripts are registered.
+Each database structure gets an `Excel` in which all the upgrade `SQL` scripts are registered.
 
-The Excel sheet and SQL scripts are put in a Visual Studio project to manage them easily.
+The `Excel` sheet and `SQL` scripts are put in a [`Visual Studio`](https://visualstudio.microsoft.com/#vs-section) project to manage them easily.
 
 Always edit the Excel in the dev branch, because Excels cannot be merged.
 

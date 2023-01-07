@@ -745,13 +745,13 @@ Misc
 
 ### JJ.Framework
 
-`JJ.Framework` are nuts, bolts and screws for software development. There were things missing in `.NET`, so we programmed it ourselves. These extensions to `.NET` are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+`JJ.Framework` are nuts, bolts and screws for software development. There were things missing in [`.NET`](https://dotnet.microsoft.com/), so we programmed it ourselves. These extensions to [`.NET`](https://dotnet.microsoft.com/) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
-`.NET` code can use `config` files for confuration, often named `App.config` or `Web.config`.
+[`.NET`](https://dotnet.microsoft.com/) code can use `config` files for confuration, often named `App.config` or `Web.config`.
 
 To access these `configs`we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using `.NET`'s `System.Configuration` directly.
 
@@ -978,11 +978,11 @@ If this makes you lose grip on reality and wonder whether `ORM's` are worth it? 
 
 Executing queries onto a database is normally done through `ORM`, but if performance is an issue, it can be combined with raw `SQL`.
 
-Other techniques: *stored procedures* and *views* were dismissed at one point, in favor of putting the `SQL` files directly the `.NET` projects, under a sub-folder named `Sql`.
+Other techniques: *stored procedures* and *views* were dismissed at one point, in favor of putting the `SQL` files directly the [`.NET`](https://dotnet.microsoft.com/) projects, under a sub-folder named `Sql`.
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing `SQL` in `.NET` would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
+The classic way of executing `SQL` in [`.NET`](https://dotnet.microsoft.com/) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
@@ -1000,7 +1000,7 @@ The `SQL` may look as follows:
 update Ingredient set Name = @name where ID = @id;
 ```
 
-Then put an enum in the `SQL` folder in your `.NET` project:
+Then put an enum in the `SQL` folder in your [`.NET`](https://dotnet.microsoft.com/) project:
 
 ![](images/sql-enum.png)
 
@@ -1116,7 +1116,7 @@ But it might make it harder to track down all the `SQL` of your project, optimiz
 
 #### SQL String Concatenation
 
-*`SQL` `string` concatenation* is sort of a no-no, because it removes a layer of protection against `SQL` injection attacks. `SqlClient` has `SqlParameters` from `.NET` to prevent unwanted insertion of scripting. `SqlExecutor` from `JJ.Framework` uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+*`SQL` `string` concatenation* is sort of a no-no, because it removes a layer of protection against `SQL` injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](https://dotnet.microsoft.com/) to prevent unwanted insertion of scripting. `SqlExecutor` from `JJ.Framework` uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
 Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the `SQL` script's `where` clause
 

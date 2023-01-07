@@ -678,7 +678,7 @@ Spaces and Braces
 
 ### Auto-Formatting
 
-Prefer Visual Studio's autoformatting enabled and set to its defaults.  
+Prefer [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) autoformatting enabled and set to its defaults.  
 Reason: Less surprising to the next developer.
 
 ### Indentation
@@ -1508,7 +1508,7 @@ sbyte
 </td></tr></table>
 
 Reason:  
-For compatibility with more variations of `.NET`.
+For compatibility with more variations of [`.NET`](https://dotnet.microsoft.com/).
 
 ### No Decisions from Exceptions
 

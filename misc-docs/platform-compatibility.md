@@ -19,25 +19,25 @@
 Introduction
 ------------
 
-Deploying .NET code to mobile platforms meant dealing with various compatibility issues. This document lists the issues found while deploying of .NET code to iOS, Windows Phone and Android. The deployment was done using a tool called Unity, which is a Mono-based game engine.
+Deploying [`.NET`](https://dotnet.microsoft.com/) code to mobile platforms meant dealing with various compatibility issues. This document lists the issues found while deploying of [`.NET`](https://dotnet.microsoft.com/) code to iOS, Windows Phone and Android. The deployment was done using a tool called Unity, which is a Mono-based game engine.
 
 The project during which this was done was [`JJ.SaveText`](https://github.com/jjvanzon/JJ.SaveText).
 
-Some work-arounds had been given a place in [`JJ.Framework.PlaformCompatibility`](https://www.nuget.org/packages/JJ.Framework.PlatformCompatibility) to keep overview of these issues. But that package may not be relevant for later .NET versions anymore.
+Some work-arounds had been given a place in [`JJ.Framework.PlaformCompatibility`](https://www.nuget.org/packages/JJ.Framework.PlatformCompatibility) to keep overview of these issues. But that package may not be relevant for later [`.NET`](https://dotnet.microsoft.com/) versions anymore.
 
 
 Unity 4.3.4 / .NET Compatibility Issues
 ---------------------------------------
 
-The following things might need to be taken into consideration to make the .NET code work in Unity.
+The following things might need to be taken into consideration to make the [`.NET`](https://dotnet.microsoft.com/) code work in Unity.
 
 - ### Use .NET 3.5
 
-  Unity / Mono (as of 2014-05-17) appears to be only compatible with .NET 3.5, not 4.0 or 4.5, so things were targeted to .NET 3.5 in the .NET code and workarounds were made for missing features.
+  Unity / Mono (as of 2014-05-17) appears to be only compatible with .NET 3.5, not 4.0 or 4.5, so things were targeted to .NET 3.5 in the [`.NET`](https://dotnet.microsoft.com/) code and workarounds were made for missing features.
 
 - ### Copy your own Compiled Assemblies
 
-  To use self-made .NET assemblies in Unity, they were copied to the `Assets` folder or a sub-folder in there in the Unity project.
+  To use self-made [`.NET`](https://dotnet.microsoft.com/) assemblies in Unity, they were copied to the `Assets` folder or a sub-folder in there in the Unity project.
 
 - ### Target .NET 2.0
 
@@ -46,7 +46,7 @@ The following things might need to be taken into consideration to make the .NET 
 
 - ### Copy Mono .NET Assemblies
 
-  The Mono versions of .NET assemblies might need to be used, that are not included by default in the Unity projects. To work with .NET assemblies not standardly included by Unity (for instance `System.ServiceModel` and `System.Runtime.Serialization`) the dll's were copied from the Unity program files to the Unity project. The location of these dll's was in the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0`. They were copied to the Unity project somewhere in the `Assets` folder. It might be an idea to create a new sub-folder in the `Assets` folder and possibly name it `Plugins`.
+  The Mono versions of [`.NET`](https://dotnet.microsoft.com/) assemblies might need to be used, that are not included by default in the Unity projects. To work with [`.NET`](https://dotnet.microsoft.com/) assemblies not standardly included by Unity (for instance `System.ServiceModel` and `System.Runtime.Serialization`) the dll's were copied from the Unity program files to the Unity project. The location of these dll's was in the program files folder of Unity and then: `Editor/Data/Mono/lib/mono/2.0`. They were copied to the Unity project somewhere in the `Assets` folder. It might be an idea to create a new sub-folder in the `Assets` folder and possibly name it `Plugins`.
 
 
 Unity Free 4.3.4 Compatibility Issues
@@ -54,7 +54,7 @@ Unity Free 4.3.4 Compatibility Issues
 
 - ### System.Net.Sockets
 
-  Unity Free did not support deploying applications that use `System.Net.Sockets`. That only seemed available in Unity Pro. This also means any part of .NET that indirectly uses `System.Net.Sockets`. So basically connecting to a network from the .NET code is disabled. The emulator in Unity could use it, but deploying it to a device did not work. To make the deployment succeed, removing `System.ServiceModel.dll` from the `Assets` folder might work and anything else that uses `System.Net.Sockets`.
+  Unity Free did not support deploying applications that use `System.Net.Sockets`. That only seemed available in Unity Pro. This also means any part of [`.NET`](https://dotnet.microsoft.com/) that indirectly uses `System.Net.Sockets`. So basically connecting to a network from the [`.NET`](https://dotnet.microsoft.com/) code is disabled. The emulator in Unity could use it, but deploying it to a device did not work. To make the deployment succeed, removing `System.ServiceModel.dll` from the `Assets` folder might work and anything else that uses `System.Net.Sockets`.
 
 
 Android / Unity 4.3.4 Issues
@@ -148,7 +148,7 @@ The items below were compatibility problems related to how Unity interoperated w
   This post said they know about the bug, they found the problem, but they won't fix it; just copy a file from an earlier Unity version they say...  
   <http://forum.unity3d.com/threads/223065-Unity-4-3-3-Type-GetMembers%28BindingFlags%29-crash>  
 
-  It appeared the programmers of Unity added types to their library of .NET stubs (or something) that are already present in the Windows Phone 8 version of the .NET Framework and this seems to result in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it appears to crash with a method not found exception.  
+  It appeared the programmers of Unity added types to their library of [`.NET`](https://dotnet.microsoft.com/) stubs (or something) that are already present in the Windows Phone 8 version of the .NET Framework and this seems to result in two types with the same name arbitrarily used in different places. When a piece of code runs, that wants the two types to be the same, it appears to crash with a method not found exception.  
 
   The workaround mentioned in the post was to install version 4.3.2 of Unity in a seperate folder and replace the original Unity (4.3.3) installation's:  
   `Editor\Data\PlaybackEngines\wp8support\Managed\Win RTLegacy.dll`
@@ -162,7 +162,7 @@ The items below were compatibility problems related to how Unity interoperated w
 
 - ### Resource Assemblies
 
-  Unity would not automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. A trick that appeared to work, was to simply copy the folders such as `nl-NL` and `en-US` out of the .NET `bin` folder, to the Windows Phone deployment folder of the Unity project. The 'language' folders would be placed right beside where the Unity put the `.csproj` file when doing a Windows Phone build.
+  Unity would not automatically deploy the 'satellite assemblies' with translations of texts into multiple languages. A trick that appeared to work, was to simply copy the folders such as `nl-NL` and `en-US` out of the [`.NET`](https://dotnet.microsoft.com/) `bin` folder, to the Windows Phone deployment folder of the Unity project. The 'language' folders would be placed right beside where the Unity put the `.csproj` file when doing a Windows Phone build.
 
 - ### Resource Assemblies
 
@@ -226,7 +226,7 @@ iOS 6 / Unity 4.3.4 Compatibility Issues
 
 - ### JIT Compilation
 
-  Any JIT compilation might not be permitted on iOS. Some functions of .NET (or the Mono versions of .NET) automatically seem to JIT something on the fly.
+  Any JIT compilation might not be permitted on iOS. Some functions of [`.NET`](https://dotnet.microsoft.com/) (or the Mono versions of `.NET`) automatically seem to JIT something on the fly.
 
   (Sources: Google: "unity" "ios" "propertyinfo.GetValue" <http://forum.unity3d.com/threads/43038-ExecutionEngineException-Attempting-to-JIT-compile-method>)
 
@@ -257,7 +257,7 @@ iOS 6 / Unity 4.3.4 Compatibility Issues
 
 - ### Compile for Release
 
-  Resources might not work when you do not compile .NET assemblies for release.
+  Resources might not work when you do not compile [`.NET`](https://dotnet.microsoft.com/) assemblies for release.
 
 
 - ### System.ServiceModel

@@ -75,7 +75,7 @@ Introduction
 
 What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an [`API`](api.md) or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and [`API's`](api.md) and are a level of abstraction that hovers above them.
 
-Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te Visual Studio IDE.
+Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te [`Visual Studio IDE`](https://visualstudio.microsoft.com/#vs-section).
 
 (The word 'aspect' is related to the 'aspect' construct in aspect oriented programming languages or frameworks, but you can think in terms of aspects even regardless of these tools and constructs.)
 
@@ -141,7 +141,7 @@ Code style an be enforced with different methods:
 
 - The [Code Style](code-style.md) handbook, such as is part of this [Reference Architecture](index.md).
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
-- Using Visual Studio's code style options from the Options screen.
+- Using [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) code style options from the Options screen.
 - ReSharper!
 
 
@@ -192,7 +192,7 @@ We will use 3 ways of storing configuration settings:
 - Reading out the appSettings section.
 - Reading out the connectionStrings section.
 
-There is another configuration method in .NET: the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
+There is another configuration method in [`.NET`](https://dotnet.microsoft.com/): the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
 
 
 Conversion
