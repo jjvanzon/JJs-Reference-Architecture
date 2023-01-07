@@ -23,7 +23,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - Data: Repository interfaces
 - Data: Default repositories
 - Data: NHibernate mappings
-- Data: SQL queries
+- Data: [`SQL`](api.md#sql) queries
 - Data: NHibernate repositories (optional)
 - Data: Other repositories (optional)
 - Data: Other mappings (optional)

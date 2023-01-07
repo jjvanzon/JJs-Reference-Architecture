@@ -253,7 +253,7 @@ The result of this split up is that we are not stuck with a 1-to-1 relation betw
 
 For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with NHibernate and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the entity model on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use MVC, it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store entity models differently depending on the infrastructural context. On a mobile platform we might store an entity model in XML, while in a web environment we might store things in SQL Service using NHibernate.
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store entity models differently depending on the infrastructural context. On a mobile platform we might store an entity model in XML, while in a web environment we might store things in [`SQL Server`](https://www.microsoft.com/en-us/sql-server) Server using NHibernate.
 
 #### Framework Assemblies
 
@@ -378,7 +378,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to DTO's as do for entities. Especially if they just transfer data from SQL statements to application logic.
+- Usually the same rules apply to DTO's as do for entities. Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
 
 #### Strings
     
@@ -396,7 +396,7 @@ Here are rules for null-checks for other constructs:
 
 #### Parameters
 
-- Execute null-checks on arguments of public methods. Use `NullException` (out of `JJ.Framework.Reflection`). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
+- Execute null-checks on arguments of public methods. Use `NullException` (out of [`JJ.Framework.Reflection`](https://www.nuget.org/packages/JJ.Framework.Reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
 - Avoid allowing null parameters.
 - But if a parameter *is* nullable, you can denote this in several ways.
 - Assign null as the default value of the parameter, so it is clear that it can accept null:  

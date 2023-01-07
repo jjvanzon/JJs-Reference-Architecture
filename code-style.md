@@ -271,7 +271,7 @@ For number sequences these names might be used:
     SortOrder
     Rank
 
-Perhaps avoid `Index` because it is an `SQL` keyword.
+Perhaps avoid `Index` because it is an [`SQL`](api.md#sql) keyword.
 
 ### File-Related Variable Names
 

@@ -234,7 +234,7 @@ There is are reusable EntityStatusManager classes in `JJ.Framework.Business`, bu
 
 <h3>Alternatives</h3>
 
-The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an ORM or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, `JJ.Framework.Data` should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make `JJ.Framework.Data` much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating `JJ.Framework.Data` also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, `JJ.Framework.Data` should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make `JJ.Framework.Data` much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating `JJ.Framework.Data` also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
 This is why the explicit status management solution won over the entity status management in the persistence framework.
 
@@ -631,7 +631,7 @@ A downside of that is that the table structure is dependent on the domain model 
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
-The foreign key solution does have a big benefit over the generic key solution, because ORM's will cache the entities in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
+The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the entities in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
 To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the repositories / data access layer, but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around entity cache objects or translation facades around your business layer, as a substitute for getting them from a repository directly, which would not work for non-flushed ('uncommitted') entities.
 
@@ -681,7 +681,7 @@ To access a data store (usually a database), `JJ.Framework.Data` will be used. T
 
 The main interface of the framework is `IContext`.
 
-See also: 'ORM'.
+See also: [`ORM`](api.md#orm).
 
 
 Platform Compatibility

@@ -148,7 +148,7 @@ Meta-skills:
 Tools & techniques:
 
 - Database development
-- SQL
+- [`SQL`](api.md#sql)
 
 `< TODO: Add more... Could be a pretty extensive list. >`
 

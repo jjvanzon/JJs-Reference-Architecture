@@ -139,7 +139,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Data.Canonical__                         | Where are canonical entity models are defined.
 | __JJ.Data.Esb__                               | Entity model that stores Enterprises, Users, ConnectionTypes, Connections, etc. Basically the configuration settings of the architecture.
 | __JJ.Data.Esb.NHibernate__                    | Stores the Esb entity model using NHibernate.
-| __JJ.Data.Esb.SqlClient__                     | SQL queries for working with the stored Esb entity model.
+| __JJ.Data.Esb.SqlClient__                     | [`SQL`](api.md#sql) queries for working with the stored Esb entity model.
 | __JJ.Business.Canonical__                     | Some shared logic that operates on canonical models.
 | __JJ.Business.Esb__                           | Business logic for managing the Esb model.
 | __JJ.Services.Ordering.Interface__            | Defines [interfaces](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [C#](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.

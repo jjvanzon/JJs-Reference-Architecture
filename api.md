@@ -150,7 +150,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://www.nuget.org/profiles/jjvanzon">
+    <a href="#jjframework">
        JJ.Framework</a></th>
   <td>
       In-house programmed extensions to the .NET Framework.<br/>
@@ -203,7 +203,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql/">
+    <a href="#sql">
        SQL</a>
   </th>
   <td>
@@ -833,7 +833,7 @@ Data
 
 ### Entity Framework
 
-`Entity Framework` is a framework for data access, a so called `ORM` (**O**bject **R**elational **M**apper). `Entity Framework` might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
+`Entity Framework` is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). `Entity Framework` might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
@@ -841,7 +841,7 @@ It may be required to enable `MSDTC`. That would be a service belonging to an [`
 
 ### NHibernate
 
-`NHibernate` is a technology, used for data access. A so called `ORM` (**O**bject **R**elational **M**apper). It is comparable to `Entity Framework`.
+`NHibernate` is a technology, used for data access. A so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). It is comparable to `Entity Framework`.
 
 `NHibernate` is used in some projects, because an employer favored it, and some other projects joined the club.
 
@@ -857,9 +857,9 @@ This information was gathered from experience built up with `NHibernate`. It mig
 
 #### Committed / Uncommitted Objects
 
-Here is something that happens in `ORM` sometimes:
+Here is something that happens in [`ORM`](#orm) sometimes:
 
-Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in `ORM's`, since doing it another way might harm performance.
+Some methods of data retrieval work with uncommitted / non-flushed entities: so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed entities. This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance.
 
 | Method | Data |
 |--------|------|
@@ -868,11 +868,11 @@ Some methods of data retrieval work with uncommitted / non-flushed entities: so 
 | `IContext.TryGet` | 1st committed / flushed, then uncommitted / non-flushed
 | Navigation properties /<br>following the object graph | 1st committed / flushed, then uncommitted / non-flushed
 
-It appears to have to do with when the `ORM` goes to the database to query or save objects.
+It appears to have to do with when the [`ORM`](#orm) goes to the database to query or save objects.
 
 #### Flush
 
-`Flushing` in `NHibernate` would mean that all the pending `SQL` statements are executed onto the database, without committing the transaction yet.
+`Flushing` in `NHibernate` would mean that all the pending [`SQL`](#sql) statements are executed onto the database, without committing the transaction yet.
 
 A `Flush` can help get an auto-generated `ID` from the database. Also when `NHibernate` is confused about the order in which to execute things, a `Flush` may help it execute things in the right order sometimes.
 
@@ -886,7 +886,7 @@ It may also help to create entities in a specific order (e.g. parent object firs
 
 #### Read-Write Order
 
-It seems `ORM's` like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles committed / uncommited objects as described earlier above.
+It seems [`ORM's`](#orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles committed / uncommited objects as described earlier above.
 
 #### Bridge Entities 
 
@@ -894,7 +894,7 @@ An *bridge* entity is for `n => n` relationhips, usually requiring an additional
 
 <img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
-Using an `ORM`, the bridge entity might not be visible in the code, but can be managed as two collections inside the two related entity types.
+Using an [`ORM`](#orm), the bridge entity might not be visible in the code, but can be managed as two collections inside the two related entity types.
 
 ```cs
 class Question
@@ -908,9 +908,9 @@ class Category
 }
 ```
 
-The `ORM` might do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You can expect quite a few exceptions to go off unfortunately, while `ORM` tries to guard the integrity of the relationship.
+The [`ORM`](#orm) might do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You can expect quite a few exceptions to go off unfortunately, while [`ORM`](#orm) tries to guard the integrity of the relationship.
 
-These problems almost all go away, if you map to a *bridge entity* instead. Instead of putting collections of the other entity in an entity, you let both entities hold a list of *bridge entities* instead, and the bridge entity would link to 1 entity of each type. This turns the `n => n` relationship into two `1 => n` relationships which ORM can manage with less hardship.
+These problems almost all go away, if you map to a *bridge entity* instead. Instead of putting collections of the other entity in an entity, you let both entities hold a list of *bridge entities* instead, and the bridge entity would link to 1 entity of each type. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship.
 
 ```cs
 class QuestionCategory
@@ -934,7 +934,7 @@ It might be is advised that the bridge table not to rely on a composite key of t
 
 <img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
-This is because it gives 1 handle to the combination of 2 thing, giving `ORM` less difficulty managing things under the hood, prevents passing around composite keys all the time, less good hashing keys, URL's that look more difficult, etc.
+This is because it gives 1 handle to the combination of 2 thing, giving [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys all the time, less good hashing keys, URL's that look more difficult, etc.
 
 #### Binary Fields
 
@@ -942,13 +942,13 @@ You might not want to map binary and other serialized data fields using `NHibern
 
 Retrieving some loose fields of an entity, would also retrieve a blob in that case. As wel as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
-Using separate `SQL` statements for retrieving blobs might be a better alternative.
+Using separate [`SQL`](#sql) statements for retrieving blobs might be a better alternative.
 
 #### Inheritance
 
 Particular surprises might emerge when using inheritance in your entity model at least while working with `NHibernate`. The main advance is to avoid inheritance at all in the entity models if you can.
 
-When retrieving an entity through ORM, it is likely it will not return an instance of your entity type, but an instance of a type derived from your entity type, a so called ***proxy***. This proxy adds to your entity type a sort of connectedness to the database.
+When retrieving an entity through [`ORM`](#orm), it is likely it will not return an instance of your entity type, but an instance of a type derived from your entity type, a so called ***proxy***. This proxy adds to your entity type a sort of connectedness to the database.
 
 When you retrieved an entity from `HNibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
 
@@ -962,7 +962,7 @@ This also means that to evaluate the *type*, you are better of unproxying, or it
 
 By now maybe it may be clear, why the main advice is not to use inheritance in the first place in your entity models, if at all possible.
 
-An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the entity. Although, `NHibernate` and other `ORM's` are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two entity types use a mutual `interface` might be an alternative too.
+An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the entity. Although, `NHibernate` and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two entity types use a mutual `interface` might be an alternative too.
 
 #### Generic Interfaces
 
@@ -970,41 +970,41 @@ Data access in this [architecture](index.md) is favored behind generic interface
 
 #### Conclusion
 
-If this makes you lose grip on reality and wonder whether `ORM's` are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in the code.
+If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in the code.
 
 ### SQL
 
-`SQL` is a language for data retrieval and manipulation and other actions to execute onto a *database*.
+[`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
 
-Executing queries onto a database is normally done through `ORM`, but if performance is an issue, it can be combined with raw `SQL`.
+Executing queries onto a database is normally done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
-Other techniques: *stored procedures* and *views* were dismissed at one point, in favor of putting the `SQL` files directly the `.NET` projects, under a sub-folder named `Sql`.
+Other techniques: *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](https://dotnet.microsoft.com/) projects, under a sub-folder named `Sql`.
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing `SQL` in [`.NET`](https://dotnet.microsoft.com/) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
+The classic way of executing [`SQL`](#sql) in [`.NET`](https://dotnet.microsoft.com/) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
-With an `API` like that, we can execute `SQL` command in a strongly-typed way, often with only a single code line.
+With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single code line.
 
-The first choice of doing it might be to make the `SQL` file embedded resources:
+The first choice of doing it might be to make the [`SQL`](#sql) file embedded resources:
 
 ![](images/sql-as-embedded-resource.png)
 
-This makes the `SQL` be deployed together with your `DLL` or `EXE`, because compiles the `SQL` file right into the assembly.
+This makes the [`SQL`](#sql) be deployed together with your `DLL` or `EXE`, because compiles the [`SQL`](#sql) file right into the assembly.
 
-The `SQL` may look as follows:
+The [`SQL`](#sql) may look as follows:
 
 ```sql
 update Ingredient set Name = @name where ID = @id;
 ```
 
-Then put an enum in the `SQL` folder in your `.NET` project:
+Then put an enum in the [`SQL`](#sql) folder in your `.NET` project:
 
 ![](images/sql-enum.png)
 
-Add `enum` members that exactly correspond to the file names of the `sql` files:
+Add `enum` members that exactly correspond to the file names of the [`SQL`](#sql) files:
 
 ```cs
 namespace JJ.Demos.SqlExecutor.Sql
@@ -1024,19 +1024,19 @@ ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnu
 
 We passed the `SqlConnection` and `SqlTransaction` to it.
 
-Then you can call a method that executes the `SQL`:
+Then you can call a method that executes the [`SQL`](#sql):
 
 ```cs
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names are similar to what you might be used to using `SqlCommand`. You pass `SQL` parameters along with the `SqlExecutor` as an anonymous type:
+The method names are similar to what you might be used to using `SqlCommand`. You pass [`SQL`](#sql) parameters along with the `SqlExecutor` as an anonymous type:
 
 ```cs
 new { id, name }
 ```
 
-The name and type of the variables `id` and `name` correspond to the parameters of the `SQL`. You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the `SQL` parameters, they are applied correctly:
+The name and type of the variables `id` and `name` correspond to the parameters of the [`SQL`](#sql). You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the [`SQL`](#sql) parameters, they are applied correctly:
 
 ```cs
 var ingredient = new IngredientDto
@@ -1059,9 +1059,9 @@ foreach (IngredientDto record in records)
 }
 ```
 
-The column names in the `SQL` are *case sensitive!*
+The column names in the [`SQL`](#sql) are *case sensitive!*
 
-It might be an idea to let the `SQL` file names begin with the entity type name, so they stay grouped together:
+It might be an idea to let the [`SQL`](#sql) file names begin with the entity type name, so they stay grouped together:
 
 ![](images/sql-file-names.png)
 
@@ -1076,7 +1076,7 @@ ISession session = ...;
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.EmbeddedResource, session);
 ```
 
-This version uses an `NHibernate` `ISession`. In order for the `SQL` to run in the same transaction as the `SQL` that `NHibernate` executes, we make it aware of the `ISession` here.
+This version uses an `NHibernate` `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as the [`SQL`](#sql) that `NHibernate` executes, we make it aware of the `ISession` here.
 
 A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate).
 
@@ -1084,11 +1084,11 @@ A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
-It may usually a good choice to include the `SQL` as an embedded resource, but you can also use *files* or *literal strings*.
+It may usually a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use *files* or *literal strings*.
 
 ![](images/sql-as-content-file.png)
 
-Here is code to create the `SqlExecutor` and execute an `SQL` file:
+Here is code to create the `SqlExecutor` and execute an [`SQL`](#sql) file:
 
 ```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.FileName, session);
@@ -1102,7 +1102,7 @@ So the `SqlEnum` cannot be used here. You'd use the (relative) file path here.
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
-It is not recommended to use `SQL` strings in your code. But it is possible all the same using code like this:
+It is not recommended to use [`SQL`](#sql) strings in your code. But it is possible all the same using code like this:
 
 ```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.String, session);
@@ -1110,27 +1110,27 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSou
 sqlExecutor.ExecuteNonQuery("update Ingredient set Name = @name where ID = @id", new { id, name });
 ```
 
-In that case no `SQL` files have to be included in your project.
+In that case no [`SQL`](#sql) files have to be included in your project.
 
-But it might make it harder to track down all the `SQL` of your project, optimize it and using `SQL` strings may also circumvents another layer of protection against `SQL` injection attacks.
+But it might make it harder to track down all the [`SQL`](#sql) of your project, optimize it and using [`SQL`](#sql) strings may also circumvents another layer of protection against [`SQL`](#sql) injection attacks.
 
 #### SQL String Concatenation
 
-*`SQL` `string` concatenation* is sort of a no-no, because it removes a layer of protection against `SQL` injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](https://dotnet.microsoft.com/) to prevent unwanted insertion of scripting. `SqlExecutor` from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](https://dotnet.microsoft.com/) to prevent unwanted insertion of scripting. `SqlExecutor` from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
-Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the `SQL` script's `where` clause
+Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
 
 ```sql
 (@value is null or Value = @value)
 ```
 
-But there might be exceptional cases where `SQL` string concatenation could be favorable. Reasons to do so might include:
+But there might be exceptional cases where [`SQL`](#sql) string concatenation could be favorable. Reasons to do so might include:
 
-- If you have a (complicated) `SQL` `select` statement and wish to take the `count` of it, concatenation may prevent rewritng the `SQL` statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 `SQL` scripts simultaneously, to make change properly, which may easily be overlooked.
-- Another case where `string` concatenation might be helpful, is an `SQL` script where you wish to include a *database name* or *schema name* not known beforehand.
-- There might be other examples where `SQL` string concatenation might be used as an exception to the rule not to.
+- If you have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it, concatenation may prevent rewritng the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make change properly, which may easily be overlooked.
+- Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name* not known beforehand.
+- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule not to.
 
-One variation of `SqlExecutor` included the ability to add placeholders to the `SQL` files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
+One variation of `SqlExecutor` included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
 #### SQL behind Repositories
 
@@ -1138,7 +1138,7 @@ The [`repository`](patterns.md#repository) pattern is used in this [architecture
 
 The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed), documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
-For `SQL` executing in cooperation with [`repositories`](patterns.md#repository) using [`SqlExecutor`](#sql) there is a way described here [here](#sql).
+For [`SQL`](#sql) executing in cooperation with [`repositories`](patterns.md#repository) using [`SqlExecutor`](#sql) there is a way described here [here](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
@@ -1188,10 +1188,10 @@ interface IMyRepository : IRepository
 This would result in:
 
 - Keeping all the queries of an entity together in a `repository`.
-- Keeping overview of all the SQL of all the entities behind an `SqlExecutor`.
+- Keeping overview of all the [`SQL`](#sql) of all the entities behind an `SqlExecutor`.
 - All that data access would be hidden `repository interfaces` decoupling the persistence technology.
  
-It may seem overhead all the layers, but it might add up after adding more queries for more entities, that are either `SQL` or `ORM` queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
+It may seem overhead all the layers, but it might add up after adding more queries for more entities, that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
 
 In `JJ` projects you might also find split up into separate assemblies: 
 
@@ -1203,6 +1203,6 @@ Separating the general things from the technology-specific things.
 
 #### Database Upgrade Scripts
 
-`SQL` executed solely for database upgrading, might not be put in the main projects, but a project/folder on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
+[`SQL`](#sql) executed solely for database upgrading, might not be put in the main projects, but a project/folder on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
 
 [back](.)

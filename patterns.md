@@ -127,9 +127,9 @@ Mappings are classes programmed for a particular persistence technology, e.g. NH
 
 DTO = Data transfer object. DTO's only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an entity is not handy or efficient.
 
-For instance: A specialized, optimized SQL query may return a result with a particular record structure. You could program a DTO that is a strongly typed version of these records. In many cases you want to query for entity objects instead, but in some cases this is not fast / efficient enough and you should resort to a DTO.
+For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a DTO that is a strongly typed version of these records. In many cases you want to query for entity objects instead, but in some cases this is not fast / efficient enough and you should resort to a DTO.
 
-DTO's can also be used for other data transfers than for SQL queries.
+DTO's can also be used for other data transfers than for [`SQL`](api.md#sql) queries.
 
 ### Repository
 
@@ -514,7 +514,7 @@ The TemporaryID concept breaks down, as soon as you need to use it to refer to s
 
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
-Another alternative is a different ID generation scheme. You may use an SQL Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
+Another alternative is a different ID generation scheme. You may use an [`SQL`](api.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
 
 ### Stateless and Stateful
 
@@ -914,7 +914,7 @@ Other Patterns
 
 ### Accessor
 
-An accessor class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. `JJ.Framework.Reflection` has an implementation of a reusable `Accessor` class.
+An accessor class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. [`JJ.Framework.Reflection`](https://www.nuget.org/packages/JJ.Framework.Reflection) has an implementation of a reusable `Accessor` class.
 
 ### Adapter
 
@@ -924,7 +924,7 @@ An accessor class allows access to non-public members of a class. This can be us
 
 Encapsulation makes sure a class protects its own data integrity. Anti-encapsulation is the design choice to let a class check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the class itself will guard none of it.
 
-The reason not to use encapsulation is that it can go against the grain of frameworks, such as `ORM's` and data serialization mechanisms.
+The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](api.md#orm) and data serialization mechanisms.
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the class cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the class and the other half in another place.
 
