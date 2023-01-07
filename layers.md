@@ -55,6 +55,7 @@ Software can be built up of layers. This article describes how layers could be s
     - [Infrastructure](#infrastructure)
     - [Loosely Coupled](#loosely-coupled)
     - [Services](#services)
+- [Decoupled](#decoupled)
 - [Alternatives](#alternatives)
 
 
@@ -312,6 +313,12 @@ In that respect the platform-independent [presentation layer](#presentation-laye
 ### Services
 
 What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
+
+
+Decoupled
+---------
+
+[Presenter](patterns.md#presenter) classes decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [Presenters](patterns.md#presenter) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
 
 
 Alternatives
