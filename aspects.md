@@ -73,7 +73,7 @@
 Introduction
 ------------
 
-What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API's and are a level of abstraction that hovers above them.
+What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an [`API`](api.md) or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and [`API's`](api.md) and are a level of abstraction that hovers above them.
 
 Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te Visual Studio IDE.
 
@@ -184,7 +184,7 @@ Another strategy that will not be used, is trying to keep all users' additions o
 Configuration
 -------------
 
-For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document *API's*.
+For configuration we will use our own `API`: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document [`API's`](api.md#configuration).
 
 We will use 3 ways of storing configuration settings:
 
@@ -536,7 +536,7 @@ Here are a few methods to do this:
 
 ### OneToManyRelationship
 
-The [OneToManyRelationship](api.md#onetomanyrelationship) is an API from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
+The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
 
 ### EntityFramework
 
@@ -570,7 +570,7 @@ Logging
 
 Be careful how much you log. Logging unhandled exceptions is usually good enough. If you log a lot, it creates a performance penalty and can impose a serious strain on your infrastructure. Servers have crashed under the pressure of logging. A simple try-catch on a main level and a call to the logger will usually suffice.
 
-For logging we will use our own API: Framework.Logging. It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
+For logging we will use our own `API`: [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging). It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
 
 Config example:
 
@@ -601,7 +601,7 @@ If you insist on using Log4Net, make a separate ILogger implementation behind wh
 Multi-Language / Translations / Culture
 ---------------------------------------
 
-For button texts and other labels in an application: see 'Resources' under 'Other Patterns'. That does not solve multi-lingual user data, for which multiple solutions are possible.
+For button texts and other labels in an application: see [Resource `strings`](patterns.md#resource-strings). That does not solve multi-lingual user data, for which multiple solutions are possible.
 
 `< TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >`
 
@@ -701,9 +701,9 @@ Scheduling
 
 Various solutions are available for scheduling a process (periodically) in time.
 
-- Windows Task Scheduler
+- `Windows Task Scheduler`
 - Immediately running a process in the background in a web application.
-- Using a job scheduling API. For instance 'Quartz' scheduling.
+- Using a job scheduling `API`. For instance 'Quartz' scheduling.
 
 `< TODO: Go into the various options and explain a little further.]`
 

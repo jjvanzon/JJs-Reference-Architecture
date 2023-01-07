@@ -165,7 +165,7 @@ But that is not always enough. Some logic will use repositories out of multiple 
 
 Also, you may want to create different, more limited repository wrappers. For instance ones for partial domain models. This keeps the width of dependency narrow, so logic that has nothing to do with certain repositories, do not become dependent on all of them.
 
-An alternative to repository wrappers is dependency injection. See 'dependency injection'. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection API. Repository wrappers and dependency injection could well be used in combination with eachother.
+An alternative to repository wrappers is dependency injection. See dependency injection'. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection `API`. Repository wrappers and dependency injection could well be used in combination with eachother.
 
 ### Validators
 
@@ -638,7 +638,7 @@ To prevent repeating this code for each controller action, you could program a g
 
 In MVC it is not straightforeward to post a collection of items or nested structures.
 
-This architecture's framework has HtmlHelper extensions to make that easier: the Html.BeginCollection API. Using this API you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
+This architecture's framework has HtmlHelper extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))

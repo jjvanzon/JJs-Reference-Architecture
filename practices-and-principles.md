@@ -416,8 +416,8 @@ Here are rules for null-checks for other constructs:
 
 #### Custom-Programmed Framework API's
 
-- For API's in our own framework you can count on an object when you call a `Get` method.
-- You have to take `null` into consideration when you call `TryGet`.
+- For `API's` in [our own framework](api.md#jjframework) you can count on an object when you call a `Get` method.
+- You'd have to take `null` into consideration when you call `TryGet`.
 
 #### Your Own Application Code
     
@@ -425,7 +425,7 @@ Here are rules for null-checks for other constructs:
 
 #### Third-party API's
     
-- Some .NET API's and third party API's may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+- Some `.NET API's` and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 
@@ -633,7 +633,7 @@ A hollow interface is and interface with many implementations in which many memb
 
 (Related to the Dependency Inversion Principle from SOLID.)
 
-Interfaces are supposed to be lean. You should keep as much as possible out of an interface. An indication of an interface that is too rich, is for instance that a method has many parameters. You might see a method's name and expect it does not need all those parameters. That indicates a degree of interdependency that is too high. This method's responsibilities might have to be redistributed among different parts of the system. An interface might use a type from an API, while you might expect that interface to be API neutral. You might see a data class passed to an interface that you expected to be independent of that data model. These are all indications of interface contamination and the solution is usually to distribute responsibilities differently over different parts of the system.
+Interfaces are supposed to be lean. You should keep as much as possible out of an interface. An indication of an interface that is too rich, is for instance that a method has many parameters. You might see a method's name and expect it does not need all those parameters. That indicates a degree of interdependency that is too high. This method's responsibilities might have to be redistributed among different parts of the system. An interface might use a type from an `API`, while you might expect that interface to be `API` neutral. You might see a data class passed to an interface that you expected to be independent of that data model. These are all indications of interface contamination and the solution is usually to distribute responsibilities differently over different parts of the system.
 
 Interface contamination becomes a big problem, when an interface is used in many different places. Then all those parts have a high degree of dependence on things they really have nothing to do with. It also makes interfaces difficult to implement, and poorly reusable.
 
@@ -808,7 +808,7 @@ Two seemingly independent pieces of code only work if one piece of code makes as
 
 ### Wrapperitis (👎)
 
-Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an API into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder "What does this do?" and the answer turns out to be "nothing really".
+Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an `API` into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder "What does this do?" and the answer turns out to be "nothing really".
 
 This is closely trelated to the 'Hatch' anti-pattern.
 
