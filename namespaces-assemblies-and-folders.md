@@ -78,7 +78,7 @@ The 2nd level in the namespacing may consist of the following parts:
 |---------------------|---------------------|
 | JJ.__Data__         | The data layer including the entity models and persistence.
 | JJ.__Business__     | The business logic layer
-| JJ.__Presentation__ | The presentation layer
+| JJ.__Presentation__ | The [presentation layer](layers.md#presentation-layer)
 | JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the software architecture can have reusable code to support it.
 
 And second in line:
@@ -150,7 +150,7 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, `Presentation`) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. `NHibernate`, `Mvc`). And a *design pattern* may be a level of detail even below that.
+The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. `NHibernate`, `Mvc`). And a *design pattern* may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 
@@ -187,7 +187,7 @@ But this might get in the way of our plans to put the assembly subdivision first
 
 ### 1st Layer then Domain
 
-Putting the *main layer* (`Data`, `Business`, `Presentation`) before the *functional domain* was a choice, that made sense at the time in a specific environment:
+Putting the *main layer* (`Data`, `Business`, [`Presentation`](layers.md#presentation-layer) before the *functional domain* was a choice, that made sense at the time in a specific environment:
 
 - JJ.Data.__MainEntities__
 - JJ.Business.__Magic__
@@ -197,7 +197,7 @@ Putting the *main layer* (`Data`, `Business`, `Presentation`) before the *functi
 - JJ.Presentation.__InternalManager__
 - JJ.Presentation.__CoolHub__
 
-Not every software had a data, business or presentation layer. Most products just had *one* of those layers.
+Not every software had a data, business or [presentation layer](layers.md#presentation-layer). Most products just had *one* of those layers.
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 

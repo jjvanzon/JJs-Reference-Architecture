@@ -243,7 +243,7 @@ And these are the technical concerns:
 
 The assemblies are split up by functional domains.
 
-There are separate assemblies for presentation, business and other main layers.
+There are separate assemblies for [presentation](layers.md#presentation-layer), business and other main layers.
 
 There are separate assemblies for specific protocols and technologies.
 

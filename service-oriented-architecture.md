@@ -151,7 +151,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Services.Ordering.Wcf.Client__           | Allows code to connect to the WCF service using the strongly typed service interface.
 | __JJ.Services.Ordering.JsonRest__             | Exposes the multi-dispatch ordering service using the Json and Rest protocols.
 | __JJ.Services.Ordering.WebApi__               | There is no reason Web API should not be involved in this service architecture, in fact, the idea of WCF being the default for services, might not be a very long-lived.
-| __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes presentation logic instead of business logic and returns ViewModels.
+| __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes [presentation logic](layers.md#presentation-layer) instead of business logic and returns ViewModels.
 
 
 Service-Related Patterns
