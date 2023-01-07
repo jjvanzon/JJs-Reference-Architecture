@@ -94,7 +94,7 @@ It mostly conforms to the `Microsoft` standard described in the following docume
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
-Using a tool like `ReSharper` may help. Its settings can be finetuned to closely match the preferences. It then checks the check code style and may auto-format code for you.
+Using a tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be finetuned to closely match the preferences. It then checks the check code style and may auto-format code for you.
 
 
 Casing

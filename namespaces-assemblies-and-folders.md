@@ -74,12 +74,12 @@ Layers
 
 The 2nd level in the namespacing may consist of the following parts:
 
-|                     |                     |
-|---------------------|---------------------|
-| JJ.__Data__         | The data layer including the entity models and persistence.
-| JJ.__Business__     | The business logic layer
+|             |                     |
+|-------------|---------------------|
+| JJ.__Data__ | The data layer including the entity models and persistence.
+| JJ.__Business__ | The business logic layer
 | JJ.__Presentation__ | The [presentation layer](layers.md#presentation-layer)
-| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
+| [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
 
@@ -98,7 +98,7 @@ The 3rd level in the namespacing is the *functional domain*. Examples:
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'functional domain' of the *framework* layer is usually a technical aspect. Examples:
+The 'functional domain' of the [*framework*](api.md#jjframework) layer is usually a technical aspect. Examples:
 
 - JJ.Framework.__Validation__  
 - JJ.Framework.__Security__  

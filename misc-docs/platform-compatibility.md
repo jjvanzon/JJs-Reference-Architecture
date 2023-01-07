@@ -119,7 +119,7 @@ The items below were compatibility problems related to how Unity interoperated w
   Officially it is supported:  
   <http://msdn.microsoft.com/en-us/library/windowsphone/develop/system.reflection.memberinfo.membertype%28v=vs.105%29.aspx>
 
-  Maybe not supported on lower Windows Phone .NET framework version?
+  Maybe not supported on lower Windows Phone .NET Framework version?
 
   Alternative code:
 

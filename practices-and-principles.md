@@ -539,7 +539,7 @@ abstract class MyBase
 
 `< TODO: Change your view on dependency injection and rewrite that section. This is because SimpleInjector takes away a lot of drawbacks that Ninject has. >`
 
-For dependency injection we will not use frameworks like Ninject anymore. Ninject uses a 'magic hat' principle: an object came from somewhere and you have no idea where it came from or if the object is even there. NInject allows you to define a set of implementations of several interfaces centrally and retrieve that implementation from arbitrary places in the code:
+For dependency injection we will not use frameworks like `Ninject` anymore. `Ninject` seems to use a 'magic hat' principle: an object came from somewhere and you have no idea where it came from or if the object is even there. `NInject` seems to allow defining a set of implementations of several interfaces centrally and retrieve that implementation from arbitrary places in the code:
 
 ```cs
 // Bind it
@@ -997,7 +997,7 @@ The solution is to make `Execute()` public and insist that that it is called exp
 
 `< TODO: Update the remark below. Another solution is to actually do all 'the work' in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above. >`
 
-(Validation framework uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
+(`JJ.Framework.Validation` uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
 
 ### Cross-Referencing (👎)
 
@@ -1547,7 +1547,7 @@ To mitigate the problem, you might try to figure out to just make the best of it
 
 ### Trade-Offs
 
-Every technique in software development has pros and cons. It is the job of the software designer to weigh off all the pros and cons of every possible design choice and come up with a balance best suited to the situations, that will make us run into the least problems in the future.
+Every technique in software development has pros and cons. It is the job of the software designer to weigh off pros and cons of different design choices and come up with a balance best suited to the situations, that will make us run into the least problems in the future.
 
 A striking example is the principle of generalization which is good, and the principle of low coupling which is good.
 

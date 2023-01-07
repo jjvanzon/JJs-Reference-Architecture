@@ -142,7 +142,7 @@ Code style an be enforced with different methods:
 - The [Code Style](code-style.md) handbook, such as is part of this [Reference Architecture](index.md).
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
 - Using Visual Studio's code style options from the Options screen.
-- ReSharper!
+- [`ReSharper`](https://www.jetbrains.com/resharper)!
 
 
 Collections / List Processing
@@ -184,7 +184,7 @@ Another strategy that will not be used, is trying to keep all users' additions o
 Configuration
 -------------
 
-For configuration we will use our own `API`: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document [`API's`](api.md#configuration).
+For configuration we will use our own `API`: JJ.Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document [`API's`](api.md#configuration).
 
 We will use 3 ways of storing configuration settings:
 
@@ -230,11 +230,11 @@ Entity Status Management
 
 Entity status management (or 'object status management') is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
-There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
+There is are reusable EntityStatusManager classes in `JJ.Framework.Business`, but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
 
 <h3>Alternatives</h3>
 
-The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an ORM or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, Framework.Persistence should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make Framework.Persistence much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating Framework.Persistence also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an ORM or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, `JJ.Framework.Data` should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make `JJ.Framework.Data` much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating `JJ.Framework.Data` also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
 This is why the explicit status management solution won over the entity status management in the persistence framework.
 
@@ -469,11 +469,11 @@ Exceptions
 - Do null-checks on arguments of public methods.
 - Sometimes miscellaneous checks need to be performed on public methods.
 - Arguments of private methods do not have to be checked if the class already enforces the rule elsewhere.
-- For null-checks, use NullException (in Framework.Exceptions).
+- For null-checks, use NullException (in `JJ.Framework.Exceptions`).
 - Use NotImplementedException for methods you have not finished yet.
 - Use NotSupportedException for interface methods that are not supported.
-- Use InvalidValueException or ValueNotSupportedException (in Framework.Exceptions) in the default in a switch statement over an enum value.
-- Use other exception types out of Framework.Exceptions.
+- Use InvalidValueException or ValueNotSupportedException (in `JJ.Framework.Exceptions`) in the default in a switch statement over an enum value.
+- Use other exception types out of `JJ.Framework.Exceptions`.
 - Otherwise just throw the Exception base class.
 - Mention the variable or property name in the exception message.
 - Mention the ID of an object in the exception message.
@@ -502,7 +502,7 @@ catch (IOException)
 
 In fact, prefer not to retrieve information by catching an exception at all.
 
-- To show a full exception message Exception.ToString() does a pretty good job including inner exceptions. If you like you can use ExceptionHelper from Framework.Logging to get a neatly formatted exception text. It also has a GetInnermostException helper method.
+- To show a full exception message Exception.ToString() does a pretty good job including inner exceptions. If you like you can use `ExceptionHelper` from `JJ.Framework.Logging` to get a neatly formatted exception text. It also has a GetInnermostException helper method.
 
 
 Facades
@@ -595,7 +595,7 @@ Config example:
 </configuration>
 ```
 
-If you insist on using Log4Net, make a separate ILogger implementation behind which you hide Log4Net. The downside of Log4Net is that its configuration can be quite verbose and complicated. Framework.Logging is simple and can run on all platforms.
+If you insist on using `Log4Net`, make a separate `ILogger` implementation behind which you hide `Log4Net`. The downside of `Log4Net` is that its configuration can be quite verbose and complicated. `JJ.Framework.Logging` is simple and can run on all platforms.
 
 
 Multi-Language / Translations / Culture
@@ -677,9 +677,9 @@ Performance
 Persistence
 -----------
 
-To access a data store (usually a database), Framework.Persistence will be used. Through that framework you can access data using different underlying persistence technologies, such as NHibernate and Entity Framework or even flat files or XML. The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
+To access a data store (usually a database), `JJ.Framework.Data` will be used. Through that framework you can access data using different underlying persistence technologies, such as NHibernate and Entity Framework or even flat files or XML. The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
 
-The main interface of the framework is IContext.
+The main interface of the framework is `IContext`.
 
 See also: 'ORM'.
 

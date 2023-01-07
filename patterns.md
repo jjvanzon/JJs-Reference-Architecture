@@ -466,7 +466,7 @@ Even though the actual call to the business logic might be trivial, it is still 
 
 ### NullCoalesce (ViewModels)
 
-When you user input back as a ViewModel from your presentation framework of choice, for instance MVC, you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing null-coalescing or instead tripping over the nulls, you can centralize the null-coalescing of pieces of view model and call it in the presenter.
+When you user input back as a `ViewModel` from your presentation framework of choice, for instance `MVC`, you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing null-coalescing or instead tripping over the nulls, you can centralize the null-coalescing of pieces of view model and call it in the presenter.
 
 `< TODO: Better description. Also incorporate:`
 
@@ -626,7 +626,7 @@ if (detailsViewModel != null)
 }
 ```
 
-At the end throw the following exception (out of the Framework):
+At the end throw the following exception (from `JJ.Framework.Exceptions`):
 
 ```cs
 throw new UnexpectedTypeException(() => viewModel);
@@ -638,7 +638,7 @@ To prevent repeating this code for each controller action, you could program a g
 
 In MVC it is not straightforeward to post a collection of items or nested structures.
 
-This [architecture's](index.md) framework has HtmlHelper extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
+This [architecture's](index.md) [framework](api.md#jjframework) has `HtmlHelper` extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
@@ -914,7 +914,7 @@ Other Patterns
 
 ### Accessor
 
-An accessor class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. JJ.Framework.Reflection has an implementation of a reusable Accessor class.
+An accessor class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. `JJ.Framework.Reflection` has an implementation of a reusable `Accessor` class.
 
 ### Adapter
 
@@ -924,7 +924,7 @@ An accessor class allows access to non-public members of a class. This can be us
 
 Encapsulation makes sure a class protects its own data integrity. Anti-encapsulation is the design choice to let a class check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the class itself will guard none of it.
 
-The reason not to use encapsulation is that it can go against the grain of many frameworks, such as ORM's and data serialization mechanisms.
+The reason not to use encapsulation is that it can go against the grain of frameworks, such as `ORM's` and data serialization mechanisms.
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the class cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the class and the other half in another place.
 
