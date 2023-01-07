@@ -794,7 +794,7 @@ internal interface IConnectionStrings
 
 ### OneToManyRelationship
 
-Inverse property management means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`.
+Inverse property management means for instance that if a parent property is set: `product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
 The classes [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) can keep bidirectional relationships in sync more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You would still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
 

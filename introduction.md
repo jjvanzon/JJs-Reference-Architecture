@@ -119,7 +119,7 @@ And second in line:
 
 - Reject input: don't correct it
 - Clear interfaces
-- 'Ya ain't gonna need it'
+- "Ya ain't gonna need it"
 - Solve a problem at its core, instead of a work-around.
 - To solve a bug, first reproduce it
 - Proper use of encoding
