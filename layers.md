@@ -145,7 +145,7 @@ It is the [`Presenter`](patterns.md#presenter) classes that talk to this [busine
 
 ### ViewModel
 
-A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure data objects, no logic. So they can be more easily used with different presentation technologies. These pure data objects can also be send over a communication line more easily without many surprises.
+A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure data objects, no logic. So they can be more easily used with different presentation technologies. These pure data objects can also be send over a line more easily without many surprises.
 
 ### ToViewModel
 
