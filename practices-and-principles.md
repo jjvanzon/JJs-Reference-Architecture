@@ -198,7 +198,7 @@ Responsibilities
 
 (Related SOLID principles: Single Responsibility Principle (SRP), Interface Segregation Principle (ISP) and Do Not Repeat Yourself (DRY)).
 
-This is the concept that you split your code into pieces and create separate classes and methods. It is perhaps the single most important design principle of this software architecture.
+This is the concept that you split your code into pieces and create separate classes and methods. It is perhaps the single most important design principle of this [software architecture](index.md).
 
 Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into entities, for instance entities like Order, Product, Customer, but this is not necessarily leading for the split up into functionality.
 
@@ -206,7 +206,7 @@ Separation of concerns can also be applied to technical aspects, such as validat
 
 #### Classes
 
-In this architecture we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
+In this [architecture](index.md) we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
 |              | Dto         | Mapping         | Validator         | ViewModel         | Presenter         | ... |
@@ -243,7 +243,7 @@ And these are the technical concerns:
 
 The assemblies are split up by functional domains.
 
-There are separate assemblies for presentation, business and other main layers.
+There are separate assemblies for [presentation](layers.md#presentation-layer), business and other main layers.
 
 There are separate assemblies for specific protocols and technologies.
 
@@ -251,7 +251,7 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with NHibernate and an SQL Server database. You could not use the entity model on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use MVC, it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with NHibernate and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the entity model on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use MVC, it can only be deployed as a web site and not as a Windows application or mobile app.
 
 By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store entity models differently depending on the infrastructural context. On a mobile platform we might store an entity model in XML, while in a web environment we might store things in SQL Service using NHibernate.
 
@@ -416,8 +416,8 @@ Here are rules for null-checks for other constructs:
 
 #### Custom-Programmed Framework API's
 
-- For API's in our own framework you can count on an object when you call a `Get` method.
-- You have to take `null` into consideration when you call `TryGet`.
+- For `API's` in [our own framework](api.md#jjframework) you can count on an object when you call a `Get` method.
+- You'd have to take `null` into consideration when you call `TryGet`.
 
 #### Your Own Application Code
     
@@ -425,11 +425,11 @@ Here are rules for null-checks for other constructs:
 
 #### Third-party API's
     
-- Some .NET API's and third party API's may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+- Some `.NET API's` and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 
-Nullability problems might be solved next to automatically by newer C# versions.
+Nullability problems might be solved next to automatically by newer [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) versions.
 
 ### Process that Checks Itself (👎)
 
@@ -633,7 +633,7 @@ A hollow interface is and interface with many implementations in which many memb
 
 (Related to the Dependency Inversion Principle from SOLID.)
 
-Interfaces are supposed to be lean. You should keep as much as possible out of an interface. An indication of an interface that is too rich, is for instance that a method has many parameters. You might see a method's name and expect it does not need all those parameters. That indicates a degree of interdependency that is too high. This method's responsibilities might have to be redistributed among different parts of the system. An interface might use a type from an API, while you might expect that interface to be API neutral. You might see a data class passed to an interface that you expected to be independent of that data model. These are all indications of interface contamination and the solution is usually to distribute responsibilities differently over different parts of the system.
+Interfaces are supposed to be lean. You should keep as much as possible out of an interface. An indication of an interface that is too rich, is for instance that a method has many parameters. You might see a method's name and expect it does not need all those parameters. That indicates a degree of interdependency that is too high. This method's responsibilities might have to be redistributed among different parts of the system. An interface might use a type from an `API`, while you might expect that interface to be `API` neutral. You might see a data class passed to an interface that you expected to be independent of that data model. These are all indications of interface contamination and the solution is usually to distribute responsibilities differently over different parts of the system.
 
 Interface contamination becomes a big problem, when an interface is used in many different places. Then all those parts have a high degree of dependence on things they really have nothing to do with. It also makes interfaces difficult to implement, and poorly reusable.
 
@@ -763,7 +763,7 @@ Not always bad practice, but is can be a cause of confusion.
 
 Syntactic sugar is creating a notation that does not add anything, other than a simpler notation.
 
-Object initializers are an example of syntactic sugar. In C# 2.0 you had to initialize an object's properties as follows:
+Object initializers are an example of syntactic sugar. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) 2.0 you had to initialize an object's properties as follows:
 
 ```cs
 Cat cat = new Cat();
@@ -771,7 +771,7 @@ cat.Age = 7;
 cat.Name = "Nala";
 ```
 
-In later versions of C# you are able to do the same thing with the following code:
+In later versions of [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you are able to do the same thing with the following code:
 
 ```cs
 var cat = new Cat 
@@ -808,7 +808,7 @@ Two seemingly independent pieces of code only work if one piece of code makes as
 
 ### Wrapperitis (👎)
 
-Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an API into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder "What does this do?" and the answer turns out to be "nothing really".
+Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an `API` into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder "What does this do?" and the answer turns out to be "nothing really".
 
 This is closely trelated to the 'Hatch' anti-pattern.
 
@@ -1054,7 +1054,7 @@ If a class is long, for instance 800+ code lines, consider if it should be split
 
 In both cases this usually means that the method or class has too many responsibilities.
 
-This code smell can also apply to other code than C# classes and methods.
+This code smell can also apply to other code than [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) classes and methods.
 
 ### Nested Loops (👎)
 
@@ -1537,7 +1537,7 @@ When you code keeps producing errors when you make a change, this could be an in
 
 ### Tooleritis
 
-Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and WinForms apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
+Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
 
 ### Tools to make Tools to make Tools
 
@@ -1579,7 +1579,7 @@ See also: Patterns, TryGet-Insert-Update.
 
 ### Whirlpool Anti-Pattern / Inappropriate Conversions
 
-The architecture contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
+The [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
 
 `< TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. >`
 

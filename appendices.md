@@ -15,7 +15,7 @@
 Appendix A: Layering Checklist
 ------------------------------
 
-This checklist might be used if you want to bulk-program the architecture for an application by going through all the layers one by one, or if you want to build a feature and make sure you have not forgotten any technical issues.
+This checklist might be used if you want to bulk-program the [architecture](index.md) for an application by going through all the layers one by one, or if you want to build a feature and make sure you have not forgotten any technical issues.
 
 - Data: Database structure
 - Data: Data migration
@@ -49,14 +49,14 @@ This checklist might be used if you want to bulk-program the architecture for an
 - Business: Factories (optional)
 - Business: EntityWrappers (optional)
 - Business: Other helpers (optional)
-- Presentation: ViewModels
+- [Presentation](layers.md#presentation-layer): ViewModels
     - Item ViewModels
     - List item ViewModels (some may only need IDNameDto, no ListItem view model)
     - Lookup ViewModel
     - List ViewModels
     - Detail ViewModels
     - DocumentViewModel (optional)
-- Presentation: ToViewModel
+- [Presentation](layers.md#presentation-layer): ToViewModel
     - Singular forms
     - WithRelatedEntities forms
     - ToListItemViewModel
@@ -64,18 +64,18 @@ This checklist might be used if you want to bulk-program the architecture for an
     - ToScreenViewModel
     - ToDocumentViewModel (optional)
     - CreateEmptyViewModel (not every view model needs one)
-- Presentation: ToEntity
+- [Presentation](layers.md#presentation-layer): ToEntity
     - Singular forms
     - WithRelatedEntities forms
     - From screen view model
     - From DocumentViewModel (optional)
-- Presentation: Presenters
+- [Presentation](layers.md#presentation-layer): Presenters
     - List Presenters
     - Detail Presenters
     - (Edit Presenters)
     - Save methods in Detail (or Edit) Presenters.
     - MainPresenter (optional)
-- Presentation: Views (Mvc / UserControls...)
+- [Presentation](layers.md#presentation-layer): Views (Mvc / UserControls...)
     - List Views
     - Detail Views
     - Main View (optional)
@@ -113,7 +113,7 @@ Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar 
 3. CanonicalModel: een tussenmodel voor uitwisseling van gegevens tussen verschillende systemen, toegankelijk via de `CanonicalResourceFormatter` class.
 4. Business layers bevatten alleen vertalingen voor de overige teksten die niet in het canonical model staan.
 5. Ook teksten die niet direct domeintermen zijn, maar wel in applicaties worden gebruikt op plekken waar het gaat over een bepaald functioneel domein, mogen in de business layer, zijn resources gezet worden.
-6. Presentation layer bevat over het algemeen geen teksten. Die zetten we in de business layer: we hebben al genoeg plekken waar we resources neerzetten.
+6. [Presentation layer](layers.md#presentation-layer) bevat over het algemeen geen teksten. Die zetten we in de business layer: we hebben al genoeg plekken waar we resources neerzetten.
 
 ### Tips
 

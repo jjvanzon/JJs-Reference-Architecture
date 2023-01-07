@@ -152,7 +152,7 @@ Suggestions for verbs:
 
 ### Class Names
 
-In this architecture, *class* names may end with the *pattern* name or a *verb* converted to a *noun*, e.g.:
+In this [architecture](index.md), *class* names may end with the *pattern* name or a *verb* converted to a *noun*, e.g.:
 
     Converter
     Validator
@@ -235,7 +235,7 @@ So perhaps avoid plural words to denote a count and avoid plural words for thing
 
 ### Enum Names
 
-This architecture tends to use the `Enum` suffix for `enum` types e.g. `OrderStatusEnum`.
+This [architecture](index.md) tends to use the `Enum` suffix for `enum` types e.g. `OrderStatusEnum`.
 
 Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference became `Enum` because it was found so important to see clearly that something is an `enum`.
 

@@ -73,7 +73,7 @@
 Introduction
 ------------
 
-What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an API or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and API's and are a level of abstraction that hovers above them.
+What are called 'Aspects' here, are technical concerns like security, logging and validation and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an [`API`](api.md) or applying certain design patterns or can even be solved by the programming language you use. In that way, aspects are more central than design patterns, programming languages and [`API's`](api.md) and are a level of abstraction that hovers above them.
 
 Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te Visual Studio IDE.
 
@@ -139,10 +139,10 @@ Code Style
 
 Code style an be enforced with different methods:
 
-- The Code Style handbook, such as is part of this Reference Architecture.
+- The [Code Style](code-style.md) handbook, such as is part of this [Reference Architecture](index.md).
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
 - Using Visual Studio's code style options from the Options screen.
-- Resharper!
+- ReSharper!
 
 
 Collections / List Processing
@@ -164,7 +164,7 @@ Concurrency
 
 In a web-based application time elapses between retrieving data to edit and saving changes. Between these actions the data may have been changed by another user.
 
-In this architecture the concurrency strategy is: the last user wins. This is accomplished in code using TryGet-Insert-Update-Delete pattern, that results in readable saving code and restoration of state, regardless of what another user did to it.
+In this [architecture](index.md) the concurrency strategy is: the last user wins. This is accomplished in code using TryGet-Insert-Update-Delete pattern, that results in readable saving code and restoration of state, regardless of what another user did to it.
 
 <h3>Alternatives</h3>
 
@@ -174,7 +174,7 @@ One possiblity is locking access to the data. This might not be such a good choi
 
 Another technique for handling concurrency is to assume that other users probably will not change the data, but if he had, the save procedure fails. Just before saving, the system checks if the data in the data store was changed since the data was retrieved. If the data is different, this will result in an error message. This requires quite some checks by the system, and remembering original values. Furthermore, in high concurrency situations the number of error messages may increases. And an error message basically means that the user needs to discard his changes and start again, which does not sound ideal.
 
-The preferred technique in this architecture works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user's changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user's changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user's save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
+The preferred technique in this [architecture](index.md) works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user's changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user's changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user's save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
 
 The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a TryGet-Insert-Update pattern for entities. There wll be no checks regarding whether an object is new or already existed. Not-found objects are simple recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
 
@@ -184,7 +184,7 @@ Another strategy that will not be used, is trying to keep all users' additions o
 Configuration
 -------------
 
-For configuration we will use our own API: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document *API's*.
+For configuration we will use our own `API`: Framework.Configuration. It makes it easier to work with complex configuration files, while using .NET's System.Configuration directly can be quite a lot of work. For details see the document [`API's`](api.md#configuration).
 
 We will use 3 ways of storing configuration settings:
 
@@ -228,7 +228,7 @@ Entity Model / Data Model
 Entity Status Management
 ------------------------
 
-Entity status management (or 'object status management') is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the presentation and business layer for a particular functional domain.
+Entity status management (or 'object status management') is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
 There is are reusable EntityStatusManager classes in Framework.Business, but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
 
@@ -536,7 +536,7 @@ Here are a few methods to do this:
 
 ### OneToManyRelationship
 
-The [OneToManyRelationship](api.md#onetomanyrelationship) is an API from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
+The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
 
 ### EntityFramework
 
@@ -570,7 +570,7 @@ Logging
 
 Be careful how much you log. Logging unhandled exceptions is usually good enough. If you log a lot, it creates a performance penalty and can impose a serious strain on your infrastructure. Servers have crashed under the pressure of logging. A simple try-catch on a main level and a call to the logger will usually suffice.
 
-For logging we will use our own API: Framework.Logging. It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
+For logging we will use our own `API`: [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging). It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
 
 Config example:
 
@@ -601,7 +601,7 @@ If you insist on using Log4Net, make a separate ILogger implementation behind wh
 Multi-Language / Translations / Culture
 ---------------------------------------
 
-For button texts and other labels in an application: see 'Resources' under 'Other Patterns'. That does not solve multi-lingual user data, for which multiple solutions are possible.
+For button texts and other labels in an application: see [Resource `strings`](patterns.md#resource-strings). That does not solve multi-lingual user data, for which multiple solutions are possible.
 
 `< TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >`
 
@@ -669,7 +669,7 @@ Performance
 
 `< TODO: Aspects, Performance: Some optimizations seem only possible with inheritance and many classes, such as the fastest static dispatch and e.g. preventing dictionary lookups by having only one value stored per object instead of a dictionary for multiple objects. Oh, that is not necessarly inheritance. But why is inheritance the only construct that can do that, because inheritance also comes with downsides. >`
 
-\> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in C# for structures that complex, while inheritance syntax is clearer in C#. Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
+\> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) for structures that complex, while inheritance syntax is clearer in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp). Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
 
 `< TODO: Aspects, Performance: Detail about nested loops: just traversing multiple levels is not a bad nested loop. Lookups of 5 to 7 items do not require a dictionary. >`
 
@@ -701,9 +701,9 @@ Scheduling
 
 Various solutions are available for scheduling a process (periodically) in time.
 
-- Windows Task Scheduler
+- `Windows Task Scheduler`
 - Immediately running a process in the background in a web application.
-- Using a job scheduling API. For instance 'Quartz' scheduling.
+- Using a job scheduling `API`. For instance 'Quartz' scheduling.
 
 `< TODO: Go into the various options and explain a little further.]`
 
@@ -852,7 +852,7 @@ Transactions
 Type Safety
 -----------
 
-C# has type-safety built in. For type safety in JavaScript, use TypeScript.
+[`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) has type-safety built in. For type safety in JavaScript, use TypeScript.
 
 
 Automated Testing
@@ -920,7 +920,7 @@ Utilities
 
 Utilities are processes that are not run very often. Utilities contains small programs for IT. For example: load translations, things to run for deployment.
 
-Framework.WinForms contains a reusable window, SimpleProcessForm, in to start and cancel the process and show progress information.
+[`JJ.Framework.WinForms`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms) contains a reusable window, SimpleProcessForm, in to start and cancel the process and show progress information.
 
 ![](images/utility.png)
 

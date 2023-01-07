@@ -79,7 +79,7 @@ Naming Conventions
 | Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `...`
 
 - Avoid using keywords as column names. Think of a different name instead.
-- 'Index' is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
+- 'Index' is an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
 
 
 Rules
@@ -181,7 +181,7 @@ This section covered:
 
 The individual upgrade SQL scripts should not contain GO statements. GO is not an SQL keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple SQL files in the database upgrade scripts.
 
-Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of SQL Server anyway.
+Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of [`SQL Server`](https://www.microsoft.com/en-us/sql-server) anyway.
 
 The upgrade scripts should be incremental: DO make assumptions about the previous state of the database structure and script a specific change. Do not write scripts like 'if not exists' then add, or 'drop and create table' scripts, because you may be throwing away data, or execute things on the wrong database. It is better to make a specific change and *not* be tolerant to differences.
 
@@ -277,23 +277,23 @@ If you do this, then the stored procedure above would have to be changed so it i
 C#-Based Migrations
 -------------------
 
-Some data migrations are easier to program using C# than SQL scripts.
+Some data migrations are easier to program using [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) than SQL scripts.
 
-Sometimes the contrast between how easy it is to do in C# or SQL is so large, that the benefits of programming it in C# outweigh the downsides. It could be a factor 20 difference in development time in some cases.
+Sometimes the contrast between how easy it is to do in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) or SQL is so large, that the benefits of programming it in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
 
-A benefit of SQL scripts is that it always operates on the right intermediate version of the entity model, while C# code always operates on the latest version of the entity model. This means that earlier C#-based migrations might not compile anymore for a newer version of the entity model, and can only work with an older version of the model.
+A benefit of SQL scripts is that it always operates on the right intermediate version of the entity model, while [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) code always operates on the latest version of the entity model. This means that earlier [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations might not compile anymore for a newer version of the entity model, and can only work with an older version of the model.
 
-This problem with C#-based migrations can be mitigated in several ways. Here are a few ideas:
+This problem with [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations can be mitigated in several ways. Here are a few ideas:
 
 <h3>Always Rerunnable Tool</h3>
 
-Replace the one-off C# migration by a tool that does something more general, that can operate on any version of the model.
+Replace the one-off [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) migration by a tool that does something more general, that can operate on any version of the model.
 
 For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. 'Run the resaver' would be the description in the list of data migrations to execute.
 
 <h3>Get Specific Version, Build, Get Specific Version, Build</h3>
 
-You can let the C#-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a C#-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
+You can let the [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
 
 <h3>Snapshots of Entity Model</h3>
 

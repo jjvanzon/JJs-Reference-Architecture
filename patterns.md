@@ -99,7 +99,7 @@ These are the classes that represent the domain model.
 
 The entity classes simply contain properties of simple types or references or lists to other entities.
 
-There will be no logic in the entity classes in our architecture.
+There will be no logic in the entity classes in our [architecture](index.md).
 
 Collections should be created in the constructor, because NHibernate does not always create them, and you do not want to check whether collections are null all over your code.
 
@@ -121,7 +121,7 @@ Generally avoided, but not prohibited:
 
 ### Mapping
 
-Mappings are classes programmed for a particular persistence technology, e.g. NHibernate, that map the entity model to how the objects are persisted in the data store (e.g. an SQL Server database).
+Mappings are classes programmed for a particular persistence technology, e.g. NHibernate, that map the entity model to how the objects are persisted in the data store (e.g. an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database).
 
 ### DTO
 
@@ -149,7 +149,7 @@ Business Logic Patterns
 
 ### Business layer
 
-Presentation, entity model and persistence should be straightforward. If anything special needs to happen this belongs in the business layer. Any number of different patterns can be used.
+[Presentation](layers.md#presentation-layer), entity model and persistence should be straightforward. If anything special needs to happen this belongs in the business layer. Any number of different patterns can be used.
 
 The business layer externally speaks a language of entities or sometimes data transfer objects (DTO's). Internally it can talk to repository interfaces for data access.
 
@@ -165,7 +165,7 @@ But that is not always enough. Some logic will use repositories out of multiple 
 
 Also, you may want to create different, more limited repository wrappers. For instance ones for partial domain models. This keeps the width of dependency narrow, so logic that has nothing to do with certain repositories, do not become dependent on all of them.
 
-An alternative to repository wrappers is dependency injection. See 'dependency injection'. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection API. Repository wrappers and dependency injection could well be used in combination with eachother.
+An alternative to repository wrappers is dependency injection. See dependency injection'. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection `API`. Repository wrappers and dependency injection could well be used in combination with eachother.
 
 ### Validators
 
@@ -307,7 +307,7 @@ The key should be representative of the text itself.
 
 `< TODO: Mention the resource formatter pattern, e.g. MessageFormatter. >`
 
-Resources seem part of the presentation, but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
+Resources seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
 
 `JJ.Framework.Resources` contains reusable resource strings for common titles such as `Delete`, `Edit`, `Save` etcetera.
 
@@ -321,7 +321,7 @@ Presentation Patterns
 
 A ViewModel class holds the data shown on screen.
 
-It is purely a data object. It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the viewmodels is fully responsible for it.)
+It is purely a [data objects](#dto). It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the viewmodels is fully responsible for it.)
 
 __A ViewModel should say *what* is shown, not *how* or *why*.__
 
@@ -432,7 +432,7 @@ All view model creation should be delegated to the ToViewModel layer (rather tha
 
 ### ToEntity-Business-ToViewModel Round-Trip
 
-A presenter is a combinator class, in that it combines multiple smaller aspects of the presentation logic, by delegating to other classes. It also combines it with calls to the business layer.
+A presenter is a combinator class, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other classes. It also combines it with calls to the business layer.
 
 A presenter action method might be organized into phases:
 
@@ -498,7 +498,7 @@ When programming page navigation, the first choice for showing content is a full
 
 But it is always the first choice to do full postbacks.
 
-The reason is maintainability: programming the application navigation in C# using presenters is more maintainable than a whole lot of JavaScript. Also: when you do not use AJAX, the Presenter keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason is maintainability: programming the application navigation in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) using presenters is more maintainable than a whole lot of JavaScript. Also: when you do not use AJAX, the Presenter keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
 Furthermore AJAX'ing comes with extra difficulties. For instance that MVC `<input>` tag ID's vary depending on the context and must be preserved after an AJAX call, big code blocks of JavaScript for doing AJAX posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full view. Things like managing the redirection to a full view from a partial action. Info from a parent view model e.g. a lookup list that is passed to the generation of a child view model is not available when you generate a partial view. Request.RawUrl cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the view depending on the outcome of the business logic. Sometimes an ajax call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
@@ -518,7 +518,7 @@ Another alternative is a different ID generation scheme. You may use an SQL Sequ
 
 ### Stateless and Stateful
 
-The presentation patterns may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that Presenters have action methods that take a ViewModel and output a new ViewModel is still useful in that setting. In a stateless environment such as web, it is needed, because the input view model only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new ViewModel has to be created. You cannot just return the user input ViewModel. You would think that in a stateful environment, such as a Windows application, this would not be necessary anymore, because the read-only view data does not get lost between user actions. However, creating a new view model is still useful, because it creates a kind of transaction, so that when something fails in the action, the original view model remains untouched.
+The [presentation patterns](#presentation-patterns) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that Presenters have action methods that take a ViewModel and output a new ViewModel is still useful in that setting. In a stateless environment such as web, it is needed, because the input view model only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new ViewModel has to be created. You cannot just return the user input ViewModel. You would think that in a stateful environment, such as a Windows application, this would not be necessary anymore, because the read-only view data does not get lost between user actions. However, creating a new view model is still useful, because it creates a kind of transaction, so that when something fails in the action, the original view model remains untouched.
 
 You will be making assumptions in your Presenter code when you program a stateful or stateful application. Some things in a stateful environment environment will not work in a stateless environment and you might make some objects long-lived in a stateful environment, such as Context, Repositories and Presenters. But even if you build code around those assumptions, then when switching to a stateless environment –  if that will ever happen – the code is still so close to what's needed for stateless, that it will not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that will probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
@@ -538,7 +538,7 @@ Presentation Patterns (MVC)
 
 ### Controller
 
-In an ASP.NET MVC application a controller has a lot of responsibilities, but in this architecture most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
+In an ASP.NET MVC application a controller has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
 
@@ -638,7 +638,7 @@ To prevent repeating this code for each controller action, you could program a g
 
 In MVC it is not straightforeward to post a collection of items or nested structures.
 
-This architecture's framework has HtmlHelper extensions to make that easier: the Html.BeginCollection API. Using this API you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
+This [architecture's](index.md) framework has HtmlHelper extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))

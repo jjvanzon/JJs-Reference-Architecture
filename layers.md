@@ -84,7 +84,7 @@ Sometimes the [presentation](#presentation-layer) layer skips the [business](#bu
 
 ### Patterns
 
-The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
+The [data](#data-layer) layer may be programmed with mostly fixed patterns in this [architecture](index.md). The [presentation](#presentation-layer) layer is mostly patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
 
 
 Data Layer
@@ -96,7 +96,7 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database. This can be a *relational database* like `Microsoft SQL Server`, which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](https://www.microsoft.com/en-us/sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
@@ -120,13 +120,13 @@ With all this in place, out come objects called [entities](patterns.md#entity), 
 
 ### Repository Interfaces
 
-The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The API [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
+The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data/) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part. The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and `SQL Server`. The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use `SQL Server` or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
+The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part. The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](https://www.microsoft.com/en-us/sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](https://www.microsoft.com/en-us/sql-server) or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
 
-This platform-independence, also allows deployment of the same code to different environments like *mobile*, *windows* or *web*.
+This platform-independence, also allows deployment of the same code to different environments like *mobile*, *Windows* or *web*.
 
 
 Presentation Layer
@@ -146,7 +146,7 @@ It is the [`Presenter`](patterns.md#presenter) classes that talk to this [busine
 
 ### ViewModel
 
-A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure data objects, no logic. So they can be more easily used with different presentation technologies. These pure data objects can also be sent over the line without many surprises.
+A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this [architecture](index.md) [`ViewModels`](patterns.md#viewmodel) are a pure [data objects](patterns.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns.md#dto) can also be sent over the line without many surprises.
 
 ### ToViewModel
 
@@ -158,7 +158,7 @@ The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patter
 
 ### Facades
 
-[`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around presentation.
+[`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
 
 They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
@@ -166,7 +166,7 @@ Because the [`Presenters`](patterns.md#presenter) combine several [responsibilit
 
 ### MVC
 
-[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this architecture for programming *user interfaces* for *web technology*. In our architecture the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
+[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In our [architecture](index.md) the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
@@ -174,7 +174,7 @@ Because the [`Presenters`](patterns.md#presenter) combine several [responsibilit
 
 [`Controllers`](patterns.md#controller) are quite specific to [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`view`](patterns.md#views) depending on their results.
+However, even on other presentation platforms, like [WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`view`](patterns.md#views) depending on their results.
 
 ### URLs
 
@@ -190,29 +190,29 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A view engine that might be used in this architecture is `Razor.` It offers a concise syntax for programming [views](patterns.md#views), that combines `C#` with `HTML.` `Razor` has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A view engine that might be used in this [architecture](index.md) is [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). It offers a concise syntax for programming [views](patterns.md#views), that combines [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) with `HTML.` [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In `WinForms` the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
+In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0) the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
 
 ### HTML
 
-The `Razor` engine produces a piece of `HTML` received by the web browser. 
+The [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In `WinForms` it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [view](patterns.md#views).
+`HTML` here can be replaced by the type of presentation output. In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [view](patterns.md#views).
 
 ### Platform Independence
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* part from the *platform independent* part. 
 
-The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and `Razor`, while the *platform independent* part is unaware of which presentation technology is used.
+The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c), while the *platform independent* part is unaware of which presentation technology is used.
 
-That means that we can use the same kind of logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
+That means that we can use similar logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
 
 
 Business Layer
 --------------
 
-What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#perpendicular-layers), might be considered the *business logic*. It's the *rules* of a system. It's like the internal, mechanical parts. The business layer might be split up into the following things:
+What is business logic? Basically anything that is not [presentation](#presentation-layer), [data access](#data-layer) or [infrastructure](#infrastructure), might be considered the *business logic*. It's the *rules* of a system. It's like the internal, mechanical parts. The business layer might be split up into the following things:
 
 <img src="images/business-layer.png" width="357" />
 
@@ -248,7 +248,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Resources Strings
 
-[Resource `strings`](patterns.md#resource-strings) can make texts in an app *multi-lingual*. These might be put in the [business layer](#business-layer) to translate terminology from the functional domain.
+[Resource `strings`](patterns.md#resource-strings) can make texts in an app [multi-lingual](aspects.md#multi-language--translations--culture). These might be put in the [business layer](#business-layer) to translate terminology from the functional domain.
 
 ### Defaults
 
@@ -256,7 +256,7 @@ Setting [default values](aspects.md#defaults) when creating an [entity](patterns
 
 ### Cascading
 
-Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main entity is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related entity. In this architecture this might be done in `C#` to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main [entity](patterns.md#entity) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related [entity](patterns.md#entity). In this [architecture](index.md) this might be done in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -276,13 +276,13 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations:
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be platform independent in this architecture, so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this software architecture.
+A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
 
 
 Perpendicular Layers
 --------------------
 
-The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is quite fundamental in this software architecture. But there can also be additional layers, called *perpendicular* layers:
+The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is quite fundamental in this [software architecture](index.md). But there can also be additional layers, called *perpendicular* layers:
 
 <img src="images/perpendicular-layers.png" width="300" />
 
@@ -300,19 +300,19 @@ The [Framework](api.md#jjframework) layer consists of `API's` that could support
 
 The infrastructure can be seen as part at the outer end of the [data layer](#data-layer) and part at the outer end of the [presentation layer](#presentation-layer), because the outer end of the [data layer](#data-layer) is actually performing the reading and writing from specific data source.
 
-However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code tends to operates independent of the infrastructure in this architecture and only the top-level project would eventually determine what the context will be.
+However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code tends to operates independent of the infrastructure in this [architecture](index.md) and only the top-level project would eventually determine what the context will be.
 
 ### Loosely Coupled
 
-The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this software architecture. Let's take [user rights management](aspects.md#security) an example.
+The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this  [software architecture](index.md). Let's take [user rights management](aspects.md#security) an example.
 
 [User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns.md#presenter) layer, adapting it to what the user is allowed to do.
 
-In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the security *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an `interface`, that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
+In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the security *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
 
 ### Services
 
-What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
+What's meant with *services* in this [architecture](index.md), is exposing [business logic](#business-layer) through a network interface, like the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
 
 
 Decoupled
@@ -326,7 +326,7 @@ Alternatives
 
 Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled.
 
-Another alternative is: no [repositories](patterns.md#repository). `C# interfaces` for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
+Another alternative is: no [repositories](patterns.md#repository). [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
 
 It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation of concerns](practices-and-principles.md#separation-of-concerns) would also stay intact.
 

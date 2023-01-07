@@ -32,7 +32,7 @@
 Introduction
 ------------
 
-What has been described so far is the *application architecture*. A second part of this software architecture is the *service oriented architecture*, which is mainly about linking systems together. This section is an addition to the documentation with regards to the service architecture. Currently the services are programmed using WCF.
+What has been described so far is the *application architecture*. A second part of this [software architecture](index.md) is the *service oriented architecture*, which is mainly about linking systems together. This section is an addition to the documentation with regards to the service architecture. Currently most of these services might be programmed using WCF.
 
 
 The ESB Concept
@@ -142,7 +142,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Data.Esb.SqlClient__                     | SQL queries for working with the stored Esb entity model.
 | __JJ.Business.Canonical__                     | Some shared logic that operates on canonical models.
 | __JJ.Business.Esb__                           | Business logic for managing the Esb model.
-| __JJ.Services.Ordering.Interface__            | Defines interfaces (the C# kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
+| __JJ.Services.Ordering.Interface__            | Defines [interfaces](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [C#](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
 | __JJ.Services.Ordering.Dispatcher__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
 | __JJ.Services.Ordering.Email__                | A specific implementation of an ordering interface, behind which we send the order by e-mail.
 | __JJ.Services.Ordering.SuperAwesomeProtocol__ | A specific implementation of an ordering interface, behind which we implement the hypothetical 'super awesome protocol' for sending orders.
@@ -151,7 +151,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Services.Ordering.Wcf.Client__           | Allows code to connect to the WCF service using the strongly typed service interface.
 | __JJ.Services.Ordering.JsonRest__             | Exposes the multi-dispatch ordering service using the Json and Rest protocols.
 | __JJ.Services.Ordering.WebApi__               | There is no reason Web API should not be involved in this service architecture, in fact, the idea of WCF being the default for services, might not be a very long-lived.
-| __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes presentation logic instead of business logic and returns ViewModels.
+| __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes [presentation logic](layers.md#presentation-layer) instead of business logic and returns ViewModels.
 
 
 Service-Related Patterns

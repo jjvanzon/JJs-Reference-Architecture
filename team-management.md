@@ -296,7 +296,7 @@ Fill in the lead's name and basically hang up the wall.
 
 - Data model extension task should mention:
 
-'+ Add the basics around this data model to all the architectural layers.' Discuss verbally which layers. Use the Layering Checklist from the Software Architecture document's Appendices to make a selection.
+'+ Add the basics around this data model to all the architectural layers.' Discuss verbally which layers. Use the [Layering Checklist](appendices.md#appendix-a-layering-checklist) to make a selection.
 
 - A task should involve all the required work, but what is not asked should be left out
 

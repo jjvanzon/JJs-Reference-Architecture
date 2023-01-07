@@ -13,13 +13,13 @@ Archived text that didn't make the cut for some reason.
 
 One time ORM almost fails a little bit, is queries where you link a bunch of entities together, you want a list of entities somewhere in the middle of that chain, you want to filter one end of the relationship chain and also on the other end.
 
-In C# it seems you can filter in one direction only:
+In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) it seems you can filter in one direction only:
 
 ```cs
 FirstList.Where(x => ...).SecondList.Where(x => ...).LastList.Where(x => ...);
 ```
 
-If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a `LINQ` query won't do, while in `SQL` it would seem so trivial. The solution in C# might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
+If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a `LINQ` query won't do, while in `SQL` it would seem so trivial. The solution in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
 
 ```cs
 var list = FirstList.Where(x => ...).SecondList.Where(x => ...).ToArray();

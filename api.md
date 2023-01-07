@@ -5,7 +5,7 @@
 
 [back](.)
 
-This article describes some of the API and technology choices in this software architecture.
+This article describes some of the API and technology choices in this [software architecture](index.md).
 
 <h3>Contents</h3>
 
@@ -188,7 +188,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://www.microsoft.com/en-us/sql-server/">
+    <a href="https://www.microsoft.com/en-us/sql-server">
        SQL Server</a>
   </th>
   <td>
@@ -717,7 +717,7 @@ Web
 
 For `AJAX'ing` such partial web content, our team made our own wrapper `AJAX` methods, around calls to `jQuery`, so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of `JavaScript` code.
 
-Our strategy was to prefer full loads, so we could keep most logic in the `C#` realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 ### JavaScript / TypeScript
 
@@ -725,19 +725,19 @@ Our strategy was to prefer full loads, so we could keep most logic in the `C#` r
 
 `JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this architecture: The idea behind `MVC` was logic on the server-side. Views were in `Razor`. Best to keep most logic `C#` was the idea.
+For web, other technology was preferred in this [architecture](index.md): The idea behind `MVC` was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
 
-`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In `C#` you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
+`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
 `TypeScript` may have saved the day to cover for the weak typing from `JavaScript`. But it wasn't tried yet.
 
-But still: logic in one place in one language (`C#`) felt so nice. I guess the love for `C#` is strong.
+But still: logic in one place in one language ([`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)) felt so nice. I guess the love for [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) is strong.
 
 The idea was that a full page load was 1st choice, 2nd choice `AJAX'ing`, and last in line `JavaScript` only to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 For this last-resort `JavaScript` we used `jQuery` and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
 
-I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to `C#` though.
+I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) though.
 
 
 Misc
@@ -747,7 +747,7 @@ Misc
 
 `JJ.Framework` are nuts, bolts and screws for software development. There were things missing in `.NET`, so we programmed it ourselves. These extensions to `.NET` are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
-They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
+They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
@@ -837,7 +837,7 @@ Data
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
-It may be required to enable `MSDTC`. That would be a service belonging to an `SQL Server` installation that might have to be enabled. Otherwise transactions might not work.
+It may be required to enable `MSDTC`. That would be a service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation that might have to be enabled. Otherwise transactions might not work.
 
 ### NHibernate
 
@@ -966,7 +966,7 @@ An alternative for inheritance might be to use a `1-to-1` related object to repr
 
 #### Generic Interfaces
 
-Data access in this architecture is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
+Data access in this [architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
 #### Conclusion
 
@@ -982,7 +982,7 @@ Other techniques: *stored procedures* and *views* were dismissed at one point, i
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing `SQL` in `.NET` would be to use `System.Data.SqlClient`. But in this architecture the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
+The classic way of executing `SQL` in `.NET` would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
@@ -1134,7 +1134,7 @@ One variation of `SqlExecutor` included the ability to add placeholders to the `
 
 #### SQL behind Repositories
 
-The [`repository`](patterns.md#repository) pattern is used in this architecture. The pattern is roughly described [here](patterns.md#repository).
+The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
 
 The [`repository`](patterns.md#repository) pattern can be used together with `JJ.Framework.Data`, documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
@@ -1150,7 +1150,7 @@ where CategoryID = @categoryID
 and MinStartDate >= @minStartDate
 ```
 
-`C#:`
+[`C#:`](https://dotnet.microsoft.com/en-us/languages/csharp)
 
 ```cs
 enum SqlEnum
