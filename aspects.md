@@ -526,7 +526,7 @@ Bidirectional Relationships
 
 Aka "Inverse Relationship Management" or "Inverse Property Management".
 
-Inverse property management means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`.
+Inverse property management means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
 Here are a few methods to do this:
 

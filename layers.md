@@ -227,7 +227,7 @@ The [presentation layer](#presentation-layer) uses the [business layer](#busines
 
 ### Validation
 
-The [business layer](#business-layer) can execute [`Validators`](patterns.md#validators) that verify that the data corresponds to the expectations.
+The [business layer](#business-layer) can execute [`Validators`](patterns.md#validators) that verify that the data corresponds to expectations.
 
 ### Side-Effects
 
@@ -243,7 +243,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Enums
 
-[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). Also some pattern-wise logic around [`enums`](aspects.md#enums) might be there in the [business layer](#business-layer).
+[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). And some pattern-wise logic around [`enums`](aspects.md#enums) might be there in the [business layer](#business-layer) too.
 
 ### Resources Strings
 
@@ -251,7 +251,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#side-effects) class. Those may be executed in the [business layer](#business-layer) [`Facades`](patterns.md#facade).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#side-effects) class. Those may be executed in the [business layer](#business-layer).
 
 ### Cascading
 
@@ -263,7 +263,7 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Relationship Syncing
 
-[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `Product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `Supplier.Products.Add(myProduct)`. This mechanism can be part in the [business layer](#business-layer) as well.
+[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`. This mechanism can be part in the [business layer](#business-layer) as well.
 
 ### Facades
 
@@ -275,7 +275,7 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations:
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be platform independent in this architecture, so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are part of the software architecture too.
+A [business layer](#business-layer) might be platform independent in this architecture, so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific `API` choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this software architecture.
 
 
 Perpendicular Layers
@@ -321,6 +321,6 @@ Here is a variation on this architectural layering, that might also sometimes be
 
 Another alternative is: no [repositories](patterns.md#repository). `C# interfaces` for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
 
-It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation of concerns](practices-and-principles.md#separation-of-concerns) would also still be there.
+It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation of concerns](practices-and-principles.md#separation-of-concerns) would also stay intact.
 
 [back](.)
