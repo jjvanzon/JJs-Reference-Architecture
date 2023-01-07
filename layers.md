@@ -115,7 +115,7 @@ With all this in place, out come objects called [entities](patterns.md#entity), 
 
 ### Repositories
 
-The [entities](patterns.md#entity) may not be directly read out of [`NHibernate`](api.md#nhibernate) by the rest of the code, but accessed using [`Repositories`](patterns.md#repository). You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity type](patterns.md#entity) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
+[`NHibernate`](api.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns.md#repository) instead. You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity type](patterns.md#entity) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
