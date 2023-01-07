@@ -205,7 +205,7 @@ The dashed line going right through the [diagram](#presentation-layer) above sep
 
 The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and `Razor`, while the *platform independent* part is unaware of which presentation technology is used.
 
-That means that we can use the same kind of logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows*. This gives us the flexibility to deploy apps on *mobile* platforms with the same base techniques.
+That means that we can use the same kind of logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
 
 
 Business Layer
