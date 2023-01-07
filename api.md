@@ -188,7 +188,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://www.microsoft.com/en-us/sql-server/">
+    <a href="https://www.microsoft.com/en-us/sql-server">
        SQL Server</a>
   </th>
   <td>
@@ -837,7 +837,7 @@ Data
 
 `JJ.Framework.Data.EntityFramework` at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used `NHibernate` instead.
 
-It may be required to enable `MSDTC`. That would be a service belonging to an `SQL Server` installation that might have to be enabled. Otherwise transactions might not work.
+It may be required to enable `MSDTC`. That would be a service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation that might have to be enabled. Otherwise transactions might not work.
 
 ### NHibernate
 

@@ -79,7 +79,7 @@ Naming Conventions
 | Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `...`
 
 - Avoid using keywords as column names. Think of a different name instead.
-- 'Index' is an SQL Server keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
+- 'Index' is an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) keyword! Avoid that name. Think of another one. IndexNumber or SortOrder.
 
 
 Rules
@@ -181,7 +181,7 @@ This section covered:
 
 The individual upgrade SQL scripts should not contain GO statements. GO is not an SQL keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple SQL files in the database upgrade scripts.
 
-Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of SQL Server anyway.
+Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of [`SQL Server`](https://www.microsoft.com/en-us/sql-server) anyway.
 
 The upgrade scripts should be incremental: DO make assumptions about the previous state of the database structure and script a specific change. Do not write scripts like 'if not exists' then add, or 'drop and create table' scripts, because you may be throwing away data, or execute things on the wrong database. It is better to make a specific change and *not* be tolerant to differences.
 

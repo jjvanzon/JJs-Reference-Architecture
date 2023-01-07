@@ -121,7 +121,7 @@ Generally avoided, but not prohibited:
 
 ### Mapping
 
-Mappings are classes programmed for a particular persistence technology, e.g. NHibernate, that map the entity model to how the objects are persisted in the data store (e.g. an SQL Server database).
+Mappings are classes programmed for a particular persistence technology, e.g. NHibernate, that map the entity model to how the objects are persisted in the data store (e.g. an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database).
 
 ### DTO
 
