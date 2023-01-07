@@ -429,7 +429,7 @@ Here are rules for null-checks for other constructs:
 
 <h4>Alternatives</h4>
 
-Nullability problems might be solved next to automatically by newer C# versions.
+Nullability problems might be solved next to automatically by newer [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) versions.
 
 ### Process that Checks Itself (👎)
 
@@ -763,7 +763,7 @@ Not always bad practice, but is can be a cause of confusion.
 
 Syntactic sugar is creating a notation that does not add anything, other than a simpler notation.
 
-Object initializers are an example of syntactic sugar. In C# 2.0 you had to initialize an object's properties as follows:
+Object initializers are an example of syntactic sugar. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) 2.0 you had to initialize an object's properties as follows:
 
 ```cs
 Cat cat = new Cat();
@@ -771,7 +771,7 @@ cat.Age = 7;
 cat.Name = "Nala";
 ```
 
-In later versions of C# you are able to do the same thing with the following code:
+In later versions of [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you are able to do the same thing with the following code:
 
 ```cs
 var cat = new Cat 
@@ -1054,7 +1054,7 @@ If a class is long, for instance 800+ code lines, consider if it should be split
 
 In both cases this usually means that the method or class has too many responsibilities.
 
-This code smell can also apply to other code than C# classes and methods.
+This code smell can also apply to other code than [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) classes and methods.
 
 ### Nested Loops (👎)
 

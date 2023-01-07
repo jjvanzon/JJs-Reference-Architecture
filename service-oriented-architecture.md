@@ -142,7 +142,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.Data.Esb.SqlClient__                     | SQL queries for working with the stored Esb entity model.
 | __JJ.Business.Canonical__                     | Some shared logic that operates on canonical models.
 | __JJ.Business.Esb__                           | Business logic for managing the Esb model.
-| __JJ.Services.Ordering.Interface__            | Defines interfaces (the C# kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
+| __JJ.Services.Ordering.Interface__            | Defines [interfaces](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [C#](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
 | __JJ.Services.Ordering.Dispatcher__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
 | __JJ.Services.Ordering.Email__                | A specific implementation of an ordering interface, behind which we send the order by e-mail.
 | __JJ.Services.Ordering.SuperAwesomeProtocol__ | A specific implementation of an ordering interface, behind which we implement the hypothetical 'super awesome protocol' for sending orders.
