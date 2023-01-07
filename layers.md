@@ -84,7 +84,7 @@ Sometimes the [presentation](#presentation-layer) layer skips the [business](#bu
 
 ### Patterns
 
-The [data](#data-layer) layer may be programmed with mostly fixed patterns in this architecture. The [presentation](#presentation-layer) layer is mostly patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
+The [data](#data-layer) layer may be programmed with mostly fixed patterns in this [architecture](index.md). The [presentation](#presentation-layer) layer is mostly patterns too. The [business](#business-layer) layer can have patterns as well, but it gets a little more creative. If anything special needs to happen, it might be put in the [business](#business-layer) layer.
 
 
 Data Layer
@@ -146,7 +146,7 @@ It is the [`Presenter`](patterns.md#presenter) classes that talk to this [busine
 
 ### ViewModel
 
-A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this architecture [`ViewModels`](patterns.md#viewmodel) are a pure [data objects](patterns.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns.md#dto) can also be sent over the line without many surprises.
+A [`ViewModel`](patterns.md#viewmodel) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this [architecture](index.md) [`ViewModels`](patterns.md#viewmodel) are a pure [data objects](patterns.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns.md#dto) can also be sent over the line without many surprises.
 
 ### ToViewModel
 
@@ -166,7 +166,7 @@ Because the [`Presenters`](patterns.md#presenter) combine several [responsibilit
 
 ### MVC
 
-[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this architecture for programming *user interfaces* for *web technology*. In our architecture the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
+[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In our [architecture](index.md) the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
@@ -190,7 +190,7 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A view engine that might be used in this architecture is [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). It offers a concise syntax for programming [views](patterns.md#views), that combines [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) with `HTML.` [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A view engine that might be used in this [architecture](index.md) is [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). It offers a concise syntax for programming [views](patterns.md#views), that combines [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) with `HTML.` [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
 In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0) the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
 
@@ -256,7 +256,7 @@ Setting [default values](aspects.md#defaults) when creating an [entity](patterns
 
 ### Cascading
 
-Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main [entity](patterns.md#entity) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related [entity](patterns.md#entity). In this architecture this might be done in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main [entity](patterns.md#entity) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related [entity](patterns.md#entity). In this [architecture](index.md) this might be done in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -276,13 +276,13 @@ The [`Facades`](patterns.md#facade) may orient around the basic data operations:
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be *platform independent* in this architecture, so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
+A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
 
 
 Perpendicular Layers
 --------------------
 
-The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is quite fundamental in this software architecture. But there can also be additional layers, called *perpendicular* layers:
+The subdivision into [data](#data-layer), [business](#business-layer) and [presentation](#presentation-layer) is quite fundamental in this [software architecture](index.md). But there can also be additional layers, called *perpendicular* layers:
 
 <img src="images/perpendicular-layers.png" width="300" />
 
@@ -300,11 +300,11 @@ The [Framework](api.md#jjframework) layer consists of `API's` that could support
 
 The infrastructure can be seen as part at the outer end of the [data layer](#data-layer) and part at the outer end of the [presentation layer](#presentation-layer), because the outer end of the [data layer](#data-layer) is actually performing the reading and writing from specific data source.
 
-However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code tends to operates independent of the infrastructure in this architecture and only the top-level project would eventually determine what the context will be.
+However it is the [presentation layer](#presentation-layer) in which the final decision is made what the infrastructural context will be. The rest of the code tends to operates independent of the infrastructure in this [architecture](index.md) and only the top-level project would eventually determine what the context will be.
 
 ### Loosely Coupled
 
-The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this software architecture. Let's take [user rights management](aspects.md#security) an example.
+The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this  [software architecture](index.md). Let's take [user rights management](aspects.md#security) an example.
 
 [User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns.md#presenter) layer, adapting it to what the user is allowed to do.
 
@@ -312,7 +312,7 @@ In that respect the platform-independent [presentation layer](#presentation-laye
 
 ### Services
 
-What's meant with *services* in this architecture, is exposing [business logic](#business-layer) through a network interface, like the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
+What's meant with *services* in this [architecture](index.md), is exposing [business logic](#business-layer) through a network interface, like the `SOAP` protocol. A service may also expose a [presentation](#presentation-layer) model to the outside world.
 
 
 Decoupled

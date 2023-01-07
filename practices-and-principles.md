@@ -198,7 +198,7 @@ Responsibilities
 
 (Related SOLID principles: Single Responsibility Principle (SRP), Interface Segregation Principle (ISP) and Do Not Repeat Yourself (DRY)).
 
-This is the concept that you split your code into pieces and create separate classes and methods. It is perhaps the single most important design principle of this software architecture.
+This is the concept that you split your code into pieces and create separate classes and methods. It is perhaps the single most important design principle of this [software architecture](index.md).
 
 Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into entities, for instance entities like Order, Product, Customer, but this is not necessarily leading for the split up into functionality.
 
@@ -206,7 +206,7 @@ Separation of concerns can also be applied to technical aspects, such as validat
 
 #### Classes
 
-In this architecture we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
+In this [architecture](index.md) we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
 |              | Dto         | Mapping         | Validator         | ViewModel         | Presenter         | ... |
@@ -1579,7 +1579,7 @@ See also: Patterns, TryGet-Insert-Update.
 
 ### Whirlpool Anti-Pattern / Inappropriate Conversions
 
-The architecture contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
+The [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
 
 `< TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. >`
 

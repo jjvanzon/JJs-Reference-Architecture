@@ -24,7 +24,7 @@
 Introduction
 ------------
 
-This article describes how namespaces and folders might be structured in this software architecture.
+This article describes how namespaces and folders might be structured in this [software architecture](index.md).
 
 
 Structure
@@ -64,7 +64,7 @@ Now each element will be described separately.
 Root Namespace / Company Name
 -----------------------------
 
-In this architecture the *root* namespace is the company name, for instance:
+In this [architecture](index.md) the *root* namespace is the company name, for instance:
 
     JJ
 
@@ -79,7 +79,7 @@ The 2nd level in the namespacing may consist of the following parts:
 | JJ.__Data__         | The data layer including the entity models and persistence.
 | JJ.__Business__     | The business logic layer
 | JJ.__Presentation__ | The [presentation layer](layers.md#presentation-layer)
-| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the software architecture can have reusable code to support it.
+| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
 

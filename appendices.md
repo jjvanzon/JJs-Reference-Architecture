@@ -15,7 +15,7 @@
 Appendix A: Layering Checklist
 ------------------------------
 
-This checklist might be used if you want to bulk-program the architecture for an application by going through all the layers one by one, or if you want to build a feature and make sure you have not forgotten any technical issues.
+This checklist might be used if you want to bulk-program the [architecture](index.md) for an application by going through all the layers one by one, or if you want to build a feature and make sure you have not forgotten any technical issues.
 
 - Data: Database structure
 - Data: Data migration

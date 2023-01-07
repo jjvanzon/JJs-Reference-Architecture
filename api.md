@@ -5,7 +5,7 @@
 
 [back](.)
 
-This article describes some of the API and technology choices in this software architecture.
+This article describes some of the API and technology choices in this [software architecture](index.md).
 
 <h3>Contents</h3>
 
@@ -725,7 +725,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 `JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this architecture: The idea behind `MVC` was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
+For web, other technology was preferred in this [architecture](index.md): The idea behind `MVC` was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
 
 `JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
@@ -747,7 +747,7 @@ Misc
 
 `JJ.Framework` are nuts, bolts and screws for software development. There were things missing in `.NET`, so we programmed it ourselves. These extensions to `.NET` are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
-They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the software architecture described here.
+They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
@@ -966,7 +966,7 @@ An alternative for inheritance might be to use a `1-to-1` related object to repr
 
 #### Generic Interfaces
 
-Data access in this architecture is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
+Data access in this [architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
 #### Conclusion
 
@@ -982,7 +982,7 @@ Other techniques: *stored procedures* and *views* were dismissed at one point, i
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing `SQL` in `.NET` would be to use `System.Data.SqlClient`. But in this architecture the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
+The classic way of executing `SQL` in `.NET` would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
@@ -1134,7 +1134,7 @@ One variation of `SqlExecutor` included the ability to add placeholders to the `
 
 #### SQL behind Repositories
 
-The [`repository`](patterns.md#repository) pattern is used in this architecture. The pattern is roughly described [here](patterns.md#repository).
+The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
 
 The [`repository`](patterns.md#repository) pattern can be used together with `JJ.Framework.Data`, documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 

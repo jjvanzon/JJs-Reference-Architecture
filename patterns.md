@@ -99,7 +99,7 @@ These are the classes that represent the domain model.
 
 The entity classes simply contain properties of simple types or references or lists to other entities.
 
-There will be no logic in the entity classes in our architecture.
+There will be no logic in the entity classes in our [architecture](index.md).
 
 Collections should be created in the constructor, because NHibernate does not always create them, and you do not want to check whether collections are null all over your code.
 
@@ -538,7 +538,7 @@ Presentation Patterns (MVC)
 
 ### Controller
 
-In an ASP.NET MVC application a controller has a lot of responsibilities, but in this architecture most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
+In an ASP.NET MVC application a controller has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
 
@@ -638,7 +638,7 @@ To prevent repeating this code for each controller action, you could program a g
 
 In MVC it is not straightforeward to post a collection of items or nested structures.
 
-This architecture's framework has HtmlHelper extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
+This [architecture's](index.md) framework has HtmlHelper extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
