@@ -204,7 +204,7 @@ The [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/gettin
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* part from the *platform independent* part. 
 
-The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and `Razor`, while the *platform independent* part is unaware of which presentation technology is used.
+The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c), while the *platform independent* part is unaware of which presentation technology is used.
 
 That means that we can use the same kind of logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
 
