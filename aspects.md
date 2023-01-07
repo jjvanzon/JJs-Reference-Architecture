@@ -920,7 +920,7 @@ Utilities
 
 Utilities are processes that are not run very often. Utilities contains small programs for IT. For example: load translations, things to run for deployment.
 
-Framework.WinForms contains a reusable window, SimpleProcessForm, in to start and cancel the process and show progress information.
+[`JJ.Framework.WinForms`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms) contains a reusable window, SimpleProcessForm, in to start and cancel the process and show progress information.
 
 ![](images/utility.png)
 
