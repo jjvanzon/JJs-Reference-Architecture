@@ -10,6 +10,8 @@
 - [Layers](#layers)
 - [Functional Domains](#functional-domains)
 - [Technologies](#technologies)
+- [Patterns](#patterns)
+- [Partial Domains](#partial-domains)
 - [Tests](#tests)
 - [Order of the Elements](#order-of-the-elements)
     - [1<sup>st</sup> Layer then Domain](#1supstsup-layer-then-domain)
@@ -87,6 +89,26 @@ The 4<sup>th</sup> level in the namespacing denotes the used [technology](api.md
 - JJ.Framework.Logging.__DebugOutput__  
 
 This means that the *platform-independent* part of the code is separate from the *platform-specific* code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md) we want depend on.
+
+
+Patterns
+--------
+
+The next level in the namespacing might a [design pattern](patterns.md). It can be a sub-folder inside an assembly:
+
+- JJ.Data.Calendar.NHibernate.__Mappings__
+- JJ.Business.Calendar.__Validators__
+- JJ.Presentation.Ordering.Mvc.__Controllers__
+
+
+Partial Domains
+---------------
+
+For bigger projects a [design pattern](patterns.md) folder may split up into sub-folders for partial domains or main [entities](patterns.md#entity):
+
+- JJ.Business.Synthesizer.Validation.__Documents__
+- JJ.Business.Synthesizer.Validation.__Operators__
+- JJ.Business.Synthesizer.Validation.__Scales__
 
 
 Tests
