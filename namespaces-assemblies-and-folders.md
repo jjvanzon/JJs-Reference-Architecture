@@ -19,7 +19,7 @@
     - [1st Assembly then Folders](#1st-assembly-then-folders)
     - [1st Functional then Technical](#1st-functional-then-technical)
 - [Summary](#summary)
-    - [General Guidelines](#general-guidelines)
+    - [Guidelines](#guidelines)
     - [Example](#example)
     - [Pattern](#pattern)
 
@@ -183,7 +183,7 @@ But this might get in the way of our plans to put the [assembly subdivision 1st]
 Summary
 -------
 
-### General Guidelines
+### Guidelines
 
 - Solution files in repository root
 - Assembly name = root namespace
@@ -221,21 +221,21 @@ Sub-namespace:
 
 ### Pattern
 
-Assembly name pattern:
+Assembly name:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
 
-In an assembly, sub-folder for each [design pattern](patterns.md):
+Sub-folder for each [design pattern](patterns.md):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.DesignPattern]
 
-For smaller projects, a single sub-folder `Helpers` could do:
+For smaller projects, a single sub-folder `Helpers`:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.Helpers]
 
-For bigger projects a [design pattern](patterns.md) folder might split up into partial domains or main [entities](patterns.md#entity):
+For bigger projects a [design pattern](patterns.md) folder splits up into partial domains or main [entities](patterns.md#entity):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.DesignPattern] [.PartialDomain]
