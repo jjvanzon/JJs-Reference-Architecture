@@ -30,10 +30,9 @@ This article describes how namespaces and folders might be structured in this [s
 Structure
 ---------
 
-- Solution files are put in the repository root.
-- An assembly's name is its root namespace.  
-- Assembly names, namespaces and folder structure are all similar.
-
+Solution files are put in the repository root.  
+An assembly's name is its root namespace.  
+Assembly names, namespaces and folder structure are all similar.  
 
 Details will follow, but in a nutshell:
 
@@ -74,9 +73,9 @@ The 2nd level in the namespacing may consist of the following parts:
 
 |             |             |
 |-------------|-------------|
-| JJ.__Data__ | The [data](layers.md#data-layer) layer including the entity models and persistence.
-| JJ.__Business__ | The [business](layers.md#business-layer) logic layer
-| JJ.__Presentation__ | The [presentation](layers.md#presentation-layer) layer
+| JJ.__Data__ | The [`Data`](layers.md#data-layer) layer including the entity models and persistence.
+| JJ.__Business__ | The [`Business`](layers.md#business-layer) logic layer
+| JJ.__Presentation__ | The [`Presentation`](layers.md#presentation-layer) layer
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
@@ -148,7 +147,7 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)). And a [design pattern](patterns.md) may be a level of detail even below that.
+The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [`Presentation`](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)). And a [design pattern](patterns.md) may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 
@@ -185,7 +184,7 @@ But this might get in the way of our plans to put the [assembly subdivision firs
 
 ### 1st Layer then Domain
 
-Putting the [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [Presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
+Putting the [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [`Presentation`](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
 
 - JJ.Data.__MainEntities__
 - JJ.Business.__Magic__
@@ -195,7 +194,7 @@ Putting the [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business
 - JJ.Presentation.__InternalManager__
 - JJ.Presentation.__CoolHub__
 
-Not every software had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation layer](layers.md#presentation-layer). Most products just had *one* of those layers.
+Not every software had a [`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer) or [`Presentation`](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
