@@ -81,7 +81,7 @@ The 'functional domain' of the [framework layer](api.md#jjframework) is usually 
 Technologies
 ------------
 
-The 4<sup>th</sup> level in the namespacing denotes the used [technology](api.md). It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
+The 4<sup>th</sup> level in the namespacing denotes what [technology](api.md) is used. It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
 
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
@@ -147,9 +147,9 @@ It made more sense there, to make the [main layer](layers.md) the first subdivis
 
 In other projects, putting the functional domain 1<sup>st</sup> and the [layer](layers.md) 2<sup>nd</sup> might make more sense:
 
-- JJ.Calendar.Data
-- JJ.Calendar.Business
-- JJ.Calendar.Presentation
+- JJ.__Calendar__.Data
+- JJ.__Calendar__.Business
+- JJ.__Calendar__.Presentation
 
 But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
 
