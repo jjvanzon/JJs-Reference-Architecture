@@ -225,12 +225,12 @@ Assembly name:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
 
-Sub-folder for each [design pattern](patterns.md):
+Each [design pattern](patterns.md) a sub-folder:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.DesignPattern]
 
-For smaller projects, a single sub-folder `Helpers`:
+For smaller projects, a single sub-folder `Helpers` instead:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.Helpers]
@@ -241,4 +241,3 @@ For bigger projects a [design pattern](patterns.md) folder splits up into partia
         [.DesignPattern] [.PartialDomain]
 
 [back](.)
-
