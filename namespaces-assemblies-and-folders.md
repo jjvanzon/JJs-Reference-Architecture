@@ -27,13 +27,13 @@
 Introduction
 ------------
 
-This article describes how namespaces and folders might be structured in [this software architecture](index.md).
+This article describes how namespaces and folders might be structured in this [software architecture](index.md).
 
 
 Company Name / Root Namespace
 -----------------------------
 
-In [this architecture](index.md) the root namespace is the company name, for instance:
+In this [architecture](index.md) the root namespace is the company name, for instance:
 
     JJ
 

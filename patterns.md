@@ -99,7 +99,7 @@ These are the classes that represent the domain model.
 
 The entity classes simply contain properties of simple types or references or lists to other entities.
 
-There will be no logic in the entity classes in [this architecture](index.md).
+There will be no logic in the entity classes in this [architecture](index.md).
 
 Collections should be created in the constructor, because [`NHibernate`](api.md#nhibernate) does not always create them, and you do not want to check whether collections are null all over your code.
 
@@ -538,7 +538,7 @@ Presentation Patterns (MVC)
 
 ### Controller
 
-In an [`ASP.NET MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) application a controller has a lot of responsibilities, but in [this architecture](index.md) most of the responsibility is delegated to Presenters. The responsibilities that are left for the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) quirks.
+In an [`ASP.NET MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) application a controller has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to Presenters. The responsibilities that are left for the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) quirks.
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
 
