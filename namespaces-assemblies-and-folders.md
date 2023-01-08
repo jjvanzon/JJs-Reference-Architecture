@@ -84,9 +84,9 @@ Technologies
 The 4<sup>th</sup> level in the namespacing denotes the used [technology](api.md). It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
 
 - JJ.Data.Calendar  
-- JJ.Data.Calendar.__NHibernate__  
+- JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
 - JJ.Presentation.Calendar  
-- JJ.Presentation.Calendar.__Mvc__  
+- JJ.Presentation.Calendar.[__Mvc__](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
