@@ -18,7 +18,7 @@
 - [Order of the Elements](#order-of-the-elements)
     - [1st Layer then Domain](#1st-layer-then-domain)
     - [1st Domain then Layer](#1st-domain-then-layer)
-    - [Scrambling Technical and Functional](#scrambling-technical-and-functional)
+    - [Scrambling Functional and Technical](#scrambling-functional-and-technical)
     - [1st Big then Small](#1st-big-then-small)
     - [1st Assembly then Folders](#1st-assembly-then-folders)
     - [1st Functional then Technical](#1st-functional-then-technical)
@@ -153,9 +153,9 @@ In other projects, putting the functional domain 1<sup>st</sup> and the [layer](
 
 But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
 
-### Scrambling Technical and Functional
+### Scrambling Functional and Technical
 
-In this namespacing, the technical and functional concerns seem scrambled.
+In this namespacing, the functional and technical concerns seem scrambled.
 
 There are functional (or commercial) concerns:
 
