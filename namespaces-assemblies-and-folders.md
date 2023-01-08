@@ -12,16 +12,16 @@
 - [Technologies](#technologies)
 - [Tests](#tests)
 - [Order of the Elements](#order-of-the-elements)
+    - [1st Layer then Domain](#1st-layer-then-domain)
+    - [1st Domain then Layer](#1st-domain-then-layer)
     - [Scrambling Technical and Functional](#scrambling-technical-and-functional)
     - [1st Big then Small](#1st-big-then-small)
     - [1st Assembly then Folders](#1st-assembly-then-folders)
-    - [1st Domain then Layer](#1st-domain-then-layer)
     - [1st Functional then Technical](#1st-functional-then-technical)
-    - [1st Layer then Domain](#1st-layer-then-domain)
 - [Summary](#summary)
     - [General Guidelines](#general-guidelines)
     - [Example](#example)
-    - [Namespace Structure](#namespace-structure)
+    - [General Pattern](#general-pattern)
 
 
 Introduction
@@ -33,7 +33,7 @@ This article describes how namespaces and folders might be structured in [this s
 Company Name / Root Namespace
 -----------------------------
 
-In [this architecture](index.md) the *root* namespace is the company name, for instance:
+In [this architecture](index.md) the root namespace is the company name, for instance:
 
     JJ
 
@@ -54,8 +54,8 @@ And second in line:
 
 |              |              |
 |--------------|--------------|
-| JJ.__Demos__ | Code for demonstration purposes or trying things out.
 | [JJ.__Utilities__](aspects.md#utilities) | Small programs, e.g. load translations, things to run for deployment.
+| JJ.__Demos__ | Code for demonstration purposes or trying things out.
 
 
 Functional Domains
@@ -86,7 +86,7 @@ The 4th level in the namespacing denotes the used [technology](api.md). It is so
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the *platform-independent* part of the code is separate from the *platform-specific* code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md) we want to be dependent on.
+This means that the *platform-independent* part of the code is separate from the *platform-specific* code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md) we want depend on.
 
 
 Tests
@@ -101,9 +101,37 @@ Every assembly can get a `Tests` assembly containing [automated tests](aspects.m
 Order of the Elements
 ---------------------
 
+### 1st Layer then Domain
+
+Putting the [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
+
+- JJ.Data.__MainEntities__
+- JJ.Business.__Magic__
+- JJ.Business.__GreatCalculator__
+- JJ.Presentation.__LandingPage__
+- JJ.Presentation.__ProprietarySite__
+- JJ.Presentation.__InternalManager__
+- JJ.Presentation.__CoolHub__
+
+Not every software product had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
+
+There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
+
+It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the *functional domains* there.
+
+### 1st Domain then Layer
+
+In other projects, putting the domain 1st and the [layer](layers.md) 2nd might make more sense:
+
+- JJ.__Calendar__.Data
+- JJ.__Calendar__.Business
+- JJ.__Calendar__.Presentation
+
+But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
+
 ### Scrambling Technical and Functional
 
-In this namespacing, the technical and functional concerns seem scrambled.
+In this namespacing, the technical and functional concerns do seem scrambled.
 
 There are functional (or commercial) concerns:
 
@@ -112,8 +140,6 @@ There are functional (or commercial) concerns:
 And there are technical concerns:
 
 - JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
-
-This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
 
 ### 1st Big then Small
 
@@ -137,16 +163,6 @@ And this would be the folders in it:
 
 - JJ.Data.Ordering.__Mappings.Products__
 
-### 1st Domain then Layer
-
-In other projects, putting the *domain* 1st and the [layer](layers.md) 2nd might make more sense:
-
-- JJ.__Calendar__.Data
-- JJ.__Calendar__.Business
-- JJ.__Calendar__.Presentation
-
-But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
-
 ### 1st Functional then Technical
 
 We could keep functionality together, and technical things together:
@@ -161,25 +177,7 @@ Technical things:
 
 Just looking at this, it does make a lot of sense.
 
-But this might get in the way of our plans to put the [assembly subdivision 1st](#1st-assembly-then-folders), and the internal folder subdivision 2nd, depending on how we organize things.
-
-### 1st Layer then Domain
-
-Putting the [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
-
-- JJ.Data.__MainEntities__
-- JJ.Business.__Magic__
-- JJ.Business.__GreatCalculator__
-- JJ.Presentation.__LandingPage__
-- JJ.Presentation.__ProprietarySite__
-- JJ.Presentation.__InternalManager__
-- JJ.Presentation.__CoolHub__
-
-Not every software product had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
-
-There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
-
-It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the *functional domains* there.
+But this might get in the way of our plans to put the [assembly subdivision 1st](#1st-assembly-then-folders, and the internal folder subdivision 2nd), depending on how we organize things.
 
 
 Summary
@@ -223,7 +221,7 @@ Sub-namespace:
     JJ.TheProject.Data.Repositories
     JJ.TheProject.Data.Helpers
 
-### Namespace Structure
+### General Pattern
 
 Assembly name is built up as follows:
 
