@@ -202,7 +202,7 @@ This is the concept that you split your code into pieces and create separate cla
 
 Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into entities, for instance entities like Order, Product, Customer, but this is not necessarily leading for the split up into functionality.
 
-Separation of concerns can also be applied to technical aspects, such as validation, calculation and security. For instance: you can split up the code to check the validity of an order's data from the code that calculates the total price of the order. The split up into technical concerns is usually similar to the split up into design patterns.
+Separation of concerns can also be applied to technical aspects, such as [validation](patterns.md#validators), [calculation](aspects.md#calculation) and [security](aspects.md#security). For instance: you can split up the code to check the [validity](patterns.md#validators) of an order's data from the code that [calculates](aspects.md#calculation) the total price of the order. The split up into technical concerns is usually similar to the split up into [design patterns](patterns.md).
 
 #### Classes
 
@@ -251,9 +251,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with NHibernate and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the entity model on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use MVC, it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the entity model on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store entity models differently depending on the infrastructural context. On a mobile platform we might store an entity model in XML, while in a web environment we might store things in SQL Service using NHibernate.
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store entity models differently depending on the infrastructural context. On a mobile platform we might store an entity model in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](https://www.microsoft.com/en-us/sql-server) Server using [`NHibernate`](api.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -277,7 +277,7 @@ After separating all different aspects of both functionality and technique, you 
 
 ### 2 API's for the Same Thing (👎)
 
-Choose one API and stick with it. It is not recommended to use e.g. two different XML API's in your application.
+Choose one API and stick with it. It is not recommended to use e.g. two different [`XML`](api.md#xml) `API's` in your application.
 
 ### Copy-Paste Programming (👎)
 
@@ -378,7 +378,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to DTO's as do for entities. Especially if they just transfer data from SQL statements to application logic.
+- Usually the same rules apply to DTO's as do for entities. Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
 
 #### Strings
     
@@ -396,7 +396,7 @@ Here are rules for null-checks for other constructs:
 
 #### Parameters
 
-- Execute null-checks on arguments of public methods. Use `NullException` (out of `JJ.Framework.Reflection`). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
+- Execute null-checks on arguments of public methods. Use `NullException` (out of [`JJ.Framework.Reflection`](https://www.nuget.org/packages/JJ.Framework.Reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
 - Avoid allowing null parameters.
 - But if a parameter *is* nullable, you can denote this in several ways.
 - Assign null as the default value of the parameter, so it is clear that it can accept null:  
@@ -488,7 +488,7 @@ This instead of calling it just Customer or just ViewModel.
 Here are a few more examples:
 
 - `CustomerListReload`
-    - It was a controller action name intended to be a AJAX variation of the Index action. Not only should CustomerList be replaced with Index, but also the word Reload is not clear. It may have something to do with reloading some piece of index, but it really is the AJAX variation of Index, so perhaps a suffix Ajax would be more appropriate. IndexAjax would have been a better name.
+    - It was a controller action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
 - A view named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a Controller Action, the .NET `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
@@ -539,7 +539,7 @@ abstract class MyBase
 
 `< TODO: Change your view on dependency injection and rewrite that section. This is because SimpleInjector takes away a lot of drawbacks that Ninject has. >`
 
-For dependency injection we will not use frameworks like Ninject anymore. Ninject uses a 'magic hat' principle: an object came from somewhere and you have no idea where it came from or if the object is even there. NInject allows you to define a set of implementations of several interfaces centrally and retrieve that implementation from arbitrary places in the code:
+For dependency injection we will not use frameworks like `Ninject` anymore. `Ninject` seems to use a 'magic hat' principle: an object came from somewhere and you have no idea where it came from or if the object is even there. `NInject` seems to allow defining a set of implementations of several interfaces centrally and retrieve that implementation from arbitrary places in the code:
 
 ```cs
 // Bind it
@@ -673,7 +673,7 @@ So many overloads you cannot see which to pick.
 
 An interface tries to abstract / generalize multiple similar problems into one solution. If an interface exposes the underlying solution, we speak of a leaky abstraction.
 
-For example: this repository interface exposes the underlying NHibernate technology:
+For example: this repository interface exposes the underlying [`NHibernate`](api.md#nhibernate) technology:
 
 ```cs
 interface IMyRepository
@@ -682,7 +682,7 @@ interface IMyRepository
 }
 ```
 
-The repository interface should not have shown NHibernate-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the repository's job is to offer a set of optimal queries. With the leaky interface above, a repository cannot do its job anymore.
+The repository interface should not have shown [`NHibernate`](api.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the repository's job is to offer a set of optimal queries. With the leaky interface above, a repository cannot do its job anymore.
 
 The following example is better.
 
@@ -997,7 +997,7 @@ The solution is to make `Execute()` public and insist that that it is called exp
 
 `< TODO: Update the remark below. Another solution is to actually do all 'the work' in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above. >`
 
-(Validation framework uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
+([`JJ.Framework.Validation`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation) uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
 
 ### Cross-Referencing (👎)
 
@@ -1248,11 +1248,11 @@ Even if your hypothesis does not turn out to be true, this is still useful infor
 
 If you are faced with a problem and you do not really know what the cause is and trying to *Narrow the Scope* is not getting you anywhere, you can also adopt a strategy of improving diagnostics.
 
-You could add some *Logging* or improve *DebuggerDisplays*. You could also improve *Error Checking*. You can also improve user input validation, which could give you a clue as to what's wrong.
+You could add some [Logging](aspects.md#logging) or improve [`DebuggerDisplays`](https://learn.microsoft.com/en-us/visualstudio/debugger/using-the-debuggerdisplay-attribute). You could also improve *Error Checking*. You can also improve user input validation, which could give you a clue as to what's wrong.
 
-(`DebuggerDisplays` are handy things that can also improve your debugging experience.)
+([`DebuggerDisplays`](https://learn.microsoft.com/en-us/visualstudio/debugger/using-the-debuggerdisplay-attribute) are handy things that can also improve your debugging experience.)
 
-You could also try and look for the already existing diagnostics to help you. Are the loggings, is there something in the windows event log. Can I see error messages in Windows Task Scheduler. Can you get a clearer error message?
+You could also try and look for the already existing diagnostics to help you. Are there loggings, is there something in the windows event log. Can I see error messages in `Windows Task Scheduler`. Can you get a clearer error message?
 
 - Can we look in the database?
 - Look at the data
@@ -1512,7 +1512,7 @@ Also called 'inclusive' or 'exclusive'.
 
 Subtractive or additive can be a strategy in programming. Subtractive starts with everything and then you start excluding things. Additive starts with nothing and then you start adding things.
 
-An example is security. It is often better to use an additive approach and start with no user rights at all and gradually add rights.
+An example is [security](aspects.md#security). It is often better to use an additive approach and start with no [user rights](aspects.md#security) at all and gradually add [rights](aspects.md#security).
 
 Another example might be storing object structures. You might create a storage mechanism that stores everything unless you exclude something, or you might create a storage mechanism that stores nothing unless you explicitly specify it is included.
 
@@ -1537,7 +1537,7 @@ When you code keeps producing errors when you make a change, this could be an in
 
 ### Tooleritis
 
-Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio?view=netdesktop-6.0) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
+Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
 
 ### Tools to make Tools to make Tools
 
@@ -1547,7 +1547,7 @@ To mitigate the problem, you might try to figure out to just make the best of it
 
 ### Trade-Offs
 
-Every technique in software development has pros and cons. It is the job of the software designer to weigh off all the pros and cons of every possible design choice and come up with a balance best suited to the situations, that will make us run into the least problems in the future.
+Every technique in software development has pros and cons. It is the job of the software designer to weigh off pros and cons of different design choices and come up with a balance best suited to the situations, that will make us run into the least problems in the future.
 
 A striking example is the principle of generalization which is good, and the principle of low coupling which is good.
 

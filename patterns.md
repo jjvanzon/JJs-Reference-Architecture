@@ -101,7 +101,7 @@ The entity classes simply contain properties of simple types or references or li
 
 There will be no logic in the entity classes in our [architecture](index.md).
 
-Collections should be created in the constructor, because NHibernate does not always create them, and you do not want to check whether collections are null all over your code.
+Collections should be created in the constructor, because [`NHibernate`](api.md#nhibernate) does not always create them, and you do not want to check whether collections are null all over your code.
 
 All public members should be virtual, otherwise persistence technologies can often not work with it.
 
@@ -121,15 +121,15 @@ Generally avoided, but not prohibited:
 
 ### Mapping
 
-Mappings are classes programmed for a particular persistence technology, e.g. NHibernate, that map the entity model to how the objects are persisted in the data store (e.g. an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database).
+Mappings are classes programmed for a particular persistence technology, e.g. [`NHibernate`](api.md#nhibernate), that map the entity model to how the objects are persisted in the data store (e.g. an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database).
 
 ### DTO
 
 DTO = Data transfer object. DTO's only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an entity is not handy or efficient.
 
-For instance: A specialized, optimized SQL query may return a result with a particular record structure. You could program a DTO that is a strongly typed version of these records. In many cases you want to query for entity objects instead, but in some cases this is not fast / efficient enough and you should resort to a DTO.
+For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a DTO that is a strongly typed version of these records. In many cases you want to query for entity objects instead, but in some cases this is not fast / efficient enough and you should resort to a DTO.
 
-DTO's can also be used for other data transfers than for SQL queries.
+DTO's can also be used for other data transfers than for [`SQL`](api.md#sql) queries.
 
 ### Repository
 
@@ -169,7 +169,7 @@ An alternative to repository wrappers is dependency injection. See dependency in
 
 ### Validators
 
-Use separate validator classes for validation. Make specialized classes derived from `JJ.Framework.Validation.FluentValidator<T>`.
+Use separate validator classes for validation. Make specialized classes derived from [`JJ.Framework.Validation.FluentValidator<T>`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation).
 
 Try to keep validators independent from eachother.
 
@@ -355,9 +355,9 @@ For small lookup lists you might include a copy of the list in each entity view 
 
 Reusing the same list instance in multiple entity view models may seem to save you some memory, but a message formatter may actually repeat the list when sending a view model over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an edit view model. A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a jQuery trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an edit view model. A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](https://jquery.com/) trick to populate a drop down just before you slide it open.
 
-For big lookup list the only viable option seems to AJAX the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once AJAX'ed you might cache the popup to be reused each time you need to select something from it.
+For big lookup list the only viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might cache the popup to be reused each time you need to select something from it.
 
 ### ToViewModel
 
@@ -436,12 +436,12 @@ A presenter is a combinator class, in that it combines multiple smaller aspects 
 
 A presenter action method might be organized into phases:
 
-- Security
-- ViewModel Validation
-- ToEntity / GetEntities
-- Business
-- Commit
-- ToViewModel
+- [Security](aspects.md#security)
+- [ViewModel](#viewmodel) [Validation](#validators)
+- [ToEntity](#toentity) / GetEntities
+- [Business](layers.md#business-layer)
+- [Commit](api.md#orm)
+- [ToViewModel](#toviewmodel)
 - Non-Persisted (yield over non-persisted data from old to new view model)
 - Redirect
 
@@ -460,13 +460,13 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
-Even though the actual call to the business logic might be trivial, it is still necessary to convert from entity to view model and back. This is due to the stateless nature of the web. It requires restoring state from the view to the entity model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do JavaScript or other native code.
+Even though the actual call to the business logic might be trivial, it is still necessary to convert from entity to view model and back. This is due to the stateless nature of the web. It requires restoring state from the view to the entity model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript--typescript) or other native code.
 
 `< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input view model. Sometimes it is even the only way to execute the essense of the user action onto the user input view model. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
 ### NullCoalesce (ViewModels)
 
-When you user input back as a ViewModel from your presentation framework of choice, for instance MVC, you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing null-coalescing or instead tripping over the nulls, you can centralize the null-coalescing of pieces of view model and call it in the presenter.
+When you user input back as a `ViewModel` from your presentation framework of choice, for instance [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing null-coalescing or instead tripping over the nulls, you can centralize the null-coalescing of pieces of view model and call it in the presenter.
 
 `< TODO: Better description. Also incorporate:`
 
@@ -482,7 +482,7 @@ It might be HTML.
 
 In WebForms this would be an aspx.
 
-In MVC it can be an aspx or cshtml.
+In [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) it can be an `aspx` or `cshtml`.
 
 Any code used in the view should be dumb. That is: most tasks should be done by the presenter, which produces the view model, which is simply shown on screen. The view should not contain business logic.
 
@@ -492,17 +492,17 @@ You could also call it: first choice full load.
 
 In web technology you could also call it:
 
-Full postback - AJAX - JavaScript	
+Full postback - [`AJAX`](api.md#ajax) - [`JavaScript`](api.md#javascript--typescript)
 
-When programming page navigation, the first choice for showing content is a full page load. Only if you have a very good reason, you might use AJAX to do a partial load. Only if you have a very good reason, you might start programming user interaction in JavaScript.
+When programming page navigation, the first choice for showing content is a full page load. Only if you have a very good reason, you might use [`AJAX`](api.md#ajax) to do a partial load. Only if you have a very good reason, you might start programming user interaction in [`JavaScript`](api.md#javascript--typescript).
 
 But it is always the first choice to do full postbacks.
 
-The reason is maintainability: programming the application navigation in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) using presenters is more maintainable than a whole lot of JavaScript. Also: when you do not use AJAX, the Presenter keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason is maintainability: programming the application navigation in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) using presenters is more maintainable than a whole lot of [`JavaScript`](api.md#javascript--typescript). Also: when you do not use [`AJAX`](api.md#ajax), the Presenter keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore AJAX'ing comes with extra difficulties. For instance that MVC `<input>` tag ID's vary depending on the context and must be preserved after an AJAX call, big code blocks of JavaScript for doing AJAX posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full view. Things like managing the redirection to a full view from a partial action. Info from a parent view model e.g. a lookup list that is passed to the generation of a child view model is not available when you generate a partial view. Request.RawUrl cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the view depending on the outcome of the business logic. Sometimes an ajax call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript--typescript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full view. Things like managing the redirection to a full view from a partial action. Info from a parent view model e.g. a lookup list that is passed to the generation of a child view model is not available when you generate a partial view. Request.RawUrl cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the view depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
-Some of the difficulties with AJAX have been solved by employing a specific way of working, as described under AJAX in the Aspects section.
+Some of the difficulties with [`AJAX`](api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](api.md#ajax) in the Aspects section.
 
 ### Temporary ID's
 
@@ -514,7 +514,7 @@ The TemporaryID concept breaks down, as soon as you need to use it to refer to s
 
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
-Another alternative is a different ID generation scheme. You may use an SQL Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
+Another alternative is a different ID generation scheme. You may use an [`SQL`](api.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
 
 ### Stateless and Stateful
 
@@ -538,7 +538,7 @@ Presentation Patterns (MVC)
 
 ### Controller
 
-In an ASP.NET MVC application a controller has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to Presenters. The responsibilities that are left for the MVC controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous MVC quirks.
+In an [`ASP.NET MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) application a controller has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to Presenters. The responsibilities that are left for the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) controllers are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) quirks.
 
 The controller may use multiple presenters and view models, since it is about multiple screens.
 
@@ -546,7 +546,7 @@ Entity names put in controller should be plural. So Customer**s**Controller not 
 
 ### Post-Redirect-Get
 
-This is a quirk intrinsic to ASP.NET MVC. We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
+This is a quirk intrinsic to [`ASP.NET MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
 
 At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
@@ -583,13 +583,13 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 
 <h4>Considerations</h4>
 
-If you do not conform to the Post-Redirect-Get pattern in MVC, you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that MVC keeps complaining about validation errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
+If you do not conform to the Post-Redirect-Get pattern in [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) keeps complaining about validation errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
 ### ValidationMessages in ModelState
 
-For the architecture to integrate well with MVC, you have to make MVC aware that there are validation messages, after you have gotten a `ViewModel` from a `Presenter`. If you do not do this, you will get strange application navigation in case of validation errors.
+For the architecture to integrate well with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), you have to make [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) aware that there are validation messages, after you have gotten a `ViewModel` from a `Presenter`. If you do not do this, you will get strange application navigation in case of validation errors.
 
-You do this in an MVC HTTP GET action method.
+You do this in an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) HTTP GET action method.
 
 The way we do it here is as follows:
 
@@ -602,13 +602,13 @@ if (viewModel.ValidationMessages.Any())
 }
 ```
 
-In theory we could communicate all validation messages to MVC instead of just communicating a single generic error message. In theory MVC could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a validation summary, we simply render all the validation messages from the view model ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have validation errors, then the view model should give the information that the appearance of the field should be different. Our view's content is totally managed by the view model.
+In theory we could communicate all validation messages to [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) instead of just communicating a single generic error message. In theory [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a validation summary, we simply render all the validation messages from the view model ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have validation errors, then the view model should give the information that the appearance of the field should be different. Our view's content is totally managed by the view model.
 
 ### Polymorphic RedirectToAction / View()
 
 A Presenter action method may return different types of view models.
 
-This means that in the MVC Controller action methods, the Presenter returns object and you should do polymorphic type checks to determine which view to go to.
+This means that in the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) Controller action methods, the Presenter returns object and you should do polymorphic type checks to determine which view to go to.
 
 Here is simplified code for how you can do this in a post method:
 
@@ -626,7 +626,7 @@ if (detailsViewModel != null)
 }
 ```
 
-At the end throw the following exception (out of the Framework):
+At the end throw the following exception (from [`JJ.Framework.Exceptions`](https://www.nuget.org/packages/JJ.Framework.Exceptions)):
 
 ```cs
 throw new UnexpectedTypeException(() => viewModel);
@@ -636,9 +636,9 @@ To prevent repeating this code for each controller action, you could program a g
 
 ### Html.BeginCollection
 
-In MVC it is not straightforeward to post a collection of items or nested structures.
+In [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) it is not so straightforeward to post a collection of items or nested structures.
 
-This [architecture's](index.md) framework has HtmlHelper extensions to make that easier: the `Html.BeginCollection` `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
+This [architecture's](index.md) [framework](api.md#jjframework) has `HtmlHelper` extensions to make that easier: the [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) `API`. Using this `API` you can send a view model with arbitrary nestings and collections over the line and restore it to a view model at the server side. In the view code you must wrap each nesting in a using block as follows:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
@@ -678,7 +678,7 @@ Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 
 Otherwise the input fields will not bind to the view model. This often forces you to program partial views for separate items. This is good practice anyway, so not that big a trade-off.
 
-An alternative to Html.BeginCollection() is using for-loops.
+An alternative to [`Html.BeginCollection()`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) is using for-loops.
 
 ```cs
 @Html.TextBoxFor(x => x.MyItem.MyProperty)
@@ -703,7 +703,7 @@ Another alternative to the `BeginCollection()` is the often-used `BeginCollectio
 }
 ```
 
-The limitation of that API is that you can only send one collection over the line and no additional nesting is possible.
+The limitation of that `API` is that you can only send one collection over the line and no additional nesting is possible.
 
 Beware that currently the different solutions do not mix well and you should only use one solution for each screen of you program.
 
@@ -729,7 +729,7 @@ public ActionResult Login(... string ret = null)
 }
 ```
 
-ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR AJAX CALL.
+ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](api.md#ajax) CALL.
 
 - For full page loads, the ret parameter must be set to:
 
@@ -737,7 +737,7 @@ ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR AJAX CALL.
   Request.RawUrl
   ```
 
-- For AJAX calls the ret parameter must be set to:
+- For [`AJAX`](api.md#ajax) calls the ret parameter must be set to:
 
   ```cs
   Url.Action(ActionNames.Index)
@@ -903,7 +903,7 @@ Even if you do not expect multiple input formats or multiple output formats or a
 
 #### MVC
 
-MVC itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
+[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - Selector - Model - Generator – Result
 - Controller - ViewModel - view engine – View
@@ -914,7 +914,7 @@ Other Patterns
 
 ### Accessor
 
-An accessor class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. JJ.Framework.Reflection has an implementation of a reusable Accessor class.
+An [`accessor`](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. [`JJ.Framework.Reflection`](https://www.nuget.org/packages/JJ.Framework.Reflection) has an implementation of a reusable [`Accessor`](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) class.
 
 ### Adapter
 
@@ -924,7 +924,7 @@ An accessor class allows access to non-public members of a class. This can be us
 
 Encapsulation makes sure a class protects its own data integrity. Anti-encapsulation is the design choice to let a class check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the class itself will guard none of it.
 
-The reason not to use encapsulation is that it can go against the grain of many frameworks, such as ORM's and data serialization mechanisms.
+The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](api.md#orm) and data serialization mechanisms.
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the class cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the class and the other half in another place.
 

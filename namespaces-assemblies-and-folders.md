@@ -74,12 +74,12 @@ Layers
 
 The 2nd level in the namespacing may consist of the following parts:
 
-|                     |                     |
-|---------------------|---------------------|
-| JJ.__Data__         | The data layer including the entity models and persistence.
-| JJ.__Business__     | The business logic layer
+|             |                     |
+|-------------|---------------------|
+| JJ.__Data__ | The data layer including the entity models and persistence.
+| JJ.__Business__ | The business logic layer
 | JJ.__Presentation__ | The [presentation layer](layers.md#presentation-layer)
-| JJ.__Framework__    | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
+| [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
 
@@ -98,7 +98,7 @@ The 3rd level in the namespacing is the *functional domain*. Examples:
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'functional domain' of the *framework* layer is usually a technical aspect. Examples:
+The 'functional domain' of the [*framework*](api.md#jjframework) layer is usually a technical aspect. Examples:
 
 - JJ.Framework.__Validation__  
 - JJ.Framework.__Security__  
@@ -150,7 +150,7 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. `NHibernate`, `Mvc`). And a *design pattern* may be a level of detail even below that.
+The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)). And a *design pattern* may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 

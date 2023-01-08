@@ -34,7 +34,7 @@ Developing a database generally involves the following steps:
 - Make foreign keys on columns that link to other tables
 - Add indexes on foreign keys columns
 - Add unique indexes
-    - However, sometimes ORM's will trip over unique keys at which we promptly remove the unique constraint.
+    - However, sometimes [`ORM's`](api.md#orm) will trip over unique keys at which we promptly remove the unique constraint.
     - Note that you do not need an additional index when there is already a unique constriant whose first column is the column you would like to index.
 - Add indexes to search columns and alternative keys
 - Add indexes for problem queries
@@ -85,7 +85,7 @@ Naming Conventions
 Rules
 -----
 
-Do not use the following object types, because these things are managed in [`.NET`](https://dotnet.microsoft.com/):
+Do not use the following object types, because these things are managed in .NET:
 
 - Views
 - Stored Procedures
@@ -120,13 +120,13 @@ Database upgrade scripts are managed as follows.
 
 ### Excel Sheet
 
-Each database structure gets an `Excel` in which all the upgrade `SQL` scripts are registered.
+Each database structure gets an Excel in which all the upgrade [`SQL`](api.md#sql) scripts are registered.
 
-The `Excel` sheet and `SQL` scripts are put in a [`Visual Studio`](https://visualstudio.microsoft.com/#vs-section) project to manage them easily.
+The Excel sheet and [`SQL`](api.md#sql) scripts are put in a [Visual Studio](https://visualstudio.microsoft.com/#vs-section) project to manage them easily.
 
 Always edit the Excel in the dev branch, because Excels cannot be merged.
 
-The name of an SQL file has a specific format:
+The name of an [`SQL`](api.md#sql) file has a specific format:
 
     2014-08-28 040 ShopDB Supplier.Name not null.sql
 
@@ -153,11 +153,11 @@ Also include a column saying whether you have scripted it at all (for if you are
 
 For upgrades that should only be executed on a specific database, put 'N/A' (or 'N.V.T.' in Dutch) in the appropriate spread sheet cell.
 
-You can also add something to the SQL file name to indicate this:
+You can also add something to the [`SQL`](api.md#sql) file name to indicate this:
 
     2015-01-23 010 OrderDB SHOPDB ONLY Order.DeliveryDateTimeUtc.sql
 
-Some things should be done manually and not with SQL. Those actions should also be mentioned in the Excel:
+Some things should be done manually and not with [`SQL`](api.md#sql). Those actions should also be mentioned in the Excel:
 
     2015-01-23 020 OrderDB OrderID Identity Yes DO MANUALLY
 
@@ -179,7 +179,7 @@ This section covered:
 
 ### Scripts
 
-The individual upgrade SQL scripts should not contain GO statements. GO is not an SQL keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple SQL files in the database upgrade scripts.
+The individual upgrade [`SQL`](api.md#sql) scripts should not contain GO statements. GO is not an [`SQL`](api.md#sql) keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple [`SQL`](api.md#sql) files in the database upgrade scripts.
 
 Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of [`SQL Server`](https://www.microsoft.com/en-us/sql-server) anyway.
 
@@ -210,7 +210,7 @@ After you have executed them, put TRUE in the appropriate spread sheet cells.
 
 You could execute the scripts one by one, but there is a handier, safer way to do it.
 
-With some creative copying and pasting the SQL file names, you can create a composite upgrade script like this:
+With some creative copying and pasting the [`SQL`](api.md#sql) file names, you can create a composite upgrade script like this:
 
 ```sql
 begin try
@@ -269,7 +269,7 @@ This section covered:
 
 ### SqlScripts Table
 
-Consider maintaining a list of executed database upgrade SQL scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
+Consider maintaining a list of executed database upgrade [`SQL`](api.md#sql) scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
 
 If you do this, then the stored procedure above would have to be changed so it inserts a record in this database table.
 
@@ -277,11 +277,11 @@ If you do this, then the stored procedure above would have to be changed so it i
 C#-Based Migrations
 -------------------
 
-Some data migrations are easier to program using [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) than SQL scripts.
+Some data migrations are easier to program using [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) than [`SQL`](api.md#sql) scripts.
 
-Sometimes the contrast between how easy it is to do in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) or SQL is so large, that the benefits of programming it in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
+Sometimes the contrast between how easy it is to do in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) or [`SQL`](api.md#sql) is so large, that the benefits of programming it in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
 
-A benefit of SQL scripts is that it always operates on the right intermediate version of the entity model, while [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) code always operates on the latest version of the entity model. This means that earlier [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations might not compile anymore for a newer version of the entity model, and can only work with an older version of the model.
+A benefit of [`SQL`](api.md#sql) scripts is that it always operates on the right intermediate version of the entity model, while [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) code always operates on the latest version of the entity model. This means that earlier [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations might not compile anymore for a newer version of the entity model, and can only work with an older version of the model.
 
 This problem with [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations can be mitigated in several ways. Here are a few ideas:
 
