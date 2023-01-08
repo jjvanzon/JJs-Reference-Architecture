@@ -150,7 +150,7 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. `NHibernate`, `Mvc`). And a *design pattern* may be a level of detail even below that.
+The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)). And a *design pattern* may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 

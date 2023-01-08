@@ -190,7 +190,7 @@ The items below were compatibility problems related to how Unity interoperated w
 
 - ### System.Diagnostics.Trace Class
 
-  Not available on Windows Phone 8. (This made [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging/overview) not usable.) 
+  Not available on Windows Phone 8. (This made [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) not usable.) 
 
 Mac OS / Unity 4.3.4 Compatibility Issues
 -----------------------------------------

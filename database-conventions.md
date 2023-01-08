@@ -122,7 +122,7 @@ Database upgrade scripts are managed as follows.
 
 Each database structure gets an Excel in which all the upgrade [`SQL`](api.md#sql) scripts are registered.
 
-The Excel sheet and [`SQL`](api.md#sql) scripts are put in a Visual Studio project to manage them easily.
+The Excel sheet and [`SQL`](api.md#sql) scripts are put in a [Visual Studio](https://visualstudio.microsoft.com/#vs-section) project to manage them easily.
 
 Always edit the Excel in the dev branch, because Excels cannot be merged.
 

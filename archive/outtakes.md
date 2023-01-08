@@ -19,7 +19,7 @@ In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) it seems you can 
 FirstList.Where(x => ...).SecondList.Where(x => ...).LastList.Where(x => ...);
 ```
 
-If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a `LINQ` query won't do, while in [`SQL`](api.md#sql) it would seem so trivial. The solution in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
+If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a [`LINQ`](https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries) query won't do, while in [`SQL`](api.md#sql) it would seem so trivial. The solution in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
 
 ```cs
 var list = FirstList.Where(x => ...).SecondList.Where(x => ...).ToArray();

@@ -39,7 +39,7 @@
     - [No Braces for Single-Line If Statements](#no-braces-for-single-line-if-statements)
     - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
     - [Tabular Form Less Preferred](#tabular-form-less-preferred)
-    - [Align Elements of Linq Queries](#align-elements-of-linq-queries)
+    - [Align Elements of LINQ Queries](#align-elements-of-linq-queries)
 - [Encapsulation](#encapsulation)
     - [Members Private](#members-private)
     - [Types Internal](#types-internal)
@@ -111,7 +111,7 @@ Casing
 | Abbreviations not preferred                                     |
 | Abbreviations of 2 letters with capitals.                       | `ID`
 | Abbreviations of 3 letters or more in pascal case.              | `Mvc`
-| MVC partial view names in pascal case, starting with underscore | `_MyPartialView`
+| [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) partial view names in pascal case, starting with underscore | `_MyPartialView`
 | For long identifiers, underscores to separate 'the pieces'      | `Sine_OperatorCalculator_VarFrequency`
 
 
@@ -678,7 +678,7 @@ Spaces and Braces
 
 ### Auto-Formatting
 
-Prefer Visual Studio's autoformatting enabled and set to its defaults.  
+Prefer [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) autoformatting enabled and set to its defaults.  
 Reason: Less surprising to the next developer.
 
 ### Indentation
@@ -841,7 +841,7 @@ public bool   IsManual { get; set; }
 Reason:  
 Tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
 
-### Align Elements of Linq Queries
+### Align Elements of LINQ Queries
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1295,9 +1295,9 @@ Reason: Readability. More obvious what the range limits are.
 
 Passing infrastructure-related parameters to constructors or methods, the parameters might be listed in this order:
 
-- __entities__ (or loose values)
-- __persistence__
-- __security__
+- __[entities](patterns.md#entity)__ (or loose values)
+- __[persistence](aspects.md#persistence)__
+- __[security](aspects.md#security)__
 - __culture__
 - __other__
 
@@ -1570,7 +1570,7 @@ Persistence frameworks do not always provide *instance* integrity, so code that 
 
 ### Avoiding Compiler Directives
 
-Prefer not to use compiler directives, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a *configuration* setting or different *concrete implementations* of classes.
+Prefer not to use compiler directives, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a [configuration](aspects.md#configuration) setting or different *concrete implementations* of classes.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 

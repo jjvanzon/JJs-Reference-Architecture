@@ -138,7 +138,7 @@ These namespaces use a hypothetical Ordering system as an example.
 | __JJ.LocalServices__                          | Root namespace for windows services. (Not part of the service architecture, but this is where that other type of service goes.)
 | __JJ.Data.Canonical__                         | Where are canonical entity models are defined.
 | __JJ.Data.Esb__                               | Entity model that stores Enterprises, Users, ConnectionTypes, Connections, etc. Basically the configuration settings of the architecture.
-| __JJ.Data.Esb.NHibernate__                    | Stores the Esb entity model using NHibernate.
+| __JJ.Data.Esb.NHibernate__                    | Stores the Esb entity model using [`NHibernate`](api.md#nhibernate).
 | __JJ.Data.Esb.SqlClient__                     | [`SQL`](api.md#sql) queries for working with the stored Esb entity model.
 | __JJ.Business.Canonical__                     | Some shared logic that operates on canonical models.
 | __JJ.Business.Esb__                           | Business logic for managing the Esb model.
@@ -177,7 +177,7 @@ This concept is used in this architecture to give a service interface an even si
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between a possible application architecture this kind of service architecture. In the application architecture the infrastructural context may be determined by the top-level project and passed down to the deeper layers as for instance repository interfaces or interfaces on security, while in the service architecture the infrastructural context might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance JJ.Services.Ordering.Email does not expose that there will be smpt server setup. You cannot see that from the constructor or interface. The service would handle all that internally.
+Not so much a pattern, but a difference in handling infrastructure setup between a possible application architecture this kind of service architecture. In the application architecture the infrastructural context may be determined by the top-level project and passed down to the deeper layers as for instance repository interfaces or interfaces on [security](aspects.md#security), while in the service architecture the infrastructural context might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance JJ.Services.Ordering.Email does not expose that there will be smpt server setup. You cannot see that from the constructor or interface. The service would handle all that internally.
 
 ### Tag Model
 
