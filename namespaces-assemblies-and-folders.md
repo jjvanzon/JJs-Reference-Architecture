@@ -7,7 +7,7 @@
 
 - [Introduction](#introduction)
 - [Structure](#structure)
-- [Root Namespace / Company Name](#root-namespace--company-name)
+- [Company Name / Root Namespace](#company-name--root-namespace)
 - [Layers](#layers)
 - [Functional Domains](#functional-domains)
 - [Technologies](#technologies)
@@ -24,7 +24,7 @@
 Introduction
 ------------
 
-This article describes how namespaces and folders might be structured in this [software architecture](index.md).
+This article describes how namespaces and folders might be structured in [this software architecture](index.md).
 
 
 Structure
@@ -58,10 +58,10 @@ When a project gets bigger, a [design pattern](patterns.md) folder might again b
 Now each element will be described separately.
 
 
-Root Namespace / Company Name
+Company Name / Root Namespace
 -----------------------------
 
-In this [architecture](index.md) the *root* namespace is the company name, for instance:
+In [this architecture](index.md) the *root* namespace is the company name, for instance:
 
     JJ
 
@@ -155,7 +155,7 @@ And a [design pattern](patterns.md) may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 
-What's also done here is putting the *assembly* subdivision first, and then the *internal folder* subdivision.
+What's also done here is putting the *assembly* subdivision first, and the *internal folder* subdivision after that.
 
 This would be the assembly:
 

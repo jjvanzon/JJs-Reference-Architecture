@@ -32,7 +32,7 @@
 Introduction
 ------------
 
-What has been described so far is the *application architecture*. A second part of this [software architecture](index.md) is the *service oriented architecture*, which is mainly about linking systems together. This section is an addition to the documentation with regards to the service architecture. Currently most of these services might be programmed using WCF.
+What has been described so far is the *application architecture*. A second part of [this software architecture](index.md) is the *service oriented architecture*, which is mainly about linking systems together. This section is an addition to the documentation with regards to the service architecture. Currently most of these services might be programmed using WCF.
 
 
 The ESB Concept

@@ -5,7 +5,7 @@
 
 [back](.)
 
-This article describes some of the API and technology choices in this [software architecture](index.md).
+This article describes some of the API and technology choices in [this software architecture](index.md).
 
 <h3>Contents</h3>
 
@@ -716,7 +716,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 `JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
+For web, other technology was preferred in [this architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
 
 `JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
@@ -957,7 +957,7 @@ An alternative for inheritance might be to use a `1-to-1` related object to repr
 
 #### Generic Interfaces
 
-Data access in this [architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data).
+Data access in [this architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data).
 
 #### Conclusion
 
@@ -973,7 +973,7 @@ Other techniques: *stored procedures* and *views* were dismissed at one point, i
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#sql) in [`.NET`](https://dotnet.microsoft.com/) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
+The classic way of executing [`SQL`](#sql) in [`.NET`](https://dotnet.microsoft.com/) would be to use `System.Data.SqlClient`. But in [this architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
@@ -1125,7 +1125,7 @@ One variation of [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_ar
 
 #### SQL behind Repositories
 
-The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
+The [`repository`](patterns.md#repository) pattern is used in [this architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
 
 The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data), documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
