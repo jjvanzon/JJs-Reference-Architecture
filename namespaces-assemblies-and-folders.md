@@ -235,7 +235,7 @@ For smaller projects, a single sub-folder `Helpers` instead:
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.Helpers]
 
-For bigger projects a [design pattern](patterns.md) folder splits up into partial domains or main [entities](patterns.md#entity):
+For bigger projects [design pattern](patterns.md) splits up into partial domains or main [entities](patterns.md#entity):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.DesignPattern] [.PartialDomain]
