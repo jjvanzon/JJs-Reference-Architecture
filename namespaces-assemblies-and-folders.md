@@ -50,7 +50,7 @@ The 2<sup>nd</sup> level in the namespacing may consist of the following parts:
 |             |             |
 |-------------|-------------|
 | JJ.__Data__ | The [`Data`](layers.md#data-layer) layer including the entity models and storage of data.
-| JJ.__Business__ | The [`Business`](layers.md#business-layer) logic layer: guarding the rules of the system.
+| JJ.__Business__ | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
 | JJ.__Presentation__ | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
@@ -96,7 +96,7 @@ This means that the *platform-independent* part of the code is separate from the
 Patterns
 --------
 
-The next level in the namespacing might a [design pattern](patterns.md). It can be a sub-folder inside an assembly:
+The next level in the namespacing can be a [design pattern](patterns.md). It could be a sub-folder inside an assembly:
 
 - JJ.Data.Calendar.NHibernate.__Mappings__
 - JJ.Business.Calendar.__Validators__
@@ -151,8 +151,6 @@ In other projects, putting the functional domain 1<sup>st</sup> and the [layer](
 - JJ.__Calendar__.Business
 - JJ.__Calendar__.Presentation
 
-But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
-
 ### Scrambling Functional and Technical
 
 In this namespacing, the functional and technical concerns seem scrambled.
@@ -173,7 +171,7 @@ The split up per *company* may be the largest concern, while of secondary import
 
 A functional domain (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
 
-And a [design pattern](patterns.md) may be a level of detail even below that.
+And a [design pattern](patterns.md) may be a level of detail below that.
 
 ### 1st Assembly then Folders
 

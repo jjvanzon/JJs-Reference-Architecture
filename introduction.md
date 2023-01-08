@@ -43,11 +43,11 @@ Possible Choices over Definite Choices
 
 This is kind of a personal note on where this documentation stands right now.
 
-Originally I described a fixed way of working here, that generally works well if you want to build large dependable systems with a lot of flexibility. I applied these methods of working in a team under my lead and also some solo projects I worked on. It worked, but required a lot of discipline of team members to do things the way the boss wants.
+Originally I described a fixed way of working here, that generally worked well, building large dependable systems with a lot of flexibility. I applied these methods of working in a team under my lead and also some solo projects I worked on. It worked, but required a lot of discipline of team members to do things the way the boss wants.
 
 I want to move away from this a little bit, and see the methods described here more like a suggestion box of different ways to do things. I will try to describe different alternatives next to the one I prefer and highlight the pros and cons, so you can perhaps see why I came to the conclusion that one method might be better than the other.
 
-Some of the document is still described in definites, rather than suggestions. As I find the time to work on this documentation, I intend to change the tone.
+Some of the documents is still described in definites, rather than suggestions. As I find the time to work on this documentation, I intend to change the tone.
 
 What you might also find is that I describe a lot of things you could do wrong. The suggestion is often that there is a better way to do it. I will try to reformulate things so they start with a positive approach rather than starting with the negative.
 
