@@ -25,7 +25,7 @@
 - [Summary](#summary)
     - [Guidelines](#guidelines)
     - [Example](#example)
-    - [Pattern](#pattern)
+    - [Structure](#structure)
 
 
 Introduction
@@ -106,7 +106,7 @@ The next level in the namespacing might a [design pattern](patterns.md). It can 
 Partial Domains
 ---------------
 
-For bigger projects a [design pattern](patterns.md) folder may split up into sub-folders for partial domains or main [entities](patterns.md#entity):
+For bigger projects, a [design pattern](patterns.md) folder may split up into sub-folders for partial domains or main [entities](patterns.md#entity):
 
 - JJ.Business.Synthesizer.Validation.__Documents__
 - JJ.Business.Synthesizer.Validation.__Operators__
@@ -116,7 +116,7 @@ For bigger projects a [design pattern](patterns.md) folder may split up into sub
 Tests
 -----
 
-Every assembly can get a `Tests` assembly containing [automated tests](aspects.md#automated-testing):
+Every assembly can get a `Tests` assembly with [automated tests](aspects.md#automated-testing):
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
@@ -147,9 +147,9 @@ It made more sense there, to make the [main layer](layers.md) the first subdivis
 
 In other projects, putting the functional domain 1<sup>st</sup> and the [layer](layers.md) 2<sup>nd</sup> might make more sense:
 
-- JJ.__Calendar__.Data
-- JJ.__Calendar__.Business
-- JJ.__Calendar__.Presentation
+- JJ.Calendar.Data
+- JJ.Calendar.Business
+- JJ.Calendar.Presentation
 
 But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
 
@@ -243,25 +243,25 @@ Sub-namespace:
     JJ.TheProject.Data.Repositories
     JJ.TheProject.Data.Helpers
 
-### Pattern
+### Structure
 
 Assembly name:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
 
 Each [design pattern](patterns.md) a sub-folder:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern]
 
 For smaller projects, a single sub-folder `Helpers` instead:
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.Helpers]
 
 For bigger projects [design pattern](patterns.md) splits up into partial domains or main [entities](patterns.md#entity):
 
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern] [.PartialDomain]
 
 [back](.)
