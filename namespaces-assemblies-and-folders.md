@@ -169,7 +169,7 @@ And there are technical concerns:
 
 But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer))
+The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
 A functional domain (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
 
@@ -201,7 +201,7 @@ Technical things:
 
 Just looking at this, it does make a lot of sense.
 
-But this might get in the way of our plans to put the [assembly 1<sup>st</sup>, and the folder 2<sup>nd</sup>](#1st-assembly-then-folders), depending on how we organize things.
+But this might get in the way of our plans to put the [assembly 1<sup>st</sup> and the folder 2<sup>nd</sup>](#1st-assembly-then-folders), depending on how we organize things.
 
 
 Summary
@@ -237,7 +237,7 @@ Root namespace:
 
     JJ.TheProject.Data
 
-Sub-namespace:
+Sub-namespaces:
 
     JJ.TheProject.Data.Entities
     JJ.TheProject.Data.Repositories
