@@ -95,7 +95,7 @@ The 3rd level in the namespacing is the *functional domain*. Examples:
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'functional domain' of the [*framework*](api.md#jjframework) layer is usually a technical [aspect](aspects.md). Examples:
+The 'functional domain' of the [framework](api.md#jjframework) layer is usually a technical [aspect](aspects.md). Examples:
 
 - [JJ.Framework.__Validation__](patterns.md#validators)
 - [JJ.Framework.__Security__](aspects.md#security)
@@ -147,7 +147,11 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [`Presentation`](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)). And a [design pattern](patterns.md) may be a level of detail even below that.
+The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [`Presentation`](layers.md#presentation-layer))
+
+A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
+
+And a [design pattern](patterns.md) may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 
