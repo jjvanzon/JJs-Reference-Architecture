@@ -21,7 +21,7 @@
 - [Summary](#summary)
     - [General Guidelines](#general-guidelines)
     - [Example](#example)
-    - [General Pattern](#general-pattern)
+    - [Pattern](#pattern)
 
 
 Introduction
@@ -45,9 +45,9 @@ The 2nd level in the namespacing may consist of the following parts:
 
 |             |             |
 |-------------|-------------|
-| JJ.__Data__ | The [`Data`](layers.md#data-layer) layer including the entity models and persistence.
-| JJ.__Business__ | The [`Business`](layers.md#business-layer) logic layer
-| JJ.__Presentation__ | The [`Presentation`](layers.md#presentation-layer) layer
+| JJ.__Data__ | The [`Data`](layers.md#data-layer) layer including the entity models and storage of data.
+| JJ.__Business__ | The [`Business`](layers.md#business-layer) logic layer guarding the rules of the system.
+| JJ.__Presentation__ | The [`Presentation`](layers.md#presentation-layer) layer is the visual part of a program.
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
@@ -61,13 +61,13 @@ And second in line:
 Functional Domains
 ------------------
 
-The 3rd level in the namespacing is the *functional domain*. Examples:
+The 3rd level in the namespacing is the *functional domain*:
 
 - JJ.Data.__Calendar__  
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'functional domain' of the [framework](api.md#jjframework) layer is usually a technical [aspect](aspects.md). Examples:
+The 'functional domain' of the [framework layer](api.md#jjframework) is usually a technical [aspect](aspects.md):
 
 - [JJ.Framework.__Validation__](patterns.md#validators)
 - [JJ.Framework.__Security__](aspects.md#security)
@@ -92,7 +92,7 @@ This means that the *platform-independent* part of the code is separate from the
 Tests
 -----
 
-Every assembly can get a `Tests` assembly containing [automated tests](aspects.md#automated-testing). For instance:
+Every assembly can get a `Tests` assembly containing [automated tests](aspects.md#automated-testing):
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
@@ -117,11 +117,11 @@ Not every software product had a [data](layers.md#data-layer), [business](layers
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
-It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the *functional domains* there.
+It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the functional domains in there.
 
 ### 1st Domain then Layer
 
-In other projects, putting the domain 1st and the [layer](layers.md) 2nd might make more sense:
+In other projects, putting the functional domain 1st and the [layer](layers.md) 2nd might make more sense:
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
@@ -131,7 +131,7 @@ But maybe not all functional domains have all [3 layers](layers.md#3-layers) lik
 
 ### Scrambling Technical and Functional
 
-In this namespacing, the technical and functional concerns do seem scrambled.
+In this namespacing, the technical and functional concerns seem scrambled.
 
 There are functional (or commercial) concerns:
 
@@ -183,8 +183,6 @@ But this might get in the way of our plans to put the [assembly subdivision 1st]
 Summary
 -------
 
-Made by someone who cannot summarize:
-
 ### General Guidelines
 
 - Solution files in repository root
@@ -195,17 +193,17 @@ Made by someone who cannot summarize:
 
     C:\Repositories
         |
-        |- JJ.TheProject\
+        |- JJ.TheProject
             |
             |- JJ.TheProject.sln
             |
-            |- Data\
+            |- Data
                 |
                 |- JJ.TheProject.Data.csproj
                 |
-                |- Entities\
-                |- Repositories\
-                |- Helpers\
+                |- Entities
+                |- Repositories
+                |- Helpers
 
 Project file:
 
@@ -221,23 +219,23 @@ Sub-namespace:
     JJ.TheProject.Data.Repositories
     JJ.TheProject.Data.Helpers
 
-### General Pattern
+### Pattern
 
-Assembly name is built up as follows:
+Assembly name pattern:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
 
-Internally in an assembly each [design pattern](patterns.md) might get its own sub-folder:
+In an assembly, sub-folder for each [design pattern](patterns.md):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.DesignPattern]
 
-If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each [design pattern](patterns.md):
+For smaller projects, a single sub-folder `Helpers` could do:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.Helpers]
 
-When a project gets bigger, a [design pattern](patterns.md) folder might again be split up into partial domains or main [entities](patterns.md#entity):
+For bigger projects a [design pattern](patterns.md) folder might split up into partial domains or main [entities](patterns.md#entity):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
         [.DesignPattern] [.PartialDomain]
