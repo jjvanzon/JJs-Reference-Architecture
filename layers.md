@@ -328,7 +328,7 @@ Alternatives
 
 Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled.
 
-Another alternative is: no [repositories](patterns.md#repository). [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
+Another alternative is: no [repositories](patterns.md#repository). But [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
 
 It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation of concerns](practices-and-principles.md#separation-of-concerns) would also stay intact.
 
