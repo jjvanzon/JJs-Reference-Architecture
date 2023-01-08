@@ -117,7 +117,7 @@ Not every software product had a [data](layers.md#data-layer), [business](layers
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
-It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the functional domains in there.
+It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the functional domains from there.
 
 ### 1<sup>st</sup> Domain then Layer
 
