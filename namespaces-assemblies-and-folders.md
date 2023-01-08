@@ -6,7 +6,6 @@
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
-- [Structure](#structure)
 - [Company Name / Root Namespace](#company-name--root-namespace)
 - [Layers](#layers)
 - [Functional Domains](#functional-domains)
@@ -19,43 +18,16 @@
     - [1st Domain then Layer](#1st-domain-then-layer)
     - [1st Functional then Technical](#1st-functional-then-technical)
     - [1st Layer then Domain](#1st-layer-then-domain)
+- [Summary](#summary)
+    - [General Guidelines](#general-guidelines)
+    - [Example](#example)
+    - [Namespace Structure](#namespace-structure)
 
 
 Introduction
 ------------
 
 This article describes how namespaces and folders might be structured in [this software architecture](index.md).
-
-
-Structure
----------
-
-Solution files are put in the repository root.  
-An assembly's name is its root namespace.  
-Assembly names, namespaces and folder structure are similar.  
-
-Details will follow, but in a nutshell:
-
-Assembly name is built up as follows:
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-
-Internally in an assembly each [design pattern](patterns.md) might get its own sub-folder:
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.DesignPattern]
-
-If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each [design pattern](patterns.md):
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.Helpers]
-
-When a project gets bigger, a [design pattern](patterns.md) folder might again be split up into partial domains or main [entities](patterns.md#entity):
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.DesignPattern] [.PartialDomain]
-
-Now each element will be described separately.
 
 
 Company Name / Root Namespace
@@ -203,10 +175,74 @@ Putting the [main layers](layers.md) ([data](layers.md#data-layer), [business](l
 - JJ.Presentation.__InternalManager__
 - JJ.Presentation.__CoolHub__
 
-Not every software had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
+Not every software product had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
 It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the *functional domains* there.
 
+
+Summary
+-------
+
+Made by someone who cannot summarize:
+
+### General Guidelines
+
+- Solution files in repository root
+- Assembly name = root namespace
+- Assembly names, namespaces and folder structure are similar
+
+### Example
+
+    C:\Repositories
+        |
+        |- JJ.TheProject\
+            |
+            |- JJ.TheProject.sln
+            |
+            |- Data\
+                |
+                |- JJ.TheProject.Data.csproj
+                |
+                |- Entities\
+                |- Repositories\
+                |- Helpers\
+
+Project file:
+
+    JJ.TheProject.Data.csproj
+
+Root namespace:
+
+    JJ.TheProject.Data
+
+Sub-namespace:
+
+    JJ.TheProject.Data.Entities
+    JJ.TheProject.Data.Repositories
+    JJ.TheProject.Data.Helpers
+
+### Namespace Structure
+
+Assembly name is built up as follows:
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+
+Internally in an assembly each [design pattern](patterns.md) might get its own sub-folder:
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+        [.DesignPattern]
+
+If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each [design pattern](patterns.md):
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+        [.Helpers]
+
+When a project gets bigger, a [design pattern](patterns.md) folder might again be split up into partial domains or main [entities](patterns.md#entity):
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
+        [.DesignPattern] [.PartialDomain]
+
 [back](.)
+
