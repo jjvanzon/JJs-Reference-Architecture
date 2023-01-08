@@ -32,7 +32,7 @@ Structure
 
 Solution files are put in the repository root.  
 An assembly's name is its root namespace.  
-Assembly names, namespaces and folder structure are all similar.  
+Assembly names, namespaces and folder structure are similar.  
 
 Details will follow, but in a nutshell:
 
@@ -114,7 +114,7 @@ The 4th level in the namespacing denotes the used [technology](api.md). It is so
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the platform-independent part of the code is separate from the platform-specific code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md) we want to be dependent on.
+This means that the *platform-independent* part of the code is separate from the *platform-specific* code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md) we want to be dependent on.
 
 
 Tests
@@ -137,7 +137,7 @@ There are functional (or commercial) concerns:
 
 - __JJ__.Data.__Ordering__.NHibernate.Mappings.__Products__
 
-And these are the technical concerns:
+And there are technical concerns:
 
 - JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
 
@@ -145,17 +145,17 @@ This 'scrambling' of technical and functional concerns, might be rooted in our t
 
 ### 1st Big then Small
 
-The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
+But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [`Presentation`](layers.md#presentation-layer))
+The split up per *company* may be the largest concern, while of secondary importance is the split up into [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer))
 
-A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
+A functional domain (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
 
 And a [design pattern](patterns.md) may be a level of detail even below that.
 
 ### 1st Assembly then Folders
 
-What's also done here is putting the *assembly* subdivision first, and the *internal folder* subdivision after that.
+What's also done here is putting the *assembly* subdivision first, and the *folder* subdivision after that.
 
 This would be the assembly:
 
@@ -167,28 +167,33 @@ And this would be the folders in it:
 
 ### 1st Domain then Layer
 
-In other projects, a different order of the namespace elements might make more sense. First the *domain* then the [layer](layers.md):
+In other projects, putting the *domain* 1st and the [layer](layers.md) 2nd might make more sense:
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
 - JJ.__Calendar__.Presentation
 
-But not all functional domains might have all [3 layers](layers.md#3-layers) like that.
+But maybe not all functional domains have all [3 layers](layers.md#3-layers) like that.
 
 ### 1st Functional then Technical
 
 We could keep functionality together, and technical things together:
 
+Functional things:
+
 - __JJ.Ordering.Products__.Data.NHibernate.Mappings
+
+Technical things:
+
 - JJ.Ordering.Products.__Data.NHibernate.Mappings__
 
 Just looking at this, it does make a lot of sense.
 
-But this might get in the way of our plans to put the [assembly subdivision first](#1st-assembly-then-folders), and the internal folder subdivision second, depending on how we organize things.
+But this might get in the way of our plans to put the [assembly subdivision 1st](#1st-assembly-then-folders), and the internal folder subdivision 2nd, depending on how we organize things.
 
 ### 1st Layer then Domain
 
-Putting the [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer), [`Presentation`](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
+Putting the [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
 
 - JJ.Data.__MainEntities__
 - JJ.Business.__Magic__
@@ -198,7 +203,7 @@ Putting the [main layers](layers.md) ([`Data`](layers.md#data-layer), [`Business
 - JJ.Presentation.__InternalManager__
 - JJ.Presentation.__CoolHub__
 
-Not every software had a [`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer) or [`Presentation`](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
+Not every software had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
