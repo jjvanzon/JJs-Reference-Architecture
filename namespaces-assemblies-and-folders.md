@@ -12,12 +12,12 @@
 - [Technologies](#technologies)
 - [Tests](#tests)
 - [Order of the Elements](#order-of-the-elements)
-    - [1st Layer then Domain](#1st-layer-then-domain)
-    - [1st Domain then Layer](#1st-domain-then-layer)
+    - [1<sup>st</sup> Layer then Domain](#1supstsup-layer-then-domain)
+    - [1<sup>st</sup> Domain then Layer](#1supstsup-domain-then-layer)
     - [Scrambling Technical and Functional](#scrambling-technical-and-functional)
-    - [1st Big then Small](#1st-big-then-small)
-    - [1st Assembly then Folders](#1st-assembly-then-folders)
-    - [1st Functional then Technical](#1st-functional-then-technical)
+    - [1<sup>st</sup> Big then Small](#1supstsup-big-then-small)
+    - [1<sup>st</sup> Assembly then Folders](#1supstsup-assembly-then-folders)
+    - [1<sup>st</sup> Functional then Technical](#1supstsup-functional-then-technical)
 - [Summary](#summary)
     - [Guidelines](#guidelines)
     - [Example](#example)
@@ -41,7 +41,7 @@ In this [architecture](index.md) the root namespace is the company name, for ins
 Layers
 ------
 
-The 2nd level in the namespacing may consist of the following parts:
+The 2<sup>nd</sup> level in the namespacing may consist of the following parts:
 
 |             |             |
 |-------------|-------------|
@@ -61,7 +61,7 @@ And second in line:
 Functional Domains
 ------------------
 
-The 3rd level in the namespacing is the *functional domain*:
+The 3<sup>rd</sup> level in the namespacing is the *functional domain*:
 
 - JJ.Data.__Calendar__  
 - JJ.Business.__Calendar__  
@@ -77,7 +77,7 @@ The 'functional domain' of the [framework layer](api.md#jjframework) is usually 
 Technologies
 ------------
 
-The 4th level in the namespacing denotes the used [technology](api.md). It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
+The 4<sup>th</sup> level in the namespacing denotes the used [technology](api.md). It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
 
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.__NHibernate__  
@@ -101,7 +101,7 @@ Every assembly can get a `Tests` assembly containing [automated tests](aspects.m
 Order of the Elements
 ---------------------
 
-### 1st Layer then Domain
+### 1<sup>st</sup> Layer then Domain
 
 Putting the [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
 
@@ -119,9 +119,9 @@ There was a certain *n-to-n* relationship between products. A functional domain 
 
 It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the functional domains in there.
 
-### 1st Domain then Layer
+### 1<sup>st</sup> Domain then Layer
 
-In other projects, putting the functional domain 1st and the [layer](layers.md) 2nd might make more sense:
+In other projects, putting the functional domain 1<sup>st</sup> and the [layer](layers.md) 2<sup>nd</sup> might make more sense:
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
@@ -141,7 +141,7 @@ And there are technical concerns:
 
 - JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
 
-### 1st Big then Small
+### 1<sup>st</sup> Big then Small
 
 But what happened here is an attempt to organize things into *bigger and smaller* chunks.
 
@@ -151,7 +151,7 @@ A functional domain (`Calendar`, `Ordering`) is considered a larger concern than
 
 And a [design pattern](patterns.md) may be a level of detail even below that.
 
-### 1st Assembly then Folders
+### 1<sup>st</sup> Assembly then Folders
 
 What's also done here is putting the *assembly* subdivision first, and the *folder* subdivision after that.
 
@@ -163,7 +163,7 @@ And this would be the folders in it:
 
 - JJ.Data.Ordering.__Mappings.Products__
 
-### 1st Functional then Technical
+### 1<sup>st</sup> Functional then Technical
 
 We could keep functionality together, and technical things together:
 
@@ -177,7 +177,7 @@ Technical things:
 
 Just looking at this, it does make a lot of sense.
 
-But this might get in the way of our plans to put the [assembly subdivision 1st](#1st-assembly-then-folders, and the internal folder subdivision 2nd), depending on how we organize things.
+But this might get in the way of our plans to put the [assembly subdivision 1<sup>st</sup>,  and the internal folder subdivision 2<sup>nd</sup>](#1supstsup-assembly-then-folders), depending on how we organize things.
 
 
 Summary
