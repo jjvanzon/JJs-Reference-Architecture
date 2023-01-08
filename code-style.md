@@ -1508,7 +1508,7 @@ sbyte
 </td></tr></table>
 
 Reason:  
-For compatibility with more variations of `.NET`.
+For compatibility with more variations of [`.NET`](https://dotnet.microsoft.com/).
 
 ### No Decisions from Exceptions
 

@@ -279,7 +279,7 @@ By creating a base visitor and multiple specialized visitors, you can create sho
 
 The classic visitor pattern has a design flaw in it, that we will not use. The classic visitor requires that classes used by the visitor have to be adapted to the visitor. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a visitor.
 
-A good example of a Visitor class is .NET's own ExpressionVisitor, however we follow additional rules.
+A good example of a Visitor class is [`.NET's`](https://dotnet.microsoft.com/) own ExpressionVisitor, however we follow additional rules.
 
 `< TODO: Make a good text out of this, covering handling polymorphism in visitors. Merge this with the main text: `
 
@@ -293,9 +293,9 @@ A good example of a Visitor class is .NET's own ExpressionVisitor, however we fo
 
 ### Resource Strings
 
-For button texts, translations of model properties in different languages, etc., use resx files in your .NET projects.
+For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](https://dotnet.microsoft.com/) projects.
 
-If you follow the following naming convention for resources files, .NET will automatically return the translations into the language of the current culture:
+If you follow the following naming convention for resources files, [`.NET`](https://dotnet.microsoft.com/) will automatically return the translations into the language of the current culture:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -1014,7 +1014,7 @@ By giving each of those processes its own executor class, you make the code over
 
 ### Inheritance-Helper
 
-A weakness of inheritance in .NET is that there is no multiple inheritance: you can only derive from one base class. This often leads to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the 'Cartesian Product of Features Problem'.) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program helper classes (static classes with static methods) that implement each feature, and then use inheritance, letting derived classes delegate to the helpers, to give each class a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived classes, but no arbitrary spreading of features over the base classes, and no code repetition either.
+A weakness of inheritance in [`.NET`](https://dotnet.microsoft.com/) is that there is no multiple inheritance: you can only derive from one base class. This often leads to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the 'Cartesian Product of Features Problem'.) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program helper classes (static classes with static methods) that implement each feature, and then use inheritance, letting derived classes delegate to the helpers, to give each class a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived classes, but no arbitrary spreading of features over the base classes, and no code repetition either.
 
 This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the Cartesian Product of Features problem, the problem that there is no multiple inheritance and the problem with god base classes, all weakneses of inheritance.
 

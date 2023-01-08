@@ -744,7 +744,7 @@ They were made in the spirit of in-house developing small extensions and hiding 
 
 [`.NET`](https://dotnet.microsoft.com/) code can use `config` files for confuration, often named `App.config` or `Web.config`.
 
-To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using `.NET`'s `System.Configuration` directly.
+To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](https://dotnet.microsoft.com/) `System.Configuration` directly.
 
 You might read from its [`README`](https://www.nuget.org/packages/JJ.Framework.Configuration) how it works.
 
