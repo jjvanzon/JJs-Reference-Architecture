@@ -1,4 +1,6 @@
-﻿🍱 Namespaces, Assemblies & Folders
+﻿<style>thead{display:none;}</style>
+
+🍱 Namespaces, Assemblies & Folders
 ====================================
  
 [back](.)
