@@ -207,9 +207,9 @@ Summary
 
 ### Guidelines
 
-- Solution files in repository root
-- Assembly name = root namespace
 - Assembly names, namespaces and folder structure are similar
+- Assembly name = root namespace
+- Solution files in repository root
 
 ### Example
 
