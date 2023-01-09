@@ -155,11 +155,11 @@ In other projects, putting the functional domain 1<sup>st</sup> and the [main la
 
 In this namespacing, the functional and technical concerns seem scrambled.
 
-There are functional (or commercial) concerns:
+These are the functional (or commercial) concerns:
 
 - __JJ__.Data.__Ordering__.NHibernate.Mappings.__Products__
 
-And there are technical concerns:
+And these are technical concerns:
 
 - JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
 
