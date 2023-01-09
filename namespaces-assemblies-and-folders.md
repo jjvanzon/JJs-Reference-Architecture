@@ -71,7 +71,7 @@ The 3<sup>rd</sup> level in the namespacing is the *functional domain:*
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'functional domain' of the [framework layer](api.md#jjframework) is usually a technical [aspect](aspects.md#aspects):
+The 'functional domain' of the [framework layer](api.md#jjframework) is usually a technical [aspect](aspects.md#-aspects):
 
 - [JJ.Framework.__Validation__](patterns.md#validators)
 - [JJ.Framework.__Security__](aspects.md#security)
