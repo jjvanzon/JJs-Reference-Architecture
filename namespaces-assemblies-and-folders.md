@@ -37,7 +37,7 @@ This article describes how namespaces and folders might be structured in this [s
 Company Name / Root Namespace
 -----------------------------
 
-In this [architecture](index.md) the root namespace is the company name, for instance:
+The root namespace is the company name, for instance:
 
     JJ
 
