@@ -96,7 +96,7 @@ This means that the *platform-independent* part of the code is separate from the
 Patterns
 --------
 
-The next level in the namespacing can be a [design pattern](patterns.md). It could be a sub-folder inside an assembly:
+The next level in the namespacing can be a [design pattern](patterns.md). It would become a sub-folder inside an assembly:
 
 - JJ.Data.Calendar.NHibernate.__Mappings__
 - JJ.Business.Calendar.__Validators__
