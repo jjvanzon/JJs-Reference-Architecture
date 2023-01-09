@@ -81,7 +81,7 @@ The 'functional domain' of the [framework layer](api.md#jjframework) is usually 
 Technologies
 ------------
 
-The 4<sup>th</sup> level in the namespacing denotes what [technology](api.md) is used. It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
+The 4<sup>th</sup> level in the namespacing denotes what [technology](api.md#-apis) is used. It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
 
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
@@ -90,13 +90,13 @@ The 4<sup>th</sup> level in the namespacing denotes what [technology](api.md) is
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the *platform-independent* part of the code is separate from the *platform-specific* part. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md) we want to depend on.
+This means that the *platform-independent* part of the code is separate from the *platform-specific* part. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose which [technologies](api.md#-apis) we want to depend on.
 
 
 Patterns
 --------
 
-The next level in the namespacing can be a [design pattern](patterns.md). It would become a sub-folder inside an assembly:
+The next level in the namespacing can be a [design pattern](patterns.md#-patterns). It would become a sub-folder inside an assembly:
 
 - JJ.Data.Calendar.NHibernate.__Mappings__
 - JJ.Business.Calendar.__Validators__
@@ -106,7 +106,7 @@ The next level in the namespacing can be a [design pattern](patterns.md). It wou
 Partial Domains
 ---------------
 
-For bigger projects, a [design pattern](patterns.md) folder may split up into sub-folders for partial domains or main [entities](patterns.md#entity):
+For bigger projects, a [design pattern](patterns.md#-patterns) folder may split up into sub-folders for partial domains or main [entities](patterns.md#entity):
 
 - JJ.Business.Synthesizer.Validation.__Documents__
 - JJ.Business.Synthesizer.Validation.__Operators__
@@ -127,7 +127,7 @@ Order of the Elements
 
 ### 1st Layer then Domain
 
-Putting the [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
+Putting the [main layers](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time in a specific environment:
 
 - JJ.Data.__MainEntities__
 - JJ.Business.__Magic__
@@ -141,11 +141,11 @@ Not every software product had a [data](layers.md#data-layer), [business](layers
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
-It made more sense there, to make the [main layer](layers.md) the first subdivision, and drop in the functional domains from there.
+It made more sense there, to make the [main layer](layers.md#-layers) the first subdivision, and drop in the functional domains from there.
 
 ### 1st Domain then Layer
 
-In other projects, putting the functional domain 1<sup>st</sup> and the [main layer](layers.md) 2<sup>nd</sup> might make more sense:
+In other projects, putting the functional domain 1<sup>st</sup> and the [main layer](layers.md#-layers) 2<sup>nd</sup> might make more sense:
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
@@ -167,11 +167,11 @@ And these are technical concerns:
 
 But what happened here, is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while a secondary concern is the split up into [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
+The split up per *company* may be the largest concern, while a secondary concern is the split up into [main layers](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
-A functional domain (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
+A functional domain (`Calendar`, `Ordering`) is considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
 
-And a [design pattern](patterns.md) may be a level of detail below that.
+And a [design pattern](patterns.md#-patterns) may be a level of detail below that.
 
 ### 1st Assembly then Folders
 
@@ -247,7 +247,7 @@ Assembly name:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
 
-Each [design pattern](patterns.md) a sub-folder:
+Each [design pattern](patterns.md#-patterns) a sub-folder:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern]
@@ -257,7 +257,7 @@ For smaller projects, a single sub-folder `Helpers` instead:
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.Helpers]
 
-For bigger projects [design pattern](patterns.md) splits up into partial domains or main [entities](patterns.md#entity):
+For bigger projects [design pattern](patterns.md#-patterns) splits up into partial domains or main [entities](patterns.md#entity):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern] [.PartialDomain]
