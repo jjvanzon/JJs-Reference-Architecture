@@ -81,7 +81,7 @@ The 'functional domain' of the [framework layer](api.md#jjframework) might be a 
 Technologies
 ------------
 
-The 4<sup>th</sup> level in the namespacing denotes what [technology](api.md#-apis) is used. It is sort of analogous to a file extension. You might find two assemblies: one *platform-independent* and one *platform-specific*.
+The 4<sup>th</sup> level in the namespacing denotes which [technology](api.md#-apis) is used. It is sort of analogous to a file extension. You might find two assemblies: one *platform-independent* and one *platform-specific*.
 
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
