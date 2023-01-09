@@ -49,9 +49,9 @@ The 2<sup>nd</sup> level in the namespacing may consist of the following parts:
 
 |             |             |
 |-------------|-------------|
-| JJ.__Data__ | The [`Data`](layers.md#data-layer) layer including the entity models and storage of data.
-| JJ.__Business__ | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
-| JJ.__Presentation__ | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
+| [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the entity models and storage of data.
+| [JJ.__Business__](layers.md#business-layer) | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
+| [JJ.__Presentation__](layers.md#presentation-layer) | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
@@ -59,7 +59,7 @@ And second in line:
 |              |              |
 |--------------|--------------|
 | [JJ.__Utilities__](aspects.md#utilities) | Small programs, e.g. load translations, things to run for deployment.
-| JJ.__Demos__ | Code for demonstration purposes or trying things out.
+| JJ.__Demos__ | Code for demo purposes or trying things out.
 
 
 Functional Domains
