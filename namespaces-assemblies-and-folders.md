@@ -65,7 +65,7 @@ And second in line:
 Functional Domains
 ------------------
 
-The 3<sup>rd</sup> level in the namespacing can be the *functional domain:*
+The 3<sup>rd</sup> level in the namespacing would be the *functional domain:*
 
 - JJ.Data.__Calendar__  
 - JJ.Business.__Calendar__  
@@ -90,13 +90,13 @@ The 4<sup>th</sup> level in the namespacing denotes what [technology](api.md#-ap
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the *platform-independent* part of the code is separate from the *platform-specific* part. That way we can choose which [technologies](api.md#-apis) we want to depend on. This also means, that quite a portion of the code can be shared between platforms.
+This means that the *platform-independent* part of the code is separate from the *platform-specific* part. This also means, that quite a portion of the code can be shared between platforms. That way we can choose which [technologies](api.md#-apis) we want to depend on.
 
 
 Patterns
 --------
 
-The next level in the namespacing can be a [design pattern](patterns.md#-patterns). It would become a sub-folder inside an assembly:
+The next level in the namespacing can be a [design pattern](patterns.md#-patterns). It would become a *sub-folder* inside an assembly:
 
 - JJ.Data.Calendar.NHibernate.__Mappings__
 - JJ.Business.Calendar.__Validators__
@@ -106,7 +106,7 @@ The next level in the namespacing can be a [design pattern](patterns.md#-pattern
 Partial Domains
 ---------------
 
-For bigger projects, a [design pattern](patterns.md#-patterns) folder may split up into sub-folders for main [entities](patterns.md#entity) or partial domains:
+For bigger projects, a [design pattern](patterns.md#-patterns) folder may split up into sub-folders for main [entities](patterns.md#entity) or *partial domains*:
 
 - JJ.Business.Synthesizer.Validation.__Documents__
 - JJ.Business.Synthesizer.Validation.__Operators__
