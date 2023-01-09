@@ -5,7 +5,14 @@ Outtakes
 
 Archived text that didn't make the cut for some reason.
 
-### API's | ORM | Meet in the Middle Queries
+<h3>Contents</h3>
+
+- [API's | ORM | Meet in the Middle Queries](#apis--orm--meet-in-the-middle-queries)
+- [Namespaces, Assemblies & Folders | Scrambling Technical and Functional](#namespaces-assemblies--folders--scrambling-technical-and-functional)
+
+
+API's | ORM | Meet in the Middle Queries
+----------------------------------------
 
 `< Archived this, because I have difficulty remembering the details about this problem. >`
 
@@ -28,5 +35,11 @@ list = list.Where(x => x.SecondList.Any(x => ...).ToArray();
 ```
 
 `< TODO: What was the problem again? When rows materialize? Retrieving quite a few more entities than strictly needed? It seems so specific to the use case back then. >`
+
+Namespaces, Assemblies & Folders | Scrambling Technical and Functional
+----------------------------------------------------------------------
+
+... 
+This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
 
 [back](..)

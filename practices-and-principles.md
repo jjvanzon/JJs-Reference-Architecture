@@ -490,7 +490,7 @@ Here are a few more examples:
 - `CustomerListReload`
     - It was a controller action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
-- A view named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a Controller Action, the .NET `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
+- A view named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a Controller Action, the [`.NET`](https://dotnet.microsoft.com/) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
 
 ### CRUD
@@ -1579,7 +1579,7 @@ See also: Patterns, TryGet-Insert-Update.
 
 ### Whirlpool Anti-Pattern / Inappropriate Conversions
 
-The [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
+This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
 
 `< TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. >`
 

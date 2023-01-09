@@ -99,7 +99,7 @@ These are the classes that represent the domain model.
 
 The entity classes simply contain properties of simple types or references or lists to other entities.
 
-There will be no logic in the entity classes in our [architecture](index.md).
+There will be no logic in the entity classes in this [architecture](index.md).
 
 Collections should be created in the constructor, because [`NHibernate`](api.md#nhibernate) does not always create them, and you do not want to check whether collections are null all over your code.
 
@@ -279,7 +279,7 @@ By creating a base visitor and multiple specialized visitors, you can create sho
 
 The classic visitor pattern has a design flaw in it, that we will not use. The classic visitor requires that classes used by the visitor have to be adapted to the visitor. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a visitor.
 
-A good example of a `Visitor` class is [`.NET's`](https://dotnet.microsoft.com/) own `ExpressionVisitor`, however we follow additional rules.
+A good example of a Visitor class is [`.NET's`](https://dotnet.microsoft.com/) own ExpressionVisitor, however we follow additional rules.
 
 `< TODO: Make a good text out of this, covering handling polymorphism in visitors. Merge this with the main text: `
 

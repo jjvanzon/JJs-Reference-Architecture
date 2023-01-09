@@ -1,70 +1,43 @@
-﻿🍱 Namespaces, Assemblies & Folders
-====================================
+﻿<style>thead{display:none;}</style>
 
+🍱 Namespaces, Assemblies & Folders
+====================================
+ 
 [back](.)
 
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
-- [Structure](#structure)
-- [Root Namespace / Company Name](#root-namespace--company-name)
+- [Company Name / Root Namespace](#company-name--root-namespace)
 - [Layers](#layers)
 - [Functional Domains](#functional-domains)
 - [Technologies](#technologies)
+- [Patterns](#patterns)
+- [Partial Domains](#partial-domains)
 - [Tests](#tests)
 - [Order of the Elements](#order-of-the-elements)
-    - [Scrambling Technical and Functional](#scrambling-technical-and-functional)
+    - [1st Layer then Domain](#1st-layer-then-domain)
+    - [1st Domain then Layer](#1st-domain-then-layer)
+    - [Scrambling Functional and Technical](#scrambling-functional-and-technical)
     - [1st Big then Small](#1st-big-then-small)
     - [1st Assembly then Folders](#1st-assembly-then-folders)
-    - [1st Domain then Layer](#1st-domain-then-layer)
     - [1st Functional then Technical](#1st-functional-then-technical)
-    - [1st Layer then Domain](#1st-layer-then-domain)
+- [Summary](#summary)
+    - [Guidelines](#guidelines)
+    - [Example](#example)
+    - [Structure](#structure)
 
 
 Introduction
 ------------
 
-This article describes how namespaces and folders might be structured in this [software architecture](index.md).
+This article describes how namespaces and folders might be structured.
 
 
-Structure
----------
-
-Solution files are put in the repository root.
-
-Assembly names, namespaces and folder structure are similar to eachother.
-
-An assembly's name is its root namespace.  
-The folder structure also corresponds to the namespacing.
-
-Details will follow, but in a nutshell:
-
-Assembly name is built up as follows:
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-
-Internally in an assembly each design pattern might get its own sub-folder:
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.DesignPattern]
-
-If a project is quite small, a single sub-folder `Helpers` might be used, instead of a folder for each design pattern:
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.Helpers]
-
-When a project gets bigger, a design pattern folder might again be split up into partial domains or main entities:
-
-    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Test]
-        [.DesignPattern] [.PartialDomain]
-
-Now each element will be described separately.
-
-
-Root Namespace / Company Name
+Company Name / Root Namespace
 -----------------------------
 
-In this [architecture](index.md) the *root* namespace is the company name, for instance:
+In this [architecture](index.md) the root namespace is the company name, for instance:
 
     JJ
 
@@ -72,58 +45,78 @@ In this [architecture](index.md) the *root* namespace is the company name, for i
 Layers
 ------
 
-The 2nd level in the namespacing may consist of the following parts:
+The 2<sup>nd</sup> level in the namespacing splits up into the following parts:
 
-|             |                     |
-|-------------|---------------------|
-| JJ.__Data__ | The data layer including the entity models and persistence.
-| JJ.__Business__ | The business logic layer
-| JJ.__Presentation__ | The [presentation layer](layers.md#presentation-layer)
+|             |             |
+|-------------|-------------|
+| [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the entity models and storage of data.
+| [JJ.__Business__](layers.md#business-layer) | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
+| [JJ.__Presentation__](layers.md#presentation-layer) | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
 
-|                  |                  |
-|------------------|------------------|
-| JJ.__Demos__     | Code for demonstration purposes or trying things out.
-| JJ.__Utilities__ | Small programs, e.g. load translations, things to run for deployment.
+|              |              |
+|--------------|--------------|
+| [JJ.__Utilities__](aspects.md#utilities) | Small programs, e.g. health checks, loading stuff in a database.
+| JJ.__Demos__ | Code for demo purposes or trying things out.
 
 
 Functional Domains
 ------------------
 
-The 3rd level in the namespacing is the *functional domain*. Examples:
+The 3<sup>rd</sup> level in the namespacing would be the *functional domain:*
 
 - JJ.Data.__Calendar__  
 - JJ.Business.__Calendar__  
 - JJ.Presentation.__Calendar__  
 
-The 'functional domain' of the [*framework*](api.md#jjframework) layer is usually a technical aspect. Examples:
+The 'functional domain' of the [framework layer](api.md#jjframework) might be a technical [aspect](aspects.md#-aspects):
 
-- JJ.Framework.__Validation__  
-- JJ.Framework.__Security__  
-- JJ.Framework.__Logging__  
+- [JJ.Framework.__Validation__](patterns.md#validators)
+- [JJ.Framework.__Security__](aspects.md#security)
+- [JJ.Framework.__Logging__](aspects.md#logging)
 
 
 Technologies
 ------------
 
-The 4th level in the namespacing denotes the used *technology*. It is sort of analogous to a file extension. You might find two assemblies: one platform-independent and one platform-specific.
+The 4<sup>th</sup> level in the namespacing denotes which [technology](api.md#-apis) is used. It is sort of analogous to a file extension. You might find two assemblies: one *platform-independent* and one *platform-specific:*
 
 - JJ.Data.Calendar  
-- JJ.Data.Calendar.__NHibernate__  
+- JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
 - JJ.Presentation.Calendar  
-- JJ.Presentation.Calendar.__Mvc__  
+- JJ.Presentation.Calendar.[__Mvc__](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the platform-indepent part of the code is separate from the platform-specific code. This also means, that quite a portion of the code can be shared between platforms. It also means, that we can specifically choose  which technologies we want to be dependent on.
+This means that the *platform-independent* part of the code is separate from the *platform-specific* part. This also means, that quite a portion of the code can be shared between platforms. That way we can choose which [technologies](api.md#-apis) we want to depend on.
+
+
+Patterns
+--------
+
+The next level in the namespacing can be a [design pattern](patterns.md#-patterns). It would become a *sub-folder* inside an assembly:
+
+- JJ.Data.Calendar.NHibernate.__Mappings__
+- JJ.Business.Calendar.__Validators__
+- JJ.Presentation.Ordering.Mvc.__Controllers__
+
+
+Partial Domains
+---------------
+
+For bigger projects, a [design pattern](patterns.md#-patterns) folder may split up into sub-folders for main [entities](patterns.md#entity) or *partial domains*:
+
+- JJ.Business.Synthesizer.Validation.__Documents__
+- JJ.Business.Synthesizer.Validation.__Operators__
+- JJ.Business.Synthesizer.Validation.__Scales__
 
 
 Tests
 -----
 
-Every assembly can get a `Tests` assembly containing automated tests. For instance:
+Assemblies with [automated tests](aspects.md#automated-testing) can add the suffix `Tests`:
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
@@ -132,62 +125,9 @@ Every assembly can get a `Tests` assembly containing automated tests. For instan
 Order of the Elements
 ---------------------
 
-### Scrambling Technical and Functional
-
-In this namespacing, the technical and functional concerns seem scrambled.
-
-There are functional (or commercial) concerns:
-
-- __JJ__.Data.__Ordering__.NHibernate.Mappings.__Products__
-
-And these are the technical concerns:
-
-- JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
-
-This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
-
-### 1st Big then Small
-
-The ordering in the namespace may seem arbitrary. But what happened here is an attempt to organize things into *bigger and smaller* chunks.
-
-The split up per *company* may be the largest concern, while of secondary importance is the split up into *main layers* (`Data`, `Business`, [Presentation](layers.md#presentation-layer)) A *functional domain* (`Calendar`, `Ordering`) is considered a larger concern than the specific *technology* used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)). And a *design pattern* may be a level of detail even below that.
-
-### 1st Assembly then Folders
-
-What's also done here is putting the *assembly* subdivision first, and then the *internal folder* subdivision.
-
-This would be the assembly:
-
-- __JJ.Data.Ordering__.Mappings.Products
-
-And this would be the folders in it:
-
-- JJ.Data.Ordering.__Mappings.Products__
-
-### 1st Domain then Layer
-
-In other projects, a different order of the namespace elements might make more sense. First the *domain* then the *layer:*
-
-- JJ.__Calendar__.Data
-- JJ.__Calendar__.Business
-- JJ.__Calendar__.Presentation
-
-But not all functional domains might have all 3 layers like that.
-
-### 1st Functional then Technical
-
-We could keep functionality together, and technical things together:
-
-- __JJ.Ordering.Products__.Data.NHibernate.Mappings
-- JJ.Ordering.Products.__Data.NHibernate.Mappings__
-
-Just looking at this, it does make a lot of sense.
-
-But this might get in the way of our plans to put the assembly subdivision first, and the internal folder subdivision second, depending on how we organize things.
-
 ### 1st Layer then Domain
 
-Putting the *main layer* (`Data`, `Business`, [`Presentation`](layers.md#presentation-layer) before the *functional domain* was a choice, that made sense at the time in a specific environment:
+Putting the [main layers](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)) before the *functional domain* was a choice, that made sense at the time:
 
 - JJ.Data.__MainEntities__
 - JJ.Business.__Magic__
@@ -197,10 +137,137 @@ Putting the *main layer* (`Data`, `Business`, [`Presentation`](layers.md#present
 - JJ.Presentation.__InternalManager__
 - JJ.Presentation.__CoolHub__
 
-Not every software had a data, business or [presentation layer](layers.md#presentation-layer). Most products just had *one* of those layers.
+Not every software product had a [data](layers.md#data-layer), [business](layers.md#business-layer) or [presentation](layers.md#presentation-layer) layer. Most products just had *one* of those layers.
 
 There was a certain *n-to-n* relationship between products. A functional domain could be *missing* a layer, an app could use *multiple* functional domains, a single functional domain could have multiple front-ends. 
 
-It made more sense there, to make the *main layer* the first subdivision, and drop in the *functional domains* there.
+It made more sense there, to make the [main layer](layers.md#-layers) the first subdivision, and drop in the functional domains from there.
+
+### 1st Domain then Layer
+
+In other projects it might make more sense, put the functional domain 1<sup>st</sup> and the [main layer](layers.md#-layers) 2<sup>nd</sup>.
+
+Functional domain:
+
+- JJ.__Calendar__.Data
+- JJ.__Calendar__.Business
+- JJ.__Calendar__.Presentation
+
+Main layer:
+
+- JJ.Calendar.__Data__
+- JJ.Calendar.__Business__
+- JJ.Calendar.__Presentation__
+
+### Scrambling Functional and Technical
+
+In this namespacing, the functional and technical concerns seem scrambled.
+
+These are the functional concerns:
+
+- JJ.Data.__Ordering__.NHibernate.Mappings.__Products__
+
+And these are technical concerns:
+
+- JJ.__Data__.Ordering.__NHibernate.Mappings__.Products
+
+### 1st Big then Small
+
+What happened here, is an attempt to organize things into *bigger and smaller* chunks.
+
+The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layer](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
+
+A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
+
+And a [design pattern](patterns.md#-patterns) may be a level of detail below that.
+
+### 1st Assembly then Folders
+
+What's also done here is putting the *assembly* subdivision first, and the *folder* subdivision after that.
+
+This would be the assembly:
+
+- __JJ.Data.Ordering__.Mappings.Products
+
+And this would be the folders in it:
+
+- JJ.Data.Ordering.__Mappings.Products__
+
+### 1st Functional then Technical
+
+We could keep functionality together, and technical things together:
+
+Functional things:
+
+- __JJ.Ordering.Products__.Data.NHibernate.Mappings
+
+Technical things:
+
+- JJ.Ordering.Products.__Data.NHibernate.Mappings__
+
+Just looking at this, it does make a lot of sense.
+
+But this might get in the way of our plans to put the [assembly 1<sup>st</sup> and the folder 2<sup>nd</sup>](#1st-assembly-then-folders).
+
+
+Summary
+-------
+
+### Guidelines
+
+- Assembly names, namespaces and folder structure similar
+- Assembly name = root namespace
+- Solution files in repository root
+
+### Example
+
+    C:\Repositories
+        |
+        |- JJ.TheProject
+            |
+            |- JJ.TheProject.sln
+            |
+            |- Data
+                |
+                |- JJ.TheProject.Data.csproj
+                |
+                |- Entities
+                |- Repositories
+                |- Helpers
+
+Project file:
+
+    JJ.TheProject.Data.csproj
+
+Root namespace:
+
+    JJ.TheProject.Data
+
+Sub-namespaces:
+
+    JJ.TheProject.Data.Entities
+    JJ.TheProject.Data.Repositories
+    JJ.TheProject.Data.Helpers
+
+### Structure
+
+Assembly name:
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
+
+Sub-folders for [design patterns](patterns.md#-patterns):
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
+        [.DesignPattern]
+
+Smaller projects, single sub-folder `Helpers` instead:
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
+        [.Helpers]
+
+Bigger projects' [design patterns](patterns.md#-patterns) split up into main [entities](patterns.md#entity) or partial domains:
+
+    Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
+        [.DesignPattern] [.PartialDomain]
 
 [back](.)

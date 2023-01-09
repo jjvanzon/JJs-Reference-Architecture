@@ -192,7 +192,7 @@ We will use 3 ways of storing configuration settings:
 - Reading out the appSettings section.
 - Reading out the connectionStrings section.
 
-There is another configuration method in .NET: the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
+There is another configuration method in [`.NET`](https://dotnet.microsoft.com/): the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
 
 
 Conversion

@@ -124,9 +124,11 @@ The [`Repository`](patterns.md#repository) implementations might not used direct
 
 ### Platform Independence
 
-The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part. The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](https://www.microsoft.com/en-us/sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](https://www.microsoft.com/en-us/sql-server) or [`NHibernate`](api.md#nhibernate) at all. This makes it possible, to program against the same model, regardless of how it is stored.
+The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part.
 
-This platform-independence, also allows deployment of the same code to different environments like *mobile*, *Windows* or *web*.
+The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](https://www.microsoft.com/en-us/sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](https://www.microsoft.com/en-us/sql-server) or [`NHibernate`](api.md#nhibernate) at all.
+
+This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also helps deploy the same code to different environments like *mobile*, *Windows* or *web*.
 
 
 Presentation Layer
@@ -166,7 +168,7 @@ Because the [`Presenters`](patterns.md#presenter) combine several [responsibilit
 
 ### MVC
 
-[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In our [architecture](index.md) the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
+[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
@@ -326,7 +328,7 @@ Alternatives
 
 Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled.
 
-Another alternative is: no [repositories](patterns.md#repository). [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
+Another alternative is: no [repositories](patterns.md#repository). But [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
 
 It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation of concerns](practices-and-principles.md#separation-of-concerns) would also stay intact.
 

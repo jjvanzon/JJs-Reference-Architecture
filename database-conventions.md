@@ -85,7 +85,7 @@ Naming Conventions
 Rules
 -----
 
-Do not use the following object types, because these things are managed in .NET:
+Do not use the following object types, because these things are managed in [`.NET`](https://dotnet.microsoft.com/):
 
 - Views
 - Stored Procedures
