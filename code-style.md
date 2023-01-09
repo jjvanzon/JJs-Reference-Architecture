@@ -20,7 +20,7 @@
     - [File-Related Variable Names](#file-related-variable-names)
     - [Prefixes and Suffixes](#prefixes-and-suffixes)
     - [Event Names / Delegate Names](#event-names--delegate-names)
-    - [Test Class Names End with "Tests"](#test-class-names-end-with-tests)
+    - [Test Class Names](#test-class-names)
     - [Test Method Names](#test-method-names)
     - ['Hungarian' Notation](#hungarian-notation)
 - [Enters](#enters)
@@ -349,9 +349,11 @@ Or the suffix `Requested`, if your event looks like a method name.
 
 Pardon the ambiguity, but the naming above can be used for the names of *events*, but some of them also serve well as names for methods that *fire/emulate* or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives for methods that raise events.
 
-Perhaps avoid event names that use *two* event-indications in the same name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be a well established event name.
+Perhaps avoid event names that use *two* event-indications in the same name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be a well known event name.
 
-### Test Class Names End with "Tests"
+### Test Class Names
+
+Test class names end with `Tests`.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -400,6 +402,7 @@ public void Test_Validator_NotNullOrEmpty_NotValid()
 public void Test1()
 { }
 
+[TestMethod]
 public void Test2()
 { }
 ```
@@ -795,6 +798,7 @@ foreach (var x in list)
 if (condition)
 {
     Bla();
+    Something();
 }
 ```
 
@@ -898,15 +902,11 @@ External things might otherwise become dependent on code, that was not meant to 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
-```cs
-public int Bla() { ... }
-```
+***`public`***` int Bla() { ... }`
 
 </td><td markdown="1" class="red">
 
-```cs
-int Bla() { ... } 
-```
+`int Bla() { ... }`
 
 </td></tr></table>
 
@@ -1010,7 +1010,7 @@ Reason:
 One might be surprised to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
 
 Exceptions:  
-It does not count for nested classes. Also a single class can be spread among files, if they are partial classes. This guideline might also be ignored if the amount of classes really becomes big. 
+It does not count for nested classes. Also a single class can be spread among files, if they are partial classes. This guideline might also be ignored if the amount of classes becomes really big. 
 
 ### No Lone Classes
 
@@ -1041,7 +1041,7 @@ int X { get; set; }
 </td></tr></table>
 
 Reason:  
-Your comment might be valuable on the outside for others to see. The `<summary>` would show up when hovering over a member.
+Your comment might be valuable on the outside for others to see. The `summary` would show up when hovering over a member.
 
 ### Comments in English
 
@@ -1059,7 +1059,8 @@ Your comment might be valuable on the outside for others to see. The `<summary>`
 
 </td></tr></table>
 
-Reason: English is sort of the main language in IT. Broader reach of people might be able to read your comments.
+Reason:  
+English is sort of the main language in IT. Broader reach of people might be able to read your comments.
 
 ### No Comments without Info
 
@@ -1081,7 +1082,7 @@ int x;
 </td></tr></table>
 
 Reason:  
-Less visual clutter. Reading it mightr not be worth the time.
+Less visual clutter. Reading it might not be worth the time.
 
 ### No Unused / Outcommented Code
 
@@ -1179,7 +1180,7 @@ Prefer not to use `var`.
 Reason:  
 It would be nice to see the variable type in the code line instead of `var`.
 
-There may be a few exceptions, where var may be preferred. For instance when the type is sort of obvious, or it might be more readable.
+There may be a few exceptions, where `var` may be preferred. For instance when the type is sort of obvious, or it might be more readable.
 
 #### Anonymous Types
 
@@ -1317,6 +1318,9 @@ class MyPresenter
     }
 }
 ```
+
+Reason:  
+Just to have some kind of standard for consistency.
 
 ### Namespace Tips
 

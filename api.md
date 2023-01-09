@@ -718,13 +718,13 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
 
-`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
+`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
 `TypeScript` may have saved the day to cover for the weak typing from `JavaScript`. But it wasn't tried yet.
 
-But still: logic in one place in one language ([`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)) felt so nice. I guess the love for [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) is strong.
+But still: logic in one place in one language ([`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)) felt so nice. I guess the love for [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was strong.
 
-The idea was that a full page load was 1st choice, 2nd choice [`AJAX'ing`](#ajax), and last in line `JavaScript` only to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+The idea was that a full page load was 1st choice, 2nd choice [`AJAX'ing`](#ajax), and last in line `JavaScript` *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 For this last-resort `JavaScript` we used [`jQuery`](https://jquery.com/) and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
 
@@ -826,9 +826,9 @@ Data
 
 [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
 
-[`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used [`NHibernate`](#nhibernate)` instead.
+[`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) at one point seemed to become quite slow, without modifying it. It was not upgraded since then, because most of the apps used [`NHibernate`](#nhibernate) instead.
 
-It may be required to enable `MSDTC`. That would be a service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation that might have to be enabled. Otherwise transactions might not work.
+It may be required to enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That would be a `Windows` service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation that might have to be enabled. Otherwise transactions might not work.
 
 ### NHibernate
 
@@ -854,10 +854,10 @@ Some methods of data retrieval work with uncommitted / non-flushed entities: so 
 
 | Method | Data |
 |--------|------|
-| `IContext.Query` | uncommitted / non-flushed
-| `IContext.Get` | 1st committed / flushed, then uncommitted / non-flushed
-| `IContext.TryGet` | 1st committed / flushed, then uncommitted / non-flushed
-| Navigation properties /<br>following the object graph | 1st committed / flushed, then uncommitted / non-flushed
+| `IContext.Query` | uncommitted
+| `IContext.Get` | 1st committed, then uncommitted
+| `IContext.TryGet` | 1st committed, then uncommitted
+| Navigation properties /<br>following the object graph | 1st committed, then uncommitted
 
 It appears to have to do with when the [`ORM`](#orm) goes to the database to query or save objects.
 
