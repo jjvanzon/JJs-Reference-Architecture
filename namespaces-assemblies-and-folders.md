@@ -58,7 +58,7 @@ And second in line:
 
 |              |              |
 |--------------|--------------|
-| [JJ.__Utilities__](aspects.md#utilities) | Small programs, e.g. running health checks, loading stuff in a database, things to run for deployment.
+| [JJ.__Utilities__](aspects.md#utilities) | Small programs, e.g. running health checks, loading stuff in a database.
 | JJ.__Demos__ | Code for demo purposes or trying things out.
 
 
