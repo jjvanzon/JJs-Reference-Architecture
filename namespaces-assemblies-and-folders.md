@@ -145,7 +145,7 @@ It made more sense there, to make the [main layer](layers.md) the first subdivis
 
 ### 1st Domain then Layer
 
-In other projects, putting the functional domain 1<sup>st</sup> and the [layer](layers.md) 2<sup>nd</sup> might make more sense:
+In other projects, putting the functional domain 1<sup>st</sup> and the [main layer](layers.md) 2<sup>nd</sup> might make more sense:
 
 - JJ.__Calendar__.Data
 - JJ.__Calendar__.Business
