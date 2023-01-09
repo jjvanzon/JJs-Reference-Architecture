@@ -28,10 +28,19 @@
     <!-- Custom Styling -->
     <style>
       section { margin-top: 0px }
-      #header { display: none }
-      abbr[title] { border-bottom: 1px dashed; text-decoration: none }
-      #title .credits { display: block; text-align: center; }
+      /*abbr[title] { border-bottom: 1px dashed; text-decoration: none }*/
+      .credits { display: block; text-align: center; }
       section #title { margin: 0 0 10px 0; }
+
+      #site-title
+      {
+          font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-weight: normal;
+          font-size: 40px;
+          text-align: center;
+          /*line-height: 36px;*/
+      }
+
       ul ul { margin: 0 0 0; }
       ol ol { margin: 0 0 0; }
       code { padding: 0; margin: 0 3px; }
@@ -46,6 +55,7 @@
   </head>
   <body>
       <div id="header">
+        <!--
         <nav>
           <ul>
             <li class="fork"><a href="{{ site.github.repository_url }}">View On GitHub</a></li>
@@ -56,13 +66,14 @@
             {% endif %}
           </ul>
         </nav>
+        -->
       </div><!-- end header -->
 
     <div class="wrapper">
 
       <section>
         <div id="title">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+          <div id="site-title">{{ site.title | default: site.github.repository_name }}</div>
           <p>{{ site.description | default: site.github.project_tagline }}</p>
           <hr>
           <!--<span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>-->
