@@ -29,18 +29,18 @@
     <style>
       .wrapper { max-width: 75%; }
       section { max-width: 100%; margin-top: 0px }
-      .credits { display: block; text-align: center; }
       section #title { margin: 0 0 10px 0; }
 
       #site-title
       {
-          font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
-          font-weight: normal;
-          font-size: 40px;
-          text-align: center;
-          line-height: 42px;
+        font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: normal;
+        font-size: 40px;
+        text-align: center;
+        line-height: 42px;
       }
 
+      .credits { display: block; text-align: center; }
       ul ul { margin: 0 0 0; }
       ol ol { margin: 0 0 0; }
       code { padding: 0; margin: 0 3px; }
@@ -50,6 +50,11 @@
       table pre { margin: 0px; }
       .red, .red * { color: #FF6666 !important }
       .green, .green * { color: #99D65C !important }
+            
+      @media print, screen and (max-width: 720px)
+      {
+        .wrapper { max-width: 100%; } 
+      }
     </style>
 
   </head>

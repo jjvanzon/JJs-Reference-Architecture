@@ -1,4 +1,4 @@
-﻿<style>section, .wrapper { max-width: 90% }</style>
+﻿<style>.wrapper { max-width: 90% }</style>
 
 🎁 API's
 =========
