@@ -175,7 +175,7 @@ And these are technical concerns:
 
 But what happened here, is an attempt to organize things into *bigger and smaller* chunks.
 
-The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layers](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
+The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layer](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
 A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
 
@@ -255,7 +255,7 @@ Assembly name:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
 
-Sub-folders for [design pattern](patterns.md#-patterns):
+Sub-folders for [design patterns](patterns.md#-patterns):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern]
