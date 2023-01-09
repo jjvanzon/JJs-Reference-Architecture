@@ -173,7 +173,7 @@ And these are technical concerns:
 
 ### 1st Big then Small
 
-But what happened here, is an attempt to organize things into *bigger and smaller* chunks.
+What happened here, is an attempt to organize things into *bigger and smaller* chunks.
 
 The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layer](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
