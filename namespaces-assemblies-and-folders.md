@@ -116,7 +116,7 @@ For bigger projects, a [design pattern](patterns.md) folder may split up into su
 Tests
 -----
 
-Every assembly can get a `Tests` assembly with [automated tests](aspects.md#automated-testing):
+Any assembly can get a `Tests` assembly with [automated tests](aspects.md#automated-testing):
 
 - JJ.Business.Calendar.__Tests__  
 - JJ.Presentation.Calendar.Mvc.__Tests__  
