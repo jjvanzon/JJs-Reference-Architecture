@@ -165,7 +165,7 @@ And these are technical concerns:
 
 ### 1st Big then Small
 
-But what happened here is an attempt to organize things into *bigger and smaller* chunks.
+But what happened here, is an attempt to organize things into *bigger and smaller* chunks.
 
 The split up per *company* may be the largest concern, while a secondary concern is the split up into [main layers](layers.md) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
