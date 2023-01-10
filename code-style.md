@@ -94,25 +94,25 @@ It mostly conforms to the `Microsoft` standard described in the following docume
 <http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
 <http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
 
-Using a tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be finetuned to closely match the preferences. It then checks the check code style and may auto-format code for you.
+Using a tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be finetuned to closely match the preferences. It then checks the code style and can auto-format code for you.
 
 
 Casing
 ------
 
-| Suggestion                                                      | Examples                       |
-|-----------------------------------------------------------------|--------------------------------|
-| Pascal case for properties, methods, class names and events     | `MyProperty` `MyMethod`
-| Camel case for local variables and parameters                   | `myLocalVariable` `myParameter`
-| Fields in camel case starting with underscore                   | `_myField`
-| Constants in capitals with underscores between words            | `MY_CONSTANT`
-| Type arguments just the letter `T` or start with the letter `T` | `T` `TEntity` `TViewModel`
-| Interface names start with `I`.                                 | `IMyInterface`
-| Abbreviations not preferred                                     |
-| Abbreviations of 2 letters with capitals.                       | `ID`
-| Abbreviations of 3 letters or more in pascal case.              | `Mvc`
+| Suggestion                                                         | Examples                       |
+|--------------------------------------------------------------------|--------------------------------|
+| Pascal case for properties, methods, class names and events        | `MyProperty` `MyMethod`
+| Camel case for local variables and parameters                      | `myLocalVariable` `myParameter`
+| Fields in camel case starting with underscore                      | `_myField`
+| Constants in capitals with underscores between words               | `MY_CONSTANT`
+| Type arguments just the letter `T` or starting with the letter `T` | `T` `TEntity` `TViewModel`
+| Interface names start with `I`.                                    | `IMyInterface`
+| Abbreviations not preferred                                        |
+| Abbreviations of 2 letters with capitals.                          | `ID`
+| Abbreviations of 3 letters or more in pascal case.                 | `Mvc`
 | [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) partial view names in pascal case, starting with underscore | `_MyPartialView`
-| For long identifiers, underscores to separate 'the pieces'      | `Sine_OperatorCalculator_VarFrequency`
+| For long identifiers, underscores to separate 'the pieces'         | `Sine_OperatorCalculator_VarFrequency`
 
 
 Naming
@@ -123,7 +123,7 @@ Reasons for naming conventions might generally be, just knowing what kind of sys
 ### Method Names
 
 Method names commonly start with verbs, e.g. `CreateOrder`.  
-For clarity, avoid starting with a verb, for other constructs than methods.  
+For clarity, avoid starting with a verb, for anything other than methods.  
 Suggestions for verbs:
 
 | Verb        | Description |
@@ -136,7 +136,7 @@ Suggestions for verbs:
 | `ConvertTo` |
 | `Create`    | Returns a new object.
 | `Delete`    |
-| `Ensure`    | Setting up a state, if not set up yet.<br>If `Ensure` means throw an exception,<br>consider using the `Assert` instead.
+| `Ensure`    | Setting up a state, if not set up yet.<br>If `Ensure` means throw an exception,<br>consider using the `Assert` verb instead.
 | `Execute`   |
 | `Generate`  |
 | `Get`       |
@@ -148,17 +148,17 @@ Suggestions for verbs:
 | `Set`       |
 | `Try`       |
 | `TryGet`    |
-| `Validate`  | Generating *validation messages* for user-input errors.
+| `Validate`  | Generating validation messages for user-input errors.
 
 ### Class Names
 
-In this [architecture](index.md), *class* names may end with the *pattern* name or a *verb* converted to a *noun*, e.g.:
+In this [architecture](index.md), *class* names may end with a *pattern* name or a *verb* converted to a *noun*, e.g.:
 
     Converter
     Validator
     Calculator
 
-And they may start with a term out of the *domain* (like `Order`, `Product` or `Price`):
+And they may start with a term out of the *functional domain* (like `Order`, `Product` or `Price`):
 
     OrderConverter
     ProductValidator
@@ -173,7 +173,7 @@ Abstract classes might prefer the suffix `Base`:
 
     ProductValidatorBase
 
-It might be quite important to see in code, whether something is a base class. Exceptions to the `Base` suffix might be made, if it would make the code more readable. For instance, base classes in entity models might look better without the `Base` suffix.
+It might be quite important to see in code, whether something is a base class. Exceptions to the `Base` suffix might be made for readability's sake. For instance, entity classes might not use the `Base` suffix.
 
 *Variables* might be kept similar to the *class* names and include the prefixes and suffixes, so it stays clear what they are.
 
@@ -181,12 +181,12 @@ Other suggested 'last names' for classes apart form the pattern names:
 
 |              | |
 |--------------|-|
-| `Resolver`   | A class that does lookups that require complex keys or different ways of looking up depending on the situations, fuzzy lookups, etc.
+| `Resolver`   | A class that does lookups that require complex keys or different ways of looking up depending on the situation, fuzzy lookups, etc.
 | `Dispatcher` | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
 | `Invoker`    | Something that invokes another method, possibly based on input or specific conditions.
-| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
+| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something is retrieved conditionally or if retrieval is be postponed until later.
 | `Asserter`   | A class meant to throw exceptions under certain conditions.
-|              | Any method verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
+|              | Any verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
 
 ### Boolean Names
 
@@ -199,15 +199,15 @@ Suggestions for *boolean* variable name prefixes and suffixes:
 | `Can...`        | `CanDelete`           | Might indicate what *user* can do.
 | `Has...`        | `HasRecords`          |
 | `Are...`        | `AreEqual`            | For plural things.
-| `Not...`        | `NotNull`             | A nice prefix, but perhaps be careful with negative names for readability's sake. See [Double Negatives](practices-and-principles.md#double-negatives-)
-| `Include...`    | `IncludeHidden`       | Verb are usually be for methods, but these may make sense for booleans.
+| `Not...`        | `NotNull`             | A nice prefix, but perhaps be careful with negative names for readability's sake. See [Double Negatives](practices-and-principles.md#double-negatives-).
+| `Include...`    | `IncludeHidden`       | Verb are usually for methods, but these may make sense for booleans.
 | `Exclude...`    | `ExcludeSpecialChars` | "
 | `...Exists`     | `FileExists`          |
 | `Always...`     |                       |
 | `Never...`      |                       |
 | `Only...`       |                       |
 
-If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: 
+A prefix may be put somewhere other than at the beginning, if it looks better e.g.: 
 
     LinesAreCopied
 
@@ -227,11 +227,11 @@ Plural words are preferred for collections:
     Products
     Orders
 
-Variable names for amounts of elements in the collection might be named:
+Variable names for amounts of elements might be named:
 
     Count
 
-So perhaps avoid plural words to denote a count and avoid plural words for things other than collections.
+So perhaps avoid plural words to denote a count or describe things other than collections.
 
 ### Enum Names
 
@@ -264,7 +264,7 @@ OrderedWhenLocal
 
 ### Sort Order
 
-For number sequences these names might be used:
+For number sequences the following names might be used:
 
     ListIndex
     IndexNumber
@@ -275,7 +275,7 @@ Perhaps avoid `Index` because it is an [`SQL`](api.md#sql) keyword.
 
 ### File-Related Variable Names
 
-Variable names that indicate parts of *file paths* might easily become ambiguous. Here are suggestions to disambiguate them:
+Variable names that describe parts of *file paths* might easily become ambiguous. Here are some suggestions to make them clearer: 
 
 | Name                     | Value          
 |--------------------------|--------------------------
@@ -302,13 +302,13 @@ Variable names that indicate parts of *file paths* might easily become ambiguous
 | `new...`                 | Denoting that the object was just newly created.
 | `original...`            | May denote that this is an original value that was (temporarily) replaced.
 | `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that not only a single object is handled, but the object including the underlying related objects.
-| `Versatile...`           | Might handle a multitude of types or situations.
-| `...With...`             | When making a specialized class that works well for a specific situation, you could use the word `With` in the class name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
-| `...Polymorphic`         | Handling a multitude of differrent (derived) types, possibly each in a different way.
-| `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less easy to read suffixes like `Conditionally` or a prefix `Conditional`.
-| `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
-| `...Recursive`           | When the process is recursive. Meaning: A method might call itself directly or indirectly. Or when processing a tree or graph, the same type of data might be there deeper down the tree. 
-| `To...`                  | For conversion from one thing to another. Sometimes the `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might also be used as an alternative:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
+| `Versatile...`           | Versatile in that it might handle a multitude of types or situations.
+| `...With...`             | When making a specialized class that works well for a specific situation, you might use the word `With` in the class name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
+| `...Polymorphic`         | Handling a variety of (derived) types, which may require different approaches.
+| `...IfNeeded`            | If you need to execute something conditionally, you might want to consider using this alternative for `Conditionally` or `Conditional` which might be harder to read.
+| `...Unsafe`              | When it lacks e.g. thread-safety, executes unmanaged code, or lacks some checks.
+| `...Recursive`           | When the process is recursive. Meaning: A method might call itself directly or indirectly. Or when processing a tree, the same type of data might be there deeper down the tree. 
+| `To...`                  | For conversion from one thing to another. Sometimes the ***`this`*** is the source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when a parameter is the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might also be used as an alternative:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
 | `From...`                | For conversion from one thing to another. A lot like `To...`, but executed on the `dest` object:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
 ### Event Names / Delegate Names
@@ -328,6 +328,7 @@ Event names and delegate names, that indicate what is *about to happen* might ha
     Click
     DoubleClick
     KeyPress
+    MouseUp
 
 *Delegate* names might also have the suffix `Callback` or `Delegate`:
 
@@ -347,9 +348,9 @@ Or the suffix `Requested`, if your event looks like a method name.
 
     RemoveRequested
 
-Pardon the ambiguity, but the naming above can be used for the names of *events*, but some of them also serve well as names for methods that *fire/emulate* or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives for methods that raise events.
+Pardon the ambiguity, but the names mentioned above can be used for events, but they can also be used for methods that *raise* or *handle* the event. Some examples of prefixes that can be used for these methods include `On`, `Handle`, `Fire`, and `Do`.
 
-Perhaps avoid event names that use *two* event-indications in the same name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be a well known event name.
+Perhaps avoid using event names with two event-indicating words, like `OnDragging` or `OnMouseUp`. Instead, you can use shorter names like `Dragging` or `MouseUp`.
 
 ### Test Class Names
 
@@ -381,7 +382,7 @@ Reason: Just convention.
 
 ### Test Method Names
 
-Prefer to start test method names with `Test_` and maybe don't hold back on underscores in the name.
+Prefer to start test method names with `Test_` and using underscores freely.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -410,7 +411,7 @@ public void Test2()
 </td></tr></table>
 
 Reason:  
-If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read.
+If the test names mean to be descriptive, they might become long. Underscores to separate the 'pieces', may make it more readable.
 
 ### 'Hungarian' Notation
 
