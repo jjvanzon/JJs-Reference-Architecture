@@ -1402,14 +1402,14 @@ Long, visually cluttered code lines might be harder to read.
 Member Order
 ------------
 
-Try giving the members in your code file a logical order, instead of putting them in am arbitrary order. Suggestions for organizing members in your code:
+To improve readability, try giving the members in your code file a logical order, instead of putting them in am arbitrary order. Suggestions for organizing members in your code:
 
 |                          |     |
 |--------------------------|-----|
 | __Chronological__        | When one method delegates to another in a particular order, you might order the methods chronologically.
-| __By functional aspect__ | When your code has distinct functionalities, you might keep members with similar functions together and add a comment line above them to improve readability.
+| __By functional aspect__ | When your code has distinct functionalities, you might keep members with similar functions together and add a comment line above them.
 | __By technical aspect__  | You may choose to keep your fields together, your `properties` together, your methods together. Grouping them by access modifier (e.g. `public` or `private`) might be another option.
-| __By layer__             | When you can identify layers of members in your `class`, you might first list the members of layer 1, then the members of layer 2, etc.
+| __By layer__             | When you can identify *layers* in your `class`, you might first list the members of layer 1, then the members of layer 2, etc.
 
 When ordering members in your code, you might prefer to do it chronologically if possible. Otherwise, order them by functional aspect. But there are no rights and wrongs here. Whatever seems most appropriate for the code.
 
