@@ -949,7 +949,7 @@ People may say the interface stability comes in jeopardy when you use `public` f
 </td></tr></table>
 
 Reason:  
-The members are automatically `internal` if the `class` is `internal`. When you wish to make the `class` `public`, it may require manually correcting the access modifiers of the methods, creating an opportunity for error.
+If the `class` is `internal`, the members are automatically `internal` too. When making the `class` `public`, it may require changing the access of methods, creating an opportunity for error.
 
 ### Prefer Interface Types
 
@@ -964,7 +964,7 @@ The members are automatically `internal` if the `class` is `internal`. When you 
 </td></tr></table>
 
 Reason:  
-Less refactoring when changing the `type`. Less dependency on specific implementation allowing you to switch more easily to another `class`.
+Less refactoring when changing the `type`. Less dependency on specific implementation, allowing you to switch more easily to another `class`.
 
 ### Nested Class on Top
 
@@ -980,6 +980,8 @@ internal class A
         
     }
     
+    ...
+
     public int X { get; set; }
 }
 ```
@@ -990,6 +992,8 @@ internal class A
 internal class A
 {
     public int X { get; set; }
+    
+    ...
     
     private class B
     {
@@ -1011,11 +1015,11 @@ Reason:
 One might be surprised to find `types` hidden away behind a single file name. It may harm the overview of the different pieces of code.
 
 Exceptions:  
-It does not count for nested `classes`. Also a single `class` can be spread among files, if they are `partial classes`. This guideline might also be ignored if the amount of `classes` becomes really big. 
+This guideline does not apply to `classes` nested inside other `classes`. Also, a single `class` can be split across multiple files if they are `partial classes`. This guideline may also be ignored if there are a large number of `classes`.
 
 ### No Lone Classes
 
-It might not be handy to have a lot of folders just containing one or very few `classes`. Consider moving those `classes` into other folders. Another solution could be to put them all together, in a `Helpers` folder for instance.
+Having many folders that only contain one or few `classes` may not be very handy. Consider moving those `classes` to other folders or putting them together in a `Helpers` folder.
 
 
 Comments
