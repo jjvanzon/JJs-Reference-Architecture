@@ -674,7 +674,7 @@ interface IMyInterface
 </td></tr></table>
 
 Reason:  
-It might have been a one-liner for readability reasons, so perhaps we keep it in that style.
+It might have been a one-liner for readability reasons, so perhaps we keep it on one line.
 
 
 Spaces and Braces
@@ -817,7 +817,7 @@ if (condition)
 </td></tr></table>
 
 Reason:  
-Without braces, only the next line is looped or executed conditionally. The line after that would be outside the loop, which is sort of not obvious and might lead to error.
+Without braces, only the next line is looped or executed conditionally. The line after that would not participate in the loop or `if`, which is sort of not obvious and might lead to error.
 
 ### Tabular Form Less Preferred
 
@@ -883,7 +883,7 @@ private void Bla()
 ```
 
 Reason:  
-Other code might become dependent on publically accessible things. Managing dependencies like that seems quite a thing in software development.
+Other code might become dependent on publically accessible things. Managing dependencies like that is quite a thing in software development.
 
 ### Types Internal 
 
@@ -896,8 +896,8 @@ internal class MyClass
 }
 ```
 
-Reason:    
-External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software.
+Reason:  
+Managing dependency between parts is a concern in software development. We might protect things forming too many connections, by using access modifying keywords, like `private` and `internal`.
 
 ### Explicit Access Modifiers
 
@@ -919,7 +919,7 @@ Interface members have no access modifiers.
 
 ### No Public Fields
 
-Prefer not to use public fields. Use either private fields or use properties. 
+Prefer not to use `public` fields. Use either `private` fields or use properties. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -932,11 +932,11 @@ Prefer not to use public fields. Use either private fields or use properties.
 </td></tr></table>
 
 Reason:  
-People may say the interface stability comes in jeopardy when you use public fields. The fields may look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
+People may say the interface stability comes in jeopardy when you use `public` fields. The fields may look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easy. Perhaps compatibility like that is an argument.
 
 ### Public Members for Internal Classes
 
-Internal classes are preferred not to have internal members.
+`Internal` classes are preferred not to have `internal` members.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
