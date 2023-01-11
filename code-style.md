@@ -1335,7 +1335,7 @@ Just to have some kind of standard for consistency.
 
 #### Full Namespaces
 
-*Full* `namespaces` in code, might make the code harder to read:
+*Full* `namespaces` in code might not be preferred:
 
 <table><tr><th class="red">
 
@@ -1348,6 +1348,9 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
     PersistenceHelper.CreatCmsRepository<JJ.Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 </td></tr></table>
+
+Reason:  
+Long and wordy code can make it harder to read.
 
 #### Half Namespaces
 
