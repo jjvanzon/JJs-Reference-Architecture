@@ -457,7 +457,7 @@ int A { get; set; } int B { get; set; }
 </td></tr></table>
 
 Reason:  
-Might be easy to overlook that there is another property.
+Otherwise it might be easy to overlook that there is another property.
 
 ### Variables on Separate Lines
 
@@ -477,7 +477,7 @@ int i, j;
 </td></tr></table>
 
 Reason:  
-Just a preference, when not used to it, it may be overlooked, doing a Search through the code, may not show the results expected.
+Just a preference. It's up to you. But when you're not familiar with it, variables might be missed while searching the code. This syntax would have to be taken into account.
 
 ### Enters between Methods
 
