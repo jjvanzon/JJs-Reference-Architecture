@@ -1378,7 +1378,7 @@ To prevent using a `namespace` in the code line, you might give a `class` a more
 
 #### Namespace Aliases
 
-To disambiguate a `type` name, you might use a *namespaces alias* instead, to prevent long `namespaces` in the code lines.
+To disambiguate a `type` name, you might use a *namespaces alias* instead. This can prevent long `namespaces` in the code lines.
 
 <table><tr><th class="green">
 
