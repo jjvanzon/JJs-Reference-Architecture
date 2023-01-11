@@ -70,6 +70,10 @@
     - [Ordered If Range](#ordered-if-range)
     - [Parameter Order](#parameter-order)
     - [Namespace Tips](#namespace-tips)
+        - [Full Namespaces](#full-namespaces)
+        - [Half Namespaces](#half-namespaces)
+        - [Class Name More Unique](#class-name-more-unique)
+        - [Namespace Aliases](#namespace-aliases)
 - [Member Order](#member-order)
 - [Misc Preferences](#misc-preferences)
     - [Null / Empty Strings](#null--empty-strings)
@@ -1027,7 +1031,7 @@ Comments
 
 ### Comments in Summaries
 
-You might want to put comment for members in `<summary>` tags. 
+It may be an idea to put comment for members in `<summary>` tags. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1065,7 +1069,7 @@ Your comment might be valuable on the outside for others to see. The `summary` w
 </td></tr></table>
 
 Reason:  
-English is sort of the main language in IT. Broader reach of people might be able to read your comments.
+English is basically the main language in IT. A broader reach of people might be able to read your comments.
 
 ### No Comments without Info
 
@@ -1087,11 +1091,11 @@ int x;
 </td></tr></table>
 
 Reason:  
-Less visual clutter. Reading it might not be worth the time.
+Less visual clutter. Reading it might not be worth your time.
 
 ### No Unused / Outcommented Code
 
-Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder.
+Avoid keeping unused or commented-out code. If necessary, you can move it to an `Archive` folder.
 
 Reason:  
 Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
@@ -1170,7 +1174,7 @@ Reason: readability.
 
 ### Var
 
-Prefer not to use `var`.
+The use of `var` is not preferred here.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1183,9 +1187,9 @@ Prefer not to use `var`.
 </td></tr></table>
 
 Reason:  
-It would be nice to see the variable `type` in the code line instead of `var`.
+The variable `type` might be *relevant* to see in the code line.
 
-There may be a few exceptions, where `var` may be preferred. For instance when the `type` is sort of obvious, or it might be more readable.
+In a few cases, using `var` may be more appropriate. For example, when the `type` is obvious, or it makes the code more readable.
 
 #### Anonymous Types
 
@@ -1270,14 +1274,14 @@ Reason: Less visual clutter.
 
 ### FileOpen, FileMode, FileAccess, FileShare
 
-It is appreciated when a `FileStream` is opened specifying all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly with the most logical and most limiting values appropriate for the particular situation.
+When a `FileStream` is opened it is appreciated to specify all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly. Try to use the most logical and most limiting values tailored to the situation.
 
 Reason:  
 Otherwise these aspects may have surprising defaults.
 
 ### Ordered If Range 
 
-When evaluating a range in an `if`, it may be a good idea to mention the *limits* of the range and mention the *start* of the range 1st and the *end* of the range second.
+When evaluating a *range* in an `if`, showing the actual *limits* of the range may make it look better. Also, mentioning the *start* of the range 1<sup>st</sup> and the *end* of the range 2<sup>nd</sup> might make it more readable.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1299,7 +1303,7 @@ Reason: Readability. More obvious what the range limits are.
 
 ### Parameter Order
 
-Passing infrastructure-related parameters to constructors or methods, the parameters might be listed in this order:
+Passing *infrastructure*-related parameters to constructors or methods, the parameters might be listed in a certain order:
 
 - __[entities](patterns.md#entity)__ (or loose values)
 - __[persistence](aspects.md#persistence)__
@@ -1329,6 +1333,8 @@ Just to have some kind of standard for consistency.
 
 ### Namespace Tips
 
+#### Full Namespaces
+
 *Full* `namespaces` in code, might make the code harder to read:
 
 <table><tr><th class="red">
@@ -1343,7 +1349,9 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 ```
 </td></tr></table>
 
-*Half* a `namespace` might not be preferred either, because when you want to rename a `namespace`, it may generate more manual work.
+#### Half Namespaces
+
+*Half* a `namespace` might not be preferred either.
 
 <table><tr><th class="red">
 
@@ -1358,7 +1366,16 @@ Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 
 </td></tr></table>
 
-An alternative is to give a `class` a more *unique* name. Or use an *alias* instead:
+Reason:  
+It might create more manual work, if you'd want to rename a `namespace`. The shortened `namespace` could be overlooked when searching through the code.
+
+#### Class Name More Unique
+
+To prevent using a `namespace` in the code line, you might give a `class` a more *unique* name.
+
+#### Namespace Aliases
+
+To disambiguate a `type` name, you might use a *namespaces alias* instead, to prevent long `namespaces` in the code lines.
 
 <table><tr><th class="green">
 
