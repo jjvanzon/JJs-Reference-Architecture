@@ -63,13 +63,17 @@
         - [Anonymous Types](#anonymous-types)
         - [New Statements](#new-statements)
         - [Direct Casts](#direct-casts)
-        - [Code Line Quite Long and Better Readable](#code-line-quite-long-and-better-readable)
-        - [View Code](#view-code)
+        - [Long Code Lines](#long-code-lines-1)
+        - [Views](#views)
     - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
     - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
     - [Ordered If Range](#ordered-if-range)
     - [Parameter Order](#parameter-order)
     - [Namespace Tips](#namespace-tips)
+        - [Full Namespaces](#full-namespaces)
+        - [Half Namespaces](#half-namespaces)
+        - [Unique Class Names](#unique-class-names)
+        - [Type Aliases](#type-aliases)
 - [Member Order](#member-order)
 - [Misc Preferences](#misc-preferences)
     - [Null / Empty Strings](#null--empty-strings)
@@ -80,63 +84,63 @@
     - [CLR Data Types](#clr-data-types)
     - [No Decisions from Exceptions](#no-decisions-from-exceptions)
     - [Entity Equality by ID](#entity-equality-by-id)
-    - [Avoiding Compiler Directives](#avoiding-compiler-directives)
+    - [Compiler Directives](#compiler-directives)
     - [Activator.CreateInstance](#activatorcreateinstance)
 
 
 Introduction
 ------------
 
-This article lists coding style preferences, that might be followed in the `JJ`  projects.
+This article lists code style preferences, that might be followed in some of the `JJ` projects.
 
-It mostly conforms to the `Microsoft` standard described in the following documents:
+They mostly conform to `Microsoft` standards described in the following documents:
 
-<http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
-<http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
+- [C# Coding Conventions](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
+- [Coding Techniques and Programming Practices](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
 
-Using a tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be finetuned to closely match the preferences. It then checks the check code style and may auto-format code for you.
+A tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be fine-tuned to closely match the preferences. It then checks the code style and can auto-format for you.
 
 
 Casing
 ------
 
-| Suggestion                                                      | Examples                       |
-|-----------------------------------------------------------------|--------------------------------|
-| Pascal case for properties, methods, class names and events     | `MyProperty` `MyMethod`
-| Camel case for local variables and parameters                   | `myLocalVariable` `myParameter`
-| Fields in camel case starting with underscore                   | `_myField`
-| Constants in capitals with underscores between words            | `MY_CONSTANT`
-| Type arguments just the letter `T` or start with the letter `T` | `T` `TEntity` `TViewModel`
-| Interface names start with `I`.                                 | `IMyInterface`
-| Abbreviations not preferred                                     |
-| Abbreviations of 2 letters with capitals.                       | `ID`
-| Abbreviations of 3 letters or more in pascal case.              | `Mvc`
+| Suggestion                                                        | Examples                       |
+|-------------------------------------------------------------------|--------------------------------|
+| Pascal case for properties, methods, `class` names and `events`   | `MyProperty` `MyMethod`
+| Camel case for local variables and parameters                     | `myLocalVariable` `myParameter`
+| Fields in camel case starting with underscore                     | `_myField`
+| Constants in capitals with underscores between words              | `MY_CONSTANT`
+| `Type` arguments just the letter `T` or start with the letter `T` | `T` `TEntity` `TViewModel`
+| `Interfaces` start with `I`.                                      | `IMyInterface`
+| Abbreviations not preferred                                       |
+| Abbreviations of 2 letters with capitals.                         | `ID`
+| Abbreviations of 3 letters or more in pascal case.                | `Mvc`
 | [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) partial view names in pascal case, starting with underscore | `_MyPartialView`
-| For long identifiers, underscores to separate 'the pieces'      | `Sine_OperatorCalculator_VarFrequency`
+| For long identifiers, underscores to separate 'the pieces'        | `Sine_OperatorCalculator_VarFrequency`
 
 
 Naming
 ------
 
-Reasons for naming conventions might generally be, just knowing what kind of system elements they are.
+Reasons for naming conventions might be, just knowing what kind of system elements they are.
 
 ### Method Names
 
-Method names commonly start with verbs, e.g. `CreateOrder`.  
-For clarity, avoid starting with a verb, for other constructs than methods.  
+Method names commonly start with *verbs,* e.g. `CreateOrder`.  
+For clarity generally don't use verbs, for things other than methods.  
 Suggestions for verbs:
 
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>(List can be the `this` argument or the first argument.)
-| `Assert`    | Throws `Exceptions` if input is invalid.
+| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>(`List` can be the ***`this`*** argument or the first argument.)
+| `Assert`    | Throws an [`Exception`](aspects.md#exceptions) if input is invalid.
 | `Calculate` |
-| `Clear`     | Clearing a list.
+| `Clear`     | Clears a list.
 | `Convert`   |
 | `ConvertTo` |
 | `Create`    | Returns a new object.
 | `Delete`    |
-| `Ensure`    | Setting up a state, if not set up yet.<br>If `Ensure` means throw an exception,<br>consider using the `Assert` instead.
+| `Ensure`    | Setting up a state, if not set up yet.<br>If `Ensure` means to throw an [`Exception`](aspects.md#exceptions),<br>consider using the `Assert` verb instead.
 | `Execute`   |
 | `Generate`  |
 | `Get`       |
@@ -148,66 +152,66 @@ Suggestions for verbs:
 | `Set`       |
 | `Try`       |
 | `TryGet`    |
-| `Validate`  | Generating *validation messages* for user-input errors.
+| `Validate`  | Generating validation messages for user-input errors.
 
 ### Class Names
 
-In this [architecture](index.md), *class* names may end with the *pattern* name or a *verb* converted to a *noun*, e.g.:
+In this [architecture](index.md), `class` names may end with a [pattern](patterns.md) name or a *verb* converted to a *noun*, e.g.:
 
     Converter
     Validator
     Calculator
 
-And they may start with a term out of the *domain* (like `Order`, `Product` or `Price`):
+And they may start with a term out of the *functional domain* (like `Order`, `Product` or `Price`):
 
     OrderConverter
     ProductValidator
     PriceCalculator
 
-More *specialized* classes might get prefixes or suffixes (like `Optimized` or `WithPriorityShipping`):
+More *specialized* `classes` might get a prefix or suffix (like `Optimized` or `WithPriorityShipping`):
 
     OptimizedPriceCalculator
     OrderValidatorWithPriorityShipping
 
-Abstract classes might prefer the suffix `Base`:
+Abstract `classes` might prefer a `Base` suffix:
 
     ProductValidatorBase
 
-It might be quite important to see in code, whether something is a base class. Exceptions to the `Base` suffix might be made, if it would make the code more readable. For instance, base classes in entity models might look better without the `Base` suffix.
+It might be quite important to see in code, whether something is a `base` class. But exceptions may be made. For instance, [entity](patterns.md#entity) `classes` might leave out the `Base` suffix for readability reasons.
 
-*Variables* might be kept similar to the *class* names and include the prefixes and suffixes, so it stays clear what they are.
+You might keep *variables* names similar to the `class` names and include the prefixes and suffixes, so it stays clear what they are.
 
-Other suggested 'last names' for classes apart form the pattern names:
+Apart form *pattern names*, here are some other suggested "last names" for `classes`:
 
 |              | |
 |--------------|-|
-| `Resolver`   | A class that does lookups that require complex keys or different ways of looking up depending on the situations, fuzzy lookups, etc.
-| `Dispatcher` | A class that takes a canonical input, and dispatches it by calling different method depending on the input, or sending a message in a different format to a different infrastructural endpoint depending on the input.
-| `Invoker`    | Something that invokes another method, possibly based on input or specific conditions.
-| `Provider`   | A class that provides something. It can be useful to have a separate class that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something has to be retrieved conditionally or if retrieval has to be postponed until later.
-| `Asserter`   | A class meant to throw exceptions under certain conditions.
-|              | Any method verb might become a class name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
+| `Resolver`   | A `class` that does lookups requiring complex keys or different ways of looking up depending on the situation, fuzzy lookups, etc.
+| `Dispatcher` | A `class` calls different methods or sends messages to different endpoints  based on the input it receives.
+| `Invoker`    | Something that invokes a method, possibly based on input or specific conditions.
+| `Provider`   | A `class` that provides something. It can be useful to have a separate `class` that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something is retrieved conditionally or if retrieval is postponed until later.
+| `Asserter`   | A `class` meant to throw `Exceptions` under certain conditions.
+|              | Any verb might become a `class` name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
 
 ### Boolean Names
 
-Suggestions for *boolean* variable name prefixes and suffixes:
+When naming *boolean* variables, consider using prefixes and suffixes:
 
 | Prefix / Suffix | Example               | Comment |
 |-----------------|-----------------------|---------|
-| `Is...`         | `IsDeleted`           | Might be the most common.
+| `Is...`         | `IsDeleted`           | Might be the most common prefix.
 | `Must...`       | `MustDelete`          |
 | `Can...`        | `CanDelete`           | Might indicate what *user* can do.
 | `Has...`        | `HasRecords`          |
 | `Are...`        | `AreEqual`            | For plural things.
-| `Not...`        | `NotNull`             | A nice prefix, but perhaps be careful with negative names for readability's sake. See [Double Negatives](practices-and-principles.md#double-negatives-)
-| `Include...`    | `IncludeHidden`       | Verb are usually be for methods, but these may make sense for booleans.
+| `Not...`        | `NotNull`             | A nice prefix, but perhaps be careful with negative names. See [Double Negatives](practices-and-principles.md#double-negatives-).
+| `Include...`    | `IncludeHidden`       | Verb are usually for methods, but these may make sense for booleans.
 | `Exclude...`    | `ExcludeSpecialChars` | "
 | `...Exists`     | `FileExists`          |
 | `Always...`     |                       |
 | `Never...`      |                       |
 | `Only...`       |                       |
 
-If it looks wrong to put the prefix at the beginning, maybe put it in the middle, e.g.: 
+A prefix might not always be put at the beginning. If it looks better, it might be put somewhere else:
 
     LinesAreCopied
 
@@ -227,17 +231,17 @@ Plural words are preferred for collections:
     Products
     Orders
 
-Variable names for amounts of elements in the collection might be named:
+Variable names for amounts of elements might be named:
 
     Count
 
-So perhaps avoid plural words to denote a count and avoid plural words for things other than collections.
+So perhaps avoid plural words to denote a count or describe things other than collections.
 
 ### Enum Names
 
-This [architecture](index.md) tends to use the `Enum` suffix for `enum` types e.g. `OrderStatusEnum`.
+This [architecture](index.md) tends to end `enum` types with the `Enum` suffix e.g. `OrderStatusEnum`.
 
-Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`, but at some point the preference became `Enum` because it was found so important to see clearly that something is an `enum`.
+Another alternative might be the suffix `Mode`, e.g. `ConnectionMode`. But `Enum` expresses it more explicitly and that might be quite important.
 
 ### DateTime Names
 
@@ -264,18 +268,18 @@ OrderedWhenLocal
 
 ### Sort Order
 
-For number sequences these names might be used:
+For number sequences the following names might be used:
 
     ListIndex
     IndexNumber
     SortOrder
     Rank
 
-Perhaps avoid `Index` because it is an [`SQL`](api.md#sql) keyword.
+Perhaps avoid the word `Index` on its own, because that's an [`SQL`](api.md#sql) keyword.
 
 ### File-Related Variable Names
 
-Variable names that indicate parts of *file paths* might easily become ambiguous. Here are suggestions to disambiguate them:
+Variable names that describe parts of *file paths* might easily become ambiguous. Here are some suggestions to make them clearer: 
 
 | Name                     | Value          
 |--------------------------|--------------------------
@@ -297,39 +301,40 @@ Variable names that indicate parts of *file paths* might easily become ambiguous
 
 | Example                  | Description
 |--------------------------|--------------------
-| `source...`<br>`dest...` | In code that converts one structure to the other, it might be clear to use the prefixes `source` and `dest` consistently in the variable names to keep track of where data comes from and where it goes.
-| `existing...`            | Denoting that something already existed (in the data store) before starting.
+| `source...`<br>`dest...` | In code that converts one structure to the other, it might be clear to use the prefixes `source` and `dest`. You might use them consistently in the variable names, to keep track of where data comes from and where it goes.
+| `existing...`            | Denoting that something already existed (in the database).
 | `new...`                 | Denoting that the object was just newly created.
 | `original...`            | May denote that this is an original value that was (temporarily) replaced.
-| `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that not only a single object is handled, but the object including the underlying related objects.
-| `Versatile...`           | Might handle a multitude of types or situations.
-| `...With...`             | When making a specialized class that works well for a specific situation, you could use the word `With` in the class name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
-| `...Polymorphic`         | Handling a multitude of differrent (derived) types, possibly each in a different way.
-| `...IfNeeded`            | If something is executed conditionally. This might be a nice alternative for a possibly less easy to read suffixes like `Conditionally` or a prefix `Conditional`.
-| `...Unsafe`              | When it lacks e.g. thread-safety or executes unmanaged code, or lacks some checks.
-| `...Recursive`           | When the process is recursive. Meaning: A method might call itself directly or indirectly. Or when processing a tree or graph, the same type of data might be there deeper down the tree. 
-| `To...`                  | For conversion from one thing to another. Sometimes the `this` is source of the conversion, for example:<br>`array.ToHashSet()`<br>Perhaps less commonly the `To` prefix is used when the `this` is not the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>The `Convert` or `ConvertTo` verbs might also be used as an alternative:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
-| `From...`                | For conversion from one thing to another. A lot like `To...`, but executed on the `dest` object:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
+| `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that it does more than handling a single object. Related objects linked to it are also included.
+| `Versatile...`           | `Versatile` in that it might handle a multitude of types or situations.
+| `...With...`             | When making a specialized `class` that works well for a specific situation, you might use the word `With` in the `class` name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
+| `...Polymorphic`         | Handling a variety of (derived) `types`, which may need different ways of processing.
+| `...IfNeeded`            | A suffix alternative for `Conditional` that might be easier to read.
+| `...Unsafe`              | When it lacks e.g. thread-safety, executes unmanaged code, or lacks some other checks.
+| `...Recursive`           | When the process is recursive. Meaning: A method might call itself directly or indirectly. Or when processing a tree, the same type of data might be there deeper down the tree. 
+| `To...`                  | For conversion from one thing to another. Sometimes the ***`this`*** is the source of the conversion, for example:<br>`array.ToHashSet()`<br>Sometimes a parameter is the source, for instance:<br>`MyConverter.ToHashSet(object[] array)`<br>But `Convert` or `ConvertTo` might be used as an alternative in that case:<br>`MyConverter.ConvertToHashSet(object[] array)`<br>
+| `From...`                | For conversion from one thing to another. A lot like `To...` but executed on the `dest` object:<br>`dest.FromSource(source)`<br>The `To...` prefix might be more common, and possibly more readable.
 
 ### Event Names / Delegate Names
 
-*Event* names and *delegate* names, that indicate what *just happened* might have the following form:
+`Event` names and `delegate` names representing what *just happened* might be written in the past tense. For example:
 
     Deleted
     TransactionCompleted
 
-Event names and delegate names, that indicate what is *about to happen* might have the following form:
+`Event` names and `delegate` names representing what is *about to happen* might be written in the following form:
 
     Deleting
     TransactionCompleting
 
-*User-initiated* events might not follow that pattern:
+*User-initiated* `events` might not follow that pattern:
 
     Click
     DoubleClick
     KeyPress
+    MouseUp
 
-*Delegate* names might also have the suffix `Callback` or `Delegate`:
+`Delegate` names might also have the suffix `Callback` or `Delegate`:
 
     ProgressInfoCallback
     AddItemDelegate
@@ -343,17 +348,17 @@ Or the prefix `Handle`:
 
     HandleMouseDown
 
-Or the suffix `Requested`, if your event looks like a method name.
+Or the suffix `Requested`, if your `event` looks like a method name.
 
     RemoveRequested
 
-Pardon the ambiguity, but the naming above can be used for the names of *events*, but some of them also serve well as names for methods that *fire/emulate* or otherwise handle the event. The prefix `On` for instance and the prefix `Handle` may very well be used for the methods that actually raise the event. `Fire` and `Do` might also be alternatives for methods that raise events.
+The names mentioned above can be used for `events`, but also for methods that *raise* or *handle* the event. Some prefixes for these methods include: `On`, `Handle`, `Fire`, and `Do`.
 
-Perhaps avoid event names that use *two* event-indications in the same name. For instance `OnDragging` might be shortened to just `Dragging` or `OnDrag`. `OnMouseUp` might be shortened to just `MouseUp`, because that would be a well known event name.
+Perhaps avoid using `event` names with two `event`-indicating words, like <code class="red">OnDragging</code> or <code class="red">OnMouseUp</code>. Instead, you can use shorter names like <code class="green">Dragging</code> or <code class="green">MouseUp</code>.
 
 ### Test Class Names
 
-Test class names end with `Tests`.
+`Test class` names end with the word `Tests`.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -381,7 +386,7 @@ Reason: Just convention.
 
 ### Test Method Names
 
-Prefer to start test method names with `Test_` and maybe don't hold back on underscores in the name.
+Prefer to start `test` method names with `Test_` and use underscores freely.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -410,7 +415,7 @@ public void Test2()
 </td></tr></table>
 
 Reason:  
-If the test names mean to be descriptive, they might become long, and underscores to separate the 'pieces' may make it easier to read.
+When test names mean to be descriptive, they might become long. Underscores can separate the 'pieces' and make it more readable.
 
 ### 'Hungarian' Notation
 
@@ -456,7 +461,7 @@ int A { get; set; } int B { get; set; }
 </td></tr></table>
 
 Reason:  
-Might be easy to overlook that there is another property.
+Otherwise it might be easily overlooked, that there is another property.
 
 ### Variables on Separate Lines
 
@@ -476,7 +481,7 @@ int i, j;
 </td></tr></table>
 
 Reason:  
-Just a preference, when not used to it, it may be overlooked, doing a Search through the code, may not show the results expected.
+Just a preference. It's up to you. But when you're not familiar with it, variables might be missed while searching the code. This syntax would have to be taken into account.
 
 ### Enters between Methods
 
@@ -513,7 +518,7 @@ Reason: Just a bit more tidy.
 
 ### Enters in Methods
 
-Putting enters inside methods between 'pieces that do something'.  
+Putting enters inside methods between the 'pieces that do something'.  
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -549,7 +554,7 @@ void Bla()
 </td></tr></table>
 
 Reason:  
-Visible separation of steps inside methods.
+Visible separation between steps inside methods.
 
 ### Loops Multi-Line
 
@@ -673,7 +678,7 @@ interface IMyInterface
 </td></tr></table>
 
 Reason:  
-It might have been a one-liner for readability reasons, so perhaps we keep it in that style.
+It might have been on a single line for readability, so perhaps we want to keep it like that.
 
 
 Spaces and Braces
@@ -681,7 +686,8 @@ Spaces and Braces
 
 ### Auto-Formatting
 
-Prefer [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) autoformatting enabled and set to its defaults.  
+Perhaps start out with [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) auto-formatting enabled and set to its defaults.  
+
 Reason: Less surprising to the next developer.
 
 ### Indentation
@@ -816,7 +822,7 @@ if (condition)
 </td></tr></table>
 
 Reason:  
-Without braces, only the next line is looped or executed conditionally. The line after that would be outside the loop, which is sort of not obvious and might lead to error.
+Without braces, only the next line is looped or executed conditionally. The line after that would not participate in the loop or `if`, which is sort of not obvious and might lead to error.
 
 ### Tabular Form Less Preferred
 
@@ -872,7 +878,7 @@ Encapsulation
 
 ### Members Private
 
-Prefer keeping members private. 
+Keeping members private is preferred. 
 
 ```cs
 private void Bla()
@@ -882,11 +888,11 @@ private void Bla()
 ```
 
 Reason:  
-Other code might become dependent on publically accessible things. Managing dependencies like that seems quite a thing in software development.
+Other code might become dependent on publicly accessible things. Managing dependencies like that is quite a thing in software development.
 
 ### Types Internal 
 
-Prefer to keep types `internal`.
+Keep types `internal` is preferred.
 
 ```cs
 internal class MyClass
@@ -895,8 +901,8 @@ internal class MyClass
 }
 ```
 
-Reason:    
-External things might otherwise become dependent on code, that was not meant to have so many links to it. Managing dependency between parts seems quite a concern in software.
+Reason:  
+Managing dependency between parts is quite a concern in software development. We might protect things forming too many connections, by using access modifying keywords, like `private` and `internal`.
 
 ### Explicit Access Modifiers
 
@@ -914,11 +920,11 @@ Reason:
 Avoiding confusion about the defaults.
 
 Exception:  
-Interface members have no access modifiers.
+`Interface` members have no access modifiers.
 
 ### No Public Fields
 
-Prefer not to use public fields. Use either private fields or use properties. 
+Prefer not to use `public` fields. Use either `private` fields or use *properties*. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -931,15 +937,15 @@ Prefer not to use public fields. Use either private fields or use properties.
 </td></tr></table>
 
 Reason:  
-People may say the interface stability comes in jeopardy when you use public fields. The fields may look similar from the outside. However, frameworks may expect properties, not fields, which makes letting fields participate in reusable functions less easily. Perhaps compatibility like that is an argument.
+Some may say using `public` fields makes the `interface` less stable. Fields may look similar to `properties` from the outside. However, frameworks may expect `properties`, not fields. This makes it harder to use fields in reusable functions and may cause compatibility issues.
 
 ### Public Members for Internal Classes
 
-Internal classes are preferred not to have internal members.
+The use of `internal` members is not recommended within `internal` classes.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
-`internal class A { `***`public`***`void B { } }`
+`internal class A { `***`public`***` void B { } }`
 
 </td><td markdown="1" class="red">
 
@@ -948,7 +954,7 @@ Internal classes are preferred not to have internal members.
 </td></tr></table>
 
 Reason:  
-The members are automatically `internal` if the class is `internal`. When you wish to make the class `public`, you would not have to manually correct the access modifiers of the methods, creating an opportunity for error.
+If the `class` is `internal`, the members are automatically `internal` too. When making the `class` `public`, access modifiers of methods may need to change, creating an opportunity for error.
 
 ### Prefer Interface Types
 
@@ -963,11 +969,11 @@ The members are automatically `internal` if the class is `internal`. When you wi
 </td></tr></table>
 
 Reason:  
-Less refactoring when changing the type. Less dependency on specific implementation allowing you to switch more easily to another class.
+`Interface types` may give you less to refactor when changing a `type`. Less dependency on specific implementation, allowing for an easier switch to another `class`.
 
 ### Nested Class on Top
 
-Putting nested classes at the top of the parent class' code. 
+Putting nested `classes` at the top of the parent `class'` code. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -979,6 +985,8 @@ internal class A
         
     }
     
+    ...
+
     public int X { get; set; }
 }
 ```
@@ -990,6 +998,8 @@ internal class A
 {
     public int X { get; set; }
     
+    ...
+    
     private class B
     {
         
@@ -1000,21 +1010,21 @@ internal class A
 </td></tr></table>
 
 Reason:  
-It may not be obvious there are nested classes, unless they are put at the top.
+It may not be obvious there are nested `classes`, unless they are put at the top.
 
 ### 1 Type 1 File
 
-Preferably give each class (or interface or enum) its own file.
+Give each `class` (or `interface` or `enum`) its own file.
 
 Reason:  
-One might be surprised to find types hidden away behind a single file name. It may harm the overview of the different pieces of code.
+One might be surprised to find `types` hidden away behind a single file name. It may harm the overview of the different pieces of the software.
 
 Exceptions:  
-It does not count for nested classes. Also a single class can be spread among files, if they are partial classes. This guideline might also be ignored if the amount of classes becomes really big. 
+This guideline does not apply to nested `classes`. Also, a single `class` can be split across multiple files if they are `partial classes`. This guideline can also be ignored if there are a large number of smaller `classes`.
 
 ### No Lone Classes
 
-It might not be handy to have a lot of folders just containing one or very few classes. Consider moving those classes into other folders. Another solution could be to put them all together, in a `Helpers` folder for instance.
+It may not be very handy to have many folders that only contain one or few `classes`. Consider moving those `classes` to other folders or putting them together in a single `Helpers` folder.
 
 
 Comments
@@ -1022,7 +1032,7 @@ Comments
 
 ### Comments in Summaries
 
-You might want to put comment for members in `<summary>` tags. 
+It may be an idea to put comment for members in `<summary>` tags. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1041,7 +1051,7 @@ int X { get; set; }
 </td></tr></table>
 
 Reason:  
-Your comment might be valuable on the outside for others to see. The `summary` would show up when hovering over a member.
+Your comment might be valuable from the outside for others to see. Your `summary` would show up when hovering over a member.
 
 ### Comments in English
 
@@ -1060,7 +1070,7 @@ Your comment might be valuable on the outside for others to see. The `summary` w
 </td></tr></table>
 
 Reason:  
-English is sort of the main language in IT. Broader reach of people might be able to read your comments.
+English is basically the main language in IT. A broader reach of people might be able to read your comments.
 
 ### No Comments without Info
 
@@ -1082,14 +1092,14 @@ int x;
 </td></tr></table>
 
 Reason:  
-Less visual clutter. Reading it might not be worth the time.
+Less visual clutter. Reading it might not be worth your time.
 
 ### No Unused / Outcommented Code
 
-Prefer not to leave unused (or outcommented) code around. If needed, it might be moved it to an `Archive` folder.
+Avoid leaving in unused or outcommented code. If necessary, you can move it to an `Archive` folder.
 
 Reason:  
-Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
+Unused code might clutter your vision. It may also give the impression, that it was outcommented in error.
 
 
 More Notation
@@ -1156,20 +1166,19 @@ switch (x)
 </td></tr></table>
 
 Reason:  
-The default `switch` case is often the "last resort" case, so it may make sense to put it last in the list.
+The default `switch` case is often the 'last resort' case, so it may make sense to put it last.
 
 ### Long Code Lines
 
-Avoid long code lines.  
-Reason: readability.
+Avoid long code lines for readability.
 
 ### Var
 
-Prefer not to use `var`.
+The use of `var` is not preferred here.
 
-<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td m1arkdown="1" class="green">
 
-***`int`***`x = y.X;`
+***`int`***` x = y.X;`
 
 </td><td markdown="1" class="red">
 
@@ -1178,9 +1187,10 @@ Prefer not to use `var`.
 </td></tr></table>
 
 Reason:  
-It would be nice to see the variable type in the code line instead of `var`.
+A variable `type` might be *relevant* to see.
 
-There may be a few exceptions, where `var` may be preferred. For instance when the type is sort of obvious, or it might be more readable.
+Exceptions:  
+In some cases, `var` may be a better fit. For example, when the `type` is obvious, or it makes the code more readable.
 
 #### Anonymous Types
 
@@ -1190,7 +1200,7 @@ There may be a few exceptions, where `var` may be preferred. For instance when t
 
 </td><td markdown="1" class="red">
 
-***`X`***`q = from x in list select new { A = x.A };`
+***`X`***` q = from x in list select new { A = x.A };`
 
 </td></tr></table>
 
@@ -1218,7 +1228,7 @@ There may be a few exceptions, where `var` may be preferred. For instance when t
 
 </td></tr></table>
 
-#### Code Line Quite Long and Better Readable
+#### Long Code Lines
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1235,7 +1245,7 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 </td></tr></table>
 
-#### View Code
+#### Views
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1249,7 +1259,7 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 ### No Inferrable Type Arguments
 
-Prefer not to use type arguments that can be inferred. 
+Prefer not to use `type` arguments that can be *inferred*. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1265,14 +1275,14 @@ Reason: Less visual clutter.
 
 ### FileOpen, FileMode, FileAccess, FileShare
 
-It is appreciated when a file stream is opened specifying all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly with the most logical and most limiting values appropriate for the particular situation.
+When a `FileStream` is opened it is appreciated to specify the aspects `FileMode`, `FileAccess` and `FileShare` explicitly. Try to use the most logical and most limiting values tailored to the situation.
 
 Reason:  
 Otherwise these aspects may have surprising defaults.
 
 ### Ordered If Range 
 
-When evaluating a range in an `if`, it may be a good idea to mention the *limits* of the range and mention the *start* of the range 1st and the *end* of the range second.
+When expressing a *range* in an `if` statement, showing the actual *limits* of the range may look better. Also, mentioning the *start* of the range first and the *end* of the range second might make it more readable.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1294,7 +1304,7 @@ Reason: Readability. More obvious what the range limits are.
 
 ### Parameter Order
 
-Passing infrastructure-related parameters to constructors or methods, the parameters might be listed in this order:
+Passing *infrastructure*-related parameters to constructors or methods, the parameters might be listed in a certain order:
 
 - __[entities](patterns.md#entity)__ (or loose values)
 - __[persistence](aspects.md#persistence)__
@@ -1302,7 +1312,7 @@ Passing infrastructure-related parameters to constructors or methods, the parame
 - __culture__
 - __other__
 
-Example:
+For instance:
 
 ```cs
 class MyPresenter
@@ -1324,7 +1334,9 @@ Just to have some kind of standard for consistency.
 
 ### Namespace Tips
 
-*Full* namespaces in code, might make the code harder to read:
+#### Full Namespaces
+
+*Full* `namespaces` in code might not be preferred:
 
 <table><tr><th class="red">
 
@@ -1338,7 +1350,12 @@ JJ.Business.Cms.RepositoryInterfaces.IUserRepository userRepository =
 ```
 </td></tr></table>
 
-*Half* a namespace might not be preferred either, because when you want to rename a namespace, it may generate more manual work.
+Reason:  
+Long and wordy code can make it harder to read.
+
+#### Half Namespaces
+
+*Half* a `namespace` might not be preferred either.
 
 <table><tr><th class="red">
 
@@ -1347,13 +1364,31 @@ Less Preferred
 </th></tr><tr><td markdown="1" class="red">
 
 ```cs
-Business.Cms.RepositoryInterfaces.IUserRepository userRepository = 
-    PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
+Cms.RepositoryInterfaces.IUserRepository userRepository = 
+    PersistenceHelper.CreateCmsRepository<Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
 </td></tr></table>
 
-An alternative is to give a class a more *unique* name. Or use an *alias* instead:
+Reason:  
+If you'd want to rename the `namespace`, it might create more manual work. The shortened `namespace` could be overlooked when searching through the code.
+
+#### Unique Class Names
+
+To prevent using a `namespace` in the code line, you might give a `class` a more unique name.
+
+<table><tr><td markdown="1" class="green">
+
+```cs
+ICmsUserRepository cmsUserRepository = 
+    PersistenceHelper.CreateCmsRepository<ICmsUserRepository>(cmsContext);
+```
+
+</td></tr></table>
+
+#### Type Aliases
+
+To disambiguate a `type` name, you might use a `type` *alias* instead. This can prevent long `namespaces` in the code lines.
 
 <table><tr><th class="green">
 
@@ -1377,16 +1412,16 @@ Long, visually cluttered code lines might be harder to read.
 Member Order
 ------------
 
-Try giving the members in your code file a logical order, instead of putting them in am arbitrary order. Suggestions for organizing members:
+To improve readability, try giving the members in your code file a logical order, instead of putting them all in an arbitrary order. Suggestions for organizing the members in your code:
 
 |                          |     |
 |--------------------------|-----|
 | __Chronological__        | When one method delegates to another in a particular order, you might order the methods chronologically.
-| __By functional aspect__ | When your code file contains multiple functionalities, you might keep the members with the same function together, and put a comment line above it.
-| __By technical aspect__  | You may choose to keep your fields together, your properties together, your members together or group them by access modifier (e.g. public or private).
-| __By layer__             | When you can identify layers of delegation in your class you might first list the members of layer 1, then the members of layer 2, etc.
+| __By functional aspect__ | When your code has distinct functionalities, you might keep members with similar functions together and add a comment line above the group.
+| __By technical aspect__  | You may choose to keep your fields together, your `properties` together, your methods together. Another option might be to group them by access modifier (e.g. `public` or `private`).
+| __By layer__             | When you can identify *layers* in your `class`, you might first list the members of layer 1, then the members of layer 2, etc.
 
-The preferred ordering of members might be chronological if applicable and otherwise by functional aspect, but there are no rights and wrongs here. Whatever seems most appropriate for the code.
+You might prefer to make it chronological if possible. Otherwise, order it by functional aspect. But there are no rights and wrongs here. Whatever seems most appropriate for your code.
 
 
 Misc Preferences
@@ -1395,6 +1430,7 @@ Misc Preferences
 ### Null / Empty Strings
 
 Prefer handling both `null` and `""` the same way.  
+
 Reason: No surprises when using either `null` or `""`.
 
 ### String.IsNullOrEmpty
@@ -1416,7 +1452,7 @@ str == null
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) may fail even when `strings` are equal.
+Reference equality (`==`) may fail in exceptional cases even when `strings` are equal.
 
 ### String.Equals
 
@@ -1437,11 +1473,11 @@ str == "bla"
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) may fail even if `strings` are equal.
+*Reference* equality (`==`) may fail in exceptional cases even if `string` *values* are equal.
 
 ### Prefer Value and HasValue
 
-For nullable types.
+For `Nullable` types:
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1449,8 +1485,7 @@ For nullable types.
 int? number;
 if (number.HasValue)
 {
-    string message = string.Format(
-        "Number = {0}", number.Value);
+    string message = $"Number = {number.Value}";
 }
 ```
 
@@ -1460,15 +1495,14 @@ if (number.HasValue)
 int? number;
 if (number != null)
 {
-    string message = string.Format(
-        "Number = {0}", number);
+    string message = $"Number = {number}");
 } 
 ```
 
 </td></tr></table>
 
 Reason:  
-Changing the variable to type `object`, would change the behavior of the code considerably.
+The behavior of the code would change considerably, if the variable type is changed to `object`.
 
 ### Prefer ToArray
 
@@ -1485,11 +1519,11 @@ Prefer `ToArray` over `ToList`.
 </td></tr></table>
 
 Reason: More performance.  
-Downside: The `Add` method may throw an exception for an `Array`.
+Downside: The `Add` method may throw an [`Exception`](aspects.md#exceptions) for an `Array`.
 
 ### CLR Data Types
 
-Prefer using `CLR`- complient data types. Some aren't `CLR`- complient.
+Prefer using [`CLR`](https://learn.microsoft.com/en-us/dotnet/standard/clr)- compliant data types. Some aren't [`CLR`](https://learn.microsoft.com/en-us/dotnet/standard/clr)- compliant.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1516,7 +1550,7 @@ For compatibility with more variations of [`.NET`](https://dotnet.microsoft.com/
 
 ### No Decisions from Exceptions
 
-Avoid getting information by catching an exception. Prefer getting your information without using exception handling.
+Avoid getting information by catching an [`Exception`](aspects.md#exceptions). Prefer getting your information without using [`Exception`](aspects.md#exceptions) handling.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1547,11 +1581,11 @@ bool FileExists(string path)
 </td></tr></table>
 
 Reason:  
-`Exception` handling is more performance intensive than might be expected, compared to an `if` statement. When no exception goes off, exception handling might perform well, but when an exception does go off, quite a few things happen, like gathering stack trace information.
+[`Exception`](aspects.md#exceptions) handling is more performance intensive than might be expected. When no [`Exception`](aspects.md#exceptions) goes off, [`Exception`](aspects.md#exceptions) handling might perform well, but when an [`Exception`](aspects.md#exceptions) does go off, quite a few things happen, like gathering `StackTrace` information.
 
 ### Entity Equality by ID
 
-Entity equality checks might be better done by ID than by reference.
+[Entity](patterns.md#entity) equality checks might be better done by `ID` than by *reference*.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1568,13 +1602,13 @@ if (entity1 == entity2)
 </td></tr></table>
 
 Reason:  
-Persistence frameworks do not always provide *instance* integrity, so code that compares *identities* may be less likely to break. 
+Code that compares *identities* may be less likely to break, because [persistence frameworks](api.md#orm) don't always ensure *instance* integrity.
 
-(Also consider doing *null* checks on the entities if applicable.)
+(Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns.md#entity) if needed.)
 
-### Avoiding Compiler Directives
+### Compiler Directives
 
-Prefer not to use compiler directives, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a [configuration](aspects.md#configuration) setting or different *concrete implementations* of classes.
+Prefer not to use *compiler directives*, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a [configuration](aspects.md#configuration) setting or different *concrete implementations* of `classes`.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1596,7 +1630,7 @@ if (config.FeatureXEnabled)
 </td></tr></table>
 
 Reason:  
-When using these compiling directives, a compilation might succeed, without all the code being compilable.
+When using these compiling directives, a compilation might succeed, without all the code being actually compilable.
 
 ### Activator.CreateInstance
 
@@ -1605,7 +1639,7 @@ Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using gene
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
 ```cs
-T = new T()
+new T()
 ```
 
 </td><td markdown="1" class="red">
@@ -1616,9 +1650,9 @@ Activator.CreateInstance(typeof(T))
 
 </td></tr></table>
 
-A call to `Activator.CreateInstance` might be the last choice for instantiating an object.
+A call to `Activator.CreateInstance` might be the last choice for instantiating an `object`.
 
 Reason:  
-New statements are strongly typed and less likely to break.
+`New` statements are strongly typed, less likely to break and possibly faster.
 
 [back](.)
