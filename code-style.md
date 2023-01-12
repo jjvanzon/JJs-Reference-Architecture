@@ -39,7 +39,7 @@
     - [No Braces for Single-Line If Statements](#no-braces-for-single-line-if-statements)
     - [Braces for Multi-Line Statements](#braces-for-multi-line-statements)
     - [Tabular Form Less Preferred](#tabular-form-less-preferred)
-    - [Align Elements of LINQ Queries](#align-elements-of-linq-queries)
+    - [Align LINQ Queries](#align-linq-queries)
 - [Encapsulation](#encapsulation)
     - [Members Private](#members-private)
     - [Types Internal](#types-internal)
@@ -851,7 +851,9 @@ public bool   IsManual { get; set; }
 Reason:  
 Tabular form might be undone by auto-formatting. It may look nice, but maybe get your eyes used to non-tabular form instead.
 
-### Align Elements of LINQ Queries
+### Align LINQ Queries
+
+Aligning the elements:
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
