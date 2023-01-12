@@ -358,7 +358,7 @@ Perhaps avoid using `event` names with two `event`-indicating words, like <code 
 
 ### Test Class Names
 
-Test `class` names end with `Tests`.
+Test `class` names end with the word `Tests`.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -386,7 +386,7 @@ Reason: Just convention.
 
 ### Test Method Names
 
-Prefer to start test method names with `Test_` and using underscores freely.
+Prefer to start test method names with `Test_` and use underscores freely.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -415,7 +415,7 @@ public void Test2()
 </td></tr></table>
 
 Reason:  
-If the test names mean to be descriptive, they might become long. Underscores to separate the 'pieces', may make it more readable.
+When test names mean to be descriptive, they might become long. Underscores can separate the 'pieces' and make it more readable.
 
 ### 'Hungarian' Notation
 
