@@ -185,7 +185,7 @@ Apart form *pattern names*, here are some other suggested "last names" for `clas
 
 |              | |
 |--------------|-|
-| `Resolver`   | A `class` that does lookups that require complex keys or different ways of looking up depending on the situation, fuzzy lookups, etc.
+| `Resolver`   | A `class` that does lookups requiring complex keys or different ways of looking up depending on the situation, fuzzy lookups, etc.
 | `Dispatcher` | A `class` calls different methods or sends messages to different endpoints  based on the input it receives.
 | `Invoker`    | Something that invokes a method, possibly based on input or specific conditions.
 | `Provider`   | A `class` that provides something. It can be useful to have a separate `class` that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something is retrieved conditionally or if retrieval is postponed until later.
