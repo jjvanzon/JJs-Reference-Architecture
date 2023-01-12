@@ -132,7 +132,7 @@ Suggestions for verbs:
 
 | Verb        | Description |
 |-------------|-------------|
-| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>(`List` can be the `this` argument or the first argument.)
+| `Add`       | `List.Add(item)`<br>`ListManager.Add(list, item)`<br>(`List` can be the ***`this`*** argument or the first argument.)
 | `Assert`    | Throws an [`Exception`](aspects.md#exceptions) if input is invalid.
 | `Calculate` |
 | `Clear`     | Clearing a list.
