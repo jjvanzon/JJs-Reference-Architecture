@@ -177,7 +177,7 @@ Abstract `classes` might prefer a `Base` suffix:
 
     ProductValidatorBase
 
-It might be quite important to see in code, whether something is a `base` class. Exceptions to the `Base` suffix might be made. For instance, [entity](patterns.md#entity) `classes` might leave out the `Base` suffix for readability reasons.
+It might be quite important to see in code, whether something is a `base` class. But exceptions may be made. For instance, [entity](patterns.md#entity) `classes` might leave out the `Base` suffix for readability reasons.
 
 You might keep *variables* names similar to the `class` names and include the prefixes and suffixes, so it stays clear what they are.
 
