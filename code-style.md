@@ -1420,6 +1420,7 @@ Misc Preferences
 ### Null / Empty Strings
 
 Prefer handling both `null` and `""` the same way.  
+
 Reason: No surprises when using either `null` or `""`.
 
 ### String.IsNullOrEmpty
@@ -1441,7 +1442,7 @@ str == null
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) may fail even when `strings` are equal.
+Reference equality (`==`) may fail in exceptional cases even when `strings` are equal.
 
 ### String.Equals
 
@@ -1462,11 +1463,11 @@ str == "bla"
 </td></tr></table>
 
 Reason:  
-In exceptional cases reference equality (`==`) may fail even if `strings` are equal.
+*Reference* equality (`==`) may fail in exceptional cases even if `string` *values* are equal.
 
 ### Prefer Value and HasValue
 
-For `Nullable` types.
+For `Nullable` types:
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1493,7 +1494,7 @@ if (number != null)
 </td></tr></table>
 
 Reason:  
-Changing the variable to type `object`, would change the behavior of the code considerably.
+The behavior of the code would change considerably, if the variable `type` is changed to `object`.
 
 ### Prefer ToArray
 
