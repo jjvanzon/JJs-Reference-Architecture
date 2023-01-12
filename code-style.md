@@ -1411,7 +1411,7 @@ To improve readability, try giving the members in your code file a logical order
 | __By technical aspect__  | You may choose to keep your fields together, your `properties` together, your methods together. Grouping them by access modifier (e.g. `public` or `private`) might be another option.
 | __By layer__             | When you can identify *layers* in your `class`, you might first list the members of layer 1, then the members of layer 2, etc.
 
-When ordering members in your code, you might prefer to do it chronologically if possible. Otherwise, order them by functional aspect. But there are no rights and wrongs here. Whatever seems most appropriate for the code.
+When ordering members in your code, you might prefer to do it chronologically if possible. Otherwise, order them by functional aspect. But there are no rights and wrongs here. Whatever seems most appropriate for your code.
 
 
 Misc Preferences
