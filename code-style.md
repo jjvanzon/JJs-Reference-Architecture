@@ -1573,7 +1573,7 @@ bool FileExists(string path)
 </td></tr></table>
 
 Reason:  
-`Exception` handling is more performance intensive than might be expected, compared to an `if` statement. When no `Exception` goes off, `Exception` handling might perform well, but when an `Exception` does go off, quite a few things happen, like gathering `StackTrace` information.
+`Exception` handling is more performance intensive than might be expected. When no `Exception` goes off, `Exception` handling might perform well, but when an `Exception` does go off, quite a few things happen, like gathering `StackTrace` information.
 
 ### Entity Equality by ID
 
