@@ -91,14 +91,14 @@
 Introduction
 ------------
 
-This article lists coding style preferences, that might be followed in the `JJ`  projects.
+This article lists code style preferences, that might be followed in some of the `JJ` projects.
 
-It mostly conforms to the `Microsoft` standard described in the following documents:
+They mostly conforms to `Microsoft` standards described in the following documents:
 
-<http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx>  
-<http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx>
+[C# Coding Conventions](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
+[Coding Techniques and Programming Practices](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
 
-Using a tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be finetuned to closely match the preferences. It then checks the code style and can auto-format code for you.
+A tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be finetuned to closely match the preferences. It then checks the code style and can auto-format code for you.
 
 
 Casing
@@ -1603,7 +1603,7 @@ if (entity1 == entity2)
 Reason:  
 Code that compares *identities* may be less likely to break, because persistence frameworks don't always ensure *instance* integrity.
 
-(Also consider doing [`null` checks](practices-and-principles.md#null-checks) on the [entities](patterns.md#entity) if needed.)
+(Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns.md#entity) if needed.)
 
 ### Compiler Directives
 
