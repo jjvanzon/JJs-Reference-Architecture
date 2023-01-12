@@ -1402,7 +1402,7 @@ Long, visually cluttered code lines might be harder to read.
 Member Order
 ------------
 
-To improve readability, try giving the members in your code file a logical order, instead of putting them in am arbitrary order. Suggestions for organizing members in your code:
+To improve readability, try giving the members in your code file a logical order, instead of putting them in an arbitrary order. Suggestions for organizing members in your code:
 
 |                          |     |
 |--------------------------|-----|
