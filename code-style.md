@@ -63,8 +63,8 @@
         - [Anonymous Types](#anonymous-types)
         - [New Statements](#new-statements)
         - [Direct Casts](#direct-casts)
-        - [Code Line Quite Long and Better Readable](#code-line-quite-long-and-better-readable)
-        - [View Code](#view-code)
+        - [Long Code Line Harder to Read](#long-code-line-harder-to-read)
+        - [`View` Code](#view-code)
     - [No Inferrable Type Arguments](#no-inferrable-type-arguments)
     - [FileOpen, FileMode, FileAccess, FileShare](#fileopen-filemode-fileaccess-fileshare)
     - [Ordered If Range](#ordered-if-range)
@@ -73,7 +73,7 @@
         - [Full Namespaces](#full-namespaces)
         - [Half Namespaces](#half-namespaces)
         - [Class Name More Unique](#class-name-more-unique)
-        - [Namespace Aliases](#namespace-aliases)
+        - [Type Aliases](#type-aliases)
 - [Member Order](#member-order)
 - [Misc Preferences](#misc-preferences)
     - [Null / Empty Strings](#null--empty-strings)
@@ -84,7 +84,7 @@
     - [CLR Data Types](#clr-data-types)
     - [No Decisions from Exceptions](#no-decisions-from-exceptions)
     - [Entity Equality by ID](#entity-equality-by-id)
-    - [Avoiding Compiler Directives](#avoiding-compiler-directives)
+    - [Compiler Directives](#compiler-directives)
     - [Activator.CreateInstance](#activatorcreateinstance)
 
 
@@ -461,7 +461,7 @@ int A { get; set; } int B { get; set; }
 </td></tr></table>
 
 Reason:  
-Otherwise it might be easy to overlook that there is another property.
+Otherwise it might be easily overlooked, that there is another property.
 
 ### Variables on Separate Lines
 
@@ -554,7 +554,7 @@ void Bla()
 </td></tr></table>
 
 Reason:  
-Visible separation of steps inside methods.
+Visible separation between steps inside methods.
 
 ### Loops Multi-Line
 
@@ -678,7 +678,7 @@ interface IMyInterface
 </td></tr></table>
 
 Reason:  
-It might have been on a single line for readability, so perhaps we want to keep it on one line.
+It might have been on a single line for readability, so perhaps we want to keep it like that.
 
 
 Spaces and Braces
@@ -687,6 +687,7 @@ Spaces and Braces
 ### Auto-Formatting
 
 Prefer [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) autoformatting enabled and set to its defaults.  
+
 Reason: Less surprising to the next developer.
 
 ### Indentation
@@ -877,7 +878,7 @@ Encapsulation
 
 ### Members Private
 
-Prefer keeping members private. 
+Keeping members private is preferred. 
 
 ```cs
 private void Bla()
@@ -891,7 +892,7 @@ Other code might become dependent on publically accessible things. Managing depe
 
 ### Types Internal 
 
-Prefer to keep types `internal`.
+Keep types `internal` is preferred.
 
 ```cs
 internal class MyClass
@@ -923,7 +924,7 @@ Exception:
 
 ### No Public Fields
 
-Prefer not to use `public` fields. Use either `private` fields or use properties. 
+Prefer not to use `public` fields. Use either `private` fields or use *properties*. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -936,7 +937,7 @@ Prefer not to use `public` fields. Use either `private` fields or use properties
 </td></tr></table>
 
 Reason:  
-People may say the interface stability comes in jeopardy when you use `public` fields. The fields may look similar from the outside. However, frameworks may expect `properties`, not fields, which makes letting fields participate in reusable functions less easy. Perhaps compatibility like that is an argument.
+Some may say using `public` fields makes the interface less stable. Fields may look similar to `properties` from the outside. However, frameworks may expect `properties`, not fields. This makes it harder to use fields in reusable functions and may cause compatibility issues.
 
 ### Public Members for Internal Classes
 
@@ -953,7 +954,7 @@ People may say the interface stability comes in jeopardy when you use `public` f
 </td></tr></table>
 
 Reason:  
-If the `class` is `internal`, the members are automatically `internal` too. When making the `class` `public`, it may require changing the access of methods, creating an opportunity for error.
+If the `class` is `internal`, the members are automatically `internal` too. When making the `class` `public`, access modifiers of methods may need to change, creating an opportunity for error.
 
 ### Prefer Interface Types
 
@@ -968,7 +969,7 @@ If the `class` is `internal`, the members are automatically `internal` too. When
 </td></tr></table>
 
 Reason:  
-Less refactoring when changing the `type`. Less dependency on specific implementation, allowing you to switch more easily to another `class`.
+Interface types may give you less to refactor when changing a `type`. Less dependency on specific implementation, allowing for an easier switch to another `class`.
 
 ### Nested Class on Top
 
@@ -1016,14 +1017,14 @@ It may not be obvious there are nested `classes`, unless they are put at the top
 Preferably give each `class` (or `interface` or `enum`) its own file.
 
 Reason:  
-One might be surprised to find `types` hidden away behind a single file name. It may harm the overview of the different pieces of code.
+One might be surprised to find `types` hidden away behind a single file name. It may harm the overview of the different pieces of the software.
 
 Exceptions:  
-This guideline does not apply to `classes` nested inside other `classes`. Also, a single `class` can be split across multiple files if they are `partial classes`. This guideline may also be ignored if there are a large number of `classes`.
+This guideline does not apply to nested `classes`. Also, a single `class` can be split across multiple files if they are `partial classes`. This guideline may also be ignored if there are a large number of smaller `classes`.
 
 ### No Lone Classes
 
-Having many folders that only contain one or few `classes` may not be very handy. Consider moving those `classes` to other folders or putting them together in a `Helpers` folder.
+It may not be very handy to have many folders that only contain one or few `classes`. Consider moving those `classes` to other folders or putting them together in a single `Helpers` folder.
 
 
 Comments
@@ -1050,7 +1051,7 @@ int X { get; set; }
 </td></tr></table>
 
 Reason:  
-Your comment might be valuable on the outside for others to see. The `summary` would show up when hovering over a member.
+Your comment might be valuable from the outside for others to see. Your `summary` would show up when hovering over a member.
 
 ### Comments in English
 
@@ -1095,10 +1096,10 @@ Less visual clutter. Reading it might not be worth your time.
 
 ### No Unused / Outcommented Code
 
-Avoid keeping unused or commented-out code. If necessary, you can move it to an `Archive` folder.
+Avoid leaving in unused or commented-out code. If necessary, you can move them to an `Archive` folder.
 
 Reason:  
-Unused code might clutter your vision or may make the suggestion that it was outcommented in error.
+Unused code might clutter your vision. It may also give the impression, that it was outcommented in error.
 
 
 More Notation
@@ -1165,12 +1166,11 @@ switch (x)
 </td></tr></table>
 
 Reason:  
-The default `switch` case is often the "last resort" case, so it may make sense to put it last in the list.
+The default `switch` case is often the "last resort" case, so it may make sense to put it last.
 
 ### Long Code Lines
 
-Avoid long code lines.  
-Reason: readability.
+Avoid long code lines for readability.
 
 ### Var
 
@@ -1187,9 +1187,9 @@ The use of `var` is not preferred here.
 </td></tr></table>
 
 Reason:  
-The variable `type` might be *relevant* to see in the code line.
+A variable `type` might be *relevant* to see.
 
-In a few cases, using `var` may be more appropriate. For example, when the `type` is obvious, or it makes the code more readable.
+In some cases, using `var` may be more appropriate. For example, when the `type` is obvious, or it makes the code more readable.
 
 #### Anonymous Types
 
@@ -1227,7 +1227,7 @@ In a few cases, using `var` may be more appropriate. For example, when the `type
 
 </td></tr></table>
 
-#### Code Line Quite Long and Better Readable
+#### Long Code Line Harder to Read
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1244,7 +1244,7 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 </td></tr></table>
 
-#### View Code
+#### `View` Code
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1258,7 +1258,7 @@ foreach (KeyValuePair<Canonical.ValidationMessage,
 
 ### No Inferrable Type Arguments
 
-Prefer not to use `type` arguments that can be inferred. 
+Prefer not to use `type` arguments that can be *inferred*. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1274,14 +1274,14 @@ Reason: Less visual clutter.
 
 ### FileOpen, FileMode, FileAccess, FileShare
 
-When a `FileStream` is opened it is appreciated to specify all three aspects `FileMode`, `FileAccess` and `FileShare` explicitly. Try to use the most logical and most limiting values tailored to the situation.
+When a `FileStream` is opened it is appreciated to specify the aspects `FileMode`, `FileAccess` and `FileShare` explicitly. Try to use the most logical and most limiting values tailored to the situation.
 
 Reason:  
 Otherwise these aspects may have surprising defaults.
 
 ### Ordered If Range 
 
-When evaluating a *range* in an `if`, showing the actual *limits* of the range may make it look better. Also, mentioning the *start* of the range 1<sup>st</sup> and the *end* of the range 2<sup>nd</sup> might make it more readable.
+When expressing a *range* in an `if` statement, showing the actual *limits* of the range may make it look better. Also, mentioning the *start* of the range first and the *end* of the range second might make it more readable.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1311,7 +1311,7 @@ Passing *infrastructure*-related parameters to constructors or methods, the para
 - __culture__
 - __other__
 
-Example:
+For instance:
 
 ```cs
 class MyPresenter
@@ -1363,22 +1363,31 @@ Less Preferred
 </th></tr><tr><td markdown="1" class="red">
 
 ```cs
-Business.Cms.RepositoryInterfaces.IUserRepository userRepository = 
-    PersistenceHelper.CreateCmsRepository<Business.Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
+Cms.RepositoryInterfaces.IUserRepository userRepository = 
+    PersistenceHelper.CreateCmsRepository<Cms.RepositoryInterfaces.IUserRepository>(cmsContext);
 ```
 
 </td></tr></table>
 
 Reason:  
-It might create more manual work, if you'd want to rename a `namespace`. The shortened `namespace` could be overlooked when searching through the code.
+If you'd want to rename the `namespace`, it might create more manual work. The shortened `namespace` could be overlooked when searching through the code.
 
 #### Class Name More Unique
 
 To prevent using a `namespace` in the code line, you might give a `class` a more *unique* name.
 
-#### Namespace Aliases
+<table><tr><td markdown="1" class="green">
 
-To disambiguate a `type` name, you might use a *namespaces alias* instead. This can prevent long `namespaces` in the code lines.
+```cs
+ICmsUserRepository cmsUserRepository = 
+    PersistenceHelper.CreateCmsRepository<ICmsUserRepository>(cmsContext);
+```
+
+</td></tr></table>
+
+#### Type Aliases
+
+To disambiguate a `type` name, you might use a *type alias* instead. This can prevent long `namespaces` in the code lines.
 
 <table><tr><th class="green">
 
@@ -1407,11 +1416,11 @@ To improve readability, try giving the members in your code file a logical order
 |                          |     |
 |--------------------------|-----|
 | __Chronological__        | When one method delegates to another in a particular order, you might order the methods chronologically.
-| __By functional aspect__ | When your code has distinct functionalities, you might keep members with similar functions together and add a comment line above each group.
-| __By technical aspect__  | You may choose to keep your fields together, your `properties` together, your methods together. Grouping them by access modifier (e.g. `public` or `private`) might be another option.
+| __By functional aspect__ | When your code has distinct functionalities, you might keep members with similar functions together and add a comment line above the group.
+| __By technical aspect__  | You may choose to keep your fields together, your `properties` together, your methods together. Another option might be to group them by access modifier (e.g. `public` or `private`).
 | __By layer__             | When you can identify *layers* in your `class`, you might first list the members of layer 1, then the members of layer 2, etc.
 
-When ordering members in your code, you might prefer to do it chronologically if possible. Otherwise, order them by functional aspect. But there are no rights and wrongs here. Whatever seems most appropriate for your code.
+You might prefer to make it chronological if possible. Otherwise, order it by functional aspect. But there are no rights and wrongs here. Whatever seems most appropriate for your code.
 
 
 Misc Preferences
@@ -1475,8 +1484,7 @@ For `Nullable` types:
 int? number;
 if (number.HasValue)
 {
-    string message = string.Format(
-        "Number = {0}", number.Value);
+    string message = $"Number = {number.Value}";
 }
 ```
 
@@ -1486,15 +1494,14 @@ if (number.HasValue)
 int? number;
 if (number != null)
 {
-    string message = string.Format(
-        "Number = {0}", number);
+    string message = $"Number = {number}");
 } 
 ```
 
 </td></tr></table>
 
 Reason:  
-The behavior of the code would change considerably, if the variable `type` is changed to `object`.
+The behavior of the code would change considerably, if the variable type is changed to `object`.
 
 ### Prefer ToArray
 
@@ -1594,13 +1601,13 @@ if (entity1 == entity2)
 </td></tr></table>
 
 Reason:  
-Persistence frameworks do not always provide *instance* integrity. So code that compares *identities* may be less likely to break. 
+Code that compares *identities* may be less likely to break, because persistence frameworks don't always ensure *instance* integrity.
 
-(Also consider doing `null` checks on the [entities](patterns.md#entity) if applicable.)
+(Also consider doing [`null` checks](practices-and-principles.md#null-checks) on the [entities](patterns.md#entity) if needed.)
 
-### Avoiding Compiler Directives
+### Compiler Directives
 
-Prefer not to use compiler directives, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a [configuration](aspects.md#configuration) setting or different *concrete implementations* of `classes`.
+Prefer not to use *compiler directives*, unless the code cannot run on a platform without excluding that piece of code. Otherwise a *boolean* variable might be preferred, a [configuration](aspects.md#configuration) setting or different *concrete implementations* of `classes`.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
