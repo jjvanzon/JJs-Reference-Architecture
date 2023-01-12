@@ -1180,7 +1180,7 @@ The use of `var` is not preferred here.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td m1arkdown="1" class="green">
 
-***`int`*** `x = y.X;`
+***`int`***`x = y.X;`
 
 </td><td markdown="1" class="red">
 
