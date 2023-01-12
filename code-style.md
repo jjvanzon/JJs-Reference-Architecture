@@ -888,7 +888,7 @@ private void Bla()
 ```
 
 Reason:  
-Other code might become dependent on publically accessible things. Managing dependencies like that is quite a thing in software development.
+Other code might become dependent on publicly accessible things. Managing dependencies like that is quite a thing in software development.
 
 ### Types Internal 
 
@@ -945,7 +945,7 @@ Some may say using `public` fields makes the interface less stable. Fields may l
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
-`internal class A { `***`public`***`void B { } }`
+`internal class A { `***`public`***` void B { } }`
 
 </td><td markdown="1" class="red">
 
@@ -1176,9 +1176,9 @@ Avoid long code lines for readability.
 
 The use of `var` is not preferred here.
 
-<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td m1arkdown="1" class="green">
 
-***`int`***`x = y.X;`
+***`int`***` x = y.X;`
 
 </td><td markdown="1" class="red">
 
@@ -1199,7 +1199,7 @@ In some cases, using `var` may be more appropriate. For example, when the `type`
 
 </td><td markdown="1" class="red">
 
-***`X`***`q = from x in list select new { A = x.A };`
+***`X`***` q = from x in list select new { A = x.A };`
 
 </td></tr></table>
 
@@ -1522,7 +1522,7 @@ Downside: The `Add` method may throw an `Exception` for an `Array`.
 
 ### CLR Data Types
 
-Prefer using `CLR`- complient data types. Some aren't `CLR`- complient.
+Prefer using `CLR`- compliant data types. Some aren't `CLR`- compliant.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
