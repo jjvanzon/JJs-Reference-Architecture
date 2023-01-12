@@ -1497,8 +1497,8 @@ if (number.HasValue)
 int? number;
 if (number != null)
 {
-    string message = $"Number = {number}");
-} 
+    string message = $"Number = {number}";
+}
 ```
 
 </td></tr></table>
