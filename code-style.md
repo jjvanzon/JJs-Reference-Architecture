@@ -1577,7 +1577,7 @@ Reason:
 
 ### Entity Equality by ID
 
-[Entity](patterns.md#entity) equality checks might be better done by `ID` than by reference.
+[Entity](patterns.md#entity) equality checks might be better done by `ID` than by *reference*.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1594,7 +1594,7 @@ if (entity1 == entity2)
 </td></tr></table>
 
 Reason:  
-Persistence frameworks do not always provide *instance* integrity, so code that compares *identities* may be less likely to break. 
+Persistence frameworks do not always provide *instance* integrity. So code that compares *identities* may be less likely to break. 
 
 (Also consider doing `null` checks on the [entities](patterns.md#entity) if applicable.)
 
@@ -1622,7 +1622,7 @@ if (config.FeatureXEnabled)
 </td></tr></table>
 
 Reason:  
-When using these compiling directives, a compilation might succeed, without all the code being compilable.
+When using these compiling directives, a compilation might succeed, without all the code being actually compilable.
 
 ### Activator.CreateInstance
 
@@ -1631,7 +1631,7 @@ Prefer using the `new` keyword instead of `Activator.CreateInstance`. Using gene
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
 ```cs
-T = new T()
+new T()
 ```
 
 </td><td markdown="1" class="red">
@@ -1645,6 +1645,6 @@ Activator.CreateInstance(typeof(T))
 A call to `Activator.CreateInstance` might be the last choice for instantiating an `object`.
 
 Reason:  
-`New` statements are strongly typed and less likely to break.
+`New` statements are strongly typed, less likely to break and possibly faster.
 
 [back](.)
