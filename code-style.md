@@ -1189,10 +1189,10 @@ The use of `var` is not preferred here.
 </td></tr></table>
 
 Reason:  
-A variable `type` might be *relevant* to see.
+A variable `type` might be relevant to see.
 
 Exceptions:  
-In some cases, `var` may be a better fit. For example, when the `type` is obvious, or it makes the code more readable.
+But in some cases, `var` may be preferred after all. For example, when the `type` is obvious, or it makes the code more readable.
 
 #### Anonymous Types
 
