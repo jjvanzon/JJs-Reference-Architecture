@@ -95,8 +95,8 @@ This article lists code style preferences, that might be followed in some of the
 
 They mostly conform to `Microsoft` standards described in the following documents:
 
-- ["C# Coding Conventions"](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
-- ["Coding Techniques and Programming Practices"](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
+- [C# Coding Conventions](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
+- [Coding Techniques and Programming Practices](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
 
 A tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be fine-tuned to closely match the preferences. It then checks the code style and can auto-format code for you.
 
