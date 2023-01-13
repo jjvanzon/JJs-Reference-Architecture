@@ -837,7 +837,7 @@ For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXml
 
 ### Embedded Resources
 
-*Embedded resources* might be handy to prevent including loose files with a deployment. Instead they are compiled right into your program files' `DLL` or `EXE`. It also protects those resources a bit better against modifications.
+*Embedded resources* might be handy to prevent including loose files with a deployment. Instead they are compiled right into your program files' `DLL` or `EXE`. This also protects those resources a bit better against modifications.
 
 To include a file as an embedded resource, you could set the following property:
 
@@ -857,7 +857,7 @@ Data
 
 [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). To hide [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) behind abstractions, [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces) might be used.
 
-At one point we could notice a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). This while it wasn't even modified. Probably caused by an upgrade to a newer [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) version. Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then, because most of the apps used [`NHibernate`](#nhibernate) instead.
+At one point we thought we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). But it wasn't even modified. Probably caused by an upgrade to a newer [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) version. Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then, because most of the apps used [`NHibernate`](#nhibernate) instead.
 
 Using these `API's` transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That would be a `Windows` service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation.
 
