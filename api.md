@@ -819,13 +819,11 @@ internal interface IConnectionStrings
 
 ### OneToManyRelationship
 
-*Inverse property management* means that if a parent property is set: `product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+*Inverse property management* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-The classes [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) can keep bidirectional relationships in sync more or less automatically, which can then be used in your models (rich, entity, API or otherwise). More or less: You would still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business) package, which can be used in various models: rich, entity, API or otherwise.
 
-Package and code examples available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Business).
-
-There might be other ways to do this. [`Entity Framework`](#entity-framework) might do it automatically. [`NHibernate`](#nhibernate) does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code.
+There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns.md#linkto) can also be used. Or hand-writing the syncing in-place. 
 
 ### XML
 
