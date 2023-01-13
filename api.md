@@ -912,7 +912,7 @@ It seems [`ORM's`](#orm) like it when you first read the data out, and then star
 
 #### Bridge Entities
 
-An *bridge* [entity](patterns.md#entity) applies to `n => n` relationhips, usually requiring an additional table to make the link between the [entities](patterns.md#entity):
+An *bridge* [entity](patterns.md#entity) applies to `n => n` relationhips and may require an additional table to make the link between the [entities](patterns.md#entity):
 
 <img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
@@ -932,7 +932,7 @@ class Category
 
 The [`ORM`](#orm) might do a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](aspects.md#exceptions) to go off unfortunately, while [`ORM`](#orm) tries to guard the integrity of the relationship.
 
-These problems almost all go away, if you map to a *bridge [entity](patterns.md#entity)* instead. You can let both [entities](patterns.md#entity) hold a list of *bridge [entities](patterns.md#entity)* instead. In turn, the bridge [entity](patterns.md#entity) would link to the two main [entities](patterns.md#entity). This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship.
+These problems almost all go away, if you map to a *bridge* [entity](patterns.md#entity) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](patterns.md#entity) hold a list of *bridge* [entities](patterns.md#entity) instead. In turn, the bridge [entity](patterns.md#entity) would link to the two main [entities](patterns.md#entity).
 
 ```cs
 class QuestionCategory
@@ -952,11 +952,11 @@ class Category
 }
 ```
 
-It might be is advised that the bridge table not to rely on a composite key of the two `ID's` of the related [entities](patterns.md#entity). A single surrogate `ID` field might do better.
+It might be is advised, that the bridge table not to rely on a *composite key* of the two `ID's`. A single surrogate `ID` field might do better:
 
 <img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
-This is because it gives 1 handle to the combination of 2 thing, giving [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hashing keys, URL's that look more difficult, etc.
+This is because it gives 1 handle to the combination of 2 thing, giving [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash keys, URL's that look less pretty, etc.
 
 #### Binary Fields
 
