@@ -130,6 +130,21 @@ List of API's (and other tech)
 </tr>
 
 <tr>
+  <th><a href=https://gitforwindows.org/">Git for Windows</a></th>
+  <td>Windows version of Git.</td>
+</tr>
+
+<tr>
+  <th><a href="https://gitextensions.github.io/">Git Extensions</a></th>
+  <td>User interface for Git with many options.</td>
+</tr>
+
+<tr>
+  <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
+  <td>User interface for Git with File Explorer extensions.</td>
+</tr>
+
+<tr>
   <th>
   <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">
       Azure DevOps</a>
