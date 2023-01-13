@@ -596,7 +596,7 @@ List of API's (and other tech)
   </th>
   <td>
       A convenient way to map XML to (C#) classes.<br/>
-      Access XML nodes more safely, with null and unicity checks.
+      Access XML nodes more safely, with null and uniqueness checks.
   </td>
 </tr>
 
@@ -827,13 +827,13 @@ There may be other options available. [`NHibernate`](#nhibernate) does not appea
 
 ### XML
 
-`XML` is a file format for storing and transmitting information. Here are some preferences for `API's` to use for `XML`.
+`XML` is a file format for storing and transmitting data. When working with `API's` for `XML` there are a few options to consider.
 
-There is a preference for `XElement` (`LINQ to XML`) over `XmlDocument` except when you want to use `XPath`.
+In most cases, it is recommended to use`XElement` (LINQ to XML) instead of `XmlDocument` unless you specifically need to use `XPath`.
 
-Perhaps prefer the `XmlHelper` methods (from [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) over using other `API's` directly, because the helper will handle nullability and unicity more grafully.
+To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) over other `API's` directly.
 
-`XmlToObjectConverter` and `ObjectToXmlConverter` might also be used. (Also in [`JJ.Framework.Xml`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq)). That might be a simpler way to convert `XML` to an object graph than other `API's`.
+For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXmlConverter` from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) might be useful and offer a simpler solution than other `API's`.
 
 ### Embedded Resources
 
