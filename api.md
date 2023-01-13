@@ -141,7 +141,7 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
-  <td>Git user interface that shows the state near icons in File Explorer.</td>
+  <td>Git user interface that shows state in File Explorer icons.</td>
 </tr>
 
 <tr>
@@ -150,7 +150,7 @@ List of API's (and other tech)
       Azure DevOps</a>
   </th>
   <td>
-      Build pipeline. Pre-release package feed. Original planning boards. Might still host one project not migrated to GitHub.
+      Build pipeline. Pre-release package feed. Original planning boards. Might still host a project not migrated to GitHub.
   </td>
 </tr>
 
