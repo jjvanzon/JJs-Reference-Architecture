@@ -930,7 +930,7 @@ class Category
 }
 ```
 
-The [`ORM`](#orm) can do a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](aspects.md#exceptions) to go off, while [`ORM`](#orm) tries to guard the integrity of the relationship.
+The [`ORM`](#orm) can do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](aspects.md#exceptions) to go off, while [`ORM`](#orm) tries to guard the integrity of the relationship.
 
 These problems almost all go away, if you map a *bridge* [entity](patterns.md#entity) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](patterns.md#entity) hold a list of *bridge* [entities](patterns.md#entity). In turn, the bridge [entity](patterns.md#entity) would link back to the two main [entities](patterns.md#entity):
 
