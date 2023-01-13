@@ -916,7 +916,7 @@ An *bridge* [entity](patterns.md#entity) applies to `n => n` relationhips and ma
 
 <img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
-Using an [`ORM`](#orm), the bridge [entity](patterns.md#entity) might not be visible in the code, but can be managed as two collections inside the two [entities](patterns.md#entity):
+Using an [`ORM`](#orm), the bridge [entity](patterns.md#entity) might not be visible in the code, but can be managed as two collections inside the two main [entities](patterns.md#entity):
 
 ```cs
 class Question
