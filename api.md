@@ -141,7 +141,7 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
-  <td>User interface for Git with File Explorer extensions.</td>
+  <td>Git User interface with File Explorer extensions.</td>
 </tr>
 
 <tr>
