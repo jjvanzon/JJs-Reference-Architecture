@@ -837,7 +837,7 @@ For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXml
 
 ### Embedded Resources
 
-Embedded resources might be handy to prevent having to include loose files with a deployment, but instead compiling the loose files right into your program files' `DLL` or `EXE`. It also protects those resources a little bit better against modifications.
+*Embedded resources* might be handy to prevent including loose files with a deployment. Instead they are compiled right into your program files' `DLL` or `EXE`. It also protects those resources a bit better against modifications.
 
 To include a file as an embedded resource, you could set the following property:
 
@@ -849,7 +849,6 @@ To include a file as an embedded resource, you could set the following property:
 string text = EmbeddedResourceReader.GetText(
   assembly, "Ingredient_UpdateName.sql");
 ```
-
 
 Data
 ----
