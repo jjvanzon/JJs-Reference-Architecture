@@ -25,7 +25,7 @@ Contents
 
 Misc:
 
-- ⚠ [Platform Compatibility](misc-docs/platform-compatibility.md)
-- 📰 [Database Upgrade Excel Example](misc-docs/database-upgrade-excel-example.xlsx)
+- ⚠ [Platform Compatibility](platform-compatibility.md)
+- 📰 [Database Upgrade Excel Example](database-upgrade-excel-example.xlsx)
 
 *JJ van Zon, 2014-2022*
