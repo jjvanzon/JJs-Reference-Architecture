@@ -93,7 +93,7 @@ Introduction
 
 This article lists code style preferences, that might be followed in some of the `JJ` projects.
 
-They mostly conform to `Microsoft` standards described in the following documents:
+They mostly conform to `Microsoft` standards described in these articles:
 
 - [C# Coding Conventions](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
 - [Coding Techniques and Programming Practices](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
@@ -181,7 +181,7 @@ It might be quite important to see in code, whether something is a `base` class.
 
 You might keep *variables* names similar to the `class` names and include the prefixes and suffixes, so it stays clear what they are.
 
-Apart form *pattern names*, here are some other suggested "last names" for `classes`:
+Apart form *pattern names*, here are some other suggested 'last names' for `classes`:
 
 |              | |
 |--------------|-|
@@ -211,7 +211,7 @@ When naming *boolean* variables, consider using prefixes and suffixes:
 | `Never...`      |                       |
 | `Only...`       |                       |
 
-A prefix might not always be put at the beginning. If it looks better, it might be put somewhere else:
+A prefix might not always be put at the beginning. If it looks better, you might put it somewhere else:
 
     LinesAreCopied
 
@@ -259,7 +259,7 @@ ModifiedWhen
 OrderedWhen
 </pre>
 
-But that might look less nice when you add the `Local` and `Utc` suffixes again:
+But that might not look so nice, when you add the `Local` and `Utc` suffixes again:
 
 <pre class="red">
 ModifiedWhenUtc
@@ -275,7 +275,7 @@ For number sequences the following names might be used:
     SortOrder
     Rank
 
-Perhaps avoid the word `Index` on its own, because that's an [`SQL`](api.md#sql) keyword.
+Perhaps don't use the word `Index` on its own, because that's an [`SQL`](api.md#sql) keyword.
 
 ### File-Related Variable Names
 
@@ -606,7 +606,7 @@ switch (x)
 
 </td></tr></table>
 
-Reason: A bit tidier.
+Reason: A bit tidier and the bits better separated.
 
 ### Surplus Enters Between Braces
 
@@ -822,7 +822,7 @@ if (condition)
 </td></tr></table>
 
 Reason:  
-Without braces, only the next line is looped or executed conditionally. The line after that would not participate in the loop or `if`, which is sort of not obvious and might lead to error.
+Without braces, only the next line is looped or executed conditionally. The line after that would not be part of the loop or `if`, which might not be very obvious and might lead to error.
 
 ### Tabular Form Less Preferred
 
@@ -904,7 +904,7 @@ internal class MyClass
 ```
 
 Reason:  
-Managing dependency between parts is quite a concern in software development. We might protect things forming too many connections, by using access modifying keywords, like `private` and `internal`.
+Managing dependency between parts is quite a concern in software development. We might protect things from forming too many connections, by using access modifying keywords, like `private` and `internal`.
 
 ### Explicit Access Modifiers
 
@@ -956,7 +956,7 @@ The use of `internal` members is not recommended within `internal` classes.
 </td></tr></table>
 
 Reason:  
-If the `class` is `internal`, the members are automatically `internal` too. When making the `class` `public`, access modifiers of methods may need to change, creating an opportunity for error.
+If the `class` is `internal`, the members are automatically `internal` too. When making the `class` `public`, more access modifiers may need to change, creating an opportunity for error.
 
 ### Prefer Interface Types
 
@@ -1019,10 +1019,10 @@ It may not be obvious there are nested `classes`, unless they are put at the top
 Give each `class` (or `interface` or `enum`) its own file.
 
 Reason:  
-One might be surprised to find `types` hidden away behind a single file name. It may harm the overview of the different pieces of the software.
+One might be surprised to find `types` hidden away behind a single file name. It may harm the overview of the different pieces of the code.
 
 Exceptions:  
-This guideline does not apply to nested `classes`. Also, a single `class` can be split across multiple files if they are `partial classes`. This guideline can also be ignored if there are a large number of smaller `classes`.
+This guideline does not apply to nested `classes`. Also, a single `class` can be split across multiple files if they are `partial classes`. This guideline may also be ignored if there are a large number of smaller `classes`.
 
 ### No Lone Classes
 
@@ -1034,7 +1034,7 @@ Comments
 
 ### Comments in Summaries
 
-It may be an idea to put comment for members in `<summary>` tags. 
+You might put comment for members in `<summary>` tags. 
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1094,11 +1094,11 @@ int x;
 </td></tr></table>
 
 Reason:  
-Less visual clutter. Reading it might not be worth your time.
+Less visual clutter. Reading it might not be worth the time.
 
 ### No Unused / Outcommented Code
 
-Avoid leaving in unused or outcommented code. If necessary, you can move it to an `Archive` folder.
+Avoid leaving around unused or outcommented code. If necessary, you can move it to an `Archive` folder.
 
 Reason:  
 Unused code might clutter your vision. It may also give the impression, that it was outcommented in error.
@@ -1357,7 +1357,7 @@ Long and wordy code can make it harder to read.
 
 #### Half Namespaces
 
-*Half* a `namespace` might not be preferred either.
+*Half* a `namespace` might not be preferred either:
 
 <table><tr><th class="red">
 
@@ -1377,7 +1377,7 @@ If you'd want to rename the `namespace`, it might create more manual work. The s
 
 #### Unique Class Names
 
-To prevent using a `namespace` in the code line, you might give a `class` a more unique name.
+To prevent using a `namespace` in the code line, you might give a `class` a more unique name:
 
 <table><tr><td markdown="1" class="green">
 
@@ -1390,7 +1390,7 @@ ICmsUserRepository cmsUserRepository =
 
 #### Type Aliases
 
-To disambiguate a `type` name, you might use a `type` *alias* instead. This can prevent long `namespaces` in the code lines.
+To disambiguate a `type` name, you might use a `type` *alias* instead. This can prevent long `namespaces` in the code lines:
 
 <table><tr><th class="green">
 
@@ -1414,7 +1414,7 @@ Long, visually cluttered code lines might be harder to read.
 Member Order
 ------------
 
-To improve readability, try giving the members in your code file a logical order, instead of putting them all in an arbitrary order. Suggestions for organizing the members in your code:
+To improve readability, try giving the members in your code a logical order, instead of putting them all in an arbitrary order. Suggestions for organizing the members in your code:
 
 |                          |     |
 |--------------------------|-----|
@@ -1504,7 +1504,7 @@ if (number != null)
 </td></tr></table>
 
 Reason:  
-The behavior of the code would change considerably, if the variable type is changed to `object`.
+The less preferred one may look nice, but the behavior of the code would change considerably, if the variable type is changed to `object`.
 
 ### Prefer ToArray
 
