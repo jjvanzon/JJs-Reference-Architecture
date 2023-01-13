@@ -90,6 +90,16 @@ List of API's (and other tech)
 </tr>
 
 <tr>
+  <th><a href="https://www.mono-project.com/">Mono</a></th>
+  <td>Version of .NET that worked for other platforms than Windows. Later versions of the .NET might work for more platforms out-of-the-box.</td>
+</tr>
+
+<tr>
+  <th><a href="https://unity.com/">Unity Game Engine</a></th>
+  <td>The first tech at that time, that would work for deploying the code on multiple mobile platforms. It uses the Mono compiler.</td>
+</tr>
+
+<tr>
   <th>
     <a href="https://dotnet.microsoft.com/en-us/languages/csharp">
        C#</a>
@@ -728,31 +738,31 @@ Web
 
 ### AJAX
 
-`AJAX` is a way to load part of a web page, so the whole page does not have te be reloaded. This may make the user interface smoother, than reloading the page entirely every time.
+`AJAX` is a way to load part of a web page, so the whole page does not have te be refreshed. This may make the user interface smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team made our own wrapper `AJAX` methods, around calls to [`jQuery`](https://jquery.com/), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript--typescript) code.
+For `AJAX'ing` such partial web content, our team programmed wrapper `AJAX` functions in [`JavaScript`](#javascript--typescript), around calls to [`jQuery`](https://jquery.com/), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript--typescript) code.
 
 Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 ### JavaScript / TypeScript
 
-`JavaScript` is a programming language with a wide range of applications. Originally it was mostly run in web browsers to optimize the user experience.
+[`JavaScript`](https://www.javascript.com/) is a programming language with a wide range of applications. Originally it was mostly run in web browsers to optimize the user experience.
 
-`JavaScript` was less preferred as an architectural choice. `JavaScript's` weak type system played a role. The strange behavior and trickiness in `JavaScript` (part due to this weak typing) gave it less appeal.
+[`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
 For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
 
-`JavaScript` would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the `JavaScript` might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
+[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
-`TypeScript` may have saved the day to cover for the weak typing from `JavaScript`. But it wasn't tried yet.
+[`TypeScript`](https://www.typescriptlang.org/) may have saved the day to cover for the weak typing from [`JavaScript`](https://www.javascript.com/). But it wasn't tried yet.
 
 But still: logic in one place in one language ([`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)) felt so nice. I guess the love for [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was strong.
 
-The idea was that a full page load was 1st choice, 2nd choice [`AJAX'ing`](#ajax), and last in line `JavaScript` *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> choice [`AJAX'ing`](#ajax), and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
-For this last-resort `JavaScript` we used [`jQuery`](https://jquery.com/) and some home-programmed `JavaScript` libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](https://jquery.com/) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
 
-I realize `JavaScript` is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer `JavaScript` version, `TypeScript`, newer tech and libraries. My heart says I'd rather stick to [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) though.
+I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) though.
 
 
 Misc
@@ -760,9 +770,9 @@ Misc
 
 ### JJ.Framework
 
-`JJ.Framework` are nuts, bolts and screws for software development. There were things missing in [`.NET`](https://dotnet.microsoft.com/), so we programmed it ourselves. These extensions to [`.NET`](https://dotnet.microsoft.com/) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](https://dotnet.microsoft.com/), so we programmed our own. These extensions to [`.NET`](https://dotnet.microsoft.com/) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
-They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind generalize interfaces. They are sort part of the [software architecture](index.md) described here.
+They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](layers.md#loosely-coupled). They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
@@ -809,11 +819,11 @@ internal interface IConnectionStrings
 
 ### OneToManyRelationship
 
-Inverse property management means for instance that if a parent property is set: `product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+*Inverse property management* means that if a parent property is set: `product.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-The classes [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) can keep bidirectional relationships in sync more or less automatically, which you then use in your models (rich, entity, API or otherwise). More or less: You would still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
+The classes [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business) can keep bidirectional relationships in sync more or less automatically, which can then be used in your models (rich, entity, API or otherwise). More or less: You would still have to program classes that derive from `ManyToOneRelationship` and `OneToManyRelationship` and use them a certain way, but the result would be in a navigation property and collection property whose ends will be kept in sync.
 
-Package and code examples available on NuGet [here](https://www.nuget.org/packages/JJ.Framework.Business).
+Package and code examples available on [NuGet](https://www.nuget.org/packages/JJ.Framework.Business).
 
 There might be other ways to do this. [`Entity Framework`](#entity-framework) might do it automatically. [`NHibernate`](#nhibernate) does not appear to do it for us. A [`LinkTo`](patterns.md#linkto) pattern might be used in certain projects. Or hand-writing the syncing code.
 
