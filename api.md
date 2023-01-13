@@ -859,7 +859,7 @@ Data
 
 At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). But it hadn't even been modified. Probably caused by an upgrade to a newer [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) version. Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
-When using these `API's`, transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation.
+When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation.
 
 ### NHibernate
 
