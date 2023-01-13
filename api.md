@@ -165,6 +165,15 @@ List of API's (and other tech)
 
 <tr>
   <th>
+    <a href="https://www.markdownguide.org/cheat-sheet">
+       MarkDown</a></th>
+  <td>
+      Lightweight alternative for HTML. Used for documentation. Compatible with quite some web tech.
+  </td>
+</tr>
+
+<tr>
+  <th>
     <a href="#jjframework">
        JJ.Framework</a></th>
   <td>
