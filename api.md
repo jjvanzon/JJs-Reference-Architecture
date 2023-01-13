@@ -130,7 +130,7 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href=https://gitforwindows.org/">Git for Windows</a></th>
+  <th><a href="https://gitforwindows.org/">Git for Windows</a></th>
   <td>Windows version of Git.</td>
 </tr>
 
