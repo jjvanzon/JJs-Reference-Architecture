@@ -62,7 +62,7 @@ Software can be built up of layers. This article describes how layers could be s
 3 Layers
 --------
 
-Software might be split up into 3 main layers:
+Software can be split up into 3 main layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
