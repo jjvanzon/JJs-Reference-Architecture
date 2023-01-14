@@ -962,7 +962,7 @@ This is because it gives 1 handle to the combination of 2 thing. This gives [`OR
 
 #### Binary Fields
 
-You might not want to map binary and other serialized data fields using [`NHibernate`](#nhibernate), because it can harm performance quite a bit.
+You might not want to map *binary* and other *serialized data fields* using [`NHibernate`](#nhibernate), because it can harm performance quite a bit.
 
 Retrieving some loose fields of an [entity](patterns.md#entity), would also retrieve a blob in that case. As wel as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
@@ -978,13 +978,13 @@ When you retrieved an [entity](patterns.md#entity) from `HNibernate` that has in
 
 You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
 
-But if you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison might also fail.
+But you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison might also fail.
 
 [ID comparison](code-style.md#entity-equality-by-id) could avoid this problem with [entity](patterns.md#entity) equality checks.
 
-This also means that to evaluate the *type*, you are better of unproxying, or it will return the proxy type instead of your [entity](patterns.md#entity) type, which can be confusing.
+To evaluate the *type*, you are better of unproxying as well, or it will compare the proxy type instead of your [entity](patterns.md#entity) type, which can be confusing.
 
-By now maybe it may be clear, why the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
+By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
 
 An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two [entity](patterns.md#entity) types use a mutual `interface` might be an alternative too.
 
