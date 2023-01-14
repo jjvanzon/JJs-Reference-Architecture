@@ -1002,7 +1002,7 @@ If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are wo
 
 Executing queries onto a database is normally done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
-Other techniques: *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](https://dotnet.microsoft.com/) projects, under a sub-folder named `Sql`.
+Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](https://dotnet.microsoft.com/) projects, under a sub-folder named `Sql`.
 
 ![](images/sql-sub-folder.png)
 
@@ -1016,7 +1016,7 @@ The first choice of doing it might be to make the [`SQL`](#sql) file embedded re
 
 ![](images/sql-as-embedded-resource.png)
 
-This makes the [`SQL`](#sql) be deployed together with your `DLL` or `EXE`, because compiles the [`SQL`](#sql) file right into the assembly.
+This deploys the [`SQL`](#sql) together with your `EXE` or `DLL`, because compiles the [`SQL`](#sql) file right into the assembly.
 
 The [`SQL`](#sql) may look as follows:
 
@@ -1043,7 +1043,8 @@ namespace JJ.Demos.SqlExecutor.Sql
 Then an [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) can be created as follows:
 
 ```cs
-ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.EmbeddedResource, connection, transaction);
+ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(
+    SqlSourceTypeEnum.EmbeddedResource, connection, transaction);
 ```
 
 We passed the `SqlConnection` and `SqlTransaction` to it.
@@ -1054,13 +1055,13 @@ Then you can call a method that executes the [`SQL`](#sql):
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names are similar to what you might be used to using `SqlCommand`. You pass [`SQL`](#sql) parameters along with the [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) as an anonymous type:
+The method names are similar to an `SqlCommand`. You pass [`SQL`](#sql) parameters along with the [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) as an anonymous type:
 
 ```cs
 new { id, name }
 ```
 
-The name and type of the variables `id` and `name` correspond to the parameters of the [`SQL`](#sql). You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the [`SQL`](#sql) parameters, they are applied correctly:
+The name and type of the variables `id` and `name` correspond to the parameters of the [`SQL`](#sql). You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the [`SQL`](#sql) parameters:
 
 ```cs
 var ingredient = new IngredientDto
@@ -1092,30 +1093,32 @@ It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](
 #### With NHibernate
 
 If you use [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) in combination with [`NHibernate`](#nhibernate) you might want to 
-use the `NHibernateSqlExecutorFactory` instead of the default `SqlExecutorFactory`:
+use the [`NHibernateSqlExecutorFactory`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) instead of the default [`SqlExecutorFactory`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient):
 
 ```cs
 ISession session = ...;
 
-ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.EmbeddedResource, session);
+ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
+    SqlSourceTypeEnum.EmbeddedResource, session);
 ```
 
-This version uses an [`NHibernate`](#nhibernate) `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as the [`SQL`](#sql) that [`NHibernate`](#nhibernate) executes, we make it aware of the `ISession` here.
+This version uses an [`NHibernate`](#nhibernate) `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as the [`SQL`](#sql) that [`NHibernate`](#nhibernate) executes, we made it aware of the `ISession`.
 
-A variation of this was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate).
+A variation of this [`NHibernateSqlExecutorFactory`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate).
 
 #### Files instead of Embedded Resources
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
-It may usually a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use *files* or *literal strings*.
+It might be a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use *files* or *literal strings:*
 
 ![](images/sql-as-content-file.png)
 
 Here is code to create the [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) and execute an [`SQL`](#sql) file:
 
 ```cs
-ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.FileName, session);
+ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
+    SqlSourceTypeEnum.FileName, session);
 
 sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient\_Update.sql", new { id, name });
 ```
@@ -1129,30 +1132,31 @@ So the `SqlEnum` cannot be used here. You'd use the (relative) file path here.
 It is not recommended to use [`SQL`](#sql) strings in your code. But it is possible all the same using code like this:
 
 ```cs
-ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(SqlSourceTypeEnum.String, session);
+ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
+    SqlSourceTypeEnum.String, session);
 
 sqlExecutor.ExecuteNonQuery("update Ingredient set Name = @name where ID = @id", new { id, name });
 ```
 
 In that case no [`SQL`](#sql) files have to be included in your project.
 
-But it might make it harder to track down all the [`SQL`](#sql) of your project, optimize it and using [`SQL`](#sql) strings may also circumvents another layer of protection against [`SQL`](#sql) injection attacks.
+But it might make it harder to track down all the [`SQL`](#sql) of your project and optimize it. Using [`SQL`](#sql) strings may also circumvent another layer of protection against [`SQL`](#sql) injection attacks.
 
 #### SQL String Concatenation
 
 *[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](https://dotnet.microsoft.com/) to prevent unwanted insertion of scripting. [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
-Here is a trick to potentially prevent using string concatenation as an option: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
+Here is a trick to prevent using `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
 
 ```sql
 (@value is null or Value = @value)
 ```
 
-But there might be exceptional cases where [`SQL`](#sql) string concatenation could be favorable. Reasons to do so might include:
+But there might be exceptional cases where [`SQL`](#sql) string concatenation would be favorable. Reasons to do so might include:
 
-- If you have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it, concatenation may prevent rewritng the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make change properly, which may easily be overlooked.
-- Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name* not known beforehand.
-- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule not to.
+- If you have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it, concatenation may prevent rewriting the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make change properly, which may easily be overlooked.
+- Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name*.
+- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule.
 
 One variation of [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
@@ -1162,7 +1166,7 @@ The [`repository`](patterns.md#repository) pattern is used in this [architecture
 
 The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data), documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
-For [`SQL`](#sql) executing in cooperation with [`repositories`](patterns.md#repository) using [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) there is a way described here [here](#sql).
+Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) is described [here](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
@@ -1227,6 +1231,6 @@ Separating the general things from the technology-specific things.
 
 #### Database Upgrade Scripts
 
-[`SQL`](#sql) executed solely for database upgrading, might not be put in the main projects, but a project/folder on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
+[`SQL`](#sql) executed solely for database upgrading, might not be put in the main projects, but a project on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
 
 [back](.)
