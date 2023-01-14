@@ -994,7 +994,7 @@ Data access in this [architecture](index.md) is favored behind generic interface
 
 #### Conclusion
 
-If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself, or see much of it in the code.
+If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself.
 
 ### SQL
 
