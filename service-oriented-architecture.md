@@ -92,11 +92,11 @@ ESB Model
 
 On top of a canonical model, we might need more facilities. The ESB model could offer a model for administrating connection settings and register enterprises that can log in to our system to get access to our services.
 
-Next will be listed the main entities of this model.
+Next will be listed the main [entities](#entity) of this model.
 
 ### Enterprises
 
-Every enterprise involved in this service architecture would be registered in the ESB database. Some of these enterprises will actually log into our system. Those will get an associated User entity with (encrypted) credentials stored in it.
+Every enterprise involved in this service architecture would be registered in the ESB database. Some of these enterprises will actually log into our system. Those will get an associated `User` [entity](patterns.md#entity) with (encrypted) credentials stored in it.
 
 ### ConnectionTypes
 
@@ -108,7 +108,7 @@ Every individual connection between two parties would be registered in the Conne
 
 ### Keys
 
-Often systems have different identifiers for e.g. orders or other objects. There may be a need to map a reference number from one system to the reference number of another system. An ESB model could have entities and logic to manage these key mappings.
+Often systems have different identifiers for e.g. orders or other objects. There may be a need to map a reference number from one system to the reference number of another system. An ESB model could have [entities](#entity) and logic to manage these key mappings.
 
 ### Transmissions
 
@@ -132,26 +132,26 @@ Namespaces
 
 These namespaces use a hypothetical Ordering system as an example.
 
-|                                               |     |
-|-----------------------------------------------|-----|
-| __JJ.Services__                               | Root namespace for web services / WCF services
-| __JJ.LocalServices__                          | Root namespace for windows services. (Not part of the service architecture, but this is where that other type of service goes.)
-| __JJ.Data.Canonical__                         | Where are canonical entity models are defined.
-| __JJ.Data.Esb__                               | Entity model that stores Enterprises, Users, ConnectionTypes, Connections, etc. Basically the configuration settings of the architecture.
-| __JJ.Data.Esb.NHibernate__                    | Stores the Esb entity model using [`NHibernate`](api.md#nhibernate).
-| __JJ.Data.Esb.SqlClient__                     | [`SQL`](api.md#sql) queries for working with the stored Esb entity model.
-| __JJ.Business.Canonical__                     | Some shared logic that operates on canonical models.
-| __JJ.Business.Esb__                           | Business logic for managing the Esb model.
-| __JJ.Services.Ordering.Interface__            | Defines [interfaces](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [C#](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that abstract the way messages are sent between different ordering system. These interfaces use the canonical models.
-| __JJ.Services.Ordering.Dispatcher__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
-| __JJ.Services.Ordering.Email__                | A specific implementation of an ordering interface, behind which we send the order by e-mail.
-| __JJ.Services.Ordering.SuperAwesomeProtocol__ | A specific implementation of an ordering interface, behind which we implement the hypothetical 'super awesome protocol' for sending orders.
-| __JJ.Services.Ordering.Wcf__                  | A WCF service that allows you to communicate with the multi-dispatch ordering system.
-| __JJ.Services.Ordering.Wcf.Interface__        | Defines the interface of the WCF service that allows you to communicate with the multi-dispatch ordering system. This service interface can is used by both service and client.
-| __JJ.Services.Ordering.Wcf.Client__           | Allows code to connect to the WCF service using the strongly typed service interface.
-| __JJ.Services.Ordering.JsonRest__             | Exposes the multi-dispatch ordering service using the Json and Rest protocols.
-| __JJ.Services.Ordering.WebApi__               | There is no reason Web API should not be involved in this service architecture, in fact, the idea of WCF being the default for services, might not be a very long-lived.
-| __JJ.Presentation.Shop.AppService.Wcf__       | A special kind of service is an app service, that exposes [presentation logic](layers.md#presentation-layer) instead of business logic and returns ViewModels.
+|                                                 |     |
+|-------------------------------------------------|-----|
+| __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services
+| __`JJ.LocalServices`__                          | Root `namespace` for Windows services. (Not part of the service architecture, but this is where that other type of service goes.)
+| __`JJ.Data.Canonical`__                         | Where are canonical [entity models](patterns.md#entity) are defined.
+| __`JJ.Data.Esb`__                               | [Entity model](patterns.md#entity) that stores `Enterprises`, `Users`, `ConnectionTypes`, `Connections`, etc. Basically the configuration settings of the architecture.
+| __`JJ.Data.Esb.NHibernate`__                    | Stores the `Esb` [entity model](patterns.md#entity) using [`NHibernate`](api.md#nhibernate).
+| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the stored `Esb` [entity model](patterns.md#entity).
+| __`JJ.Business.Canonical`__                     | Some shared logic that operates on canonical models.
+| __`JJ.Business.Esb`__                           | Business logic for managing the `Esb` model.
+| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` system. These interfaces use the canonical models.
+| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
+| __`JJ.Services.Ordering.Email`__                | A specific implementation of an `Ordering` `interface`, behind which we send the order by e-mail.
+| __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | A specific implementation of an `Ordering` `interface`, behind which we implement the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
+| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the multi-dispatch ordering system.
+| __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service that allows you to communicate with the multi-dispatch `Ordering` system. This service `interface` can is used by both service and client.
+| __`JJ.Services.Ordering.Wcf.Client`__           | Allows code to connect to the `WCF` service using the strongly typed service `interface`.
+| __`JJ.Services.Ordering.JsonRest`__             | Exposes the multi-dispatch `Ordering` service using the `Json` and `Rest` protocols.
+| __`JJ.Services.Ordering.WebApi`__               | There is no reason `Web API` should not be involved in this service architecture, in fact, the idea of `WCF` being the default for services, might not be a very long-lived.
+| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service is an `AppService`, that exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) and returns [`ViewModels`](patterns.md#viewmodel).
 
 
 Service-Related Patterns
@@ -177,7 +177,7 @@ This concept is used in this architecture to give a service interface an even si
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between a possible application architecture this kind of service architecture. In the application architecture the infrastructural context may be determined by the top-level project and passed down to the deeper layers as for instance repository interfaces or interfaces on [security](aspects.md#security), while in the service architecture the infrastructural context might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance JJ.Services.Ordering.Email does not expose that there will be smpt server setup. You cannot see that from the constructor or interface. The service would handle all that internally.
+Not so much a pattern, but a difference in handling infrastructure setup between a possible application architecture this kind of service architecture. In the application architecture the infrastructural context may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or interfaces on [security](aspects.md#security), while in the service architecture the infrastructural context might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance JJ.Services.Ordering.Email does not expose that there will be smpt server setup. You cannot see that from the constructor or interface. The service would handle all that internally.
 
 ### Tag Model
 
@@ -198,7 +198,7 @@ You might loosely link the tags:
 TODO
 ----
 
-< TODO: Service Architecture: Three-Stage KeyMapping vs. Custom KeyMapping may be something to write about. It may explains why you do not need an even more generic Key mapping, for intance:
+< TODO: Service Architecture: Three-Stage `KeyMapping` vs. Custom `KeyMapping` may be something to write about. It may explains why you do not need an even more generic `KeyMapping`, for intance:
 
     CustomerOrderNumber
     SupplierOrderNumber

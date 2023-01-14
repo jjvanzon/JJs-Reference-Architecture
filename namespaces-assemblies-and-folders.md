@@ -49,7 +49,7 @@ The 2<sup>nd</sup> level in the namespacing splits up into the following parts:
 
 |             |             |
 |-------------|-------------|
-| [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the entity models and storage of data.
+| [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the [entity](patterns.md#entity) models and storage of data.
 | [JJ.__Business__](layers.md#business-layer) | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
 | [JJ.__Presentation__](layers.md#presentation-layer) | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
@@ -232,7 +232,7 @@ Summary
                 |- JJ.TheProject.Data.csproj
                 |
                 |- Entities
-                |- Repositories
+                |- Mappings
                 |- Helpers
 
 Project file:
@@ -246,7 +246,7 @@ Root namespace:
 Sub-namespaces:
 
     JJ.TheProject.Data.Entities
-    JJ.TheProject.Data.Repositories
+    JJ.TheProject.Data.Mappings
     JJ.TheProject.Data.Helpers
 
 ### Structure

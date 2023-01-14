@@ -115,7 +115,7 @@ Casing
 | Abbreviations not preferred                                       |
 | Abbreviations of 2 letters with capitals.                         | `ID`
 | Abbreviations of 3 letters or more in pascal case.                | `Mvc`
-| [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) partial view names in pascal case, starting with underscore | `_MyPartialView`
+| [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) partial [`View`](patterns.md#views) names in pascal case, starting with underscore | `_MyPartialView`
 | For long identifiers, underscores to separate 'the pieces'        | `Sine_OperatorCalculator_VarFrequency`
 
 
@@ -151,8 +151,8 @@ Suggestions for verbs:
 | `Save`      |
 | `Set`       |
 | `Try`       |
-| `TryGet`    |
-| `Validate`  | Generating validation messages for user-input errors.
+| [`TryGet`](patterns.md#tryget) | Returns `null` if an `object` does not exist.
+| `Validate`  | Generating [`validation`](aspects.md#validation) messages for user-input errors.
 
 ### Class Names
 
@@ -190,7 +190,7 @@ Apart form *pattern names*, here are some other suggested 'last names' for `clas
 | `Invoker`    | Something that invokes a method, possibly based on input or specific conditions.
 | `Provider`   | A `class` that provides something. It can be useful to have a separate `class` that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something is retrieved conditionally or if retrieval is postponed until later.
 | `Asserter`   | A `class` meant to throw `Exceptions` under certain conditions.
-|              | Any verb might become a `class` name, by turning it into a verby noun, e.g. `Convert` => `Converter`.
+|              | Any verb might become a `class` name, by turning it into a verby noun, e.g. `Convert` => [`Converter`](patterns.md#converter).
 
 ### Boolean Names
 
@@ -305,7 +305,7 @@ Variable names that describe parts of *file paths* might easily become ambiguous
 | `existing...`            | Denoting that something already existed (in the database).
 | `new...`                 | Denoting that the object was just newly created.
 | `original...`            | May denote that this is an original value that was (temporarily) replaced.
-| `...WithRelatedEntities`<br>`...WithRelatedObjects` | Indicating that it does more than handling a single object. Related objects linked to it are also included.
+| [`...WithRelatedEntities`](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)<br>[`...WithRelatedObjects`](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) | Indicating that it does more than handling a single object. Related objects linked to it are also included.
 | `Versatile...`           | `Versatile` in that it might handle a multitude of types or situations.
 | `...With...`             | When making a specialized `class` that works well for a specific situation, you might use the word `With` in the `class` name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
 | `...Polymorphic`         | Handling a variety of (derived) `types`, which may need different ways of processing.

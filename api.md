@@ -45,7 +45,7 @@ This article describes some of the API and technology choices in this [software 
     - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
     - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
     - [SQL String Concatenation](#sql-string-concatenation)
-    - [SQL behind Repositories](#sql-behind-repositories)
+    - [SQL Behind Repositories](#sql-behind-repositories)
     - [Database Upgrade Scripts](#database-upgrade-scripts)
 
 
@@ -370,7 +370,7 @@ List of API's (and other tech)
        PagerViewModelFactory</a>
   </th>
   <td>
-      Can construct a pager view model with properties like
+      Can construct a PagerViewModel with properties like
       CanGoToFirstPage, CanGoToPreviousPage, CanGoToNextPage, CanGoToLastPage.
   </td>
 </tr>
@@ -524,7 +524,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/using-the-debuggerdisplay-attribute">
+    <a href="patterns.md#debuggerdisplays">
        DebuggerDisplays</a>
   </th>
   <td>
@@ -585,7 +585,7 @@ List of API's (and other tech)
        JJ.Framework.HtmlToXml</a>
   </th>
   <td>
-      The HtmlToXmlConverter class steals from SgmlReader. It does what it says.
+      The HtmlToXmlConverter class steals from SgmlReader. It does what the name implies.
   </td>
 </tr>
 
@@ -740,7 +740,7 @@ Web
 
 `AJAX` is a way to load part of a web page, so the whole page does not have te be refreshed. This may make the user interface smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team programmed wrapper `AJAX` functions in [`JavaScript`](#javascript--typescript), around calls to [`jQuery`](https://jquery.com/), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript--typescript) code.
+For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) `AJAX` functions in [`JavaScript`](#javascript--typescript), around calls to [`jQuery`](https://jquery.com/), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript--typescript) code.
 
 Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
@@ -750,7 +750,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. Views were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
+For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. [`Views`](patterns.md#views) were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
 
 [`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
@@ -821,7 +821,7 @@ internal interface IConnectionStrings
 
 *Inverse property management* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business) package, which can be used in various models: rich, [entity](patterns.md#entity), API or otherwise.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business) package, which can be used in various models: [rich](patterns.md#rich-models), [entity](patterns.md#entity), `API` or otherwise.
 
 There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns.md#linkto) can also be used. Or hand-writing the syncing in-place. 
 
@@ -833,7 +833,7 @@ In most cases, it is recommended to use`XElement` (LINQ to XML) instead of `XmlD
 
 To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) over other `API's` directly.
 
-For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXmlConverter` from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) might be useful and offer a simpler solution than other `API's`.
+For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXmlConverter` from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) might be useful and offer a simpler solution than other `API's`.
 
 ### Embedded Resources
 
@@ -843,7 +843,7 @@ To include a file as an embedded resource, you could set the following property 
 
 ![](images/sql-as-embedded-resource.png)
 
-[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a helper class [`EmbeddedResourceReader`](https://www.nuget.org/packages/JJ.Framework.Common). It makes it a little bit easier to access those resources from your code:
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper class`](patterns.md#helper) [`EmbeddedResourceReader`](https://www.nuget.org/packages/JJ.Framework.Common). It makes it a little bit easier to access those resources from your code:
 
 ```cs
 string text = EmbeddedResourceReader.GetText(
@@ -1160,7 +1160,7 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 
 One variation of [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
-#### SQL behind Repositories
+#### SQL Behind Repositories
 
 The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
 
@@ -1217,7 +1217,7 @@ This would result in:
 
 - Keeping all the queries of an [entity](patterns.md#entity) together in a [`repository`](patterns.md#repository).
 - Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entity) behind an [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
-- All that data access would be hidden `repository interfaces` decoupling the persistence technology.
+- All that data access would be hidden [`repository interfaces`](patterns.md#repository-interfaces) decoupling the persistence technology.
  
 It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
 

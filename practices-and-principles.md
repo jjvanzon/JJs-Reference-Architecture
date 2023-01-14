@@ -200,7 +200,7 @@ Responsibilities
 
 This is the concept that you split your code into pieces and create separate classes and methods. It is perhaps the single most important design principle of this [software architecture](index.md).
 
-Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into entities, for instance entities like Order, Product, Customer, but this is not necessarily leading for the split up into functionality.
+Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into [entities](#entity), for instance [entities](#entity) like `Order`, `Product`, `Customer`, but this is not necessarily leading for the split up into functionality.
 
 Separation of concerns can also be applied to technical aspects, such as [validation](patterns.md#validators), [calculation](aspects.md#calculation) and [security](aspects.md#security). For instance: you can split up the code to check the [validity](patterns.md#validators) of an order's data from the code that [calculates](aspects.md#calculation) the total price of the order. The split up into technical concerns is usually similar to the split up into [design patterns](patterns.md).
 
@@ -209,18 +209,18 @@ Separation of concerns can also be applied to technical aspects, such as [valida
 In this [architecture](index.md) we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
-|              | Dto         | Mapping         | Validator         | ViewModel         | Presenter         | ... |
-|--------------|-------------|-----------------|-------------------|-------------------|-------------------|-----|
-| __Order__    | OrderDto    | OrderMapping    | OrderValidator    | OrderViewModel    | OrderPresenter    | ... |
-| __Product__  | ProductDto  | ProductMapping  | ProductValidator  | ProductViewModel  | ProductPresenter  | ... |
-| __Customer__ | CustomerDto | CustomerMapping | CustomerValidator | CustomerViewModel | CustomerPresenter | ... |
-| __...__      | ...         | ...             | ...               | ...               | ...               | ... |
+|                | [`Dto`](patterns.md#dto) | [`Mapping`](patterns.md#mapping) | [`Validator`](patterns.md#validators) | [`ViewModel`](patterns.md#viewmodel) | [`Presenter`](patterns.md#presenter) | `...` |
+|----------------|-----|-----|-----|-----|-----|-----|
+| __`Order`__    | `OrderDto`    | `OrderMapping`    | `OrderValidator`    | `OrderViewModel`    | `OrderPresenter`    | `...` |
+| __`Product`__  | `ProductDto`  | `ProductMapping`  | `ProductValidator`  | `ProductViewModel`  | `ProductPresenter`  | `...` |
+| __`Customer`__ | `CustomerDto` | `CustomerMapping` | `CustomerValidator` | `CustomerViewModel` | `CustomerPresenter` | `...` |
+| __`...`__      | `...`         | `...`             | `...`               | `...`               | `...`               | `...` |
 
-Plus: you can have specialized variations of these classes, for instance: OrderEditPresenter, SubscriptionProductValidator.
+Plus: you can have specialized variations of these classes, for instance: `OrderEditPresenter`, `SubscriptionProductValidator`.
 
-This is a very maintainable structure, because everybody that understands the system of organization, can find the code exactly where he would expect it. A change has low impact, because it can at most impact code that references that specific class. Code is better reusable and recombinable. E.g. you can reuse the same validations in multiple places or use specific validations in specific situations.
+This is a very maintainable structure, because everybody that understands the system of organization, can find the code exactly where he would expect it. A change has low impact, because it can at most impact code that references that specific class. Code is better reusable and recombinable. E.g. you can reuse the same [validations](patterns.md#validators) in multiple places or use specific [validations](patterns.md#validators) in specific situations.
 
-Using this split up into classes could impact data integrity negatively, since every class can be independently used, and there is not one thing that guards all the rules. The solution is to use facades that guard (most of) the integrity rules by delegating to smaller business logic objects. The separate concern itself is actually better guarded, since a small class does not get entangled with other code, because it handled totally separately.
+Using this split up into classes could impact data integrity negatively, since every class can be independently used, and there is not one thing that guards all the rules. A solution could be to use [`Facades`](patterns.md#facade) that guard (most of) the integrity rules by delegating to smaller business logic objects. The separate concern itself is actually better guarded, since a small class does not get entangled with other code, because it handled totally separately.
 
 #### Assemblies
 
@@ -251,9 +251,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the entity model on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the [entity model](patterns.md#entity) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store entity models differently depending on the infrastructural context. On a mobile platform we might store an entity model in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](https://www.microsoft.com/en-us/sql-server) Server using [`NHibernate`](api.md#nhibernate).
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns.md#entity) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns.md#entity) in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](https://www.microsoft.com/en-us/sql-server) Server using [`NHibernate`](api.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -263,7 +263,7 @@ By further splitting up our assemblies we can reuse the Ordering back-end in mul
 
 A base that that is a union of the functionality needed in the derived classes, instead of containing just the basic functionality. 
 
-Consider moving code to the derived classes that need it, delegating to different helper classes instead of putting everything in the base class, or as a last resort add intermediate inheritance levels, gradually extending functionality.
+Consider moving code to the derived classes that need it, delegating to different [`Helper classes`](patterns.md#helper) instead of putting everything in the `base class`, or as a last resort add intermediate inheritance levels, gradually extending functionality.
 
 `< TODO: Rephrase this and make it part of the main text: You should use inheritance to share behavior / private implementation, not as a way make methods available from multiple places, or to give a generalized name to a set of types, even though they still have separate unique behavior. You should also not create a base class, that is about a side-issue, because then you have reserved your one inheritance slot with something unimportant. >`
 
@@ -273,7 +273,7 @@ An object that is used everywhere and can do anything. Consider splitting it up 
 
 ### Combination of Concerns
 
-After separating all different aspects of both functionality and technique, you can recombine these separated aspects in specific spots in the code: facades or presenters or in very specific classes that are a machine to perform very specific functionalities in a completely controlled way. See 'Facades' under 'Aspects ' and 'Facade' under 'Patterns'.
+After separating all different aspects of both functionality and technique, you can recombine these separated aspects in specific spots in the code: [`Facades`](patterns.md#facade) or [`Presenters`](patterns.md#presenter) or in very specific `classes` that are a like a machine to perform very specific functionalities in a controlled way. See [`Facades`](aspects.md#facades) in [Aspects](aspects.md) and [`Facade`](patterns.md#facade) in [Patterns](patterns.md).
 
 ### 2 API's for the Same Thing (👎)
 
@@ -301,9 +301,9 @@ Granularity can be compared to sand. Large pebbles are large granules, while fin
 
 ### Helperitis (👎)
 
-Helpers are static methods with static functions that support a specific aspect of programming for which no more than a flat list of methods is required.
+[`Helpers`](patterns.md#helper) are `static classes` with `static` methods that support a specific aspect of programming for which no more than a flat list of methods is required.
 
-Helpers are ofcourse helpful, but sometimes you can end up with code in which everything is delegates to helpers, obscuring what is actually going on.
+[`Helpers`](patterns.md#helper) are, ofcourse, 'helpful', but sometimes you can end up with code in which everything is delegates to [`Helpers`](patterns.md#helper), obscuring what is actually going on.
 
 ### Spread Responsibility (👎)
 
@@ -357,16 +357,16 @@ Code should be strict when it comes to nullability. The general message is: chec
 
 #### Basic Guidelines
 
-- Entity models are anti-encapsulated: none of the data is protected.
+- [Entity models](patterns.md#entity) are anti-encapsulated: none of the data is protected.
 - A data store often guards nullability.
-- Validators should also guard nullability.
-- Those two things determine whether an entity property is not nullable.
-- You might mark the entity property with the word 'not nullable' in its summary.
+- [`Validators`](patterns.md#validators) should also guard nullability.
+- Those two things determine whether an [entity](patterns.md#entity) property is not nullable.
+- You might mark the [entity](patterns.md#entity) property with the word 'not nullable' in its summary.
 - For not nullable properties you never have to do null-checks in your business logic, even though in theory null could be assigned.
-- List-properties in the entity models require no null checks at all. They should be created in the constructor of the entity class and we simply assume nobody will assign null to it.
-- This means that serious business logic should not be executed on entities that have not been validated yet. When you just retrieved entities from the data store, you may assume the data is valid.
+- List-properties in the [entity models](patterns.md#entity) require no null checks at all. They should be created in the constructor of the [entity class](patterns.md#entity) and we simply assume nobody will assign null to it.
+- This means that serious business logic should not be executed on [entities](patterns.md##entity) that have not been [validated](patterns.md#validators) yet. When you just retrieved [entities](#entity) from the data store, you may assume the data is valid.
 - This saves us a lot of null-checks, which makes code more readable.
-- The other entity properties are considered nullable.
+- The other [entity](patterns.md#entity) properties are considered nullable.
 - For nullable properties, business logic must have an alternative flow. Some business logic could throw an exception if a null is encountered. Other business logic might have to be null-tollerant and skip certain things. (Reflect this in the code by using words like 'Try' and 'IfNeeded'.)
 - Null-checks can be omitted if you know that a variable was verified before. For instance: if you throw an exception in the constructor in case an argument is null, you can leave out null-checks in the rest of your class.
 
@@ -378,7 +378,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to DTO's as do for entities. Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
+- Usually the same rules apply to [DTO's](patterns.md#dto) as do for [entities](#entity). Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
 
 #### Strings
     
@@ -411,13 +411,13 @@ Here are rules for null-checks for other constructs:
 
 #### ViewModels
 
-- `ViewModels` that are passed to `Presenters` may contain nulls.
-- You can use the `NullCoalesce` pattern to resolve the nulls before processing the view model object, so that null-checks can be omitted from the rest of the code.
+- [`ViewModels`](patterns.md#viewmodel) that are passed to [`Presenters`](patterns.md#presenter) may contain nulls.
+- You can use the [`NullCoalesce`](patterns.md#nullcoalesce-viewmodels) pattern to resolve the nulls before processing the [`ViewModel`](patterns.md#viewmodel) object, so that null-checks can be omitted from the rest of the code.
 
 #### Custom-Programmed Framework API's
 
 - For `API's` in [our own framework](api.md#jjframework) you can count on an object when you call a `Get` method.
-- You'd have to take `null` into consideration when you call `TryGet`.
+- You'd have to take `null` into consideration when you call [`TryGet`](patterns.md#tryget).
 
 #### Your Own Application Code
     
@@ -441,7 +441,7 @@ In certain cases with very sensitive, error-prone code you could opt for the pro
 
 ### Reject Input, Don't Correct It
 
-Do not correct input data, but require that input data is correctly entered. Code that creates tolerance towards user entry errors can quickly get out of hand, while simply rejecting the use input with a validation message would suffice. It also gives the user more control over what happens, instead of the system's wrongly interpreting the user input.
+Do not correct input data, but require that input data is correctly entered. Code that creates tolerance towards user entry errors can quickly get out of hand, while simply rejecting the use input with a [`validation message`](patterns.md#validators) would suffice. It also gives the user more control over what happens, instead of the system's wrongly interpreting the user input.
 
 
 Interfacing
@@ -451,7 +451,7 @@ Interfacing
 
 ### 'All' and 'Many'
 
-The word 'All' is often misused in repository method names. Once just a selection is returned, it is not 'All' anymore. Use the word 'Many'. So not GetAllBySearchText. Instead use GetManyBySearchText.
+The word `All` is sometimes misused in [`Repository`](patterns.md#repository) method names. Once just a selection is returned, it is not `All` anymore. Use the word `Many`. So not `GetAllBySearchText`. Instead use `GetManyBySearchText`.
 
 `< TODO: If multiple items are returned by for instance repository methods, remember that the multiplicity should be reflected in the method name. For instance a method GetByCritia could be intended to return a list, but you cannot really see it from the name. One could assume it returns a single item. You could for instance call it GetManyByCriteria in that case, so you can see from the name that can return more than one. There are other ways to express multiplicity, such as the word 'List' or 'Collection' or a plural name, but as long as it is clear. >`
 
@@ -473,24 +473,24 @@ Simply giving something a name that reveals its inner workings is a common form 
 
 A longer name in code is better than a short, unspecific one. Even through you may think brevity supports readability, if it creates ambiguity, a longer, unambiguous name usually works out better.
 
-For entity models, consider the name Order.OrderProducts, not Order.Products if the entity types are Order and OrderProduct, even though the first part of the expression 'Order.Products' already seems to imply it that it would be an OrderProduct. Because next to an OrderProduct entity, the model probably also has a Product entity and it would be very confusing that Order.Products would be a list of OrderProducts, as you would sooner think it is a list of Products from the name. Also it makes it harder to 'guess' what an entity model property is, if you abbreviate the names. Just use the full entity type name for property names and it will be far less confusing, especially to the ones that did not program your model. Again: yes, even when it seems obvious to *you*.
+For [entity models](patterns.md#entity), consider the name Order.OrderProducts, not Order.Products if the [entity types](patterns.md#entity) are Order and OrderProduct, even though the first part of the expression 'Order.Products' already seems to imply it that it would be an OrderProduct. Because next to an OrderProduct [entity](patterns.md#entity), the model probably also has a Product [entity](patterns.md#entity) and it would be very confusing that Order.Products would be a list of OrderProducts, as you would sooner think it is a list of Products from the name. Also it makes it harder to 'guess' what an [entity model](patterns.md#entity) property is, if you abbreviate the names. Just use the full [entity type](patterns.md#entity) name for property names and it will be far less confusing, especially to the ones that did not program your model. Again: yes, even when it seems obvious to *you*.
 
 ### Conceptual Names (👎)
 
 'Conceptual names' are bad practice. It is hard to define what that means. But it has to do with the names not being specific enough or only vaguely related to what it is really about.
 
-Often combining a domain term with a design pattern gives you a more specific name:
+Often combining a domain term with a [design pattern](patterns.md) gives you a more specific name:
 
     CustomerViewModel
 
-This instead of calling it just Customer or just ViewModel.
+This instead of calling it just `Customer` or just [`ViewModel`](patterns.md#viewmodel).
 
 Here are a few more examples:
 
 - `CustomerListReload`
-    - It was a controller action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
+    - It was a [`Controller`](patterns.md#controller) action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
-- A view named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a Controller Action, the [`.NET`](https://dotnet.microsoft.com/) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
+- A [`View`](patterns.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns.md#controller) `Action`, the [`.NET`](https://dotnet.microsoft.com/) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
 
 ### CRUD
@@ -596,10 +596,10 @@ Now we have accomplished the same thing, only instantiation is explicit and not 
 
 ### Entity Design
 
-< Entity design:
+`< Entity design:`
 
-- (Dutch) Aangeven dat het beperken van tabellen belangrijker is dan constraints bewaken op database niveau omdat alles wat je in de database structuur aanmaakt, daar kom je 'nooit meer' vanaf en alles wat je in business logic oplost is makkelijker aan te passen.
-- Keep models simple clean and stripped of all accessories, in particular entity models and especially canonical models. >
+`- (Dutch) Aangeven dat het beperken van tabellen belangrijker is dan constraints bewaken op database niveau omdat alles wat je in de database structuur aanmaakt, daar kom je 'nooit meer' vanaf en alles wat je in business logic oplost is makkelijker aan te passen.`
+`- Keep models simple clean and stripped of all accessories, in particular entity models and especially canonical models. >`
 
 ### Execution Order Dependence (👎)
 
@@ -615,15 +615,15 @@ Specialized case: Overloads that are never used, should be removed from the code
 
 ### Hatch / 'Doorgeefluik' (👎)
 
-A method, that does not do anything but delegate to another method. For example: let's say there is a method GetImage in both an ImageRepository and an ImageFacade. All ImageFacade.GetImage does is call ImageRepository.GetImage.
+A method, that does not do anything but delegate to another method. For example: let's say there is a method `GetImage` in both an `ImageRepository` and an `ImageFacade`. All `ImageFacade.GetImage` does is call `ImageRepository.GetImage`.
 
-The thinking error might be that you want to consistently call the ImageFacade for everything and that it is a good preparation for the future, because the Facade might add extra rules later.
+The thinking error might be that you want to consistently call the `ImageFacade` for everything and that it is a good preparation for the future, because the Facade might add extra rules later.
 
-But it usually a better plan to directly call ImageRepository.GetImage and leave out the method ImageFacade.GetImage. If you leave in the method that does nothing, then when a deeper layer changes, you'd have to change a lot of pointless layers above it. Also by adding a method to the Facade class, you create the false illusion, that more is done than just retrieving an image, giving you a lessened sense control what is going on.
+But it usually a better plan to directly call `ImageRepository`.`GetImage` and leave out the method `ImageFacade.GetImage`. If you leave in the method that does nothing, then when a deeper layer changes, you'd have to change a lot of pointless layers above it. Also by adding a method to the [`Facade class`](patterns.md#facade), you create the false illusion, that more is done than just retrieving an image, giving you a lessened sense control what is going on.
 
 If you see a method that does nothing but delegate to another method you have to consider removing this method.
 
-However, you could also consider that in this case maybe the hatch is a good thing. If the general rule is to always go through the facade then a method in the facade may be expected. For a simple get by ID you may be better off using the repository directly, otherwise you get dependencies on facades where you do not need them, and this due to the nature of facades, which can do anything, automatically creates a large degree of dependency on many different parts of the code.
+However, you could also consider that in this case maybe the hatch is a good thing. If the general rule is to always go through the [`Facade`](patterns.md#facade) then a method in the [`Facade`](patterns.md#facade) may be expected. For a simple get by `ID` you may be better off using the [`Repository`](patterns.md#repository) directly, otherwise you get dependencies on [`Facades`](patterns.md#facade) where you do not need them, and this due to the nature of [`Facades`](patterns.md#facade), which can do anything, automatically creates a large degree of dependency on many different parts of the code.
 
 ### Hollow Interface
 
@@ -673,7 +673,7 @@ So many overloads you cannot see which to pick.
 
 An interface tries to abstract / generalize multiple similar problems into one solution. If an interface exposes the underlying solution, we speak of a leaky abstraction.
 
-For example: this repository interface exposes the underlying [`NHibernate`](api.md#nhibernate) technology:
+For example: this [`Repository interface`](patterns.md#repository-interfaces) exposes the underlying [`NHibernate`](api.md#nhibernate) technology:
 
 ```cs
 interface IMyRepository
@@ -682,7 +682,7 @@ interface IMyRepository
 }
 ```
 
-The repository interface should not have shown [`NHibernate`](api.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the repository's job is to offer a set of optimal queries. With the leaky interface above, a repository cannot do its job anymore.
+The [`Repository interface`](patterns.md#repository-interfaces) should not have shown [`NHibernate`](api.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the [`Repository's`](patterns.md#repository) job is to offer a set of optimal queries. With the leaky interface above, a [`Repository`](patterns.md#repository) cannot do its job anymore.
 
 The following example is better.
 
@@ -717,9 +717,9 @@ Names in code should tell the truth. If a method does more than what the name sa
 
 ### Magic (👎)
 
-When a call to a member does more than you would expect and has unintuitive side effects that you do not see.
+When a call to a member does more than you would expect and has unintuitive [`SideEffects`](patterns.md#sideeffects) that you do not see.
 
-Solution: execute the side effects explicitly, so you see what is going on, instead of letting the side effects go off automatically.
+Solution: execute the [`SideEffects`](patterns.md#sideeffects) explicitly, so you see what is going on, instead of letting the [`SideEffects`](patterns.md#sideeffects) go off automatically.
 
 ### Magic Defaults (generally bad)
 
@@ -783,9 +783,9 @@ var cat = new Cat
 
 These two pieces of code do exactly the same thing. The shorter notation introduced is 'syntactic sugar'.
 
-You can also program syntactic sugar into your own code. You can do this by introducing shorter names or a shorter notation, helper classes or implicit conversion operators (which can be very confusing). This may create a concise notation, but breaks the rule 'clarity over brevity'. Often such notations lie a little about what is really going on. So use it sparsely and in most cases go for a more explicit notation.
+You can also program syntactic sugar into your own code. You can do this by introducing shorter names or a shorter notation, [`Helper classes`](patterns.md#helper) or implicit conversion operators (which can be very confusing). This may create a concise notation, but breaks the rule ['clarity over brevity'](#clarity-over-brevity). Often such notations lie a little about what is really going on. So use it sparsely and in most cases go for a more explicit notation.
 
-(The object initializer notation above actually is the recommended notation, not undesirable syntactic sugar.)
+(The [object initializer](code-style.md#object-initializers) notation above actually is the recommended notation, not undesirable syntactic sugar.)
 
 ### Unclear Interfaces
 
@@ -808,11 +808,11 @@ Two seemingly independent pieces of code only work if one piece of code makes as
 
 ### Wrapperitis (👎)
 
-Do not make a class that simply wraps another class with no specific reason at all. For instance wrapping an `API` into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having wrapper classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder "What does this do?" and the answer turns out to be "nothing really".
+Do not make a `class` that simply [wraps](patterns.md#wrapper) another `class` with no specific reason. For instance [wrapping](patterns.md#wrapper) an `API` into a class that supposedly makes it easier, but really adds nothing new to it. You may be better of directly working with the underlying classes that actually do stuff, instead of having [wrapper](patterns.md#wrapper) classes that suggest that they add something, but really do not have any additional value. It is annoying when you have a whole lot of classes and many times you wonder "What does this do?" and the answer turns out to be "nothing really".
 
 This is closely trelated to the 'Hatch' anti-pattern.
 
-There can be a good reason to wrap something though: loose coupling and polymorphism: giving multiple things a mutual interface, while originally they did not have a common interface.
+There can be a good reason to [wrap](patterns.md#wrapper) something though: loose coupling and polymorphism: giving multiple things a mutual interface, while originally they did not have a common interface.
 
 
 Variables and Parameters
@@ -1147,7 +1147,7 @@ This is a phrase that can help you prevent a mess of half-baked things that do n
 
 Combatting a problem by implementing security against it at multiple levels. Sometimes this protects against a problem better, but on the other hand, you introduce spread responsibility and potentially code repetition.
 
-Here is an example. Say there is a process that writes away data. The process is in principle responsible for writing away correct data, but the validation part of the architecture may guard the overall rules. This means the intricacies around the correct data is noticable in both the process and the validation, so if one of these subsystems contains a programming error, the other subsystem acts as a fail safe.
+Here is an example. Say there is a process that writes away data. The process is in principle responsible for writing away correct data, but the [validation](patterns.md#validators) part of the architecture may guard the overall rules. This means the intricacies around the correct data is noticable in both the process and the [validation](patterns.md#validators), so if one of these subsystems contains a programming error, the other subsystem acts as a fail safe.
 
 If the correctness of data is described by trivial rules, you might not say there is a spread responsibility and rather call it a double-stitched solution. But if writing away correct data and checking the correctness of that data is very intricate, you may be repeating significant logic, which does lead to spread responsibility and code repetition. So even though that solution is safer because of double-stitchedness, it is unsafe due to excessive code repetition. This goes to show that it all depends on the situation what the best strategy is.
 
@@ -1248,9 +1248,9 @@ Even if your hypothesis does not turn out to be true, this is still useful infor
 
 If you are faced with a problem and you do not really know what the cause is and trying to *Narrow the Scope* is not getting you anywhere, you can also adopt a strategy of improving diagnostics.
 
-You could add some [Logging](aspects.md#logging) or improve [`DebuggerDisplays`](https://learn.microsoft.com/en-us/visualstudio/debugger/using-the-debuggerdisplay-attribute). You could also improve *Error Checking*. You can also improve user input validation, which could give you a clue as to what's wrong.
+You could add some [Logging](aspects.md#logging) or improve [`DebuggerDisplays`](patterns.md#debuggerdisplays). You could also improve *Error Checking*. You can also improve [user input validation](patterns.md#validators), which could give you a clue as to what's wrong.
 
-([`DebuggerDisplays`](https://learn.microsoft.com/en-us/visualstudio/debugger/using-the-debuggerdisplay-attribute) are handy things that can also improve your debugging experience.)
+([`DebuggerDisplays`](patterns.md#debuggerdisplays) are handy things that can also improve your debugging experience.)
 
 You could also try and look for the already existing diagnostics to help you. Are there loggings, is there something in the windows event log. Can I see error messages in `Windows Task Scheduler`. Can you get a clearer error message?
 
@@ -1332,16 +1332,16 @@ Things that could still be wrong with the program are for instance that:
 - Crashes in exceptional cases
 - Corrupts data in exceptional cases
 - Code not easy to understand. So that another programmer does not easily understand.
-- Poor maintainability so that a change takes ages
-- or possibly means it has to be rewritten completely 
+- Poor maintainability so that a modification would take very long
+- or possibly means it has to be rewritten again
 - or a change is error-prone.
 - Not adapted to contextual changes such as culture or when variables change. They may be hard-codedly interwoven into the code.
 - Assumptions that databases will be available when they are not.
 - Security leaks
 - Crashes when services are offline.
-- Does not give validation or exception messages when something goes wrong.
+- Does not give [validation](patterns.md#validators) or [Exception](aspects.md#exceptions) messages when something goes wrong.
 - Does not integrate well with other technologies.
-- Etcetera. 
+- Etc. 
 
 These are all examples of what could still be wrong with the code if a program 'seems to work'.
 
@@ -1355,7 +1355,7 @@ It does not just apply to turning features on and off. If you have 4 variation o
 
 This is a weaknesses of inheritance, that makes it so that inheritance should not always be your first choice in constructs to solve your problem.
 
-The Inheritance-Helper pattern may solve some of the issues.
+The [Inheritance-`Helper` pattern](patterns.md#inheritance-helper) may solve some of the issues.
 
 ### Chicken and Egg
 
@@ -1411,7 +1411,7 @@ An anti-pattern where a GUID (Globally Unique Identifier) is used as an identifi
 
 ### Head in the Sand (👎)
 
-Ignoring problems, hoping they won't be an issue. Lack of validation in code could be considered burying your head in the sand too. With proper validation code you get confronted with issues in your processing, you might otherwise overlook. Without proper validation you just have corrupt data, that customers find out at a very late stage, when the problem has escalated into a bigger concern.
+Ignoring problems, hoping they won't be an issue. Lack of [validation](patterns.md#validators) in code could be considered burying your head in the sand too. With proper [validation code](patterns.md#validators) you get confronted with issues in your processing, you might otherwise overlook. Without proper [validation](patterns.md#validators) you just have corrupt data, that customers find out at a very late stage, when the problem has escalated into a bigger concern.
 
 ### Hypothetical Ideal Solution
 
@@ -1568,18 +1568,18 @@ It is always harder than you think. The general gist of it might take you 30 min
 If you want to update a set of records, you can sometimes get away with deleting all of them and then inserting the new ones again, but you have to realize that this is generally bad practice. You are better off checking if the item exists and then choose whether to insert or update the item based on that. The reason for this is that often the existing items are linked to by other items. If you bluntly remove them, those links will be corrupted. Even when items do not seem to have any links to them, it is still a better idea to check for existence, then insert or update, because of various reasons:
 
 - It performs better if those statements will end up executed onto a database.
-- You might link to those entities in the future, which makes your code prepared for that, just by following best practice.
-- The entity might not be linked to by other entities, but the entity's ID may very well be present in URL's someone might send to someone in an e-mail.
-- Also there could be links to an entity in the UI, even though there are not links to the entity from other entities.
-- The entity might not be linked to through a foreign key but could be linked to externally by a loosely linked key. (It can be said that it is very easy to overlook that there are links to an entity.)
+- You might link to those [entities](#entity) in the future, which makes your code prepared for that, just by following best practice.
+- The [entity](patterns.md#entity) might not be linked to by other [entities](#entity), but the [entity's](patterns.md#entity) ID may very well be present in URL's someone might send to someone in an e-mail.
+- Also there could be links to an [entity](patterns.md#entity) in the UI, even though there are not links to the [entity](patterns.md#entity) from other [entities](patterns.md#entity).
+- The [entity](patterns.md#entity) might not be linked to through a foreign key but could be linked to externally by a loosely linked key. (It can be said that it is very easy to overlook that there are links to an [entity](patterns.md#entity).)
 
 Hopefully this will give you an idea of how soon you run into problems if you pretend an update equals a deletion + an insertion and make you think twice and do it another way.
 
-See also: Patterns, TryGet-Insert-Update.
+See also: [`TryGet-Insert-Update`](patterns.md#tryget-insert-update).
 
 ### Whirlpool Anti-Pattern / Inappropriate Conversions
 
-This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a view model to an entity. However, additional conversions such as converting one type of view model to another type of view model are not recommended.
+This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a [`ViewModel`](patterns.md#viewmodel) to an [entity](patterns.md#entity). However, additional conversions such as converting one type of [`ViewModel`](patterns.md#viewmodel) to another type of [`ViewModel`](patterns.md#viewmodel) are not recommended.
 
 `< TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. >`
 
