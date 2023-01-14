@@ -75,7 +75,7 @@ Introduction
 
 What are called 'Aspects' here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more things. In medium to large software development projects you might have to make a decision about some of these concerns. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns.md) or can even be solved by the programming language you use. In that way, aspects are more central than [design patterns](patterns.md), programming languages and [`API's`](api.md) and are a level of abstraction that hovers above them.
 
-Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te [`Visual Studio IDE`](https://visualstudio.microsoft.com/#vs-section).
+Some aspects might not be mentioned here, because they are for instance automatically solved by the programming language we use, the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
 
 (The word 'aspect' is related to the 'aspect' construct in aspect oriented programming languages or frameworks, but you can think in terms of aspects even regardless of these tools and constructs.)
 
