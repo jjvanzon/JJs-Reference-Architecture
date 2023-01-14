@@ -278,6 +278,25 @@ List of API's (and other tech)
   </td>
 </tr>
 
+
+<tr id="linq">
+  <th>
+      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries">
+         LINQ</a>
+  </th>
+  <td>
+      A query language usable in C#. Can be query several types of data store, but used commonly for in-memory collections.
+  </td>
+</tr>
+
+<tr id="jj-framework-collections">
+  <th>
+    <a href="https://www.nuget.org/packages/JJ.Framework.Collections">
+       JJ.Framework.Collections</a>
+  </th>
+  <td>JJ extensions to LINQ.</td>
+</tr>
+
 <tr id="jj-framework-data">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data">
@@ -345,24 +364,6 @@ List of API's (and other tech)
   <td>
       Additional feature for <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that stores data in <code>XML</code> files. <code>System.Xml.Linq</code> used internally.
   </td>
-</tr>
-
-<tr id="linq">
-  <th>
-      <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries">
-         LINQ</a>
-  </th>
-  <td>
-      A query language usable in C#. Can be query several types of data store, but used commonly for in-memory collections.
-  </td>
-</tr>
-
-<tr id="jj-framework-collections">
-  <th>
-    <a href="https://www.nuget.org/packages/JJ.Framework.Collections">
-       JJ.Framework.Collections</a>
-  </th>
-  <td>JJ extensions to LINQ.</td>
 </tr>
 
 </table>
