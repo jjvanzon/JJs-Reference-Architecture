@@ -17,68 +17,69 @@ Appendix A: Layering Checklist
 
 This checklist might be used if you want to bulk-program the [architecture](index.md) for an application by going through all the layers one by one, or if you want to build a feature and make sure you have not forgotten any technical issues.
 
-- Data: Database structure
-- Data: Data migration
-- Data: Entity classes
-- Data: Repository interfaces
-- Data: Default repositories
-- Data: [`NHibernate`](api.md#nhibernate) mappings
-- Data: [`SQL`](api.md#sql) queries
-- Data: [`NHibernate`](api.md#nhibernate) repositories (optional)
-- Data: Other repositories (optional)
-- Data: Other mappings (optional)
-- Data: Helpers 
-- Business: LinkTo (Inverse Property Management)
-- Business: Unlink (Inverse Property Management)
-- Business: Cascading: DeleteRelatedEntitiesExtensions
-- Business: Cascading: UnlinkRelatedEntitiesExtensions
-- Business: Enums
-- Business: Resources Strings
-- Business: EnumExtensions
-- Business: Validators
-    - Delete Validators too
-    - Warning Validators (optional)
-- Business: SideEffects
-    - SetDefaults SideEffects too
-- Business: Facades
-- Business: Extensions
-- Business: RepositoryWrappers
-- Business: Dtos (optional)
-- Business: Calculations
-- Business: Visitors
-- Business: Factories (optional)
-- Business: EntityWrappers (optional)
-- Business: Other helpers (optional)
-- [Presentation](layers.md#presentation-layer): ViewModels
-    - Item ViewModels
-    - List item ViewModels (some may only need IDNameDto, no ListItem view model)
-    - Lookup ViewModel
-    - List ViewModels
-    - Detail ViewModels
-    - DocumentViewModel (optional)
-- [Presentation](layers.md#presentation-layer): ToViewModel
-    - Singular forms
-    - WithRelatedEntities forms
-    - ToListItemViewModel
-    - ToLookupViewModel
-    - ToScreenViewModel
-    - ToDocumentViewModel (optional)
-    - CreateEmptyViewModel (not every view model needs one)
-- [Presentation](layers.md#presentation-layer): ToEntity
-    - Singular forms
-    - WithRelatedEntities forms
-    - From screen view model
-    - From DocumentViewModel (optional)
-- [Presentation](layers.md#presentation-layer): Presenters
-    - List Presenters
-    - Detail Presenters
-    - (Edit Presenters)
-    - Save methods in Detail (or Edit) Presenters.
-    - MainPresenter (optional)
-- [Presentation](layers.md#presentation-layer): Views ([`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) / UserControls...)
-    - List Views
-    - Detail Views
-    - Main View (optional)
+- [`Data`](layers.md#data-layer): [Database structure](database-conventions.md)
+- [`Data`](layers.md#data-layer): [Data migration](database-conventions.md#upgrade-scripts)
+- [`Data`](layers.md#data-layer): [Entity classes](patterns.md#entity)
+- [`Data`](layers.md#data-layer): [`Repository interfaces`](patterns.md#repository-interfaces)
+- [`Data`](layers.md#data-layer): Default [`Repositories`](patterns.md#repository)
+- [`Data`](layers.md#data-layer): [`NHibernate`](api.md#nhibernate) [`Mappings`](patterns.md#mapping)
+- [`Data`](layers.md#data-layer): [`SQL` queries](api.md#sql)
+- [`Data`](layers.md#data-layer): [`NHibernate`](api.md#nhibernate) [`Repositories`](patterns.md#repository) (optional)
+- [`Data`](layers.md#data-layer): Other [`Repositories`](patterns.md#repository) (optional)
+- [`Data`](layers.md#data-layer): Other [`Mappings`](patterns.md#mapping) (optional)
+- [`Data`](layers.md#data-layer): [`Helpers`](patterns.md#helper) 
+- [`Business`](layers.md#business-layer): [`LinkTo`](patterns.md#linkto) ([Inverse Property Management](aspects.md#bidirectional-relationships))
+- [`Business`](layers.md#business-layer): [`Unlink`](patterns.md#linkto) ([Inverse Property Management](aspects.md#bidirectional-relationships))
+- [`Business`](layers.md#business-layer): [Cascading](aspects.md#cascading): [`DeleteRelatedEntitiesExtensions`](aspects.md#cascading)
+- [`Business`](layers.md#business-layer): [Cascading](aspects.md#cascading): [`UnlinkRelatedEntitiesExtensions`](aspects.md#cascading)
+- [`Business`](layers.md#business-layer): [`Enums`](aspects.md#enums)
+- [`Business`](layers.md#business-layer): [`Resource `strings``](patterns.md#resource-strings)
+- [`Business`](layers.md#business-layer): [`EnumExtensions`](aspects.md#enum-like-entities)
+- [`Business`](layers.md#business-layer): [`Validators`](patterns.md#validators)
+    - `Delete` [`Validators`](patterns.md#validators) too
+    - `Warning` [`Validators`](patterns.md#validators) (optional)
+- [`Business`](layers.md#business-layer): [`SideEffects`](patterns.md#sideeffects)
+    - [`SetDefaults`](aspects.md#defaults) [`SideEffects`](patterns.md#sideeffects) too
+- [`Business`](layers.md#business-layer): [`Facades`](patterns.md#facade)
+- [`Business`](layers.md#business-layer): `Extensions`
+- [`Business`](layers.md#business-layer): [`RepositoryWrappers`](patterns.md#repositorywrappers)
+- [`Business`](layers.md#business-layer): [`Dtos`](patterns.md#dto) (optional)
+- [`Business`](layers.md#business-layer): [`Calculations`](aspects.md#calculation)
+- [`Business`](layers.md#business-layer): [`Visitors`](patterns.md#visitor)
+- [`Business`](layers.md#business-layer): [`Factories`](patterns.md#factory) (optional)
+- [`Business`](layers.md#business-layer): [`EntityWrappers`](patterns.md#wrapper) (optional)
+- [`Business`](layers.md#business-layer): Other [`Helpers`](patterns.md#helper) (optional)
+- [`Presentation`](layers.md#presentation-layer): [`ViewModels`](patterns.md#viewmodel)
+    - `Item` [`ViewModels`](patterns.md#viewmodel)
+    - `ListItem` [`ViewModels`](patterns.md#viewmodel) (some may only need `IDNameDto`, no `ListItem` [`ViewModel`](patterns.md#viewmodel))
+    - `Lookup` [`ViewModel`](patterns.md#viewmodel)
+    - `List` [`ViewModels`](patterns.md#viewmodel)
+    - `Detail` [`ViewModels`](patterns.md#viewmodel)
+    - `DocumentViewModel` (optional)
+- [`Presentation`](layers.md#presentation-layer): [`ToViewModel`](patterns.md#toviewmodel)
+    - [Singular forms](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
+    - [`WithRelatedEntities` forms](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
+    - [`ToListItemViewModel`](patterns.md#toviewmodel)
+    - [`ToLookupViewModel`](patterns.md#toviewmodel)
+    - [`ToScreenViewModel`](patterns.md#toviewmodel)
+    - [`ToDocumentViewModel`](patterns.md#toviewmodel) (optional)
+    - [`CreateEmptyViewModel`](patterns.md#toviewmodel) (not every [`ViewModel`](patterns.md#viewmodel) needs one)
+- [`Presentation`](layers.md#presentation-layer): [`ToEntity`](patterns.md#toentity)
+    - [Singular forms](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
+    - [`WithRelatedEntities` forms](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
+    - From screen [`ViewModel`](patterns.md#viewmodel)
+    - `DocumentViewModel` (optional)
+- [`Presentation`](layers.md#presentation-layer): [`Presenters`](patterns.md#presenter)
+    - `List` [`Presenters`](patterns.md#presenter)
+    - `Detail` [`Presenters`](patterns.md#presenter)
+    - (`Edit` [`Presenters`](patterns.md#presenter))
+    - `Save` methods in `Detail` (or `Edit`) [`Presenters`](patterns.md#presenter).
+    - `MainPresenter` (optional)
+- [`Presentation`](layers.md#presentation-layer):
+    - [`Views`](patterns.md#views) ([`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) / `UserControls` / ... )
+    - `List` [`Views`](patterns.md#views)
+    - `Detail` [`Views`](patterns.md#views)
+    - `Main` [`View`](patterns.md#views) (optional)
 
 
 Appendix B: Knopteksten en berichtteksten in applicaties (resource strings) [ Dutch ]
@@ -117,7 +118,7 @@ Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar 
 
 ### Tips
 
-1. Gebruik van placeholders zoals {0} is toegestaan, maar dan moet je wel een class erbij maken, die de placeholders vervangt. Zie JJ.Framework.Resources voor een voorbeeld. Het is dan verstandig om de resources zelf internal te maken en alleen de class die de placeholders vervangt public te maken. Kijk echter uit dat je het daarbij geschikt houdt voor meerdere talen, want een creatief met placeholder opgebouwde resource string werkt al gauw niet voor een andere taal.
+1. Gebruik van placeholders zoals {0} is toegestaan, maar dan moet je wel een class erbij maken, die de placeholders vervangt. Zie JJ.Framework.Resources voor een voorbeeld. Het is dan verstandig om de resources zelf internal te maken en alleen de class die de placeholders vervangt public te maken. Kijk echter uit dat je het daarbij geschikt houdt voor meerdere talen, want een creatief met placeholder opgebouwde [resource string](patterns.md#resource-strings) werkt al gauw niet voor een andere taal.
 2. Negeer dat de beschreven werkwijze kan resulteren in berichtteksten met hoofdlettergebruik zoals: 'Het __Ordernummer__ is niet ingevuld bij de __Bestelling__.' Als we dit aanpakken, doen we dat met een algoritme, niet met nog meer resources.
 3. Het is verstandig om teksten in de applicatie algemeen te houden. Dus bijv. 'Artikelen', i.p.v. 'Artikelen in dit boek'. Dit scheelt vertaalwerk. Ook dit is verstandig: 'Artikel 1: Naam is verplicht.' Daarbij zijn de teksten 'Artikel', 'Naam' en '{0} is verplicht.' waarschijnlijk allang vertaald. Door de 'dubbele punt' notatie aan te houden ('Artikel 1:'), voorkom je het verwerken van de term in een zin, wat voor iedere taal een compleet andere grammatica kan zijn, wat voorkomt dat er complete volzinnen vertaald moeten worden.
 

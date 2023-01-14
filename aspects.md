@@ -57,7 +57,7 @@
         - [Organize by Access Level](#organize-by-access-level)
         - [Access Yes or No](#access-yes-or-no)
         - [Organize by Feature](#organize-by-feature)
-- [Side Effects](#side-effects)
+- [SideEffects](#sideeffects)
 - [Styling](#styling)
 - [Text Processing](#text-processing)
 - [Transactions](#transactions)
@@ -101,7 +101,7 @@ Calculation
 
 `< TODO: Write a text. Include:` 
 
-`Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those 'Calculators'. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a visitor to simplify, but isolate complex recursive calculations. >`
+`Extension methods for small calculations are an option. Putting calculations directly in your entity models (rich models.) I would not recommend it, because it would mix entity modeling with calculation aspect too much. For more complicated calculations you could delegate to specialized business logic objects. You could call those 'Calculators'. Those could have a recursive structure of objects, if needed. You can also create code generators that compile to more optimal calculation code, if the structure of the calculation does not very too much over time it may be worth it to periodically recompile. Code generators are not easy, though. You could use a Visitor to simplify, but isolate complex recursive calculations. >`
 
 
 Cascading
@@ -150,9 +150,9 @@ Collections / List Processing
 
 `< TODO: Write text. Include: >`
 
-- When to use which, interface types, array / list, KeyValuePair / Tuple / custom tuple class.
-- Functions in JJ.Framework.Common.The extension methods and the KeyValuePairHelper.
-- ToArray() trick when you adapt the list within the loop.>
+`- When to use which, interface types, array / list, KeyValuePair / Tuple / custom tuple class.`
+`- Functions in JJ.Framework.Common.The extension methods and the KeyValuePairHelper.`
+`- ToArray() trick when you adapt the list within the loop. >`
 
 ### Specialized Lists
 
@@ -164,7 +164,7 @@ Concurrency
 
 In a web-based application time elapses between retrieving data to edit and saving changes. Between these actions the data may have been changed by another user.
 
-In this [architecture](index.md) the concurrency strategy is: the last user wins. This is accomplished in code using TryGet-Insert-Update-Delete pattern, that results in readable saving code and restoration of state, regardless of what another user did to it.
+In this [architecture](index.md) the concurrency strategy is: the last user wins. This is accomplished in code using [`TryGet-Insert-Update-Delete` pattern](patterns.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion), that results in readable saving code and restoration of state, regardless of what another user did to it.
 
 <h3>Alternatives</h3>
 
@@ -176,9 +176,9 @@ Another technique for handling concurrency is to assume that other users probabl
 
 The preferred technique in this [architecture](index.md) works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user's changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user's changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user's save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
 
-The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a TryGet-Insert-Update pattern for entities. There wll be no checks regarding whether an object is new or already existed. Not-found objects are simple recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
+The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a [`TryGet-Insert-Update`](patterns.md#tryget-insert-update) pattern for [entities](patterns.md#entity). There wll be no checks regarding whether an object is new or already existed. Not-found objects are simply recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
 
-Another strategy that will not be used, is trying to keep all users' additions of related entities. However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related entity is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related entity, or user A's removal of the related entity? The ambiguity could be solved by marking which entities are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
+Another strategy that will not be used, is trying to keep all users' additions of related [entities](patterns.md#entity). However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related [entity](patterns.md#entity) is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related [entity](patterns.md#entity), or user A's removal of the related [entity](patterns.md#entity)? The ambiguity could be solved by marking which [entities](patterns.md#entity) are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
 
 
 Configuration
@@ -198,19 +198,24 @@ There is another configuration method in [`.NET`](https://dotnet.microsoft.com/)
 Conversion
 ----------
 
-See: 'Converter', 'TryGet-Insert-Update', 'TryGet-Insert-Update-Delete / Collection Conversion', 'Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities' under 'Design Patterns'.
+See the following [patterns](patterns.md):
+
+- [`Converter`](patterns.md#converter)
+- [`TryGet-Insert-Update`](patterns.md#try-get-insert-update)
+- [`TryGet-Insert-Update-Delete` / Full-`CRUD` Conversion / Collection Conversion](patterns.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
+- [Singular, Plural, Non-Recursive, `Recursive` and `WithRelatedEntities`](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
 
 
 Defaults
 --------
 
-Implemented as side-effects that go off in a Facades's Create methods. See 'Side Effects', 'Facade' under 'Design Patterns'.
+Implemented as [`SideEffects`](patterns.md#sideeffects) that go off in a [`Facades's`](patterns.md#facade) `Create` methods.
 
 
 Debugging
 ---------
 
-See [`DebuggerDisplays`](patterns.md#debuggerdisplays) in `Patterns`.
+See [`DebuggerDisplays`](patterns.md#debuggerdisplays).
 
 
 Entity Model / Data Model
@@ -228,15 +233,15 @@ Entity Model / Data Model
 Entity Status Management
 ------------------------
 
-Entity status management (or 'object status management') is the recording of whether an entity is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently entity status management is done explicitly by using an EntityStatusManager class, that is simply a wrapper for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
+[Entity](patterns.md#entity) status management (or 'object status management') is the recording of whether an [entity](patterns.md#entity) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns.md#entity) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
-There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which entities and properties get status flagging instead of leaving it up to the entity status writers to guess what entity status reporting is needed and entity status readers to guess of what entities and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what entity status management you need.
+There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns.md#entity) and properties get status flagging instead of leaving it up to the [entity](patterns.md#entity) status writers to guess what [entity](patterns.md#entity) status reporting is needed and [entity](patterns.md#entity) status readers to guess of what [entities](patterns.md#entity) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns.md#entity) status management you need.
 
 <h3>Alternatives</h3>
 
-The consequence of explicit entity status management through the EntityStatusManager class is that if you forget to call it, the entity status may not be correctly reflected by the EntityStatusManager. An alternative is to leave entity status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have entity status management through IContext across all platforms, [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) should offer its own alternative to entity status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over entity status management at the Persistence side, it would make [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit [entity](patterns.md#entity) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns.md#entity) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns.md#entity) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns.md#entity) status management through IContext across all platforms, [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) should offer its own alternative to [entity](patterns.md#entity) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns.md#entity) status management at the Persistence side, it would make [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
-This is why the explicit status management solution won over the entity status management in the persistence framework.
+This is why the explicit status management solution won over the [entity](patterns.md#entity) status management in the persistence framework.
 
 
 Enums
@@ -304,7 +309,7 @@ The difference between throwing an InvalidValueException or a ValueNotSupportedE
 
 ### Enum-Like Entities
 
-- Entity models often contain enum-like entities:
+- [Entity](patterns.md#entity) models often contain enum-like [entities](patterns.md#entity):
 
 ```cs
 public class SectionType
@@ -316,7 +321,7 @@ public class SectionType
 
 Often you do not need more than these two properties.
 
-It is common to end the enum-like entity type with the suffix 'Type' (not a strict requirement).
+It is common to end the enum-like [entity](patterns.md#entity) type with the suffix 'Type' (not a strict requirement).
 
 The Name property will be filled with the string that is exactly the enum member name:
 
@@ -328,7 +333,7 @@ new SectionType
 }
 ```
 
-- Enum-like entities have an enum-equivalent in the *Business* Layer:
+- Enum-like [entities](patterns.md#entity) have an enum-equivalent in the *Business* Layer:
 
 ```cs
 public enum SectionType
@@ -342,9 +347,9 @@ public enum SectionType
 }
 ```
 
-Note that the enums themselves do not belong in the entity model, but in the Business layer.
+Note that the enums themselves do not belong in the [entity](patterns.md#entity) model, but in the Business layer.
 
-- It is *not* recommended to give enum-like entities an inverse property to the entities that use it.
+- It is *not* recommended to give enum-like [entities](patterns.md#entity) an inverse property to the [entities](patterns.md#entity) that use it.
 
 ```cs
 public class SectionType
@@ -354,9 +359,9 @@ public class SectionType
 }
 ```
 
-The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the LinkTo methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
+The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the [`LinkTo`](patterns.md#linkto) methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
 
-- To make assigning an enum-like entity easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like entities:
+- To make assigning an enum-like [entity](patterns.md#entity) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like [entities](patterns.md#entity):
 
 ```cs
 SectionTypeEnum sectionTypeEnum = section.GetSectionTypeEnum();
@@ -409,7 +414,7 @@ But a helper extension methods can make the code much more readable.  This allow
   string str4 = ResourceHelper.GetPropertyDisplayName("Paragraph");
 ```
 
-Put a class in your Business.Resouces namespace, can it for instance ResourceHelper.  These are examples of such ResourceHelper methods:
+Put a class in your Business.Resouces namespace, can it for instance `ResourceHelper`. These are examples of such `ResourceHelper` methods:
 
 ```cs
 public static class ResourceHelper
@@ -444,11 +449,11 @@ public static class ResourceHelper
 
 ### TODO
 
-`< TODO: The following things are not yet discussed there:
+`< TODO: The following things are not yet discussed there:`
 
-- If you use Guids as primary keys, you cannot use enums for the ID's of enum-like entities.
-- ID's columns of enum-like entities are never auto-increment.
-- Indexes on enum-like columns are not necessary because they do not have a lot of variation in values, which makes an index not very effective, and also you will not often join or search on an enum-like column.>
+`- If you use Guids as primary keys, you cannot use enums for the ID's of enum-like entities.`
+`- ID's columns of enum-like entities are never auto-increment.`
+`- Indexes on enum-like columns are not necessary because they do not have a lot of variation in values, which makes an index not very effective, and also you will not often join or search on an enum-like column. >`
 
 
 Errors
@@ -502,23 +507,23 @@ catch (IOException)
 
 In fact, prefer not to retrieve information by catching an exception at all.
 
-- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) from [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) helper method.
+- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) from [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) [`Helper`](patterns.md#helper) method.
 
 
 Facades
 -------
 
-Facades might sound like a pattern to you, but regardless of whether you use the facade pattern or not, your system has facades whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
+`Facades` might sound like a pattern to you, but regardless of whether you use the [`Facade`](patterns.md#facade) pattern or not, your system has `Facades` whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
 
-If you have an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) web app and you think you do not have facades, then it is probably the controllers that are your facades.
+If you have an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns.md#controller) that are your `Facades`.
 
-If you have a poorly layered Windows app, you probably have a lot of facades: each form probably is one.
+If you have `Windows` app without a lot of layers, you probably have quite a few `Facades`: each `Form` probably is one.
 
-You could even say that a very flat, unstructured user app's facade is the user interface itself, which combines all the underlying code together into a simpler view on it.
+You could even say that a flat, unstructured app's `Facade` is the user interface itself, which combines all the underlying code together into a simpler view on it.
 
-In an architecture with many different business logic objects, that each take an arbitrary set of dependencies, all of those business logic objects are facades. You could ask yourself questions about the large gedree of interdependence in your system, and if the responsibilities are separated clearly enough. You could try to make your business logic objects operate as independent from eachother as possble, and only have a few that combine a lot aspects of together by delegating to smaller business logic objects.
+In an architecture with many different business logic objects, that each take an arbitrary set of dependencies, quite a few of those business logic objects can be considered `Facades`. You could ask yourself questions about the large gedree of interdependence in your system, and if the responsibilities are separated clearly enough. You could try to make your [business logic](layers.md#business-layer) objects operate as independent from each other as possble, and only have a few that combine a lot aspects of together by delegating to smaller [business logic](layers.md#business-layer) objects.
 
-These are all options to choose from. You can just mess around and do whatever. Or you can actively think about the choices you make about where you put your facades.
+These are all options to choose from. You can choose to ingore it them. Or you might actively think about the choices you make about where you put your `Facades`.
 
 
 Bidirectional Relationships
@@ -532,7 +537,7 @@ Here are a few methods to do this:
 
 ### LinkTo
 
-[LinkTo](patterns.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
+[`LinkTo`](patterns.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
 
 ### OneToManyRelationship
 
@@ -547,7 +552,7 @@ If you use [`Entity Framework`](api.md#entity-framework) it might do it automati
 Reasons not to have an inverse property can be:
     
 - Enum-like type
-- Loosely linked entity
+- Loosely linked [entity](patterns.md#entity)
 - 1-to-1 relationship
 - The inverse relationship would result in an impractically large list.
 
@@ -611,7 +616,7 @@ One option to support multi-language, is for a content item to be only available
 
 ### Loosely Linked Translation Entities
 
-One possible solution is each possble naming / grammar structure to each have a generic entity type, that can be tied to an arbitrary entity:
+One possible solution is each possble naming / grammar structure to each have a generic [entity](patterns.md#entity) type, that can be tied to an arbitrary [entity](patterns.md#entity):
 
 ```
 NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityID }
@@ -619,11 +624,11 @@ NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityI
 SingularAndPlural { ID, Singular, Plural, CultureName, EntityTypeName, EntityID }
 ```
 
-The combination { EntityTypeName, EntityID } is a alternative key to the entity. This makes the translation item structure independent on the model it is applied to, which can be a benefit.
+The combination `{ EntityTypeName, EntityID }` is a alternative key to the [entity](patterns.md#entity). This makes the translation item structure independent on the model it is applied to, which can be a benefit.
 
 ### Many Foreign Keys
 
-Another alternative is to give the translation item entity a whole bunch of foreign keys: one for each possible translatable entity type.
+Another alternative is to give the translation item [entity](patterns.md#entity) a whole bunch of foreign keys: one for each possible translatable [entity](patterns.md#entity) type.
 
 NameAndDescription { ID, Name, Description, CultureName, __ProductID, DepartmentID__ }
 
@@ -631,11 +636,11 @@ A downside of that is that the table structure is dependent on the domain model 
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
-The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the entities in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
+The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the [entities](patterns.md#entity) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
-To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the repositories / data access layer, but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around entity cache objects or translation facades around your business layer, as a substitute for getting them from a repository directly, which would not work for non-flushed ('uncommitted') entities.
+To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns.md#entity) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns.md#entity).
 
-A lot of work to use the loosely linked entities. This is not unique to loosely linked translation entities. It is a problem with any alternative key, that non-flushed entities cannot be retrieved with a ([`LINQ`](https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries)) query.
+A lot of work to use the loosely linked [entities](patterns.md#entity). This is not unique to loosely linked translation [entities](patterns.md#entity). It is a problem with any alternative key, that non-flushed [entities](patterns.md#entity) cannot be retrieved with a ([`LINQ`](https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries)) query.
 
 
 Naming
@@ -651,7 +656,7 @@ All page numbering starts at 1. Even though we usually start counting at 0 as pr
 
 Throughout the software layering we pass through 1-based page numbers and page count. Our data store may need a first index instead, but we only convert to that number as deeply into the layering as possible.
 
-`< TODO: Describe programming practices for working with paging in views. >`
+`< TODO: Describe programming practices for working with paging in Views. >`
 
 
 Parsing
@@ -715,7 +720,7 @@ Security
 
 `< TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web? >`
 
-`< TODO: Aspects, Security: If content is to be protected with authorization, then for partial presenters you need to do authorization checks if the presenter cass is public, and do not have to do authorization if the presenter class is internal. >`
+`< TODO: Aspects, Security: If content is to be protected with authorization, then for partial Presenters you need to do authorization checks if the Presenter cass is public, and do not have to do authorization if the Presenter class is internal. >`
 
 for enum-like tables.
 
@@ -723,7 +728,7 @@ for enum-like tables.
 
 `In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. >`
 
-Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an IContext and repositories in the top-level project, often an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
+Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns.md#repository) in the top-level project, often an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
 There are the following interfaces:
 
@@ -817,10 +822,10 @@ Calculation Module
 ```
 
 
-Side Effects
+SideEffects
 ------------
 
-See 'Side Effects' under 'Design Patterns'.
+See [`SideEffects`](patterns.md#sideeffects) in [Patterns](patterns.md).
 
 
 Styling
@@ -842,7 +847,7 @@ Text Processing
 Transactions
 ------------
 
-`< TODO: Write text. Include: Discuss what NHibernate does, explicit and implicit commit, IContext, how to use the SqlExecutor API. Discuss view model transaction and how to work transactionally regardless of how a database does it.`
+`< TODO: Write text. Include: Discuss what NHibernate does, explicit and implicit commit, IContext, how to use the SqlExecutor API. Discuss ViewModel transaction and how to work transactionally regardless of how a database does it.`
 
 `- Describe transactionality: usage of rollback and commit. Document that flush is an exception and dangerous and if used, must be commented with the reason why you use it.`
 
@@ -912,7 +917,7 @@ Possible strategies for making unit tests easier to debug and read:
 User Interface
 --------------
 
-`< TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my views to view models, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under 'Presentation Patterns'. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API's or consumed as json in JavaScript UI's. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base. >`
+`< TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my Views to ViewModels, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under 'Presentation Patterns'. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API's or consumed as json in JavaScript UI's. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base. >`
 
 
 Utilities
@@ -942,7 +947,7 @@ public partial class MainForm : SimpleProcessForm
 }
 ```
 
-The `MyExecutor` class may look as follows and can call its callbacks at its own discretion:
+The [`MyExecutor`](patterns.md#executor) class may look as follows and can call its callbacks at its own discretion:
 
 ```cs
 internal class ExecutorDemo
@@ -999,7 +1004,7 @@ internal class ExecutorDemo
 Validation
 ----------
 
-See 'Validators' under 'Design Patterns'.
+See [`Validators`](patterns.md#validators) in [Design Patterns](patterns.md).
 
 
 Versioning (Data)

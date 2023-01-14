@@ -37,7 +37,7 @@ Software can be built up of layers. This article describes how layers could be s
     - [Layer Connections](#layer-connections)
     - [Magic](#magic)
     - [Validation](#validation)
-    - [Side-Effects](#side-effects)
+    - [SideEffects](#sideeffects)
     - [Calculations](#calculations)
     - [Conversions](#conversions)
     - [Enums](#enums)
@@ -62,7 +62,7 @@ Software can be built up of layers. This article describes how layers could be s
 3 Layers
 --------
 
-Software might be split up into 3 main layers:
+Software can be split up into 3 main layers:
 
 <img src="images/data-business-presentation.png" width="141" />
 
@@ -100,13 +100,13 @@ It starts with the database. This can be a *relational database* like [`Microsof
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [*entities*](patterns.md#entity).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [entities](patterns.md#entity).
     
 It could also be a different data access technology: a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework), or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns.md#entity) objects have *properties*, that map to *columns* in the database, and properties that point to *related entities*. [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns.md#entity) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns.md#entity). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
 The [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) `API` can help set up these [mappings](patterns.md#mapping).
 
@@ -156,13 +156,13 @@ The [`Presenters`](patterns.md#presenter) might delegate to a [`ToViewModel`](pa
 
 ### ToEntity
 
-The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [`entity`](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
+The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [entity](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
 
 ### Facades
 
 [`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
 
-They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#side-effects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
+They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#sideeffects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
 Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
 
@@ -176,7 +176,7 @@ Because the [`Presenters`](patterns.md#presenter) combine several [responsibilit
 
 [`Controllers`](patterns.md#controller) are quite specific to [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms, like [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`view`](patterns.md#views) depending on their results.
+However, even on other presentation platforms, like [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`View`](patterns.md#views) depending on their results.
 
 ### URLs
 
@@ -192,15 +192,15 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A view engine that might be used in this [architecture](index.md) is [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). It offers a concise syntax for programming [views](patterns.md#views), that combines [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) with `HTML.` [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The view engine can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the view template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). It offers a concise syntax for programming [`Views`](patterns.md#views), that combines [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) with `HTML.` [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the [`View`](patterns.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) the [views](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [view](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
+In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) the [`Views`](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
 
 ### HTML
 
 The [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [view](patterns.md#views).
+`HTML` here can be replaced by the type of presentation output. In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns.md#views).
 
 ### Platform Independence
 
@@ -232,9 +232,9 @@ The [presentation layer](#presentation-layer) uses the [business layer](#busines
 
 The [business layer](#business-layer) can execute [`Validators`](patterns.md#validators) that verify that the data corresponds to expectations.
 
-### Side-Effects
+### SideEffects
 
-The [business layer](#business-layer) can execute [`SideEffects`](patterns.md#side-effects) when altering data, for instance updating the *date time modified* or automatically *generating a name* for a new object.
+The [business layer](#business-layer) can execute [`SideEffects`](patterns.md#sideeffects) when altering data, for instance updating the *date time modified* or automatically *generating a name* for a new object.
 
 ### Calculations
 
@@ -254,7 +254,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#side-effects) class. Those may be executed in the [business layer](#business-layer).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#sideeffects) class. Those may be executed in the [business layer](#business-layer).
 
 ### Cascading
 
@@ -270,7 +270,7 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Facades
 
-Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#side-effects), [cascading](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
+Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#sideeffects), [cascading](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
 
 ### CRUD
 
@@ -320,7 +320,7 @@ What's meant with *services* in this [architecture](index.md), is exposing [busi
 Decoupled
 ---------
 
-[Presenter](patterns.md#presenter) classes decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [Presenters](patterns.md#presenter) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
+[`Presenter`](patterns.md#presenter) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns.md#presenter) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
 
 
 Alternatives

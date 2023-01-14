@@ -102,7 +102,7 @@ Do not use the following object types, because these things are managed in [`.NE
 
 For new databases, prefer int's as primary keys over guids, because guids create performance penalties throughout the software stack.
 
-Only use additional guid columns as an alternative key for entities that need to be unique across multiple systems or databases. Do not forget to put an index on the guid column. Prefer surrogate keys rather than complicated composite keys. Prefer auto-incremented ID's, except for enum-like tables.
+Only use additional guid columns as an alternative key for [entities](patterns.md#entity) that need to be unique across multiple systems or databases. Do not forget to put an index on the guid column. Prefer surrogate keys rather than complicated composite keys. Prefer auto-incremented ID's, except for enum-like tables.
 
 `< TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked. >`
 
@@ -281,7 +281,7 @@ Some data migrations are easier to program using [`C#`](https://dotnet.microsoft
 
 Sometimes the contrast between how easy it is to do in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) or [`SQL`](api.md#sql) is so large, that the benefits of programming it in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
 
-A benefit of [`SQL`](api.md#sql) scripts is that it always operates on the right intermediate version of the entity model, while [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) code always operates on the latest version of the entity model. This means that earlier [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations might not compile anymore for a newer version of the entity model, and can only work with an older version of the model.
+A benefit of [`SQL`](api.md#sql) scripts is that it always operates on the right intermediate version of the [entity](patterns.md#entity) model, while [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) code always operates on the latest version of the [entity](patterns.md#entity) model. This means that earlier [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations might not compile anymore for a newer version of the [entity](patterns.md#entity) model, and can only work with an older version of the model.
 
 This problem with [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-based migrations can be mitigated in several ways. Here are a few ideas:
 
@@ -297,7 +297,7 @@ You can let the [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)-base
 
 <h3>Snapshots of Entity Model</h3>
 
-Storing a snapshot of an entity model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
+Storing a snapshot of an [entity](patterns.md#entity) model in a separate project specifically intended for that migration might be a solution. (Not tried out in practice. Might turn out to be very impractical.)
 
 <h3>Any Other Ideas</h3>
 
