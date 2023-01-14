@@ -857,9 +857,9 @@ Data
 
 [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
 
-At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). But it hadn't even been modified. Probably caused by an upgrade to a newer [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) version. Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
+At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
-When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation.
+When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation.
 
 ### NHibernate
 
@@ -867,7 +867,7 @@ When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework),
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) is used in some projects, because an employer favored it, and some other projects joined the club.
 
-[`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) and through [repository interfaces](patterns.md#repository).
+[`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) and [repository interfaces](patterns.md#repository).
 
 ### ORM
 
@@ -890,7 +890,7 @@ Some methods of data retrieval work with uncommitted / non-flushed [entities](pa
 | `IContext.TryGet` | 1st committed, then uncommitted
 | Navigation properties /<br>following the object graph | 1st committed, then uncommitted
 
-It appears to have to do with, *when* the [`ORM`](#orm) goes to the database to query or save the objects.
+It appears to have to do with, when the [`ORM`](#orm) goes to the database to query or save the objects.
 
 #### Flush
 
@@ -900,7 +900,7 @@ A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes
 
 The trouble with `Flush` is, that it might be executed when things are not done yet, and incomplete data might go to the database, upon which database may give an error. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
 
-`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` an [entity](patterns.md#entity). Unlike the documentation might suggest, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
+`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns.md#entity). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
 
 Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This caused a `null` [`Exceptions`](aspects.md#exceptions) on the child object's `ParentID` column.
 
@@ -952,13 +952,13 @@ class Category
 }
 ```
 
-This also has the advantage, the [entity](patterns.md#entity) model would not need to be refactored, it you'd want to add properties to the combination of things.
+This also has the advantage, that the [entity](patterns.md#entity) model would not need to be refactored, it you'd want to add properties to the combination of things.
 
-It might be is advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` field might do better:
+It might be advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` field might do better:
 
 <img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
-This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that look less pretty, etc.
+This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that don't look pretty, etc.
 
 #### Binary Fields
 
