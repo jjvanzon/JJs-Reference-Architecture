@@ -952,7 +952,7 @@ class Category
 }
 ```
 
-This also has the advantage, the [entity](patterns.md#entity) model would not need to be refactored, it you want to add properties to the combination of things.
+This also has the advantage, the [entity](patterns.md#entity) model would not need to be refactored, it you'd want to add properties to the combination of things.
 
 It might be is advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` field might do better:
 
