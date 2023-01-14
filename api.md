@@ -64,42 +64,42 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="visual-studio">
   <th>
     <a href="https://visualstudio.microsoft.com/#vs-section">
        Visual Studio</a>
   </th>
   <td>
-      Used for the development of the code.
+      Programming environment used for the development of the software.
   </td>
 </tr>
 
-<tr>
+<tr id="vs-code">
   <th>
     <a href="https://visualstudio.microsoft.com/#vscode-section">
        VS Code</a>
   </th>
   <td>
-      Used for MarkDown editing.
+      Used for <a href=#mark-down>MarkDown</a> editing.
   </td>
 </tr>
 
-<tr>
+<tr id="dot-net">
   <th><a href="https://dotnet.microsoft.com/">.NET</a></th>
   <td>Framework from Microsoft that forms a base for the programming.</td>
 </tr>
 
-<tr>
+<tr id="mono">
   <th><a href="https://www.mono-project.com/">Mono</a></th>
   <td>Version of .NET that worked for other platforms than Windows. Later versions of the .NET might work for more platforms out-of-the-box.</td>
 </tr>
 
-<tr>
+<tr id="unity-game-engine">
   <th><a href="https://unity.com/">Unity Game Engine</a></th>
   <td>The first tech at that time, that would work for deploying the code on multiple mobile platforms. It uses the Mono compiler.</td>
 </tr>
 
-<tr>
+<tr id="c-sharp">
   <th>
     <a href="https://dotnet.microsoft.com/en-us/languages/csharp">
        C#</a>
@@ -109,17 +109,17 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="visual-basic">
   <th>
     <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/">
-       VB.NET</a>
+       Visual Basic</a>
   </th>
   <td>
       Some projects might still use this programming language.
   </td>
 </tr>
 
-<tr>
+<tr id="resharper">
   <th>
     <a href="https://www.jetbrains.com/resharper">
        ReSharper</a>
@@ -129,32 +129,32 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="git">
   <th><a href="https://git-scm.com/">Git</a></th>
   <td>Source control, revision history, version management for the code.</td>
 </tr>
 
-<tr>
+<tr id="git-hub">
   <th><a href="https://github.com/jjvanzon">GitHub</a></th>
   <td>Where the source code is hosted and shared.</td>
 </tr>
 
-<tr>
+<tr id ="git-for-windows">
   <th><a href="https://gitforwindows.org/">Git for Windows</a></th>
   <td>Windows version of Git.</td>
 </tr>
 
-<tr>
+<tr id="git-extensions">
   <th><a href="https://gitextensions.github.io/">Git Extensions</a></th>
   <td>User interface for Git with many options.</td>
 </tr>
 
-<tr>
+<tr id="tortoise-git">
   <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
   <td>Git user interface that shows state in File Explorer icons.</td>
 </tr>
 
-<tr>
+<tr id="azure-dev-ops">
   <th>
   <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">
       Azure DevOps</a>
@@ -164,7 +164,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="github-issues">
   <th>
     <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/quickstart">
        GitHub Issues</a></th>
@@ -173,7 +173,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="mark-down">
   <th>
     <a href="https://www.markdownguide.org/cheat-sheet">
        MarkDown</a></th>
@@ -194,7 +194,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-conversion">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Conversion">
        JJ.Framework.Conversion</a>
@@ -204,7 +204,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj.framework-reflection">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Reflection">
        JJ.Framework.Reflection</a>
@@ -220,7 +220,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="sql-server">
   <th>
     <a href="https://www.microsoft.com/en-us/sql-server">
        SQL Server</a>
@@ -254,7 +254,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="query-over">
   <th>
     <a href="https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html">
        QueryOver</a>
@@ -264,7 +264,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="fluent-nhibernate">
   <th>
     <a href="https://www.nuget.org/packages/FluentNHibernate">
        FluentNHibernate</a>
@@ -283,7 +283,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-data">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data">
        JJ.Framework.Data</a>
@@ -302,7 +302,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="linq">
   <th>
       <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries">
          LINQ</a>
@@ -312,7 +312,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-collections">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Collections">
        JJ.Framework.Collections</a>
@@ -326,7 +326,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="jj-framework-business">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Business">
        JJ.Framework.Business</a>
@@ -336,7 +336,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-validation">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation">
        JJ.Framework.Validation</a>
@@ -346,7 +346,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-mathematics">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Mathematics">
        JJ.Framework.Mathematics</a>
@@ -364,7 +364,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="pager-view-model-factory">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Presentation">
        PagerViewModelFactory</a>
@@ -381,7 +381,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="iis">
   <th>
     <a href="https://www.iis.net/">
        IIS</a>
@@ -392,7 +392,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="mvc">
   <th>
     <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc">
        MVC</a>
@@ -402,7 +402,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="razor">
   <th>
     <a href="https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c">
        Razor</a>
@@ -412,7 +412,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="html-begin-collection">
   <th>
     <a href="patterns.html#htmlbegincollection">
        Html.BeginCollection</a>
@@ -422,7 +422,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="java-script">
   <th>
     <a href="#javascript--typescript">
        JavaScript</a>
@@ -432,7 +432,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="type-script">
   <th>
     <a href="#javascript--typescript">
        TypeScript</a>
@@ -447,12 +447,12 @@ List of API's (and other tech)
   <td>For retrieving / posting back parts of page pages to the server and back.</td>
 </tr>
 
-<tr>
+<tr id="jquery">
   <th><a href="https://jquery.com/">jQuery</a></th>
   <td>Used to support UI details in web. Can make some JavaScript shorter.</td>
 </tr>
 
-<tr>
+<tr id="jj-framework-javascript">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript">
        JJ.Framework.JavaScript</a>
@@ -470,7 +470,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="win-forms">
   <th>
     <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio">
        WinForms</a>
@@ -480,12 +480,12 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="simple-process-form">
   <th><a href="aspects.html#utilities">SimpleProcessForm</a></th>
   <td>A base form for a utility that runs a process.</td>
 </tr>
 
-<tr>
+<tr id="jj-framework-vectorgraphics">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.VectorGraphics">
        JJ.Framework.VectorGraphics</a>
@@ -501,7 +501,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="mstest">
   <th>
     <a href="https://www.nuget.org/packages/MSTest.TestFramework">
        MSTest</a>
@@ -512,7 +512,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-testing">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Testing">
        JJ.Framework.Testing</a>
@@ -522,7 +522,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="debugger-displays">
   <th>
     <a href="patterns.md#debuggerdisplays">
        DebuggerDisplays</a>
@@ -532,7 +532,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-exceptions">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Exceptions">
        JJ.Framework.Exceptions</a>
@@ -544,7 +544,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="accessor">
   <th>
     <a href="patterns.html#accessor">Accessor</a>
   </th>
@@ -559,7 +559,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="jj-framework-text">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Text">
        JJ.Framework.Text</a>
@@ -569,7 +569,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-io">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.IO">
        JJ.Framework.IO</a>
@@ -579,7 +579,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-htmltoxml">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.HtmlToXml">
        JJ.Framework.HtmlToXml</a>
@@ -589,7 +589,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework.xml">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Xml">
        JJ.Framework.Xml</a>
@@ -600,7 +600,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-xml-link">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq">
        JJ.Framework.Xml.Linq</a>
@@ -615,7 +615,7 @@ List of API's (and other tech)
   <td>Embedded resources allow compiling files and content right inside a DLL or EXE.</td>
 </tr>
 
-<tr>
+<tr id="embedded-resource-reader">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Common">
       EmbeddedResourceReader</a>
@@ -633,12 +633,12 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="resource-strings">
   <th><a href="patterns.html#resource-strings">Resource Strings</a></th>
   <td>For localization, resx files can be used in Visual Studio.</td>
 </tr>
 
-<tr>
+<tr id="jj.framework.resourcestrings">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings">
        JJ.Framework.ResourceStrings</a>
@@ -680,7 +680,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="jj.framework.security">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security">
        JJ.Framework.Security</a>
@@ -706,7 +706,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr>
+<tr id="jj-framework-logging">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging">
        JJ.Framework.Logging</a>
@@ -732,6 +732,7 @@ More Elaborate Descriptions
 ---------------------------
 
 For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology and others.
+
 
 Web
 ---
