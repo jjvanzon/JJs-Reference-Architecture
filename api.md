@@ -958,7 +958,7 @@ It might be is advised, that the bridge table not rely on a *composite* key of t
 
 <img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
-This is because it gives 1 handle to the combination of 2 thing, giving [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that look less pretty, etc.
+This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that look less pretty, etc.
 
 #### Binary Fields
 
