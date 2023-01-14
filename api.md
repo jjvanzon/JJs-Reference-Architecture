@@ -99,7 +99,7 @@ List of API's (and other tech)
   <td>The first tech at that time, that would work for deploying the code on multiple mobile platforms. It uses the Mono compiler.</td>
 </tr>
 
-<tr id="c-sharp">
+<tr id="csharp">
   <th>
     <a href="https://dotnet.microsoft.com/en-us/languages/csharp">
        C#</a>
@@ -204,7 +204,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr id="jj.framework-reflection">
+<tr id="jj-framework-reflection">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Reflection">
        JJ.Framework.Reflection</a>
@@ -236,13 +236,8 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th>
-    <a href="#sql">
-       SQL</a>
-  </th>
-  <td>
-      For performance reasons SQL is hand-programmed incidentally, combined with ORM.
-  </td>
+  <th><a href="#sql">SQL</a></th>
+  <td>For performance reasons SQL is hand-programmed incidentally, combined with ORM.</td>
 </tr>
 
 <tr>
@@ -289,16 +284,66 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does notexpose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
+      Helps hide data access behind abstractions. It does not expose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
   </td>
 </tr>
 
-<tr>
+<tr id="jj-framework-data-entity-framework">
   <th>
-    <a href="#sql">SqlExecutor</a>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework">
+       JJ.Framework.Data.EntityFramework</a>
   </th>
   <td>
-      Helps execute SQL with less code lines, and more type save than using SqlClient directly.
+      <a href="#entity-framework"><code>Entity Framework</code></a> extension to work with <code>interfaces</code> from <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a>.
+  </td>
+</tr>
+
+<tr id="jj-framework-data-memory">
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Memory">
+       JJ.Framework.Data.Memory</a>
+  </th>
+  <td>
+      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allows working with <em>in-memory</em> data for instance to <a href="patterns.html#mock">mock</a> a data store.
+  </td>
+</tr>
+
+<tr id="jj-framework-data-nhibernate">
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate">
+       JJ.Framework.Data.NHibernate</a>
+  </th>
+  <td>
+      <a href="#nhibernate"><code>NHibernate</code></a> extension to work with <code>interfaces</code> from <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a>.
+  </td>
+</tr>
+
+<tr id="sql-executor">
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient">JJ.Framework.Data.SqlClient</a>
+  </th>
+  <td>
+      Also know as <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient"><strong><code>SqlExecutor</code></strong></a>. Helpers for working more easily with <a href="#sql"><code>SqlClient</code></a> with less code.
+  </td>
+</tr>
+
+<tr id="jj-framework-data-xml">
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml">
+       JJ.Framework.Data.Xml</a>
+  </th>
+  <td>
+      An extension to <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> for storage in <code>XML</code> files. <code>System.Xml</code> is used internally.
+  </td>
+</tr>
+
+<tr id="jj-framework-data-xml-linq">
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq">
+       JJ.Framework.Data.Xml.Linq</a>
+  </th>
+  <td>
+      Additional feature for <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that stores data in <code>XML</code> files. <code>System.Xml.Linq</code> used internally.
   </td>
 </tr>
 
@@ -308,7 +353,7 @@ List of API's (and other tech)
          LINQ</a>
   </th>
   <td>
-      A query language usable in C#. Can be used to query several types of data store, but used commonly for in-memory collections.
+      A query language usable in C#. Can be query several types of data store, but used commonly for in-memory collections.
   </td>
 </tr>
 
@@ -638,7 +683,7 @@ List of API's (and other tech)
   <td>For localization, resx files can be used in Visual Studio.</td>
 </tr>
 
-<tr id="jj.framework.resourcestrings">
+<tr id="jj-framework-resourcestrings">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.ResourceStrings">
        JJ.Framework.ResourceStrings</a>
@@ -680,7 +725,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr id="jj.framework.security">
+<tr id="jj-framework-security">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Security">
        JJ.Framework.Security</a>
@@ -743,7 +788,7 @@ Web
 
 For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) `AJAX` functions in [`JavaScript`](#javascript--typescript), around calls to [`jQuery`](https://jquery.com/), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript--typescript) code.
 
-Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 ### JavaScript / TypeScript
 
@@ -751,19 +796,19 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. [`Views`](patterns.md#views) were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was the idea.
+For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. [`Views`](patterns.md#views) were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](#csharp) was the idea.
 
-[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you could refactor, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
+[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](#csharp) you could refactor, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
 [`TypeScript`](https://www.typescriptlang.org/) may have saved the day to cover for the weak typing from [`JavaScript`](https://www.javascript.com/). But it wasn't tried yet.
 
-But still: logic in one place in one language ([`C#`](https://dotnet.microsoft.com/en-us/languages/csharp)) felt so nice. I guess the love for [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) was strong.
+But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I guess the love for [`C#`](#csharp) was strong.
 
 The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> choice [`AJAX'ing`](#ajax), and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
 For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](https://jquery.com/) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
 
-I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) though.
+I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
 
 
 Misc
@@ -771,13 +816,13 @@ Misc
 
 ### JJ.Framework
 
-[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](https://dotnet.microsoft.com/), so we programmed our own. These extensions to [`.NET`](https://dotnet.microsoft.com/) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dot-net), so we programmed our own. These extensions to [`.NET`](#dot-net) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](layers.md#loosely-coupled). They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
-[`.NET`](https://dotnet.microsoft.com/) code can use `config` files for confuration, often named `App.config` or `Web.config`.
+[`.NET`](#dot-net) code can use `config` files for confuration, often named `App.config` or `Web.config`.
 
 To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](https://dotnet.microsoft.com/) `System.Configuration` directly.
 
@@ -840,7 +885,7 @@ For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXml
 
 *Embedded resources* might be handy, to prevent including loose files with a deployment. Instead they are compiled right into your program files' `EXE` or `DLL`. This also protects those resources a bit better against modifications.
 
-To include a file as an embedded resource, you could set the following property in [`Visual Studio`](https://visualstudio.microsoft.com/#vs-section):
+To include a file as an embedded resource, you could set the following property in [`Visual Studio`](#visual-studio):
 
 ![](images/sql-as-embedded-resource.png)
 
@@ -860,7 +905,7 @@ Data
 
 At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
-When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](https://www.microsoft.com/en-us/sql-server) installation.
+When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](#sql-server) installation.
 
 ### NHibernate
 
@@ -991,7 +1036,7 @@ An alternative for inheritance might be to use a `1-to-1` related object to repr
 
 #### Generic Interfaces
 
-Data access in this [architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data).
+Data access in this [architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](#jj-framework-data).
 
 #### Conclusion
 
@@ -1003,11 +1048,11 @@ If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are wo
 
 Executing queries onto a database is normally done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
-Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](https://dotnet.microsoft.com/) projects, under a sub-folder named `Sql`.
+Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dot-net) projects, under a sub-folder named `Sql`.
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#sql) in [`.NET`](https://dotnet.microsoft.com/) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
+The classic way of executing [`SQL`](#sql) in [`.NET`](#dot-net) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
 
 A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
 
@@ -1145,7 +1190,7 @@ But it might make it harder to track down all the [`SQL`](#sql) of your project 
 
 #### SQL String Concatenation
 
-*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](https://dotnet.microsoft.com/) to prevent unwanted insertion of scripting. [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dot-net) to prevent unwanted insertion of scripting. [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
 Here is a trick to prevent using `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
 
