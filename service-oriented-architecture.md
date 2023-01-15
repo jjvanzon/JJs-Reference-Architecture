@@ -72,7 +72,7 @@ It gets better with each system you introduce in your ESB. When messages from a 
 Clearer Integration Code
 ------------------------
 
-But it gets better. You save yourself even more work. The conversion code from message to canonical model is often easier than converting from one system's format to the other system's format, because instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforeward format, which is quite a lot easier to program.
+But it gets better. You save yourself even more work. The conversion code from message to canonical model is often easier than converting from one system's format to the other system's format, because instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforward format, which is quite a lot easier to program.
 
 
 In Practice

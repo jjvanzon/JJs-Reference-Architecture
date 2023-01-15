@@ -654,7 +654,7 @@ Network Communication
 
 ### Postdata over HTTP
 
-In [`MVC`](api.md#mvc) it is not so straightforeward to `POST` a collection of items or nested structures over `HTTP`.
+In [`MVC`](api.md#mvc) it is not so straightforward to `POST` a collection of items or nested structures over `HTTP`.
 
 There are a few possibilities:
 
