@@ -302,7 +302,7 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does not expose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead.
+      Helps hide data access behind abstractions. It does not expose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead. For more information see the <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation here</a>.
   </td>
 </tr>
 
@@ -520,7 +520,7 @@ List of API's (and other tech)
        WinForms</a>
   </th>
   <td>
-      Used in some projects. Small utilities and JJ.Synthesizer uses it as the top-most layer.
+      Used in some projects: in small utilities and JJ.Synthesizer uses it as the top-most layer.
   </td>
 </tr>
 
@@ -805,7 +805,7 @@ But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I 
 
 The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> choice [`AJAX'ing`](#ajax), and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
-For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
 I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
 
@@ -1207,7 +1207,7 @@ One variation of [`SqlExecutor`](#sql-executor) included the ability to add plac
 
 The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
 
-The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data), documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
+The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).
 
 Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](#sql-executor) is described [here](#sql).
 
@@ -1221,7 +1221,7 @@ where CategoryID = @categoryID
 and MinStartDate >= @minStartDate
 ```
 
-[`C#:`](https://dotnet.microsoft.com/en-us/languages/csharp)
+[`C#:`](#csharp)
 
 ```cs
 enum SqlEnum

@@ -184,7 +184,7 @@ Another strategy that will not be used, is trying to keep all users' additions o
 Configuration
 -------------
 
-For configuration we will use our own `API`: [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration). It makes it easier to work with complex configuration files, while using `.NET's System.Configuration` directly can be quite a lot of work. For details see the document [`API's`](api.md#configuration).
+For configuration we will use our own `API`: [`JJ.Framework.Configuration`](api.md#configuration). It makes it easier to work with complex configuration files, while using `.NET's System.Configuration` directly can be quite a lot of work.
 
 We will use 3 ways of storing configuration settings:
 

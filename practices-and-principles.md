@@ -425,7 +425,7 @@ Here are rules for null-checks for other constructs:
 
 #### Third-party API's
     
-- Some [`.NET API's`](https://dotnet.microsoft.com/) and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+- Some [`.NET API's`](api.md#dot-net) and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 

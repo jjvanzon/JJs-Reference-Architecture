@@ -278,7 +278,7 @@ By creating a base `Visitor` and multiple specialized `Visitors`, you can create
 
 The classic `Visitor` pattern has a design flaw in it, that we will not use. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a `Visitor`.
 
-A good example of a `Visitor` class is [`.NET's`](https://dotnet.microsoft.com/) own `ExpressionVisitor`, however we follow additional rules.
+A good example of a `Visitor` class is [`.NET's`](api.md#dot-net) own `ExpressionVisitor`, however we follow additional rules.
 
 `< TODO: Make a good text out of this, covering handling polymorphism in Visitors. Merge this with the main text: `
 
