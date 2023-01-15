@@ -549,8 +549,8 @@ List of API's (and other tech)
 </tr>
 
 <tr id="simple-process-form">
-  <th><a href="aspects.html#utilities">SimpleProcessForm</a></th>
-  <td>A base user interface for a <a href="aspects.html#utilities">utility</a> that runs a process.</td>
+  <th><a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms">SimpleProcessForm</a></th>
+  <td>Part of <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms"><code>JJ.Framework.WinForms</code></a>. A base user interface for a <a href="aspects.html#utilities">utility</a> that runs a process.</td>
 </tr>
 
 <tr id="jj-framework-vectorgraphics">

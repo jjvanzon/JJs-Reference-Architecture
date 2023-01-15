@@ -941,9 +941,9 @@ User Interface
 Utilities
 ---------
 
-Utilities are processes that are not run very often. Utilities contains small programs for IT. For example: load translations, things to run for deployment.
+Utilities are small programs or processes that are not run very often. It can be small programs for IT. For example: health checks, loading stuff in a database, things to run for deployment.
 
-[`JJ.Framework.WinForms`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms) contains a reusable window, [`SimpleProcessForm`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms), in to start and cancel the process and show progress information.
+[`JJ.Framework.WinForms`](api.md#simple-process-form) contains a reusable window, [`SimpleProcessForm`](api.md#simple-process-form), in to start and cancel the process and show progress information.
 
 ![](images/utility.png)
 
