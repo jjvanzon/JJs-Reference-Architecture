@@ -23,6 +23,7 @@ This article describes some of the API and technology choices in this [software 
   - [AJAX](#ajax)
   - [JavaScript / TypeScript](#javascript--typescript)
   - [Html.BeginCollection](#htmlbegincollection)
+  - [Html.BeginCollectionItem](#htmlbegincollectionitem)
 - [Misc](#misc)
   - [JJ.Framework](#jjframework)
   - [Configuration](#configuration)
@@ -457,15 +458,6 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr id="html-begin-collection">
-  <th>
-    <a href="#htmlbegincollection">Html.BeginCollection</a>
-  </th>
-  <td>
-      Makes it possible to send tree structures over <code>HTTP</code> to the server-side <a href="#mvc"><code>MVC</code></a>.
-  </td>
-</tr>
-
 <tr id="javascript">
   <th>
     <a href="#javascript--typescript">
@@ -511,16 +503,34 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr >
+<tr id="jj-framework-mvc">
   <th>
-    <a href="#htmlbegincollection">
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc">
        JJ.Framework.Mvc</a>
   </th>
   <td>
-      Extensions to <a href="#mvc"><code>MVC</code></a> for web development. Most notably the possibility to send tree structures over <code>HTTP</code>.
+      Extensions to <a href="#mvc"><code>MVC</code></a> for web development.
   </td>
 </tr>
 
+<tr>
+  <th>
+    <a href="#htmlbegincollection">Html.BeginCollection</a>
+  </th>
+  <td>
+      Part of <a href="#jj-framework-mvc"><code>JJ.Framework.Mvc</code></a>. Makes it possible to send tree structures over <code>HTTP</code> to the server-side <a href="#mvc"><code>MVC</code></a>.
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <a href="#htmlbegincollectionitem">Html.BeginCollectionItem</a>
+  </th>
+  <td>
+      Alternative for <a href="#jjframework"><code>JJ.Framework</code></a>'s <a href="#htmlbegincollection"><code>Html.BeginCollection</code></a>.
+      Allows sending a collection over <code>HTTP</code> to server-side <a href="#mvc"><code>MVC</code></a>, but not trees.
+  </td>
+</tr>
 
 </table>
 
@@ -827,7 +837,7 @@ I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of 
 
 In [`MVC`](#mvc) it is not so straightforward to [`HTTP POST` a tree structure](patterns.md#trees-over-http).
 
-[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodel) at the server side.
+[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodel) at the server side.
 
 In the [`View`](patterns.md#views) code you would wrap each nesting inside a `using` block:
 
@@ -847,7 +857,9 @@ In the [`View`](patterns.md#views) code you would wrap each nesting inside a `us
 }
 ```
 
-So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block. There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](patterns.md#views).
+So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block.
+
+There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](patterns.md#views).
 
 Input fields in a nested structure look as follows:
 
@@ -868,6 +880,25 @@ Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
 Otherwise the input fields might not bind to the [`ViewModel`](#viewmodel). This may force you to program partial [`Views`](#views) for separate items sometimes. This may be good practice anyway, so might not be such a big trade-off.
+
+### Html.BeginCollectionItem
+
+An alternative to [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework.mvc) is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
+
+```cs
+@foreach (var child in Model.Children)
+{
+    using (Html.BeginCollectionItem("Children"))
+    {
+        @* ... *@
+    }
+}
+```
+
+This `API` has some limitations:
+
+- It can send *one* collection over the wire, not trees.
+- It takes a `string` a parameter (e.g. `"Children"`), not an expression like: `() => Model.Children`.
 
 
 Misc

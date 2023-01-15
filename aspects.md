@@ -7,6 +7,12 @@
 
 - [Introduction](#introduction)
 - [Authoring & Reviewing](#authoring--reviewing)
+- [Bidirectional Relationships](#bidirectional-relationships)
+    - [LinkTo](#linkto)
+    - [OneToManyRelationship](#onetomanyrelationship)
+    - [Entity Framework](#entity-framework)
+    - [Omit Inverse Property](#omit-inverse-property)
+    - [TODO](#todo)
 - [Caching](#caching)
 - [Calculation](#calculation)
 - [Cascading](#cascading)
@@ -26,16 +32,10 @@
     - [General Rules](#general-rules)
     - [Enum-Like Entities](#enum-like-entities)
     - [Localization](#localization)
-    - [TODO](#todo)
+    - [TODO](#todo-1)
 - [Errors](#errors)
 - [Exceptions](#exceptions)
 - [Facades](#facades)
-- [Bidirectional Relationships](#bidirectional-relationships)
-    - [LinkTo](#linkto)
-    - [OneToManyRelationship](#onetomanyrelationship)
-    - [Entity Framework](#entity-framework)
-    - [Omit Inverse Property](#omit-inverse-property)
-    - [TODO](#todo-1)
 - [IO](#io)
 - [Logging](#logging)
 - [Multi-Language / Translations / Culture](#multi-language--translations--culture)
@@ -44,6 +44,8 @@
     - [Many Foreign Keys](#many-foreign-keys)
     - [Comparison Loosely Linked vs Many Foreign Keys](#comparison-loosely-linked-vs-many-foreign-keys)
 - [Naming](#naming)
+- [Network Communication](#network-communication)
+    - [PostData over HTTP](#postdata-over-http)
 - [Paging](#paging)
 - [Parsing](#parsing)
 - [Performance](#performance)
@@ -88,6 +90,44 @@ This aspect covers things such as marking objects with creation dates, modificat
 `< TODO: Describe better: Reviewing: Like rating content. So closely related to authoring I find that it should be grouped together. >`
 
 `< TODO: Add specific solutions. >`
+
+
+Bidirectional Relationships
+---------------------------
+
+Aka "Inverse Relationship Management" or "Inverse Property Management".
+
+Inverse property management means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+
+Here are a few methods to do this:
+
+### LinkTo
+
+[`LinkTo`](patterns.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
+
+### OneToManyRelationship
+
+The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](api.md#jj-framework-business) that can manage the two ends of a relationship automatically.
+
+### Entity Framework
+
+If you use [`Entity Framework`](api.md#entity-framework) it might do it automatically for you.
+
+### Omit Inverse Property
+
+Reasons not to have an inverse property can be:
+    
+- Enum-like type
+- Loosely linked [entity](patterns.md#entity)
+- 1-to-1 relationship
+- The inverse relationship would result in an impractically large list.
+
+### TODO
+
+`< TODO: Consider incorporating these ideas here: >`
+
+- Make story about inverse property management in property setters. A general description.
+- Idea 2015-04-29: Inverse property management with a List and a HashSet to make operations not n-problems...
 
 
 Caching
@@ -157,7 +197,6 @@ Collections / List Processing
 ### Specialized Lists
 
 `< TODO: Talk about constrained lists and how to program a specialized list if a normal list does not suffice. >`
-
 
 Concurrency
 -----------
@@ -525,45 +564,6 @@ In an architecture with many different business logic objects, that each take an
 
 These are all options to choose from. You can choose to ingore it them. Or you might actively think about the choices you make about where you put your `Facades`.
 
-
-Bidirectional Relationships
----------------------------
-
-Aka "Inverse Relationship Management" or "Inverse Property Management".
-
-Inverse property management means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
-
-Here are a few methods to do this:
-
-### LinkTo
-
-[`LinkTo`](patterns.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
-
-### OneToManyRelationship
-
-The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](api.md#jj-framework-business) that can manage the two ends of a relationship automatically.
-
-### Entity Framework
-
-If you use [`Entity Framework`](api.md#entity-framework) it might do it automatically for you.
-
-### Omit Inverse Property
-
-Reasons not to have an inverse property can be:
-    
-- Enum-like type
-- Loosely linked [entity](patterns.md#entity)
-- 1-to-1 relationship
-- The inverse relationship would result in an impractically large list.
-
-### TODO
-
-`< TODO: Consider incorporating these ideas here: >`
-
-- Make story about inverse property management in property setters. A general description.
-- Idea 2015-04-29: Inverse property management with a List and a HashSet to make operations not n-problems...
-
-
 IO
 --
 
@@ -647,6 +647,25 @@ Naming
 ------
 
 See 'Names' under 'Coding Style'.
+
+
+Network Communication
+---------------------
+
+### PostData over HTTP
+
+In [`MVC`](api.md#mvc) it is not so straightforeward to `POST` a collection of items or nested structures over `HTTP`.
+
+There are a few possibilities:
+
+- [`Html.BeginCollection`](api.md#htmlbegincollection)
+    - An `API` from [`JJ.Framework.Mvc`](api.md#jj-framework.mvc) for `POST`'ing trees and lists across `HTTP`.
+- [`Html.BeginCollectionItem`](api.md#htmlbegincollectionitem)
+    - A commonly used alternative `API.` Can send *one* collection over the wire, not trees.
+- [`for` loops](patterns.md##lists-in-http-postdata-using-for-loops)
+    - A pattern that works without an additional `API` for posting a list over `HTTP`.
+
+Beware that currently the different solutions do not mix well. You might pick just one of the solutions for each screen of you program.
 
 
 Paging
@@ -918,7 +937,6 @@ User Interface
 --------------
 
 `< TODO: Make a final text out of these preliminary texts. User Interfaces have a ton of ways to implement them. Especially due to the large amount of different presentation technologies that exist. But I like to keep a little independence from specific presentation technologies, by at least abstracting my Views to ViewModels, which are just simple DTO objects that describe the data that is shown on screen. More such patterns can be found under 'Presentation Patterns'. ViewModels can then be applied to your UserControls, cshtml, exposed through Web API's or consumed as json in JavaScript UI's. Creating a ViewModel can be independent on the specific presentation technology you use. This is just a handful of choices you could make regarding your UI. One could wonder if User Interface is really just one aspect, since it covers about half your code base. >`
-
 
 Utilities
 ---------

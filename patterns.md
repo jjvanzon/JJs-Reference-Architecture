@@ -41,11 +41,7 @@
     - [Post-Redirect-Get](#post-redirect-get)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
-    - [Trees over HTTP](#trees-over-http)
-        - [Html.BeginCollection (for Trees)](#htmlbegincollection-for-trees)
-        - [For Loops (for Lists)](#for-loops-for-lists)
-        - [Html.BeginCollectionItem (for Lists)](#htmlbegincollectionitem-for-lists)
-        - [Mixing Solutions not Recommended](#mixing-solutions-not-recommended)
+    - [Lists in HTTP PostData using For Loops](#lists-in-http-postdata-using-for-loops)
     - [Return URL's](#return-urls)
     - [Back Buttons](#back-buttons)
 - [Data Transformation Patterns](#data-transformation-patterns)
@@ -637,17 +633,9 @@ throw new UnexpectedTypeException(() => viewModel);
 
 To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](#viewmodel) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
-### Trees over HTTP
+### Lists in HTTP PostData using For Loops
 
-In [`MVC`](api.md#mvc) it is not so straightforeward to post a collection of items or nested structures.
-
-#### Html.BeginCollection (for Trees)
-
-An `API` for `POST`'ing trees and lists across `HTTP`: [`Html.BeginCollection`](api.md#htmlbegincollection).
-
-#### For Loops (for Lists)
-
-An alternative to for posting collections isusing for-loops.
+An alternative to for posting collections is using for-loops.
 
 ```cs
 @Html.TextBoxFor(x => x.MyItem.MyProperty)
@@ -659,26 +647,6 @@ An alternative to for posting collections isusing for-loops.
 ```
 
 This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](#viewmodel) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](#views) code into partials.
-
-#### Html.BeginCollectionItem (for Lists)
-
-Another alternative to the `BeginCollection()` is the often-used `BeginCollectionItem(string)` `API`. Example:
-
-```cs
-@foreach (var child in Model.Children)
-{
-    using (Html.BeginCollectionItem("Children"))
-    {
-        @* ... *@
-    }
-}
-```
-
-The limitation of that `API` is that you can only send one collection over the line and no additional nesting is possible. Also, it takes a `string` as a parameter and not an expression like `() => Model.Children`.
-
-#### Mixing Solutions not Recommended
-
-Beware that currently the different solutions do not mix well and you should only use one solution for each screen of you program.
 
 ### Return URL's
 
