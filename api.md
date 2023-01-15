@@ -237,7 +237,7 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="#sql">SQL</a></th>
-  <td>For performance reasons <a href="#sql"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="#orm"><code>ORM</code</a>.</td>
+  <td>For performance reasons <a href="#sql"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="#orm"><code>ORM</code></a>.</td>
 </tr>
 
 <tr>
@@ -245,7 +245,7 @@ List of API's (and other tech)
     <a href="#nhibernate">NHibernate</a>
   </th>
   <td>
-      A type of <a href="#orm"><code>ORM</code</a>. Chosen in several <code>JJ</code> project because an employer also so happened to use it.
+      A type of <a href="#orm"><code>ORM</code></a>. Chosen in several <code>JJ</code> project because an employer also so happened to use it.
   </td>
 </tr>
 
@@ -265,7 +265,7 @@ List of API's (and other tech)
        FluentNHibernate</a>
   </th>
   <td>
-      A way to define <a href="#orm"><code>ORM</code</a> mappings, using fluent notation.
+      A way to define <a href="#orm"><code>ORM</code></a> mappings, using fluent notation.
   </td>
 </tr>
 
