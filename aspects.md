@@ -142,7 +142,7 @@ Code style an be enforced with different methods:
 - The [Code Style](code-style.md) handbook, such as is part of this [Reference Architecture](index.md).
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
 - Using Visual Studio's code style options from the Options screen.
-- [`ReSharper`](https://www.jetbrains.com/resharper)!
+- [`ReSharper`](api.md#resharper)!
 
 
 Collections / List Processing
@@ -192,7 +192,7 @@ We will use 3 ways of storing configuration settings:
 - Reading out the appSettings section.
 - Reading out the connectionStrings section.
 
-There is another configuration method in [`.NET`](https://dotnet.microsoft.com/): the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
+There is another configuration method in [`.NET`](api.md#dot-net): the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
 
 
 Conversion
@@ -235,11 +235,11 @@ Entity Status Management
 
 [Entity](patterns.md#entity) status management (or 'object status management') is the recording of whether an [entity](patterns.md#entity) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns.md#entity) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
-There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns.md#entity) and properties get status flagging instead of leaving it up to the [entity](patterns.md#entity) status writers to guess what [entity](patterns.md#entity) status reporting is needed and [entity](patterns.md#entity) status readers to guess of what [entities](patterns.md#entity) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns.md#entity) status management you need.
+There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns.md#entity) and properties get status flagging instead of leaving it up to the [entity](patterns.md#entity) status writers to guess what [entity](patterns.md#entity) status reporting is needed and [entity](patterns.md#entity) status readers to guess of what [entities](patterns.md#entity) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns.md#entity) status management you need.
 
 <h3>Alternatives</h3>
 
-The consequence of explicit [entity](patterns.md#entity) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns.md#entity) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns.md#entity) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns.md#entity) status management through IContext across all platforms, [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) should offer its own alternative to [entity](patterns.md#entity) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns.md#entity) status management at the Persistence side, it would make [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit [entity](patterns.md#entity) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns.md#entity) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns.md#entity) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns.md#entity) status management through IContext across all platforms, [`JJ.Framework.Data`](api.md#jj-framework-data) should offer its own alternative to [entity](patterns.md#entity) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns.md#entity) status management at the Persistence side, it would make [`JJ.Framework.Data`](api.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
 This is why the explicit status management solution won over the [entity](patterns.md#entity) status management in the persistence framework.
 
@@ -474,11 +474,11 @@ Exceptions
 - Do null-checks on arguments of public methods.
 - Sometimes miscellaneous checks need to be performed on public methods.
 - Arguments of private methods do not have to be checked if the class already enforces the rule elsewhere.
-- For null-checks, use NullException (in [`JJ.Framework.Exceptions`](https://www.nuget.org/packages/JJ.Framework.Exceptions)).
+- For null-checks, use NullException (in [`JJ.Framework.Exceptions`](api.md#jj-framework-exceptions)).
 - Use NotImplementedException for methods you have not finished yet.
 - Use NotSupportedException for interface methods that are not supported.
-- Use InvalidValueException or ValueNotSupportedException (in [`JJ.Framework.Exceptions`](https://www.nuget.org/packages/JJ.Framework.Exceptions)) in the default in a switch statement over an enum value.
-- Use other exception types out of [`JJ.Framework.Exceptions`](https://www.nuget.org/packages/JJ.Framework.Exceptions).
+- Use InvalidValueException or ValueNotSupportedException (in [`JJ.Framework.Exceptions`](api.md#jj-framework-exceptions)) in the default in a switch statement over an enum value.
+- Use other exception types out of [`JJ.Framework.Exceptions`](api.md#jj-framework-exceptions).
 - Otherwise just throw the Exception base class.
 - Mention the variable or property name in the exception message.
 - Mention the ID of an object in the exception message.
@@ -507,7 +507,7 @@ catch (IOException)
 
 In fact, prefer not to retrieve information by catching an exception at all.
 
-- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) from [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) [`Helper`](patterns.md#helper) method.
+- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](api.md#jj-framework-logging) from [`JJ.Framework.Logging`](api.md#jj-framework-logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](api.md#jj-framework-logging) [`Helper`](patterns.md#helper) method.
 
 
 Facades
@@ -515,7 +515,7 @@ Facades
 
 `Facades` might sound like a pattern to you, but regardless of whether you use the [`Facade`](patterns.md#facade) pattern or not, your system has `Facades` whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
 
-If you have an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns.md#controller) that are your `Facades`.
+If you have an [`MVC`](api.md#mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns.md#controller) that are your `Facades`.
 
 If you have `Windows` app without a lot of layers, you probably have quite a few `Facades`: each `Form` probably is one.
 
@@ -541,7 +541,7 @@ Here are a few methods to do this:
 
 ### OneToManyRelationship
 
-The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business/) that can manage the two ends of a relationship automatically.
+The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](api.md#jj-framework-business) that can manage the two ends of a relationship automatically.
 
 ### Entity Framework
 
@@ -575,7 +575,7 @@ Logging
 
 Be careful how much you log. Logging unhandled exceptions is usually good enough. If you log a lot, it creates a performance penalty and can impose a serious strain on your infrastructure. Servers have crashed under the pressure of logging. A simple try-catch on a main level and a call to the logger will usually suffice.
 
-For logging we will use our own `API`: [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging). It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
+For logging we might use our own `API`: [`JJ.Framework.Logging`](api.md#jj-framework-logging). It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
 
 Config example:
 
@@ -600,7 +600,7 @@ Config example:
 </configuration>
 ```
 
-If you insist on using `Log4Net`, make a separate `ILogger` implementation behind which you hide `Log4Net`. The downside of `Log4Net` is that its configuration can be quite verbose and complicated. [`JJ.Framework.Logging`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Logging) is simple and can run on all platforms.
+If you insist on using `Log4Net`, make a separate `ILogger` implementation behind which you hide `Log4Net`. The downside of `Log4Net` is that its configuration can be quite verbose and complicated. [`JJ.Framework.Logging`](api.md#jj-framework-logging) is simple and can run on all platforms.
 
 
 Multi-Language / Translations / Culture
@@ -640,7 +640,7 @@ The foreign key solution does have a big benefit over the generic key solution, 
 
 To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns.md#entity) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns.md#entity).
 
-A lot of work to use the loosely linked [entities](patterns.md#entity). This is not unique to loosely linked translation [entities](patterns.md#entity). It is a problem with any alternative key, that non-flushed [entities](patterns.md#entity) cannot be retrieved with a ([`LINQ`](https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries)) query.
+A lot of work to use the loosely linked [entities](patterns.md#entity). This is not unique to loosely linked translation [entities](patterns.md#entity). It is a problem with any alternative key, that non-flushed [entities](patterns.md#entity) cannot be retrieved with a ([`LINQ`](api.md#linq)) query.
 
 
 Naming
@@ -674,7 +674,7 @@ Performance
 
 `< TODO: Aspects, Performance: Some optimizations seem only possible with inheritance and many classes, such as the fastest static dispatch and e.g. preventing dictionary lookups by having only one value stored per object instead of a dictionary for multiple objects. Oh, that is not necessarly inheritance. But why is inheritance the only construct that can do that, because inheritance also comes with downsides. >`
 
-\> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) for structures that complex, while inheritance syntax is clearer in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp). Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
+\> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in [`C#`](api.md#csharp) for structures that complex, while inheritance syntax is clearer in [`C#`](api.md#csharp). Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
 
 `< TODO: Aspects, Performance: Detail about nested loops: just traversing multiple levels is not a bad nested loop. Lookups of 5 to 7 items do not require a dictionary. >`
 
@@ -682,7 +682,7 @@ Performance
 Persistence
 -----------
 
-To access a data store (usually a database), [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) will be used. Through that framework you can access data using different underlying persistence technologies, such as [`NHibernate`](api.md#nhibernate) and [`Entity Framework`](#entity-framework) or even flat files or [`XML`](api.md#xml). The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
+To access a data store (usually a database), [`JJ.Framework.Data`](api.md#jj-framework-data) will be used. Through that framework you can access data using different underlying persistence technologies, such as [`NHibernate`](api.md#nhibernate) and [`Entity Framework`](#entity-framework) or even flat files or [`XML`](api.md#xml). The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
 
 The main interface of the framework is `IContext`.
 
@@ -728,7 +728,7 @@ for enum-like tables.
 
 `In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. >`
 
-Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns.md#repository) in the top-level project, often an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
+Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns.md#repository) in the top-level project, often an [`MVC`](api.md#mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
 There are the following interfaces:
 
@@ -857,7 +857,7 @@ Transactions
 Type Safety
 -----------
 
-[`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) has type-safety built in. For type safety in [`JavaScript`](api.md#javascript--typescript), use [`TypeScript`](api.md#javascript--typescript).
+[`C#`](api.md#csharp) has type-safety built in. For type safety in [`JavaScript`](api.md#javascript), use [`TypeScript`](api.md#typescript).
 
 
 Automated Testing

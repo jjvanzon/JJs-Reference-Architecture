@@ -98,7 +98,7 @@ They mostly conform to `Microsoft` standards described in these articles:
 - [C# Coding Conventions](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
 - [Coding Techniques and Programming Practices](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
 
-A tool like [`ReSharper`](https://www.jetbrains.com/resharper) may help. Its settings can be fine-tuned to closely match the preferences. It then checks the code style and can auto-format for you.
+A tool like [`ReSharper`](api.md#resharper) may help. Its settings can be fine-tuned to closely match the preferences. It then checks the code style and can auto-format for you.
 
 
 Casing
@@ -115,7 +115,7 @@ Casing
 | Abbreviations not preferred                                       |
 | Abbreviations of 2 letters with capitals.                         | `ID`
 | Abbreviations of 3 letters or more in pascal case.                | `Mvc`
-| [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) partial [`View`](patterns.md#views) names in pascal case, starting with underscore | `_MyPartialView`
+| [`MVC`](api.md#mvc) partial [`View`](patterns.md#views) names in pascal case, starting with underscore | `_MyPartialView`
 | For long identifiers, underscores to separate 'the pieces'        | `Sine_OperatorCalculator_VarFrequency`
 
 
@@ -686,7 +686,7 @@ Spaces and Braces
 
 ### Auto-Formatting
 
-Perhaps start out with [`Visual Studio's`](https://visualstudio.microsoft.com/#vs-section) auto-formatting enabled and set to its defaults.  
+Perhaps start out with [`Visual Studio's`](api.md#visual-studio) auto-formatting enabled and set to its defaults.  
 
 Reason: Less surprising to the next developer.
 
@@ -1548,7 +1548,7 @@ sbyte
 </td></tr></table>
 
 Reason:  
-For compatibility with more variations of [`.NET`](https://dotnet.microsoft.com/).
+For compatibility with more variations of [`.NET`](api.md#dot-net).
 
 ### No Decisions from Exceptions
 

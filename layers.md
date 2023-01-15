@@ -96,7 +96,7 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](https://www.microsoft.com/en-us/sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api.md#sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
@@ -108,7 +108,7 @@ It could also be a different data access technology: a different [`ORM`](api.md#
 
 [Entity](patterns.md#entity) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns.md#entity). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
-The [`FluentNHibernate`](https://www.nuget.org/packages/FluentNHibernate) `API` can help set up these [mappings](patterns.md#mapping).
+The [`FluentNHibernate API`](api.md#fluent-nhibernate) can help set up these [mappings](patterns.md#mapping).
 
 ### Entities
 
@@ -120,13 +120,13 @@ With all this in place, out come objects called [entities](patterns.md#entity), 
 
 ### Repository Interfaces
 
-The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
+The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](api.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
 
 ### Platform Independence
 
 The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part.
 
-The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](https://www.microsoft.com/en-us/sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](https://www.microsoft.com/en-us/sql-server) or [`NHibernate`](api.md#nhibernate) at all.
+The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](api.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](api.md#sql-server) or [`NHibernate`](api.md#nhibernate) at all.
 
 This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also helps deploy the same code to different environments like *mobile*, *Windows* or *web*.
 
@@ -168,23 +168,23 @@ Because the [`Presenters`](patterns.md#presenter) combine several [responsibilit
 
 ### MVC
 
-[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
+[`MVC`](api.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api.md#mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
 
 ### MVC Controllers
 
-[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) uses [`Controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
+[`MVC`](api.md#mvc) uses [`Controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns.md#controller) are quite specific to [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). An equivalent might not be present on other presentation platforms.
+[`Controllers`](patterns.md#controller) are quite specific to [`MVC`](api.md#mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms, like [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`View`](patterns.md#views) depending on their results.
+However, even on other presentation platforms, like [`WinForms`](api.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`View`](patterns.md#views) depending on their results.
 
 ### URLs
 
-Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to get a `URL`.
+Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. [`MVC`](api.md#mvc) makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to get a `URL`.
 
-The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) [`Controllers`](patterns.md#controller). The [`ViewModels`](patterns.md#viewmodel) and are built up from post data by [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) automatically.
+The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodel) parameters are accepted by [`MVC`](api.md#mvc) [`Controllers`](patterns.md#controller). The [`ViewModels`](patterns.md#viewmodel) and are built up from post data by [`MVC`](api.md#mvc) automatically.
 
-[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc).
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api.md#mvc).
 
 ### View Engine (Razor)
 
@@ -192,21 +192,21 @@ After the [`Controller`](patterns.md#controller) method is done, the view engine
 
 ### Views (Razor)
 
-A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). It offers a concise syntax for programming [`Views`](patterns.md#views), that combines [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) with `HTML.` [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) has tight integration with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the [`View`](patterns.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns.md#viewmodel) as input, along with the [`View`](patterns.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) the [`Views`](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
+In [`WinForms`](api.md#winforms) the [`Views`](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
 
 ### HTML
 
-The [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) engine produces a piece of `HTML` received by the web browser. 
+The [`Razor`](api.md#razor) engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In [`WinForms`](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns.md#views).
+`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns.md#views).
 
 ### Platform Independence
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* part from the *platform independent* part. 
 
-The *platform-specific* part concerns itself with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), `HTML` and [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c), while the *platform independent* part is unaware of which presentation technology is used.
+The *platform-specific* part concerns itself with [`MVC`](api.md#mvc), `HTML` and [`Razor`](api.md#razor), while the *platform independent* part is unaware of which presentation technology is used.
 
 That means that we can use similar logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
 
@@ -258,7 +258,7 @@ Setting [default values](aspects.md#defaults) when creating an [entity](patterns
 
 ### Cascading
 
-Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main [entity](patterns.md#entity) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related [entity](patterns.md#entity). In this [architecture](index.md) this might be done in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main [entity](patterns.md#entity) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related [entity](patterns.md#entity). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 

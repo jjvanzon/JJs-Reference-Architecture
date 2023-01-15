@@ -251,9 +251,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database. You could not use the [entity model](patterns.md#entity) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](api.md#sql-server) database. You could not use the [entity model](patterns.md#entity) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns.md#entity) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns.md#entity) in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](https://www.microsoft.com/en-us/sql-server) Server using [`NHibernate`](api.md#nhibernate).
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns.md#entity) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns.md#entity) in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](api.md#sql-server) Server using [`NHibernate`](api.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -396,7 +396,7 @@ Here are rules for null-checks for other constructs:
 
 #### Parameters
 
-- Execute null-checks on arguments of public methods. Use `NullException` (out of [`JJ.Framework.Reflection`](https://www.nuget.org/packages/JJ.Framework.Reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
+- Execute null-checks on arguments of public methods. Use `NullException` (out of [`JJ.Framework.Reflection`](api.md#jj-framework-reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
 - Avoid allowing null parameters.
 - But if a parameter *is* nullable, you can denote this in several ways.
 - Assign null as the default value of the parameter, so it is clear that it can accept null:  
@@ -429,7 +429,7 @@ Here are rules for null-checks for other constructs:
 
 <h4>Alternatives</h4>
 
-Nullability problems might be solved next to automatically by newer [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) versions.
+Nullability problems might be solved next to automatically by newer [`C#`](api.md#csharp) versions.
 
 ### Process that Checks Itself (👎)
 
@@ -490,7 +490,7 @@ Here are a few more examples:
 - `CustomerListReload`
     - It was a [`Controller`](patterns.md#controller) action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
-- A [`View`](patterns.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns.md#controller) `Action`, the [`.NET`](https://dotnet.microsoft.com/) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
+- A [`View`](patterns.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns.md#controller) `Action`, the [`.NET`](api.md#dot-net) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
 
 ### CRUD
@@ -763,7 +763,7 @@ Not always bad practice, but is can be a cause of confusion.
 
 Syntactic sugar is creating a notation that does not add anything, other than a simpler notation.
 
-Object initializers are an example of syntactic sugar. In [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) 2.0 you had to initialize an object's properties as follows:
+Object initializers are an example of syntactic sugar. In [`C#`](api.md#csharp) 2.0 you had to initialize an object's properties as follows:
 
 ```cs
 Cat cat = new Cat();
@@ -771,7 +771,7 @@ cat.Age = 7;
 cat.Name = "Nala";
 ```
 
-In later versions of [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) you are able to do the same thing with the following code:
+In later versions of [`C#`](api.md#csharp) you are able to do the same thing with the following code:
 
 ```cs
 var cat = new Cat 
@@ -997,7 +997,7 @@ The solution is to make `Execute()` public and insist that that it is called exp
 
 `< TODO: Update the remark below. Another solution is to actually do all 'the work' in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above. >`
 
-([`JJ.Framework.Validation`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation) uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
+([`JJ.Framework.Validation`](api.md#jj-framework-validation) uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
 
 ### Cross-Referencing (👎)
 
@@ -1054,7 +1054,7 @@ If a class is long, for instance 800+ code lines, consider if it should be split
 
 In both cases this usually means that the method or class has too many responsibilities.
 
-This code smell can also apply to other code than [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) classes and methods.
+This code smell can also apply to other code than [`C#`](api.md#csharp) classes and methods.
 
 ### Nested Loops (👎)
 
@@ -1537,7 +1537,7 @@ When you code keeps producing errors when you make a change, this could be an in
 
 ### Tooleritis
 
-Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
+Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](api.md#winforms) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
 
 ### Tools to make Tools to make Tools
 

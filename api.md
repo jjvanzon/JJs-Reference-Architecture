@@ -278,7 +278,6 @@ List of API's (and other tech)
   </td>
 </tr>
 
-
 <tr id="linq">
   <th>
       <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/write-linq-queries">
@@ -294,7 +293,7 @@ List of API's (and other tech)
     <a href="https://www.nuget.org/packages/JJ.Framework.Collections">
        JJ.Framework.Collections</a>
   </th>
-  <td>JJ extensions to LINQ.</td>
+  <td><code>LINQ</code> extensions from the <code>JJ.Framework</code>.</td>
 </tr>
 
 <tr id="jj-framework-data">
@@ -429,8 +428,7 @@ List of API's (and other tech)
 
 <tr id="iis">
   <th>
-    <a href="https://www.iis.net/">
-       IIS</a>
+    <a href="https://www.iis.net/">IIS</a>
   </th>
   <td>
       (Internet Information Services.) For hosting web sites. 
@@ -516,7 +514,7 @@ List of API's (and other tech)
 
 <table>
 
-<tr id="win-forms">
+<tr id="winforms">
   <th>
     <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/get-started/create-app-visual-studio">
        WinForms</a>
@@ -758,7 +756,7 @@ List of API's (and other tech)
        JJ.Framework.Logging</a>
   </th>
   <td>
-      For now might only contains the ExceptionHelper class, which for instance converts exception information to a string.
+      For now might only contain the ExceptionHelper class, which for instance converts exception information to a string.
   </td>
 </tr>
 
@@ -787,7 +785,7 @@ Web
 
 `AJAX` is a way to load part of a web page, so the whole page does not have te be refreshed. This may make the user interface smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) `AJAX` functions in [`JavaScript`](#javascript--typescript), around calls to [`jQuery`](https://jquery.com/), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript--typescript) code.
+For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) `AJAX` functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript) code.
 
 Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
@@ -797,7 +795,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) was logic on the server-side. [`Views`](patterns.md#views) were in [`Razor`](https://learn.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c). Best to keep most logic [`C#`](#csharp) was the idea.
+For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](patterns.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
 
 [`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](#csharp) you could refactor, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
 
@@ -807,7 +805,7 @@ But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I 
 
 The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> choice [`AJAX'ing`](#ajax), and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
-For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](https://jquery.com/) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.JavaScript) which had some merit, but may have been superseded by newer tech by now.
 
 I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
 
@@ -868,7 +866,7 @@ internal interface IConnectionStrings
 
 *Inverse property management* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](https://www.nuget.org/packages/JJ.Framework.Business) package, which can be used in various models: [rich](patterns.md#rich-models), [entity](patterns.md#entity), `API` or otherwise.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns.md#rich-models), [entity](patterns.md#entity), `API` or otherwise.
 
 There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns.md#linkto) can also be used. Or hand-writing the syncing in-place. 
 
@@ -878,9 +876,9 @@ There may be other options available. [`NHibernate`](#nhibernate) does not appea
 
 In most cases, it is recommended to use`XElement` (LINQ to XML) instead of `XmlDocument` unless you specifically need to use `XPath`.
 
-To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml) or [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) over other `API's` directly.
+To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework.xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over other `API's` directly.
 
-For converting `XML` to an object graph, `XmlToObjectConverter` and `ObjectToXmlConverter` from [`JJ.Framework.Xml`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`JJ.Framework.Xml.Linq`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.Xml.Linq) might be useful and offer a simpler solution than other `API's`.
+For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework.xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful and offer a simpler solution than other `API's`.
 
 ### Embedded Resources
 
@@ -890,7 +888,7 @@ To include a file as an embedded resource, you could set the following property 
 
 ![](images/sql-as-embedded-resource.png)
 
-[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper class`](patterns.md#helper) [`EmbeddedResourceReader`](https://www.nuget.org/packages/JJ.Framework.Common). It makes it a little bit easier to access those resources from your code:
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper class`](patterns.md#helper) [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
 ```cs
 string text = EmbeddedResourceReader.GetText(
@@ -902,9 +900,9 @@ Data
 
 ### Entity Framework
 
-[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) and [repository interfaces](patterns.md#repository-interfaces).
+[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entityframework) and [repository interfaces](patterns.md#repository-interfaces).
 
-At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.EntityFramework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
+At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entityframework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entityframework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
 When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](#sql-server) installation.
 
@@ -914,7 +912,7 @@ When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework),
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) is used in some projects, because an employer favored it, and some other projects joined the club.
 
-[`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) and [repository interfaces](patterns.md#repository).
+[`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate) and [repository interfaces](patterns.md#repository).
 
 ### ORM
 
@@ -1053,9 +1051,7 @@ Other techniques, like *stored procedures* and *views* were dismissed at one poi
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#sql) in [`.NET`](#dot-net) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) might be used.
-
-A version of it is available on [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
+The classic way of executing [`SQL`](#sql) in [`.NET`](#dot-net) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](#sql-executor) might be used.
 
 With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single code line.
 
@@ -1087,7 +1083,7 @@ namespace JJ.Demos.SqlExecutor.Sql
 }
 ```
 
-Then an [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) can be created as follows:
+Then an [`SqlExecutor`](#sql-executor) can be created as follows:
 
 ```cs
 ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(
@@ -1102,7 +1098,7 @@ Then you can call a method that executes the [`SQL`](#sql):
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names are similar to an `SqlCommand`. You pass [`SQL`](#sql) parameters along with the [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) as an anonymous type:
+The method names are similar to an `SqlCommand`. You pass [`SQL`](#sql) parameters along with the [`SqlExecutor`](#sql-executor) as an anonymous type:
 
 ```cs
 new { id, name }
@@ -1139,8 +1135,8 @@ It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](
 
 #### With NHibernate
 
-If you use [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) in combination with [`NHibernate`](#nhibernate) you might want to 
-use the [`NHibernateSqlExecutorFactory`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) instead of the default [`SqlExecutorFactory`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient):
+If you use [`SqlExecutor`](#sql-executor) in combination with [`NHibernate`](#nhibernate) you might want to 
+use the [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) instead of the default [`SqlExecutorFactory`](#sql-executor):
 
 ```cs
 ISession session = ...;
@@ -1151,7 +1147,7 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
 
 This version uses an [`NHibernate`](#nhibernate) `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as the [`SQL`](#sql) that [`NHibernate`](#nhibernate) executes, we made it aware of the `ISession`.
 
-A variation of this [`NHibernateSqlExecutorFactory`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate) was implemented here: [`JJs-Pre-Release-Package-Feed`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.NHibernate).
+A variation of this [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) was implemented here: [`JJs-Pre-Release-Package-Feed`](#jj-framework-data-nhibernate).
 
 #### Files instead of Embedded Resources
 
@@ -1161,7 +1157,7 @@ It might be a good choice to include the [`SQL`](#sql) as an embedded resource, 
 
 ![](images/sql-as-content-file.png)
 
-Here is code to create the [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) and execute an [`SQL`](#sql) file:
+Here is code to create the [`SqlExecutor`](#sql-executor) and execute an [`SQL`](#sql) file:
 
 ```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
@@ -1191,7 +1187,7 @@ But it might make it harder to track down all the [`SQL`](#sql) of your project 
 
 #### SQL String Concatenation
 
-*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dot-net) to prevent unwanted insertion of scripting. [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dot-net) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
 Here is a trick to prevent using `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
 
@@ -1205,15 +1201,15 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 - Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name*.
 - There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule.
 
-One variation of [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
+One variation of [`SqlExecutor`](#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
 #### SQL Behind Repositories
 
 The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
 
-The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data), documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
+The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data), documentation [here](https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data).
 
-Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient) is described [here](#sql).
+Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](#sql-executor) is described [here](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
@@ -1263,7 +1259,7 @@ interface IMyRepository : IRepository
 This would result in:
 
 - Keeping all the queries of an [entity](patterns.md#entity) together in a [`repository`](patterns.md#repository).
-- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entity) behind an [`SqlExecutor`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient).
+- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entity) behind an [`SqlExecutor`](#sql-executor).
 - All that data access would be hidden [`repository interfaces`](patterns.md#repository-interfaces) decoupling the persistence technology.
  
 It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
