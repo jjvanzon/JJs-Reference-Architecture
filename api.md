@@ -825,7 +825,7 @@ I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of 
 
 ### Html.BeginCollection
 
-In [`MVC`](#mvc) it is not so straightforeward to [`HTTP POST` a tree structure](patterns.md#trees-over-http).
+In [`MVC`](#mvc) it is not so straightforward to [`HTTP POST` a tree structure](patterns.md#trees-over-http).
 
 [`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodel) at the server side.
 
