@@ -80,7 +80,7 @@ List of API's (and other tech)
        VS Code</a>
   </th>
   <td>
-      Used for <a href="#mark-down">MarkDown</a> editing.
+      Used for <a href="#mark-down"><code>MarkDown</code></a> editing.
   </td>
 </tr>
 
@@ -91,12 +91,12 @@ List of API's (and other tech)
 
 <tr id="mono">
   <th><a href="https://www.mono-project.com/">Mono</a></th>
-  <td>Version of .NET that worked for other platforms than Windows. Later versions of the .NET might work for more platforms out-of-the-box.</td>
+  <td>Version of <code>.NET</code> that worked for other platforms than <code>Windows</code>. Later versions of the <code>.NET</code> might work for more platforms out-of-the-box.</td>
 </tr>
 
 <tr id="unity-game-engine">
   <th><a href="https://unity.com/">Unity Game Engine</a></th>
-  <td>The first tech at that time, that would work for deploying the code on multiple mobile platforms. It uses the Mono compiler.</td>
+  <td>The first tech at that time, that would work for deploying the code on multiple mobile platforms. It uses the <a href="#mono"><code>Mono</code></a> compiler.</td>
 </tr>
 
 <tr id="csharp">
@@ -141,17 +141,17 @@ List of API's (and other tech)
 
 <tr id ="git-for-windows">
   <th><a href="https://gitforwindows.org/">Git for Windows</a></th>
-  <td>Windows version of Git.</td>
+  <td><code>Windows</code> version of <a href="#git"><code>Git</code></a>.</td>
 </tr>
 
 <tr id="git-extensions">
   <th><a href="https://gitextensions.github.io/">Git Extensions</a></th>
-  <td>User interface for Git with many options.</td>
+  <td>User interface for <a href="#git"><code>Git</code></a> with many options.</td>
 </tr>
 
 <tr id="tortoise-git">
   <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
-  <td>Git user interface that shows state in File Explorer icons.</td>
+  <td><a href="#git"><code>Git</code></a> user interface that shows state in <code>File Explorer</code> icons.</td>
 </tr>
 
 <tr id="azure-dev-ops">
