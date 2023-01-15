@@ -85,7 +85,7 @@ Naming Conventions
 Rules
 -----
 
-Do not use the following object types, because these things are managed in [`.NET`](api.md#dot-net):
+Do not use the following object types, because these things are managed in [`.NET`](api.md#dotnet):
 
 - Views
 - Stored Procedures

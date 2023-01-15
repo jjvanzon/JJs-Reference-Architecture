@@ -425,7 +425,7 @@ Here are rules for null-checks for other constructs:
 
 #### Third-party API's
     
-- Some [`.NET API's`](api.md#dot-net) and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+- Some [`.NET API's`](api.md#dotnet) and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 
@@ -490,7 +490,7 @@ Here are a few more examples:
 - `CustomerListReload`
     - It was a [`Controller`](patterns.md#controller) action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
-- A [`View`](patterns.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns.md#controller) `Action`, the [`.NET`](api.md#dot-net) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
+- A [`View`](patterns.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns.md#controller) `Action`, the [`.NET`](api.md#dotnet) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
 
 ### CRUD

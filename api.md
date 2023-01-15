@@ -84,7 +84,7 @@ List of API's (and other tech)
   </td>
 </tr>
 
-<tr id="dot-net">
+<tr id="dotnet">
   <th><a href="https://dotnet.microsoft.com/">.NET</a></th>
   <td>Framework from Microsoft that forms a base for the programming.</td>
 </tr>
@@ -160,7 +160,7 @@ List of API's (and other tech)
       Azure DevOps</a>
   </th>
   <td>
-      Build pipeline. Pre-release package feed. Original planning boards. Might still host a project not migrated to GitHub.
+      <a href="https://dev.azure.com/jjvanzon/JJs-Software/_build">Build pipeline</a>, <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">Pre-Release-Package-Feed</a>, original <a href="https://dev.azure.com/jjvanzon/JJs-Software/_workitems/">planning boards</a>, hosts a <a href="https://dev.azure.com/jjvanzon/JJs-Software/_git/"> repository</a> not migrated to <a href="#git-hub"><code>GitHub</code></a>.
   </td>
 </tr>
 
@@ -169,7 +169,7 @@ List of API's (and other tech)
     <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/quickstart">
        GitHub Issues</a></th>
   <td>
-      Gradually using GitHub Issues more for planning.
+      Gradually used more for planning.
   </td>
 </tr>
 
@@ -178,7 +178,7 @@ List of API's (and other tech)
     <a href="https://www.markdownguide.org/cheat-sheet">
        MarkDown</a></th>
   <td>
-      Lightweight alternative for HTML. Used for documentation. Compatible with quite some web tech.
+      Lightweight alternative for <code>HTML</code>. Used for documentation. Compatible with various web tech.
   </td>
 </tr>
 
@@ -187,7 +187,7 @@ List of API's (and other tech)
     <a href="#jjframework">
        JJ.Framework</a></th>
   <td>
-      In-house programmed extensions to the .NET Framework.<br/>
+      In-house programmed extensions to the <a href="#dotnet"><code>.NET Framework</code></a>.<br/>
       <a href="https://github.com/jjvanzon/JJ.Framework">GitHub</a> / 
       <a href="https://www.nuget.org/profiles/jjvanzon">NuGet</a> /
       <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">JJs-Pre-Release-Package-Feed</a>
@@ -210,7 +210,7 @@ List of API's (and other tech)
        JJ.Framework.Reflection</a>
   </th>
   <td>
-      Helps with and speeds up accessing code structure elements through reflection and lambda expressions.
+      Helps and speeds up accessing code structure elements through <a href="https://learn.microsoft.com/en-us/dotnet/framework/reflection-and-codedom/reflection">reflection</a> and <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions">lambda expressions</a>.
   </td>
 </tr>
 
@@ -232,12 +232,12 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="#orm">ORM</a></th>
-  <td>Hides most SQL, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
+  <td>Hides most <a href="#sql"><code>SQL</code></a>, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
 </tr>
 
 <tr>
   <th><a href="#sql">SQL</a></th>
-  <td>For performance reasons SQL is hand-programmed incidentally, combined with ORM.</td>
+  <td>For performance reasons <a href="#sql"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="#orm"><code>ORM</code</a>.</td>
 </tr>
 
 <tr>
@@ -245,7 +245,7 @@ List of API's (and other tech)
     <a href="#nhibernate">NHibernate</a>
   </th>
   <td>
-      A type of ORM. Chosen in several JJ project because an employer also so happened to use it.
+      A type of <a href="#orm"><code>ORM</code</a>. Chosen in several <code>JJ</code> project because an employer also so happened to use it.
   </td>
 </tr>
 
@@ -255,7 +255,7 @@ List of API's (and other tech)
        QueryOver</a>
   </th>
   <td>
-      A strongly-typed query language like LINQ, but then the NHibernate variation.
+      A strongly-typed query language like <a href="#linq"><code>LINQ</code></a>, but then the <a href="#nhibernate"><code>NHibernate</code></a> variation.
   </td>
 </tr>
 
@@ -265,7 +265,7 @@ List of API's (and other tech)
        FluentNHibernate</a>
   </th>
   <td>
-      A way to define ORM mappings, using fluent notation.
+      A way to define <a href="#orm"><code>ORM</code</a> mappings, using fluent notation.
   </td>
 </tr>
 
@@ -274,7 +274,7 @@ List of API's (and other tech)
     <a href="#entity-framework">Entity Framework</a>
   </th>
   <td>
-      A type of ORM. Chosen less in the JJ projects, because of more experience with NHibernate. Worth considering though.
+      A type of <a href="#orm"><code>ORM</code></a>. Chosen less in the <code>JJ</code> projects, because of more experience with <a href="#nhibernate"><code>NHibernate</code></a>. Worth considering though.
   </td>
 </tr>
 
@@ -284,7 +284,7 @@ List of API's (and other tech)
          LINQ</a>
   </th>
   <td>
-      A query language usable in C#. Can be query several types of data store, but used commonly for in-memory collections.
+      A query language usable in <a href="#csharp"><code>C#</code></a>. Can be query several types of data store, but commonly used for in-memory collections.
   </td>
 </tr>
 
@@ -293,7 +293,7 @@ List of API's (and other tech)
     <a href="https://www.nuget.org/packages/JJ.Framework.Collections">
        JJ.Framework.Collections</a>
   </th>
-  <td><code>LINQ</code> extensions from the <code>JJ.Framework</code>.</td>
+  <td><a href="#linq"><code>LINQ</code></a> extensions from the <a href="#jjframework"><code>JJ.Framework</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-data">
@@ -302,7 +302,7 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does not expose whether it is SQL Server, SQL, ORM, NHibernate. There would just be abstracted convenient methods instead. For more information see the <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation here</a>.
+      Helps hide data access behind <em>abstractions</em>. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="#sql"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="#nhibernate"><code>NHibernate</code></a>. There would just be abstracted convenient methods instead. For more information see the <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
   </td>
 </tr>
 
@@ -377,7 +377,7 @@ List of API's (and other tech)
        JJ.Framework.Business</a>
   </th>
   <td>
-      Types for supporting a business layer and/or API. Bidirectional relationship sync. Result types to pass data, succes flags and (validation) messages.
+      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship sync</a>. Result types to pass data, succes flags and (<a href="patterns.html#validators">validation</a>) messages.
   </td>
 </tr>
 
@@ -387,7 +387,7 @@ List of API's (and other tech)
        JJ.Framework.Validation</a>
   </th>
   <td>
-      A nice fluent notation for validations.
+      A nice fluent notation for <a href="patterns.html#validators">validations</a>.
   </td>
 </tr>
 
@@ -397,7 +397,7 @@ List of API's (and other tech)
        JJ.Framework.Mathematics</a>
   </th>
   <td>
-      Helpers for math things. See link.
+      Helpers for math things.
   </td>
 </tr>
 
@@ -415,8 +415,8 @@ List of API's (and other tech)
        PagerViewModelFactory</a>
   </th>
   <td>
-      Can construct a PagerViewModel with properties like
-      CanGoToFirstPage, CanGoToPreviousPage, CanGoToNextPage, CanGoToLastPage.
+      Can construct a <code>PagerViewModel</code> with properties like
+      <code>CanGoToFirstPage</code>, <code>CanGoToPreviousPage</code>, <code>CanGoToNextPage</code>, <code>CanGoToLastPage</code>.
   </td>
 </tr>
 
@@ -432,7 +432,7 @@ List of API's (and other tech)
   </th>
   <td>
       (Internet Information Services.) For hosting web sites. 
-      Some Visual Studio projects wish to use it upon load.
+      Some <a href="#visual-studio"><code>Visual Studio</code></a> projects wish to use it upon load.
   </td>
 </tr>
 
@@ -442,7 +442,7 @@ List of API's (and other tech)
        MVC</a>
     </th>
   <td>
-      A web development tech in the .NET Framework. Code runs mostly server side.
+      A web development tech in the <a href="#dotnet"><code>.NET Framework</code></a>. Code runs mostly server side.
   </td>
 </tr>
 
@@ -452,7 +452,7 @@ List of API's (and other tech)
        Razor</a>
   </th>
   <td>
-      A view renderer for web. Terse syntax, combining C# and HTML almost seemlessly.
+      A view renderer for web. Terse syntax, combining <a href="#csharp"><code>C#</code></a> and <code>HTML</code> almost seemlessly.
   </td>
 </tr>
 
@@ -462,27 +462,27 @@ List of API's (and other tech)
        Html.BeginCollection</a>
   </th>
   <td>
-      Makes it possible to send tree structures over HTTP to the server-side MVC.
+      Makes it possible to send tree structures over <code>HTTP</code> to the server-side <a href="#mvc"><code>MVC</code></a>.
   </td>
 </tr>
 
-<tr id="java-script">
+<tr id="javascript">
   <th>
     <a href="#javascript--typescript">
        JavaScript</a>
   </th>
   <td>
-      Used to support UI details in web. In this architecture most (UI) logic would be handled in C#.
+      Used to support UI details in web. In this <a href="index.html">architecture</a> most (UI) logic would be handled in <a href="#csharp"><code>C#</code></a>.
   </td>
 </tr>
 
-<tr id="type-script">
+<tr id="typescript">
   <th>
     <a href="#javascript--typescript">
        TypeScript</a>
   </th>
   <td>
-      Might be preferred over JavaScript in the future.
+      Might be preferred over <a href="#javascript"><code>JavaScript</code></a> in the future.
   </td>
 </tr>
 
@@ -492,8 +492,11 @@ List of API's (and other tech)
 </tr>
 
 <tr id="jquery">
-  <th><a href="https://jquery.com/">jQuery</a></th>
-  <td>Used to support UI details in web. Can make some JavaScript shorter.</td>
+  <th>
+    <a href="https://jquery.com/">jQuery</a>
+  </th>
+  <td>
+      Used to support UI details in web. Can make some <a href="#javascript"><code>JavaScript</code></a> shorter.</td>
 </tr>
 
 <tr id="jj-framework-javascript">
@@ -503,8 +506,8 @@ List of API's (and other tech)
   </th>
   <td>
       Used to support UI details in web.
-      Remembering scroll position, cookie functions, url parsing.
-      Might be extended with one-line AJAX functions one day.
+      Remembering scroll position, cookie functions, URL parsing.
+      Might be extended with one-line <a href="#ajax"><code>AJAX</code></a> functions one day.
   </td>
 </tr>
 
@@ -520,13 +523,13 @@ List of API's (and other tech)
        WinForms</a>
   </th>
   <td>
-      Used in some projects: in small utilities and JJ.Synthesizer uses it as the top-most layer.
+      Used in some projects: in small <a href="aspects.html#utilities">utilities</a> and <a href="https://github.com/jjvanzon/JJ.Synthesizer"><code>JJ.Synthesizer</code></a> uses it as the top-most layer.
   </td>
 </tr>
 
 <tr id="simple-process-form">
   <th><a href="aspects.html#utilities">SimpleProcessForm</a></th>
-  <td>A base form for a utility that runs a process.</td>
+  <td>A base user interface for a <a href="aspects.html#utilities">utility</a> that runs a process.</td>
 </tr>
 
 <tr id="jj-framework-vectorgraphics">
@@ -562,17 +565,17 @@ List of API's (and other tech)
        JJ.Framework.Testing</a>
   </th>
   <td>
-      Extends the Assert class, but automatically includes the tested expression in the error messages.
+      Extends the <code><a href="#mstest">Assert</a> class</code>, but automatically includes the tested expression in the error messages.
   </td>
 </tr>
 
 <tr id="debugger-displays">
   <th>
-    <a href="patterns.md#debuggerdisplays">
+    <a href="patterns.html#debuggerdisplays">
        DebuggerDisplays</a>
   </th>
   <td>
-      A technique to quickly display helpful info in the watch screen.
+      A technique to quickly display helpful info in the watch screen of a programming environment.
   </td>
 </tr>
 
@@ -582,7 +585,7 @@ List of API's (and other tech)
        JJ.Framework.Exceptions</a>
   </th>
   <td>
-      Contains exception classes for basic errors.
+      Contains <code>Exception classes</code> for basic errors.
       Clear concise error messages,
       including tested expressions and tested values.
   </td>
@@ -593,7 +596,7 @@ List of API's (and other tech)
     <a href="patterns.html#accessor">Accessor</a>
   </th>
   <td>
-      For accessing the internals of types for instance for testing purposes.
+      For accessing the internals of <code>types</code> for instance for testing purposes.
   </td>
 </tr>
 
@@ -629,34 +632,34 @@ List of API's (and other tech)
        JJ.Framework.HtmlToXml</a>
   </th>
   <td>
-      The HtmlToXmlConverter class steals from SgmlReader. It does what the name implies.
+      The <code>HtmlToXmlConverter class</code> steals from <a href="https://www.nuget.org/packages/SgmlReaderOld/"><code>SgmlReader</code></a>. It does what the name implies.
   </td>
 </tr>
 
-<tr id="jj-framework.xml">
+<tr id="jj-framework-xml">
   <th>
     <a href="https://www.nuget.org/packages/JJ.Framework.Xml">
        JJ.Framework.Xml</a>
   </th>
   <td>
-      A convenient way to map XML to (C#) classes.<br/>
-      Access XML nodes more safely, with null and uniqueness checks.
+      A convenient way to map <a href="#xml"><code>XML</code></a> to (<a href="#csharp"><code>C#</code></a>) classes.<br/>
+      Access <a href="#xml"><code>XML</code></a> nodes more safely, with null and uniqueness checks.
   </td>
 </tr>
 
-<tr id="jj-framework-xml-link">
+<tr id="jj-framework-xml-linq">
   <th>
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Xml.Linq">
        JJ.Framework.Xml.Linq</a>
   </th>
   <td>
-      "
+      <a href="#jj-framework-xml">"</a>
   </td>
 </tr>
 
 <tr>
   <th><a href="#embedded-resources">Embedded Resources</a></th>
-  <td>Embedded resources allow compiling files and content right inside a DLL or EXE.</td>
+  <td>Embedded resources allow compiling files and content right inside a <code>DLL</code> or <code>EXE</code>.</td>
 </tr>
 
 <tr id="embedded-resource-reader">
@@ -665,7 +668,7 @@ List of API's (and other tech)
       EmbeddedResourceReader</a>
   </th>
   <td>
-      Make it a little easier to get embedded resource Streams, bytes and strings.
+      Make it a little easier to get <a href="#embedded-resources">"embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
   </td>
 </tr>
 
@@ -679,7 +682,7 @@ List of API's (and other tech)
 
 <tr id="resource-strings">
   <th><a href="patterns.html#resource-strings">Resource Strings</a></th>
-  <td>For localization, resx files can be used in Visual Studio.</td>
+  <td>For localization, <code>resx</code> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-resourcestrings">
@@ -694,7 +697,7 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="aspects.html#localization">Localization</a></th>
-  <td>More ideas about localization.</td>
+  <td>More ideas about <a href="aspects.html#localization">localization</a>.</td>
 </tr>
 
 </table>
@@ -709,13 +712,13 @@ List of API's (and other tech)
        JJ.Framework.Configuration</a>
   </th>
   <td>
-      For working with complex configuration files, esier than System.Configuration.
+      For working with complex <a href="#configuration">configuration</a> files. Easier than <code>System.Configuration</code>.
   </td>
 </tr>
 
 <tr>
   <th><a href="aspects.html#configuration">Configuration</a></th>
-  <td>More info about configuration.</td>
+  <td>More info about <a href="aspects.html#configuration">configuration</a>.</td>
 </tr>
 
 </table>
@@ -730,7 +733,7 @@ List of API's (and other tech)
        JJ.Framework.Security</a>
   </th>
   <td>
-      A generic interfacing for authenticating a user and yet to be tested hashed salted password authentication.
+      A generic interfacing for <a href="aspects.html#security">authenticating a user</a> and yet to be tested hashed salted password authentication.
   </td>
 </tr>
 
@@ -739,7 +742,7 @@ List of API's (and other tech)
     <a href="aspects.html#security">Security</a>
   </th>
   <td>
-      If more might be needed security-wise, it may be hidden behind generic interfaces, abstracting the security system.
+      If more might be needed security-wise, it may be hidden behind <a href="aspects.html#security">generic interfaces</a>, abstracting the security system.
   </td>
 </tr>
 
@@ -756,7 +759,7 @@ List of API's (and other tech)
        JJ.Framework.Logging</a>
   </th>
   <td>
-      For now might only contain the ExceptionHelper class, which for instance converts exception information to a string.
+      For now might only contain the <code>ExceptionHelper</code> class, which for instance converts <code>Exception</code> information to a <code>string</code>.
   </td>
 </tr>
 
@@ -765,7 +768,7 @@ List of API's (and other tech)
     <a href="aspects.html#logging">Logging</a>
   </th>
   <td>
-      Described how it might be extended to contain more other code to do with logging.
+      More info about how <a href="#jj-framework-logging"><code>JJ.Framework.Logging</code></a> might be extended to contain more code to do with logging.
   </td>
 </tr>
 
@@ -815,13 +818,13 @@ Misc
 
 ### JJ.Framework
 
-[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dot-net), so we programmed our own. These extensions to [`.NET`](#dot-net) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dotnet), so we programmed our own. These extensions to [`.NET`](#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](layers.md#loosely-coupled). They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
-[`.NET`](#dot-net) code can use `config` files for confuration, often named `App.config` or `Web.config`.
+[`.NET`](#dotnet) code can use `config` files for confuration, often named `App.config` or `Web.config`.
 
 To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](https://dotnet.microsoft.com/) `System.Configuration` directly.
 
@@ -876,9 +879,9 @@ There may be other options available. [`NHibernate`](#nhibernate) does not appea
 
 In most cases, it is recommended to use`XElement` (LINQ to XML) instead of `XmlDocument` unless you specifically need to use `XPath`.
 
-To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework.xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over other `API's` directly.
+To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over other `API's` directly.
 
-For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework.xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful and offer a simpler solution than other `API's`.
+For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful and offer a simpler solution than other `API's`.
 
 ### Embedded Resources
 
@@ -1047,11 +1050,11 @@ If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are wo
 
 Executing queries onto a database is normally done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
-Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dot-net) projects, under a sub-folder named `Sql`.
+Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`.
 
 ![](images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#sql) in [`.NET`](#dot-net) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](#sql-executor) might be used.
+The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](#sql-executor) might be used.
 
 With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single code line.
 
@@ -1187,7 +1190,7 @@ But it might make it harder to track down all the [`SQL`](#sql) of your project 
 
 #### SQL String Concatenation
 
-*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dot-net) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
 Here is a trick to prevent using `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
 

@@ -278,7 +278,7 @@ By creating a base `Visitor` and multiple specialized `Visitors`, you can create
 
 The classic `Visitor` pattern has a design flaw in it, that we will not use. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a `Visitor`.
 
-A good example of a `Visitor` class is [`.NET's`](api.md#dot-net) own `ExpressionVisitor`, however we follow additional rules.
+A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however we follow additional rules.
 
 `< TODO: Make a good text out of this, covering handling polymorphism in Visitors. Merge this with the main text: `
 
@@ -292,9 +292,9 @@ A good example of a `Visitor` class is [`.NET's`](api.md#dot-net) own `Expressio
 
 ### Resource Strings
 
-For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](api.md#dot-net) projects.
+For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](api.md#dotnet) projects.
 
-If you follow the following naming convention for resources files, [`.NET`](api.md#dot-net) will automatically return the translations into the language of the current culture:
+If you follow the following naming convention for resources files, [`.NET`](api.md#dotnet) will automatically return the translations into the language of the current culture:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -1015,7 +1015,7 @@ By giving each of those processes its own `Executor` class, you make the code ov
 
 ### Inheritance-Helper
 
-One weakness of inheritance in [`.NET`](api.md#dot-net) might be, that there is no multiple inheritance: you can only derive from one base class. This can lead to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one base class. This can lead to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
 
 This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with god base classes, all weakneses of inheritance.
 

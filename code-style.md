@@ -1548,7 +1548,7 @@ sbyte
 </td></tr></table>
 
 Reason:  
-For compatibility with more variations of [`.NET`](api.md#dot-net).
+For compatibility with more variations of [`.NET`](api.md#dotnet).
 
 ### No Decisions from Exceptions
 
