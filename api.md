@@ -622,7 +622,7 @@ List of API's (and other tech)
        JJ.Framework.IO</a>
   </th>
   <td>
-      Contains various file functions, functions for working with streams and working with CSV's.
+      Contains various file functions, functions for working with streams and working with <code>CSV's</code>.
   </td>
 </tr>
 
