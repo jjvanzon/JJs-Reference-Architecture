@@ -22,6 +22,7 @@ This article describes some of the API and technology choices in this [software 
 - [Web](#web)
   - [AJAX](#ajax)
   - [JavaScript / TypeScript](#javascript--typescript)
+  - [Html.BeginCollection](#htmlbegincollection)
 - [Misc](#misc)
   - [JJ.Framework](#jjframework)
   - [Configuration](#configuration)
@@ -442,7 +443,7 @@ List of API's (and other tech)
        MVC</a>
     </th>
   <td>
-      A web development tech in the <a href="#dotnet"><code>.NET Framework</code></a>. Code runs mostly server side.
+      <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc"><code>Microsoft ASP.NET MVC Framework.</code></a> Web development tech. Code runs mostly server side.
   </td>
 </tr>
 
@@ -458,8 +459,7 @@ List of API's (and other tech)
 
 <tr id="html-begin-collection">
   <th>
-    <a href="patterns.html#htmlbegincollection">
-       Html.BeginCollection</a>
+    <a href="#htmlbegincollection">Html.BeginCollection</a>
   </th>
   <td>
       Makes it possible to send tree structures over <code>HTTP</code> to the server-side <a href="#mvc"><code>MVC</code></a>.
@@ -510,6 +510,17 @@ List of API's (and other tech)
       Might be extended with one-line <a href="#ajax"><code>AJAX</code></a> functions one day.
   </td>
 </tr>
+
+<tr >
+  <th>
+    <a href="#htmlbegincollection">
+       JJ.Framework.Mvc</a>
+  </th>
+  <td>
+      Contains extensions to <a href="#mvc"><code>MVC</code></a> for developing web applications. Perhaps most notably the possibility to send tree structures over HTTP.
+  </td>
+</tr>
+
 
 </table>
 
@@ -811,6 +822,50 @@ The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> cho
 For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
 I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
+
+### Html.BeginCollection
+
+In [`MVC`](#mvc) it is not so straightforeward to post a collection of items or nested structures.
+
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) has `HtmlHelper` extensions to make that easier: the [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) `API`. Using this `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line and restore it as a [`ViewModel`](patterns.md#viewmodel) at the server side. In the [`View`](patterns.md#views) code you would wrap each nesting in a `using` block as follows:
+
+```cs
+@using (Html.BeginItem(() => Model.MyItem))
+{
+    using (Html.BeginCollection(() => Model.MyItem.MyCollection))
+    {
+        foreach (var x in Model.MyItem.MyCollection)
+        {
+            using (Html.BeginCollectionItem())
+            {
+                ...
+            }
+        }
+    }
+}
+```
+
+So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block. There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread the nesting around multiple partial [views](patterns.md#views).
+
+Input fields in a nested structure would look as follows:
+
+```cs
+Html.TextBoxFor(x => x.MyProperty)
+```
+
+Or:
+
+```cs
+Html.TextBoxFor(x => Model.MyProperty)
+```
+
+But not like this:
+
+```cs
+Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
+```
+
+Otherwise the input fields might not bind to the [`ViewModel`](#viewmodel). This might force you to program partial [`Views`](#views) for separate items. This may be good practice anyway, so may be not such a big trade-off.
 
 
 Misc

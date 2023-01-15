@@ -41,7 +41,11 @@
     - [Post-Redirect-Get](#post-redirect-get)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
-    - [Html.BeginCollection](#htmlbegincollection)
+    - [Trees over HTTP](#trees-over-http)
+        - [Html.BeginCollection (for Trees)](#htmlbegincollection-for-trees)
+        - [For Loops (for Lists)](#for-loops-for-lists)
+        - [Html.BeginCollectionItem (for Lists)](#htmlbegincollectionitem-for-lists)
+        - [Mixing Solutions not Recommended](#mixing-solutions-not-recommended)
     - [Return URL's](#return-urls)
     - [Back Buttons](#back-buttons)
 - [Data Transformation Patterns](#data-transformation-patterns)
@@ -633,51 +637,17 @@ throw new UnexpectedTypeException(() => viewModel);
 
 To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](#viewmodel) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
-### Html.BeginCollection
+### Trees over HTTP
 
 In [`MVC`](api.md#mvc) it is not so straightforeward to post a collection of items or nested structures.
 
-[`JJ.Framework`](api.md#jjframework) has `HtmlHelper` extensions to make that easier: the [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) `API`. Using this `API` you can send a [`ViewModel`](#viewmodel) with arbitrary nestings and collections over the line and restore it to a [`ViewModel`](#viewmodel) at the server side. In the [`View`](#views) code you must wrap each nesting in a using block as follows:
+#### Html.BeginCollection (for Trees)
 
-```cs
-@using (Html.BeginItem(() => Model.MyItem))
-{
-    using (Html.BeginCollection(() => Model.MyItem.MyCollection))
-    {
-        foreach (var x in Model.MyItem.MyCollection)
-        {
-            using (Html.BeginCollectionItem())
-            {
-                ...
-            }
-        }
-    }
-}
-```
+[Html.BeginCollection API](api.md#htmlbegincollection)
 
-So each time you enter a level, you need another call to the `HtmlHelper` again and wrap the code in a using block. You can use as many collections as you like, and use as much nesting as you like. You can spread the nesting around multiple partials.
+#### For Loops (for Lists)
 
-Input fields in a nested structure must look as follows:
-
-```cs
-Html.TextBoxFor(x => x.MyProperty)
-```
-
-Or:
-
-```cs
-Html.TextBoxFor(x => Model.MyProperty)
-```
-
-Not like this:
-
-```cs
-Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
-```
-
-Otherwise the input fields will not bind to the [`ViewModel`](#viewmodel). This often forces you to program partial [`Views`](#views) for separate items. This is good practice anyway, so not that big a trade-off.
-
-An alternative to [`Html.BeginCollection()`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) is using for-loops.
+An alternative to for posting collections isusing for-loops.
 
 ```cs
 @Html.TextBoxFor(x => x.MyItem.MyProperty)
@@ -689,6 +659,9 @@ An alternative to [`Html.BeginCollection()`](https://dev.azure.com/jjvanzon/JJs-
 ```
 
 This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](#viewmodel) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](#views) code into partials.
+
+
+#### Html.BeginCollectionItem (for Lists)
 
 Another alternative to the `BeginCollection()` is the often-used `BeginCollectionItem(string)` API. Example:
 
@@ -703,6 +676,8 @@ Another alternative to the `BeginCollection()` is the often-used `BeginCollectio
 ```
 
 The limitation of that `API` is that you can only send one collection over the line and no additional nesting is possible.
+
+#### Mixing Solutions not Recommended
 
 Beware that currently the different solutions do not mix well and you should only use one solution for each screen of you program.
 
