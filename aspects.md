@@ -941,9 +941,9 @@ User Interface
 Utilities
 ---------
 
-Utilities are small programs or processes that are not run very often. It can be small programs for IT. For example: health checks, loading stuff in a database, things to run for deployment.
+Utilities are small programs or processes that are not run very often. It can be a small program for IT. For example: health checks, loading stuff in a database, things to run for deployment.
 
-[`JJ.Framework.WinForms`](api.md#simple-process-form) contains a reusable window, [`SimpleProcessForm`](api.md#simple-process-form), in to start and cancel the process and show progress information.
+[`JJ.Framework.WinForms`](api.md#simple-process-form) contains a reusable window, [`SimpleProcessForm`](api.md#simple-process-form), to start and cancel the process and show progress information.
 
 ![](images/utility.png)
 
