@@ -661,11 +661,11 @@ There are a few possibilities:
 - [`Html.BeginCollection`](api.md#htmlbegincollection)
     - An `API` from [`JJ.Framework.Mvc`](api.md#jj-framework-mvc) for `POST`'ing trees and lists across `HTTP`.
 - [`Html.BeginCollectionItem`](api.md#htmlbegincollectionitem)
-    - A commonly used alternative `API.` Can send *one* collection over the wire, not trees.
+    - A commonly used alternative. Can send *one* collection over the wire, not trees.
 - [`for` loops](patterns.md#lists-in-http-postdata-using-for-loops)
-    - A pattern that works without an additional `API` for posting a list over `HTTP`.
+    - A pattern that might work without an additional `API` for posting a list over `HTTP`.
 
-Beware that currently the different solutions do not mix well. You might pick just one of the solutions for each screen of you program.
+Beware that currently the different solutions do not mix well. You might pick just one of the solutions for each screen you'd like to program.
 
 
 Paging
