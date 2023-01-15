@@ -517,7 +517,7 @@ List of API's (and other tech)
        JJ.Framework.Mvc</a>
   </th>
   <td>
-      Extensions to <a href="#mvc"><code>MVC</code></a> for developing web apps. Perhaps most notably the possibility to send tree structures over HTTP.
+      Extensions to <a href="#mvc"><code>MVC</code></a> for developing web apps. Perhaps most notably the possibility to send tree structures over <code>HTTP</code>.
   </td>
 </tr>
 
@@ -825,9 +825,9 @@ I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of 
 
 ### Html.BeginCollection
 
-In [`MVC`](#mvc) it is not so straightforeward to post a collection of items or nested structures.
+In [`MVC`](#mvc) it is not so straightforeward to `POST` a collection of items or nested structures over `HTTP`.
 
-[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) has `HtmlHelper` extensions to make that easier: the [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) `API`. Using this `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line and restore it as a [`ViewModel`](patterns.md#viewmodel) at the server side. In the [`View`](patterns.md#views) code you would wrap each nesting in a `using` block as follows:
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) has `HtmlHelper` extensions to make that easier: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using this `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line and restore it as a [`ViewModel`](patterns.md#viewmodel) at the server side. In the [`View`](patterns.md#views) code you would wrap each nesting inside a `using` block:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
@@ -845,7 +845,7 @@ In [`MVC`](#mvc) it is not so straightforeward to post a collection of items or 
 }
 ```
 
-So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block. There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread the nesting around multiple partial [views](patterns.md#views).
+So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block. There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](patterns.md#views).
 
 Input fields in a nested structure would look as follows:
 
@@ -865,7 +865,7 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](#viewmodel). This might force you to program partial [`Views`](#views) for separate items. This may be good practice anyway, so may be not such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](#viewmodel). This might force you to program partial [`Views`](#views) for separate items. This may be good practice anyway, so may not be such a big trade-off.
 
 
 Misc
