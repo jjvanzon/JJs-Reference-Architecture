@@ -883,7 +883,7 @@ Otherwise the input fields might not bind to the [`ViewModel`](#viewmodel). This
 
 ### Html.BeginCollectionItem
 
-An alternative to [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework.mvc) is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
+An alternative to [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework-mvc) is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
 
 ```cs
 @foreach (var child in Model.Children)

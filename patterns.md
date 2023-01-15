@@ -635,7 +635,7 @@ To prevent repeating this code for each [`Controller`](#controller) action, you 
 
 ### Lists in HTTP PostData using For Loops
 
-An alternative to for posting collections is using for-loops.
+An alternative to for [posting collections](aspects.md#postdata-over-http) is using for-loops.
 
 ```cs
 @Html.TextBoxFor(x => x.MyItem.MyProperty)
