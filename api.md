@@ -454,7 +454,7 @@ List of API's (and other tech)
        Razor</a>
   </th>
   <td>
-      A view renderer for web. Terse syntax, combining <a href="#csharp"><code>C#</code></a> and <code>HTML</code> almost seemlessly.
+      A view renderer for web. Terse syntax, combining <a href="#csharp"><code>C#</code></a> and <code>HTML</code> almost seamlessly.
   </td>
 </tr>
 
@@ -807,7 +807,7 @@ Web
 
 ### AJAX
 
-`AJAX` is a way to load part of a web page, so the whole page does not have te be refreshed. This may make the user interface smoother, than reloading the entire page every time.
+`AJAX` is a way to load part of a web page, so the whole page does not have to be refreshed. This may make the user interface smoother, than reloading the entire page every time.
 
 For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) `AJAX` functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript) code.
 
@@ -831,7 +831,7 @@ The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> cho
 
 For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
-I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
+I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
 
 ### Html.BeginCollection
 
@@ -916,7 +916,7 @@ They were made in the spirit of in-house developing small extensions and hiding 
 
 ### Configuration
 
-[`.NET`](#dotnet) code can use `config` files for confuration, often named `App.config` or `Web.config`.
+[`.NET`](#dotnet) code can use `config` files for configuration, often named `App.config` or `Web.config`.
 
 To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](https://dotnet.microsoft.com/) `System.Configuration` directly.
 
@@ -969,9 +969,9 @@ There may be other options available. [`NHibernate`](#nhibernate) does not appea
 
 `XML` is a file format for storing and transmitting data. When working with `API's` for `XML` there are a few options to consider.
 
-In most cases, it is recommended to use`XElement` (LINQ to XML) instead of `XmlDocument` unless you specifically need to use `XPath`.
+In most cases, it is recommended to use `XElement` (LINQ to XML) instead of `XmlDocument` unless you specifically need to use `XPath`.
 
-To handle nullability and uniqueness more grafully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over other `API's` directly.
+To handle nullability and uniqueness more gracefully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over other `API's` directly.
 
 For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful and offer a simpler solution than other `API's`.
 
@@ -1048,11 +1048,11 @@ It may also help to create [entities](patterns.md#entity) in a specific order (e
 
 #### Read-Write Order
 
-It seems [`ORM's`](#orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommited objects](#committed--uncommitted-objects).
+It seems [`ORM's`](#orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#committed--uncommitted-objects).
 
 #### Bridge Entities
 
-An *bridge* [entity](patterns.md#entity) applies to `n => n` relationhips and may require an additional table to make the link between the [entities](patterns.md#entity):
+An *bridge* [entity](patterns.md#entity) applies to `n => n` relationships and may require an additional table to make the link between the [entities](patterns.md#entity):
 
 <img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
@@ -1104,7 +1104,7 @@ This is because it gives 1 handle to the combination of 2 thing. This gives [`OR
 
 You might not want to map *binary* and other *serialized data fields* using [`NHibernate`](#nhibernate), because it can harm performance quite a bit.
 
-Retrieving some loose fields of an [entity](patterns.md#entity), would also retrieve a blob in that case. As wel as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
+Retrieving some loose fields of an [entity](patterns.md#entity), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
 Using separate [`SQL`](#sql) statements for retrieving blobs might be a better alternative.
 
@@ -1114,7 +1114,7 @@ Particular surprises might emerge when using inheritance in your [entity](patter
 
 When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it is likely it will not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity) type, a so called ***proxy***. This proxy adds to your [entity](patterns.md#entity) type a sort of connectedness to the database.
 
-When you retrieved an [entity](patterns.md#entity) from `HNibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
+When you retrieved an [entity](patterns.md#entity) from `NHibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
 
 You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
 
@@ -1357,7 +1357,7 @@ This would result in:
 - Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entity) behind an [`SqlExecutor`](#sql-executor).
 - All that data access would be hidden [`repository interfaces`](patterns.md#repository-interfaces) decoupling the persistence technology.
  
-It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of couse you could skip layers, but this is how it is done in some of the `JJ` projects.
+It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
 In `JJ` projects you might also find split up into separate assemblies: 
 
