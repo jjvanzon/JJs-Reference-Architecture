@@ -517,7 +517,7 @@ List of API's (and other tech)
        JJ.Framework.Mvc</a>
   </th>
   <td>
-      Extensions to <a href="#mvc"><code>MVC</code></a> for developing web apps. Perhaps most notably the possibility to send tree structures over <code>HTTP</code>.
+      Extensions to <a href="#mvc"><code>MVC</code></a> for web development. Most notably the possibility to send tree structures over <code>HTTP</code>.
   </td>
 </tr>
 
@@ -825,9 +825,9 @@ I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of 
 
 ### Html.BeginCollection
 
-In [`MVC`](#mvc) it is not so straightforeward to `POST` a collection of items or nested structures over `HTTP`.
+It is not so straightforeward to `POST` a collection of items or nested structures over `HTTP` in [`MVC`](#mvc).
 
-[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) has `HtmlHelper` extensions to make that easier: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using this `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line and restore it as a [`ViewModel`](patterns.md#viewmodel) at the server side. In the [`View`](patterns.md#views) code you would wrap each nesting inside a `using` block:
+[`JJ.Framework.Mvc`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) makes that easier, by oiffering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using this `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodel) at the server side. In the [`View`](patterns.md#views) code you would wrap each nesting inside a `using` block:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
