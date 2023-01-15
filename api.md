@@ -632,7 +632,7 @@ List of API's (and other tech)
        JJ.Framework.HtmlToXml</a>
   </th>
   <td>
-      <code>HtmlToXmlConverter class</code> that steals from <a href="https://www.nuget.org/packages/SgmlReaderOld/"><code>SgmlReader</code></a>. It does what the name implies.
+      <code>HtmlToXmlConverter class</code> that steals from <a href="https://www.nuget.org/packages/SgmlReaderOld/"><code>SgmlReader</code></a>. It does what its name implies.
   </td>
 </tr>
 
@@ -668,7 +668,7 @@ List of API's (and other tech)
       EmbeddedResourceReader</a>
   </th>
   <td>
-      Make it a little easier to get <a href="#embedded-resources">"embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
+      Make it a little easier to get <a href="#embedded-resources">embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
   </td>
 </tr>
 
