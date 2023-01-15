@@ -91,7 +91,7 @@ List of API's (and other tech)
 
 <tr id="mono">
   <th><a href="https://www.mono-project.com/">Mono</a></th>
-  <td>Version of <code>.NET</code> that worked for other platforms than <code>Windows</code>. Later versions of the <code>.NET</code> might work for more platforms out-of-the-box.</td>
+  <td>Version of <a href="#dotnet"><code>.NET Framework</code></a> that worked for other platforms than <code>Windows</code>. Later versions of the <a href="#dotnet"><code>.NET Framework</code></a> might work for more platforms out-of-the-box.</td>
 </tr>
 
 <tr id="unity-game-engine">
@@ -632,7 +632,7 @@ List of API's (and other tech)
        JJ.Framework.HtmlToXml</a>
   </th>
   <td>
-      The <code>HtmlToXmlConverter class</code> steals from <a href="https://www.nuget.org/packages/SgmlReaderOld/"><code>SgmlReader</code></a>. It does what the name implies.
+      <code>HtmlToXmlConverter class</code> that steals from <a href="https://www.nuget.org/packages/SgmlReaderOld/"><code>SgmlReader</code></a>. It does what the name implies.
   </td>
 </tr>
 
