@@ -443,7 +443,7 @@ List of API's (and other tech)
        MVC</a>
     </th>
   <td>
-      <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc"><code>Microsoft ASP.NET MVC Framework.</code></a> Web development tech. Code runs mostly server side.
+      Or <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc"><code>Microsoft ASP.NET MVC Framework.</code></a> Web development tech. Code runs mostly server side.
   </td>
 </tr>
 
@@ -517,7 +517,7 @@ List of API's (and other tech)
        JJ.Framework.Mvc</a>
   </th>
   <td>
-      Contains extensions to <a href="#mvc"><code>MVC</code></a> for developing web applications. Perhaps most notably the possibility to send tree structures over HTTP.
+      Extensions to <a href="#mvc"><code>MVC</code></a> for developing web apps. Perhaps most notably the possibility to send tree structures over HTTP.
   </td>
 </tr>
 
