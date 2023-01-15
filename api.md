@@ -879,7 +879,7 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](#viewmodel). This may force you to program partial [`Views`](#views) for separate items sometimes. This may be good practice anyway, so might not be such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodel). This may force you to program partial [`Views`](patterns.md#views) for separate items sometimes. This may be good practice anyway, so might not be such a big trade-off.
 
 ### Html.BeginCollectionItem
 
