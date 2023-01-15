@@ -302,7 +302,7 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="#sql"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="#nhibernate"><code>NHibernate</code></a> or <a href="#entity-framework"><code>Entity Framework</code></a>. There would just be abstracted convenient methods instead. For more information see the <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
+      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="#sql"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="#nhibernate"><code>NHibernate</code></a> or <a href="#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see the <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
   </td>
 </tr>
 
