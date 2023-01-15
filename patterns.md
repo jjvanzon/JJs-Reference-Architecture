@@ -643,7 +643,7 @@ In [`MVC`](api.md#mvc) it is not so straightforeward to post a collection of ite
 
 #### Html.BeginCollection (for Trees)
 
-[Html.BeginCollection API](api.md#htmlbegincollection)
+An `API` for `POST`'ing trees and lists across `HTTP`: [`Html.BeginCollection`](api.md#htmlbegincollection).
 
 #### For Loops (for Lists)
 
@@ -660,10 +660,9 @@ An alternative to for posting collections isusing for-loops.
 
 This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](#viewmodel) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](#views) code into partials.
 
-
 #### Html.BeginCollectionItem (for Lists)
 
-Another alternative to the `BeginCollection()` is the often-used `BeginCollectionItem(string)` API. Example:
+Another alternative to the `BeginCollection()` is the often-used `BeginCollectionItem(string)` `API`. Example:
 
 ```cs
 @foreach (var child in Model.Children)
@@ -675,7 +674,7 @@ Another alternative to the `BeginCollection()` is the often-used `BeginCollectio
 }
 ```
 
-The limitation of that `API` is that you can only send one collection over the line and no additional nesting is possible.
+The limitation of that `API` is that you can only send one collection over the line and no additional nesting is possible. Also, it takes a `string` as a parameter and not an expression like `() => Model.Children`.
 
 #### Mixing Solutions not Recommended
 
