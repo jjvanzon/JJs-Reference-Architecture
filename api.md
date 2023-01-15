@@ -5,7 +5,7 @@
 
 [back](.)
 
-This article describes some of the API and technology choices in this [software architecture](index.md).
+This article describes some of the `API` and technology choices in this [software architecture](index.md).
 
 <h3>Contents</h3>
 
@@ -480,7 +480,7 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="#ajax">AJAX</a></th>
-  <td>For retrieving / posting back parts of page pages to the server and back.</td>
+  <td>For retrieving / posting back parts of pages to the server and back.</td>
 </tr>
 
 <tr id="jquery">
@@ -918,7 +918,7 @@ They were made in the spirit of in-house developing small extensions and hiding 
 
 [`.NET`](#dotnet) code can use `config` files for configuration, often named `App.config` or `Web.config`.
 
-To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](https://dotnet.microsoft.com/) `System.Configuration` directly.
+To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](#dotnet) `System.Configuration` directly.
 
 You might read from its [`README`](https://www.nuget.org/packages/JJ.Framework.Configuration) how it works.
 
@@ -983,7 +983,7 @@ To include a file as an embedded resource, you could set the following property 
 
 ![](images/sql-as-embedded-resource.png)
 
-[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper class`](patterns.md#helper) [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](patterns.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
 ```cs
 string text = EmbeddedResourceReader.GetText(
@@ -995,9 +995,9 @@ Data
 
 ### Entity Framework
 
-[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entityframework) and [repository interfaces](patterns.md#repository-interfaces).
+[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework) and [repository interfaces](patterns.md#repository-interfaces).
 
-At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entityframework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entityframework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
+At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
 When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](#sql-server) installation.
 
