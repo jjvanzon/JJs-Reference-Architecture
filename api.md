@@ -835,7 +835,7 @@ I realize [`JavaScript`](https://www.javascript.com/) is popuplar with a lot of 
 
 ### Html.BeginCollection
 
-In [`MVC`](#mvc) it is not so straightforward to [`HTTP POST` a tree structure](aspects.md#postdata-over-http).
+In [`MVC`](#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](aspects.md#postdata-over-http).
 
 [`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodel) at the server side.
 
@@ -883,14 +883,16 @@ Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewm
 
 ### Html.BeginCollectionItem
 
-An alternative to [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework-mvc) is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
+In [`MVC`](#mvc) it is not so apparent how to [send a collection as `HTTP postdata`](aspects.md#postdata-over-http).
+
+An alternative is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
 
 ```cs
 @foreach (var child in Model.Children)
 {
     using (Html.BeginCollectionItem("Children"))
     {
-        @* ... *@
+        ...
     }
 }
 ```
@@ -899,6 +901,8 @@ This `API` has some limitations:
 
 - It can send *one* collection over the wire, not trees.
 - It takes a `string` a parameter (e.g. `"Children"`), not an expression like: `() => Model.Children`.
+
+To send trees and arbitrary nestings over `HTTP postdata`, consider using [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework-mvc).
 
 
 Misc

@@ -45,7 +45,7 @@
     - [Comparison Loosely Linked vs Many Foreign Keys](#comparison-loosely-linked-vs-many-foreign-keys)
 - [Naming](#naming)
 - [Network Communication](#network-communication)
-    - [PostData over HTTP](#postdata-over-http)
+    - [Postdata over HTTP](#postdata-over-http)
 - [Paging](#paging)
 - [Parsing](#parsing)
 - [Performance](#performance)
@@ -652,7 +652,7 @@ See 'Names' under 'Coding Style'.
 Network Communication
 ---------------------
 
-### PostData over HTTP
+### Postdata over HTTP
 
 In [`MVC`](api.md#mvc) it is not so straightforeward to `POST` a collection of items or nested structures over `HTTP`.
 
@@ -662,7 +662,7 @@ There are a few possibilities:
     - An `API` from [`JJ.Framework.Mvc`](api.md#jj-framework-mvc) for `POST`'ing trees and lists across `HTTP`.
 - [`Html.BeginCollectionItem`](api.md#htmlbegincollectionitem)
     - A commonly used alternative. Can send *one* collection over the wire, not trees.
-- [`for` loops](patterns.md#lists-in-http-postdata-using-for-loops)
+- [`for` loops](patterns.md#for-loops-for-lists-in-http-postdata)
     - A pattern that might work without an additional `API` for posting a list over `HTTP`.
 
 Beware that currently the different solutions do not mix well. You might pick just one of the solutions for each screen you'd like to program.

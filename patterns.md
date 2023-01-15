@@ -41,7 +41,7 @@
     - [Post-Redirect-Get](#post-redirect-get)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
-    - [Lists in HTTP PostData using For Loops](#lists-in-http-postdata-using-for-loops)
+    - [For Loops for Lists in HTTP Postdata](#for-loops-for-lists-in-http-postdata)
     - [Return URL's](#return-urls)
     - [Back Buttons](#back-buttons)
 - [Data Transformation Patterns](#data-transformation-patterns)
@@ -633,7 +633,7 @@ throw new UnexpectedTypeException(() => viewModel);
 
 To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](#viewmodel) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
-### Lists in HTTP PostData using For Loops
+### For Loops for Lists in HTTP Postdata
 
 An alternative to for [posting collections](aspects.md#postdata-over-http) is using for-loops.
 
