@@ -34,7 +34,7 @@ This article describes some of the technology choices in this [software architec
   - [Entity Framework](#entity-framework)
   - [NHibernate](#nhibernate)
   - [ORM](#orm)
-    - [Committed / Uncommitted Objects](#committed--uncommitted-objects)
+    - [Uncommitted Objects](#uncommitted-objects)
     - [Flush](#flush)
     - [Read-Write Order](#read-write-order)
     - [Bridge Entities](#bridge-entities)
@@ -44,10 +44,10 @@ This article describes some of the technology choices in this [software architec
     - [Conclusion](#conclusion)
   - [SQL](#sql)
     - [With NHibernate](#with-nhibernate)
-    - [Files instead of Embedded Resources](#files-instead-of-embedded-resources)
-    - [Strings instead of Embedded Resources](#strings-instead-of-embedded-resources)
-    - [SQL String Concatenation](#sql-string-concatenation)
-    - [SQL Behind Repositories](#sql-behind-repositories)
+    - [SQL Files](#sql-files)
+    - [SQL Strings](#sql-strings)
+    - [String Concat](#string-concat)
+    - [Behind Repositories](#behind-repositories)
     - [Database Upgrade Scripts](#database-upgrade-scripts)
 
 
@@ -1016,7 +1016,7 @@ Here follow some issues you could encounter while using an `ORM`, and some sugge
 
 This information was gathered from experience, built up with [`NHibernate`](#nhibernate). It might be possible that other `ORM's` have similar issues, due to how `ORM's` work internally.
 
-#### Committed / Uncommitted Objects
+#### Uncommitted Objects
 
 Here is something that happens in [`ORM`](#orm) sometimes:
 
@@ -1245,7 +1245,7 @@ This version uses an `ISession`. In order for the [`SQL`](#sql) to run in the sa
 
 An implementation of [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
 
-#### Files instead of Embedded Resources
+#### SQL Files
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
@@ -1264,7 +1264,7 @@ sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient_Update.sql", new { id, name });
 
 So the `SqlEnum` cannot be used here. You'd use a (relative) file path.
 
-#### Strings instead of Embedded Resources
+#### SQL Strings
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
@@ -1281,7 +1281,7 @@ In that case no [`SQL`](#sql) files have to be included in your project.
 
 But it might make it harder to track down all the [`SQL`](#sql) of your project and optimize it. Using [`SQL`](#sql) strings may also circumvent another layer of protection against [`SQL`](#sql) injection attacks.
 
-#### SQL String Concatenation
+#### String Concat
 
 *[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
@@ -1299,7 +1299,7 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 
 One variation of [`SqlExecutor`](#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
-#### SQL Behind Repositories
+#### Behind Repositories
 
 The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md).  
 The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
