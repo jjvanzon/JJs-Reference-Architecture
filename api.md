@@ -1102,7 +1102,7 @@ This is because it gives 1 handle to the combination of 2 thing. This gives [`OR
 
 #### Binary Fields
 
-You might not want to map *binary* and other *serialized data fields* using [`NHibernate`](#nhibernate), because it can harm performance quite a bit.
+You might not want to map *binary* and other *serialized data fields* using [`ORM`](#orm), because it can harm performance quite a bit.
 
 Retrieving some loose fields of an [entity](patterns.md#entity), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
@@ -1110,7 +1110,7 @@ Using separate [`SQL`](#sql) statements for retrieving blobs might be a better a
 
 #### Inheritance
 
-Particular surprises might emerge when using inheritance in your [entity](patterns.md#entity) model at least while working with [`NHibernate`](#nhibernate). The main advance is to avoid inheritance at all in the [entity](patterns.md#entity) models if you can.
+Particular surprises might emerge when using inheritance in your [entity](patterns.md#entity) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns.md#entity) models if you can.
 
 When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it is likely it will not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity) type, a so called ***proxy***. This proxy adds to your [entity](patterns.md#entity) type a sort of connectedness to the database.
 
@@ -1242,7 +1242,7 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
 
 This version uses an [`NHibernate`](#nhibernate) `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as the [`SQL`](#sql) that [`NHibernate`](#nhibernate) executes, we made it aware of the `ISession`.
 
-A variation of this [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) was implemented here: [`JJs-Pre-Release-Package-Feed`](#jj-framework-data-nhibernate).
+A variation of this [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) was implemented here in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
 
 #### Files instead of Embedded Resources
 
@@ -1300,11 +1300,11 @@ One variation of [`SqlExecutor`](#sql-executor) included the ability to add plac
 
 #### SQL Behind Repositories
 
-The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md). The pattern is roughly described [here](patterns.md#repository).
+The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md).
 
 The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).
 
-Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](#sql-executor) is described [here](#sql).
+Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
