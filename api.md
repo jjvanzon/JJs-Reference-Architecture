@@ -54,7 +54,7 @@ This article describes some of the technology choices in this [software architec
 Introduction
 ------------
 
-This article lists some of the tech used in [`JJ`](https://github.com/jjvanzon?tab=repositories) projects. Most are listed out in the [table](#list-of-apis-and-other-tech) below.
+This article lists some of the tech used in the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects. Most are listed out in the [table](#list-of-apis-and-other-tech) below.
 
 Some technology is described in more detail, mostly [data](#data-1) technologies, but also [web](#web) technology.
 
@@ -88,17 +88,17 @@ List of API's (and other tech)
 
 <tr id="dotnet">
   <th><a href="https://dotnet.microsoft.com/">.NET</a></th>
-  <td>Framework from Microsoft that forms the foundation of the programming.</td>
+  <td>Framework from Microsoft that forms the foundation of the software.</td>
 </tr>
 
 <tr id="mono">
   <th><a href="https://www.mono-project.com/">Mono</a></th>
-  <td>Version of <a href="#dotnet"><code>.NET Framework</code></a> that worked for other platforms than <code>Windows</code>. Later versions of <a href="#dotnet"><code>.NET</code></a> itself might work for more platforms out-of-the-box.</td>
+  <td>Version of <a href="#dotnet"><code>.NET</code></a> that worked for other platforms than <code>Windows</code>. Later versions of <a href="#dotnet"><code>.NET</code></a> itself may work for more platforms out-of-the-box.</td>
 </tr>
 
 <tr id="unity-game-engine">
   <th><a href="https://unity.com/">Unity Game Engine</a></th>
-  <td>The first tech at that time, that would cooperate for deploying the code on multiple mobile platforms. It uses the <a href="#mono"><code>Mono</code></a> compiler.</td>
+  <td>The first tech at that time, that would cooperate for deploying the code on multiple mobile platforms. It used the <a href="#mono"><code>Mono</code></a> compiler.</td>
 </tr>
 
 <tr id="csharp">
@@ -153,7 +153,7 @@ List of API's (and other tech)
 
 <tr id="tortoise-git">
   <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
-  <td><a href="#git"><code>Git</code></a> user interface that shows state in <code>File Explorer</code> icons.</td>
+  <td><a href="#git"><code>Git</code></a> user interface that shows the state in <code>File Explorer</code>.</td>
 </tr>
 
 <tr id="azure-dev-ops">
@@ -162,7 +162,7 @@ List of API's (and other tech)
       Azure DevOps</a>
   </th>
   <td>
-      <a href="https://dev.azure.com/jjvanzon/JJs-Software/_build">Build pipeline</a>, <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">Pre-Release-Package-Feed</a>, original <a href="https://dev.azure.com/jjvanzon/JJs-Software/_workitems/">planning boards</a>, hosts a <a href="https://dev.azure.com/jjvanzon/JJs-Software/_git/"> repository</a> not migrated to <a href="#git-hub"><code>GitHub</code></a>.
+      <a href="https://dev.azure.com/jjvanzon/JJs-Software/_build">Build pipeline</a>, <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">Pre-Release-Package-Feed</a>, original <a href="https://dev.azure.com/jjvanzon/JJs-Software/_workitems/">planning boards</a>, may host a <a href="https://dev.azure.com/jjvanzon/JJs-Software/_git/"> repository</a> not migrated to <a href="#git-hub"><code>GitHub</code></a>.
   </td>
 </tr>
 
@@ -257,7 +257,7 @@ List of API's (and other tech)
        QueryOver</a>
   </th>
   <td>
-      A strongly-typed query language like <a href="#linq"><code>LINQ</code></a>, but then the <a href="#nhibernate"><code>NHibernate</code></a> variation.
+      A strongly-typed query language like <a href="#linq"><code>LINQ</code></a>, but then the <a href="#nhibernate"><code>NHibernate</code></a> version.
   </td>
 </tr>
 
@@ -267,7 +267,7 @@ List of API's (and other tech)
        FluentNHibernate</a>
   </th>
   <td>
-      A way to define <a href="#orm"><code>ORM</code></a> mappings, using fluent notation.
+      A way to define <a href="#orm"><code>ORM</code></a> mappings with fluent notation.
   </td>
 </tr>
 
@@ -286,7 +286,7 @@ List of API's (and other tech)
          LINQ</a>
   </th>
   <td>
-      A query language usable in <a href="#csharp"><code>C#</code></a>. Can be query several types of data store, but commonly used for in-memory collections.
+      A query language usable in <a href="#csharp"><code>C#</code></a>. Can query several types of data store, but commonly used for in-memory collections.
   </td>
 </tr>
 
@@ -324,7 +324,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Memory</a>
   </th>
   <td>
-      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allows working with <em>in-memory</em> data for instance to <a href="patterns.html#mock">mock</a> a data store.
+      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="patterns.html#mock">mock</a> a data store.
   </td>
 </tr>
 
@@ -343,7 +343,7 @@ List of API's (and other tech)
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient">JJ.Framework.Data.SqlClient</a>
   </th>
   <td>
-      Also know as <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient"><strong><code>SqlExecutor</code></strong></a>. Helpers for working more easily with <a href="#sql"><code>SqlClient</code></a> with less code.
+      Also know as <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient"><strong><code>SqlExecutor</code></strong></a>. Work more easily with <a href="#sql"><code>SqlClient</code></a> with less code.
   </td>
 </tr>
 
@@ -363,7 +363,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Xml.Linq</a>
   </th>
   <td>
-      Additional feature for <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that stores data in <code>XML</code> files. <code>System.Xml.Linq</code> used internally.
+      Additional feature for <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that stores data in <code>XML</code> files. <code>System.Xml.Linq</code> is used internally.
   </td>
 </tr>
 
@@ -379,7 +379,7 @@ List of API's (and other tech)
        JJ.Framework.Business</a>
   </th>
   <td>
-      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship sync</a>. Result types to pass data, succes flags and (<a href="patterns.html#validators">validation</a>) messages.
+      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns.html#validators">validation</a>) messages.
   </td>
 </tr>
 
@@ -417,7 +417,7 @@ List of API's (and other tech)
        PagerViewModelFactory</a>
   </th>
   <td>
-      Can construct a <code>PagerViewModel</code> with properties like
+      Constructs a <code>PagerViewModel</code> with properties like
       <code>CanGoToFirstPage</code>, <code>CanGoToPreviousPage</code>, <code>CanGoToNextPage</code>, <code>CanGoToLastPage</code>.
   </td>
 </tr>
@@ -433,8 +433,8 @@ List of API's (and other tech)
     <a href="https://www.iis.net/">IIS</a>
   </th>
   <td>
-      (Internet Information Services.) For hosting web sites. 
-      Some <a href="#visual-studio"><code>Visual Studio</code></a> projects wish to use it upon load.
+      Or <a href="https://www.iis.net/"><code>Internet Information Services.</code></a> For hosting web sites. 
+      Some <a href="#visual-studio"><code>Visual Studio</code></a> projects like to use it upon load.
   </td>
 </tr>
 
@@ -464,7 +464,7 @@ List of API's (and other tech)
        JavaScript</a>
   </th>
   <td>
-      Used to support UI details in web. In this <a href="index.html">architecture</a> most (UI) logic would be handled in <a href="#csharp"><code>C#</code></a>.
+      Used to support UI details in web. In this <a href="index.html">architecture</a> most (UI) logic would be handled in <a href="#csharp"><code>C#</code></a> instead.
   </td>
 </tr>
 
@@ -608,7 +608,7 @@ List of API's (and other tech)
   <td>
       Contains <code>Exception classes</code> for basic errors.
       Clear concise error messages,
-      including tested expressions and tested values.
+      that include tested expressions and tested values.
   </td>
 </tr>
 
@@ -689,7 +689,7 @@ List of API's (and other tech)
       EmbeddedResourceReader</a>
   </th>
   <td>
-      Make it a little easier to get <a href="#embedded-resources">embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
+      Makes it a little easier to get <a href="#embedded-resources">embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
   </td>
 </tr>
 
@@ -703,7 +703,7 @@ List of API's (and other tech)
 
 <tr id="resource-strings">
   <th><a href="patterns.html#resource-strings">Resource Strings</a></th>
-  <td>For localization, <code>resx</code> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
+  <td>For localization, <a href="patterns.html#resource-strings"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-resourcestrings">
@@ -780,7 +780,7 @@ List of API's (and other tech)
        JJ.Framework.Logging</a>
   </th>
   <td>
-      For now might only contain the <code>ExceptionHelper</code> class, which for instance converts <code>Exception</code> information to a <code>string</code>.
+      For now contains not much more than the <code>ExceptionHelper</code> class, which for instance converts <code>Exception</code> information to a <code>string</code>.
   </td>
 </tr>
 
@@ -799,7 +799,7 @@ List of API's (and other tech)
 More Elaborate Descriptions
 ---------------------------
 
-For some of these things you can find more elaborate descriptions below: mostly about [data store](#data-1) technologies, but also some about [web](#web) technology and [others](#misc).
+For some of these things you can find more elaborate descriptions below: mostly about [data](#data-1) store technologies, but also some about [web](#web) technology and [others](#misc).
 
 
 Web
@@ -815,7 +815,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 ### JavaScript / TypeScript
 
-[`JavaScript`](https://www.javascript.com/) is a programming language with a wide range of applications. Originally it was mostly run in web browsers to optimize the user experience.
+[`JavaScript`](https://www.javascript.com/) is a programming language with a wide range of applications. Originally it was run in web browsers to optimize the user experience.
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
@@ -827,9 +827,9 @@ For web, other technology was preferred in this [architecture](index.md): The id
 
 But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I guess the love for [`C#`](#csharp) was strong.
 
-The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> choice [`AJAX'ing`](#ajax), and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
+The idea was that a full page load was 1<sup>st</sup> choice, [`AJAX'ing`](#ajax) the 2<sup>nd</sup> choice, and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
-For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries: [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
 I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick with [`C#`](#csharp) though.
 
@@ -879,13 +879,13 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodel). This may force you to program partial [`Views`](patterns.md#views) sometimes. This may be good practice anyway, so might not be such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodel). This may force you to program partial [`Views`](patterns.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
 
 ### Html.BeginCollectionItem
 
 In [`MVC`](#mvc) it is not so apparent how to [send a collection as `HTTP postdata`](aspects.md#postdata-over-http).
 
-An alternative is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
+One alternative is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
 
 ```cs
 @foreach (var child in Model.Children)
@@ -918,7 +918,7 @@ They were made in the spirit of in-house developing small extensions and hiding 
 
 [`.NET`](#dotnet) code can use configuration files, often named `App.config` or `Web.config`.
 
-To access these `configs` we might use [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration), quite a bit more easily than using [`.NET's`](#dotnet) `System.Configuration` directly.
+To access these `configs` we might use [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) quite a bit more easily than using [`.NET's`](#dotnet) `System.Configuration` directly.
 
 You might read from its [`README`](https://www.nuget.org/packages/JJ.Framework.Configuration) how it works.
 
@@ -948,7 +948,7 @@ string connectionString =
     ConnectionStrings<IConnectionStrings>.Get(x => x.OrderDB);
 ```
 
-You may then define an `interface` to be use the strongly-typed name:
+You can define an `interface` to use the strongly-typed name:
 
 ```cs
 internal interface IConnectionStrings
@@ -986,8 +986,7 @@ To include a file as an embedded resource, you could set the following property 
 [`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](patterns.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
 ```cs
-string text = EmbeddedResourceReader.GetText(
-  assembly, "Ingredient_UpdateName.sql");
+string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");
 ```
 
 Data
@@ -1078,7 +1077,7 @@ These problems almost all go away, if you map a *bridge* [entity](patterns.md#en
 class QuestionCategory
 {
     Question Question { get; set;}
-    Question Category { get; set;}
+    Category Category { get; set;}
 }
 
 class Question
@@ -1120,7 +1119,7 @@ You can then *unproxy* both and it will return the underlying object, which is i
 
 But you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison might also fail.
 
-[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem with [entity](patterns.md#entity) equality checks.
+[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns.md#entity) equality checks.
 
 To evaluate the *type*, you are better of unproxying as well. Otherwise it will compare proxy types instead of your [entity](patterns.md#entity) type. This can be confusing.
 
@@ -1136,7 +1135,7 @@ Data access in this [architecture](index.md) is favored behind generic interface
 
 #### Conclusion
 
-If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself anymore.
+If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself anymore.
 
 ### SQL
 
@@ -1210,7 +1209,7 @@ var ingredient = new IngredientDto
     Name = "My ingredient"
 };
 
-sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_Update, ingredient);
+sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, ingredient);
 ```
 
 You can also retrieve records as a collection of strongly typed objects:
@@ -1254,16 +1253,16 @@ It might be a good choice to include the [`SQL`](#sql) as an embedded resource, 
 
 ![](images/sql-as-content-file.png)
 
-Here is code to create the [`SqlExecutor`](#sql-executor) and execute an [`SQL`](#sql) file:
+Here is code to create the [`SqlExecutor`](#sql-executor) and execute the [`SQL`](#sql) file:
 
 ```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
     SqlSourceTypeEnum.FileName, session);
 
-sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient\_Update.sql", new { id, name });
+sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient_Update.sql", new { id, name });
 ```
 
-So the `SqlEnum` cannot be used here. You'd use the (relative) file path here.
+So the `SqlEnum` cannot be used here. You'd use a (relative) file path.
 
 #### Strings instead of Embedded Resources
 
@@ -1286,7 +1285,7 @@ But it might make it harder to track down all the [`SQL`](#sql) of your project 
 
 *[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
-Here is a trick to prevent the use of `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause:
+Here is a trick to prevent the use of `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not, then the following expression might be used in the [`SQL`](#sql) script's `where` clause:
 
 ```sql
 (@value is null or Value = @value)
@@ -1296,7 +1295,7 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 
 - You have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it. String concatenation may prevent rewriting the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make a change properly, which may easily be overlooked.
 - Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name*.
-- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule.
+- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception.
 
 One variation of [`SqlExecutor`](#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
@@ -1347,7 +1346,7 @@ class MyRepository : RepositoryBase
 }
 
 interface IMyRepository : IRepository
-
+{
     var Filter(int categoryID, DateTime minStartDate);
 }
 ```
@@ -1356,7 +1355,7 @@ This would result in:
 
 - Keeping all the queries of an [entity](patterns.md#entity) together in a [`repository`](patterns.md#repository).
 - Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entity) behind an [`SqlExecutor`](#sql-executor).
-- All that data access would be hidden [`repository interfaces`](patterns.md#repository-interfaces) decoupling the persistence technology.
+- All that data access would be hidden behind [`repository interfaces`](patterns.md#repository-interfaces) decoupling the persistence technology.
  
 It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
