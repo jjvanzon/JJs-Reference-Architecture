@@ -5,7 +5,7 @@
 
 [back](.)
 
-This article describes some of the `API` and technology choices in this [software architecture](index.md).
+This article describes some of the technology choices in this [software architecture](index.md).
 
 <h3>Contents</h3>
 
@@ -54,9 +54,9 @@ This article describes some of the `API` and technology choices in this [softwar
 Introduction
 ------------
 
-This article lists some of the tech used in `JJ` projects. Most are listed out in a table.
+This article lists some of the tech used in [`JJ`](https://github.com/jjvanzon?tab=repositories) projects. Most are listed out in the [table](#list-of-apis-and-other-tech) below.
 
-Some technology is described in more detail, mostly data store technologies but also about web technology.
+Some technology is described in more detail, mostly [data](#data-1) technologies, but also [web](#web) technology.
 
 
 List of API's (and other tech)
@@ -88,17 +88,17 @@ List of API's (and other tech)
 
 <tr id="dotnet">
   <th><a href="https://dotnet.microsoft.com/">.NET</a></th>
-  <td>Framework from Microsoft that forms a base for the programming.</td>
+  <td>Framework from Microsoft that forms the foundation of the programming.</td>
 </tr>
 
 <tr id="mono">
   <th><a href="https://www.mono-project.com/">Mono</a></th>
-  <td>Version of <a href="#dotnet"><code>.NET Framework</code></a> that worked for other platforms than <code>Windows</code>. Later versions of the <a href="#dotnet"><code>.NET Framework</code></a> might work for more platforms out-of-the-box.</td>
+  <td>Version of <a href="#dotnet"><code>.NET Framework</code></a> that worked for other platforms than <code>Windows</code>. Later versions of <a href="#dotnet"><code>.NET</code></a> itself might work for more platforms out-of-the-box.</td>
 </tr>
 
 <tr id="unity-game-engine">
   <th><a href="https://unity.com/">Unity Game Engine</a></th>
-  <td>The first tech at that time, that would work for deploying the code on multiple mobile platforms. It uses the <a href="#mono"><code>Mono</code></a> compiler.</td>
+  <td>The first tech at that time, that would cooperate for deploying the code on multiple mobile platforms. It uses the <a href="#mono"><code>Mono</code></a> compiler.</td>
 </tr>
 
 <tr id="csharp">
@@ -799,7 +799,7 @@ List of API's (and other tech)
 More Elaborate Descriptions
 ---------------------------
 
-For some of these things you can find more elaborate descriptions below: mostly about data store technologies, but also some about web technology and others.
+For some of these things you can find more elaborate descriptions below: mostly about [data store](#data-1) technologies, but also some about [web](#web) technology and [others](#misc).
 
 
 Web
@@ -807,9 +807,9 @@ Web
 
 ### AJAX
 
-`AJAX` is a way to load part of a web page, so the whole page does not have to be refreshed. This may make the user interface smoother, than reloading the entire page every time.
+`AJAX` is a way to load part of a web page, so the whole page does not have to be refreshed. This may make the user interaction smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) `AJAX` functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. Saved quite a few lines of [`JavaScript`](#javascript) code.
+For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns.md#wrapper) functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](#javascript) code.
 
 Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns.md#first-full-load--then-partial-load--then-native-code).
 
@@ -821,9 +821,9 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](patterns.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
 
-[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. In [`C#`](#csharp) you could refactor, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face.
+[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. You could refactor [`C#`](#csharp) code, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face when compiling.
 
-[`TypeScript`](https://www.typescriptlang.org/) may have saved the day to cover for the weak typing from [`JavaScript`](https://www.javascript.com/). But it wasn't tried yet.
+[`TypeScript`](https://www.typescriptlang.org/) may have saved the day to cover for the weak typing from [`JavaScript`](https://www.javascript.com/). But we hadn't tried that yet.
 
 But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I guess the love for [`C#`](#csharp) was strong.
 
@@ -831,7 +831,7 @@ The idea was that a full page load was 1<sup>st</sup> choice, 2<sup>nd</sup> cho
 
 For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
-I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick to [`C#`](#csharp) though.
+I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick with [`C#`](#csharp) though.
 
 ### Html.BeginCollection
 
@@ -879,7 +879,7 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodel). This may force you to program partial [`Views`](patterns.md#views) for separate items sometimes. This may be good practice anyway, so might not be such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodel). This may force you to program partial [`Views`](patterns.md#views) sometimes. This may be good practice anyway, so might not be such a big trade-off.
 
 ### Html.BeginCollectionItem
 
@@ -900,7 +900,7 @@ An alternative is the often-used [`Html.BeginCollectionItem`](https://www.nuget.
 This `API` has some limitations:
 
 - It can send *one* collection over the wire, not trees.
-- It takes a `string` a parameter (e.g. `"Children"`), not an expression like: `() => Model.Children`.
+- It takes a `string` a parameter, not an expression like: `() => Model.Children`.
 
 To send trees and arbitrary nestings over `HTTP postdata`, consider using [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework-mvc).
 
@@ -910,23 +910,23 @@ Misc
 
 ### JJ.Framework
 
-[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dotnet), so we programmed our own. These extensions to [`.NET`](#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it in the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dotnet), so we programmed our own. These extensions to [`.NET`](#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](layers.md#loosely-coupled). They are sort part of the [software architecture](index.md) described here.
 
 ### Configuration
 
-[`.NET`](#dotnet) code can use `config` files for configuration, often named `App.config` or `Web.config`.
+[`.NET`](#dotnet) code can use configuration files, often named `App.config` or `Web.config`.
 
-To access these `configs` we might use the [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) `API`, which is quite a bit easier than using [`.NET's`](#dotnet) `System.Configuration` directly.
+To access these `configs` we might use [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration), quite a bit more easily than using [`.NET's`](#dotnet) `System.Configuration` directly.
 
 You might read from its [`README`](https://www.nuget.org/packages/JJ.Framework.Configuration) how it works.
 
-It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work. would it ever be programmed.
+It does not seem to support reading out the `connectionStrings` section yet. So here is an idea how that might work, would it ever be programmed.
 
 <h4>ConnectionStrings</h4>
 
-Reading out `connectionStrings` might be made similar to reading out the `appSettings`. Connection strings in the `App.config` or `Web.config` may look as follows:
+Reading out `connectionStrings` might be made similar to reading out the [`appSettings`](https://www.nuget.org/packages/JJ.Framework.Configuration#appsettingsreadert). Connection strings in the `App.config` or `Web.config` may look as follows:
 
 ```xml
 <connectionStrings>
@@ -941,14 +941,14 @@ string connectionString =
     ConfigurationManager.ConnectionStrings["OrderDB"].ConnectionString;
 ```
 
-This could the alternative in `JJ.Framework.Configuration`:
+This would be the alternative in `JJ.Framework.Configuration`:
 
 ```cs
 string connectionString = 
     ConnectionStrings<IConnectionStrings>.Get(x => x.OrderDB);
 ```
 
-You may then define an `interface` to be able to use the strongly-typed name:
+You may then define an `interface` to be use the strongly-typed name:
 
 ```cs
 internal interface IConnectionStrings
@@ -959,21 +959,21 @@ internal interface IConnectionStrings
 
 ### OneToManyRelationship
 
-*Inverse property management* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
+*Bidirectional relationship management* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
 This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns.md#rich-models), [entity](patterns.md#entity), `API` or otherwise.
 
-There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns.md#linkto) can also be used. Or hand-writing the syncing in-place. 
+There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
 ### XML
 
 `XML` is a file format for storing and transmitting data. When working with `API's` for `XML` there are a few options to consider.
 
-In most cases, it is recommended to use `XElement` (LINQ to XML) instead of `XmlDocument` unless you specifically need to use `XPath`.
+In most cases, it is recommended to use `XElement` (LINQ to XML) instead of `XmlDocument`. However, a useful feature of `XmlDocument` is that it supports [`XPath`](https://www.w3schools.com/xml/xpath_intro.asp).
 
-To handle nullability and uniqueness more gracefully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over other `API's` directly.
+To handle nullability and uniqueness more gracefully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over using other `API's` directly.
 
-For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful and offer a simpler solution than other `API's`.
+For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful. They can offer simpler solutions than other `API's`.
 
 ### Embedded Resources
 
@@ -1005,7 +1005,7 @@ When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework),
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) is a technology used for data access. A so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). It is comparable to [`Entity Framework`](#entity-framework).
 
-[`NHibernate`](https://www.nuget.org/packages/NHibernate) is used in some projects, because an employer favored it, and some other projects joined the club.
+[`NHibernate`](https://www.nuget.org/packages/NHibernate) is used in some projects, because an employer favored it, and other projects joined the club.
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate) and [repository interfaces](patterns.md#repository).
 
@@ -1021,16 +1021,16 @@ This information was gathered from experience, built up with [`NHibernate`](#nhi
 
 Here is something that happens in [`ORM`](#orm) sometimes:
 
-Some methods of data retrieval work with uncommitted / non-flushed [entities](patterns.md#entity): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](patterns.md#entity). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance:
+Some methods of data retrieval work with uncommitted / non-flushed [entities](patterns.md#entity): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](patterns.md#entity). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance considerably:
 
-| Method | Data |
-|--------|------|
+| Method | Data Read |
+|--------|----------|
 | `IContext.Query` | committed
 | `IContext.Get` | 1st committed, then uncommitted
 | `IContext.TryGet` | 1st committed, then uncommitted
 | Navigation properties /<br>following the object graph | 1st committed, then uncommitted
 
-It appears to have to do with, when the [`ORM`](#orm) goes to the database to query or save the objects.
+It appears to have to do with, when the [`ORM`](#orm) goes to the database to query for objects.
 
 #### Flush
 
@@ -1042,7 +1042,7 @@ The trouble with `Flush` is, that it might be executed when things are not done 
 
 `Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns.md#entity). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
 
-Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This caused a `null` [`Exceptions`](aspects.md#exceptions) on the child object's `ParentID` column.
+Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exceptions`](aspects.md#exceptions) on the child object's `ParentID` column.
 
 It may also help to create [entities](patterns.md#entity) in a specific order (e.g. parent object first, child objects second) or choose a identity generation scheme, that does not require flushing an [entity](patterns.md#entity) pre-maturely.
 
@@ -1092,9 +1092,9 @@ class Category
 }
 ```
 
-This also has the advantage, that the [entity](patterns.md#entity) model would not need to be refactored, it you'd want to add properties to the combination of things.
+This also has the advantage, that the [entity](patterns.md#entity) model would not need to be refactored, if you'd want to add properties to a *combination* of things.
 
-It might be advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` field might do better:
+It might be advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` might do better:
 
 <img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
@@ -1102,7 +1102,7 @@ This is because it gives 1 handle to the combination of 2 thing. This gives [`OR
 
 #### Binary Fields
 
-You might not want to map *binary* and other *serialized data fields* using [`ORM`](#orm), because it can harm performance quite a bit.
+You might not want to map *binary* and other *serialized data* fields using [`ORM`](#orm), because it can harm performance quite a bit.
 
 Retrieving some loose fields of an [entity](patterns.md#entity), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
@@ -1110,9 +1110,9 @@ Using separate [`SQL`](#sql) statements for retrieving blobs might be a better a
 
 #### Inheritance
 
-Particular surprises might emerge when using inheritance in your [entity](patterns.md#entity) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns.md#entity) models if you can.
+Particular surprises might emerge when using *inheritance* in your [entity](patterns.md#entity) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns.md#entity) models if you can.
 
-When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it is likely it will not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity) type, a so called ***proxy***. This proxy adds to your [entity](patterns.md#entity) type a sort of connectedness to the database.
+When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity), a so called ***proxy***. This proxy adds to your [entity](patterns.md#entity) a sort of connectedness to the database.
 
 When you retrieved an [entity](patterns.md#entity) from `NHibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
 
@@ -1122,33 +1122,35 @@ But you can also get failing reference comparisons another way. If you unproxied
 
 [ID comparison](code-style.md#entity-equality-by-id) could avoid this problem with [entity](patterns.md#entity) equality checks.
 
-To evaluate the *type*, you are better of unproxying as well, or it will compare the proxy type instead of your [entity](patterns.md#entity) type, which can be confusing.
+To evaluate the *type*, you are better of unproxying as well. Otherwise it will compare proxy types instead of your [entity](patterns.md#entity) type. This can be confusing.
 
 By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
 
-An alternative for inheritance might be to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work. Letting two [entity](patterns.md#entity) types use a mutual `interface` might be an alternative too.
+An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work.
+
+Letting two [entity](patterns.md#entity) types use a mutual `interface` might be an alternative too.
 
 #### Generic Interfaces
 
-Data access in this [architecture](index.md) is favored behind generic interfaces using [`JJ.Framework.Data`](#jj-framework-data).
+Data access in this [architecture](index.md) is favored behind generic interfaces from [`JJ.Framework.Data`](#jj-framework-data).
 
 #### Conclusion
 
-If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might still be worth it. They might allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself.
+If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and when it does it. You just don't need to do it yourself anymore.
 
 ### SQL
 
 [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
 
-Executing queries onto a database is normally done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
+Executing queries onto a database would normally be done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
-Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`.
+Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`:
 
 ![](images/sql-sub-folder.png)
 
 The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](#sql-executor) might be used.
 
-With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single code line.
+With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single line of code.
 
 The first choice of doing it might be to make the [`SQL`](#sql) file embedded resources:
 
@@ -1162,11 +1164,11 @@ The [`SQL`](#sql) may look as follows:
 update Ingredient set Name = @name where ID = @id;
 ```
 
-Then put an enum in the [`SQL`](#sql) folder in your `.NET` project:
+Then you can put an enum in the [`Sql`](#sql) folder in your `.NET` project:
 
 ![](images/sql-enum.png)
 
-Add `enum` members that exactly correspond to the file names of the [`SQL`](#sql) files:
+Add `enum` members that correspond to the file names of the [`SQL`](#sql) files:
 
 ```cs
 namespace JJ.Demos.SqlExecutor.Sql
@@ -1193,13 +1195,13 @@ Then you can call a method that executes the [`SQL`](#sql):
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names are similar to an `SqlCommand`. You pass [`SQL`](#sql) parameters along with the [`SqlExecutor`](#sql-executor) as an anonymous type:
+Its method names are similar to an `SqlCommand`. [`SQL`](#sql) parameters can be passed along as an anonymous type:
 
 ```cs
 new { id, name }
 ```
 
-The name and type of the variables `id` and `name` correspond to the parameters of the [`SQL`](#sql). You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the [`SQL`](#sql) parameters:
+The name and type of `id` and `name` correspond to the parameters of the [`SQL`](#sql). You do not need to use an anonymous type. You can use any object. As long as its properties correspond to the [`SQL`](#sql) parameters:
 
 ```cs
 var ingredient = new IngredientDto
@@ -1240,15 +1242,15 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
     SqlSourceTypeEnum.EmbeddedResource, session);
 ```
 
-This version uses an [`NHibernate`](#nhibernate) `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as the [`SQL`](#sql) that [`NHibernate`](#nhibernate) executes, we made it aware of the `ISession`.
+This version uses an `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as [`NHibernate`](#nhibernate), we made it aware of its `ISession`.
 
-A variation of this [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) was implemented here in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
+An implementation of [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
 
 #### Files instead of Embedded Resources
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
-It might be a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use *files* or *literal strings:*
+It might be a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use loose *files:*
 
 ![](images/sql-as-content-file.png)
 
@@ -1284,7 +1286,7 @@ But it might make it harder to track down all the [`SQL`](#sql) of your project 
 
 *[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
-Here is a trick to prevent using `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause
+Here is a trick to prevent the use of `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not then the following expression might be used in the [`SQL`](#sql) script's `where` clause:
 
 ```sql
 (@value is null or Value = @value)
@@ -1292,7 +1294,7 @@ Here is a trick to prevent using `string` concatenation: When you want to filter
 
 But there might be exceptional cases where [`SQL`](#sql) string concatenation would be favorable. Reasons to do so might include:
 
-- If you have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it, concatenation may prevent rewriting the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make change properly, which may easily be overlooked.
+- You have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it. String concatenation may prevent rewriting the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make a change properly, which may easily be overlooked.
 - Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name*.
 - There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule.
 
@@ -1302,7 +1304,8 @@ One variation of [`SqlExecutor`](#sql-executor) included the ability to add plac
 
 The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md).  
 The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
-Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) can be simplified with [`SqlExecutor`](#sql).
+
+Using [`SQL`](#sql) combined with [`repositories`](patterns.md#repository) can be simplified with [`SqlExecutor`](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
@@ -1357,7 +1360,7 @@ This would result in:
  
 It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
-In `JJ` projects you might also find split up into separate assemblies: 
+You might also find split up into separate assemblies: 
 
 - `MyProject.Data`  
 - `MyProject.Data.EntityFramework`
