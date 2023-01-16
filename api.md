@@ -1300,11 +1300,9 @@ One variation of [`SqlExecutor`](#sql-executor) included the ability to add plac
 
 #### SQL Behind Repositories
 
-The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md).
-
-The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).
-
-Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) with [`SqlExecutor`](#sql).
+The [`repository`](patterns.md#repository) pattern is used in this [architecture](index.md).  
+The [`repository`](patterns.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
+Using [`SQL`](#sql) in [`repositories`](patterns.md#repository) can be simplified with [`SqlExecutor`](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
