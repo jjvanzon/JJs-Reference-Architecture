@@ -76,7 +76,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
     - `Save` methods in `Detail` (or `Edit`) [`Presenters`](patterns.md#presenter).
     - `MainPresenter` (optional)
 - [`Presentation`](layers.md#presentation-layer):
-    - [`Views`](patterns.md#views) ([`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) / `UserControls` / ... )
+    - [`Views`](patterns.md#views) ([`MVC`](api.md#mvc) / `UserControls` / ... )
     - `List` [`Views`](patterns.md#views)
     - `Detail` [`Views`](patterns.md#views)
     - `Main` [`View`](patterns.md#views) (optional)
@@ -110,7 +110,7 @@ Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar 
 (Update: De hoeveelheid verschillende plekken waar resources staan is een zwakte van dit ordeningssysteem, omdat het verwarrend kan zijn. In toekomstige oplossingen is het wellicht een idee om resource teksten mmer op één centrale plek te zetten. Dubbelzinnigheid van termen in meerdere domeinmodellen is daarbij wellicht meer een uitzondering dan een regel, waar omheen gewerkt kan worden.)
 
 1. 'Save', 'Close', 'Edit', etc. staan in `JJ.Framework.Resources`, toegankelijk via de `CommonResourceFormatter` class.
-2. Validatiemeldingen uit [`JJ.Framework.Validation`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation), toegankelijk via de `ValidationResourceFormatter` class.
+2. Validatiemeldingen uit [`JJ.Framework.Validation`](api.md#jj-framework-validation), toegankelijk via de `ValidationResourceFormatter` class.
 3. CanonicalModel: een tussenmodel voor uitwisseling van gegevens tussen verschillende systemen, toegankelijk via de `CanonicalResourceFormatter` class.
 4. Business layers bevatten alleen vertalingen voor de overige teksten die niet in het canonical model staan.
 5. Ook teksten die niet direct domeintermen zijn, maar wel in applicaties worden gebruikt op plekken waar het gaat over een bepaald functioneel domein, mogen in de business layer, zijn resources gezet worden.

@@ -41,7 +41,7 @@
     - [Post-Redirect-Get](#post-redirect-get)
     - [ValidationMessages in ModelState](#validationmessages-in-modelstate)
     - [Polymorphic RedirectToAction / View()](#polymorphic-redirecttoaction--view)
-    - [Html.BeginCollection](#htmlbegincollection)
+    - [For Loops for Lists in HTTP Postdata](#for-loops-for-lists-in-http-postdata)
     - [Return URL's](#return-urls)
     - [Back Buttons](#back-buttons)
 - [Data Transformation Patterns](#data-transformation-patterns)
@@ -120,7 +120,7 @@ Generally avoided, but not prohibited:
 
 ### Mapping
 
-Mappings are classes programmed for a particular persistence technology, e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the objects are persisted in the data store (e.g. an [`SQL Server`](https://www.microsoft.com/en-us/sql-server) database).
+Mappings are classes programmed for a particular persistence technology, e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the objects are persisted in the data store (e.g. an [`SQL Server`](api.md#sql-server) database).
 
 ### DTO
 
@@ -168,7 +168,7 @@ An alternative to `RepositoryWrappers` might be *dependency injection*. See depe
 
 ### Validators
 
-Use separate `Validator` classes for validation. Make specialized classes derived from [`JJ.Framework.Validation.FluentValidator<T>`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Validation).
+Use separate `Validator` classes for validation. Make specialized classes derived from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
 
 Try to keep `Validators` independent from eachother.
 
@@ -278,7 +278,7 @@ By creating a base `Visitor` and multiple specialized `Visitors`, you can create
 
 The classic `Visitor` pattern has a design flaw in it, that we will not use. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a `Visitor`.
 
-A good example of a `Visitor` class is [`.NET's`](https://dotnet.microsoft.com/) own `ExpressionVisitor`, however we follow additional rules.
+A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however we follow additional rules.
 
 `< TODO: Make a good text out of this, covering handling polymorphism in Visitors. Merge this with the main text: `
 
@@ -292,9 +292,9 @@ A good example of a `Visitor` class is [`.NET's`](https://dotnet.microsoft.com/)
 
 ### Resource Strings
 
-For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](https://dotnet.microsoft.com/) projects.
+For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](api.md#dotnet) projects.
 
-If you follow the following naming convention for resources files, [`.NET`](https://dotnet.microsoft.com/) will automatically return the translations into the language of the current culture:
+If you follow the following naming convention for resources files, [`.NET`](api.md#dotnet) will automatically return the translations into the language of the current culture:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -354,7 +354,7 @@ For small lookup lists you might include a copy of the list in each [entity](#en
 
 Reusing the same list instance in multiple [entity](#entity) [ViewModels](#viewmodel) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodel) over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an edit [`ViewModel`](#viewmodel). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](https://jquery.com/) trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an edit [`ViewModel`](#viewmodel). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
 
 For big lookup list the only viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might cache the popup to be reused each time you need to select something from it.
 
@@ -459,13 +459,13 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
-Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entity) to [`ViewModel`](#viewmodel) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entity) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript--typescript) or other native code.
+Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entity) to [`ViewModel`](#viewmodel) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entity) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
 
 `< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input ViewModel. Sometimes it is even the only way to execute the essense of the user action onto the user input ViewModel. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
 ### NullCoalesce (ViewModels)
 
-When you user input back as a [`ViewModel`](#viewmodel) from your presentation framework of choice, for instance [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodel) and call it in the [`Presenter`](#presenter).
+When you user input back as a [`ViewModel`](#viewmodel) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodel) and call it in the [`Presenter`](#presenter).
 
 `< TODO: Better description. Also incorporate:`
 
@@ -481,7 +481,7 @@ It might be `HTML`.
 
 In `WebForms` this would be an `aspx`.
 
-In [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) it can be an `aspx` or `cshtml`.
+In [`MVC`](api.md#mvc) it can be an `aspx` or `cshtml`.
 
 Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](#presenter), which produces the [`ViewModel`](#viewmodel), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
 
@@ -491,15 +491,15 @@ You could also call it: first choice full load.
 
 In web technology you could also call it:
 
-Full postback - [`AJAX`](api.md#ajax) - [`JavaScript`](api.md#javascript--typescript)
+Full postback - [`AJAX`](api.md#ajax) - [`JavaScript`](api.md#javascript)
 
-When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](index.md). Only if there is a very good reason, we might use [`AJAX`](api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](api.md#javascript--typescript).
+When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](index.md). Only if there is a very good reason, we might use [`AJAX`](api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](api.md#javascript).
 
 But it was always the first choice to do full postbacks.
 
-The reason for this choice is *maintainability*: programming the application navigation in [`C#`](https://dotnet.microsoft.com/en-us/languages/csharp) using [`Presenters`](#presenter) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript--typescript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](#presenter) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason for this choice is *maintainability*: programming the application navigation in [`C#`](api.md#csharp) using [`Presenters`](#presenter) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](#presenter) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript--typescript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodel) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodel) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodel) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodel) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
 Some of the difficulties with [`AJAX`](api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](api.md#ajax) in the Aspects section.
 
@@ -537,7 +537,7 @@ Presentation Patterns (MVC)
 
 ### Controller
 
-In an [`ASP.NET MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) application a [`Controller`](patterns.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](#presenter). The responsibilities that are left for the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) quirks.
+In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](#presenter). The responsibilities that are left for the [`MVC`](api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](api.md#mvc) quirks.
 
 The [`Controller`](#controller) may use multiple [`Presenters`](#presenter) and [`ViewModels`](#viewmodel), since it is about multiple screens.
 
@@ -545,7 +545,7 @@ The [`Controller`](#controller) may use multiple [`Presenters`](#presenter) and 
 
 ### Post-Redirect-Get
 
-This is a quirk intrinsic to [`ASP.NET MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc). We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
+This is a quirk intrinsic to [`ASP.NET MVC`](api.md#mvc). We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
 
 At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
@@ -582,13 +582,13 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 
 <h4>Considerations</h4>
 
-If you do not conform to the Post-Redirect-Get pattern in [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) keeps complaining about [validation](#validators) errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
+If you do not conform to the Post-Redirect-Get pattern in [`MVC`](api.md#mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](api.md#mvc) keeps complaining about [validation](#validators) errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
 ### ValidationMessages in ModelState
 
-For the architecture to integrate well with [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), you have to make [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) aware that there are [validation](#validators) messages, after you have gotten a [`ViewModel`](#viewmodel) from a [`Presenter`](#presenter). If you do not do this, you will get strange application navigation in case of [validation](#validators) errors.
+For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](#validators) messages, after you have gotten a [`ViewModel`](#viewmodel) from a [`Presenter`](#presenter). If you do not do this, you will get strange application navigation in case of [validation](#validators) errors.
 
-You do this in an [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) HTTP GET action method.
+You do this in an [`MVC`](api.md#mvc) HTTP GET action method.
 
 The way we do it here is as follows:
 
@@ -601,13 +601,13 @@ if (viewModel.ValidationMessages.Any())
 }
 ```
 
-In theory we could communicate all [validation](#validators) messages to [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) instead of just communicating a single generic error message. In theory [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](#validators) summary, we simply render all the [validation messages from the [`ViewModel`](#viewmodel) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](#validators) errors, then the [`ViewModel`](#viewmodel) should give the information that the appearance of the field should be different. Our [`View's`](#views) content is totally managed by the [`ViewModel`](#viewmodel).
+In theory we could communicate all [validation](#validators) messages to [`MVC`](api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](#validators) summary, we simply render all the [validation messages from the [`ViewModel`](#viewmodel) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](#validators) errors, then the [`ViewModel`](#viewmodel) should give the information that the appearance of the field should be different. Our [`View's`](#views) content is totally managed by the [`ViewModel`](#viewmodel).
 
 ### Polymorphic RedirectToAction / View()
 
 A [`Presenter`](#presenter) action method may return different types of [`ViewModels`](#viewmodel).
 
-This means that in the [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns object and you should do polymorphic type checks to determine which [`View`](#views) to go to.
+This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns object and you should do polymorphic type checks to determine which [`View`](#views) to go to.
 
 Here is simplified code for how you can do this in a post method:
 
@@ -625,7 +625,7 @@ if (detailsViewModel != null)
 }
 ```
 
-At the end throw the following exception (from [`JJ.Framework.Exceptions`](https://www.nuget.org/packages/JJ.Framework.Exceptions)):
+At the end throw the following exception (from [`JJ.Framework.Exceptions`](api.md#jj-framework-exceptions)):
 
 ```cs
 throw new UnexpectedTypeException(() => viewModel);
@@ -633,51 +633,9 @@ throw new UnexpectedTypeException(() => viewModel);
 
 To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](#viewmodel) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
-### Html.BeginCollection
+### For Loops for Lists in HTTP Postdata
 
-In [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) it is not so straightforeward to post a collection of items or nested structures.
-
-[`JJ.Framework`](api.md#jjframework) has `HtmlHelper` extensions to make that easier: the [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) `API`. Using this `API` you can send a [`ViewModel`](#viewmodel) with arbitrary nestings and collections over the line and restore it to a [`ViewModel`](#viewmodel) at the server side. In the [`View`](#views) code you must wrap each nesting in a using block as follows:
-
-```cs
-@using (Html.BeginItem(() => Model.MyItem))
-{
-    using (Html.BeginCollection(() => Model.MyItem.MyCollection))
-    {
-        foreach (var x in Model.MyItem.MyCollection)
-        {
-            using (Html.BeginCollectionItem())
-            {
-                ...
-            }
-        }
-    }
-}
-```
-
-So each time you enter a level, you need another call to the `HtmlHelper` again and wrap the code in a using block. You can use as many collections as you like, and use as much nesting as you like. You can spread the nesting around multiple partials.
-
-Input fields in a nested structure must look as follows:
-
-```cs
-Html.TextBoxFor(x => x.MyProperty)
-```
-
-Or:
-
-```cs
-Html.TextBoxFor(x => Model.MyProperty)
-```
-
-Not like this:
-
-```cs
-Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
-```
-
-Otherwise the input fields will not bind to the [`ViewModel`](#viewmodel). This often forces you to program partial [`Views`](#views) for separate items. This is good practice anyway, so not that big a trade-off.
-
-An alternative to [`Html.BeginCollection()`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc) is using for-loops.
+An alternative to for [posting collections](aspects.md#postdata-over-http) is using for-loops.
 
 ```cs
 @Html.TextBoxFor(x => x.MyItem.MyProperty)
@@ -689,22 +647,6 @@ An alternative to [`Html.BeginCollection()`](https://dev.azure.com/jjvanzon/JJs-
 ```
 
 This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](#viewmodel) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](#views) code into partials.
-
-Another alternative to the `BeginCollection()` is the often-used `BeginCollectionItem(string)` API. Example:
-
-```cs
-@foreach (var child in Model.Children)
-{
-    using (Html.BeginCollectionItem("Children"))
-    {
-        @* ... *@
-    }
-}
-```
-
-The limitation of that `API` is that you can only send one collection over the line and no additional nesting is possible.
-
-Beware that currently the different solutions do not mix well and you should only use one solution for each screen of you program.
 
 ### Return URL's
 
@@ -902,7 +844,7 @@ Even if you do not expect multiple input formats or multiple output formats or a
 
 #### MVC
 
-[`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
+[`MVC`](api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
 - [`Controller`](#controller) - [`ViewModel`](#viewmodel) - view engine – [`View`](#views)
@@ -913,7 +855,7 @@ Other Patterns
 
 ### Accessor
 
-An [`Accessor`](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. [`JJ.Framework.Reflection`](https://www.nuget.org/packages/JJ.Framework.Reflection) has an implementation of a reusable [`Accessor`](https://www.nuget.org/packages/JJ.Framework.Reflection#accessor) class.
+An [`Accessor`](api.md#accessor) class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) class.
 
 ### Adapter
 
@@ -1015,7 +957,7 @@ By giving each of those processes its own `Executor` class, you make the code ov
 
 ### Inheritance-Helper
 
-One weakness of inheritance in [`.NET`](https://dotnet.microsoft.com/) might be, that there is no multiple inheritance: you can only derive from one base class. This can lead to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one base class. This can lead to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
 
 This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with god base classes, all weakneses of inheritance.
 

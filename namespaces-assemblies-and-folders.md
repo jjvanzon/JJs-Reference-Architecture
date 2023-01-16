@@ -86,7 +86,7 @@ The 4<sup>th</sup> level in the namespacing denotes which [technology](api.md#-a
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
 - JJ.Presentation.Calendar  
-- JJ.Presentation.Calendar.[__Mvc__](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)
+- JJ.Presentation.Calendar.[__Mvc__](api.md#mvc)
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
@@ -177,7 +177,7 @@ What happened here, is an attempt to organize things into *bigger and smaller* c
 
 The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layer](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
-A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc)).
+A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](api.md#mvc)).
 
 And a [design pattern](patterns.md#-patterns) may be a level of detail below that.
 
