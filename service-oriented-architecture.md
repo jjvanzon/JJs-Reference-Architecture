@@ -33,71 +33,71 @@
 Introduction
 ------------
 
-What has been described so far is the [application architecture](introduction.md#application-architecture-vs-service-architecture). A second part of this [software architecture](index.md) is the *service oriented architecture*, which is mainly about linking systems together. This section is an addition to the documentation with regards to the service architecture. Currently the main technology used here is `WCF`.
+What has been described so far is the [application architecture](introduction.md#application-architecture-vs-service-architecture). Another part of this [software architecture](index.md) is the *service oriented architecture.* It is mainly about linking systems together. Currently the main technology used is `WCF`.
 
 
 The ESB Concept
 ---------------
 
-`ESB` stands for *Enterprise Service Bus*, which is a system for exchanging data between different systems of different organizations in different formats with different protocols. Central components are used to make integration between these systems more manageable. One relevant concept is the [`Canonical` model](#canonical-model).
+`ESB` stands for *Enterprise Service Bus*, which is a system for exchanging data between different systems of different organizations in different formats with different protocols. Central components are used to make integration between these systems more manageable. One relevant concept is a [`Canonical`](#canonical-model) model.
 
 
 Canonical Model
 ---------------
 
-The `Canonical` model helps us exchange data between systems. Data can be retrieved from multiple systems and is converted to a `Canonical` form, so that the same code may be reused for data that comes from various systems. The aim is for the `Canonical` model to be as pure and general as possible, so indeed information of any system can fit into it with few modifications.
+A `Canonical` model helps us exchange data between systems. Data can be retrieved from multiple systems and is converted to a `Canonical` form, so that the same code may be reused for data that comes from various systems. The aim is for the `Canonical` model to be as pure and general as possible, so indeed information of any system can fit into it with few modifications.
 
 
 Less Integration Code
 ---------------------
 
-Say you have `4` systems: `A`, `B`, `C` and `D` and you want to connect all `4` of them together. Theoretically you would have to write `12` different message conversion as you can see from the arrows in the diagram below:
+Say you have `4` systems: `A`, `B`, `C` and `D` and you want to connect all `4` of them together. Theoretically you would have to write `12` different message conversions. See alls the arrows in the diagram below:
 
 <img src="images/no-esb.png" width="166"/>
 
-By connecting a system to the `ESB`, instead of connecting individual systems together, you have to implement only `8` different message conversions as you can see from the arrows below:
+By connecting a system to the `ESB`, instead of connecting individual systems together, you have to implement only `8` different message conversions. The number of arrows below is reduced:
 
 <img src="images/esb.png" width="200"/>
 
-You just saved yourself 33% of the work!
+You just saved yourself __33%__ of the work!
 
-With every system you add to your `ESB` it gets better as you can see from the numbers below that indicate the amount of message conversions.
+With every added system it gets better. You can see this from the numbers below that indicate the amount of message conversions.
 
 <img src="images/esb-connection-counts.png" width="400" />
 
-The first integration between 2 systems you program using your `ESB` you actually program more message conversions, but with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce, will have saved 33% of the overall work.
+The first integration between 2 systems you program using your `ESB` you actually program more message conversions. But with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce, you will have saved 33% of the overall work.
 
-It gets better with each system you introduce in your `ESB`. When messages from a system are converted to and from the [`Canonical` model](#canonical-model), you can automatically connect it to all the other systems.
+It gets better with each system you introduce in your `ESB`. When messages from one system are converted to and from the [`Canonical`](#canonical-model) model, you can automatically connect it to all the other systems.
 
 
 Clearer Integration Code
 ------------------------
 
-But it gets better. You save yourself even more work. The conversion code from message to [`Canonical` model](#canonical-model) is often easier than converting from one system's format to the other system's format, because instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforward format, which is quite a lot easier to program.
+But it gets better. You save yourself even more work. The code to convert a message to [`Canonical`](#canonical-model) model is often easier than converting from one system's format to the other system's format. Instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforward format, which is quite a lot easier to program.
 
 
 In Practice
 -----------
 
-In practice not every system sends every type of message back and forth to every other system. And sometimes the messaging is not bidirectional but one-way only. But the benefits of the `ESB` still hold and systems would be linked together with less code and less effort than custom programming every integration between two systems.
+In practice not every system sends every type of message back and forth to every other system. And sometimes the messaging is not bidirectional but one-way only. But the benefits of an `ESB` still hold and systems would be linked together with less code and less effort than custom programming every integration between two systems again.
 
 
 In-Memory
 ---------
 
-An added benefit to the `Canonical` model is that it tends to live in memory. That means changes to it, do not require any data migrations, just refactoring of to the conversion code, which makes it lower impact and more flexible.
+An added benefit to the `Canonical` model is that it tends to live in memory. Thit means that changes to it, do not require any data migrations. You would just refactor the conversion code, making it lower impact and more flexible.
 
 
 Standard ESB vs Custom ESB
 --------------------------
 
-There are standard `Enterprise Service Bus` software packages available. Yet, you might choose to build a *custom* one yourself. The concepts might not be too hard to implement. And standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own [`Canonical` model](#canonical-model), which is basically all of the work. Therefore building it yourself seems a viable option.
+There is standard `Enterprise Service Bus` software. Yet, you might choose to build a *custom* one. The concepts could be easier to implement than you might think. And standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building it yourself does seem a viable option.
 
 
 ESB Model
 ---------
 
-On top of a [`Canonical` model](#canonical-model), we might need more facilities. The `ESB` model could offer a model for administrating `Connection` settings and register `Enterprises` that can log in to our system to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` model could offer a model for administrating `Connection` settings and register `Enterprises` that can log in to our system to get access to our services.
 
 Next will be listed the main [entities](#entity) of this model.
 
@@ -125,13 +125,13 @@ Optionally you can log the transferred messages that went over a `Connection`. D
 Service Implementations
 -----------------------
 
-The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical` model](#canonical-model). Conversely, [`Canonical` models](#canonical-model) are converted back to a specific message format and sent over a communication protocol.
+The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical`](#canonical-model) model. Conversely, [`Canonical` models](#canonical-model) are converted back to a specific message format and sent over a communication protocol.
 
 
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical` model](#canonical-model) might determine what service to send it to. For instance, one [`Canonical`](#canonical-model) `Order` has to be sent to one `Supplier` using their own specific integration protocol, another order might simply be e-mailed to the `Supplier`. This service architecture enables you to retrieve a message from one system, for instance an `Order`, and then send that message to an arbitrary other system. That is part of the power of the [`Canonical` model](#canonical-model), where multiple systems' messages being converted to [`Canonical` model](#canonical-model), enables all those systems to communicate with each other.
+The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, one [`Canonical`](#canonical-model) `Order` has to be sent to one `Supplier` using their own specific integration protocol, another order might simply be e-mailed to the `Supplier`. This service architecture enables you to retrieve a message from one system, for instance an `Order`, and then send that message to an arbitrary other system. That is part of the power of the [`Canonical`](#canonical-model) model, where multiple systems' messages being converted to [`Canonical`](#canonical-model) model, enables all those systems to communicate with each other.
 
 
 Namespaces
@@ -188,7 +188,7 @@ Not so much a pattern, but a difference in handling infrastructure setup between
 
 ### Tag Model
 
-The [`Canonical` model](#canonical-model) should concern itself with data that is exchanged, which has a logical function in the systems in your company. But *some* data is only relevant to one system alone and not used to make two or more systems link together either. You could opt to not pollute your [`Canonical` model](#canonical-model) with data modeling that concerns none of your business processes, but just add `Tag` collections to your [`Canonical` model](#canonical-model). You might add those `Tag` models to specific domain models too. That way you could add data to your domain models, that none of your own logic concerns itself with, but is still data that you are supposed to send along to another system, because *it* needs it. Here follow some examples of `Tag` models.
+The [`Canonical`](#canonical-model) model should concern itself with data that is exchanged, which has a logical function in the systems in your company. But *some* data is only relevant to one system alone and not used to make two or more systems link together either. You could opt to not pollute your [`Canonical`](#canonical-model) model with data modeling that concerns none of your business processes, but just add `Tag` collections to your [`Canonical`](#canonical-model) model. You might add those `Tag` models to specific domain models too. That way you could add data to your domain models, that none of your own logic concerns itself with, but is still data that you are supposed to send along to another system, because *it* needs it. Here follow some examples of `Tag` models.
 
     Order { Tags[] }
     Tag { Name, Value }
@@ -200,7 +200,6 @@ You might also make tags culture specific:
 You might loosely link the tags:
 
     Tag { Name, Value, EntityTypeName, EntityID }
-
 
 ### Canonical KeyMapping
 
@@ -254,7 +253,7 @@ What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` i
 
 This way, when a new system is added, only one `KeyMapping` is needed to map it to all the other systems.
 
-As messages are sent back and forth between systems, the keys in the [`Canonical` model](#canonical-model) are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next system.
+As messages are sent back and forth between systems, the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next system.
 
 It does all depend on the specific design of your system. But hopefully this demonstrated a few options how to handle `KeyMappings`, `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
