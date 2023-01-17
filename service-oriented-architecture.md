@@ -245,17 +245,17 @@ But there may be another trick, that requires only 2 key fields in your [`Canoni
         ExternalID
     }
 
-What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from anotehr system:
+What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from another system:
 
     { System.A, ExternalID } => InternalID
     { System.B, ExternalID } => InternalID
     { System.C, ExternalID } => InternalID 
     { System.D, ExternalID } => InternalID
 
-A benefit here would be that adding a new system may only require one `KeyMapping` to map to al the other systems that had formerly joined in.
+A benefit would be that adding a new system may only require one `KeyMapping` to map to al the other systems that had formerly joined in.
 
-As messages are sent back and forth between systems, the keys in the [`Canonical` model](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the ID from the next system.
+As messages are sent back and forth between systems, the keys in the [`Canonical` model](#canonical-model) are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next system.
 
-It does depend on the specific design of your system, but these demonstrate a few options of how to handle key mappings, IDs and reference numbers.
+It does depend on the specific design of your system, but this demonstrated a few options of how to handle `KeyMappings`, `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
 [back](.)
