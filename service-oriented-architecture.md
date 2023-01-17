@@ -204,7 +204,7 @@ You might loosely link the tags:
 
 ### 3-Stage KeyMapping
 
-The `KeyMapping` idea might map `ExternalIDs` from one system to `ExternalIDs` of another system.
+`KeyMapping` is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system.
 
 If the amount of systems becomes larger the amount of `KeyMappings` might go up exponentially.
 
@@ -219,7 +219,7 @@ You might get many `IDs` in your model:
         IntermediaryOrderNumber
     }
 
-And the jeopardy arises that there can be many `KeyMappings`:
+And the jeopardy of getting many `KeyMappings` arises:
 
     KeyA <=> KeyB
     KeyA <=> KeyC
@@ -228,7 +228,7 @@ And the jeopardy arises that there can be many `KeyMappings`:
     KeyB <=> KeyD
     KeyC <=> KeyD
 
-But might not be very generic in the long run. You could make it a bit more generic like this:
+But this might become difficult to manage and not very generic in the long run. You could make it a bit more generic like this:
 
     Order
     {
@@ -237,7 +237,7 @@ But might not be very generic in the long run. You could make it a bit more gene
 
 So it becomes an array of `IDs` for different `Systems`.
 
-But there may be another trick, that requires only 2 key fields in your [`Canonical` models](#canonical-model), no more!
+But there's a trick, that requires only 2 key fields in your [`Canonical` models](#canonical-model), and no more!
 
     Order
     {
@@ -252,10 +252,10 @@ What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` i
     { System.C, ExternalID } => InternalID 
     { System.D, ExternalID } => InternalID
 
-A benefit would be that adding a new system may only require one `KeyMapping` to map to al the other systems that had formerly joined in.
+This way, when a new system is added, only one `KeyMapping` is needed to map it to all the other systems.
 
 As messages are sent back and forth between systems, the keys in the [`Canonical` model](#canonical-model) are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next system.
 
-It does depend on the specific design of your system, but this demonstrated a few options of how to handle `KeyMappings`, `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
+It does all depend on the specific design of your system. But hopefully this demonstrated a few options how to handle `KeyMappings`, `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
 [back](.)
