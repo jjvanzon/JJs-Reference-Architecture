@@ -53,17 +53,17 @@ Less Integration Code
 
 Say you have `4` systems: `A`, `B`, `C` and `D` and you want to connect all `4` of them together. Theoretically you would have to write `12` different message conversions. See alls the arrows in the diagram below:
 
-<img src="images/no-esb.png" width="166"/>
+<img src="images/no-esb.png" width="133"/>
 
 By connecting a system to the `ESB`, instead of connecting individual systems together, you have to implement only `8` different message conversions. The number of arrows below is reduced:
 
-<img src="images/esb.png" width="200"/>
+<img src="images/esb.png" width="150"/>
 
 You just saved yourself __33%__ of the work!
 
 With every added system it gets better. You can see this from the numbers below that indicate the amount of message conversions.
 
-<img src="images/esb-connection-counts.png" width="400" />
+<img src="images/esb-connection-counts.png" width="325" />
 
 The first integration between 2 systems you program using your `ESB` you actually program more message conversions. But with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce, you will have saved 33% of the overall work.
 
