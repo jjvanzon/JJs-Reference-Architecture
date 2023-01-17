@@ -27,7 +27,7 @@
     - [Facade](#facade)
     - [Hidden Infrastructure](#hidden-infrastructure)
     - [Tag Model](#tag-model)
-- [TODO](#todo)
+    - [3-Stage KeyMapping](#3-stage-keymapping)
 
 
 Introduction
@@ -59,13 +59,13 @@ By connecting a system to the `ESB`, instead of connecting individual systems to
 
 <img src="images/esb.png" width="200"/>
 
-You just saved yourself `33%` of the work!
+You just saved yourself 33% of the work!
 
 With every system you add to your `ESB` it gets better as you can see from the numbers below that indicate the amount of message conversions.
 
 <img src="images/esb-connection-counts.png" width="400" />
 
-The first integration between `2` systems you program using your `ESB` you actually program more message conversions, but with the next system it is already a tie between `ESB` and no `ESB`. The `4th` integration you introduce you will have saved `33%` of the overall work.
+The first integration between 2 systems you program using your `ESB` you actually program more message conversions, but with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce you will have saved 33% of the overall work.
 
 It gets better with each system you introduce in your `ESB`. When messages from a system are converted to and from the [`Canonical` model](#canonical-model), you can automatically connect it to all the other systems.
 
@@ -202,15 +202,60 @@ You might loosely link the tags:
     Tag { Name, Value, EntityTypeName, EntityID }
 
 
-TODO
-----
+### 3-Stage KeyMapping
 
-< TODO: Service Architecture: Three-Stage `KeyMapping` vs. Custom `KeyMapping` may be something to write about. It may explains why you do not need an even more generic `KeyMapping`, for intance:
+The `KeyMapping` idea might map `ExternalIDs` from one system to `ExternalIDs` of another system.
 
-    CustomerOrderNumber
-    SupplierOrderNumber
-    InternalID
+If the amount of systems becomes larger the amount of `KeyMappings` might go up exponentially.
 
-Cannot remember how and why it worked exactly. >
+You might get many `IDs` in your model:
+
+    Order
+    {
+        InternalID,
+        CustomerOrderNumber,
+        SupplierOrderNumber,
+        ManufacturerOrderNumber,
+        IntermediaryOrderNumber
+    }
+
+And the jeopardy arises that there can be many `KeyMappings`:
+
+    KeyA <=> KeyB
+    KeyA <=> KeyC
+    KeyA <=> KeyD
+    KeyB <=> KeyC
+    KeyB <=> KeyD
+    KeyC <=> KeyD
+
+But might not be very generic in the long run. You could make it a bit more generic like this:
+
+    Order
+    {
+        IDs[] { System, Number }
+    }
+
+So it becomes an array of `IDs` for different `Systems`.
+
+But there may be another trick, that requires only 2 key fields in your [`Canonical` models](#canonical-model), no more!
+
+    Order
+    {
+        InternalID
+        ExternalID
+    }
+
+What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from anotehr system:
+
+    { System.A, ExternalID } => InternalID
+    { System.B, ExternalID } => InternalID
+    { System.C, ExternalID } => InternalID 
+    { System.D, ExternalID } => InternalID
+
+A benefit here would be that adding a new system may only require one `KeyMapping` to map to al the other systems that had formerly joined in.
+
+As messages are sent back and forth between systems, the keys in the [`Canonical` model](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the ID from the next system.
+
+It does depend on the specific design of your system, but these demonstrate a few options of how to handle key mappings, IDs and reference numbers.
 
 [back](.)
