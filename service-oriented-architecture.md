@@ -10,8 +10,8 @@
 - [Canonical Model](#canonical-model)
 - [Less Integration Code](#less-integration-code)
 - [Clearer Integration Code](#clearer-integration-code)
-- [In Memory](#in-memory)
 - [In Practice](#in-practice)
+- [In-Memory](#in-memory)
 - [Standard ESB vs Custom ESB](#standard-esb-vs-custom-esb)
 - [ESB Model](#esb-model)
     - [Enterprises](#enterprises)
@@ -76,22 +76,22 @@ Clearer Integration Code
 But it gets better. You save yourself even more work. The conversion code from message to [`Canonical` model](#canonical-model) is often easier than converting from one system's format to the other system's format, because instead of converting from one quirky format to another quirky format, which is quite difficult to do, you convert from one quirky format to a more straightforward format, which is quite a lot easier to program.
 
 
-In Memory
----------
-
-An added benefit to the `Canonical` model is that it tends to live in memory, so making changes to it, does not require any data migrations, just refactoring of to the conversion code, which makes it low impact and flexible.
-
-
 In Practice
 -----------
 
 In practice not every system sends every type of message back and forth to every other system. And sometimes the messaging is not bidirectional but one-way only. But the benefits of the `ESB` still hold and systems would be linked together with less code and less effort than custom programming every integration between two systems.
 
 
+In-Memory
+---------
+
+An added benefit to the `Canonical` model is that it tends to live in memory. That means changes to it, do not require any data migrations, just refactoring of to the conversion code, which makes it lower impact and more flexible.
+
+
 Standard ESB vs Custom ESB
 --------------------------
 
-There are standard `Enterprise Service Bus` software packages available. Yet, you might choose to build a custom one yourself. The concepts might not be too hard to implement. And generic `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own [`Canonical` model](#canonical-model), which is basically all of the work. Therefore building it yourself seems a viable option.
+There are standard `Enterprise Service Bus` software packages available. Yet, you might choose to build a *custom* one yourself. The concepts might not be too hard to implement. And standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own [`Canonical` model](#canonical-model), which is basically all of the work. Therefore building it yourself seems a viable option.
 
 
 ESB Model
@@ -111,7 +111,7 @@ Every type of `Connection` between systems might be registered in a table of `Co
 
 ### Connections
 
-Every individual `Connection` between two `Enterprises` would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated `ConnectionType` that indicates what type of integration it is. Note that some `Connections` might not be between `Enterprises` but involve only one `Enterprise`. `Connections` do not have to be complete messaging implementations. Sometimes they are simply database connection settings or even the path of a network folder.
+Every individual `Connection` between two `Enterprises` would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated `ConnectionType` that indicates what type of integration it is. Note that some `Connections` might not be *between* `Enterprises`, but involve only *one* `Enterprise`. `Connections` do not have to be complete messaging implementations. Sometimes they are simply database connection settings or even the path of a network folder.
 
 ### KeyMappings
 
@@ -137,11 +137,11 @@ The content of a [`Canonical` model](#canonical-model) might determine what serv
 Namespaces
 ----------
 
-These namespaces use a hypothetical Ordering system as an example.
+These namespaces use a hypothetical `Ordering` system as an example:
 
 |                                                 |     |
 |-------------------------------------------------|-----|
-| __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services
+| __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services/
 | __`JJ.LocalServices`__                          | Root `namespace` for Windows services. (Not part of the service architecture, but this is where that other type of service goes.)
 | __`JJ.Data.Canonical`__                         | Where are [`Canonical`](#canonical-model) [entity]](patterns.md#entity) models are defined.
 | __`JJ.Data.Esb`__                               | [Entity model](patterns.md#entity) that stores `Enterprises`, `Users`, `ConnectionTypes`, `Connections`, etc. Basically the configuration settings of the architecture.
@@ -184,7 +184,7 @@ This concept is used in this [architecture](#index.md) to give a service `interf
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security), while in the service architecture the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `smpt` server setup. You cannot see that from the constructor or `interface`. The service would handle all that internally.
+Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `smpt` server setup. You cannot see that from the constructor or `interface`. The service would handle all that internally.
 
 ### Tag Model
 
