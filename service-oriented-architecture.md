@@ -115,7 +115,7 @@ Every individual `Connection` between two `Enterprises` would be registered in t
 
 ### KeyMappings
 
-Often systems have different identifiers for e.g. `Orders` or other objects. There may be a need to map a reference number from one system to the reference number of another system. An `ESB` model could have [entities](#entity) and logic to manage those `KeyMappings`.
+Systems often have different identifiers for e.g. `Orders`, `Customers` or other objects. It may be needed to map a reference number from one system to the reference number of another system. An `ESB` model could have [entities](#entity) and logic to manage those kinds of `KeyMappings`.
 
 ### Transmissions
 
@@ -125,36 +125,36 @@ Optionally you can log the transferred messages that went over a `Connection`. D
 Service Implementations
 -----------------------
 
-The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical`](#canonical-model) model. Conversely, [`Canonical` models](#canonical-model) are converted back to a specific message format and sent over a communication protocol.
+The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical`](#canonical-model) model. After that, the [`Canonical` model](#canonical-model) is converted to another message format and sent over another communication protocol.
 
 
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, one [`Canonical`](#canonical-model) `Order` has to be sent to one `Supplier` using their own specific integration protocol, another order might simply be e-mailed to the `Supplier`. This service architecture enables you to retrieve a message from one system, for instance an `Order`, and then send that message to an arbitrary other system. That is part of the power of the [`Canonical`](#canonical-model) model, where multiple systems' messages being converted to [`Canonical`](#canonical-model) model, enables all those systems to communicate with each other.
+The content of a [`Canonical`](#canonical-model) model might determine what service it is sent to. For instance, one [`Canonical`](#canonical-model) `Order` has to be sent to one `Supplier` using their own specific integration protocol, another order might simply be emailed to the `Supplier`. This service architecture enables you to retrieve a message from one system, for instance an `Order`, and then send that message to an arbitrary other system. That is part of the power of the [`Canonical`](#canonical-model) model. Multiple systems' messages converted to [`Canonical`](#canonical-model) models, enables all those systems to communicate with each other.
 
 
 Namespaces
 ----------
 
-These namespaces use a hypothetical `Ordering` system as an example:
+These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system as an example:
 
 |                                                 |     |
 |-------------------------------------------------|-----|
-| __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services/
-| __`JJ.LocalServices`__                          | Root `namespace` for Windows services. (Not part of the service architecture, but this is where that other type of service goes.)
+| __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services.
+| __`JJ.LocalServices`__                          | Root `namespace` for `Windows` services. (Not part of this service architecture, but this is where that other type of service goes.)
 | __`JJ.Data.Canonical`__                         | Where are [`Canonical`](#canonical-model) [entity](patterns.md#entity) models are defined.
 | __`JJ.Data.Esb`__                               | [Entity model](patterns.md#entity) that stores `Enterprises`, `Users`, `ConnectionTypes`, `Connections`, etc. Basically, the configuration settings of the architecture.
 | __`JJ.Data.Esb.NHibernate`__                    | Stores the `Esb` [entity model](patterns.md#entity) using [`NHibernate`](api.md#nhibernate).
-| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the stored `Esb` [entity model](patterns.md#entity).
-| __`JJ.Business.Canonical`__                     | Some shared logic that operates on [`Canonical` models](#canonical-model).
+| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the stored `Esb` [entities](patterns.md#entity).
+| __`JJ.Business.Canonical`__                     | Some shared logic that operates on [`Canonical`](#canonical-model) models.
 | __`JJ.Business.Esb`__                           | Business logic for managing the `Esb` model.
-| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems. These interfaces use the [`Canonical` models](#canonical-model).
+| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems. These interfaces use the [`Canonical`](#canonical-model) models.
 | __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
-| __`JJ.Services.Ordering.Email`__                | A specific implementation of an `Ordering` `interface`, behind which we send the order by e-mail.
-| __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | A specific implementation of an `Ordering` `interface`, behind which we implement the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
+| __`JJ.Services.Ordering.Email`__                | A specific implementation of an `Ordering` `interface`, where we send the order by email.
+| __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | Implementation of an `Ordering` `interface`, behind which we implement the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
 | __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the multi-dispatch ordering system.
-| __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service that allows you to communicate with the multi-dispatch `Ordering` system. This service `interface` can is used by both service and client.
+| __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. The service `interface` can be used by both server and client.
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows code to connect to the `WCF` service using the strongly typed service `interface`.
 | __`JJ.Services.Ordering.JsonRest`__             | Exposes the multi-dispatch `Ordering` service using the `Json` and `Rest` protocols.
 | __`JJ.Services.Ordering.WebApi`__               | There is no reason `Web API` should not be involved in this service architecture, in fact, the idea of `WCF` being the default for services, might not be a very long-lived.
@@ -166,44 +166,43 @@ Service-Related Patterns
 
 ### IsSupported
 
-A service environment may hold the same `interface` for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different `interfaces`, but that would make the service layer more difficult to use, because you would not know which interface to use. Instead, you could also add `IsSupported` properties to the `interface` to make an implementation communicate back if it supports a feature at all, for instance:
+A service environment may hold the same `interface` for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different `interfaces`, but that might make it more difficult to know which interface to use. Instead, you could also add `IsSupported` properties to the `interface`. Then an implementation can communicate back if it supports a feature at all:
 
 ```cs
-OrderStatusEnum IOrderFacade.GetOrderStatus();
-
-bool IOrderFacade.GetOrderStatusIsSupported { get; }
+Product GetProducts();
+bool GetProductsIsSupported { get; }
 ```
 
-Then when running price updates for multiple systems, you can simply skip the ones that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, more than introducing a large number of `interfaces` that would all need to be handled separately.
+Then when for instance running price updates, you can simply skip the systems that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, better than a large number of `interfaces` to all handle separately.
 
 ### Facade
 
-An `interface` behind which a lot of other `interfaces` and `classes` are used, with the goal of simplifying working with these systems.
+A [`Facade`](patterns.md#facade) is an `interface` behind which a lot of other `interfaces` and `classes` are used, with the goal of simplifying working with these systems.
 
-This concept is used in this [architecture](#index.md) to give a service `interface` an even simpler `interface` than the underlying business logic has. It may hide interactions with multiple systems, and hide infrastructural setup.
+This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying business logic. It may hide interactions with multiple systems, and hide infrastructural setup.
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or `interface`. The service would handle all that internally.
+Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle all of that internally.
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should concern itself with data that is exchanged, which has a logical function in the systems in your company. But *some* data is only relevant to one system alone and not used to make two or more systems link together either. You could opt to not pollute your [`Canonical`](#canonical-model) model with data modeling that concerns none of your business processes, but just add `Tag` collections to your [`Canonical`](#canonical-model) model. You might add those `Tag` models to specific domain models too. That way you could add data to your domain models, that none of your own logic concerns itself with, but is still data that you are supposed to send along to another system, because *it* needs it. Here follow some examples of `Tag` models.
+The [`Canonical`](#canonical-model) model should concern itself with data that is exchanged, which has a logical function in your company. But *some* data is only relevant to one system alone. This data might not be needed to link systems together. You could opt to not pollute your [`Canonical`](#canonical-model) model with data modeling that concerns none of your business processes. Instead may be add `Tag` collections to your [`Canonical`](#canonical-model) model. You might use those `Tags` in other models than the [`Canonical`](#canonical-model) too. That way you could add data to your domain models, that none of your own logic concerns itself with. But this data can still be sent along to another system, because *it* needs it. Here follow some examples of possible `Tag` models:
 
     Order { Tags[] }
     Tag { Name, Value }
 
-You might also make tags culture specific:
+You might also like culture specific tags:
 
     Tag { Name, Value, CultureName }
 
-You might loosely link the tags:
+Or you might loosely link the tags:
 
     Tag { Name, Value, EntityTypeName, EntityID }
 
 ### Canonical KeyMapping
 
-`KeyMapping` is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system.
+`KeyMapping` is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system. For example, the same `Order` could have a different `OrderNumber` depending on which party it was sent to.
 
 If the amount of systems becomes larger the amount of `KeyMappings` might go up exponentially.
 
@@ -227,7 +226,7 @@ And the jeopardy of getting many `KeyMappings` arises:
     KeyB <=> KeyD
     KeyC <=> KeyD
 
-But this might become difficult to manage and not very generic in the long run. You could make it a bit more generic like this:
+This might become difficult to manage, and not very generic in the long run. You could make it a bit more generic like this:
 
     Order
     {
@@ -236,7 +235,7 @@ But this might become difficult to manage and not very generic in the long run. 
 
 So it becomes an array of `IDs` for different `Systems`.
 
-But there's a trick, that requires only 2 key fields in your [`Canonical` models](#canonical-model), and no more!
+But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#canonical-model) models, but no more!
 
     Order
     {
