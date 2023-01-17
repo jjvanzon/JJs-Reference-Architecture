@@ -65,7 +65,7 @@ With every system you add to your `ESB` it gets better as you can see from the n
 
 <img src="images/esb-connection-counts.png" width="400" />
 
-The first integration between 2 systems you program using your `ESB` you actually program more message conversions, but with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce you will have saved 33% of the overall work.
+The first integration between 2 systems you program using your `ESB` you actually program more message conversions, but with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce, will have saved 33% of the overall work.
 
 It gets better with each system you introduce in your `ESB`. When messages from a system are converted to and from the [`Canonical` model](#canonical-model), you can automatically connect it to all the other systems.
 
@@ -125,7 +125,7 @@ Optionally you can log the transferred messages that went over a `Connection`. D
 Service Implementations
 -----------------------
 
-The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical` model](#canonical-model). Conversely, [`Canonical` models](#canonical-model) are converted back to a specific message format and the sent over a communication protocol.
+The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical` model](#canonical-model). Conversely, [`Canonical` models](#canonical-model) are converted back to a specific message format and sent over a communication protocol.
 
 
 Multi-Dispatch
@@ -143,13 +143,13 @@ These namespaces use a hypothetical `Ordering` system as an example:
 |-------------------------------------------------|-----|
 | __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services/
 | __`JJ.LocalServices`__                          | Root `namespace` for Windows services. (Not part of the service architecture, but this is where that other type of service goes.)
-| __`JJ.Data.Canonical`__                         | Where are [`Canonical`](#canonical-model) [entity]](patterns.md#entity) models are defined.
-| __`JJ.Data.Esb`__                               | [Entity model](patterns.md#entity) that stores `Enterprises`, `Users`, `ConnectionTypes`, `Connections`, etc. Basically the configuration settings of the architecture.
+| __`JJ.Data.Canonical`__                         | Where are [`Canonical`](#canonical-model) [entity](patterns.md#entity) models are defined.
+| __`JJ.Data.Esb`__                               | [Entity model](patterns.md#entity) that stores `Enterprises`, `Users`, `ConnectionTypes`, `Connections`, etc. Basically, the configuration settings of the architecture.
 | __`JJ.Data.Esb.NHibernate`__                    | Stores the `Esb` [entity model](patterns.md#entity) using [`NHibernate`](api.md#nhibernate).
 | __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the stored `Esb` [entity model](patterns.md#entity).
 | __`JJ.Business.Canonical`__                     | Some shared logic that operates on [`Canonical` models](#canonical-model).
 | __`JJ.Business.Esb`__                           | Business logic for managing the `Esb` model.
-| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` system. These interfaces use the [`Canonical` models](#canonical-model).
+| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems. These interfaces use the [`Canonical` models](#canonical-model).
 | __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
 | __`JJ.Services.Ordering.Email`__                | A specific implementation of an `Ordering` `interface`, behind which we send the order by e-mail.
 | __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | A specific implementation of an `Ordering` `interface`, behind which we implement the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
@@ -166,7 +166,7 @@ Service-Related Patterns
 
 ### IsSupported
 
-A service environment may contain the same `interface` for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different `interfaces`, but that would make the service layer more difficult to use, because you would not know which interface to use. Instead, you could also add `IsSupported` properties to the `interface` to make an implementation communicate back if it supports a feature at all, for instance:
+A service environment may hold the same `interface` for accessing multiple systems. But not every system is able to support the same features. You could solve it by creating a lot of different `interfaces`, but that would make the service layer more difficult to use, because you would not know which interface to use. Instead, you could also add `IsSupported` properties to the `interface` to make an implementation communicate back if it supports a feature at all, for instance:
 
 ```cs
 OrderStatusEnum IOrderFacade.GetOrderStatus();
@@ -174,7 +174,7 @@ OrderStatusEnum IOrderFacade.GetOrderStatus();
 bool IOrderFacade.GetOrderStatusIsSupported { get; }
 ```
 
-Then when running price updates for multiple systems, you can simply skip the ones that do not support it. Possible a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, more than introducing a large number of `interfaces` that would all need to be handled separately.
+Then when running price updates for multiple systems, you can simply skip the ones that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, more than introducing a large number of `interfaces` that would all need to be handled separately.
 
 ### Facade
 
@@ -184,11 +184,11 @@ This concept is used in this [architecture](#index.md) to give a service `interf
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `smpt` server setup. You cannot see that from the constructor or `interface`. The service would handle all that internally.
+Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or `interface`. The service would handle all that internally.
 
 ### Tag Model
 
-The [`Canonical` model](#canonical-model) should concern itself with data that is exchanged, which has a logical function in the systems in your company. But *some* data is only relevant to one system alone and not used to make two or more systems link together either. You could opt to not pollute your [`Canonical` model](#canonical-model) with data modeling that concerns none of your business processes, but just add to `Tag` collections to your [`Canonical` model](#canonical-model). You might add those `Tag` models to specific domain models too. That way you could add data to your domain models, that none of your own logic concerns itself with, but is still data that you are supposed to send along to another system, because *it* needs it. Here follow some examples of `Tag` models.
+The [`Canonical` model](#canonical-model) should concern itself with data that is exchanged, which has a logical function in the systems in your company. But *some* data is only relevant to one system alone and not used to make two or more systems link together either. You could opt to not pollute your [`Canonical` model](#canonical-model) with data modeling that concerns none of your business processes, but just add `Tag` collections to your [`Canonical` model](#canonical-model). You might add those `Tag` models to specific domain models too. That way you could add data to your domain models, that none of your own logic concerns itself with, but is still data that you are supposed to send along to another system, because *it* needs it. Here follow some examples of `Tag` models.
 
     Order { Tags[] }
     Tag { Name, Value }
