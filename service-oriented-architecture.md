@@ -27,7 +27,7 @@
     - [Facade](#facade)
     - [Hidden Infrastructure](#hidden-infrastructure)
     - [Tag Model](#tag-model)
-    - [3-Stage KeyMapping](#3-stage-keymapping)
+    - [Canonical KeyMapping](#canonical-keymapping)
 
 
 Introduction
@@ -202,7 +202,7 @@ You might loosely link the tags:
     Tag { Name, Value, EntityTypeName, EntityID }
 
 
-### 3-Stage KeyMapping
+### Canonical KeyMapping
 
 `KeyMapping` is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system.
 
