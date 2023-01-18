@@ -139,7 +139,7 @@ The content of a [`Canonical`](#canonical-model) model might determine what serv
 Namespaces
 ----------
 
-These are [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) [`JJ.Data`](layers.md#data-layer), [`JJ.Business`](layers.md#business-layer) and `JJ.Services` can be seen in there.
+These are [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) and [namespaces](namespaces-assemblies-and-folders.md): [`JJ.Data`](layers.md#data-layer), [`JJ.Business`](layers.md#business-layer) and `JJ.Services` can be seen in there.
 
 |                                                 |     |
 |-------------------------------------------------|-----|
@@ -210,9 +210,9 @@ Or you might loosely link the `Tags` to [entities](patterns.md#entity):
 
 ### Canonical KeyMapping
 
-[`KeyMapping`](#keymappings) is an idea that maps `ReferenceNumbers` from one system to `ReferenceNumbers` of another system. For example, the same `Order` could have a different `OrderNumber` depending on which party it is sent to.
+[`KeyMapping`](#keymappings) is an idea that maps `ReferenceNumbers` from one system to `ReferenceNumbers` of another. For example, the same `Order` could have a different `OrderNumber` depending on which party it is sent to.
 
-If the amount of systems becomes larger. the amount of [`KeyMappings`](#keymappings) might go up exponentially.
+If the amount of systems becomes larger, the amount of [`KeyMappings`](#keymappings) might go up exponentially.
 
 You might get many `IDs` in your model:
 
