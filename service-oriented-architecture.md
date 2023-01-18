@@ -156,7 +156,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems.
 | __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and [logic](layers.md#business-layer).
 | __`JJ.Services.Ordering.Email`__                | A specific [implementation](#connectiontypes) of an `Ordering` `interface`, in which we send the `Order` by email.
-| __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
+| __`JJ.Services.Ordering.AwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use the hypothetical `AwesomeProtocol` for sending `Orders`.
 | __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) `Ordering` system.
 | __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. This `interface` can be used by both server and client.
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows code to connect to the `WCF` service using the strongly typed service `interface`.
