@@ -105,7 +105,7 @@ Next: The main [entities](patterns.md#entity) of an `ESB` model:
 
 ### Enterprises
 
-Every `Enterprise` involved in this [service architecture](#introduction) would be registered in the `ESB` database. Some of these `Enterprises` will log into our [system](#connectiontypes). Those will get an associated `User` [entity](patterns.md#entity) with (encrypted) credentials stored in it.
+Every `Enterprise` involved in this [service architecture](#-service-oriented-architecture) would be registered in the `ESB` database. Some of these `Enterprises` will log into our [system](#connectiontypes). Those will get an associated `User` [entity](patterns.md#entity) with (encrypted) credentials stored in it.
 
 ### ConnectionTypes
 
@@ -115,7 +115,7 @@ Every type of [`Connection`](#connections) between systems might be registered i
 
 Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) that indicates what type of [integration](#connectiontypes) it is.
 
-Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). `Connections` do not have to be complete messaging implementations. Sometimes they are simply a database connection or even the path of a network folder.
+Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). `Connections` do not have to be complete messaging [implementations](#connectiontypes). Sometimes they are simply a database connection or even the path of a network folder.
 
 ### KeyMappings
 
@@ -129,39 +129,39 @@ Optionally you can [log](aspects.md#logging) the transferred messages that went 
 Service Implementations
 -----------------------
 
-The implementation of a service would involve [message transformation](aspects.md#conversion) and *transmission*. Data is received through some [communication protocol](#connectiontypes), the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another [communication protocol](#connectiontypes).
+The [implementation](#connectiontypes) of a service would involve [message transformation](aspects.md#conversion) and *transmission*. Data is received through some [communication protocol](#connectiontypes), the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another [communication protocol](#connectiontypes).
 
 
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may describe the `Supplier` to send it to. One `Supplier` may use their own specific [integration protocol](#connectiontypes). Another `Suplier` might like an email about it. This [service architecture](#introduction) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are [converted](aspects.md#conversion) to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
+The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may describe the `Supplier` to send it to. One `Supplier` may use their own specific [integration protocol](#connectiontypes). Another `Suplier` might like an email about it. This [service architecture](#-service-oriented-architecture) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are [converted](aspects.md#conversion) to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
 
 
 Namespaces
 ----------
 
-These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` [system](#connectiontypes). The main [layers](layers.md) and [`namespaces`](namespaces-assemblies-and-folders.md) can be seen in there: [`JJ.Data`](layers.md#data-layer), [`JJ.Business`](layers.md#business-layer) and `JJ.Services`.
+These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) and [`namespaces`](namespaces-assemblies-and-folders.md) can be seen in there: [`JJ.Data`](layers.md#data-layer), [`JJ.Business`](layers.md#business-layer) and `JJ.Services`.
 
 |                                                 |     |
 |-------------------------------------------------|-----|
 | __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for web services / `WCF` services.
-| __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#introduction), but this is where that other type of *service* goes.)
-| __`JJ.Data.Canonical`__                         | Where [`Canonical`](#canonical-model) entity models are defined.
+| __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of *service* goes.)
+| __`JJ.Data.Canonical`__                         | Where [`Canonical` entity models](#canonical-model) are defined.
 | __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of the architecture.
 | __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api.md#nhibernate).
 | __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb` entities](#esb-model).
 | __`JJ.Business.Canonical`__                     | Shared [logic](layers.md#business-layer) that operates on [`Canonical`](#canonical-model) models.
 | __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
-| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` [systems](#connectiontypes).
-| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (orders, price updates) are received from and sent to the [right system](#multi-dispatch) depending on message content and settings.
-| __`JJ.Services.Ordering.Email`__                | A specific implementation of an `Ordering` `interface`, in which we send the order by email.
-| __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | Implementation of an `Ordering` `interface`, behind which we use the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
-| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) ordering [system](#connectiontypes).
+| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems.
+| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and [logic](layers.md#business-layer).
+| __`JJ.Services.Ordering.Email`__                | A specific [implementation](#connectiontypes) of an `Ordering` `interface`, in which we send the `Order` by email.
+| __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
+| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) `Ordering` system.
 | __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. This `interface` can be used by both server and client.
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows code to connect to the `WCF` service using the strongly typed service `interface`.
 | __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` and `Rest` protocols.
-| __`JJ.Services.Ordering.WebApi`__               | There is no reason `Web API` should not be involved in this [service architecture](#introduction), in fact, the idea of `WCF` being the default for services, might not be a very long-lived.
+| __`JJ.Services.Ordering.WebApi`__               | There is no reason `Web API` should not be involved in this [service architecture](#-service-oriented-architecture), in fact, the idea of `WCF` being the default for services, might not be a very long-lived.
 | __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service is an `AppService`, that exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) and returns [`ViewModels`](patterns.md#viewmodel).
 
 
@@ -187,11 +187,11 @@ This concept is used in this [architecture](#index.md) to give a service an even
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of [service architecture](#introduction).
+Not so much a pattern, but a difference in handling infrastructure setup between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of [service architecture](#-service-oriented-architecture).
 
 In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). 
 
-While in the [service architecture](#introduction) the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle that internally.
+While in the [service architecture](#-service-oriented-architecture) the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle that internally.
 
 ### Tag Model
 
