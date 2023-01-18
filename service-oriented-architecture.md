@@ -181,7 +181,7 @@ Then when for instance running price updates, you can simply skip the systems th
 
 A [`Facade`](patterns.md#facade) is an `interface` behind which a lot of other `interfaces` and `classes` are used, with the goal of simplifying working with these systems.
 
-This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying business logic. It may hide interactions with multiple systems, and hide infrastructural setup.
+This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying business. It may hide interactions with multiple systems, and hide infrastructural setup.
 
 ### Hidden Infrastructure
 
@@ -189,16 +189,18 @@ Not so much a pattern, but a difference in handling infrastructure setup between
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should concern itself with data that is exchanged, which has a logical function in your company. But *some* data is only relevant to one system alone. This data might not be needed to link systems together. You could opt to not pollute your [`Canonical`](#canonical-model) model with data modeling that concerns none of your business processes. Instead may be add `Tag` collections to your [`Canonical`](#canonical-model) model. You might use those `Tags` in other models than the [`Canonical`](#canonical-model) too. That way you could add data to your domain models, that none of your own logic concerns itself with. But this data can still be sent along to another system, because *it* needs it. Here follow some examples of possible `Tag` models:
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another system may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary data structurings, you could use `Tag` collections. You might use those `Tags` in domain models too, to add data, that none of your own business concerns itself with. But this data can still be sent along to another system, when *it* needs it.
+
+Here are some examples for `Tag` models:
 
     Order { Tags[] }
     Tag { Name, Value }
 
-You might also like culture specific tags:
+You might also like culture-specific `Tags`:
 
     Tag { Name, Value, CultureName }
 
-Or you might loosely link the tags:
+Or you might loosely link the `Tags` to [entities](patterns.md#entity):
 
     Tag { Name, Value, EntityTypeName, EntityID }
 
