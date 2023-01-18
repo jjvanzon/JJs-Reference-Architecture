@@ -99,7 +99,7 @@ There is standard `Enterprise Service Bus` software. Yet, you might choose to bu
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` model could offer a model for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our system to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` [model](patterns.md#entity) could offer a model for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our system to get access to our services.
 
 Next: the main [entities](patterns.md#entity) of an `ESB` model.
 
@@ -133,21 +133,21 @@ The implementation of a service would involve mostly *message transformation* an
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical`](#canonical-model) model might determine what service it is sent to. For instance, one [`Canonical`](#canonical-model) `Order` has to be sent to one `Supplier` using their own specific integration protocol, another order might simply be emailed to the `Supplier`. This service architecture enables you to retrieve a message from one system, for instance an `Order`, and then send that message to an arbitrary other system. That is part of the power of the [`Canonical`](#canonical-model) model. Multiple systems' messages converted to [`Canonical`](#canonical-model) models, enables all those systems to communicate with each other.
+The content of a [`Canonical`](#canonical-model) model might determine what service it is sent to. For instance, one [`Canonical`](#canonical-model) `Order` has to be sent to one `Supplier` using their own specific integration protocol, another order might simply be emailed to the `Supplier`. This service architecture enables you to retrieve a message from one system, for instance an `Order`, and then send that message to an arbitrary other system. That is part of the power of the [`Canonical`](#canonical-model) model. Multiple systems' messages are converted to [`Canonical`](#canonical-model) models, enabling all those systems to communicate with each other.
 
 
 Namespaces
 ----------
 
-These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system as an example:
+These are [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) [`JJ.Data`](layers.md#data-layer), [`JJ.Business`](layers.md#business-layer) and `JJ.Services` can be seen in there.
 
 |                                                 |     |
 |-------------------------------------------------|-----|
 | __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services.
-| __`JJ.LocalServices`__                          | Root `namespace` for `Windows` services. (Not part of this service architecture, but this is where that other type of service goes.)
+| __`JJ.LocalServices`__                          | Root `namespace` for `Windows` services. (Not part of this service architecture, but this is where that other type of *service* goes.)
 | __`JJ.Data.Canonical`__                         | Where are [`Canonical`](#canonical-model) [entity](patterns.md#entity) models are defined.
-| __`JJ.Data.Esb`__                               | [Entity model](#esb-model) that stores [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of the architecture.
-| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` entity model](#esb-model) using [`NHibernate`](api.md#nhibernate).
+| __`JJ.Data.Esb`__                               | [Model](#esb-model) that stores [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of the architecture.
+| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api.md#nhibernate).
 | __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb` entities](#esb-model).
 | __`JJ.Business.Canonical`__                     | Some shared logic that operates on [`Canonical`](#canonical-model) models.
 | __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
@@ -175,21 +175,25 @@ Product GetProducts();
 bool GetProductsIsSupported { get; }
 ```
 
-Then when for instance running price updates, you can simply skip the systems that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, better than a large number of `interfaces` to all handle separately.
+Then when for instance running price updates, you can simply skip the systems that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, instead of the confusion that comes, handling a large number of `interfaces`.
 
 ### Facade
 
-A [`Facade`](patterns.md#facade) is an `interface` behind which a lot of other `interfaces` and `classes` are used, with the goal of simplifying working with these systems.
+A [`Facade`](patterns.md#facade) is an `interface` behind which a lot of other `interfaces` and `classes` are used. Its goal is to simplify working with these systems.
 
 This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying business. It may hide interactions with multiple systems, and hide infrastructural setup.
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture. In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle all of that internally.
+Not so much a pattern, but a difference in handling infrastructure setup between a possible [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of service architecture.
+
+In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). 
+
+While in the *service architecture* the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle all of that internally.
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another system may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary data structurings, you could use `Tag` collections. You might use those `Tags` in domain models too, to add data, that none of your own business concerns itself with. But this data can still be sent along to another system, when *it* needs it.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another system may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary data structure, you could use `Tag` collections. You might use those `Tags` to domain models too, to add data, that none of your own business concerns itself with. But this data can still be sent along to another system, when *it* needs it.
 
 Here are some examples for `Tag` models:
 
@@ -206,9 +210,9 @@ Or you might loosely link the `Tags` to [entities](patterns.md#entity):
 
 ### Canonical KeyMapping
 
-[`KeyMapping`](#keymappings) is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system. For example, the same `Order` could have a different `OrderNumber` depending on which party it was sent to.
+[`KeyMapping`](#keymappings) is an idea that maps `ReferenceNumbers` from one system to `ReferenceNumbers` of another system. For example, the same `Order` could have a different `OrderNumber` depending on which party it is sent to.
 
-If the amount of systems becomes larger the amount of [`KeyMappings`](#keymappings) might go up exponentially.
+If the amount of systems becomes larger. the amount of [`KeyMappings`](#keymappings) might go up exponentially.
 
 You might get many `IDs` in your model:
 
@@ -221,7 +225,7 @@ You might get many `IDs` in your model:
         IntermediaryOrderNumber
     }
 
-And the jeopardy of getting many [`KeyMappings`](#keymappings)](#keymappings) in the `ESB` database arises:
+And the jeopardy of getting many [`KeyMappings`](#keymappings) in the `ESB` database arises:
 
     KeyA <=> KeyB
     KeyA <=> KeyC
@@ -230,7 +234,7 @@ And the jeopardy of getting many [`KeyMappings`](#keymappings)](#keymappings) in
     KeyB <=> KeyD
     KeyC <=> KeyD
 
-This might become difficult to manage, and not very generic in the long run. You could make it a bit more generic like this:
+This might become difficult to manage. You could make it a bit more generic like this:
 
     Order
     {
@@ -254,7 +258,7 @@ What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` i
     { SystemC, ExternalID } => InternalID 
     { SystemD, ExternalID } => InternalID
 
-This way, when a new system is added, only one [`KeyMapping`](#keymappings) is needed to map it to all the other systems.
+This way, when a new system is added, only one [`KeyMapping`](#keymappings) is needed, to map it to all the other systems.
 
 As messages are sent back and forth between systems, the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next system.
 
