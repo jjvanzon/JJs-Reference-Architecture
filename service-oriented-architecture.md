@@ -204,9 +204,9 @@ Or you might loosely link the tags:
 
 ### Canonical KeyMapping
 
-`KeyMapping` is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system. For example, the same `Order` could have a different `OrderNumber` depending on which party it was sent to.
+[`KeyMapping`](#keymappings) is an idea that maps `ExternalIDs` from one system to `ExternalIDs` of another system. For example, the same `Order` could have a different `OrderNumber` depending on which party it was sent to.
 
-If the amount of systems becomes larger the amount of `KeyMappings` might go up exponentially.
+If the amount of systems becomes larger the amount of [`KeyMappings`](#keymappings) might go up exponentially.
 
 You might get many `IDs` in your model:
 
@@ -219,7 +219,7 @@ You might get many `IDs` in your model:
         IntermediaryOrderNumber
     }
 
-And the jeopardy of getting many `KeyMappings` arises:
+And the jeopardy of getting many [`KeyMappings`](#keymappings)](#keymappings) in the `ESB` database arises:
 
     KeyA <=> KeyB
     KeyA <=> KeyC
@@ -247,15 +247,15 @@ But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#ca
 
 What you could do is map `ExternalIDs` from one system *only* to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from another system:
 
-    { System.A, ExternalID } => InternalID
-    { System.B, ExternalID } => InternalID
-    { System.C, ExternalID } => InternalID 
-    { System.D, ExternalID } => InternalID
+    { SystemA, ExternalID } => InternalID
+    { SystemB, ExternalID } => InternalID
+    { SystemC, ExternalID } => InternalID 
+    { SystemD, ExternalID } => InternalID
 
-This way, when a new system is added, only one `KeyMapping` is needed to map it to all the other systems.
+This way, when a new system is added, only one [`KeyMapping`](#keymappings) is needed to map it to all the other systems.
 
 As messages are sent back and forth between systems, the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next system.
 
-It does all depend on the specific design of your system. But hopefully this demonstrated a few options how to handle `KeyMappings`, `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
+It does all depend on the specific design of your system. But hopefully this demonstrated a few options how to handle [`KeyMappings`](#keymappings), `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
 [back](.)
