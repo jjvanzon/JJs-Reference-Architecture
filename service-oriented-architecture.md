@@ -1,4 +1,6 @@
-﻿🌐 Service Oriented Architecture
+﻿<style>thead{display:none;}</style>
+
+🌐 Service Oriented Architecture
 =================================
 
 [back](.)
@@ -11,7 +13,7 @@
 - [Less Integration Code](#less-integration-code)
 - [Clearer Integration Code](#clearer-integration-code)
 - [In Practice](#in-practice)
-- [In-Memory](#in-memory)
+- [Memory](#memory)
 - [Standard ESB vs Custom ESB](#standard-esb-vs-custom-esb)
 - [ESB Model](#esb-model)
     - [Enterprises](#enterprises)
@@ -61,13 +63,13 @@ By connecting a system to the `ESB`, instead of connecting individual systems to
 
 You just saved yourself __33%__ of the work!
 
-With every added system it gets better. You can see this from the numbers below that indicate the amount of message conversions.
+With every added system it gets better. You can see this from the numbers below, that indicate the amount of message conversions.
 
 <img src="images/esb-connection-counts.png" width="325" />
 
-The first integration between 2 systems you program using your `ESB` you actually program more message conversions. But with the next system it is already a tie between `ESB` and no `ESB`. The 4th integration you introduce, you will have saved 33% of the overall work.
+The first integration between 2 systems you actually program more message conversions by using an `ESB`. But the next system it's already a tie between `ESB` and no `ESB`. The 4th integration you introduce, you will have saved 33% of the overall work.
 
-It gets better with each system you introduce in your `ESB`. When messages from one system are converted to and from the [`Canonical`](#canonical-model) model, you can automatically connect it to all the other systems.
+It gets better with each system you introduce to your `ESB`. When messages from one system are converted to and from the [`Canonical`](#canonical-model) model, you can automatically connect it to all the other systems.
 
 
 Clearer Integration Code
@@ -79,27 +81,27 @@ But it gets better. You save yourself even more work. The code to convert a mess
 In Practice
 -----------
 
-In practice not every system sends every type of message back and forth to every other system. And sometimes the messaging is not bidirectional but one-way only. But the benefits of an `ESB` still hold and systems would be linked together with less code and less effort than custom programming every integration between two systems again.
+In practice not every system tends to send every type of message back and forth to every other system. And sometimes the messaging is not bidirectional but one-way only. But the benefits of an `ESB` still hold and systems would be linked with less code and less effort than custom programming every integration.
 
 
-In-Memory
----------
+Memory
+------
 
-An added benefit to the `Canonical` model is that it tends to live in memory. Thit means that changes to it, do not require any data migrations. You would just refactor the conversion code, making it lower impact and more flexible.
+An added benefit to the `Canonical` model is that it tends to live in memory. Thit means that changes to it, do not require any data migrations. You would just refactor the conversion code. This makes it lower impact and more flexible.
 
 
 Standard ESB vs Custom ESB
 --------------------------
 
-There is standard `Enterprise Service Bus` software. Yet, you might choose to build a *custom* one. The concepts could be easier to implement than you might think. And standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion code yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building it yourself does seem a viable option.
+There is standard `Enterprise Service Bus` software. Yet, you might choose to build a *custom* one. The concepts might be easier to implement than you think. And standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building it yourself might be a viable option.
 
 
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` model could offer a model for administrating `Connection` settings and register `Enterprises` that can log in to our system to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` model could offer a model for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our system to get access to our services.
 
-Next will be listed the main [entities](#entity) of this model.
+Next: the main [entities](patterns.md#entity) of an `ESB` model.
 
 ### Enterprises
 
@@ -107,25 +109,25 @@ Every `Enterprise` involved in this service architecture would be registered in 
 
 ### ConnectionTypes
 
-Every type of `Connection` between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of integrating with a system, with a specific messaging protocol, message format and implementation.
+Every type of [`Connection`](#connections) between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of integrating with a system, with a specific messaging protocol, message format and implementation.
 
 ### Connections
 
-Every individual `Connection` between two `Enterprises` would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated `ConnectionType` that indicates what type of integration it is. Note that some `Connections` might not be *between* `Enterprises`, but involve only *one* `Enterprise`. `Connections` do not have to be complete messaging implementations. Sometimes they are simply database connection settings or even the path of a network folder.
+Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) that indicates what type of integration it is. Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). `Connections` do not have to be complete messaging implementations. Sometimes they are simply a database connection or even the path of a network folder.
 
 ### KeyMappings
 
-Systems often have different identifiers for e.g. `Orders`, `Customers` or other objects. It may be needed to map a reference number from one system to the reference number of another system. An `ESB` model could have [entities](#entity) and logic to manage those kinds of `KeyMappings`.
+Systems often have different identifiers for e.g. `Orders`, `Customers` or other [entities](patterns.md#entity). It may be needed to map a reference number from one system to the reference number of another system. An `ESB` model could have [entities](patterns.md#entity) and logic to manage those kinds of `KeyMappings`.
 
 ### Transmissions
 
-Optionally you can log the transferred messages that went over a `Connection`. Do note that logging all messages can impact performance and storage requirements so perhaps use it sparsely.
+Optionally you can log the transferred messages that went over a [`Connection`](#connections). Do note that logging all messages can impact performance and storage requirements so perhaps use it sparsely.
 
 
 Service Implementations
 -----------------------
 
-The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical`](#canonical-model) model. After that, the [`Canonical` model](#canonical-model) is converted to another message format and sent over another communication protocol.
+The implementation of a service would involve mostly *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is converted to another message format and sent over another communication protocol.
 
 
 Multi-Dispatch
@@ -144,19 +146,19 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Services`__                               | Root `namespace` for web services / `WCF` services.
 | __`JJ.LocalServices`__                          | Root `namespace` for `Windows` services. (Not part of this service architecture, but this is where that other type of service goes.)
 | __`JJ.Data.Canonical`__                         | Where are [`Canonical`](#canonical-model) [entity](patterns.md#entity) models are defined.
-| __`JJ.Data.Esb`__                               | [Entity model](patterns.md#entity) that stores `Enterprises`, `Users`, `ConnectionTypes`, `Connections`, etc. Basically, the configuration settings of the architecture.
-| __`JJ.Data.Esb.NHibernate`__                    | Stores the `Esb` [entity model](patterns.md#entity) using [`NHibernate`](api.md#nhibernate).
-| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the stored `Esb` [entities](patterns.md#entity).
+| __`JJ.Data.Esb`__                               | [Entity model](#esb-model) that stores [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of the architecture.
+| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` entity model](#esb-model) using [`NHibernate`](api.md#nhibernate).
+| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb` entities](#esb-model).
 | __`JJ.Business.Canonical`__                     | Some shared logic that operates on [`Canonical`](#canonical-model) models.
-| __`JJ.Business.Esb`__                           | Business logic for managing the `Esb` model.
+| __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
 | __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems. These interfaces use the [`Canonical`](#canonical-model) models.
-| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (orders, price updates) are received from and sent to the right system depending on message content.
+| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (orders, price updates) are received from and sent to the [right system](#multi-dispatch) depending on message content.
 | __`JJ.Services.Ordering.Email`__                | A specific implementation of an `Ordering` `interface`, where we send the order by email.
 | __`JJ.Services.Ordering.SuperAwesomeProtocol`__ | Implementation of an `Ordering` `interface`, behind which we implement the hypothetical `SuperAwesomeProtocol` for sending `Orders`.
-| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the multi-dispatch ordering system.
+| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) ordering system.
 | __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. The service `interface` can be used by both server and client.
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows code to connect to the `WCF` service using the strongly typed service `interface`.
-| __`JJ.Services.Ordering.JsonRest`__             | Exposes the multi-dispatch `Ordering` service using the `Json` and `Rest` protocols.
+| __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` and `Rest` protocols.
 | __`JJ.Services.Ordering.WebApi`__               | There is no reason `Web API` should not be involved in this service architecture, in fact, the idea of `WCF` being the default for services, might not be a very long-lived.
 | __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service is an `AppService`, that exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) and returns [`ViewModels`](patterns.md#viewmodel).
 
