@@ -35,19 +35,19 @@
 Introduction
 ------------
 
-What has been described so far is the [application architecture](introduction.md#application-architecture-vs-service-architecture). Another part is the *service oriented architecture.* It is about linking [systems](#connectiontypes) together. Currently its main technology is `WCF`.
+What has been described so far is the [application architecture](introduction.md#application-architecture-vs-service-architecture). Another part of this [software architecture](index.md) is the *service oriented architecture.* It is about linking [systems](#connectiontypes) together. It currently mainly runs on `WCF` technology.
 
 
 The ESB Concept
 ---------------
 
-`ESB` stands for *Enterprise Service Bus*, which is a [system](#connectiontypes) for exchanging data between different [systems](#connectiontypes) of different [organizations](#enterprises) in different [formats](#connectiontypes) with different [protocols](#connectiontypes). Central components are used to make [integration](#connectiontypes) between these [systems](#connectiontypes) more manageable. A relevant concept is the [`Canonical`](#canonical-model) model.
+`ESB` stands for *Enterprise Service Bus*, which is a [system](#connectiontypes) for exchanging data between different [systems](#connectiontypes) of different [organizations](#enterprises) in different [formats](#connectiontypes) with different [protocols](#connectiontypes). Central components are used, to make [integration](#connectiontypes) between these [systems](#connectiontypes) more manageable. A relevant concept is the [`Canonical`](#canonical-model) model.
 
 
 Canonical Model
 ---------------
 
-A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and is [converted](aspects.md#conversion) to a `Canonical` form, so that the same code may be reused for data that comes from various [systems](#connectiontypes). The aim is for the `Canonical` model to be as pure and general as possible, so indeed information of any [system](#connectiontypes) can be fit into it with few modifications.
+A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and is [converted](aspects.md#conversion) to a `Canonical` form, so that the same model may be reused for data that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so indeed information of different [systems](#connectiontypes) can fit into it with few modifications.
 
 
 Less Integration Code
@@ -57,13 +57,13 @@ Say you have `4` [systems](#connectiontypes): `A`, `B`, `C` and `D` and you want
 
 <img src="images/no-esb.png" width="133"/>
 
-By connecting a [system](#connectiontypes) to an `ESB`, instead of connecting individual [systems](#connectiontypes) together, you have to implement only `8` different message [conversions](aspects.md#conversion). The number of arrows is reduced:
+By connecting [systems](#connectiontypes) to an `ESB`, instead of to eachother, you need to implement only `8` different message [conversions](aspects.md#conversion). The number of arrows is reduced:
 
 <img src="images/esb.png" width="150"/>
 
 You just saved yourself __33%__ of the work!
 
-With every added [system](#connectiontypes) it gets better. You can see this from the numbers below, that indicate the amount of message [conversions](aspects.md#conversion).
+With every added [system](#connectiontypes) it gets better. You can see this from the numbers below, indicating the amount of message [conversions](aspects.md#conversion).
 
 <img src="images/esb-connection-counts.png" width="325" />
 
@@ -87,13 +87,13 @@ In practice not every [system](#connectiontypes) tends to send every type of mes
 Memory
 ------
 
-An added benefit to the `Canonical` model is that it tends to live in memory. This means that changing it, does not require any [data migrations](database-conventions.md#upgrade-scripts). You would just refactor the [conversion](aspects.md#conversion) code. This makes it both low impact and flexible.
+An added benefit to the `Canonical` model is, it tends to live in memory. This means that changing it, does not require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it low impact and flexible.
 
 
 Standard ESB vs Custom ESB
 --------------------------
 
-There is standard `Enterprise Service Bus` software. Yet, you could also build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the [message conversion](aspects.md#conversion) yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself might certainly be an option.
+There is standard `Enterprise Service Bus` software. Yet, you could also build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the [message conversion](aspects.md#conversion) yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself may certainly be an option.
 
 
 ESB Model
@@ -101,7 +101,7 @@ ESB Model
 
 On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
 
-Next: The main [entities](patterns.md#entity) of an `ESB` model:
+Next: The main [entities](patterns.md#entity) of the `ESB` model:
 
 ### Enterprises
 
@@ -109,7 +109,7 @@ Every `Enterprise` involved in this [service architecture](#-service-oriented-ar
 
 ### ConnectionTypes
 
-Every type of [`Connection`](#connections) between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of [integrating](#connectiontypes) with a *system*, with a specific messaging *protocol*, message *format* and *implementation*.
+Every type of [`Connection`](#connections) between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of *integrating* with a *system*, with a specific messaging *protocol*, message *format* and *implementation*.
 
 ### Connections
 
@@ -135,7 +135,7 @@ The [implementation](#connectiontypes) of a service would involve [message trans
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may describe the `Supplier` to send it to. One `Supplier` may use their own specific [integration protocol](#connectiontypes). Another `Suplier` might like an email about it. This [service architecture](#-service-oriented-architecture) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are [converted](aspects.md#conversion) to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
+The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may indicate a `Supplier` to send it to. One `Supplier` may use their own specific [integration protocol](#connectiontypes). Another `Suplier` might like an email. This [service architecture](#-service-oriented-architecture) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are [converted](aspects.md#conversion) to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
 
 
 Namespaces
@@ -146,7 +146,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 |                                                 |     |
 |-------------------------------------------------|-----|
 | __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for web services / `WCF` services.
-| __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of *service* goes.)
+| __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of service goes.)
 | __`JJ.Data.Canonical`__                         | Where [`Canonical` entity models](#canonical-model) are defined.
 | __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of the architecture.
 | __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api.md#nhibernate).
