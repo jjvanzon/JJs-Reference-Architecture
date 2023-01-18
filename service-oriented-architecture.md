@@ -35,7 +35,7 @@
 Introduction
 ------------
 
-What has been described so far is the [application architecture](introduction.md#application-architecture-vs-service-architecture). Another part is the *service oriented architecture.* It is mainly about linking [systems](#connectiontypes) together. Currently the main technology is `WCF`.
+What has been described so far is the [application architecture](introduction.md#application-architecture-vs-service-architecture). Another part is the *service oriented architecture.* It is about linking [systems](#connectiontypes) together. Currently its main technology is `WCF`.
 
 
 The ESB Concept
@@ -47,35 +47,35 @@ The ESB Concept
 Canonical Model
 ---------------
 
-A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and is converted to a `Canonical` form, so that the same code may be reused for data that comes from various [systems](#connectiontypes). The aim is for the `Canonical` model to be as pure and general as possible, so indeed information of any [system](#connectiontypes) can be fit into it with few modifications.
+A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and is [converted](aspects.md#conversion) to a `Canonical` form, so that the same code may be reused for data that comes from various [systems](#connectiontypes). The aim is for the `Canonical` model to be as pure and general as possible, so indeed information of any [system](#connectiontypes) can be fit into it with few modifications.
 
 
 Less Integration Code
 ---------------------
 
-Say you have `4` [systems](#connectiontypes): `A`, `B`, `C` and `D` and you want to connect all `4` of them together. Theoretically you would have to write `12` different message conversions. See all the arrows in this diagram:
+Say you have `4` [systems](#connectiontypes): `A`, `B`, `C` and `D` and you want to connect all `4` of them together. Theoretically you would have to write `12` different message [conversions](aspects.md#conversion). See all the arrows in this diagram:
 
 <img src="images/no-esb.png" width="133"/>
 
-By connecting a [system](#connectiontypes) to an `ESB`, instead of connecting individual [systems](#connectiontypes) together, you have to implement only `8` different message conversions. The number of arrows below is reduced:
+By connecting a [system](#connectiontypes) to an `ESB`, instead of connecting individual [systems](#connectiontypes) together, you have to implement only `8` different message [conversions](aspects.md#conversion). The number of arrows is reduced:
 
 <img src="images/esb.png" width="150"/>
 
 You just saved yourself __33%__ of the work!
 
-With every added [system](#connectiontypes) it gets better. You can see this from the numbers below, that indicate the amount of message conversions.
+With every added [system](#connectiontypes) it gets better. You can see this from the numbers below, that indicate the amount of message [conversions](aspects.md#conversion).
 
 <img src="images/esb-connection-counts.png" width="325" />
 
-But the first integration between 2 [systems](#connectiontypes) you actually program *more* message conversions by using an `ESB`. But wait: the next [system](#connectiontypes) it's already a tie between `ESB` and no `ESB`. And the 4th integration you introduce, you will have saved 33% of the overall work.
+But the first integration between 2 [systems](#connectiontypes) you actually program *more* message [conversions](aspects.md#conversion) by using an `ESB`. But wait: the next [system](#connectiontypes) it's already a tie between `ESB` and no `ESB`. And the 4th integration you introduce, you will have saved 33% of the overall work.
 
-It gets better with each [system](#connectiontypes) you add to your `ESB`. When messages from one [system](#connectiontypes) are converted to and from a [`Canonical`](#canonical-model) model, you can automatically connect to all the other [systems](#connectiontypes).
+It gets better with each [system](#connectiontypes) you add to your `ESB`. When messages from one [system](#connectiontypes) are [converted](aspects.md#conversion) to and from a [`Canonical`](#canonical-model) model, you can automatically connect to all the other [systems](#connectiontypes).
 
 
 Clearer Integration Code
 ------------------------
 
-But it gets better. You save yourself even more work. The code to convert a message to [`Canonical`](#canonical-model) model is often easier than converting from one [system's](#connectiontypes) format to the other [system's](#connectiontypes) format. Instead of converting from one quirky format to another quirky format, which is quite difficult to do, you can convert from one quirky format to a more straightforward format, which is quite a lot easier to program.
+But it gets better. You save yourself even more work. The code to [convert](aspects.md#conversion) a message to [`Canonical`](#canonical-model) model is often easier than [converting](aspects.md#conversion) from one [system's](#connectiontypes) format to the other [system's](#connectiontypes) format. Instead of [converting](aspects.md#conversion) from one quirky format to another quirky format, which is quite difficult to do, you can [convert](aspects.md#conversion) from one quirky format to a more straightforward format, which is quite a lot easier to program.
 
 
 In Practice
@@ -87,13 +87,13 @@ In practice not every [system](#connectiontypes) tends to send every type of mes
 Memory
 ------
 
-An added benefit to the `Canonical` model is that it tends to live in memory. This means that changes to it, do not require any data migrations. You would just refactor the conversion code. This makes it both low impact and flexible.
+An added benefit to the `Canonical` model is that it tends to live in memory. This means that changes to it, do not require any data migrations. You would just refactor the [conversion](aspects.md#conversion) code. This makes it both low impact and flexible.
 
 
 Standard ESB vs Custom ESB
 --------------------------
 
-There is standard `Enterprise Service Bus` software. Yet, you might choose to build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message conversion yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building it yourself might be a viable option.
+There is standard `Enterprise Service Bus` software. Yet, you might choose to build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to custom program much of the message [conversion](aspects.md#conversion) yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building it yourself might be a viable option.
 
 
 ESB Model
@@ -109,7 +109,7 @@ Every `Enterprise` involved in this [service architecture](#introduction) would 
 
 ### ConnectionTypes
 
-Every type of [`Connection`](#connections) between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of integrating with a *system*, with a specific messaging *protocol*, message *format* and *implementation*. A `ConnectionType` could also be called a `System`.
+Every type of [`Connection`](#connections) between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of integrating with a *system*, with a specific messaging *protocol*, message *format* and *implementation*.
 
 ### Connections
 
@@ -127,13 +127,13 @@ Optionally you can log the transferred messages that went over a [`Connection`](
 Service Implementations
 -----------------------
 
-The implementation of a service would involve *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then converted to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is converted to another message format and sent over another communication protocol.
+The implementation of a service would involve *message transformation* and *transmission*. Data is received through some communication protocol, the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another communication protocol.
 
 
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may describe the `Supplier` to send it to. One `Supplier` may use their own specific integration protocol. Another `Suplier` might like an email about it. This [service architecture](#introduction) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are converted to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
+The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may describe the `Supplier` to send it to. One `Supplier` may use their own specific integration protocol. Another `Suplier` might like an email about it. This [service architecture](#introduction) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are [converted](aspects.md#conversion) to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
 
 
 Namespaces
