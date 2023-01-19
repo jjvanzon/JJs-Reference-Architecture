@@ -119,11 +119,11 @@ Note that some `Connections` might not be *between* [`Enterprises`](#enterprises
 
 ### KeyMappings
 
-When different systems handle the same type of data, such as `Orders` and `Customers`, they often use different *identifiers*. To facilitate communication between these systems, it may be necessary to map the identifiers they use. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which are also referred to as [`KeyMappings`](#canonical-keymapping).
+When different systems handle the same type of data, such as `Orders` and `Customers`, they often use different *identifiers*. To facilitate communication between these systems, it may be necessary to map the identifiers they use. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which can also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
-Optionally you can [log](aspects.md#logging) the transferred messages that went over a [`Connection`](#connections). Do note that [logging](aspects.md#logging) all messages can impact performance and storage requirements so use it as your own discretion.
+It's may be a good idea to [log](aspects.md#logging) the messages that are transferred over a [`Connection`](#connections). This can be helpful for troubleshooting and debugging, but keep in mind that it can have an impact on performance and storage, so use this feature with care.
 
 
 Service Implementations
