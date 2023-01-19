@@ -192,20 +192,20 @@ This concept is used in this [architecture](#index.md) to give a service an even
 
 When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
 
-In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the top-level project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [`data access`](patterns.md#repository-interfaces). 
+In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the top-level project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [data access](patterns.md#repository-interfaces). 
 
 But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the bottom-level project. At least in the case of multi-dispatch this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client set up under the hood. You cannot see that from the constructor or the `interface`. The services would handle that internally.
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to use `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes), when it's needed.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to use `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) anyway when it's needed.
 
 Here are some examples of `Tag` models:
 
     Order { Tags[] }
     Tag { Name, Value }
 
-You might also make the `Tags` culture-specific:
+You might also make the `Tags` *culture-specific:*
 
     Tag { Name, Value, CultureName }
 
@@ -265,7 +265,7 @@ What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `I
 
 This way, when a new [system](#connectiontypes) is added, only one [`KeyMapping`](#keymappings) is needed, to map with all the other [systems](#connectiontypes).
 
-As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then, the `ExternalID` property is overwritten by the `ID` from the next [system](#connectiontypes).
+As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then, the `ExternalID` property is overwritten by the `ID` from the targeted [system](#connectiontypes).
 
 It all depends on the specific design of your system. But hopefully this demonstrated a few options how to handle [`KeyMappings`](#keymappings), `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
