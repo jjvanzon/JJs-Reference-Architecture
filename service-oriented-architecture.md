@@ -41,7 +41,7 @@ The next part of this [software architecture](index.md) is the *Service Oriented
 The ESB Concept
 ---------------
 
-`ESB` stands for *Enterprise Service Bus*, which is a [system](#connectiontypes) for exchanging data between different [systems](#connectiontypes) of different [organizations](#enterprises) in different [formats](#connectiontypes) with different [protocols](#connectiontypes). Central components are used, to make [integration](#integrations) between these [systems](#connectiontypes) more streamlined. A relevant concept is the [`Canonical`](#canonical-model) model.
+The term `ESB` stands for *Enterprise Service Bus*. It is a [system](#connectiontypes) for exchanging data between different [systems](#connectiontypes) of different [organizations](#enterprises) in different [formats](#connectiontypes) with different [protocols](#connectiontypes). Central components are used, to make [integration](#integrations) between these [systems](#connectiontypes) more streamlined. A relevant concept is the [`Canonical`](#canonical-model) model.
 
 
 Canonical Model
