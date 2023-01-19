@@ -145,7 +145,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 
 |                                                 |     |
 |-------------------------------------------------|-----|
-| __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for (web) services.
+| __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for the (web) services.
 | __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of service goes.)
 | __`JJ.Data.Canonical`__                         | Where [`Canonical` entities](#canonical-model) are modeled.
 | __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of this architecture.
@@ -156,7 +156,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems.
 | __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and [logic](layers.md#business-layer).
 | __`JJ.Services.Ordering.Email`__                | A specific [implementation](#connectiontypes) of an `Ordering` system, in which we send the `Order` by email.
-| __`JJ.Services.Ordering.AwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use the hypothetical `AwesomeProtocol`.
+| __`JJ.Services.Ordering.AwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use a hypothetical `AwesomeProtocol`.
 | __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) `Ordering` system.
 | __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. This `interface` can be used both by server and client.
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows a connection to the `WCF` service using a convenient, strongly typed `interface`.
@@ -170,7 +170,7 @@ Service-Related Patterns
 
 ### IsSupported
 
-A service environment may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But then it might be more difficult to know which `interface` to use. Instead, you could also add `IsSupported` properties to the `interface`. Then an implementation can communicate back if it supports a feature or not:
+A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But then it may be more difficult to know which `interface` to use. Instead, you could also add `IsSupported` properties to the `interface`. Then an implementation can communicate back if it supports a feature or not:
 
 ```cs
 Product PlaceOrder();
@@ -186,7 +186,7 @@ Then when for instance running price updates, you can simply *skip* the [systems
 
 A [`Facade`](patterns.md#facade) is an `interface` that sits in front of other `interfaces` and `classes`. Its goal is to provide an easier way to access a more complex system.
 
-This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes), and hide [infrastructural setup](layers.md#infrastructure).
+This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural setup](layers.md#infrastructure).
 
 ### Hidden Infrastructure
 
@@ -194,11 +194,11 @@ When it comes to handling infrastructure setup, there's a key difference between
 
 In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the top-level project is responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [`data access`](patterns.md#repository-interfaces). 
 
-But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the bottom-level project. At least in the case of multi-dispatch this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client setup under the hood. You cannot see that from the constructor or the `interface`. The services would handle that internally.
+But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the bottom-level project. At least in the case of multi-dispatch this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client set up under the hood. You cannot see that from the constructor or the `interface`. The services would handle that internally.
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structures, you could use `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes), when it's needed.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to use `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes), when it's needed.
 
 Here are some examples of `Tag` models:
 
@@ -217,7 +217,7 @@ Or you could *loosely link* `Tags` to [entities](patterns.md#entity), like so:
 
 [`KeyMapping`](#keymappings) is an idea that maps `ReferenceNumbers` from one [system](#connectiontypes) to another. For example, the same `Order` could have a different `OrderNumber` depending on which [system](#connectiontypes) or [party](#enterprises) it is sent to.
 
-If the amount of [systems](#connectiontypes) becomes larger, the amount of [`KeyMappings`](#keymappings) might go up exponentially.
+If the amount of [systems](#connectiontypes) becomes larger, the amount of [`KeyMappings`](#keymappings) can go up exponentially.
 
 You might get many `IDs` in your model:
 
@@ -256,14 +256,14 @@ But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#ca
         ExternalID
     }
 
-What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from yet again another [system](#connectiontypes):
+What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `InternalIDs` in the `ESB`, which in turn can be mapped to an `ID` from yet again another [system](#connectiontypes):
 
     { SystemA, ExternalID } => InternalID
     { SystemB, ExternalID } => InternalID
     { SystemC, ExternalID } => InternalID 
     { SystemD, ExternalID } => InternalID
 
-This way, when a new [system](#connectiontypes) is added, only one [`KeyMapping`](#keymappings) is needed, to map to all the other [systems](#connectiontypes).
+This way, when a new [system](#connectiontypes) is added, only one [`KeyMapping`](#keymappings) is needed, to map with all the other [systems](#connectiontypes).
 
 As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next [system](#connectiontypes).
 
