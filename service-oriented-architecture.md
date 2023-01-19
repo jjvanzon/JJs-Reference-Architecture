@@ -129,13 +129,13 @@ It's may be a good idea to [log](aspects.md#logging) the messages that are trans
 Service Implementations
 -----------------------
 
-The [implementation](#connectiontypes) of a service would involve [message transformation](aspects.md#conversion) and *transmission*. Data is received through some [communication protocol](#connectiontypes), the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another [communication protocol](#connectiontypes).
+The [implementation](#connectiontypes) of a service would involve [message *transformation*](aspects.md#conversion) and *transmission*. Data is received through some [communication protocol](#connectiontypes), the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another [communication protocol](#connectiontypes).
 
 
 Multi-Dispatch
 --------------
 
-The content of a [`Canonical`](#canonical-model) model might determine what service to send it to. For instance, an `Order` may indicate a `Supplier` to send it to. One `Supplier` may use their own specific [integration protocol](#connectiontypes). Another `Suplier` might like an email. This [service architecture](#-service-oriented-architecture) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then send that message to an arbitrary other [system](#connectiontypes). That is part of the power of the [`Canonical`](#canonical-model) model. Multiple [systems'](#connectiontypes) messages are [converted](aspects.md#conversion) to [`Canonical`](#canonical-model) models, enabling all those [systems](#connectiontypes) to communicate together.
+The contents of a [`Canonical`](#canonical-model) model can determine where it needs to be sent. For example, an `Order` may indicate a specific `Supplier` that it should be sent to. One `Supplier` might use their own unique [integration protocol](#connectiontypes), while another might prefer to receive the `Order` by email. This [service architecture](#-service-oriented-architecture) enables you to retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then forward it to an arbitrary other [system](#connectiontypes). That is part of the power of a [`Canonical`](#canonical-model) model. It enables communication between multiple [systems](#connectiontypes) by [converting](aspects.md#conversion) their messages into a [common format](#canonical-model).
 
 
 Namespaces
@@ -195,7 +195,7 @@ While in the [service architecture](#-service-oriented-architecture) the [infras
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could use `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business. But this data can still be sent along to another [system](#connectiontypes), when *it* needs it.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structures, you could use `Tag` models instead. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business. But this data can still be sent along to another [system](#connectiontypes), when it needs it.
 
 Here are some examples for `Tag` models:
 
@@ -240,12 +240,12 @@ This might become difficult to manage. You could make it a bit more generic like
 
     Order
     {
-        IDs[] { System, Number }
+        Identifiers[] { System, Number }
     }
 
-So it becomes an array of `IDs` for different [`Systems`](#connectiontypes).
+So it becomes an array of `Identifiers` for different [`Systems`](#connectiontypes).
 
-But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#canonical-model) models, but no more!
+But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#canonical-model) models, and no more!
 
     Order
     {
@@ -253,7 +253,7 @@ But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#ca
         ExternalID
     }
 
-What you could do is map `ExternalIDs` from one [system](#connectiontypes) *only* to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from yet another [system](#connectiontypes):
+What you could do is map `ExternalIDs` from one [system](#connectiontypes) *only* to `InternalIDs` in the `ESB`, so that the `InternalID` can in turn be mapped to an `ID` from yet again another [system](#connectiontypes):
 
     { SystemA, ExternalID } => InternalID
     { SystemB, ExternalID } => InternalID
