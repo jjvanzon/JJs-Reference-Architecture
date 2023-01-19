@@ -35,7 +35,7 @@
 Introduction
 ------------
 
-The next part of this [software architecture](index.md) is the *service oriented architecture*. It's about linking systems together. It focuses on software integrations.
+The next part of this [software architecture](index.md) is the *Service Oriented Architecture*. It's about linking systems together. It focuses on software integrations.
 
 
 The ESB Concept
