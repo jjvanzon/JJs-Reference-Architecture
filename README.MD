@@ -15,7 +15,7 @@ Contents
 - 🧱 [Aspects](aspects.md)
 - 🎁 [API's](api.md)
 - 🏗 [Practices & Principles](practices-and-principles.md)
-- 🌐 [Service Oriented Architecture](service-oriented-architecture.md)
+- 🌍 [Service Oriented Architecture](service-oriented-architecture.md)
 - 📀 [Database Conventions](database-conventions.md)
 - 👨‍💻 [Code Style](code-style.md)
 - 🚀 [Software Lifecycle](software-lifecycle.md)

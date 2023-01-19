@@ -1,6 +1,6 @@
 ﻿<style>thead{display:none;}</style>
 
-🌐 Service Oriented Architecture
+🌍 Service Oriented Architecture
 =================================
 
 [back](.)
