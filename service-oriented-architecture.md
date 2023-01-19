@@ -170,7 +170,7 @@ Service-Related Patterns
 
 ### IsSupported
 
-A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But then it may be more confusing to know which `interface` to use. As an alternative, you could add `IsSupported` properties to the `interface`. That makes it possible for an implementation to communicate back if it supports a feature or not:
+A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But that can make it confusing to know which `interface` to use. As an alternative, you could add `IsSupported` properties to the `interface`. That makes it possible for an implementation to communicate back if it supports a feature or not:
 
 ```cs
 Product PlaceOrder();
@@ -180,7 +180,7 @@ Product GetProducts();
 bool GetProductsIsSupported { get; }
 ```
 
-Then when for instance running price updates, you can simply *skip* the [systems](#connectiontypes) that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans are here, to keep complexity at bay.
+Then when for instance running price updates, you can simply *skip* the [systems](#connectiontypes) that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans help us, keep complexity at bay.
 
 ### Facade
 
