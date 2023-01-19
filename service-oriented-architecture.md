@@ -119,7 +119,7 @@ Note that some `Connections` might not be *between* [`Enterprises`](#enterprises
 
 ### KeyMappings
 
-Different systems might handle the same type of data, such as `Orders` and `Customers`. However, they are prone to use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
