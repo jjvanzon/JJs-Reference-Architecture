@@ -47,7 +47,7 @@ The ESB Concept
 Canonical Model
 ---------------
 
-A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and is [converted](aspects.md#conversion) to a `Canonical` form, so that the same model may be reused for data that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) can fit into it with minimal trouble.
+A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model may be reused for data that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) can fit into it with minimal trouble.
 
 
 Less Integration Code
@@ -81,13 +81,13 @@ But it gets better. You save yourself even more work. The code to [convert](aspe
 In Practice
 -----------
 
-In practice not every [system](#connectiontypes) tends to send every type of message back and forth. And sometimes the messaging is not bidirectional but one-way only. But the benefits of an `ESB` still hold and [systems](#connectiontypes) would be linked with less code and less effort than custom programming every [integration](#integrations).
+In practice not every [system](#connectiontypes) tends to send every type of message back and forth. And sometimes the messaging isn't bidirectional but one-way only. But the benefits of an `ESB` still hold and [systems](#connectiontypes) would be linked with less code and less effort than custom programming every [integration](#integrations).
 
 
 Memory
 ------
 
-An added benefit to the `Canonical` model, is that it it tends to live in memory. This means that changes to it don't not require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it lower impact and more flexible too.
+An added benefit to the `Canonical` model, is that it it tends to live in memory. This means that changing it doesn't require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it lower impact and more flexible.
 
 
 Standard ESB vs Custom ESB
@@ -113,13 +113,13 @@ All types of [`Connections`](#connections) that can be established between syste
 
 ### Connections
 
-Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) that indicates what type of [integration](#integrations) it is.
+Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) to indicate what type of [integration](#integrations) it is.
 
 Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). Not all `Connections` need to be full-fledged messaging [implementations](#connectiontypes). Sometimes they are simply a database connection or even the path of a network folder.
 
 ### KeyMappings
 
-Different systems handling the same type of data, such as `Orders` and `Customers`, well, they often use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which can also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle the same type of data, such as `Orders` and `Customers`. However, they are prone to use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
