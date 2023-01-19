@@ -123,7 +123,7 @@ Different systems might handle similar sorts of data, like `Orders` and `Custome
 
 ### Transmissions
 
-It may be a good idea to [log](aspects.md#logging) the messages that are transferred over the [`Connections`](#connections). This can be helpful for troubleshooting and debugging. But keep in mind that it can have an impact on performance and storage, so use this feature with care.
+It may be a good idea to [log](aspects.md#logging) the messages that are transferred over the [`Connections`](#connections). This can be helpful for troubleshooting and debugging. But keep in mind, that it also has an impact on performance and storage, so perhaps use this feature with care.
 
 
 Integrations
