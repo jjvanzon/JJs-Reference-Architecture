@@ -69,7 +69,7 @@ With every added [system](#connectiontypes) it gets better. You can see this fro
 
 The first [integration](#connectiontypes) between 2 [systems](#connectiontypes) you actually program *more* message [conversions](aspects.md#conversion) by using an `ESB`. But wait: the next [system](#connectiontypes) it's already a tie between `ESB` and no `ESB`. And the 4th [integration](#connectiontypes) you introduce, you will have saved 33% of the overall work.
 
-It gets better with each [system](#connectiontypes) you add to your `ESB`. When messages from one [system](#connectiontypes) are [converted](aspects.md#conversion) to and from a [`Canonical`](#canonical-model) model, you can automatically connect to all the other [systems](#connectiontypes).
+It gets better with each [system](#connectiontypes) you add to your `ESB`. When messages from one [system](#connectiontypes) are [converted](aspects.md#conversion) to and from a [`Canonical`](#canonical-model) model, you can automatically connect it to all the other [systems](#connectiontypes).
 
 
 Clearer Integration Code
@@ -87,19 +87,19 @@ In practice not every [system](#connectiontypes) tends to send every type of mes
 Memory
 ------
 
-An added benefit to the `Canonical` model, is that it it tends to live in memory. This means that changes to it don't not require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it lower impact and more flexible.
+An added benefit to the `Canonical` model, is that it it tends to live in memory. This means that changes to it don't not require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it lower impact and more flexible too.
 
 
 Standard ESB vs Custom ESB
 --------------------------
 
-There is standard `Enterprise Service Bus` software. Yet, you could also build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to *custom program* much of the [message conversion](aspects.md#conversion) yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself may certainly be an option.
+There is standard `Enterprise Service Bus` software. Yet, we could also build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to *custom program* much of the [message conversion](aspects.md#conversion) yourself anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself may certainly be an option.
 
 
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to the services.
 
 Next: The main [entities](patterns.md#entity) of the `ESB` model:
 
@@ -119,17 +119,17 @@ Note that some `Connections` might not be *between* [`Enterprises`](#enterprises
 
 ### KeyMappings
 
-Different systems handling the same type of data, such as `Orders` and `Customers`, well they often use different *identifiers* for things. To facilitate communication between these systems, it may be necessary to map these identifiers to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which can also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems handling the same type of data, such as `Orders` and `Customers`, well, they often use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which can also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
-It's may be a good idea to [log](aspects.md#logging) the messages that are transferred over a [`Connection`](#connections). This can be helpful for troubleshooting and debugging, but keep in mind that it can have an impact on performance and storage, so this feature is to be used with care.
+It's may be a good idea to [log](aspects.md#logging) the messages that are transferred over a [`Connection`](#connections). This can be helpful for troubleshooting and debugging, but keep in mind that it can have an impact on performance and storage, so use this feature with care.
 
 
 Service Implementations
 -----------------------
 
-The [implementation](#connectiontypes) of a service would involve [message *transformation*](aspects.md#conversion) and *transmission*. Data is received through some [communication protocol](#connectiontypes), the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another [communication protocol](#connectiontypes).
+The [implementation](#connectiontypes) of a service would involve message [*transformation*](aspects.md#conversion) and [*transmission*](#transmissions). Data is received through some [communication protocol](#connectiontypes), the message format is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another message format and sent over another [communication protocol](#connectiontypes).
 
 
 Multi-Dispatch
@@ -141,7 +141,7 @@ The contents of a [`Canonical`](#canonical-model) model can determine where it n
 Namespaces
 ----------
 
-These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) can be recognized there, among which: [`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer) and `Services`.
+These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) can be recognized there, like [`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer) and `Services`.
 
 |                                                 |     |
 |-------------------------------------------------|-----|
@@ -153,8 +153,8 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb` entities](#esb-model).
 | __`JJ.Business.Canonical`__                     | Shared [logic](layers.md#business-layer) that operates on [`Canonical`](#canonical-model) models.
 | __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
-| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the way messages are sent between different `Ordering` systems.
-| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and [logic](layers.md#business-layer).
+| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the message communication between different `Ordering` systems.
+| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and other [logic](layers.md#business-layer).
 | __`JJ.Services.Ordering.Email`__                | A specific [implementation](#connectiontypes) of an `Ordering` system, in which we send the `Order` by email.
 | __`JJ.Services.Ordering.AwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use a hypothetical `AwesomeProtocol`.
 | __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) `Ordering` system.
@@ -162,7 +162,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows a connection to the `WCF` service using a convenient, strongly typed `interface`.
 | __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` and `Rest` protocols.
 | __`JJ.Services.Ordering.WebApi`__               | There is no reason `Web API` should not be involved in this [service architecture](#-service-oriented-architecture). In fact, the idea of `WCF` being the default for services, might not be a very long-lived.
-| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service is an `AppService`, that exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) returning [`ViewModels`](patterns.md#viewmodel).
+| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service is an `AppService`, that exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns.md#viewmodel).
 
 
 Service-Related Patterns
@@ -170,7 +170,7 @@ Service-Related Patterns
 
 ### IsSupported
 
-A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But then it may be more difficult to know which `interface` to use. Instead, you could also add `IsSupported` properties to the `interface`. Then an implementation can communicate back if it supports a feature or not:
+A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But then it may be more confusing to know which `interface` to use. Instead, you could add `IsSupported` properties to the `interface`. Then an implementation can communicate back if it supports a feature or not:
 
 ```cs
 Product PlaceOrder();
@@ -180,7 +180,7 @@ Product GetProducts();
 bool GetProductsIsSupported { get; }
 ```
 
-Then when for instance running price updates, you can simply *skip* the [systems](#connectiontypes) that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans keeps complexity at bay, instead of the confusion of handling a large number of `interfaces`.
+Then when for instance running price updates, you can simply *skip* the [systems](#connectiontypes) that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` booleans can keep complexity at bay.
 
 ### Facade
 
@@ -192,7 +192,7 @@ This concept is used in this [architecture](#index.md) to give a service an even
 
 When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
 
-In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the top-level project is responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [`data access`](patterns.md#repository-interfaces). 
+In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the top-level project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [`data access`](patterns.md#repository-interfaces). 
 
 But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the bottom-level project. At least in the case of multi-dispatch this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client set up under the hood. You cannot see that from the constructor or the `interface`. The services would handle that internally.
 
@@ -256,7 +256,7 @@ But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#ca
         ExternalID
     }
 
-What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `InternalIDs` in the `ESB`, which in turn can be mapped to an `ID` from yet again another [system](#connectiontypes):
+What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `InternalIDs` in the `ESB`, which can then be mapped to an `ID` from yet again another [system](#connectiontypes):
 
     { SystemA, ExternalID } => InternalID
     { SystemB, ExternalID } => InternalID
@@ -265,7 +265,7 @@ What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `I
 
 This way, when a new [system](#connectiontypes) is added, only one [`KeyMapping`](#keymappings) is needed, to map with all the other [systems](#connectiontypes).
 
-As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then the `ExternalID` property is overwritten by the `ID` from the next [system](#connectiontypes).
+As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then, the `ExternalID` property is overwritten by the `ID` from the next [system](#connectiontypes).
 
 It all depends on the specific design of your system. But hopefully this demonstrated a few options how to handle [`KeyMappings`](#keymappings), `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
