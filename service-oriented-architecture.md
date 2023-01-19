@@ -105,21 +105,21 @@ Next: The main [entities](patterns.md#entity) of the `ESB` model:
 
 ### Enterprises
 
-Every `Enterprise` involved in this [service architecture](#-service-oriented-architecture) would be registered in the `ESB` database. Some of these `Enterprises` will log into our [system](#connectiontypes). Those will get an associated `User` [entity](patterns.md#entity) with (encrypted) credentials stored in it.
+`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the `ESB` database. For those who need to log in, a `User` [entity](patterns.md#entity) with encrypted credentials would be added.
 
 ### ConnectionTypes
 
-Every type of [`Connection`](#connections) between systems might be registered in a table of `ConnectionTypes`. Each `ConnectionType` is meant to be a very specific way of *integrating* with a *system*, with a specific messaging *protocol*, message *format* and *implementation*.
+All types of [`Connections`](#connections) that can be established between systems can be found in the `ConnectionTypes` table. Each `ConnectionType` is meant to be a very specific way of *integrating* with a *system*, with a specific messaging *protocol*, message *format* and *implementation*.
 
 ### Connections
 
 Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) that indicates what type of [integration](#connectiontypes) it is.
 
-Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). `Connections` do not have to be complete messaging [implementations](#connectiontypes). Sometimes they are simply a database connection or even the path of a network folder.
+Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). Not all `Connections` need to be full-fledged messaging [implementations](#connectiontypes). Sometimes they are simply a database connection or even the path of a network folder.
 
 ### KeyMappings
 
-[Systems](#connectiontypes) often have different identifiers for e.g. `Orders`, `Customers` or other [entities](patterns.md#entity). The reference numbers may need to be mapped from one [system](#connectiontypes) to another. An [`ESB` model](#esb-model) could have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of [`KeyMappings`](#canonical-keymapping).
+When different systems handle the same type of data, such as `Orders` and `Customers`, they often use different *identifiers*. To facilitate communication between these systems, it may be necessary to map the identifiers they use. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which are also referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
