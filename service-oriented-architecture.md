@@ -184,17 +184,17 @@ Then when for instance running price updates, you can simply skip the [systems](
 
 ### Facade
 
-A [`Facade`](patterns.md#facade) is an `interface` that sits in front of a set of other `interfaces` and `classes`. Its goal is to provide an easier way to access the system.
+A [`Facade`](patterns.md#facade) is an `interface` that sits in front of another set of `interfaces` and `classes`. Its goal is to provide an easier way to access a more complex system.
 
 This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying business. It may hide interactions with multiple [systems](#connectiontypes), and hide infrastructural setup.
 
 ### Hidden Infrastructure
 
-Not so much a pattern, but a difference in handling infrastructure setup between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this kind of [service architecture](#-service-oriented-architecture).
+When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
 
-In the [application architecture](introduction.md#application-architecture-vs-service-architecture) the [infrastructural context](layers.md#infrastructure) may be determined by the top-level project and passed down to the deeper layers as for instance [`Repository interfaces`](patterns.md#repository) or `interfaces` on [security](aspects.md#security). 
+In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the top-level project is responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [`Repositories`](patterns.md#repository). 
 
-While in the [service architecture](#-service-oriented-architecture) the [infrastructural context](layers.md#infrastructure) might be determined by the bottom-level project. At least in the case of multi-dispatch this seems necessary. A bottom-level project, for instance `JJ.Services.Ordering.Email` does not expose that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle that internally.
+On the other hand, the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the bottom-level project. At least in the case of multi-dispatch this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there will be `SMTP` server setup. You cannot see that from the constructor or the `interface`. The service would handle that internally.
 
 ### Tag Model
 
