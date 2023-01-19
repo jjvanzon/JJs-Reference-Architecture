@@ -47,7 +47,7 @@ The term `ESB` stands for *Enterprise Service Bus*. It is a [system](#connection
 Canonical Model
 ---------------
 
-A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model may be reused for data that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) can fit into it with minimal trouble.
+A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model may be reused for data, that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) can fit into it with minimal trouble.
 
 
 Less Integration Code
@@ -75,13 +75,13 @@ It gets better with each [system](#connectiontypes) you add to your `ESB`. When 
 Clearer Integration Code
 ------------------------
 
-But it gets better. You save yourself even more work. The code to [convert](aspects.md#conversion) a message to [`Canonical`](#canonical-model) model is often easier than [converting](aspects.md#conversion) from one [system's](#connectiontypes) format to the other [system's](#connectiontypes) format. Instead of [converting](aspects.md#conversion) from one quirky format to another quirky format, which is quite difficult to do, you can [convert](aspects.md#conversion) from one quirky format to a more [straightforward format](#canonical-model), which is quite a lot easier to program.
+But it gets better. You save yourself even more work. The code to [convert](aspects.md#conversion) a message to [`Canonical`](#canonical-model) model, is often easier than [converting](aspects.md#conversion) from one [system's](#connectiontypes) format directly to the other [system's](#connectiontypes) format. Instead of [converting](aspects.md#conversion) from one quirky format to another quirky format, which is quite difficult to do, you can [convert](aspects.md#conversion) from one quirky format to a more [straightforward format](#canonical-model), which is quite a lot easier to program.
 
 
 In Practice
 -----------
 
-In practice not every [system](#connectiontypes) tends to send every type of message back and forth. And sometimes the messaging isn't bidirectional but one-way only. But the benefits of an `ESB` still hold and [systems](#connectiontypes) would be linked with less code and less effort than custom programming every [integration](#integrations).
+In practice not every [system](#connectiontypes) sends every type of message back and forth. And sometimes the messaging isn't bidirectional but only one way. But the benefits of an `ESB` still hold and [systems](#connectiontypes) would be linked with less code and less effort than custom programming every [integration](#integrations).
 
 
 Memory
@@ -115,11 +115,11 @@ All types of [`Connections`](#connections) that can be established between syste
 
 Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) to indicate what type of [integration](#integrations) it is.
 
-Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). Not all `Connections` need to be full-fledged messaging [implementations](#connectiontypes). Sometimes they are simply a database connection or even the path of a network folder.
+Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). Not all `Connections` need to be full-fledged messaging [implementations](#integrations). Sometimes they are simply a database connection or even the path of a network folder.
 
 ### KeyMappings
 
-Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to one another. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping) for things. To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
@@ -170,13 +170,13 @@ Service-Related Patterns
 
 ### IsSupported
 
-A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But that can make it confusing to know which `interface` to use. As an alternative, you could add `IsSupported` properties to the `interface`. That makes it possible for an implementation to communicate back if it supports a feature or not:
+A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But that can make it confusing to know which `interface` to use. As an alternative, you could use `IsSupported` properties in the `interface`. That makes it possible for an implementation to communicate back if it supports a feature or not:
 
 ```cs
-Product PlaceOrder();
+void PlaceOrder(Order order);
 bool PlaceOrderIsSupported { get; }
 
-Product GetProducts();
+IList<Product> GetProducts();
 bool GetProductsIsSupported { get; }
 ```
 
@@ -184,7 +184,7 @@ Then when for instance running price updates, you can simply *skip* the [systems
 
 ### Facade
 
-A [`Facade`](patterns.md#facade) is an `interface` that sits in front of other `interfaces` and `classes`. Its goal is to provide an easier way to access a more complex system.
+A [`Facade`](patterns.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
 
 This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural setup](layers.md#infrastructure).
 
@@ -209,7 +209,7 @@ You might also make the `Tags` *culture-specific:*
 
     Tag { Name, Value, CultureName }
 
-Or you could *loosely link* `Tags` to [entities](patterns.md#entity), like so:
+Or choose to *loosely link* `Tags` to [entities](patterns.md#entity), like so:
 
     Tag { Name, Value, EntityTypeName, EntityID }
 
