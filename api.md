@@ -93,7 +93,7 @@ List of API's (and other tech)
 
 <tr id="mono">
   <th><a href="https://www.mono-project.com/">Mono</a></th>
-  <td>Version of <a href="#dotnet"><code>.NET</code></a> that worked for other platforms than <code>Windows</code>. Later versions of <a href="#dotnet"><code>.NET</code></a> itself may work for more platforms out-of-the-box.</td>
+  <td>Version of <a href="#dotnet"><code>.NET</code></a> that worked for other platforms than <code>Windows</code>. Later versions of <a href="#dotnet"><code>.NET</code></a> itself work on more platforms out-of-the-box.</td>
 </tr>
 
 <tr id="unity-game-engine">
@@ -133,7 +133,7 @@ List of API's (and other tech)
 
 <tr id="git">
   <th><a href="https://git-scm.com/">Git</a></th>
-  <td>Source control, revision history, version management for the code.</td>
+  <td>Source control, revision history, version management of the code.</td>
 </tr>
 
 <tr id="git-hub">
@@ -153,7 +153,7 @@ List of API's (and other tech)
 
 <tr id="tortoise-git">
   <th><a href="https://tortoisegit.org/">TortoiseGit</a></th>
-  <td><a href="#git"><code>Git</code></a> user interface that shows the state in <code>File Explorer</code>.</td>
+  <td><a href="#git"><code>Git</code></a> user interface that shows state in <code>File Explorer</code>.</td>
 </tr>
 
 <tr id="azure-dev-ops">
@@ -353,7 +353,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Xml</a>
   </th>
   <td>
-      An extension to <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> for storage in <code>XML</code> files. <code>System.Xml</code> is used internally.
+      An extension to <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> for storing in <a href="#xml"><code>XML</code></a> files. <code>System.Xml</code> is used internally.
   </td>
 </tr>
 
@@ -363,7 +363,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Xml.Linq</a>
   </th>
   <td>
-      Additional feature for <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that stores data in <code>XML</code> files. <code>System.Xml.Linq</code> is used internally.
+      Additional feature for <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that stores data in <a href="#xml"><code>XML</code></a> files. <code>System.Xml.Linq</code> is used internally.
   </td>
 </tr>
 
@@ -789,7 +789,7 @@ List of API's (and other tech)
     <a href="aspects.html#logging">Logging</a>
   </th>
   <td>
-      More info about how <a href="#jj-framework-logging"><code>JJ.Framework.Logging</code></a> might be extended to contain more code to do with logging.
+      More info how <a href="#jj-framework-logging"><code>JJ.Framework.Logging</code></a> might be extended to contain more code for logging.
   </td>
 </tr>
 
@@ -1041,7 +1041,7 @@ The trouble with `Flush` is, that it might be executed when things are not done 
 
 `Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns.md#entity). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
 
-Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exceptions`](aspects.md#exceptions) on the child object's `ParentID` column.
+Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](aspects.md#exceptions) on the child object's `ParentID` column.
 
 It may also help to create [entities](patterns.md#entity) in a specific order (e.g. parent object first, child objects second) or choose a identity generation scheme, that does not require flushing an [entity](patterns.md#entity) pre-maturely.
 
@@ -1125,7 +1125,7 @@ To evaluate the *type*, you are better of unproxying as well. Otherwise it will 
 
 By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
 
-An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. Oh well, all in a day's work.
+An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
 
 Letting two [entity](patterns.md#entity) types use a mutual `interface` might be an alternative too.
 
@@ -1151,7 +1151,7 @@ The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use 
 
 With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single line of code.
 
-The first choice of doing it might be to make the [`SQL`](#sql) file embedded resources:
+The first choice of doing it might be to make the [`SQL`](#sql) files embedded resources:
 
 ![](images/sql-as-embedded-resource.png)
 
@@ -1174,7 +1174,7 @@ namespace JJ.Demos.SqlExecutor.Sql
 {
     internal enum SqlEnum
     {
-      Ingredient_UpdateName
+        Ingredient_UpdateName
     }
 }
 ```
@@ -1295,7 +1295,7 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 
 - You have a (complicated) [`SQL`](#sql) `select` statement and wish to take the `count` of it. String concatenation may prevent rewriting the [`SQL`](#sql) statement twice, introducing a maintenance issue. Bugs would be awaiting as you'd have to change 2 [`SQL`](#sql) scripts simultaneously, to make a change properly, which may easily be overlooked.
 - Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name*.
-- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception.
+- There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule.
 
 One variation of [`SqlExecutor`](#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
