@@ -47,7 +47,7 @@ The term `ESB` stands for *Enterprise Service Bus*. It is a pattern for exchangi
 Canonical Model
 ---------------
 
-A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model can be reused for data, that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) might indeed fit into it.
+A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model can be reused for data, that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) can indeed fit into it.
 
 
 Less Integration Code
@@ -115,11 +115,11 @@ All types of [`Connections`](#connections) that can be established between syste
 
 Every individual `Connection` between two [`Enterprises`](#enterprises) would be registered in the `Connection` table with the `Connection` settings stored with it. Each `Connection` has an associated [`ConnectionType`](#connectiontypes) to indicate what type of [integration](#integrations) it is.
 
-Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). Not all `Connections` need to be full-fledged messaging [implementations](#integrations). Sometimes they are simply a database connection or even the path of a network folder.
+Note that some `Connections` might not be *between* [`Enterprises`](#enterprises), but involve only *one* [`Enterprise`](#enterprises). Not all `Connections` need to be full-fledged messaging [implementations](#integrations). Sometimes they are simply a database connection or even the path to a network folder.
 
 ### KeyMappings
 
-Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of `ReferenceNumbers`, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of [`ReferenceNumbers`](#canonical-keymapping), which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
