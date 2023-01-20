@@ -47,7 +47,7 @@ The term `ESB` stands for *Enterprise Service Bus*. It is a pattern for exchangi
 Canonical Model
 ---------------
 
-A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model can be reused for data, that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) might fit into it with minimal trouble.
+A `Canonical` model helps us exchange data between [systems](#connectiontypes). Data can be retrieved from multiple [systems](#connectiontypes) and [converted](aspects.md#conversion) to a `Canonical` form, so that the same model can be reused for data, that comes from various [systems](#connectiontypes). The aim for the `Canonical` model is to be as pure and general as possible, so information of different [systems](#connectiontypes) might indeed fit into it.
 
 
 Less Integration Code
@@ -57,7 +57,7 @@ Say you have `4` [systems](#connectiontypes): `A`, `B`, `C` and `D` and you want
 
 <img src="images/no-esb.png" width="133"/>
 
-By connecting [systems](#connectiontypes) to an `ESB`, instead of to each other, you would implement only `8` different message [conversions](aspects.md#conversion). The number of arrows is reduced:
+By connecting [systems](#connectiontypes) to an [`ESB`](#the-esb-concept), instead of to each other, you would implement only `8` different message [conversions](aspects.md#conversion). The number of arrows is reduced:
 
 <img src="images/esb.png" width="150"/>
 
@@ -67,9 +67,9 @@ With every added [system](#connectiontypes) it gets better. You can see this fro
 
 <img src="images/esb-connection-counts.png" width="325" />
 
-The first [integration](#integrations) between 2 [systems](#connectiontypes) you actually program *more* message [conversions](aspects.md#conversion) by using an `ESB`. But wait: the next [system](#connectiontypes) it's already a tie between `ESB` and no `ESB`. And the 4th [integration](#integrations) you introduce, you will have saved 33% of the work overall.
+The first [integration](#integrations) between 2 [systems](#connectiontypes) you actually program *more* message [conversions](aspects.md#conversion) by using an [`ESB`](#the-esb-concept). But wait: the next [system](#connectiontypes) it's already a tie between [`ESB`](#the-esb-concept) and no [`ESB`](#the-esb-concept). And the 4th [integration](#integrations) you introduce, you will have saved 33% of the work overall.
 
-It gets better with each [system](#connectiontypes) you add to your `ESB`. When messages from one [system](#connectiontypes) are [converted](aspects.md#conversion) to and from a [`Canonical`](#canonical-model) model, you can automatically connect it to all the other [systems](#connectiontypes).
+It gets better with each [system](#connectiontypes) you add to your [`ESB`](#the-esb-concept). When messages from one [system](#connectiontypes) are [converted](aspects.md#conversion) to and from a [`Canonical`](#canonical-model) model, you can automatically connect it to all the other [systems](#connectiontypes).
 
 
 Clearer Integration Code
@@ -81,7 +81,7 @@ But it gets better. You save yourself even more work. The code to [convert](aspe
 In Practice
 -----------
 
-In practice not every [system](#connectiontypes) sends every type of message back and forth. And sometimes the messaging isn't bidirectional but one-way only. But the benefits of an `ESB` still hold and [systems](#connectiontypes) would be linked with less code and less effort than custom programming every [integration](#integrations).
+In practice not every [system](#connectiontypes) sends every type of message back and forth. And sometimes the messaging isn't bidirectional but one-way only. But the benefits of an [`ESB`](#the-esb-concept) still hold and [systems](#connectiontypes) would be linked with less code and less effort than custom programming every [integration](#integrations).
 
 
 Memory
@@ -99,13 +99,13 @@ There are standard `Enterprise Service Buses`. Yet, we could also build a *custo
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The `ESB` could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
 
-Next: The main [entities](patterns.md#entity) of the `ESB` model:
+Next: The main [entities](patterns.md#entity) of the [`ESB`](#the-esb-concept) model:
 
 ### Enterprises
 
-`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the `ESB` database. Those who need to log in, will get a `User` [entity](patterns.md#entity) with encrypted credentials.
+`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the [`ESB` database](#esb-model). Those who need to log in, will get a `User` [entity](patterns.md#entity) with encrypted credentials.
 
 ### ConnectionTypes
 
@@ -256,7 +256,7 @@ But there's a *trick*, that requires only 2 key fields in your [`Canonical`](#ca
         ExternalID
     }
 
-What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `InternalIDs` in the `ESB`, which can then be mapped to an `ID` from yet again another [system](#connectiontypes):
+What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `InternalIDs` in the [`ESB`](#esb-model), which can then be mapped to an `ID` from yet again another [system](#connectiontypes):
 
     { SystemA, ExternalID } => InternalID
     { SystemB, ExternalID } => InternalID
