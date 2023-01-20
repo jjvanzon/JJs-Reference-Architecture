@@ -11,7 +11,7 @@
 - [The ESB Concept](#the-esb-concept)
 - [Canonical Model](#canonical-model)
 - [Less Integration Code](#less-integration-code)
-- [Clearer Integration Code](#clearer-integration-code)
+- [Clear Integration Code](#clear-integration-code)
 - [In Practice](#in-practice)
 - [Memory](#memory)
 - [Standard ESB vs Custom ESB](#standard-esb-vs-custom-esb)
@@ -63,7 +63,7 @@ By connecting [systems](#connectiontypes) to an [`ESB`](#the-esb-concept), inste
 
 You just saved yourself __33%__ of the work!
 
-With every added [system](#connectiontypes) it gets better. You can see this from the numbers below, indicating the amount of message [conversions](aspects.md#conversion).
+With every added [system](#connectiontypes) it gets better. You can see this from the numbers below, indicating the amount of message [conversions](aspects.md#conversion):
 
 <img src="images/esb-connection-counts.png" width="325" />
 
@@ -72,10 +72,10 @@ The first [integration](#integrations) between 2 [systems](#connectiontypes) you
 It gets better with each [system](#connectiontypes) you add to your [`ESB`](#the-esb-concept). When messages from one [system](#connectiontypes) are [converted](aspects.md#conversion) to and from a [`Canonical`](#canonical-model) model, you can automatically connect it to all the other [systems](#connectiontypes).
 
 
-Clearer Integration Code
-------------------------
+Clear Integration Code
+----------------------
 
-But it gets better. You save yourself even more work. The code to [convert](aspects.md#conversion) a message to [`Canonical`](#canonical-model) model, is often easier than [converting](aspects.md#conversion) from one [system's](#connectiontypes) format directly to the other [system's](#connectiontypes) format. Instead of [converting](aspects.md#conversion) from one quirky format to another quirky format, which is quite difficult to do, you can [convert](aspects.md#conversion) from one quirky format to a more [straightforward format](#canonical-model), which is quite a lot easier to program.
+But it gets better. You save yourself even more work. The code to [convert](aspects.md#conversion) a message to [`Canonical`](#canonical-model) model, is often easier than [converting](aspects.md#conversion) from one [system's](#connectiontypes) format directly to another [system's](#connectiontypes) format. Instead of [converting](aspects.md#conversion) from one quirky format to another quirky format, which is quite difficult to do, you can [convert](aspects.md#conversion) from one quirky format to a more [straightforward format](#canonical-model), which is quite a lot easier to program.
 
 
 In Practice
@@ -87,19 +87,19 @@ In practice not every [system](#connectiontypes) sends every type of message bac
 Memory
 ------
 
-An added benefit to the `Canonical` model, is that it it tends to live in memory. This means that changing it doesn't require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it lower impact and more flexible.
+An added benefit to the [`Canonical`](#canonical-model) model, is that it it tends to live in memory. This means that changing it doesn't require any [data migrations](database-conventions.md#upgrade-scripts). You would only refactor the [conversion](aspects.md#conversion) code. That makes it lower impact and more flexible.
 
 
 Standard ESB vs Custom ESB
 --------------------------
 
-There are standard `Enterprise Service Buses`. Yet, we could also build a *custom* one. The concepts might be easier to implement than you think. Standard `ESB's` are complex and have a steep learning curve, require training, specialists. This all while you are going to have to *custom program* much of the [message conversion](aspects.md#conversion) anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself may certainly be an option.
+There are standard [`Enterprise Service Buses`](#the-esb-concept). Yet, we could also build a *custom* one. The concepts might be easier to implement than you think. Standard [`ESB's`](#the-esb-concept) are complex and have a steep learning curve, require training, specialists. This all while you are going to have to *custom program* much of the [message conversion](aspects.md#conversion) anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself may certainly be an option.
 
 
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and register [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and registering [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
 
 Next: The main [entities](patterns.md#entity) of the [`ESB`](#the-esb-concept) model:
 
@@ -119,7 +119,7 @@ Note that some `Connections` might not be *between* [`Enterprises`](#enterprises
 
 ### KeyMappings
 
-Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of reference numbers, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of `ReferenceNumbers`, which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
@@ -129,7 +129,7 @@ It may be a good idea to [log](aspects.md#logging) the messages that are transfe
 Integrations
 ------------
 
-The [implementation](#connectiontypes) of a service would involve message [*transformation*](aspects.md#conversion) and [*transmission*](#transmissions). Data is received through some [communication protocol](#connectiontypes), the *message format* is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another *message format* and sent over another [communication protocol](#connectiontypes).
+The implementation of a service would involve message [*transformation*](aspects.md#conversion) and [*transmission*](#transmissions). Data is received through some [communication protocol](#connectiontypes), the *message format* is parsed and then [converted](aspects.md#conversion) to a [`Canonical`](#canonical-model) model. After that, the [`Canonical`](#canonical-model) model is [converted](aspects.md#conversion) to another *message format* and sent over another [communication protocol](#connectiontypes).
 
 
 Multi-Dispatch
@@ -147,7 +147,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 |-------------------------------------------------|-----|
 | __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for the (web) services.
 | __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of service goes.)
-| __`JJ.Data.Canonical`__                         | Where [`Canonical` entities](#canonical-model) are modeled.
+| __`JJ.Data.Canonical`__                         | Where the [`Canonical` entities](#canonical-model) are modeled.
 | __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of this architecture.
 | __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api.md#nhibernate).
 | __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb`](#esb-model) database.
@@ -170,7 +170,7 @@ Service-Related Patterns
 
 ### IsSupported
 
-A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating a lot of different `interfaces`. But that can make it confusing to know which `interface` to use. As an alternative, you could use `IsSupported` booleans in the `interface`. That makes it possible for an implementation to communicate back if it supports a feature or not:
+A [service environment](#-service-oriented-architecture) may hold the same `interface` for accessing multiple [systems](#connectiontypes). But not every [system](#connectiontypes) is able to support the same features. You could solve this by creating lots of different `interfaces`. But that can make it confusing to know which `interface` to use. As an alternative, you could use `IsSupported` booleans in the `interface`. That makes it possible for an implementation to communicate back if it supports a feature or not:
 
 ```cs
 void PlaceOrder(Order order);
@@ -198,7 +198,7 @@ But the [service architecture](#-service-oriented-architecture) determines the [
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to use `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) when it needs it.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to add `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) when it needs it.
 
 Here are some examples of `Tag` models in pseudo-code:
 
@@ -209,7 +209,7 @@ You might also make the `Tags` *culture-specific:*
 
     Tag { Name, Value, CultureName }
 
-Or choose to *loosely link* `Tags` to [entities](patterns.md#entity), like this:
+Or choose to *loosely link* `Tags` to [entities](patterns.md#entity), like so:
 
     Tag { Name, Value, EntityTypeName, EntityID }
 
@@ -265,7 +265,7 @@ What you could do is map `ExternalIDs` from one [system](#connectiontypes) to `I
 
 This way, when a new [system](#connectiontypes) is added, only one [`KeyMapping`](#keymappings) is needed, to map with all the other [systems](#connectiontypes).
 
-As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then, the `ExternalID` property is overwritten by the `ID` from the targeted [system](#connectiontypes).
+As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then, the `ExternalID` property is overwritten by the `ID` from the target [system](#connectiontypes).
 
 It all depends on the specific design of your system. But hopefully this demonstrated a few options how to handle [`KeyMappings`](#keymappings), `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
