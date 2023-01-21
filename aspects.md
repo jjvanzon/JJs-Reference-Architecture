@@ -76,15 +76,15 @@
 Introduction
 ------------
 
-What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
+What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large scale software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
 
 
 Authoring & Reviewing
 ---------------------
 
-This aspect covers things such as marking objects with *creation and modification dates*. Additionally, it includes adding *author's comments* to objects and managing multiple *versions* of objects. *Logging* user changes is also a part of this aspect, which is also referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *user comments*.
+This aspect covers things such as marking objects with *creation and modification dates*. Additionally, it can include adding *author's comments* to objects and managing multiple *versions* of objects. *Logging user changes* is also a part of this aspect, which is also referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *user comments*.
 
-Which concepts are practical, depends on the specific needs of your application.
+Which concepts are practical, may depend on the specific needs of your application.
 
 
 Bidirectional Relationship Synchronization
@@ -94,7 +94,7 @@ This concept allows for automatic synchronization of related properties in a par
 
 `Product.Supplier` and `Supplier.Products` are said to be *inverse properties*. That's why this concept is also called *inverse property management* or *inverse relationship management*.
 
-Here are a few methods to do this:
+Here are a few examples how to do it:
 
 ### LinkTo
 
@@ -106,13 +106,13 @@ The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.
 
 ### Entity Framework
 
-If you use [`Entity Framework`](api.md#entity-framework) it automatically does inverse property management for you.
+[`Entity Framework`](api.md#entity-framework) automatically does inverse property management for you.
 
 ### Property Setters
 
-Inverse property synchronization could also hand-written in *property setters* instead.
+Inverse property synchronization could also *hand-written* in property setters.
 
-In pseudo-code:
+Pseudo-code:
 
 ```cs
 class Product
@@ -131,14 +131,14 @@ class Product
 
 So the collection of `Products` gets updated.
 
-But this does not cover edge cases like `null` or `Product` already in collection.
+But this does not cover edge cases like `null` or `Product` is already in collection.
 
-It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead. The tendency to divert to an abstraction like that may be quite strong and for good reason.
+It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead or use the [OneToManyRelationship](api.md#onetomanyrelationship) `API`. The tendency use an abstraction like is quite strong.
 
 ### Omit Inverse Property
 
 Reasons not to have an inverse property can be:
-    
+
 - [Enum-like entities](#enum-Like-entities)
 - [Loosely linked](#loosely-linked-translation-entities) [entity](patterns.md#entity)
 - 1-to-1 relationships
