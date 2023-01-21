@@ -35,7 +35,7 @@
 Introduction
 ------------
 
-The next part of this [software architecture](index.md) is the *Service Oriented Architecture*. It's about linking systems together. Its focus is software integration.
+The next part of this [software architecture](index.md) is the *Service Oriented Architecture*. It's about linking systems together. It focuses on software integration.
 
 
 The ESB Concept
@@ -93,7 +93,7 @@ An added benefit to the [`Canonical`](#canonical-model) model, is that it it ten
 Standard ESB vs Custom ESB
 --------------------------
 
-There are standard [`Enterprise Service Buses`](#the-esb-concept). Yet, we could also build a *custom* one. The concepts might be easier to implement than you think. Standard [`ESB's`](#the-esb-concept) are complex and have a steep learning curve, require training, specialists. This all while you are going to have to *custom program* much of the [message conversion](aspects.md#conversion) anyway, and design your own [`Canonical`](#canonical-model) model, which is basically all of the work. Therefore building one yourself may certainly be an option.
+Standard [ESB's](#the-esb-concept) can be complex and difficult to learn, requiring specialized training and expertise. But we could also build a *custom* one. Either way, we would have to *custom program* the [message conversions](aspects.md#conversion) anyhow, and design a [`Canonical`](#canonical-model) model, which is basically all of the work. The concepts might be easier to implement than you think. Building a custom [`ESB`](#the-esb-concept) yourself may certainly be an option.
 
 
 ESB Model
