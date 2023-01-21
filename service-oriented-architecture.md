@@ -93,7 +93,7 @@ An added benefit to the [`Canonical`](#canonical-model) model, is that it it ten
 Standard ESB vs Custom ESB
 --------------------------
 
-Standard [ESB's](#the-esb-concept) can be complex and difficult to learn, requiring specialized training and expertise. But we could also build a *custom* one. Either way, we would have to *custom program* the [message conversions](aspects.md#conversion) anyhow, and design a [`Canonical`](#canonical-model) model, which is basically all of the work. The concepts might be easier to implement than you think. Building a custom [`ESB`](#the-esb-concept) yourself may certainly be an option.
+Standard [ESB's](#the-esb-concept) can be complex and difficult to learn, requiring specialized training and expertise. But we could also build a *custom* one. Either way, we would have to program the [message conversions](aspects.md#conversion) anyhow, and design a [`Canonical`](#canonical-model) model too, which is basically all of the work. The concepts might be easier to implement than you think. Building a custom [`ESB`](#the-esb-concept) yourself may certainly be an option.
 
 
 ESB Model
