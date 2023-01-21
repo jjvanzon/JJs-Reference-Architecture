@@ -82,17 +82,17 @@ What are called *aspects* here, are technical concerns like [security](#security
 Authoring & Reviewing
 ---------------------
 
-This aspect covers things such as marking objects with creation and modification *dates*. Additionally, it includes adding *author's comments* to objects and managing multiple *versions* of objects. *Logging* user changes is also a part of this aspect, which is also referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *users' commenting*.
+This aspect covers things such as marking objects with *creation and modification dates*. Additionally, it includes adding *author's comments* to objects and managing multiple *versions* of objects. *Logging* user changes is also a part of this aspect, which is also referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *user comments*.
 
-Which concepts are practical to apply, all depends on the specific needs of your application.
+Which concepts are practical, depends on the specific needs of your application.
 
 
 Bidirectional Relationship Synchronization
 ------------------------------------------
 
-*Bidirectional relationship synchronization* can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+This concept allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-`Product.Supplier` and `Supplier.Products` are said to be *inverse properties*. That's why this concept can also be called *inverse property management* or *inverse relationship management*.
+`Product.Supplier` and `Supplier.Products` are said to be *inverse properties*. That's why this concept is also called *inverse property management* or *inverse relationship management*.
 
 Here are a few methods to do this:
 
@@ -106,16 +106,15 @@ The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.
 
 ### Entity Framework
 
-If you use [`Entity Framework`](api.md#entity-framework) it might automatically do inverse property management for you.
+If you use [`Entity Framework`](api.md#entity-framework) it automatically does inverse property management for you.
 
 ### Property Setters
 
-*Inverse property synchronization* could also hand-written in *property setters* instead.
+Inverse property synchronization could also hand-written in *property setters* instead.
 
-In simplified code:
+In pseudo-code:
 
-cs
-```
+```cs
 class Product
 {
     Supplier
@@ -132,7 +131,7 @@ class Product
 
 So the collection of `Products` gets updated.
 
-But this does not cover edge cases like `null` values or when the `Product` was already in the collection.
+But this does not cover edge cases like `null` or `Product` already in collection.
 
 It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead. The tendency to divert to an abstraction like that may be quite strong and for good reason.
 
@@ -140,9 +139,9 @@ It may be tempting to call a [LinkTo](patterns.md#linkto) method from the proper
 
 Reasons not to have an inverse property can be:
     
-- [Enum-like type](#enum-Like-entities)
+- [Enum-like entities](#enum-Like-entities)
 - [Loosely linked](#loosely-linked-translation-entities) [entity](patterns.md#entity)
-- 1-to-1 relationship
+- 1-to-1 relationships
 - The inverse relationship would result in an impractically large list.
 
 ### TODO
