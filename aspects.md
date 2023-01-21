@@ -11,6 +11,7 @@
     - [LinkTo](#linkto)
     - [OneToManyRelationship](#onetomanyrelationship)
     - [Entity Framework](#entity-framework)
+    - [Property Setters](#property-setters)
     - [Omit Inverse Property](#omit-inverse-property)
     - [TODO](#todo)
 - [Caching](#caching)
@@ -75,13 +76,15 @@
 Introduction
 ------------
 
-What are called *Aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more things. In medium to large software development projects, decisions might need to be made about some of these things. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
+What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
 
 
 Authoring & Reviewing
 ---------------------
 
-This aspect covers things such as marking objects with creation *dates*, modification dates, etcetera, adding an author's comment to objects and managing multiple *versions* of objects and *logging* which user made which change, which also might be referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *commenting*.
+This aspect covers things such as marking objects with creation and modification *dates*. Additionally, it includes adding *author's comments* to objects and managing multiple *versions* of objects. *Logging* user changes is also a part of this aspect, which is also referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *users' commenting*.
+
+Which concepts are practical to apply, all depends on the specific needs of your application.
 
 
 Bidirectional Relationship Synchronization
@@ -103,14 +106,42 @@ The [OneToManyRelationship](api.md#onetomanyrelationship) is an `API` from [`JJ.
 
 ### Entity Framework
 
-If you use [`Entity Framework`](api.md#entity-framework) it might do it automatically for you.
+If you use [`Entity Framework`](api.md#entity-framework) it might automatically do inverse property management for you.
+
+### Property Setters
+
+*Inverse property synchronization* could also hand-written in *property setters* instead.
+
+In simplified code:
+
+cs
+```
+class Product
+{
+    Supplier
+    {
+        set
+        {
+            _supplier.Products.Remove(this);
+            _supplier = value;
+            _supplier.Products.Add(this);
+        }
+    }
+}
+```
+
+So the collection of `Products` gets updated.
+
+But this does not cover edge cases like `null` values or when the `Product` was already in the collection.
+
+It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead. The tendency to divert to an abstraction like that may be quite strong and for good reason.
 
 ### Omit Inverse Property
 
 Reasons not to have an inverse property can be:
     
-- Enum-like type
-- Loosely linked [entity](patterns.md#entity)
+- [Enum-like type](#enum-Like-entities)
+- [Loosely linked](#loosely-linked-translation-entities) [entity](patterns.md#entity)
 - 1-to-1 relationship
 - The inverse relationship would result in an impractically large list.
 
@@ -118,7 +149,6 @@ Reasons not to have an inverse property can be:
 
 `< TODO: Consider incorporating these ideas here: >`
 
-- Make story about bidirectional relationship synchronization in property setters. A general description.
 - Idea 2015-04-29: Bidirectional relationship synchronization with a List and a HashSet to make operations not n-problems...
 
 
