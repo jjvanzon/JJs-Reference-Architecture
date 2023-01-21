@@ -45,7 +45,7 @@ Software can be built up of layers. This article describes how layers could be s
     - [Defaults](#defaults)
     - [Cascading](#cascading)
     - [Cloning](#cloning)
-    - [Relationship Syncing](#relationship-syncing)
+    - [Bidirectional Relationship Synchronization](#bidirectional-relationship-synchronization)
     - [Facades](#facades-1)
     - [CRUD](#crud)
     - [Platform Independence](#platform-independence-2)
@@ -264,9 +264,9 @@ Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity
 
 Sometimes there is code for [cloning](aspects.md#cloning) or copying an object or graph of objects. Code for this kind of [cloning](aspects.md#cloning) might be put in the [business layer](#business-layer) too.
 
-### Relationship Syncing
+### Bidirectional Relationship Synchronization
 
-[Relationship synchronization](aspects.md#bidirectional-relationships) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`. This mechanism can be part in the [business layer](#business-layer) as well.
+[Bidirectional relationship synchronization](aspects.md#bidirectional-relationship-synchronization) can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`. This mechanism can be part in the [business layer](#business-layer) as well.
 
 ### Facades
 

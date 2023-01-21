@@ -192,9 +192,9 @@ Using separate classes for `SideEffects`, creates overview over those pieces of 
 
 ### LinkTo
 
-This pattern is about *inverse property management*. Inverse property management means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+This pattern is about *bidirectional relationship synchronization*. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage inverse properties even when the underlying persistent technology does not have inverse property management, you can link [entities](#entity) with `LinkTo` methods, instead of assigning properties or adding or removing from related collections directly. By calling the `LinkTo` methods, both ends of the relationship are kept in sync. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
+To manage bidirectional relationships even when the underlying persistent technology does not have bidirectional relationship synchronization, you can link [entities](#entity) with `LinkTo` methods, instead of assigning properties or adding or removing from related collections directly. By calling the `LinkTo` methods, both ends of the relationship are kept in sync. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)

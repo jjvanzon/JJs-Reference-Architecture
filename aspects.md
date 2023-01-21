@@ -7,7 +7,7 @@
 
 - [Introduction](#introduction)
 - [Authoring & Reviewing](#authoring--reviewing)
-- [Bidirectional Relationships](#bidirectional-relationships)
+- [Bidirectional Relationship Synchronization](#bidirectional-relationship-synchronization)
     - [LinkTo](#linkto)
     - [OneToManyRelationship](#onetomanyrelationship)
     - [Entity Framework](#entity-framework)
@@ -81,19 +81,15 @@ What are called *Aspects* here, are technical concerns like [security](#security
 Authoring & Reviewing
 ---------------------
 
-This aspect covers things such as marking objects with creation dates, modification dates, etcetera, adding an author's comment to objects and managing multiple versions of objects and logging which user made which change.
-
-`< TODO: Describe better: Reviewing: Like rating content. So closely related to authoring I find that it should be grouped together. >`
-
-`< TODO: Add specific solutions. >`
+This aspect covers things such as marking objects with creation *dates*, modification dates, etcetera, adding an author's comment to objects and managing multiple *versions* of objects and *logging* which user made which change, which also might be referred to as *auditing*. Reviewing could also involve *rating* content, *liking* and *commenting*.
 
 
-Bidirectional Relationships
----------------------------
+Bidirectional Relationship Synchronization
+------------------------------------------
 
-Aka "Inverse Relationship Management" or "Inverse Property Management".
+*Bidirectional relationship synchronization* can keep two ends of a relationship in sync. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-Inverse property management means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+`Product.Supplier` and `Supplier.Products` are said to be *inverse properties*. That's why this concept can also be called *inverse property management* or *inverse relationship management*.
 
 Here are a few methods to do this:
 
@@ -122,8 +118,8 @@ Reasons not to have an inverse property can be:
 
 `< TODO: Consider incorporating these ideas here: >`
 
-- Make story about inverse property management in property setters. A general description.
-- Idea 2015-04-29: Inverse property management with a List and a HashSet to make operations not n-problems...
+- Make story about bidirectional relationship synchronization in property setters. A general description.
+- Idea 2015-04-29: Bidirectional relationship synchronization with a List and a HashSet to make operations not n-problems...
 
 
 Caching
@@ -384,7 +380,7 @@ public enum SectionType
 
 Note that the enums themselves do not belong in the [entity](patterns.md#entity) model, but in the Business layer.
 
-- It is *not* recommended to give enum-like [entities](patterns.md#entity) an inverse property to the [entities](patterns.md#entity) that use it.
+- It is *not* recommended to give enum-like [entities](patterns.md#entity) a [bidirectional relationship](aspects.md#bidirectional-relationships) to the [entities](patterns.md#entity) that use it.
 
 ```cs
 public class SectionType
