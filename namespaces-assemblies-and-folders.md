@@ -68,8 +68,11 @@ Functional Domains
 The 3<sup>rd</sup> level in the namespacing would be the *functional domain:*
 
 - JJ.Data.__Calendar__  
+- JJ.Data.__Synthesizer__  
 - JJ.Business.__Calendar__  
+- JJ.Business.__Synthesizer__  
 - JJ.Presentation.__Calendar__  
+- JJ.Presentation.__Synthesizer__  
 
 The 'functional domain' of the [framework layer](api.md#jjframework) might be a technical [aspect](aspects.md#-aspects):
 
