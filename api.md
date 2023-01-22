@@ -1123,15 +1123,15 @@ Particular surprises might emerge when using *inheritance* in your [entity](patt
 
 ##### Problem: Entity / Proxy Type Mismatch
 
-When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity), a so called ***proxy***. This proxy adds to your [entity](patterns.md#entity) a sort of connectedness to the database.
+When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity), a so called `Proxy`. This `Proxy` adds to your [entity](patterns.md#entity) a sort of connectedness to the database.
 
 ##### Problem: Base Proxy / Derived Proxy Type Mismatch
 
-When you retrieved an [entity](patterns.md#entity) from `NHibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
+When you retrieved an [entity](patterns.md#entity) from `NHibernate` that has inheritance, using the base type it returns a `Proxy` of the base type instead of a `Proxy` of the derived type, which makes reference comparisons between base `Proxies` and derived class `Proxies` fail.
 
 ##### Problem: 2 Proxies / 1 Entity
 
-But you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison might also fail.
+But you can also get failing reference comparisons another way. If you `Unproxied` a derived type, and retrieve another `Proxy` of the derived type, reference comparison might also fail.
 
 ##### Problem: Query Performance
 
@@ -1139,11 +1139,11 @@ It can also harm performance of queries, getting a lot of `left joins`: one for 
 
 ##### Alternative: Unproxy for Reference Comparison
 
-You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
+You can then `Unproxy` both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
 
 ##### Alternative: Unproxy for Type Evaluation
 
-To evaluate the *type*, you are better of unproxying as well. Otherwise it will compare proxy types instead of your [entity](patterns.md#entity) type. This can be confusing.
+To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it will compare `Proxy` types instead of your [entity](patterns.md#entity) type. This can be confusing.
 
 ##### Alternative: ID Comparison
 
