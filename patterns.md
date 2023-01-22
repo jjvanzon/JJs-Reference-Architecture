@@ -118,7 +118,7 @@ class Supplier
 
 #### Members Virtual
 
-`Public` members should be `virtual`, otherwise [persistence technologies](api.md#orm) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch).
+`Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch).
 
 ```cs
 class Supplier
@@ -183,15 +183,15 @@ public class Supplier
 
 ### Mapping
 
-`Mappings` are `classes` programmed for a particular [persistence technology](api.md#orm), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which *`class`* maps to which *`table`* and which *`column`* maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](aspects.md#persistence), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which *`class`* maps to which *`table`* and which *`column`* maps to which *property*.
 
 ### DTO
 
-`DTO` = Data transfer object. `DTO's` only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an [entity](#entity) is not handy or efficient.
+`DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of the system. In certain situations, where passing an  [entity](#entity) is not handy or efficient, a `DTO` might be a good alternative.
 
 For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [entity](#entity) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
-`DTO's` can also be used for other data transfers than for [`SQL`](api.md#sql) queries.
+`DTO's` can also be used for other data transfers than [`SQL`](api.md#sql) queries.
 
 ### Repository
 
@@ -199,12 +199,13 @@ A `Repository` is like a set of queries. `Repositories` return or save [entities
 
 Typically, every [entity type](#entity) gets its own `Repository`.
 
-It might be best to not expose types from the underlying persistence technology, so the `Repository` abstraction stays neutral.
+It might be best to not expose types from the underlying [persistence technology](aspects.md#persistence), so the `Repository` abstraction stays neutral.
 
 ### Repository Interfaces
 
-Any [`Repository type`](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled to the underlying persistence technology.
+Any [`Repository type`](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled from the underlying [persistence technology](aspects.md#persistence).
 
+The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](api.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
 
 Business Logic Patterns
 -----------------------
