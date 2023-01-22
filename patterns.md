@@ -326,9 +326,9 @@ But beware that `LinkTo` might be a better choice, because executing `NewLinkTo`
 
 ### Facade
 
-A `Facade` combines several related (usually `CRUD`) operations into one class that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that the integrity is maintained.
+A `Facade` combines several related (usually `CRUD`) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that integrity is maintained.
 
-It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so manages a set of [entity types](#entities) together.
+It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a set of [entity types](#entities) together.
 
 <h4>Get by ID not in the Facade</h4>
 
