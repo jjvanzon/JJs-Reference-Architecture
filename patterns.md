@@ -260,7 +260,7 @@ Using separate classes for `SideEffects` can create overview over pieces of logi
 
 This pattern is about *bidirectional relationship synchronization*. That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships, even when the underlying persistent technology do it, we could link [entities](#entities) using `LinkTo` extension methods. By calling `LinkTo`, both ends of the relationship are updated together. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations do come with performance penalties.
+To manage bidirectional relationships, even when the underlying persistent technology doesn't it, we could link [entities](#entities) together using `LinkTo` extension methods. By calling `LinkTo`, both ends of the relationship are updated. Here is a template for a `LinkTo` method that works for an `1-to-n` relationship. Beware that all the checks and list operations can come with a performance penalty:
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -287,9 +287,9 @@ public static void LinkTo(this Child child, Parent parent)
 }
 ```
 
-You could put the `LinkTo` methods together in a `class` called `LinkToExtensions`. You might put it in the `LinkTo` [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
+You could put the `LinkTo` methods together in a `class` called `LinkToExtensions`. You might put it in a `LinkTo` [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
 
-If the `LinkTo` method name would be ambiguous, you could suffix it, e.g.:
+If a `LinkTo` method name becomes ambiguous, you could suffix e.g.:
 
     LinkToParentDocument
 
@@ -307,7 +307,7 @@ public static void UnlinkParent(this Child child)
 
 #### NewLinkTo
 
-If you are linking objects together, that you *know are new*, you may create better-performing variations for `LinkTo`, called `NewLinkTo`, that omit expensive checks:
+If you are linking objects together, that you *know are new*, you may use better-performing variations for `LinkTo`, called `NewLinkTo`, that omit expensive checks:
 
 ```cs
 public static void NewLinkTo(this Child child, Parent parent)
@@ -318,7 +318,7 @@ public static void NewLinkTo(this Child child, Parent parent)
 }
 ```
 
-Beware that `LinkTo` might be a better choice, because executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
+But beware that `LinkTo` might be a better choice, because executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
 
 ### Cascading
 
