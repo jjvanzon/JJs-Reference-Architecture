@@ -228,17 +228,17 @@ Some logic will use [`Repositories`](#repository) out of multiple [domains](name
 
 Also, you may want to create different, more limited `RepositoryWrappers`. For instance ones for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not become dependent on all of them.
 
-An alternative to `RepositoryWrappers` might be [dependency injection](practices-and-principles.md#dependency-injection). Under the [link](practices-and-principles.md#dependency-injection) you will find some criticism about the techique, but that might be due to not using a very good [dependency injection](practices-and-principles.md#dependency-injection) `API`. `RepositoryWrappers` and [dependency injection](practices-and-principles.md#dependency-injection) could also be used in combination with each other.
+An alternative to `RepositoryWrappers` might be [dependency injection](practices-and-principles.md#dependency-injection). Under the [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very good [dependency injection](practices-and-principles.md#dependency-injection) `API`. `RepositoryWrappers` and [dependency injection](practices-and-principles.md#dependency-injection) could also be used in combination with each other.
 
 ### Validators
 
-Use separate `Validator` classes for validation. Make specialized classes derived from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
+Separate `Validator` classes could be used for validation. Specialized classes can be created by deriving from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
 
-Try to keep `Validators` independent from eachother.
+It is recommended to keep `Validators` independent from one another.
 
-If multiple `Validators` should go off, call them individually one by one. Try not to make them delegate to eachother.
+If multiple `Validators` should go off, you might call them individually one by one, rather than delegating to eachother.
 
-If you do decide to make a complex `Validator`, add a prefix or suffix to the class name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make extra clear that it is not just a simple `Validator`.
+When creating a complex `Validator`, it is suggested to add a prefix or suffix to the `class` name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is not just a simple `Validator`.
 
 Next to `Validators` saying that user input is wrong, `Validators` can be used to generate warnings, that are not blocking, but help the user do their work.
 
