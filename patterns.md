@@ -9,10 +9,10 @@
 - [Data Access Patterns](#data-access-patterns)
     - [Entity](#entity)
         - [Pure Data](#pure-data)
-        - [Members Virtual](#members-virtual)
         - [Enums](#enums)
         - [Avoid Inheritance](#avoid-inheritance)
         - [Create Collections](#create-collections)
+        - [Members Virtual](#members-virtual)
         - [Real Code](#real-code)
     - [Mapping](#mapping)
     - [DTO](#dto)
@@ -116,19 +116,6 @@ class Supplier
 }
 ```
 
-#### Members Virtual
-
-`Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch).
-
-```cs
-class Supplier
-{
-    virtual int ID { get; set; }
-    virtual int Name { get; set; }
-    ...
-}
-```
-
 #### Enums
 
 You might even want to avoid `enums` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
@@ -164,6 +151,19 @@ Creating collections upon initialization is recommended. [`NHibernate`](api.md#n
 class Supplier
 {
     var Products { get; set; } = new List<Product>();
+}
+```
+
+#### Members Virtual
+
+`Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+
+```cs
+class Supplier
+{
+    virtual int ID { get; set; }
+    virtual int Name { get; set; }
+    ...
 }
 ```
 
