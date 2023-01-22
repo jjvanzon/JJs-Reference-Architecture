@@ -19,7 +19,7 @@
     - [Repository](#repository)
     - [Repository Interfaces](#repository-interfaces)
 - [Business Logic Patterns](#business-logic-patterns)
-    - [Business layer](#business-layer)
+    - [Business Layer](#business-layer)
     - [RepositoryWrappers](#repositorywrappers)
     - [Validators](#validators)
     - [SideEffects](#sideeffects)
@@ -210,7 +210,7 @@ The `Repository interfaces` are also handy for [testing](aspects.md#automated-te
 Business Logic Patterns
 -----------------------
 
-### Business layer
+### Business Layer
 
 [Presentation](layers.md#presentation-layer), [entity](#entities) model and [persistence](aspects.md#persistence) should be straightforward [pattern](#-patterns)-wise. If anything 'special' needs to happen this belongs in the [business layer](layers.md#business-layer). Any number of different patterns can be used.
 
@@ -248,11 +248,11 @@ Next to `Validators` saying that user input is invalid, `Validators` could also 
 
 The business layer can execute `SideEffects`, when altering data, for instance to store the *date time modified* or setting *default values*, or automatically *generating a name*.
 
-We could implement the interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. They only have one method: `Execute`, but it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or other generic handling of them.
+We could implement the interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It only has one method: `Execute`, but it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or to generically handle of them in other ways.
 
-Using separate classes for `SideEffects`, creates overview over those pieces of business logic, that are the most creative of all, and prevents those special things from getting entangled with other code.
+Using separate classes for `SideEffects`, creates overview over those pieces of business logic, that are quite creative in nature, and prevents these special things from getting entangled with other code.
 
-`SideEffects` might evaluate the conditions internally as much as possible. So the caller of the `SideEffect` class does not know what conditions are tied to it. The `SideEffect` could skip its own execution if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens. What a `SideEffect's` does might also depend on [entity status flags](aspects.md#entity-status-management).
+`SideEffects` might evaluate the conditions internally. So the caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip its own execution, if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does might also depend on [entity status flags](aspects.md#entity-status-management).
 
 ### LinkTo
 
