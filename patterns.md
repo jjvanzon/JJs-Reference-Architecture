@@ -248,19 +248,19 @@ Next to `Validators` saying that user input is invalid, `Validators` could also 
 
 ### SideEffects
 
-The [business layer](layers.md#business-layer) can execute `SideEffects` when altering data, for instance to store the *date time modified*, or set [default values](aspects.md#defaults), or automatically *generating a name*.
+The [business layer](layers.md#business-layer) can execute `SideEffects` when altering data, for instance to store the *date time modified*, or set [default values](aspects.md#defaults), or automatically generating a *name*.
 
 We could implement an interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It has only one method: `Execute`. But this allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in a row, or to otherwise *generically* handle them.
 
 Using separate classes for `SideEffects` can create overview over pieces of logic, creative in nature, and prevent these special things from getting entangled with other code.
 
-`SideEffects` might evaluate conditions internally. The caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, when it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can depend on [status flags](aspects.md#entity-status-management) too.
+`SideEffects` might evaluate conditions internally. The caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, when it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can depend on [status flagging](aspects.md#entity-status-management) too.
 
 ### LinkTo
 
-This pattern is about *bidirectional relationship synchronization*. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+This pattern is about *bidirectional relationship synchronization*. That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships even when the underlying persistent technology does not do it for us, we could link [entities](#entities) with `LinkTo` methods. By calling the `LinkTo` methods, both ends of the relationship are updated together. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
+To manage bidirectional relationships, even when the underlying persistent technology do it, we could link [entities](#entities) using `LinkTo` extension methods. By calling `LinkTo`, both ends of the relationship are updated together. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations do come with performance penalties.
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -287,15 +287,15 @@ public static void LinkTo(this Child child, Parent parent)
 }
 ```
 
-The class in which to put the `LinkTo` methods, should be called `LinkToExtensions` and it should be put in the `LinkTo` sub-namespace in your project.
+You could put the `LinkTo` methods together in a `class` called `LinkToExtensions`. You might put it in the `LinkTo` [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
 
-Only if the `LinkTo` method name is ambiguous, you can suffix it, e.g.:
+If the `LinkTo` method name would be ambiguous, you could suffix it, e.g.:
 
     LinkToParentDocument
 
 #### Unlink
 
-Next to `LinkTo` method, you might add `Unlink` methods in an `UnlinkExtensions` class:
+Next to `LinkTo` methods, you might also add `Unlink` methods in an `UnlinkExtensions` class:
 
 ```cs
 public static void UnlinkParent(this Child child)
@@ -307,7 +307,7 @@ public static void UnlinkParent(this Child child)
 
 #### NewLinkTo
 
-If you are linking objects together that you know are new, you may create better-performing variations for `LinkTo`, called `NewLinkTo`, that omit the expensive checks:
+If you are linking objects together, that you *know are new*, you may create better-performing variations for `LinkTo`, called `NewLinkTo`, that omit expensive checks:
 
 ```cs
 public static void NewLinkTo(this Child child, Parent parent)
