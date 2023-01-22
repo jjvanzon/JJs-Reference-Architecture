@@ -248,13 +248,13 @@ Next to `Validators` saying that user input is invalid, `Validators` could also 
 
 ### SideEffects
 
-The [business layer](layers.md#business-layer) can execute `SideEffects` when altering data, for instance to store the *date time modified*, or set *default values*, or automatically *generate a name*.
+The [business layer](layers.md#business-layer) can execute `SideEffects` when altering data, for instance to store the *date time modified*, or set [default values](aspects.md#defaults), or automatically *generating a name*.
 
-We could implement an interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It only has one method: `Execute`. But it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or to generically handle them.
+We could implement an interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It has only one method: `Execute`. But this allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in a row, or to otherwise *generically* handle them.
 
-Using separate classes for `SideEffects` can creates overview over pieces of code, quite creative in nature, and prevent these special things from getting entangled with other code.
+Using separate classes for `SideEffects` can create overview over pieces of logic, creative in nature, and prevent these special things from getting entangled with other code.
 
-`SideEffects` might evaluate the conditions internally. The caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can also depend on [status flags](aspects.md#entity-status-management).
+`SideEffects` might evaluate conditions internally. The caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, when it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can depend on [status flags](aspects.md#entity-status-management) too.
 
 ### LinkTo
 
