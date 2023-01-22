@@ -40,6 +40,16 @@ This article describes some of the technology choices in this [software architec
     - [Bridge Entities](#bridge-entities)
     - [Binary Fields](#binary-fields)
     - [Inheritance](#inheritance)
+      - [Problem: Entity / Proxy Type Mismatch](#problem-entity--proxy-type-mismatch)
+      - [Problem: Base Proxy / Derived Proxy Type Mismatch](#problem-base-proxy--derived-proxy-type-mismatch)
+      - [Problem: 2 Proxies / 1 Entity](#problem-2-proxies--1-entity)
+      - [Problem: Query Performance](#problem-query-performance)
+      - [Alternative: Unproxy for Reference Comparison](#alternative-unproxy-for-reference-comparison)
+      - [Alternative: Unproxy for Type Evaluation](#alternative-unproxy-for-type-evaluation)
+      - [Alternative: ID Comparison](#alternative-id-comparison)
+      - [Alternative: 1-to-1 Relationship](#alternative-1-to-1-relationship)
+      - [Alternative: Interfaces](#alternative-interfaces)
+      - [Alternative: No Inheritance](#alternative-no-inheritance)
     - [Generic Interfaces](#generic-interfaces)
     - [Conclusion](#conclusion)
   - [SQL](#sql)
@@ -1111,23 +1121,45 @@ Using separate [`SQL`](#sql) statements for retrieving blobs might be a better a
 
 Particular surprises might emerge when using *inheritance* in your [entity](patterns.md#entity) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns.md#entity) models if you can.
 
+##### Problem: Entity / Proxy Type Mismatch
+
 When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity), a so called ***proxy***. This proxy adds to your [entity](patterns.md#entity) a sort of connectedness to the database.
+
+##### Problem: Base Proxy / Derived Proxy Type Mismatch
 
 When you retrieved an [entity](patterns.md#entity) from `NHibernate` that has inheritance, using the base type it returns a proxy of the base type instead of a proxy of the derived type, which makes reference comparisons between base proxies and derived class proxies fail.
 
-You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
+##### Problem: 2 Proxies / 1 Entity
 
 But you can also get failing reference comparisons another way. If you unproxied a derived type, and retrieve another proxy of the derived type, reference comparison might also fail.
 
-[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns.md#entity) equality checks.
+##### Problem: Query Performance
+
+It can also harm performance of queries, getting a lot of `left joins`: one for each derived class' table.
+
+##### Alternative: Unproxy for Reference Comparison
+
+You can then *unproxy* both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
+
+##### Alternative: Unproxy for Type Evaluation
 
 To evaluate the *type*, you are better of unproxying as well. Otherwise it will compare proxy types instead of your [entity](patterns.md#entity) type. This can be confusing.
 
-By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
+##### Alternative: ID Comparison
+
+[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns.md#entity) equality checks.
+
+##### Alternative: 1-to-1 Relationship
 
 An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
 
+##### Alternative: Interfaces
+
 Letting two [entity](patterns.md#entity) types use a mutual `interface` might be an alternative too.
+
+##### Alternative: No Inheritance
+
+By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
 
 #### Generic Interfaces
 

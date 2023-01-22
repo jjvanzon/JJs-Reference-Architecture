@@ -86,7 +86,7 @@
 Introduction
 ------------
 
-Design patterns are coding techniques to solve common programming problems. They bring consistency to the code. They help us reuse best practices and prevent code from becoming messy. They also are an extension to the software layering.
+Design patterns are coding techniques to solve common programming problems. They can bring consistency to the code. They help us reuse established solutions and improve the overall design of the software. They also are an extension to the software layering.
 
 
 Data Access Patterns
@@ -94,29 +94,71 @@ Data Access Patterns
 
 ### Entity
 
-These are the classes that represent the domain model.
+These are the classes that represent the *domain model*.
 
-The entity classes simply contain properties of simple types or references or lists to other [entities](#entity).
+In this [architecture](index.md), we aim to keep the entity classes [just data](#dto) and free of logic. The entity classes in this [architecture](index.md) simply contain properties of simple types or references or lists to other [entities](#entity).
 
-There will be no logic in the entity classes in this [architecture](index.md).
+```cs
+class Supplier
+{
+    // Simple types
+    int ID { get; set; }
+    string Name { get; set; }
 
-Collections should be created in the constructor, because [`NHibernate`](api.md#nhibernate) does not always create them, and you do not want to check whether collections are null all over your code.
+    // Reference to entity
+    Address Address { get; set; }
 
-All public members should be virtual, otherwise persistence technologies can often not work with it.
+    // Reference to list of entities
+    IList<Product> Products { get; set; }
+}
+```
 
-Do not use inheritance within your entity model, because it can make using persistence technologies harder, error prone, and it can actually harm performance of queries.
+`Public` members should be `virtual`, otherwise persistence technologies may not work. This is because they want to create proxy `classes`. You may read more about about that [here](api.md#inheritance).
 
-<h4>Alternatives</h4>
+```cs
+class Supplier
+{
+    virtual int ID { get; set; }
+    virtual int Name { get; set; }
+    ...
+}
+```
 
-Generally avoided, but not prohibited:
+You might even want to avoid `enums`. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
 
-- Use inheritance anyway with the aforementioned downsides.
-- Use interfaces for polymorphism instead.
-- Instead of inheritance, consider a composition solution, rather than an inheritance solution.
+```cs
+class Supplier
+{
+    Industry Industry { get; set; }
+}
 
-<h4>Considerations</h4>
+class Industry
+{
+    int ID { get; set; }
+    int Name { get; set; }
+}
 
-`< TODO: Write some more about the difficulties of inheritance in entity models. >`
+enum IndustryEnum
+{
+    Retail = 1,
+    Travel = 2
+}
+```
+
+Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
+
+Creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
+
+```cs
+class Supplier
+{
+    var Products { get; set; } = new List<Product>();
+}
+```
+
+These code examples were just illustrative pseudo-code.
+
+`< TODO: Real code sample. >`
 
 ### Mapping
 
