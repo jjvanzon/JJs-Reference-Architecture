@@ -232,17 +232,17 @@ An alternative to `RepositoryWrappers` might be [dependency injection](practices
 
 ### Validators
 
-Separate `Validator` classes could be used for validation. Specialized classes can be created by deriving from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
+Separate `Validator` classes could be used for validation. Specialized classes can be created derived from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
 
 It is recommended to keep `Validators` independent from one another.
 
-If multiple `Validators` should go off, you might call them individually one by one, rather than delegating to eachother.
+If multiple `Validators` should go off, you might call them individually one by one, rather than delegating to one another.
 
-When creating a complex `Validator`, it is suggested to add a prefix or suffix to the `class` name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is not just a simple `Validator`.
+When creating a complex `Validator`, it is suggested to add a prefix or suffix to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is not just a simple `Validator`.
 
-Next to `Validators` saying that user input is wrong, `Validators` can be used to generate warnings, that are not blocking, but help the user do their work.
+Next to `Validators` saying that user input is invalid, `Validators` can be used to generate *warnings*, that are not blocking, but help the user do their work.
 
-`Validators` can also be used for (complex) delete constraints, for instance when an [entity](#entities) is still in use, you might not be able to delete it.
+`Validators` might also be used for (complex) delete constraints, for instance when an [entity](#entities) is still in use, you might not be able to delete it.
 
 ### SideEffects
 
@@ -334,13 +334,13 @@ A `Visitor` class processes a recursive structure that might involve many object
 
 Whenever a whole recursive structure needs to be processed, the `Visitor` pattern is a good way to go.
 
-A `Visitor` class will have a set of `Visit` methods, e.g. `VisitOrder`, VisitProduct, typically one for every type, possibly also one for each collection. A base `Visitor` might simply follow the whole recursive structure, and has a Visit method for each node in the structure. All Visit methods are protected virtual and usually return void. Public methods will only expose the entry points in the recursion. Derived `Visitors` can override any Visit method that they need. If you only want to process objects of a specific type, you only override the Visit method for that specific type. You can optimize performance by overriding Visit methods that would enter a part of the recursive structure that you do not use.
+A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, VisitProduct, typically one for every type, possibly also one for each collection. A base `Visitor` might simply follow the whole recursive structure, and has a Visit method for each node in the structure. All Visit methods are protected virtual and usually return void. Public methods might only expose the entry points in the recursion. Derived `Visitors` can override any Visit method that they need. If you only want to process objects of a specific type, you only override the Visit method for that specific type. You can optimize performance by overriding Visit methods that would enter a part of the recursive structure that you do not use.
 
 Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the Visit methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
 
 By creating a base `Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
-The classic `Visitor` pattern has a design flaw in it, that we will not use. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a `Visitor`.
+The classic `Visitor` pattern has a design flaw in it, that we might not employ. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. It is advised not to use it and leave out the `Accept` methods for `classes` used by a `Visitor`.
 
 A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however we follow additional rules.
 
@@ -348,7 +348,7 @@ A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `Expression
 
 `- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.`
 
-`- Visitor pattern: mention that you always need to call polymorphic, otherwise you will not get all the objects when you override the polymorphic. >`
+`- Visitor pattern: mention that you always need to call polymorphic, otherwise you might not get all the objects when you override the polymorphic. >`
 
 `< TODO: Code example. >`
 
@@ -358,7 +358,7 @@ A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `Expression
 
 For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](api.md#dotnet) projects.
 
-If you follow the following naming convention for resources files, [`.NET`](api.md#dotnet) will automatically return the translations into the language of the current culture:
+If you follow the following naming convention for resources files, [`.NET`](api.md#dotnet) can automatically return the translations into the language of the current culture:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -384,7 +384,7 @@ Presentation Patterns
 
 A `ViewModel` class holds the data shown on screen.
 
-It is purely a [data objects](#dto). It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the `ViewModels` is fully responsible for it.)
+It is purely a [data objects](#dto). It would only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the `ViewModels` is fully responsible for it.)
 
 __A `ViewModel` should say *what* is shown, not *how* or *why*.__
 
@@ -465,7 +465,7 @@ Some [`ViewModels`](#viewmodel) do not take one primary [entity](#entities) as i
 
 Extension methods that convert a [`ViewModel`](#viewmodel) to an [entity](#entities).
 
-You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [entity](#entities), if it exists, it will be updated, if it does not, it will be created.
+You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [entity](#entities), if it exists, it would be updated, if it does not, it would be created.
 
 A more complex `ToEntity` method might also update related [entities](#entities). In that case related [entities](#entities) might be inserted, updated and deleted, depending on whether the [entity](#entities) still exists in the [`ViewModel`](#viewmodel) or in the data store.
 
@@ -583,7 +583,7 @@ Another alternative is a different ID generation scheme. You may use an [`SQL`](
 
 The [presentation patterns](#presentation-patterns) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodel) and output a new [`ViewModel`](#viewmodel) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodel) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodel) has to be created. You cannot just return the user input [`ViewModel`](#viewmodel). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodel) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodel) remains untouched.
 
-You will be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment will not work in a stateless environment and you might make some objects long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that will ever happen – the code is still so close to what's needed for stateless, that it will not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that will probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some objects long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
 ### Considerations
 
