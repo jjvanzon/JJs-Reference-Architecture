@@ -24,6 +24,8 @@
     - [Validators](#validators)
     - [SideEffects](#sideeffects)
     - [LinkTo](#linkto)
+        - [Unlink](#unlink)
+        - [NewLinkTo](#newlinkto)
     - [Cascading](#cascading)
     - [Facade](#facade)
     - [Visitor](#visitor)
@@ -252,13 +254,13 @@ We could implement the interface [`ISideEffect`](api.md#jj-framework-business) f
 
 Using separate classes for `SideEffects`, creates overview over those pieces of business logic, that are quite creative in nature, and prevents these special things from getting entangled with other code.
 
-`SideEffects` might evaluate the conditions internally. So the caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip its own execution, if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does might also depend on [entity status flags](aspects.md#entity-status-management).
+`SideEffects` might evaluate the conditions internally. So the caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can also depend on [status flags](aspects.md#entity-status-management).
 
 ### LinkTo
 
 This pattern is about *bidirectional relationship synchronization*. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships even when the underlying persistent technology does not have bidirectional relationship synchronization, you can link [entities](#entities) with `LinkTo` methods, instead of assigning properties or adding or removing from related collections directly. By calling the `LinkTo` methods, both ends of the relationship are kept in sync. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
+To manage bidirectional relationships even when the underlying persistent technology does not do it for us, we could link [entities](#entities) with `LinkTo` methods, instead of setting *inverse properties* directly. By calling the `LinkTo` methods, both ends of the relationship are updated together. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -289,7 +291,9 @@ The class in which to put the `LinkTo` methods, should be called `LinkToExtensio
 
 Only if the `LinkTo` method name is ambiguous, you can suffix it, e.g.:
 
-  LinkToParentDocument
+    LinkToParentDocument
+
+#### Unlink
 
 Next to `LinkTo` method, you might add `Unlink` methods in an `UnlinkExtensions` class:
 
@@ -300,6 +304,8 @@ public static void UnlinkParent(this Child child)
     child.LinkTo((Parent)null);
 }
 ```
+
+#### NewLinkTo
 
 If you are linking objects together that you know are new, you may create better-performing variations for `LinkTo`, called `NewLinkTo`, that omit the expensive checks:
 
@@ -312,7 +318,7 @@ public static void NewLinkTo(this Child child, Parent parent)
 }
 ```
 
-Be aware that executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
+Beware that `LinkTo` might be a better choice, because executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
 
 ### Cascading
 
