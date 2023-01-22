@@ -326,13 +326,13 @@ But beware that `LinkTo` might be a better choice, because executing `NewLinkTo`
 
 ### Facade
 
-A `Facade` combines several related (usually `CRUD`) operations into one class that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, conversions, etc. It delegates to other classes to do the work. If you do it using a `Facade` you should be able to count on it that the integrity is maintained.
+A `Facade` combines several related (usually `CRUD`) operations into one class that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that the integrity is maintained.
 
-It is a combinator class: a `Facade` combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial functional domain, so manages a set of [entity types](#entities) together. You could also call it a combinator class.
+It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so manages a set of [entity types](#entities) together.
 
 <h4>Get by ID not in the Facade</h4>
 
-Even though `Facades` typically contain CRUD methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your `Facade`. Execute a simple Get by `ID` onto the [`Repository`](#repository). The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a `Facade`, which is a combinator `class`, meaning it is dependent on many [`Repositories`](#repository) and other objects. So a simple Get goes through the [`Repository`](#repository).
+Even though `Facades` typically contain `CRUD` methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your `Facade`. Execute a simple Get by `ID` onto the [`Repository`](#repository). The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a `Facade`, which is a combinator `class`, meaning it is dependent on many [`Repositories`](#repository) and other objects. So a simple Get goes through the [`Repository`](#repository).
 
 ### Visitor
 
