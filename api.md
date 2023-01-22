@@ -389,7 +389,7 @@ List of API's (and other tech)
        JJ.Framework.Business</a>
   </th>
   <td>
-      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns.html#validators">validation</a>) messages.
+      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns.html#validators">validation</a>) messages. <a href="patterns.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
   </td>
 </tr>
 
