@@ -248,19 +248,19 @@ Next to `Validators` saying that user input is invalid, `Validators` could also 
 
 ### SideEffects
 
-The business layer can execute `SideEffects`, when altering data, for instance to store the *date time modified* or setting *default values*, or automatically *generating a name*.
+The [business layer](layers.md#business-layer) can execute `SideEffects` when altering data, for instance to store the *date time modified*, or set *default values*, or automatically *generate a name*.
 
-We could implement the interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It only has one method: `Execute`, but it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or to generically handle of them in other ways.
+We could implement an interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It only has one method: `Execute`. But it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or to generically handle them.
 
-Using separate classes for `SideEffects`, creates overview over those pieces of business logic, that are quite creative in nature, and prevents these special things from getting entangled with other code.
+Using separate classes for `SideEffects` can creates overview over pieces of code, quite creative in nature, and prevent these special things from getting entangled with other code.
 
-`SideEffects` might evaluate the conditions internally. So the caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can also depend on [status flags](aspects.md#entity-status-management).
+`SideEffects` might evaluate the conditions internally. The caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can also depend on [status flags](aspects.md#entity-status-management).
 
 ### LinkTo
 
 This pattern is about *bidirectional relationship synchronization*. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships even when the underlying persistent technology does not do it for us, we could link [entities](#entities) with `LinkTo` methods, instead of setting *inverse properties* directly. By calling the `LinkTo` methods, both ends of the relationship are updated together. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
+To manage bidirectional relationships even when the underlying persistent technology does not do it for us, we could link [entities](#entities) with `LinkTo` methods. By calling the `LinkTo` methods, both ends of the relationship are updated together. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
