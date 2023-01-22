@@ -100,11 +100,11 @@ Data Access Patterns
 
 ### Entity
 
-These are the classes that represent the *domain model*.
+*Entities* are the `classes` that represent the *functional domain model*.
 
 #### Pure Data
 
-In this [architecture](index.md), we aim to keep the entity classes [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entity).
+In this [architecture](index.md), we aim to keep the entity `classes` [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entity).
 
 ```cs
 class Supplier
@@ -183,19 +183,19 @@ public class Supplier
 
 ### Mapping
 
-Mappings are classes programmed for a particular persistence technology, e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the objects are persisted in the data store (e.g. an [`SQL Server`](api.md#sql-server) database).
+`Mappings` are `classes` programmed for a particular [persistence technology](api.md#orm), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which *`class`* maps to which *`table`* and which *`column`* maps to which *property*.
 
 ### DTO
 
-DTO = Data transfer object. DTO's only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an [entity](#entity) is not handy or efficient.
+`DTO` = Data transfer object. `DTO's` only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an [entity](#entity) is not handy or efficient.
 
-For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a DTO that is a strongly typed version of these records. In many cases you want to query for [entity](#entity) objects instead, but in some cases this is not fast / efficient enough and you should resort to a DTO.
+For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [entity](#entity) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
-DTO's can also be used for other data transfers than for [`SQL`](api.md#sql) queries.
+`DTO's` can also be used for other data transfers than for [`SQL`](api.md#sql) queries.
 
 ### Repository
 
-A `Repository` is like a set of queries. `Repositories` return or save [entities](#entity) in the data store. Simple types, not [entities](#entity), are preferred for parameters. The `Repository` pattern is a way to put queries in a single place. The `Repository's` job is also to provide an optimal set of queries.
+A `Repository` is like a set of queries. `Repositories` return or save [entities](#entity) in the data store. Simple types, not [entities](#entity), are preferred for parameters. The `Repository` pattern is a way to put queries in a single place. The `Repositories'` job is also to provide an optimal set of queries.
 
 Typically, every [entity type](#entity) gets its own `Repository`.
 
@@ -203,7 +203,7 @@ It might be best to not expose types from the underlying persistence technology,
 
 ### Repository Interfaces
 
-Any [Repository type](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled to the underlying persistence technology.
+Any [`Repository type`](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled to the underlying persistence technology.
 
 
 Business Logic Patterns
