@@ -19,7 +19,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 
 - [`Data`](layers.md#data-layer): [Database structure](database-conventions.md)
 - [`Data`](layers.md#data-layer): [Data migration](database-conventions.md#upgrade-scripts)
-- [`Data`](layers.md#data-layer): [Entity classes](patterns.md#entity)
+- [`Data`](layers.md#data-layer): [Entity classes](patterns.md#entities)
 - [`Data`](layers.md#data-layer): [`Repository interfaces`](patterns.md#repository-interfaces)
 - [`Data`](layers.md#data-layer): Default [`Repositories`](patterns.md#repository)
 - [`Data`](layers.md#data-layer): [`NHibernate`](api.md#nhibernate) [`Mappings`](patterns.md#mapping)

@@ -200,7 +200,7 @@ Responsibilities
 
 This is the concept that you split your code into pieces and create separate classes and methods. It is perhaps the single most important design principle of this [software architecture](index.md).
 
-Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into [entities](#entity), for instance [entities](#entity) like `Order`, `Product`, `Customer`, but this is not necessarily leading for the split up into functionality.
+Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into [entities](patterns.md#entities), for instance [entities](patterns.md#entities) like `Order`, `Product`, `Customer`, but this is not necessarily leading for the split up into functionality.
 
 Separation of concerns can also be applied to technical aspects, such as [validation](patterns.md#validators), [calculation](aspects.md#calculation) and [security](aspects.md#security). For instance: you can split up the code to check the [validity](patterns.md#validators) of an order's data from the code that [calculates](aspects.md#calculation) the total price of the order. The split up into technical concerns is usually similar to the split up into [design patterns](patterns.md).
 
@@ -251,9 +251,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](api.md#sql-server) database. You could not use the [entity model](patterns.md#entity) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](api.md#sql-server) database. You could not use the [entity model](patterns.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns.md#entity) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns.md#entity) in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](api.md#sql-server) Server using [`NHibernate`](api.md#nhibernate).
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns.md#entities) in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](api.md#sql-server) Server using [`NHibernate`](api.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -357,16 +357,16 @@ Code should be strict when it comes to nullability. The general message is: chec
 
 #### Basic Guidelines
 
-- [Entity models](patterns.md#entity) are anti-encapsulated: none of the data is protected.
+- [Entity models](patterns.md#entities) are anti-encapsulated: none of the data is protected.
 - A data store often guards nullability.
 - [`Validators`](patterns.md#validators) should also guard nullability.
-- Those two things determine whether an [entity](patterns.md#entity) property is not nullable.
-- You might mark the [entity](patterns.md#entity) property with the word 'not nullable' in its summary.
+- Those two things determine whether an [entity](patterns.md#entities) property is not nullable.
+- You might mark the [entity](patterns.md#entities) property with the word 'not nullable' in its summary.
 - For not nullable properties you never have to do null-checks in your business logic, even though in theory null could be assigned.
-- List-properties in the [entity models](patterns.md#entity) require no null checks at all. They should be created in the constructor of the [entity class](patterns.md#entity) and we simply assume nobody will assign null to it.
-- This means that serious business logic should not be executed on [entities](patterns.md##entity) that have not been [validated](patterns.md#validators) yet. When you just retrieved [entities](#entity) from the data store, you may assume the data is valid.
+- List-properties in the [entity models](patterns.md#entities) require no null checks at all. They should be created in the constructor of the [entity class](patterns.md#entities) and we simply assume nobody will assign null to it.
+- This means that serious business logic should not be executed on [entities](patterns.md##entity) that have not been [validated](patterns.md#validators) yet. When you just retrieved [entities](patterns.md#entities) from the data store, you may assume the data is valid.
 - This saves us a lot of null-checks, which makes code more readable.
-- The other [entity](patterns.md#entity) properties are considered nullable.
+- The other [entity](patterns.md#entities) properties are considered nullable.
 - For nullable properties, business logic must have an alternative flow. Some business logic could throw an exception if a null is encountered. Other business logic might have to be null-tollerant and skip certain things. (Reflect this in the code by using words like 'Try' and 'IfNeeded'.)
 - Null-checks can be omitted if you know that a variable was verified before. For instance: if you throw an exception in the constructor in case an argument is null, you can leave out null-checks in the rest of your class.
 
@@ -378,7 +378,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to [DTO's](patterns.md#dto) as do for [entities](#entity). Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
+- Usually the same rules apply to [DTO's](patterns.md#dto) as do for [entities](patterns.md#entities). Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
 
 #### Strings
     
@@ -473,7 +473,7 @@ Simply giving something a name that reveals its inner workings is a common form 
 
 A longer name in code is better than a short, unspecific one. Even through you may think brevity supports readability, if it creates ambiguity, a longer, unambiguous name usually works out better.
 
-For [entity models](patterns.md#entity), consider the name Order.OrderProducts, not Order.Products if the [entity types](patterns.md#entity) are Order and OrderProduct, even though the first part of the expression 'Order.Products' already seems to imply it that it would be an OrderProduct. Because next to an OrderProduct [entity](patterns.md#entity), the model probably also has a Product [entity](patterns.md#entity) and it would be very confusing that Order.Products would be a list of OrderProducts, as you would sooner think it is a list of Products from the name. Also it makes it harder to 'guess' what an [entity model](patterns.md#entity) property is, if you abbreviate the names. Just use the full [entity type](patterns.md#entity) name for property names and it will be far less confusing, especially to the ones that did not program your model. Again: yes, even when it seems obvious to *you*.
+For [entity models](patterns.md#entities), consider the name Order.OrderProducts, not Order.Products if the [entity types](patterns.md#entities) are Order and OrderProduct, even though the first part of the expression 'Order.Products' already seems to imply it that it would be an OrderProduct. Because next to an OrderProduct [entity](patterns.md#entities), the model probably also has a Product [entity](patterns.md#entities) and it would be very confusing that Order.Products would be a list of OrderProducts, as you would sooner think it is a list of Products from the name. Also it makes it harder to 'guess' what an [entity model](patterns.md#entities) property is, if you abbreviate the names. Just use the full [entity type](patterns.md#entities) name for property names and it will be far less confusing, especially to the ones that did not program your model. Again: yes, even when it seems obvious to *you*.
 
 ### Conceptual Names (👎)
 
@@ -1568,10 +1568,10 @@ It is always harder than you think. The general gist of it might take you 30 min
 If you want to update a set of records, you can sometimes get away with deleting all of them and then inserting the new ones again, but you have to realize that this is generally bad practice. You are better off checking if the item exists and then choose whether to insert or update the item based on that. The reason for this is that often the existing items are linked to by other items. If you bluntly remove them, those links will be corrupted. Even when items do not seem to have any links to them, it is still a better idea to check for existence, then insert or update, because of various reasons:
 
 - It performs better if those statements will end up executed onto a database.
-- You might link to those [entities](#entity) in the future, which makes your code prepared for that, just by following best practice.
-- The [entity](patterns.md#entity) might not be linked to by other [entities](#entity), but the [entity's](patterns.md#entity) ID may very well be present in URL's someone might send to someone in an e-mail.
-- Also there could be links to an [entity](patterns.md#entity) in the UI, even though there are not links to the [entity](patterns.md#entity) from other [entities](patterns.md#entity).
-- The [entity](patterns.md#entity) might not be linked to through a foreign key but could be linked to externally by a loosely linked key. (It can be said that it is very easy to overlook that there are links to an [entity](patterns.md#entity).)
+- You might link to those [entities](patterns.md#entities) in the future, which makes your code prepared for that, just by following best practice.
+- The [entity](patterns.md#entities) might not be linked to by other [entities](patterns.md#entities), but the [entity's](patterns.md#entities) ID may very well be present in URL's someone might send to someone in an e-mail.
+- Also there could be links to an [entity](patterns.md#entities) in the UI, even though there are not links to the [entity](patterns.md#entities) from other [entities](patterns.md#entities).
+- The [entity](patterns.md#entities) might not be linked to through a foreign key but could be linked to externally by a loosely linked key. (It can be said that it is very easy to overlook that there are links to an [entity](patterns.md#entities).)
 
 Hopefully this will give you an idea of how soon you run into problems if you pretend an update equals a deletion + an insertion and make you think twice and do it another way.
 
@@ -1579,7 +1579,7 @@ See also: [`TryGet-Insert-Update`](patterns.md#tryget-insert-update).
 
 ### Whirlpool Anti-Pattern / Inappropriate Conversions
 
-This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a [`ViewModel`](patterns.md#viewmodel) to an [entity](patterns.md#entity). However, additional conversions such as converting one type of [`ViewModel`](patterns.md#viewmodel) to another type of [`ViewModel`](patterns.md#viewmodel) are not recommended.
+This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a [`ViewModel`](patterns.md#viewmodel) to an [entity](patterns.md#entities). However, additional conversions such as converting one type of [`ViewModel`](patterns.md#viewmodel) to another type of [`ViewModel`](patterns.md#viewmodel) are not recommended.
 
 `< TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. >`
 

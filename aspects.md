@@ -140,7 +140,7 @@ It may be tempting to call a [LinkTo](patterns.md#linkto) method from the proper
 Reasons not to have an inverse property can be:
 
 - [Enum-like entities](#enum-Like-entities)
-- [Loosely linked](#loosely-linked-translation-entities) [entity](patterns.md#entity)
+- [Loosely linked](#loosely-linked-translation-entities) [entity](patterns.md#entities)
 - 1-to-1 relationships
 - The inverse relationship would result in an impractically large list.
 
@@ -236,9 +236,9 @@ Another technique for handling concurrency is to assume that other users probabl
 
 The preferred technique in this [architecture](index.md) works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user's changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user's changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user's save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
 
-The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a [`TryGet-Insert-Update`](patterns.md#tryget-insert-update) pattern for [entities](patterns.md#entity). There wll be no checks regarding whether an object is new or already existed. Not-found objects are simply recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
+The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a [`TryGet-Insert-Update`](patterns.md#tryget-insert-update) pattern for [entities](patterns.md#entities). There wll be no checks regarding whether an object is new or already existed. Not-found objects are simply recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
 
-Another strategy that will not be used, is trying to keep all users' additions of related [entities](patterns.md#entity). However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related [entity](patterns.md#entity) is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related [entity](patterns.md#entity), or user A's removal of the related [entity](patterns.md#entity)? The ambiguity could be solved by marking which [entities](patterns.md#entity) are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
+Another strategy that will not be used, is trying to keep all users' additions of related [entities](patterns.md#entities). However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related [entity](patterns.md#entities) is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related [entity](patterns.md#entities), or user A's removal of the related [entity](patterns.md#entities)? The ambiguity could be solved by marking which [entities](patterns.md#entities) are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
 
 
 Configuration
@@ -293,15 +293,15 @@ Entity Model / Data Model
 Entity Status Management
 ------------------------
 
-[Entity](patterns.md#entity) status management (or 'object status management') is the recording of whether an [entity](patterns.md#entity) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns.md#entity) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
+[Entity](patterns.md#entities) status management (or 'object status management') is the recording of whether an [entity](patterns.md#entities) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns.md#entities) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
-There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns.md#entity) and properties get status flagging instead of leaving it up to the [entity](patterns.md#entity) status writers to guess what [entity](patterns.md#entity) status reporting is needed and [entity](patterns.md#entity) status readers to guess of what [entities](patterns.md#entity) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns.md#entity) status management you need.
+There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns.md#entities) and properties get status flagging instead of leaving it up to the [entity](patterns.md#entities) status writers to guess what [entity](patterns.md#entities) status reporting is needed and [entity](patterns.md#entities) status readers to guess of what [entities](patterns.md#entities) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns.md#entities) status management you need.
 
 <h3>Alternatives</h3>
 
-The consequence of explicit [entity](patterns.md#entity) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns.md#entity) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns.md#entity) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns.md#entity) status management through IContext across all platforms, [`JJ.Framework.Data`](api.md#jj-framework-data) should offer its own alternative to [entity](patterns.md#entity) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns.md#entity) status management at the Persistence side, it would make [`JJ.Framework.Data`](api.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit [entity](patterns.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns.md#entities) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api.md#jj-framework-data) should offer its own alternative to [entity](patterns.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
-This is why the explicit status management solution won over the [entity](patterns.md#entity) status management in the persistence framework.
+This is why the explicit status management solution won over the [entity](patterns.md#entities) status management in the persistence framework.
 
 
 Enums
@@ -369,7 +369,7 @@ The difference between throwing an InvalidValueException or a ValueNotSupportedE
 
 ### Enum-Like Entities
 
-- [Entity](patterns.md#entity) models often contain enum-like [entities](patterns.md#entity):
+- [Entity](patterns.md#entities) models often contain enum-like [entities](patterns.md#entities):
 
 ```cs
 public class SectionType
@@ -381,7 +381,7 @@ public class SectionType
 
 Often you do not need more than these two properties.
 
-It is common to end the enum-like [entity](patterns.md#entity) type with the suffix 'Type' (not a strict requirement).
+It is common to end the enum-like [entity](patterns.md#entities) type with the suffix 'Type' (not a strict requirement).
 
 The Name property will be filled with the string that is exactly the enum member name:
 
@@ -393,7 +393,7 @@ new SectionType
 }
 ```
 
-- Enum-like [entities](patterns.md#entity) have an enum-equivalent in the *Business* Layer:
+- Enum-like [entities](patterns.md#entities) have an enum-equivalent in the *Business* Layer:
 
 ```cs
 public enum SectionType
@@ -407,9 +407,9 @@ public enum SectionType
 }
 ```
 
-Note that the enums themselves do not belong in the [entity](patterns.md#entity) model, but in the Business layer.
+Note that the enums themselves do not belong in the [entity](patterns.md#entities) model, but in the Business layer.
 
-- It is *not* recommended to give enum-like [entities](patterns.md#entity) a [bidirectional relationship](aspects.md#bidirectional-relationships) to the [entities](patterns.md#entity) that use it.
+- It is *not* recommended to give enum-like [entities](patterns.md#entities) a [bidirectional relationship](aspects.md#bidirectional-relationships) to the [entities](patterns.md#entities) that use it.
 
 ```cs
 public class SectionType
@@ -421,7 +421,7 @@ public class SectionType
 
 The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the [`LinkTo`](patterns.md#linkto) methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
 
-- To make assigning an enum-like [entity](patterns.md#entity) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like [entities](patterns.md#entity):
+- To make assigning an enum-like [entity](patterns.md#entities) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like [entities](patterns.md#entities):
 
 ```cs
 SectionTypeEnum sectionTypeEnum = section.GetSectionTypeEnum();
@@ -637,7 +637,7 @@ One option to support multi-language, is for a content item to be only available
 
 ### Loosely Linked Translation Entities
 
-One possible solution is each possble naming / grammar structure to each have a generic [entity](patterns.md#entity) type, that can be tied to an arbitrary [entity](patterns.md#entity):
+One possible solution is each possble naming / grammar structure to each have a generic [entity](patterns.md#entities) type, that can be tied to an arbitrary [entity](patterns.md#entities):
 
 ```
 NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityID }
@@ -645,11 +645,11 @@ NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityI
 SingularAndPlural { ID, Singular, Plural, CultureName, EntityTypeName, EntityID }
 ```
 
-The combination `{ EntityTypeName, EntityID }` is a alternative key to the [entity](patterns.md#entity). This makes the translation item structure independent on the model it is applied to, which can be a benefit.
+The combination `{ EntityTypeName, EntityID }` is a alternative key to the [entity](patterns.md#entities). This makes the translation item structure independent on the model it is applied to, which can be a benefit.
 
 ### Many Foreign Keys
 
-Another alternative is to give the translation item [entity](patterns.md#entity) a whole bunch of foreign keys: one for each possible translatable [entity](patterns.md#entity) type.
+Another alternative is to give the translation item [entity](patterns.md#entities) a whole bunch of foreign keys: one for each possible translatable [entity](patterns.md#entities) type.
 
 NameAndDescription { ID, Name, Description, CultureName, __ProductID, DepartmentID__ }
 
@@ -657,11 +657,11 @@ A downside of that is that the table structure is dependent on the domain model 
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
-The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the [entities](patterns.md#entity) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
+The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the [entities](patterns.md#entities) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
-To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns.md#entity) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns.md#entity).
+To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns.md#entities) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns.md#entities).
 
-A lot of work to use the loosely linked [entities](patterns.md#entity). This is not unique to loosely linked translation [entities](patterns.md#entity). It is a problem with any alternative key, that non-flushed [entities](patterns.md#entity) cannot be retrieved with a ([`LINQ`](api.md#linq)) query.
+A lot of work to use the loosely linked [entities](patterns.md#entities). This is not unique to loosely linked translation [entities](patterns.md#entities). It is a problem with any alternative key, that non-flushed [entities](patterns.md#entities) cannot be retrieved with a ([`LINQ`](api.md#linq)) query.
 
 
 Naming

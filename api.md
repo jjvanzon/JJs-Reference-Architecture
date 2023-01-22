@@ -971,7 +971,7 @@ internal interface IConnectionStrings
 
 *Bidirectional relationship synchronization* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns.md#rich-models), [entity](patterns.md#entity), `API` or otherwise.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns.md#rich-models), [entity](patterns.md#entities), `API` or otherwise.
 
 There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
@@ -1020,7 +1020,7 @@ When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework),
 
 ### ORM
 
-An `ORM` aims to make it easier to focus on the logic around an [entity](patterns.md#entity) model, while saving things to a database is pretty much done for you.
+An `ORM` aims to make it easier to focus on the logic around an [entity](patterns.md#entities) model, while saving things to a database is pretty much done for you.
 
 Here follow some issues you could encounter while using an `ORM`, and some suggestions for how to deal with it.
 
@@ -1030,7 +1030,7 @@ This information was gathered from experience, built up with [`NHibernate`](#nhi
 
 Here is something that happens in [`ORM`](#orm) sometimes:
 
-Some methods of data retrieval work with uncommitted / non-flushed [entities](patterns.md#entity): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](patterns.md#entity). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance considerably:
+Some methods of data retrieval work with uncommitted / non-flushed [entities](patterns.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](patterns.md#entities). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance considerably:
 
 | Method | Data Read |
 |--------|----------|
@@ -1049,11 +1049,11 @@ A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes
 
 The trouble with `Flush` is, that it might be executed when things are not done yet, and incomplete data might go to the database, upon which database may give an error. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
 
-`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns.md#entity). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
+`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns.md#entities). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
 
 Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](aspects.md#exceptions) on the child object's `ParentID` column.
 
-It may also help to create [entities](patterns.md#entity) in a specific order (e.g. parent object first, child objects second) or choose a identity generation scheme, that does not require flushing an [entity](patterns.md#entity) pre-maturely.
+It may also help to create [entities](patterns.md#entities) in a specific order (e.g. parent object first, child objects second) or choose a identity generation scheme, that does not require flushing an [entity](patterns.md#entities) pre-maturely.
 
 #### Read-Write Order
 
@@ -1061,11 +1061,11 @@ It seems [`ORM's`](#orm) like it when you first read the data out, and then star
 
 #### Bridge Entities
 
-An *bridge* [entity](patterns.md#entity) applies to `n => n` relationships and may require an additional table to make the link between the [entities](patterns.md#entity):
+An *bridge* [entity](patterns.md#entities) applies to `n => n` relationships and may require an additional table to make the link between the [entities](patterns.md#entities):
 
 <img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
-Using an [`ORM`](#orm), the bridge [entity](patterns.md#entity) might not be visible in the code, but can be managed as two collections inside the two main [entities](patterns.md#entity):
+Using an [`ORM`](#orm), the bridge [entity](patterns.md#entities) might not be visible in the code, but can be managed as two collections inside the two main [entities](patterns.md#entities):
 
 ```cs
 class Question
@@ -1081,7 +1081,7 @@ class Category
 
 The [`ORM`](#orm) can do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](aspects.md#exceptions) to go off, while [`ORM`](#orm) tries to guard the integrity of the relationship.
 
-These problems almost all go away, if you map a *bridge* [entity](patterns.md#entity) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](patterns.md#entity) hold a list of *bridge* [entities](patterns.md#entity) instead. In turn, the bridge [entity](patterns.md#entity) would link back to the two main [entities](patterns.md#entity):
+These problems almost all go away, if you map a *bridge* [entity](patterns.md#entities) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](patterns.md#entities) hold a list of *bridge* [entities](patterns.md#entities) instead. In turn, the bridge [entity](patterns.md#entities) would link back to the two main [entities](patterns.md#entities):
 
 ```cs
 class QuestionCategory
@@ -1101,7 +1101,7 @@ class Category
 }
 ```
 
-This also has the advantage, that the [entity](patterns.md#entity) model would not need to be refactored, if you'd want to add properties to a *combination* of things.
+This also has the advantage, that the [entity](patterns.md#entities) model would not need to be refactored, if you'd want to add properties to a *combination* of things.
 
 It might be advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` might do better:
 
@@ -1113,21 +1113,21 @@ This is because it gives 1 handle to the combination of 2 thing. This gives [`OR
 
 You might not want to map *binary* and other *serialized data* fields using [`ORM`](#orm), because it can harm performance quite a bit.
 
-Retrieving some loose fields of an [entity](patterns.md#entity), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
+Retrieving some loose fields of an [entity](patterns.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
 Using separate [`SQL`](#sql) statements for retrieving blobs might be a better alternative.
 
 #### Inheritance
 
-Particular surprises might emerge when using *inheritance* in your [entity](patterns.md#entity) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns.md#entity) models if you can.
+Particular surprises might emerge when using *inheritance* in your [entity](patterns.md#entities) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns.md#entities) models if you can.
 
 ##### Problem: Entity / Proxy Type Mismatch
 
-When retrieving an [entity](patterns.md#entity) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns.md#entity) type, but an instance of a type derived from your [entity](patterns.md#entity), a so called `Proxy`. This `Proxy` adds to your [entity](patterns.md#entity) a sort of connectedness to the database.
+When retrieving an [entity](patterns.md#entities) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns.md#entities) type, but an instance of a type derived from your [entity](patterns.md#entities), a so called `Proxy`. This `Proxy` adds to your [entity](patterns.md#entities) a sort of connectedness to the database.
 
 ##### Problem: Base Proxy / Derived Proxy Type Mismatch
 
-When you retrieved an [entity](patterns.md#entity) from `NHibernate` that has inheritance, using the base type it returns a `Proxy` of the base type instead of a `Proxy` of the derived type, which makes reference comparisons between base `Proxies` and derived class `Proxies` fail.
+When you retrieved an [entity](patterns.md#entities) from `NHibernate` that has inheritance, using the base type it returns a `Proxy` of the base type instead of a `Proxy` of the derived type, which makes reference comparisons between base `Proxies` and derived class `Proxies` fail.
 
 ##### Problem: 2 Proxies / 1 Entity
 
@@ -1143,23 +1143,23 @@ You can then `Unproxy` both and it will return the underlying object, which is i
 
 ##### Alternative: Unproxy for Type Evaluation
 
-To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it will compare `Proxy` types instead of your [entity](patterns.md#entity) type. This can be confusing.
+To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it will compare `Proxy` types instead of your [entity](patterns.md#entities) type. This can be confusing.
 
 ##### Alternative: ID Comparison
 
-[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns.md#entity) equality checks.
+[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns.md#entities) equality checks.
 
 ##### Alternative: 1-to-1 Relationship
 
-An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entity). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
+An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns.md#entities). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
 
 ##### Alternative: Interfaces
 
-Letting two [entity](patterns.md#entity) types use a mutual `interface` might be an alternative too.
+Letting two [entity](patterns.md#entities) types use a mutual `interface` might be an alternative too.
 
 ##### Alternative: No Inheritance
 
-By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entity) models, if at all possible.
+By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns.md#entities) models, if at all possible.
 
 #### Generic Interfaces
 
@@ -1257,7 +1257,7 @@ foreach (IngredientDto record in records)
 
 The column names in the [`SQL`](#sql) are *case sensitive!*
 
-It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](patterns.md#entity) type name, so they stay grouped together:
+It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](patterns.md#entities) type name, so they stay grouped together:
 
 ![](images/sql-file-names.png)
 
@@ -1385,11 +1385,11 @@ interface IMyRepository : IRepository
 
 This would result in:
 
-- Keeping all the queries of an [entity](patterns.md#entity) together in a [`repository`](patterns.md#repository).
-- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entity) behind an [`SqlExecutor`](#sql-executor).
+- Keeping all the queries of an [entity](patterns.md#entities) together in a [`repository`](patterns.md#repository).
+- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns.md#entities) behind an [`SqlExecutor`](#sql-executor).
 - All that data access would be hidden behind [`repository interfaces`](patterns.md#repository-interfaces) decoupling the persistence technology.
  
-It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entity), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
+It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns.md#entities), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
 You might also find split up into separate assemblies: 
 

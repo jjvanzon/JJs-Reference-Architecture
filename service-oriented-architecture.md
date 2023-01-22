@@ -99,13 +99,13 @@ Standard [ESB's](#the-esb-concept) can be complex and difficult to learn, requir
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns.md#entity) for administrating [`Connection`](#connections) settings and registering [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns.md#entities) for administrating [`Connection`](#connections) settings and registering [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
 
-Next: The main [entities](patterns.md#entity) of the [`ESB`](#the-esb-concept) model:
+Next: The main [entities](patterns.md#entities) of the [`ESB`](#the-esb-concept) model:
 
 ### Enterprises
 
-`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the [`ESB` database](#esb-model). Those who need to log in, will get a `User` [entity](patterns.md#entity) with encrypted credentials.
+`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the [`ESB` database](#esb-model). Those who need to log in, will get a `User` [entity](patterns.md#entities) with encrypted credentials.
 
 ### ConnectionTypes
 
@@ -119,7 +119,7 @@ Note that some `Connections` might not be *between* [`Enterprises`](#enterprises
 
 ### KeyMappings
 
-Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entity) and [logic](layers.md#business-layer) to manage those kinds of [`ReferenceNumbers`](#canonical-keymapping), which might also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns.md#entities) and [logic](layers.md#business-layer) to manage those kinds of [`ReferenceNumbers`](#canonical-keymapping), which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
@@ -198,7 +198,7 @@ But the [service architecture](#-service-oriented-architecture) determines the [
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to add `Tag` models. You might use those `Tags` in [domain models](patterns.md#entity) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) when it needs it.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to add `Tag` models. You might use those `Tags` in [domain models](patterns.md#entities) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) when it needs it.
 
 Here are some examples of `Tag` models in pseudo-code:
 
@@ -209,7 +209,7 @@ You might also make the `Tags` *culture-specific:*
 
     Tag { Name, Value, CultureName }
 
-Or choose to *loosely link* `Tags` to [entities](patterns.md#entity), like so:
+Or choose to *loosely link* `Tags` to [entities](patterns.md#entities), like so:
 
     Tag { Name, Value, EntityTypeName, EntityID }
 
