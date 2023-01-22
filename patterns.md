@@ -248,11 +248,11 @@ Next to `Validators` saying that user input is invalid, `Validators` could also 
 
 The business layer can execute `SideEffects`, when altering data, for instance to store the *date time modified* or setting *default values*, or automatically *generating a name*.
 
-We could implement the interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. They only have one method: `Execute`, but it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or other generic handling of the `SideEffects`.
+We could implement the interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. They only have one method: `Execute`, but it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or other generic handling of them.
 
 Using separate classes for `SideEffects`, creates overview over those pieces of business logic, that are the most creative of all, and prevents those special things from getting entangled with other code.
 
-`SideEffects` might evaluate the conditions internally as much as possible. So the caller of the `SideEffect` class does not know what conditions are tied to it. Internally the `SideEffect` could skip execution if it doesn't apply. This makes the `SideEffect` fully responsible for what happens. The `SideEffect's` doing anything can also be dependent on [entity status](aspects.md#entity-status-management).
+`SideEffects` might evaluate the conditions internally as much as possible. So the caller of the `SideEffect` class does not know what conditions are tied to it. The `SideEffect` could skip its own execution if it wouldn't apply. This makes the `SideEffect` fully responsible for what happens. What a `SideEffect's` does might also depend on [entity status flags](aspects.md#entity-status-management).
 
 ### LinkTo
 
