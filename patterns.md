@@ -212,23 +212,23 @@ Business Logic Patterns
 
 ### Business layer
 
-[Presentation](layers.md#presentation-layer), [entity](#entities) model and [persistence](aspects.md#persistence) should be straightforward. If anything special needs to happen this belongs in the [business layer](layers.md#business-layer). Any number of different patterns can be used.
+[Presentation](layers.md#presentation-layer), [entity](#entities) model and [persistence](aspects.md#persistence) should be straightforward [pattern](#-patterns)-wise. If anything 'special' needs to happen this belongs in the [business layer](layers.md#business-layer). Any number of different patterns can be used.
 
 The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [data transfer objects (`DTO's`)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that [business logic](layers.md#business-layer) works with [entities](#entities) rather than [`Repositories`](#repository) (even though there is a gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
+It is preferred that [business logic](layers.md#business-layer) works with [entities](#entities) rather than [`Repositories`](#repository) (but there is a gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
 
 ### RepositoryWrappers
 
-Passing around lots of [repositories](#repository) would create long lists of parameters, that are prone to change. To combat that problem, sets of [`Repositories`](#repository) could be combined into `RepositoryWrappers` and pass those around instead. This keeps the parameter lists shorter and less prone to change.
+Passing around lots of [repositories](#repository) would create long lists of parameters, that are prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into `RepositoryWrappers`. Those can then be passed around instead. This keeps the parameter lists shorter and less prone to change.
 
 You can make a single `RepositoryWrapper` with all your domain model's [`Repositories`](#repository).
 
-But that is not always enough. Some logic will use [`Repositories`](#repository) out of multiple domains, so sometimes you are well off making a custom `RepositoryWrapper` in that case. You could also choose to simply pass around multiple `RepositoryWrappers`: one per domain model.
+But that is not always enough. Some logic will use [`Repositories`](#repository) out of multiple domains, so you might make a custom `RepositoryWrapper` in that case. You could also choose to pass around multiple `RepositoryWrappers`: one per domain model.
 
 Also, you may want to create different, more limited `RepositoryWrappers`. For instance ones for partial domain models. This keeps the width of dependency narrow, so logic that has nothing to do with certain [`Repositories`](#repository), do not become dependent on all of them.
 
-An alternative to `RepositoryWrappers` might be *dependency injection*. See dependency injection'. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection `API`. `RepositoryWrappers` and dependency injection could well be used in combination with each other.
+An alternative to `RepositoryWrappers` might be [dependency injection](practices-and-principles.md#dependency-injection). Under the link you will find some criticism about the techique, but that might be due to not using a very good [dependency injection](practices-and-principles.md#dependency-injection) `API`. `RepositoryWrappers` and [dependency injection](practices-and-principles.md#dependency-injection) could also be used in combination with each other.
 
 ### Validators
 
