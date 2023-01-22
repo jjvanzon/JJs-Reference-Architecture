@@ -10,7 +10,7 @@
     - [Entities](#entities)
         - [Pure Data](#pure-data)
         - [Enums](#enums)
-        - [Avoid Inheritance](#avoid-inheritance)
+        - [Inheritance](#inheritance)
         - [Create Collections](#create-collections)
         - [Members Virtual](#members-virtual)
         - [Real Code](#real-code)
@@ -139,7 +139,7 @@ enum IndustryEnum
 }
 ```
 
-#### Avoid Inheritance
+#### Inheritance
 
 Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
 
@@ -187,11 +187,11 @@ public class Supplier
 
 ### DTO
 
-`DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of the system. In certain situations, where passing an  [entity](#entities) is not handy or efficient, a `DTO` might be a good alternative.
+`DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of a system. In certain situations, where passing an  [entity](#entities) is not handy or efficient, a `DTO` might be a good alternative.
 
 For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [entity](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
-`DTO's` can also be used for other data transfers than [`SQL`](api.md#sql) queries.
+`DTO's` can be used for other data transfers than [`SQL`](api.md#sql) queries as well.
 
 ### Repository
 
@@ -212,15 +212,15 @@ Business Logic Patterns
 
 ### Business layer
 
-[Presentation](layers.md#presentation-layer), [entity](#entities) model and persistence should be straightforward. If anything special needs to happen this belongs in the business layer. Any number of different patterns can be used.
+[Presentation](layers.md#presentation-layer), [entity](#entities) model and [persistence](aspects.md#persistence) should be straightforward. If anything special needs to happen this belongs in the [business layer](layers.md#business-layer). Any number of different patterns can be used.
 
-The business layer externally speaks a language of [entities](#entities) or sometimes [data transfer objects (DTO's)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for data access.
+The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [data transfer objects (`DTO's`)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that business logic works with [entities](#entities) rather than [`Repositories`](#repository) (even though there is a large gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.]
+It is preferred that [business logic](layers.md#business-layer) works with [entities](#entities) rather than [`Repositories`](#repository) (even though there is a gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
 
 ### RepositoryWrappers
 
-Passing around lots of [repositories](#repository) creates long parameter lists, that are prone to change. To combat that problem, combine sets of [`Repositories`](#repository) into `RepositoryWrappers` and pass those around instead. This keeps the parameter lists short and less prone to change.
+Passing around lots of [repositories](#repository) would create long lists of parameters, that are prone to change. To combat that problem, sets of [`Repositories`](#repository) could be combined into `RepositoryWrappers` and pass those around instead. This keeps the parameter lists shorter and less prone to change.
 
 You can make a single `RepositoryWrapper` with all your domain model's [`Repositories`](#repository).
 
