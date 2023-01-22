@@ -28,6 +28,7 @@
         - [NewLinkTo](#newlinkto)
     - [Cascading](#cascading)
     - [Facade](#facade)
+        - [Using Repositories instead of Facades](#using-repositories-instead-of-facades)
     - [Visitor](#visitor)
     - [Resource Strings](#resource-strings)
 - [Presentation Patterns](#presentation-patterns)
@@ -330,9 +331,13 @@ A `Facade` combines several related (usually `CRUD`) operations into one `class`
 
 It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a set of [entity types](#entities) together.
 
-<h4>Get by ID not in the Facade</h4>
+#### Using Repositories instead of Facades
 
-Even though `Facades` typically contain `CRUD` methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your `Facade`. Execute a simple Get by `ID` onto the [`Repository`](#repository). The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a `Facade`, which is a combinator `class`, meaning it is dependent on many [`Repositories`](#repository) and other objects. So a simple Get goes through the [`Repository`](#repository).
+[`Facades`](#facade) may typically contain `CRUD` operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use [`Repositories`](#repository) directly.
+
+For example, a simple `Get` by `ID` may be better done using a [`Repository`](#repository). There may be other cases where using the [`Repository`](#repository) might be a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
+
+The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operation executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use the [`Repository`](#repository). This to limit the interdependency between things.
 
 ### Visitor
 
@@ -340,7 +345,7 @@ A `Visitor` class processes a recursive structure that might involve many object
 
 Whenever a whole recursive structure needs to be processed, the `Visitor` pattern is a good way to go.
 
-A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, VisitProduct, typically one for every type, possibly also one for each collection. A base `Visitor` might simply follow the whole recursive structure, and has a Visit method for each node in the structure. All Visit methods are protected virtual and usually return void. Public methods might only expose the entry points in the recursion. Derived `Visitors` can override any Visit method that they need. If you only want to process objects of a specific type, you only override the Visit method for that specific type. You can optimize performance by overriding Visit methods that would enter a part of the recursive structure that you do not use.
+A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every type, possibly also one for each collection. A base `Visitor` might simply follow the whole recursive structure, and has a Visit method for each node in the structure. All Visit methods are protected virtual and usually return void. Public methods might only expose the entry points in the recursion. Derived `Visitors` can override any Visit method that they need. If you only want to process objects of a specific type, you only override the Visit method for that specific type. You can optimize performance by overriding Visit methods that would enter a part of the recursive structure that you do not use.
 
 Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the Visit methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
 
