@@ -232,17 +232,17 @@ An alternative to `RepositoryWrappers` might be [dependency injection](practices
 
 ### Validators
 
-Separate `Validator` classes could be used for validation. Specialized classes can be created derived from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
+Separate `Validator` classes could be used for validation. Specialized classes can be created derived from [`VersatileValidator`](api.md#jj-framework-validation) from the [`JJ.Framework`](api.md#jjframework).
 
 It is recommended to keep `Validators` independent from one another.
 
 If multiple `Validators` should go off, you might call them individually one by one, rather than delegating to one another.
 
-When creating a complex `Validator`, it is suggested to add a prefix or suffix to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is not just a simple `Validator`.
+When creating a complex `Validator`, it is suggested to add a prefix or suffix to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple `Validator`.
 
-Next to `Validators` saying that user input is invalid, `Validators` can be used to generate *warnings*, that are not blocking, but help the user do their work.
+Next to `Validators` saying that user input is invalid, `Validators` could also be used to generate *warnings*, that are not blocking, but help the user do their work.
 
-`Validators` might also be used for (complex) delete constraints, for instance when an [entity](#entities) is still in use, you might not be able to delete it.
+`Validators` might also be used for delete constraints, for instance when an [entity](#entities) is still in use, you might not be able to delete it.
 
 ### SideEffects
 
