@@ -8,6 +8,12 @@
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
     - [Entity](#entity)
+        - [Pure Data](#pure-data)
+        - [Members Virtual](#members-virtual)
+        - [Enums](#enums)
+        - [Avoid Inheritance](#avoid-inheritance)
+        - [Create Collections](#create-collections)
+        - [Real Code](#real-code)
     - [Mapping](#mapping)
     - [DTO](#dto)
     - [Repository](#repository)
@@ -96,24 +102,23 @@ Data Access Patterns
 
 These are the classes that represent the *domain model*.
 
-In this [architecture](index.md), we aim to keep the entity classes [just data](#dto) and free of logic. The entity classes in this [architecture](index.md) simply contain properties of simple types or references or lists to other [entities](#entity).
+#### Pure Data
+
+In this [architecture](index.md), we aim to keep the entity classes [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entity).
 
 ```cs
 class Supplier
 {
-    // Simple types
     int ID { get; set; }
     string Name { get; set; }
-
-    // Reference to entity
     Address Address { get; set; }
-
-    // Reference to list of entities
     IList<Product> Products { get; set; }
 }
 ```
 
-`Public` members should be `virtual`, otherwise persistence technologies may not work. This is because they want to create proxy `classes`. You may read more about about that [here](api.md#inheritance).
+#### Members Virtual
+
+`Public` members should be `virtual`, otherwise [persistence technologies](api.md#orm) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch).
 
 ```cs
 class Supplier
@@ -124,7 +129,9 @@ class Supplier
 }
 ```
 
-You might even want to avoid `enums`. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
+#### Enums
+
+You might even want to avoid `enums` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
 
 ```cs
 class Supplier
@@ -145,7 +152,11 @@ enum IndustryEnum
 }
 ```
 
+#### Avoid Inheritance
+
 Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
+
+#### Create Collections
 
 Creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
 
@@ -156,9 +167,19 @@ class Supplier
 }
 ```
 
-These code examples were just illustrative pseudo-code.
+#### Real Code
 
-`< TODO: Real code sample. >`
+These code examples were just illustrative pseudo-code. This is a more realistic example:
+
+```cs
+public class Supplier
+{
+    public virtual int ID { get; set; }
+    public virtual string Name { get; set; }
+    public virtual Address Address { get; set; }
+    public virtual IList<Product> Products { get; set; } = new List<Product>();
+}
+```
 
 ### Mapping
 
