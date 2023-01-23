@@ -345,15 +345,19 @@ A `Visitor` class processes a recursive structure that might involve many object
 
 Whenever a whole recursive structure needs to be processed, the `Visitor` pattern is a good way to go.
 
-A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every type, possibly also one for each collection. A base `Visitor` might simply follow the whole recursive structure, and has a Visit method for each node in the structure. All Visit methods are protected virtual and usually return void. Public methods might only expose the entry points in the recursion. Derived `Visitors` can override any Visit method that they need. If you only want to process objects of a specific type, you only override the Visit method for that specific type. You can optimize performance by overriding Visit methods that would enter a part of the recursive structure that you do not use.
+A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`.
 
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the Visit methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
+A base `Visitor` might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure. All `Visit` methods are `protected virtual` and usually return `void`. `Public` methods might only expose the *entry points* in the recursion.
+
+Derived `Visitors` can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not use.
+
+Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
 
 By creating a base `Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
-The classic `Visitor` pattern has a design flaw in it, that we might not employ. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. It is advised not to use it and leave out the `Accept` methods for `classes` used by a `Visitor`.
+The classic `Visitor` pattern has a bit of a design flaw in it in my opinion.The classic `Visitor` requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think thisis adapting the wrong `classes`. My advice would be to use it and leave out these `Accept`.
 
-A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however we follow additional rules.
+A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however the style of `Visitor` might be different from that in this [software architecture](index.md). It can still be called a `Visitor` if it operates by slightly different rules.
 
 `< TODO: Make a good text out of this, covering handling polymorphism in Visitors. Merge this with the main text: `
 
