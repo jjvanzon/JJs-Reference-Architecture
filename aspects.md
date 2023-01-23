@@ -168,6 +168,10 @@ Calculation
 Cascading
 ---------
 
+When a main [entity](patterns.md#entities) would be deleted, other [entities](patterns.md#entities) might automatically be deleted, because they are part of the main [entity](patterns.md#entities).
+
+[Entities](patterns.md#entities) that are linked to the entity to be deleted, but not inherently part of it, would be *unlinked* instead of deleted.
+
 `< TODO: Write texts. Include: `
 
 `Talk about DeleteWithRelatedEntities and UnlinkRelatedEntities.`

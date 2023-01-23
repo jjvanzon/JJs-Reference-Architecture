@@ -27,12 +27,12 @@
         - [Unlink](#unlink)
         - [NewLinkTo](#newlinkto)
     - [Cascading](#cascading)
+        - [Cascading & Repositories](#cascading--repositories)
     - [Facade](#facade)
-        - [Using Repositories instead of Facades](#using-repositories-instead-of-facades)
     - [Visitor](#visitor)
         - [Polymorphic Visitation](#polymorphic-visitation)
-        - ['Accept' Methods](#accept-methods)
-        - [Code Example](#code-example)
+        - [Accept Methods](#accept-methods)
+        - [Code Sample](#code-sample)
     - [Resource Strings](#resource-strings)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
@@ -299,7 +299,7 @@ If a `LinkTo` method name becomes ambiguous, you could suffix e.g.:
 
 #### Unlink
 
-Next to `LinkTo` methods, you might also add `Unlink` methods in an `UnlinkExtensions` class:
+Next to [`LinkTo`](#linkto) methods, you might also add `Unlink` methods in an `UnlinkExtensions` class:
 
 ```cs
 public static void UnlinkParent(this Child child)
@@ -311,7 +311,7 @@ public static void UnlinkParent(this Child child)
 
 #### NewLinkTo
 
-If you are linking objects together, that you *know are new*, you may use better-performing variations for `LinkTo`, called `NewLinkTo`, that omit expensive checks:
+If you are linking objects together, that you *know are new*, you may use better-performing variations for [`LinkTo`](#linkto), called `NewLinkTo`, that omit expensive checks:
 
 ```cs
 public static void NewLinkTo(this Child child, Parent parent)
@@ -322,11 +322,80 @@ public static void NewLinkTo(this Child child, Parent parent)
 }
 ```
 
-But beware that `LinkTo` might be a better choice, because executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
+But beware that [`LinkTo`](#linkto) might be a better choice, because executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
 
 ### Cascading
 
-`< TODO: Describe how the DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions are organized. >`
+[`Cascading`](aspects.md#cascading) means that upon deletion [entities](#entities), theie sub-entities are deleted automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead of deleted.
+
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can see explicitly in the code that other deletions take place. This is considered important enough to not be hidden from view.
+
+A way to implement it is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
+
+Where a main [entity](#entities) is `Deleted`, we would also call the `Cascading` methods:
+
+```cs
+entity.DeleteRelatedEntities();
+entity.UnlinkRelatedEntities();
+repository.Delete(entity);
+```
+
+Here follows a way to organize these methods.
+
+In the `csproj` that is the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) `Cascading`, with two code files in it:
+
+```
+JJ.Ordering.Business.csproj
+    |
+    |- Cascading
+        |
+        |- DeleteRelatedEntitiesExtensions.cs
+        |- UnlinkRelatedEntitiesExtensions.cs
+```
+
+The code files can ee built up as follows: 
+
+`DeleteRelatedEntitiesExtensions.cs:`
+
+```cs
+static class DeleteRelatedEntitiesExtensions
+{
+    static void DeleteRelatedEntities(this Order order)
+    {
+        ...
+    }
+}
+```
+
+`UnlinkRelatedEntitiesExtensions.cs:`
+
+```cs
+static class UnlinkRelatedEntitiesExtensions
+{
+    static void UnlinkRelatedEntities(this Order order)
+    {
+        ...
+    }
+}
+```
+
+In these methods, the child [entities](#entities) are successively `Deleted` or [`Unlinked`](#unlink).
+
+`< TODO: Code sample Delete cascading. >`
+
+Before the extension methods `Delete` a child entity, it might call `Cascading` on the child entity too!
+
+`< TODO: Code sample Delete cascading. >`
+
+`UnlinkRelatedEntities` might be a bit simpler. It would neither require `Repositories` not does not need much recursion.
+
+`< TODO: Code sample. >`
+
+This way you can build up all `Cascading` code by just using a pattern.
+
+#### Cascading & Repositories
+
+The `DeleteRelatedEntities` methods might receive [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters* or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection). It's your choice. The choice to use *extension* methods is also a matter of preference and not a hard rule.
 
 ### Facade
 
@@ -334,13 +403,13 @@ A `Facade` combines several related (usually [`CRUD`](layers.md#crud)) operation
 
 It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a set of [entity types](#entities) together.
 
-#### Using Repositories instead of Facades
+<h4>Using Repositories instead of Facades</h4>
 
 [`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [`Repositories`](#repository) directly.
 
 For example, a simple `Get` by `ID` may be better going through the [`Repository`](#repository). There could be other cases where using the [`Repositories`](#repository) is a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
 
-The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use the [`Repository`](#repository). This to limit the interdependency between things.
+The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository). This to limit the interdependence between things.
 
 ### Visitor
 
@@ -368,11 +437,11 @@ A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `Expression
 
 `< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
 
-#### 'Accept' Methods
+#### Accept Methods
 
-The classic `Visitor` pattern has a bit of a design flaw in it in my opinion. It requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods.
+The *classic* `Visitor` pattern has a bit of a design flaw in it in my opinion. It requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods. This would keep the `Visitor` classes self-sufficient and separate from the rest of the code.
 
-#### Code Example
+#### Code Sample
 
 This code example demonstrates a specific style preference for `Visitors` in this [software architecture](index.md) and gives an impression how visitor code might be structured.
 

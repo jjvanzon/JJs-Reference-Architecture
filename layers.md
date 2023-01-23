@@ -258,7 +258,7 @@ Setting [default values](aspects.md#defaults) when creating an [entity](patterns
 
 ### Cascading
 
-Along with one [entity](patterns.md#entities), other [entities](patterns.md#entities) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entities) when a main [entity](patterns.md#entities) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entities) before deleting a related [entity](patterns.md#entities). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entities), other [entities](patterns.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entities) when a main [entity](patterns.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entities) before deleting a related [entity](patterns.md#entities). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -270,7 +270,7 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Facades
 
-Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#sideeffects), [cascading](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
+Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#sideeffects), [`Cascading`](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
 
 ### CRUD
 
