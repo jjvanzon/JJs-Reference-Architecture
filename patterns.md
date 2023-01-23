@@ -333,9 +333,9 @@ It is a combinator `class`: a `Facade` combines other (smaller) parts of the [bu
 
 #### Using Repositories instead of Facades
 
-[`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use [`Repositories`](#repository) directly.
+[`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [`Repositories`](#repository) directly.
 
-For example, a simple `Get` by `ID` may be better done using a [`Repository`](#repository). There may be other cases where using the [`Repository`](#repository) might be a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
+For example, a simple `Get` by `ID` may be better going through the [`Repository`](#repository). There may be other cases where using the [`Repositories`](#repository) might be a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code: usually straightforward [data conversion](aspects.md#conversion).
 
 The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use the [`Repository`](#repository). This to limit the interdependency between things.
 
