@@ -327,13 +327,13 @@ But beware that `LinkTo` might be a better choice, because executing `NewLinkTo`
 
 ### Facade
 
-A `Facade` combines several related (usually `CRUD`) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that integrity is maintained.
+A `Facade` combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that integrity is maintained.
 
 It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a set of [entity types](#entities) together.
 
 #### Using Repositories instead of Facades
 
-[`Facades`](#facade) may typically contain `CRUD` operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use [`Repositories`](#repository) directly.
+[`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use [`Repositories`](#repository) directly.
 
 For example, a simple `Get` by `ID` may be better done using a [`Repository`](#repository). There may be other cases where using the [`Repository`](#repository) might be a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
 
@@ -862,7 +862,7 @@ The specific way to implement it, is different in every situation. Reasons that 
 - You cannot always count on identity integrity.
 - The key to a destination item might be complex, instead of just an ID.
 - You do not always have a [`Repository`](#repository).
-- It does not always need to be full-`CRUD`.
+- It does not always need to be full-[`CRUD`](layers.md#crud).
 - You might need to report exactly what operation is executed on each [entity](#entities).
 - You might need a separate normalized [*singular* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
 - An alternative `isNew` detection might be needed.

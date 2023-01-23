@@ -274,7 +274,7 @@ Calling the [business layer](#business-layer) can happen through [`Facades`](pat
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or ["CRUD"](practices-and-principles.md#crud). This set of basic operations might not change much, keeping the interfaces relative stable. But *Non-CRUD* operations might be added too.
+The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or `CRUD`. This set of basic operations might not change much, keeping the `interfaces` relative stable. But *Non-CRUD* operations might be added too.
 
 ### Platform Independence
 

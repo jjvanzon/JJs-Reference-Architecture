@@ -44,7 +44,6 @@
     - [Blackboxing and Whiteboxing](#blackboxing-and-whiteboxing)
     - [Clarity over Brevity](#clarity-over-brevity)
     - [Conceptual Names (👎)](#conceptual-names-)
-    - [CRUD](#crud)
     - [Delegitis (👎)](#delegitis-)
     - [Dependency Injection](#dependency-injection)
     - [Entity Design](#entity-design)
@@ -492,10 +491,6 @@ Here are a few more examples:
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
 - A [`View`](patterns.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns.md#controller) `Action`, the [`.NET`](api.md#dotnet) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
-
-### CRUD
-
-`< TODO: Explain. >`
 
 ### Delegitis (👎)
 
