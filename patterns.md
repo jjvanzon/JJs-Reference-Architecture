@@ -8,11 +8,11 @@
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
     - [Entities](#entities)
-        - [Pure Data](#pure-data)
+        - [Pure Data Objects](#pure-data-objects)
         - [Enums](#enums)
+        - [Collections](#collections)
+        - [Virtual Members](#virtual-members)
         - [Inheritance](#inheritance)
-        - [Create Collections](#create-collections)
-        - [Members Virtual](#members-virtual)
         - [Real Code](#real-code)
     - [Mapping](#mapping)
     - [DTO](#dto)
@@ -30,6 +30,9 @@
     - [Facade](#facade)
         - [Using Repositories instead of Facades](#using-repositories-instead-of-facades)
     - [Visitor](#visitor)
+        - [Polymorphic Visitation](#polymorphic-visitation)
+        - ['Accept' Methods](#accept-methods)
+        - [Code Example](#code-example)
     - [Resource Strings](#resource-strings)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
@@ -105,7 +108,7 @@ Data Access Patterns
 
 *Entities* are the `classes` that represent the *functional domain model*.
 
-#### Pure Data
+#### Pure Data Objects
 
 In this [architecture](index.md), we aim to keep the entity `classes` [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entities).
 
@@ -142,11 +145,7 @@ enum IndustryEnum
 }
 ```
 
-#### Inheritance
-
-Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
-
-#### Create Collections
+#### Collections
 
 Creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
 
@@ -157,7 +156,7 @@ class Supplier
 }
 ```
 
-#### Members Virtual
+#### Virtual Members
 
 `Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
@@ -169,6 +168,10 @@ class Supplier
     ...
 }
 ```
+
+#### Inheritance
+
+Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
 
 #### Real Code
 
@@ -347,27 +350,38 @@ Whenever a whole recursive structure needs to be processed, the `Visitor` patter
 
 A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`.
 
-A base `Visitor` might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure. All `Visit` methods are `protected virtual` and usually return `void`. `Public` methods might only expose the *entry points* in the recursion.
+A base `Visitor` might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
 
 Derived `Visitors` can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not use.
 
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
-
 By creating a base `Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
-The classic `Visitor` pattern has a bit of a design flaw in it in my opinion.The classic `Visitor` requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think thisis adapting the wrong `classes`. My advice would be to use it and leave out these `Accept`.
+A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however the style of `Visitor` might be different in this [software architecture](index.md). It can still be called a `Visitor` if it operates by slightly different rules.
 
-A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however the style of `Visitor` might be different from that in this [software architecture](index.md). It can still be called a `Visitor` if it operates by slightly different rules.
+#### Polymorphic Visitation
 
-`< TODO: Make a good text out of this, covering handling polymorphism in Visitors. Merge this with the main text: `
+`< TODO:`
 
 `- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.`
 
 `- Visitor pattern: mention that you always need to call polymorphic, otherwise you might not get all the objects when you override the polymorphic. >`
 
+`< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
+
+#### 'Accept' Methods
+
+The classic `Visitor` pattern has a bit of a design flaw in it in my opinion. It requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods.
+
+#### Code Example
+
+This code example demonstrates a specific style preference for `Visitors` in this [software architecture](index.md) and gives an impression how visitor code might be structured.
+
+All `Visit` methods are `protected virtual` and usually return `void`. `Public` methods might only expose the *entry points* in the recursion.
+
+Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
+
 `< TODO: Code example. >`
 
-`< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
 
 ### Resource Strings
 
