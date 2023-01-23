@@ -337,7 +337,7 @@ It is a combinator `class`: a `Facade` combines other (smaller) parts of the [bu
 
 For example, a simple `Get` by `ID` may be better done using a [`Repository`](#repository). There may be other cases where using the [`Repository`](#repository) might be a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
 
-The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operation executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use the [`Repository`](#repository). This to limit the interdependency between things.
+The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use the [`Repository`](#repository). This to limit the interdependency between things.
 
 ### Visitor
 
