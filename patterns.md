@@ -1,6 +1,8 @@
 ﻿🧶 Patterns
 ============
 
+`[ Draft ]`
+
 [back](.)
 
 <h3>Contents</h3>
@@ -328,13 +330,13 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 ### Cascading
 
-[`Cascading`](aspects.md#cascading) means that upon deletion [entities](#entities), theie sub-entities are deleted automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead of deleted.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), the sub-entities are deleted automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead of `Deleted`.
 
-This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can see explicitly in the code that other deletions take place. This is considered important enough to not be hidden from view.
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can see explicitly in the code that other `Deletions` take place. This may be important enough to not be hidden from view.
 
 A way to implement it is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
-Where a main [entity](#entities) is `Deleted`, we would also call the `Cascading` methods:
+Where a main [entity](#entities) is `Deleted`, we could also call the `Cascading` methods:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -342,9 +344,9 @@ entity.UnlinkRelatedEntities();
 repository.Delete(entity);
 ```
 
-Here follows a way to organize these methods.
+Here follows a way to organize the code.
 
-In the `csproj` that is the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) `Cascading`, with two code files in it:
+In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) `Cascading`, with two code files in it:
 
 ```
 JJ.Ordering.Business.csproj
@@ -385,11 +387,11 @@ In these methods, the child [entities](#entities) are successively `Deleted` or 
 
 `< TODO: Code sample Delete cascading. >`
 
-Before the extension methods `Delete` a child [entity](#entities), it might call `Cascading` on the child [entity](#entities) too!
+Before an extension method `Deletes` a child [entity](#entities), it might call `Cascading` upon the child [entity](#entities) too!
 
 `< TODO: Code sample Delete cascading. >`
 
-`UnlinkRelatedEntities` might be a bit simpler. It would neither require `Repositories` not does not need much recursion.
+`UnlinkRelatedEntities` might be a bit simpler. It would neither require [`Repositories`](#repository) not does not need much recursion.
 
 `< TODO: Code sample. >`
 
@@ -397,37 +399,37 @@ This way you can build up all the `Cascading` code by just using a pattern.
 
 #### Cascading & Repositories
 
-The `DeleteRelatedEntities` methods might receive [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters* or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection). It's your choice. The choice to use *extension* methods is also a matter of preference and not a hard rule.
+The `DeleteRelatedEntities` methods might receive [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters* or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection). It's up to you. The choice to use *extension* methods is also a matter of preference.
 
 ### Facade
 
-A `Facade` combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that integrity is maintained.
+A `Facade` combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [`Validation`](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that integrity is maintained.
 
-It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a set of [entity types](#entities) together.
+It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A `Facade` can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [entity types](#entities) together.
 
 <h4>Repositories instead of Facades</h4>
 
-[`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [`Repositories`](#repository) directly.
+[`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations, that could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [data access layer](layers.md#data-layer) directly.
 
-For example, a simple `Get` by `ID` may be better going through the [`Repository`](#repository). There could be other cases where using the [`Repositories`](#repository) is a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
+For example, a simple `Get` by `ID` may be better going through a [`Repository`](#repository). There could be other cases where using [`Repositories`](#repository) directly is a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
 
-The reason is, that using the [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository). This to limit the interdependence between things.
+The reason is, that using a [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository). To limit the interdependence between things.
 
 ### Visitor
 
-A `Visitor class` processes a recursive structure that might involve many `objects` and multiple types of `objects`. Usually a `Visitor` translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. `Visitors` can result in a well performing process.
+A [`Visitor`](#visitor) `class` processes a recursive structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing processes.
 
-Whenever a whole recursive structure needs to be processed, the `Visitor` pattern is a good way to go.
+Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
-A `Visitor class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`.
+A [`Visitor`](#visitor) `class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`. Sometimes extra `Visit` methods for special cases, if relevant.
 
-A `base Visitor` might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
+A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
 
-Derived `Visitors` can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not use.
+Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not use.
 
-By creating a `base Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
+By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
-A good example of a `Visitor class` is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however the style of `Visitor` might be different in this [software architecture](index.md). It can still be called a `Visitor` if it operates by slightly different rules.
+A good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor), however the style of a [`Visitor`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
 #### Polymorphic Visitation
 
@@ -441,40 +443,45 @@ A good example of a `Visitor class` is [`.NET's`](api.md#dotnet) own `Expression
 
 #### Accept Methods
 
-The *classic* `Visitor` pattern has a bit of a design flaw in it in my opinion. It requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods. This would keep the `Visitor classes` self-sufficient and separate from the rest of the code.
+The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
 
 #### Code Sample
 
-This code example demonstrates a specific style preference for `Visitors` in this [software architecture](index.md) and gives an impression how visitor code might be structured.
+This code example demonstrates specific style preferences for [`Visitors`](#visitor) in this [software architecture](index.md) and gives an impression how [`Visitor`](#visitor) code might be structured.
 
-All `Visit` methods are `protected virtual` and usually return `void`. `Public` methods might only expose the *entry points* in the recursion.
+All `Visit` methods are `protected virtual` and usually return `void`. They all need to be `overridable` to harnass the power of having specialized [`Visitor`](#visitor) `classes`. `Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
 
 Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
 
 `< TODO: Code example. >`
 
-
 ### Resource Strings
 
-For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](api.md#dotnet) projects.
+For `Button Texts` and translations of [model](#entities) properties to different languages, you could use `resx` files in your [`.NET`](api.md#dotnet) projects.
 
-If you follow the following naming convention for resources files, [`.NET`](api.md#dotnet) can automatically return the translations into the language of the current culture:
+If you follow the following naming convention for `resources` files, [`.NET`](api.md#dotnet) can automatically return the translations into the language of the `CurrentCulture`:
 
     Resources.resx
     Resources.nl-NL.resx
     Resources.de-DE.resx
 
-The culture-inspecific resx has the en-US language.
+It uses [`.NET`](api.md#dotnet) [`CultureNames`](https://www.csharp-examples.net/culture-names/).
 
-The key should be representative of the text itself.
+The culture-inspecific `resx` is recommended to be the language `en-US` (`US English`).
 
-`< TODO: Mention the resource formatter pattern, e.g. MessageFormatter. >`
+`< TODO: example string resource editor. >`
 
-Resources seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
+It is recommended to keep the key representative of the text itself, and not something more abstract. That way it is clearer in the code, what kind of text to expect.
 
-`JJ.Framework.Resources` contains reusable resource `strings` for common titles such as `Delete`, `Edit`, `Save`, etcetera.
+`Resources` seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the [business layer](layers.md#business-layer) too, so are put in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Especially the `DisplayNames` of [model](#entities) properties might be put in the back-end, so they might be reused in multiple front-ends.
 
-Extra information in Dutch about how to structure your resource files can be read in Appendix B.
+[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) contains reusable resource `strings` for common titles such as `Delete`, `Edit`, `Save`, etcetera.
+
+`ResourceFormatters` might be used to lead the programming to use the right placeholders required in the resource strings. `< TODO: Example of string with placeholders. >`
+
+`< TODO: Code example for ResourceFromatters. >`
+
+Extra information in Dutch about how to structure your `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
 
 Presentation Patterns
