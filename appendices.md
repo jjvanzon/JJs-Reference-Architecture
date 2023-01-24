@@ -1,6 +1,8 @@
 ﻿➕ Appendices
 ==============
 
+`[ Draft ]`
+
 [back](.)
 
 <h3>Contents</h3>
@@ -84,6 +86,8 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 
 Appendix B: Knopteksten en berichtteksten in applicaties (resource strings) [ Dutch ]
 -------------------------------------------------------------------------------------
+
+`< TODO: Translate to English. Remove authoratative tone. >`
 
 Er is een bepaalde structuur waar binnen we werken voor knopteksten en meldingen in onze applicaties. De hele bedoeling is maximale herbruikbaarheid, minimaal vertaal werk en correcte teksten. Dat doen we door hele algemene teksten op plaats X te zetten, zo veel mogelijk domein termen op plaats Y, en alleen wat er dan over is, komt in specifieke projecten te staan. Dit kan het verschil betekenen tussen 100'en of 10000 teksten.
 

@@ -1,6 +1,8 @@
 ﻿🗄 Server Architecture
 ======================
 
+`[ Draft ]`
+
 [back](.)
 
 <h3>Contents</h3>

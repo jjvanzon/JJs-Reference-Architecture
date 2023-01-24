@@ -1,6 +1,8 @@
 ﻿🚀 Software Lifecycle
 ======================
 
+`[ Draft ]`
+
 [back](.)
 
 <h3>Contents</h3>
