@@ -220,23 +220,23 @@ Business Logic Patterns
 
 ### Business Layer
 
-[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that don't follow any standard [pattern](#introduction).
+[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it should belong in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that don't follow any standard [pattern](#introduction) could be found in there.
 
-The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [data transfer objects (DTO's)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
+The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [`DTO's`](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that [business logic](layers.md#business-layer) hooks up with  [entity](#entities) `classes` rather than [`Repositories`](#repository). Hoever there is a large gray area. Using [entities](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
+It is preferred that [business logic](layers.md#business-layer) hooks up with  [entity](#entities) `classes` rather than [`Repositories`](#repository). But there is a large gray area. Using [entities](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
 
 ### RepositoryWrappers
 
-Passing around lots of [`Repositories`](#repository) can create long lists of parameters, prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into `RepositoryWrappers`. Those can then be passed around instead. This keeps the parameter lists shorter and less prone to change.
+Passing around lots of [`Repositories`](#repository) can create long lists of parameters, prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into [`RepositoryWrappers`](#repositorywrappers). Those can then be passed around instead. This keeps the parameter lists shorter.
 
-You can make a single `RepositoryWrapper` with all the [`Repositories`](#repository) out of a [functional domains](namespaces-assemblies-and-folders.md#functional-domains).
+You can make a single [`RepositoryWrapper`](#repositorywrappers) with all the [`Repositories`](#repository) out of a [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
 
-Some logic might use [`Repositories`](#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple `RepositoryWrappers`: one per [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also make a custom `RepositoryWrapper` with [`Repositories`](#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
+Some logic might use [`Repositories`](#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple [`RepositoryWrappers`](#repositorywrappers): one for each [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also make a custom [`RepositoryWrapper`](#repositorywrappers) with [`Repositories`](#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains).
 
-Also, you may want to create different, more limited `RepositoryWrappers`. For instance one for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not become dependent on them all.
+You may also want to more limited [`RepositoryWrappers`](#repositorywrappers). For instance one for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency more narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not accidentally become dependent on them.
 
-An alternative to `RepositoryWrappers` might be [dependency injection](practices-and-principles.md#dependency-injection). Under thise due to not using a very go [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very safe [dependency injection](practices-and-principles.md#dependency-injection) `API`. `RepositoryWrappers` and [dependency injection](practices-and-principles.md#dependency-injection) might also be used in combination with each other.
+An alternative to [`RepositoryWrappers`](#repositorywrappers) might be [dependency injection](practices-and-principles.md#dependency-injection). Under this [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very safe [dependency injection](practices-and-principles.md#dependency-injection) `API`. [`RepositoryWrappers`](#repositorywrappers) and [dependency injection](practices-and-principles.md#dependency-injection) might also go hand in hand in combination with each other.
 
 ### Validators
 
@@ -244,29 +244,29 @@ Separate [`Validator`](api.md#jj-framework-validation) `classes` could be used f
 
 It is recommended to keep [`Validators`](api.md#jj-framework-validation) independent from each other.
 
-If multiple [`Validators`](api.md#jj-framework-validation) should go off, you might call them individually one by one, rather than delegating to one another.
+If multiple [`Validators`](api.md#jj-framework-validation) should go off, you might call them individually one by one.
 
 For complex [`Validator`](api.md#jj-framework-validation), it is suggested to add a [prefix or suffix](code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](api.md#jj-framework-validation).
 
-Next to [`Validators`](api.md#jj-framework-validation) saying that user input is invalid, [`Validators`](api.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with the app.
+Next to [`Validators`](api.md#jj-framework-validation) deciding whether user input is valid, [`Validators`](api.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with an app.
 
 [`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [entity](#entities) is still in use, you might not be able to delete it.
 
 ### SideEffects
 
-The [business layer](layers.md#business-layer) can execute [`SideEffects`](api.md#jj-framework-business) when altering data, to for instance store the *date time modified*, set [default values](aspects.md#defaults), or automatically generating a *name*.
+The [business layer](layers.md#business-layer) can execute [`SideEffects`](api.md#jj-framework-business) while altering data, for instance to record a *date time modified*, set [default values](aspects.md#defaults), or automatically generate a *name*.
 
-We could implement an `interface` [`ISideEffect`](api.md#jj-framework-business) for each [`SideEffect`](api.md#jj-framework-business). It has only one method: `Execute`. This allows us to have some sort of polymorphism over [`SideEffects`](api.md#jj-framework-business) so it is easier to execute multiple in a row, or handle them *generically*.
+We could implement an `interface` [`ISideEffect`](api.md#jj-framework-business) for each of these. It has only one method: `Execute`. This gives us some polymorphism over [`SideEffects`](api.md#jj-framework-business) so it is easier to handle them *generically* and for instance `Execute` multiple in a row.
 
-Using separate `classes` for [`SideEffects`](api.md#jj-framework-business) can create overview over pieces of logic, creative in nature, and prevent these special things from getting entangled.
+Using separate `classes` for [`SideEffects`](api.md#jj-framework-business) can create overview over pieces of logic, creative in nature, and prevent things from getting entangled.
 
-[`SideEffects`](api.md#jj-framework-business) might evaluate conditions internally. The caller of the [`SideEffect`](api.md#jj-framework-business) `class` does not know what conditions there are. A [`SideEffect`](api.md#jj-framework-business) could skip over its own execution, when it wouldn't apply. This makes the [`SideEffect`](api.md#jj-framework-business) fully responsible for what happens. What a [`SideEffect`](api.md#jj-framework-business) does can depend on [status flagging](aspects.md#entity-status-management) too.
+[`SideEffects`](api.md#jj-framework-business) might evaluate conditions internally. The caller of the [`SideEffect`](api.md#jj-framework-business) `class` would not know what conditions there are. A [`SideEffect`](api.md#jj-framework-business) could skip over its own execution, when it wouldn't apply. This makes the [`SideEffect`](api.md#jj-framework-business) fully responsible for what happens. What a [`SideEffect`](api.md#jj-framework-business) does can also depend on [status flagging](aspects.md#entity-status-management).
 
 ### LinkTo
 
-This pattern is about *bidirectional relationship synchronization*. That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+This pattern is about [bidirectional relationship synchronization](aspects.md#bidirectional-relationship-synchronization). That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships, even when the underlying persistent technology doesn't, we could link [entities](#entities) together using `LinkTo` extension methods. By calling `LinkTo`, both ends of the relationship are updated. Here is a template for a `LinkTo` method that works for an `1-to-n` relationship:
+To manage [bidirectional relationships](aspects.md#bidirectional-relationship-synchronization), even when the underlying [persistence technology](aspects.md#persistence) doesn't, we could link [entities](#entities) together using [`LinkTo`](#linkto) extension methods. By calling [`LinkTo`](#linkto), both ends of the relationship are updated. Here is a template for a [`LinkTo`](#linkto) method that works for an `1-to-n` relationship:
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -295,15 +295,15 @@ public static void LinkTo(this Child child, Parent parent)
 
 Beware that all the checks and list operations can come with a performance penalty.
 
-You could put the `LinkTo` methods together in a `class` named `LinkToExtensions`. You might put it in a `LinkTo` [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
+You could put the [`LinkTo`](#linkto) methods together in a `class` named `LinkToExtensions`. You might put it in a [`LinkTo`](#linkto) [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
 
-If a `LinkTo` method name becomes ambiguous, you could suffix it, for instance:
+If a [`LinkTo`](#linkto) method name becomes ambiguous, you could suffix it, for instance:
 
     LinkToParentDocument
 
 #### Unlink
 
-Next to [`LinkTo`](#linkto) methods, you might also add `Unlink` methods in an `UnlinkExtensions class`:
+Next to [`LinkTo`](#linkto) methods, you might also add [`Unlink`](#unlink) methods in an `UnlinkExtensions class`:
 
 ```cs
 public static void UnlinkParent(this Child child)
@@ -315,7 +315,7 @@ public static void UnlinkParent(this Child child)
 
 #### NewLinkTo
 
-If you are linking `objects` together, that you *know are new*, you may use better-performing variations for [`LinkTo`](#linkto), called `NewLinkTo`, that omit expensive checks:
+If you are linking `objects` together, that you *know are new*, you may use better-performing variations for [`LinkTo`](#linkto), called [`NewLinkTo`](#newlinkto), that omit the expensive checks:
 
 ```cs
 public static void NewLinkTo(this Child child, Parent parent)
@@ -330,13 +330,13 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 ### Cascading
 
-[`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), the sub-entities are deleted automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead of `Deleted`.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), the sub-[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead of `Deleted`.
 
 This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can see explicitly in the code that other `Deletions` take place. This may be important enough to not be hidden from view.
 
-A way to implement it is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
+A way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
-Where a main [entity](#entities) is `Deleted`, we could also call the `Cascading` methods:
+Where a main [entity](#entities) is `Deleted`, we could also call the [`Cascading`](#cascading) methods:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -346,7 +346,7 @@ repository.Delete(entity);
 
 Here follows a way to organize the code.
 
-In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) `Cascading`, with two code files in it:
+In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) [`Cascading`](#cascading), with two code files in it:
 
 ```
 JJ.Ordering.Business.csproj
@@ -387,7 +387,7 @@ In these methods, the child [entities](#entities) are successively `Deleted` or 
 
 `< TODO: Code sample Delete cascading. >`
 
-Before an extension method `Deletes` a child [entity](#entities), it might call `Cascading` upon the child [entity](#entities) too!
+Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too!
 
 `< TODO: Code sample Delete cascading. >`
 
@@ -395,17 +395,17 @@ Before an extension method `Deletes` a child [entity](#entities), it might call 
 
 `< TODO: Code sample. >`
 
-This way you can build up all the `Cascading` code by just using a pattern.
+This way you can build up all the [`Cascading`](#cascading) code by using just this pattern.
 
 #### Cascading & Repositories
 
-The `DeleteRelatedEntities` methods might receive [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters* or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection). It's up to you. The choice to use *extension* methods is also a matter of preference.
+The [`DeleteRelatedEntities`](#cascading) methods might receive [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters* or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection). It's up to you. The choice to use *extension* methods is also a matter of preference.
 
 ### Facade
 
-A `Facade` combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [`Validation`](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do it using a `Facade` you should be able to count on it that integrity is maintained.
+A [`Facade`](#facade) combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [`Validation`](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do something using a [`Facade`](#facade) you should be able to count on it that integrity is maintained.
 
-It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A `Facade` can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [entity types](#entities) together.
+It is a combinator `class`: a [`Facade`](#facade) combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A [`Facade`](#facade) can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [entity](#entities) `types` together.
 
 <h4>Repositories instead of Facades</h4>
 
@@ -413,7 +413,7 @@ It is a combinator `class`: a `Facade` combines other (smaller) parts of the [bu
 
 For example, a simple `Get` by `ID` may be better going through a [`Repository`](#repository). There could be other cases where using [`Repositories`](#repository) directly is a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
 
-The reason is, that using a [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository). To limit the interdependence between things.
+The reason is, that a [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository), to limit the interdependence between things.
 
 ### Visitor
 
@@ -421,11 +421,11 @@ A [`Visitor`](#visitor) `class` processes a recursive structure that might invol
 
 Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
-A [`Visitor`](#visitor) `class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`. Sometimes extra `Visit` methods for special cases, if relevant.
+A [`Visitor`](#visitor) `class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`. It could also have separate `Visit` methods for each `collection`. And sometimes extra `Visit` methods for special cases.
 
 A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
 
-Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not use.
+Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process.
 
 By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
@@ -443,13 +443,13 @@ A good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) o
 
 #### Accept Methods
 
-The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
+The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
 
 #### Code Sample
 
 This code example demonstrates specific style preferences for [`Visitors`](#visitor) in this [software architecture](index.md) and gives an impression how [`Visitor`](#visitor) code might be structured.
 
-All `Visit` methods are `protected virtual` and usually return `void`. They all need to be `overridable` to harnass the power of having specialized [`Visitor`](#visitor) `classes`. `Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
+All `Visit` methods are `protected virtual` and usually return `void`. They all need to be `overridable` to harnass the power of specialized [`Visitor`](#visitor) `classes`. `Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
 
 Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
 
@@ -459,7 +459,7 @@ Typically the result of a `Visitor` is not put on the call stack, but stored in 
 
 For `Button Texts` and translations of [model](#entities) properties to different languages, you could use `resx` files in your [`.NET`](api.md#dotnet) projects.
 
-If you follow the following naming convention for `resources` files, [`.NET`](api.md#dotnet) can automatically return the translations into the language of the `CurrentCulture`:
+If you follow the following naming convention for `resources` files, [`.NET`](api.md#dotnet) can automatically return the translations for the language of the `CurrentCulture`:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -467,19 +467,19 @@ If you follow the following naming convention for `resources` files, [`.NET`](ap
 
 It uses [`.NET`](api.md#dotnet) [`CultureNames`](https://www.csharp-examples.net/culture-names/).
 
-The culture-inspecific `resx` is recommended to be the language `en-US` (`US English`).
+The culture-inspecific `Resources.resx` is recommended to be in the language `en-US` (`US English`).
 
 `< TODO: example string resource editor. >`
 
-It is recommended to keep the key representative of the text itself, and not something more abstract. That way it is clearer in the code, what kind of text to expect.
+It is recommended to keep the key representative of the text itself. That way it is clearer in the code, what kind of text to expect.
 
-`Resources` seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the [business layer](layers.md#business-layer) too, so might be put in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Especially the `DisplayNames` of [model](#entities) properties might be put in the back-end, so they might be reused in multiple front-ends.
+`Resources` seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the [business layer](layers.md#business-layer) too. That's why they might be put in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Especially the `DisplayNames` of [model](#entities) properties might be put in the back-end, so they might be reused in multiple front-ends.
 
-[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) contains reusable resource `strings` for common titles such as `Delete`, `Edit`, `Save`, etcetera.
+[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) contains reusable `Resource strings` for common texts such as `Delete`, `Edit`, `Save`, etcetera.
 
-`ResourceFormatters` might be used to lead you to use the right placeholders required by the resource strings. `< TODO: Example of string with placeholders. >`
+`ResourceFormatters` might be used to fill in the right placeholders required by the resource strings. `< TODO: Example of string with placeholders. >`
 
-`< TODO: Code example for ResourceFromatters. >`
+`< TODO: Code example for ResourceFormatters. >`
 
 Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
