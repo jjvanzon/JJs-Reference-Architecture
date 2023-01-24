@@ -189,7 +189,7 @@ public class Supplier
 
 ### Mapping
 
-`Mappings` are `classes` programmed for a particular [persistence technology](aspects.md#persistence), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which *`class`* maps to which *`table`* and which *`column`* maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](aspects.md#persistence), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 ### DTO
 
@@ -218,53 +218,53 @@ Business Logic Patterns
 
 ### Business Layer
 
-[Presentation](layers.md#presentation-layer), [entity](#entities) model and [persistence](aspects.md#persistence) should be straightforward [pattern](#-patterns)-wise. If anything 'special' needs to happen this belongs in the [business layer](layers.md#business-layer). Any number of different patterns can be used.
+[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that don't follow any standard [pattern](#introduction).
 
-The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [data transfer objects (`DTO's`)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
+The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [data transfer objects (DTO's)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that [business logic](layers.md#business-layer) works with [entities](#entities) rather than [`Repositories`](#repository) (but there is a gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
+It is preferred that [business logic](layers.md#business-layer) hooks up with  [entity](#entities) `classes` rather than [`Repositories`](#repository). Hoever there is a large gray area. Using [entities](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
 
 ### RepositoryWrappers
 
-Passing around lots of [`Repositories`](#repository) would create long lists of parameters, that are prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into `RepositoryWrappers`. Those can then be passed around instead. This keeps the parameter lists shorter and less prone to change.
+Passing around lots of [`Repositories`](#repository) can create long lists of parameters, prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into `RepositoryWrappers`. Those can then be passed around instead. This keeps the parameter lists shorter and less prone to change.
 
-You can make a single `RepositoryWrapper` with all your domain model's [`Repositories`](#repository).
+You can make a single `RepositoryWrapper` with all the [`Repositories`](#repository) out of a [functional domains](namespaces-assemblies-and-folders.md#functional-domains).
 
-Some logic will use [`Repositories`](#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple `RepositoryWrappers`: one per [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also might make a custom `RepositoryWrapper` in that case, with [`Repositories`](#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
+Some logic might use [`Repositories`](#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple `RepositoryWrappers`: one per [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also make a custom `RepositoryWrapper` with [`Repositories`](#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
 
-Also, you may want to create different, more limited `RepositoryWrappers`. For instance ones for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not become dependent on all of them.
+Also, you may want to create different, more limited `RepositoryWrappers`. For instance one for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not become dependent on them all.
 
-An alternative to `RepositoryWrappers` might be [dependency injection](practices-and-principles.md#dependency-injection). Under the [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very good [dependency injection](practices-and-principles.md#dependency-injection) `API`. `RepositoryWrappers` and [dependency injection](practices-and-principles.md#dependency-injection) could also be used in combination with each other.
+An alternative to `RepositoryWrappers` might be [dependency injection](practices-and-principles.md#dependency-injection). Under thise due to not using a very go [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very safe [dependency injection](practices-and-principles.md#dependency-injection) `API`. `RepositoryWrappers` and [dependency injection](practices-and-principles.md#dependency-injection) might also be used in combination with each other.
 
 ### Validators
 
-Separate `Validator` classes could be used for validation. Specialized classes can be created derived from [`VersatileValidator`](api.md#jj-framework-validation) from the [`JJ.Framework`](api.md#jjframework).
+Separate [`Validator`](api.md#jj-framework-validation) `classes` could be used for [validation](aspects.md#validation). Specialized `classes` can be derived from [`VersatileValidator`](api.md#jj-framework-validation) from the [`JJ.Framework`](api.md#jjframework).
 
-It is recommended to keep `Validators` independent from one another.
+It is recommended to keep [`Validators`](api.md#jj-framework-validation) independent from each other.
 
-If multiple `Validators` should go off, you might call them individually one by one, rather than delegating to one another.
+If multiple [`Validators`](api.md#jj-framework-validation) should go off, you might call them individually one by one, rather than delegating to one another.
 
-When creating a complex `Validator`, it is suggested to add a prefix or suffix to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple `Validator`.
+For complex [`Validator`](api.md#jj-framework-validation), it is suggested to add a [prefix or suffix](code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](api.md#jj-framework-validation).
 
-Next to `Validators` saying that user input is invalid, `Validators` could also be used to generate *warnings*, that are not blocking, but help the user do their work.
+Next to [`Validators`](api.md#jj-framework-validation) saying that user input is invalid, [`Validators`](api.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with the app.
 
-`Validators` might also be used for delete constraints, for instance when an [entity](#entities) is still in use, you might not be able to delete it.
+[`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [entity](#entities) is still in use, you might not be able to delete it.
 
 ### SideEffects
 
-The [business layer](layers.md#business-layer) can execute `SideEffects` when altering data, for instance to store the *date time modified*, or set [default values](aspects.md#defaults), or automatically generating a *name*.
+The [business layer](layers.md#business-layer) can execute [`SideEffects`](api.md#jj-framework-business) when altering data, to for instance store the *date time modified*, set [default values](aspects.md#defaults), or automatically generating a *name*.
 
-We could implement an interface [`ISideEffect`](api.md#jj-framework-business) for each `SideEffect`. It has only one method: `Execute`. But this allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in a row, or to otherwise *generically* handle them.
+We could implement an `interface` [`ISideEffect`](api.md#jj-framework-business) for each [`SideEffect`](api.md#jj-framework-business). It has only one method: `Execute`. This allows us to have some sort of polymorphism over [`SideEffects`](api.md#jj-framework-business) so it is easier to execute multiple in a row, or handle them *generically*.
 
-Using separate classes for `SideEffects` can create overview over pieces of logic, creative in nature, and prevent these special things from getting entangled with other code.
+Using separate `classes` for [`SideEffects`](api.md#jj-framework-business) can create overview over pieces of logic, creative in nature, and prevent these special things from getting entangled.
 
-`SideEffects` might evaluate conditions internally. The caller of the `SideEffect` class does not know what conditions it has. The `SideEffect` could skip over its own execution, when it wouldn't apply. This makes the `SideEffect` fully responsible for what happens or not. What a `SideEffect` does can depend on [status flagging](aspects.md#entity-status-management) too.
+[`SideEffects`](api.md#jj-framework-business) might evaluate conditions internally. The caller of the [`SideEffect`](api.md#jj-framework-business) `class` does not know what conditions there are. A [`SideEffect`](api.md#jj-framework-business) could skip over its own execution, when it wouldn't apply. This makes the [`SideEffect`](api.md#jj-framework-business) fully responsible for what happens. What a [`SideEffect`](api.md#jj-framework-business) does can depend on [status flagging](aspects.md#entity-status-management) too.
 
 ### LinkTo
 
 This pattern is about *bidirectional relationship synchronization*. That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships, even when the underlying persistent technology doesn't it, we could link [entities](#entities) together using `LinkTo` extension methods. By calling `LinkTo`, both ends of the relationship are updated. Here is a template for a `LinkTo` method that works for an `1-to-n` relationship. Beware that all the checks and list operations can come with a performance penalty:
+To manage bidirectional relationships, even when the underlying persistent technology doesn't, we could link [entities](#entities) together using `LinkTo` extension methods. By calling `LinkTo`, both ends of the relationship are updated. Here is a template for a `LinkTo` method that works for an `1-to-n` relationship:
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -291,15 +291,17 @@ public static void LinkTo(this Child child, Parent parent)
 }
 ```
 
-You could put the `LinkTo` methods together in a `class` called `LinkToExtensions`. You might put it in a `LinkTo` [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
+Beware that all the checks and list operations can come with a performance penalty.
 
-If a `LinkTo` method name becomes ambiguous, you could suffix e.g.:
+You could put the `LinkTo` methods together in a `class` named `LinkToExtensions`. You might put it in a `LinkTo` [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
+
+If a `LinkTo` method name becomes ambiguous, you could suffix it, for instance:
 
     LinkToParentDocument
 
 #### Unlink
 
-Next to [`LinkTo`](#linkto) methods, you might also add `Unlink` methods in an `UnlinkExtensions` class:
+Next to [`LinkTo`](#linkto) methods, you might also add `Unlink` methods in an `UnlinkExtensions class`:
 
 ```cs
 public static void UnlinkParent(this Child child)
@@ -311,7 +313,7 @@ public static void UnlinkParent(this Child child)
 
 #### NewLinkTo
 
-If you are linking objects together, that you *know are new*, you may use better-performing variations for [`LinkTo`](#linkto), called `NewLinkTo`, that omit expensive checks:
+If you are linking `objects` together, that you *know are new*, you may use better-performing variations for [`LinkTo`](#linkto), called `NewLinkTo`, that omit expensive checks:
 
 ```cs
 public static void NewLinkTo(this Child child, Parent parent)
@@ -322,7 +324,7 @@ public static void NewLinkTo(this Child child, Parent parent)
 }
 ```
 
-But beware that [`LinkTo`](#linkto) might be a better choice, because executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
+But beware that [`LinkTo`](#linkto) might be a better choice, because executing `NewLinkTo` onto *existing* `objects` may corrupt the `object` graph.
 
 ### Cascading
 
@@ -383,7 +385,7 @@ In these methods, the child [entities](#entities) are successively `Deleted` or 
 
 `< TODO: Code sample Delete cascading. >`
 
-Before the extension methods `Delete` a child entity, it might call `Cascading` on the child entity too!
+Before the extension methods `Delete` a child [entity](#entities), it might call `Cascading` on the child [entity](#entities) too!
 
 `< TODO: Code sample Delete cascading. >`
 
@@ -391,7 +393,7 @@ Before the extension methods `Delete` a child entity, it might call `Cascading` 
 
 `< TODO: Code sample. >`
 
-This way you can build up all `Cascading` code by just using a pattern.
+This way you can build up all the `Cascading` code by just using a pattern.
 
 #### Cascading & Repositories
 
@@ -403,7 +405,7 @@ A `Facade` combines several related (usually [`CRUD`](layers.md#crud)) operation
 
 It is a combinator `class`: a `Facade` combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. It can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a set of [entity types](#entities) together.
 
-<h4>Using Repositories instead of Facades</h4>
+<h4>Repositories instead of Facades</h4>
 
 [`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations and could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [`Repositories`](#repository) directly.
 
@@ -413,19 +415,19 @@ The reason is, that using the [`Facade`](#facade) could create an excessive amou
 
 ### Visitor
 
-A `Visitor` class processes a recursive structure that might involve many objects and multiple types of objects. Usually a `Visitor` translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole object graph by complex criteria. `Visitors` can result in a well performing process.
+A `Visitor class` processes a recursive structure that might involve many `objects` and multiple types of `objects`. Usually a `Visitor` translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. `Visitors` can result in a well performing process.
 
 Whenever a whole recursive structure needs to be processed, the `Visitor` pattern is a good way to go.
 
-A `Visitor` class can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`.
+A `Visitor class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`, possibly also one for each `collection`.
 
-A base `Visitor` might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
+A `base Visitor` might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
 
 Derived `Visitors` can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not use.
 
-By creating a base `Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
+By creating a `base Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
-A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however the style of `Visitor` might be different in this [software architecture](index.md). It can still be called a `Visitor` if it operates by slightly different rules.
+A good example of a `Visitor class` is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however the style of `Visitor` might be different in this [software architecture](index.md). It can still be called a `Visitor` if it operates by slightly different rules.
 
 #### Polymorphic Visitation
 
@@ -439,7 +441,7 @@ A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `Expression
 
 #### Accept Methods
 
-The *classic* `Visitor` pattern has a bit of a design flaw in it in my opinion. It requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods. This would keep the `Visitor` classes self-sufficient and separate from the rest of the code.
+The *classic* `Visitor` pattern has a bit of a design flaw in it in my opinion. It requires that `classes` *used by* the `Visitor` have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to use it, and leave out these `Accept` methods. This would keep the `Visitor classes` self-sufficient and separate from the rest of the code.
 
 #### Code Sample
 
@@ -480,7 +482,7 @@ Presentation Patterns
 
 ### ViewModel
 
-A `ViewModel` class holds the data shown on screen.
+A `ViewModel class` holds the data shown on screen.
 
 It is purely a [data objects](#dto). It would only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the `ViewModels` is fully responsible for it.)
 
@@ -528,7 +530,7 @@ You may pass [`Repositories`](#repository) to the `ToViewModel` methods if requi
 
 Sometimes you cannot appoint one [entity type](#entities) as the source of a [`ViewModel`](#viewmodel). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
 
-The `ToViewModel` classes should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
+The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
 
     ToIDAndNameExtensions.cs
     ToItemViewModelExtensions.cs
@@ -557,7 +559,7 @@ public static OrderEditPopupViewModel ToEditViewModel(this Order order) { ... }
 public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) { ... }
 ```
 
-Some [`ViewModels`](#viewmodel) do not take one primary [entity](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entities) is the this argument. In that case we put it in a `ViewModelHelper` class with static classes without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
+Some [`ViewModels`](#viewmodel) do not take one primary [entity](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
 
 ### ToEntity
 
@@ -593,7 +595,7 @@ All [`ViewModel`](#viewmodel) creation should be delegated to the [`ToViewModel`
 
 ### ToEntity-Business-ToViewModel Round-Trip
 
-A [`Presenter`](#presenter) is a combinator class, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other classes. It also combines it with calls to the business layer.
+A [`Presenter`](#presenter) is a combinator `class`, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other `classes`. It also combines it with calls to the business layer.
 
 A [`Presenter`](#presenter) action method might be organized into phases:
 
@@ -681,7 +683,7 @@ Another alternative is a different ID generation scheme. You may use an [`SQL`](
 
 The [presentation patterns](#presentation-patterns) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodel) and output a new [`ViewModel`](#viewmodel) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodel) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodel) has to be created. You cannot just return the user input [`ViewModel`](#viewmodel). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodel) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodel) remains untouched.
 
-You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some objects long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
 ### Considerations
 
@@ -769,7 +771,7 @@ In theory we could communicate all [validation](#validators) messages to [`MVC`]
 
 A [`Presenter`](#presenter) action method may return different types of [`ViewModels`](#viewmodel).
 
-This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns object and you should do polymorphic type checks to determine which [`View`](#views) to go to.
+This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns `object` and you should do polymorphic type checks to determine which [`View`](#views) to go to.
 
 Here is simplified code for how you can do this in a post method:
 
@@ -875,9 +877,9 @@ Data Transformation Patterns
 
 ### Converter
 
-A class that converts one data structure to another. Typically more is involved than just converting a single object. A whole object graph might be converted to another, or a flat list or raw data to be parsed might be converted to an object structure or the other way around.
+A `class` that converts one data structure to another. Typically more is involved than just converting a single `object`. A whole `object` graph might be converted to another, or a flat list or raw data to be parsed might be converted to an `object` structure or the other way around.
 
-By implementing it as a `Converter`, it simplifies the code. You can then say that the only responsibility of the class is to simply transform one data structure to another: nothing more, nothing less and leave other responsibilities to other classes.
+By implementing it as a `Converter`, it simplifies the code. You can then say that the only responsibility of the `class` is to simply transform one data structure to another: nothing more, nothing less and leave other responsibilities to other `classes`.
 
 ### TryGet-Insert-Update
 
@@ -887,11 +889,11 @@ When converting one type to another one might use the `TryGet-Insert-Update` pat
 
 `Insert` will create the [entity](#entities) if it did not exist yet, possibly setting some defaults.
 
-`Update` will update the rest of the properties of either the existing or newly created object.
+`Update` will update the rest of the properties of either the existing or newly created `object`.
 
 When you do these actions one by one for one destination [entity](#entities) after another, you will get readable code for complex conversions between data structures.
 
-Note that deletion of destination objects is not managed by the `TryGet-Insert-Update` pattern.
+Note that deletion of destination `objects` is not managed by the `TryGet-Insert-Update` pattern.
 
 ### TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion
 
@@ -907,7 +909,7 @@ Used for managing complex conversions between data structures, that require inse
 
 <h4>Considerations</h4>
 
-Converting one collection to another may involve more than creating a destination object for each source object. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [entities](#entities) to figure out which items are obsolete.
+Converting one collection to another may involve more than creating a destination `object` for each source `object`. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [entities](#entities) to figure out which items are obsolete.
 
 In a little more detail:
 
@@ -971,16 +973,16 @@ The [`TryGet-Insert-Update-Delete` pattern](#tryget-insert-update-delete--full-c
 
 ### DocumentModel
 
-An analog of a [`ViewModel`](#viewmodel), but then for document generation, rather than [`View`](#views) rendering. It is a class that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
+An analog of a [`ViewModel`](#viewmodel), but then for document generation, rather than [`View`](#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
 
-Just as with [`ViewModels`](#viewmodel), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the DocumentClasses classes sealed.
+Just as with [`ViewModels`](#viewmodel), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
 
 ### Selector-Model-Generator-Result
 
 For data transformations you may want to split up the transformation in two parts:
 
-- A `Selector` which returns the data as an object graph, or Model.
-- A `Generator` (or `Converter`) that converts the object graph (or Model) into a specific format.
+- A `Selector` which returns the data as an `object` graph, or `Model`.
+- A `Generator` (or `Converter`) that converts the `object` graph (or `Model`) into a specific format.
 
 This is especially useful if there are either multiple input formats or multiple output formats or both, or if in the future either the input format or output format could change.
 
@@ -990,7 +992,7 @@ Her follow some examples.
 
 #### Generating a Document
 
-An example of where it is useful, is generating a document in multiple format e.g. `XLSX`, `CSV` and `PDF`. In that case the data selection and basic tranformations are programmed once (a `Selector` that produces a `Model`) and exporting three different file formats would require programming three different generators. Reusable generators for specific file formats such as `CSV` may be programmed. Those will make programming a specialized generators very easy. So then basically exporting a document is mostly reading out a data source and producing an object graph.
+An example of where it is useful, is generating a document in multiple format e.g. `XLSX`, `CSV` and `PDF`. In that case the data selection and basic tranformations are programmed once (a `Selector` that produces a `Model`) and exporting three different file formats would require programming three different generators. Reusable generators for specific file formats such as `CSV` may be programmed. Those will make programming a specialized generators very easy. So then basically exporting a document is mostly reading out a data source and producing an `object` graph.
 
 #### Data Source Independence
 
@@ -1017,7 +1019,7 @@ Other Patterns
 
 ### Accessor
 
-An [`Accessor`](api.md#accessor) class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) class.
+An [`Accessor`](api.md#accessor) `class` allows access to non-public members of a `class`. This can be used for testing or for special access to a `class` from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) `class`.
 
 ### Adapter
 
@@ -1025,17 +1027,17 @@ An [`Accessor`](api.md#accessor) class allows access to non-public members of a 
 
 ### Anti-Encapsulation
 
-Encapsulation makes sure a class protects its own data integrity. Anti-encapsulation is the design choice to let a class check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the class itself will guard none of it.
+Encapsulation makes sure a `class` protects its own data integrity. Anti-encapsulation is the design choice to let a `class` check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the `class` itself will guard none of it.
 
 The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](api.md#orm) and data serialization mechanisms.
 
-Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the class cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the class and the other half in another place.
+Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the `class` cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the `class` and the other half in another place.
 
 ### Initialization and Finalization
 
 Cleanup code should be symmetric to the set-up code. Build something up in the constuctor then dispose things in the finalizer, start a service at startup then stop a service at shutdown, etc. If in the constructor you bind an event, then in the destructor you unbind it.
 
-You can also choose to implement IDisposable. This is useful if you want to be able to explicitly trigger finalization. Finalizers/destructors only go off when the garbage collector feels like it, and you might want to imperatively tell an object to clean up its stuff.
+You can also choose to implement IDisposable. This is useful if you want to be able to explicitly trigger finalization. Finalizers/destructors only go off when the garbage collector feels like it, and you might want to imperatively tell an `object` to clean up its stuff.
 
 - If you implement IDisposable, call Dispose from the finalizer/destructor.:
 
@@ -1055,11 +1057,11 @@ You can also choose to implement IDisposable. This is useful if you want to be a
     }
     ```
 
-- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the object.
+- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the `object`.
 
 ### Constructor Inheritance
 
-Sort of forces a derived class to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a base class that has specific constructors forces your derived class to call that base constructor, often leading to exposing a similar constructor in the derived class.
+Sort of forces a derived `class` to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a `base class` that has specific constructors forces your derived `class` to call that `base` constructor, often leading to exposing a similar constructor in the derived `class`.
 
 ### Comma Appending
 
@@ -1113,19 +1115,19 @@ See: [Using the DebuggerDisplay Attribute](https://learn.microsoft.com/en-us/vis
 
 ### Executor
 
-`Executor` classes are classes that encapsulate a whole process to run. For processes that involve more than just a single function, for instance downloading a file, transforming it and then importing it, involving infrastructure end-points and possibly multiple back-end libraries.
+`Executor classes` are `classes` that encapsulate a whole process to run. For processes that involve more than just a single function, for instance downloading a file, transforming it and then importing it, involving infrastructure end-points and possibly multiple back-end libraries.
 
-By giving each of those processes its own `Executor` class, you make the code overviewable, and also make the process more easily runnable from different contexts, e.g. in a scheduler, behind a service method or by means of a button in a UI or in a utility.
+By giving each of those processes its own `Executor class`, you make the code overviewable, and also make the process more easily runnable from different contexts, e.g. in a scheduler, behind a service method or by means of a button in a UI or in a utility.
 
 ### Inheritance-Helper
 
-One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one base class. This can lead to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
 
-This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with god base classes, all weakneses of inheritance.
+This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
 
 ### Factory
 
-A `Factory class` is a class that constructs instances. But it usually means that it creates a concrete `type`, returning it as an `abstract type`. The concrete `type` that is instantiated depends on the input you pass to the `Factory's` method:
+A `Factory class` is a `class` that constructs instances. But it usually means that it creates a concrete `type`, returning it as an `abstract type`. The concrete `type` that is instantiated depends on the input you pass to the `Factory's` method:
 
 ```cs
 public static class ThingFactory
@@ -1154,7 +1156,7 @@ A `class` that returns instances with various states is also simply called a `Fa
 
 ### Factory-Base-Interface
 
-The `Factory-Base-Interface` pattern is a common way the [`Factory`](#factory) pattern is applied. Next to a [`Factory`](#factory), as described above in the [`Factory`](#factory) pattern, you give each concrete implementation that the [`Factory`](#factory) can return a mutual interface, which also becomes the return type of the [`Factory`](#factory) method. To also give each concrete implementation a mutual base class, with common functionality in it, and also to sort of force an implementation to have a specific constructor (see 'Constructor Inheritance').
+The `Factory-Base-Interface` pattern is a common way the [`Factory`](#factory) pattern is applied. Next to a [`Factory`](#factory), as described above in the [`Factory`](#factory) pattern, you give each concrete implementation that the [`Factory`](#factory) can return a mutual `interface`, which also becomes the return type of the [`Factory`](#factory) method. To also give each concrete implementation a mutual `base class`, with common functionality in it, and also to sort of force an implementation to have a specific constructor (see 'Constructor Inheritance').
 
 ### TryGet
 
@@ -1220,7 +1222,7 @@ The word `Helper` might also be used more generally. Like something that 'helps'
 
 ### Info
 
-`Info objects` are like [DTO's](#dto) in that they are usually used for yielding over information from one place to another. `Info` objects can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
+`Info objects` are like [DTO's](#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
 
 ### Mock
 
@@ -1228,7 +1230,7 @@ A `Mock object` is used in testing as a replacement for a `object` used in produ
 
 ### Name Constants
 
-To prevent typing in a lot of strings in code, make a static class with constants in it, that become placeholders for the name.
+To prevent typing in a lot of strings in code, make a `static class` with constants in it, that become placeholders for the name.
 
 E.g. `ViewNames`, with constants in it like this:
 
@@ -1257,7 +1259,7 @@ This prevents typing errors and makes "Find all References" possible.
 
 ### Progress and Cancel Callbacks
 
-To make a process cancellable and report process without being dependent on the presentation framework, you can simply pass a few callback delegates to a method or class.
+To make a process cancellable and report process without being dependent on the presentation framework, you can simply pass a few callback delegates to a method or `class`.
 
 ```cs
 public Excute(Action<string> progressCallback, Func<bool> isCanceledCallback)
@@ -1286,9 +1288,9 @@ Sometimes it is useful to separate `Cancel` into two: `Canceling` and `Canceled`
 
 When processing `object` structures, it is best to split everything up into separate methods.
 
-Every [entity type](#entities) will get a method (the 'singular' variation) that processes a single object. That method will not process any underlying related items, only the one object.
+Every [entity type](#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
 
-In case of conversions from one object structure to another, every *destination* [entity](#entities) gets a 'singular' method, not the *source* [entity](#entities), because that would easily create messy, unmanageable code.
+In case of conversions from one `object` structure to another, every *destination* [entity](#entities) gets a 'singular' method, not the *source* [entity](#entities), because that would easily create messy, unmanageable code.
 
 A 'plural' method processes a whole list of items. 'Plural' methods are less useful. Prefer 'singular' methods over 'plural' ones. 'Plural' methods usually do not add anything other than a loop, which is too trivial to create a separate method for. Only when operations must be executed onto a whole list of `objects` (for instance determining a total price of a list of items or when there are specific conditions), it may be useful to create a separate 'plural' method.
 
@@ -1349,7 +1351,7 @@ private class MyProcess
 
 ### Wrapper
 
-A `Wrapper class` is a class that wraps one or more other objects. This can be useful in various situations. You might give the `Wrapper` additional helper methods that the wrapped object does not have. You might dispose the underlying `Wrapper object` and create a new one, keeping the references to the `Wrapper object` in tact even though the `Wrapped object` does not exist anymore. You may hide a specific `object` in a `Wrapper` and give it an alternative `interface`, you might wrap multiple `objects` in one `Wrapper` to pass them around as a single `object` for convenience.
+A `Wrapper class` is a `class` that wraps one or more other `objects`. This can be useful in various situations. You might give the `Wrapper` additional helper methods that the wrapped `object` does not have. You might dispose the underlying `Wrapper object` and create a new one, keeping the references to the `Wrapper object` in tact even though the `Wrapped object` does not exist anymore. You may hide a specific `object` in a `Wrapper` and give it an alternative `interface`, you might wrap multiple `objects` in one `Wrapper` to pass them around as a single `object` for convenience.
 
 
 Alternatives
