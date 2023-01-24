@@ -473,15 +473,15 @@ The culture-inspecific `resx` is recommended to be the language `en-US` (`US Eng
 
 It is recommended to keep the key representative of the text itself, and not something more abstract. That way it is clearer in the code, what kind of text to expect.
 
-`Resources` seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the [business layer](layers.md#business-layer) too, so are put in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Especially the `DisplayNames` of [model](#entities) properties might be put in the back-end, so they might be reused in multiple front-ends.
+`Resources` seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the [business layer](layers.md#business-layer) too, so might be put in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Especially the `DisplayNames` of [model](#entities) properties might be put in the back-end, so they might be reused in multiple front-ends.
 
 [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) contains reusable resource `strings` for common titles such as `Delete`, `Edit`, `Save`, etcetera.
 
-`ResourceFormatters` might be used to lead the programming to use the right placeholders required in the resource strings. `< TODO: Example of string with placeholders. >`
+`ResourceFormatters` might be used to lead you to use the right placeholders required by the resource strings. `< TODO: Example of string with placeholders. >`
 
 `< TODO: Code example for ResourceFromatters. >`
 
-Extra information in Dutch about how to structure your `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
+Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
 
 Presentation Patterns
