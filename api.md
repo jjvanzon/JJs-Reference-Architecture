@@ -226,6 +226,17 @@ List of API's (and other tech)
   </td>
 </tr>
 
+
+<tr id="jj-canonical">
+  <th>
+    <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed">
+       JJ.Framework.Canonical</a>
+  </th>
+  <td>
+      Types to share data between <code>JJ</code> projects. Small scale <a href="service-oriented-architecture.html#canonical-model"><code>Canonical</code></a> model for generic handling of <code>Successful</code> flags, <code>Validation Messages</code> and combinations of <code>IDs</code> and <code>Names</code>.
+  </td>
+</tr>
+
 </table>
 
 ### Data
