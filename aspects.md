@@ -135,7 +135,7 @@ So the collection of `Products` gets updated.
 
 But this does not cover edge cases like `null` or `Product` is already in collection.
 
-It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead or use the [OneToManyRelationship](api.md#onetomanyrelationship) `API`. The tendency use an abstraction like is quite strong.
+It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead or use the [OneToManyRelationship](api.md#onetomanyrelationship) `API`. The tendency use an abstraction like is strong.
 
 ### Omit Inverse Property
 
