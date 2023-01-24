@@ -1,7 +1,7 @@
-﻿🏗 Practices & Principles
-==========================
+﻿`[ Draft ]`
 
-`[ Draft ]`
+🏗 Practices & Principles
+==========================
 
 [back](.)
 

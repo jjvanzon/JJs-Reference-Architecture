@@ -1,7 +1,7 @@
-﻿🗄 Server Architecture
-======================
+﻿`[ Draft ]`
 
-`[ Draft ]`
+🗄 Server Architecture
+======================
 
 [back](.)
 
