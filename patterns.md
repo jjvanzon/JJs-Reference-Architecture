@@ -338,7 +338,7 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 [`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), the sub-[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead of `Deleted`.
 
-This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can see explicitly in the code that other `Deletions` take place. This may be important enough to not be hidden from view.
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can see explicitly in the code that other `Deletions` take place. This may be important enough not to be hidden from view.
 
 A way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
@@ -374,11 +374,15 @@ public static class DeleteRelatedEntitiesExtensions
 In there, child [entities](#entities) are successively `Deleted`:
 
 ```cs
-public static void DeleteRelatedEntities(this Order order)
+public static class DeleteRelatedEntitiesExtensions
 {
-    foreach (var orderProduct in order.OrderProducts.ToArray())
+    public static void DeleteRelatedEntities(this Order order)
     {
-        _repository.Delete(orderProduct);
+        // Delete child entities.
+        foreach (var orderProduct in order.OrderProducts.ToArray())
+        {
+            _repository.Delete(orderProduct);
+        }
     }
 }
 ```
@@ -388,9 +392,11 @@ Before an extension method `Deletes` a child [entity](#entities), it might call 
 ```cs
 public static void DeleteRelatedEntities(this Order order)
 {
+    // Delete child entities.
     foreach (var orderProduct in order.OrderProducts.ToArray())
     {
-        orderProduct.UnlinkRelatedEntities(); // Call cascading on the child entity too!
+        // Call cascading on the child entity too!
+        orderProduct.UnlinkRelatedEntities();
         _repository.Delete(orderProduct);
     }
 }
@@ -403,10 +409,10 @@ public static void DeleteRelatedEntities(this Order order)
 ```cs
 public static class UnlinkRelatedEntitiesExtensions
 {
-    public static void UnlinkRelatedEntities(this OrderProduct orderProduct)
+    public static void UnlinkRelatedEntities(this OrderLine orderLine)
     {
-        orderProduct.UnlinkOrder();
-        orderProduct.UnlinkProduct();
+        orderLine.UnlinkOrder();
+        orderLine.UnlinkProduct();
     }
 }
 ```
