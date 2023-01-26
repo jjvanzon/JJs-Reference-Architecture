@@ -442,13 +442,29 @@ That way we can *see* things that would take place explicitly.
 
 #### Cascading & Repositories
 
-The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters:*
+The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
 
-`< TODO: Code sample. >`
+You might pass [`Repositories`](#repository) as *parameters:*
 
-Or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection):
+```cs
+/// <summary>
+/// With repository parameter.
+/// </summary>
+public static void DeleteRelatedEntities(
+    this Order order, IOrderLineRepository repository)
+{
+    // Delete child entities.
+    foreach (var orderLine in order.OrderLines.ToArray())
+    {
+        // Call cascading on the child entity too!
+        orderLine.UnlinkRelatedEntities();
 
-`< TODO: Code sample. >`
+        repository.Delete(orderLine);
+    }
+}
+```
+
+Or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection).
  
 It's up to you. The choice to use *extension* methods is also just a matter of preference.
 
