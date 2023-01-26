@@ -336,11 +336,12 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 ### Cascading
 
-[`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), *sub-*[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [entity](#entities), *chidd-*[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
 
-This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can then see explicitly in the code, that other `Deletions` take place. It may be important not to hide this from view.
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is to explicitly see in the code, that other `Deletions` take place. It may be important not to hide from view.
 
-One way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
+One way to implement it, is through extension methods:  
+`DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
 #### Code Files
 
@@ -392,7 +393,9 @@ public static class DeleteRelatedEntitiesExtensions
     }
 ```
 
-Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too.
+(Note: The `ToArray` prevents an `Exception` about the loop collection being modified.)
+
+Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too!
 
 ```cs
 public static void DeleteRelatedEntities(this Order order)
@@ -410,7 +413,7 @@ public static void DeleteRelatedEntities(this Order order)
 
 #### UnlinkRelatedEntities
 
-`UnlinkRelatedEntities` might be a bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
+`UnlinkRelatedEntities` might be a little bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
 
 ```cs
 /// <summary>
@@ -426,9 +429,11 @@ public static class UnlinkRelatedEntitiesExtensions
 }
 ```
 
+Note that it uses the [Unlink](#unlink) pattern discussed earlier.
+
 #### Delete Main Entity
 
-Note that the extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea is: where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+The extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -444,7 +449,7 @@ That way we can *see* things that would take place explicitly.
 
 The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
 
-You might pass [`Repositories`](#repository) as *parameters:*
+You could pass [`Repositories`](#repository) as *parameters:*
 
 ```cs
 public static void DeleteRelatedEntities(
@@ -460,17 +465,17 @@ public static void DeleteRelatedEntities(
 }
 ```
 
-Or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection).
+Or you might make repositories available through a technique called [dependency injection](practices-and-principles.md#dependency-injection).
  
-It's up to you. The choice to use *extension* methods is also just a matter of preference.
+It's up to you. The choice to use *extension* methods was also a matter of preference.
 
 #### Nuance
 
-Sometimes an [entity](#entities) does have related [entities](#entities) to `Cascadedly` [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+Sometimes an [entity](#entities) does have related [entities](#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 #### Conclusion
 
-This introduced a way to can build up all the [`Cascading`](#cascading) code just by using a pattern.
+Hopefully this introduced a way to build up [`Cascading`](#cascading) code by just using a pattern.
 
 ### Facade
 
