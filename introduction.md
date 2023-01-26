@@ -120,7 +120,7 @@ And second in line:
 - Reject input: don't correct input
 - Clear interfaces
 - "Ya ain't gonna need it"
-- Solve a problem at its core, instead of a work-around.
+- No workarounds: solve a problem at its core
 - To solve a bug, first reproduce it
 - Proper use of encoding
 
