@@ -336,11 +336,11 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 ### Cascading
 
-[`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), *sub-*[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they will be [`Unlinked`](#unlink) instead.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` [entities](#entities), *sub-*[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
 
-This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can then see explicitly in the code, that other `Deletions` take place. This may be important enough not to hide from view.
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is that you can then see explicitly in the code, that other `Deletions` take place. It may be important not to hide this from view.
 
-A way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
+One way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
 #### Code Files
 
@@ -362,7 +362,9 @@ JJ.Ordering.Business.csproj
 Here is how  `DeleteRelatedEntitiesExtensions.cs` might look internally:
 
 ```cs
-/// <summary> Deletes child entities inherently part of the main entity. </summary>
+/// <summary>
+/// Deletes child entities inherently part of the main entity.
+/// </summary>
 public static class DeleteRelatedEntitiesExtensions
 {
     public static void DeleteRelatedEntities(this Order order)
@@ -375,7 +377,9 @@ public static class DeleteRelatedEntitiesExtensions
 In there, child [entities](#entities) are successively `Deleted`:
 
 ```cs
-/// <summary> Deletes child entities inherently part of the main entity. </summary>
+/// <summary>
+/// Deletes child entities inherently part of the main entity.
+/// </summary>
 public static class DeleteRelatedEntitiesExtensions
 {
     public static void DeleteRelatedEntities(this Order order)
@@ -409,7 +413,9 @@ public static void DeleteRelatedEntities(this Order order)
 `UnlinkRelatedEntities` might be a bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
 
 ```cs
-/// <summary> Unlinks related entities, not inherently part of the main entity. </summary>
+/// <summary>
+/// Unlinks related entities, not inherently part of the main entity.
+/// </summary>
 public static class UnlinkRelatedEntitiesExtensions
 {
     public static void UnlinkRelatedEntities(this OrderLine orderLine)
@@ -432,7 +438,7 @@ entity.UnlinkRelatedEntities();
 _repository.Delete(entity);
 ```
 
-Then we explicitly *see* things, executed all in a row.
+That way we can *see* things that would take place explicitly.
 
 #### Cascading & Repositories
 
