@@ -342,8 +342,6 @@ This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it
 
 A way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
-`< TODO: Copy code samples from demo project. >`
-
 #### Code Files
 
 Here follows a way to organize the code.
@@ -364,6 +362,7 @@ JJ.Ordering.Business.csproj
 Here is how  `DeleteRelatedEntitiesExtensions.cs` might look internally:
 
 ```cs
+/// <summary> Deletes child entities inherently part of the main entity. </summary>
 public static class DeleteRelatedEntitiesExtensions
 {
     public static void DeleteRelatedEntities(this Order order)
@@ -376,17 +375,17 @@ public static class DeleteRelatedEntitiesExtensions
 In there, child [entities](#entities) are successively `Deleted`:
 
 ```cs
+/// <summary> Deletes child entities inherently part of the main entity. </summary>
 public static class DeleteRelatedEntitiesExtensions
 {
     public static void DeleteRelatedEntities(this Order order)
     {
         // Delete child entities.
-        foreach (var orderProduct in order.OrderProducts.ToArray())
+        foreach (var orderLine in order.OrderLines.ToArray())
         {
-            _repository.Delete(orderProduct);
+            _repository.Delete(orderLine);
         }
     }
-}
 ```
 
 Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too.
@@ -395,20 +394,22 @@ Before an extension method `Deletes` a child [entity](#entities), it might call 
 public static void DeleteRelatedEntities(this Order order)
 {
     // Delete child entities.
-    foreach (var orderProduct in order.OrderProducts.ToArray())
+    foreach (var orderLine in order.OrderLines.ToArray())
     {
         // Call cascading on the child entity too!
-        orderProduct.UnlinkRelatedEntities();
-        _repository.Delete(orderProduct);
+        orderLine.UnlinkRelatedEntities(); 
+
+        _repository.Delete(orderLine);
     }
 }
 ```
 
 #### UnlinkRelatedEntities
 
-`UnlinkRelatedEntities` might be a bit easier. It neither requires [`Repositories`](#repository) not does it need much recursion:
+`UnlinkRelatedEntities` might be a bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
 
 ```cs
+/// <summary> Unlinks related entities, not inherently part of the main entity. </summary>
 public static class UnlinkRelatedEntitiesExtensions
 {
     public static void UnlinkRelatedEntities(this OrderLine orderLine)
@@ -428,14 +429,22 @@ entity.DeleteRelatedEntities();
 entity.UnlinkRelatedEntities();
 
 // Delete main entity separately.
-_repository.Delete(entity); 
+_repository.Delete(entity);
 ```
+
+Then we explicitly *see* things, executed all in a row.
 
 #### Cascading & Repositories
 
-The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters* or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection). It's up to you.
+The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations. You might pass them as *parameters:*
 
-The choice to use *extension* methods is also a matter of preference.
+`< TODO: Code sample. >`
+
+Or you might make them available using [dependency injection](practices-and-principles.md#dependency-injection):
+
+`< TODO: Code sample. >`
+ 
+It's up to you. The choice to use *extension* methods is also just a matter of preference.
 
 #### Nuance
 
