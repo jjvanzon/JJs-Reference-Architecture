@@ -336,18 +336,18 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 ### Cascading
 
-[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [entity](#entities), *chidd-*[entities](#entities) are `Deleted` automatically too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [entity](#entities), *child-*[entities](#entities) are `Deleted` too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
 
-This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is to explicitly see in the code, that other `Deletions` take place. It may be important not to hide from view.
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
 
-One way to implement it, is through extension methods:  
+One way to implement [`Cascading`](aspects.md#cascading), is through extension methods:  
 `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
 #### Code Files
 
-Here follows a way to organize the code.
+Here is a suggestion for how to organize the code.
 
-In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) [`Cascading`](#cascading) and put two code files in it:
+In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) called [`Cascading`](#cascading) and put two code files in it:
 
 ```
 JJ.Ordering.Business.csproj
@@ -393,7 +393,7 @@ public static class DeleteRelatedEntitiesExtensions
     }
 ```
 
-(Note: The `ToArray` prevents an `Exception` about the loop collection being modified.)
+(Note: The `ToArray` can prevent an `Exception` about the loop collection being modified.)
 
 Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too!
 
@@ -433,7 +433,7 @@ Note that it uses the [Unlink](#unlink) pattern discussed earlier.
 
 #### Delete Main Entity
 
-The extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+The extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: Where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -443,13 +443,13 @@ entity.UnlinkRelatedEntities();
 _repository.Delete(entity);
 ```
 
-That way we can *see* things that would take place explicitly.
+That way we can see explicitly that more `Deletions` take place.
 
 #### Cascading & Repositories
 
 The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
 
-You could pass [`Repositories`](#repository) as *parameters:*
+You could pass these [`Repositories`](#repository) as *parameters:*
 
 ```cs
 public static void DeleteRelatedEntities(
