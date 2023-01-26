@@ -449,8 +449,7 @@ You might pass [`Repositories`](#repository) as *parameters:*
 ```cs
 public static void DeleteRelatedEntities(
     this Order order,
-
-    // Repository parameter
+    /* Repository parameter */
     IOrderLineRepository repository)
 {
     foreach (var orderLine in order.OrderLines.ToArray())
