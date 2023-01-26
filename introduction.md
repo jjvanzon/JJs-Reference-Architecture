@@ -88,17 +88,17 @@ The way of working described here is just a suggestion. It describes *a* way of 
 Fundamental Principles
 ----------------------
 
-The main principles of this software architecture might be:
+A few main principles of this software architecture are:
 
 - Maintainability
 - Code scalability
 - Platform and protocol independence
 
-Code scalability does not refer to hardware scalability here, but rather that the code base can grow and grow, while keeping it maintainable. 50 apps should be as maintainable as 5. This means that quality demands are high. As a companies' amount of software products grows, software architecture might make software maintenance economically viable, or a company might run into problems.
+Code scalability does not refer to hardware scalability here, but rather that a code base can grow and grow, while keeping things maintainable. 50 apps should be as maintainable as 5. This means that quality demands are high. As a companies' amount of software products grows, software architecture might make software maintenance economically viable, or a company might run into problems.
 
 Another way of putting this is: The next software change should not be more difficult than the previous one, regardless of how large the system has become.
 
-Platform and protocol independence is something given extra attention in this software architecture. A lot of split up into parts is, due to the fact that not every technology was supported on every platform. This allowed us to take our pick from technologies more easily.
+Platform and protocol independence is something given extra attention in this software architecture. A lot of split up into parts is due to the fact, that not every technology was supported on every platform. This allowed us to take our pick from technologies more easily.
 
 This software architecture also puts a lot of focus on fixed patterns of working. Patterns are code structurings proven to work well, and the idea is that if we all work the same way and understand the system of organization, we can more easily navigate the code, regardless of who wrote it. (This may wither away the skill of reading code that isn't specifically structured this way, but hey: pros and cons.)
 
@@ -108,8 +108,8 @@ Top 12 Code Improvements
 
 This documentation goes into detail about a lot that is labeled 'best practice'. But a few pointers, might improve code quite a bit already:
 
-- Avoid code duplication
-- Avoid error hiding
+- No code duplication
+- No error hiding
 - Use clear names
 - Use correct indentation
 - Separation of concerns
@@ -117,7 +117,7 @@ This documentation goes into detail about a lot that is labeled 'best practice'.
 
 And second in line:
 
-- Reject input: don't correct it
+- Reject input: don't correct input
 - Clear interfaces
 - "Ya ain't gonna need it"
 - Solve a problem at its core, instead of a work-around.
