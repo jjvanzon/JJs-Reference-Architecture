@@ -29,6 +29,12 @@
         - [Unlink](#unlink)
         - [NewLinkTo](#newlinkto)
     - [Cascading](#cascading)
+        - [Files](#files)
+        - [DeleteRelatedEntities](#deleterelatedentities)
+        - [UnlinkRelatedEntities](#unlinkrelatedentities)
+        - [Subtleties](#subtleties)
+        - [Deleting Main Entity](#deleting-main-entity)
+        - [Conclusion](#conclusion)
         - [Cascading & Repositories](#cascading--repositories)
     - [Facade](#facade)
     - [Visitor](#visitor)
@@ -220,7 +226,7 @@ Business Logic Patterns
 
 ### Business Layer
 
-[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it should belong in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that don't follow any standard [pattern](#introduction) could be found in there.
+[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that do not follow any standard [pattern](#introduction).
 
 The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [`DTO's`](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
@@ -326,7 +332,7 @@ public static void NewLinkTo(this Child child, Parent parent)
 }
 ```
 
-But beware that [`LinkTo`](#linkto) might be a better choice, because executing `NewLinkTo` onto *existing* `objects` may corrupt the `object` graph.
+But beware that [`LinkTo`](#linkto) might be a better choice, because executing [`NewLinkTo`](#newlinkto) onto *existing* `objects` may corrupt the `object` graph.
 
 ### Cascading
 
@@ -336,13 +342,7 @@ This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it
 
 A way to implement it, is through extension methods: `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
-Where a main [entity](#entities) is `Deleted`, we could also call the [`Cascading`](#cascading) methods:
-
-```cs
-entity.DeleteRelatedEntities();
-entity.UnlinkRelatedEntities();
-repository.Delete(entity);
-```
+#### Files
 
 Here follows a way to organize the code.
 
@@ -357,45 +357,79 @@ JJ.Ordering.Business.csproj
         |- UnlinkRelatedEntitiesExtensions.cs
 ```
 
-The code files can ee built up as follows: 
+#### DeleteRelatedEntities
 
-`DeleteRelatedEntitiesExtensions.cs:`
+Here is how  `DeleteRelatedEntitiesExtensions.cs` might look internally:
 
 ```cs
-static class DeleteRelatedEntitiesExtensions
+public static class DeleteRelatedEntitiesExtensions
 {
-    static void DeleteRelatedEntities(this Order order)
+    public static void DeleteRelatedEntities(this Order order)
     {
         ...
     }
 }
 ```
 
-`UnlinkRelatedEntitiesExtensions.cs:`
+In there, child [entities](#entities) are successively `Deleted`:
 
 ```cs
-static class UnlinkRelatedEntitiesExtensions
+public static void DeleteRelatedEntities(this Order order)
 {
-    static void UnlinkRelatedEntities(this Order order)
+    foreach (var orderProduct in order.OrderProducts.ToArray())
     {
-        ...
+        _repository.Delete(orderProduct);
     }
 }
 ```
-
-In these methods, the child [entities](#entities) are successively `Deleted` or [`Unlinked`](#unlink).
-
-`< TODO: Code sample Delete cascading. >`
 
 Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too!
 
-`< TODO: Code sample Delete cascading. >`
+```cs
+public static void DeleteRelatedEntities(this Order order)
+{
+    foreach (var orderProduct in order.OrderProducts.ToArray())
+    {
+        orderProduct.UnlinkRelatedEntities(); // Call cascading on the child entity too!
+        _repository.Delete(orderProduct);
+    }
+}
+```
+
+#### UnlinkRelatedEntities
 
 `UnlinkRelatedEntities` might be a bit simpler. It would neither require [`Repositories`](#repository) not does not need much recursion.
 
-`< TODO: Code sample. >`
+```cs
+public static class UnlinkRelatedEntitiesExtensions
+{
+    public static void UnlinkRelatedEntities(this OrderProduct orderProduct)
+    {
+        orderProduct.UnlinkOrder();
+        orderProduct.UnlinkProduct();
+    }
+}
+```
 
-This way you can build up all the [`Cascading`](#cascading) code by using just this pattern.
+#### Subtleties
+
+Sometimes an [entity](#entities) has related [entities](#entities) to [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+
+#### Deleting Main Entity
+
+Note that the extension methods only delete *related* [entities](#entities), not the *main* [entity](#entities). The idea is: where a main [entity](#entities) is `Deleted`, we could also call the [`Cascading`](#cascading) methods:
+
+```cs
+entity.DeleteRelatedEntities();
+entity.UnlinkRelatedEntities();
+
+// Delete main entity separately.
+_repository.Delete(entity); 
+```
+
+#### Conclusion
+
+This way you can build up all the [`Cascading`](#cascading) code by just using this pattern.
 
 #### Cascading & Repositories
 
