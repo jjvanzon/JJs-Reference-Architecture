@@ -402,7 +402,7 @@ new SectionType
 - Enum-like [entities](patterns.md#entities) have an enum-equivalent in the *Business* Layer:
 
 ```cs
-public enum SectionType
+public enum SectionTypeEnum
 {
     Undefined = 0,
     Book = 1,
@@ -413,7 +413,7 @@ public enum SectionType
 }
 ```
 
-Note that the enums themselves do not belong in the [entity](patterns.md#entities) model, but in the Business layer.
+Note that the `enums` themselves do not belong in the [entity](patterns.md#entities) model, but in the [`Business` layer](layers.md#business-layer).
 
 - It is *not* recommended to give enum-like [entities](patterns.md#entities) a [bidirectional relationship](aspects.md#bidirectional-relationships) to the [entities](patterns.md#entities) that use it.
 
@@ -427,7 +427,7 @@ public class SectionType
 
 The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the [`LinkTo`](patterns.md#linkto) methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
 
-- To make assigning an enum-like [entity](patterns.md#entities) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The enum extensions allow you to write code as follows to assign enum-like [entities](patterns.md#entities):
+- To make assigning an enum-like [entity](patterns.md#entities) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The `enum` extensions allow you to write code as follows to assign `enum`-like [entities](patterns.md#entities):
 
 ```cs
 SectionTypeEnum sectionTypeEnum = section.GetSectionTypeEnum();
