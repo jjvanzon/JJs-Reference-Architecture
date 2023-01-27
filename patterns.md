@@ -38,9 +38,13 @@
         - [Conclusion](#conclusion)
     - [Facade](#facade)
     - [Visitor](#visitor)
+        - [Introduction](#introduction-1)
+        - [Visit Methods](#visit-methods)
+        - [Base Visitor](#base-visitor)
+        - [Derived Visitors](#derived-visitors)
         - [Polymorphic Visitation](#polymorphic-visitation)
         - [Accept Methods](#accept-methods)
-        - [Code Sample](#code-sample)
+        - [Conclusion](#conclusion-1)
     - [Resource Strings](#resource-strings)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
@@ -493,19 +497,64 @@ The reason is, that a [`Facade`](#facade) could create an excessive amount of de
 
 ### Visitor
 
+#### Introduction
+
 A [`Visitor`](#visitor) `class` processes a recursive structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing processes.
 
 Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
-A [`Visitor`](#visitor) `class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`. It could also have separate `Visit` methods for each `collection`. And sometimes extra `Visit` methods for special cases.
+#### Visit Methods
+
+A [`Visitor`](#visitor) `class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
+
+```cs
+class Visitor
+{
+    void VisitOrder(Order order) { }
+    void VisitOrderLine(OrderLine orderLine) { }
+    void VisitProduct(Product product) { }
+}
+```
+
+It could also have separate `Visit` methods for each `collection`:
+
+```cs
+void VisitOrderLines(IList<OrderLine> orderLines) { }
+```
+
+And sometimes there are extra `Visit` methods for special cases:
+
+```cs
+void VisitProduct(Product product) { }
+void VisitPhysicalProduct(Product product) { }
+void VisitDigitalProduct(Product product) { }
+```
+
+#### Base Visitor
 
 A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
 
-Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`. You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process.
+`< TODO: Code Sample >`
 
-By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
+All `Visit` methods are `protected virtual` and usually return `void`. They all need to be `overridable` to harnass the power of specialized [`Visitor`](#visitor) `classes`.
 
-A good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor), however the style of a [`Visitor`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
+#### Derived Visitors
+
+Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`.
+
+`< TODO: Code Sample >`
+
+You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process.
+
+`< TODO: Code Sample >`
+
+`Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
+
+`< TODO: Code Sample >`
+
+Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
+
+`< TODO: Code Sample >`
 
 #### Polymorphic Visitation
 
@@ -521,15 +570,11 @@ A good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) o
 
 The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
 
-#### Code Sample
+#### Conclusion
 
-This code example demonstrates specific style preferences for [`Visitors`](#visitor) in this [software architecture](index.md) and gives an impression how [`Visitor`](#visitor) code might be structured.
+A good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor), however the style of a [`Visitor`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
-All `Visit` methods are `protected virtual` and usually return `void`. They all need to be `overridable` to harnass the power of specialized [`Visitor`](#visitor) `classes`. `Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
-
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
-
-`< TODO: Code example. >`
+By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
 ### Resource Strings
 
