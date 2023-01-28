@@ -23,13 +23,13 @@
     - [Transmissions](#transmissions)
 - [Integrations](#integrations)
 - [Multi-Dispatch](#multi-dispatch)
-- [Namespaces](#namespaces)
 - [Service-Related Patterns](#service-related-patterns)
     - [IsSupported](#issupported)
-    - [Facade](#facade)
-    - [Hidden Infrastructure](#hidden-infrastructure)
     - [Tag Model](#tag-model)
     - [Canonical KeyMapping](#canonical-keymapping)
+    - [Hidden Infrastructure](#hidden-infrastructure)
+    - [Facade](#facade)
+- [Namespaces](#namespaces)
 
 
 Introduction
@@ -138,33 +138,6 @@ Multi-Dispatch
 The contents of a [`Canonical`](#canonical-model) model can determine where it needs to be sent. For example, an `Order` may indicate a specific `Supplier` that it should be sent to. One `Supplier` might use their own unique [integration protocol](#connectiontypes), while another might prefer to receive the `Order` by email. With this [service architecture](#-service-oriented-architecture) you can retrieve a message from one [system](#connectiontypes), for instance an `Order`, and then forward it to an arbitrary other [system](#connectiontypes). That is part of the power of a [`Canonical`](#canonical-model) model. It enables communication between multiple [systems](#connectiontypes) by [converting](aspects.md#conversion) their messages to a [common format](#canonical-model).
 
 
-Namespaces
-----------
-
-These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) can be recognized there, like [`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer) and `Services`.
-
-|                                                 |     |
-|-------------------------------------------------|-----|
-| __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for the (web) services.
-| __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of service goes.)
-| __`JJ.Data.Canonical`__                         | Where the [`Canonical` entities](#canonical-model) are modeled.
-| __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of this architecture.
-| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api.md#nhibernate).
-| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb`](#esb-model) database.
-| __`JJ.Business.Canonical`__                     | Shared [logic](layers.md#business-layer) that operates on [`Canonical`](#canonical-model) models.
-| __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
-| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the message communication between different `Ordering` systems, providing guidelines for the message exchange.
-| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and other [logic](layers.md#business-layer).
-| __`JJ.Services.Ordering.Email`__                | A specific [implementation](#connectiontypes) of an `Ordering` system, in which we send the `Order` by email.
-| __`JJ.Services.Ordering.AwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use a hypothetical `AwesomeProtocol`.
-| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) `Ordering` system.
-| __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. This `interface` can be used both by server and client.
-| __`JJ.Services.Ordering.Wcf.Client`__           | Allows a connection to the `WCF` service using a convenient, strongly typed `interface`.
-| __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` / `Rest` protocols.
-| __`JJ.Services.Ordering.WebApi`__               | There is no reason [`Web API`](https://learn.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) should not be involved in this [service architecture](#-service-oriented-architecture). In fact, the idea of `WCF` being the default for services, might not be a very long-lived.
-| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service in this [architecture](index.md) is an `AppService`. It exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns.md#viewmodel).
-
-
 Service-Related Patterns
 ------------------------
 
@@ -181,20 +154,6 @@ bool GetProductsIsSupported { get; }
 ```
 
 Then when for instance running price updates, you can simply *skip* the [systems](#connectiontypes) that do not support it. Possibly a different mechanism is used for keeping prices up-to-date, possibly there is another reason why price updates are irrelevant. It does not matter. The `IsSupported` properties help us keep complexity at bay.
-
-### Facade
-
-A [`Facade`](patterns.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
-
-This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural](layers.md#infrastructure) setup.
-
-### Hidden Infrastructure
-
-When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
-
-In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the *top-level* project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [data access](patterns.md#repository-interfaces). 
-
-But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the *bottom-level* projects. At least in the case of [multi-dispatch](#multi-dispatch) this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client under the hood. You cannot see that setup from the constructor or the `interface`. The services would handle that internally.
 
 ### Tag Model
 
@@ -268,5 +227,46 @@ This way, when a new [system](#connectiontypes) is added, only one [`KeyMapping`
 As messages are [sent back and forth](#multi-dispatch) between [systems](#connectiontypes), the keys in the [`Canonical`](#canonical-model) model are translated from `ExternalID` to `InternalID`. Then, the `ExternalID` property is overwritten by the `ID` from the target [system](#connectiontypes).
 
 It all depends on the specific design of your system. But hopefully this demonstrated a few options how to handle [`KeyMappings`](#keymappings), `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
+
+### Hidden Infrastructure
+
+When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
+
+In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the *top-level* project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [data access](patterns.md#repository-interfaces). 
+
+But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the *bottom-level* projects. At least in the case of [multi-dispatch](#multi-dispatch) this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client under the hood. You cannot see that setup from the constructor or the `interface`. The services would handle that internally.
+
+### Facade
+
+A [`Facade`](patterns.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
+
+This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural](layers.md#infrastructure) setup.
+
+
+Namespaces
+----------
+
+These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ordering` system. The main [layers](layers.md) can be recognized there, like [`Data`](layers.md#data-layer), [`Business`](layers.md#business-layer) and `Services`.
+
+|                                                 |     |
+|-------------------------------------------------|-----|
+| __`JJ.Services`__                               | Root [`namespace`](namespaces-assemblies-and-folders.md) for the (web) services.
+| __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of service goes.)
+| __`JJ.Data.Canonical`__                         | Where the [`Canonical` entities](#canonical-model) are modeled.
+| __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of this architecture.
+| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api.md#nhibernate).
+| __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api.md#sql) queries for working with the [`Esb`](#esb-model) database.
+| __`JJ.Business.Canonical`__                     | Shared [logic](layers.md#business-layer) that operates on [`Canonical`](#canonical-model) models.
+| __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
+| __`JJ.Services.Ordering.Interface`__            | Defines [`interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) (the [`C#`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) kind) that `abstract` the message communication between different `Ordering` systems, providing guidelines for the message exchange.
+| __`JJ.Services.Ordering.Dispatcher`__           | Makes sure messages (`Orders`, `Price` updates) are received from and sent to the [right system](#multi-dispatch) depending on message content, [settings](#esb-model) and other [logic](layers.md#business-layer).
+| __`JJ.Services.Ordering.Email`__                | A specific [implementation](#connectiontypes) of an `Ordering` system, in which we send the `Order` by email.
+| __`JJ.Services.Ordering.AwesomeProtocol`__ | [Implementation](#connectiontypes) of an `Ordering` `interface`, behind which we use a hypothetical `AwesomeProtocol`.
+| __`JJ.Services.Ordering.Wcf`__                  | A `WCF` service that allows you to communicate with the [multi-dispatch](#multi-dispatch) `Ordering` system.
+| __`JJ.Services.Ordering.Wcf.Interface`__        | Defines the `interface` of the `WCF` service. This `interface` can be used both by server and client.
+| __`JJ.Services.Ordering.Wcf.Client`__           | Allows a connection to the `WCF` service using a convenient, strongly typed `interface`.
+| __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` / `Rest` protocols.
+| __`JJ.Services.Ordering.WebApi`__               | There is no reason [`Web API`](https://learn.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) should not be involved in this [service architecture](#-service-oriented-architecture). In fact, the idea of `WCF` being the default for services, might not be a very long-lived.
+| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service in this [architecture](index.md) is an `AppService`. It exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns.md#viewmodel).
 
 [back](.)
