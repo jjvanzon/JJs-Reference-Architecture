@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "🧶 Patterns - 🏛 JJ's Reference Architecture 🏛"
+---
+
+`[ Draft ]`
 
 🧶 Patterns
 ============
