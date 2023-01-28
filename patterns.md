@@ -520,13 +520,13 @@ class Visitor
 }
 ```
 
-It could also have separate `Visit` methods for each `collection`:
+It could also have separate `Visit` methods for `collections`:
 
 ```cs
 void VisitOrderLines(IList<OrderLine> orderLines) { }
 ```
 
-And there might be extra `Visit` methods for special cases:
+And there might be `Visit` methods for special cases:
 
 ```cs
 void VisitProduct(Product product) { }
@@ -536,7 +536,7 @@ void VisitDigitalProduct(Product product) { }
 
 #### Base Visitor
 
-A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node. Here is an example where an `Order` structure is `Visited`, including its child `objects`.
+A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node. Here is an example where an `Order` structure is `Visited`:
 
 ```cs
 class OrderVisitorBase
@@ -568,20 +568,20 @@ class OrderVisitorBase
 }
 ```
 
-`VisitOrder` and `VisitOrderLine` also call `Visit` methods for their *child* objects. Those are `VisitCustomer`, `VisitSupplier` and `VisitProduct`. Those have no child nodes, so their implementations are empty.
-
-All `Visit` methods are `protected virtual`. This makes them `overridable` to harnass the power of making *specialized* [`Visitors`](#visitor) `classes`.
+The ones with *child objects* also call `Visit` on their children. Those without children have an empty implementation.
 
 #### Specialized Visitors
 
+All `Visit` methods are `protected virtual`. This makes them `overridable` to harnass the power of making *specialized* [`Visitors`](#visitor) `classes`.
+
 Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need.
 
-If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`.
+If you only want to process `objects` of a specific `type`, you only override `Visit` methods for those specific `types`:
 
 ```cs
 /// <summary>
-/// This specialized `Visitor` is only going to
-/// process `OrderLines` and `Products`,
+/// This specialized `Visitor` only processes
+/// `OrderLines` and `Products`,
 /// so the respective `Visit` methods are overridden.
 /// </summary>
 class OrderSummaryVisitor : OrderVisitorBase
@@ -597,7 +597,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
 
 The aim for this new `Visitor` is to create a text, that summarizes the order. 
-Here is the code that uses a `StringBuilder` to build up the text:
+Here is the code that uses a `StringBuilder` to build it up:
 
 ```cs
 /// <summary>
@@ -611,6 +611,7 @@ class OrderSummaryVisitor2 : OrderVisitorBase
     protected override void VisitOrderLine(OrderLine orderLine)
     {
         _sb.Append($"{orderLine.Quantity} x ");
+
         base.VisitOrderLine(orderLine);
     }
 
@@ -618,29 +619,53 @@ class OrderSummaryVisitor2 : OrderVisitorBase
     {
         _sb.Append($"{product.Name}");
         _sb.AppendLine();
+
         base.VisitProduct(product);
     }
 }
 ```
 
-The result of the process can be a text like this:
+The result of the process might be a text like this:
 
 ```
-1 x Cool gadget
-2 x Fidget thing
+1 x Cool Gadget
+2 x Fidget Thing
 ```
 
 #### Optimization
 
-You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process.
+You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process:
 
-`< TODO: Code Sample >`
+```cs
+/// <summary>
+/// This Visitor aims to optimize the recursive process.
+/// </summary>
+class OrderSummaryVisitor_Step3_Optimize : OrderVisitorBase
+{
+    /// <summary>
+    /// Override VisitOrder and leave out part of the recursion.
+    /// </summary>
+    protected override void VisitOrder(Order order)
+    {
+        // Customer and Supplier are skipped here for optimization.
+
+        foreach (var orderLine in order.OrderLines)
+        {
+            VisitOrderLine(orderLine);
+        }
+
+        // Don't call base here. This method replaced it.
+    }
+}
+```
 
 #### Entry Point
 
 `Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
 
 `< TODO: Code Sample >`
+
+This is why the `Visit` methods were `protected`, not `public`.
 
 #### Details
 
@@ -670,7 +695,7 @@ The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opi
 
 By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
 
-A good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor), however the style of a [`Visitor`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
+Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
 ### Resource Strings
 
