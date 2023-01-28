@@ -43,9 +43,9 @@
         - [Base Visitor](#base-visitor)
         - [Specialized Visitors](#specialized-visitors)
         - [Optimization](#optimization)
-        - [Entry Point](#entry-point)
+        - [Entry Points](#entry-points)
         - [Details](#details)
-        - [Changing the Order](#changing-the-order)
+        - [Change the Order](#change-the-order)
         - [Polymorphic Visitation](#polymorphic-visitation)
         - [Accept Methods](#accept-methods)
         - [Conclusion](#conclusion-1)
@@ -503,13 +503,13 @@ The reason is, that a [`Facade`](#facade) could create an excessive amount of de
 
 #### Introduction
 
-A [`Visitor`](#visitor) `class` processes a recursive structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing processes.
+A [`Visitor`](#visitor) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing code.
 
 Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
 #### Visit Methods
 
-A [`Visitor`](#visitor) `class` can have a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
+A [`Visitor`](#visitor) `class` has a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
 
 ```cs
 class Visitor
@@ -520,7 +520,7 @@ class Visitor
 }
 ```
 
-It could also have separate `Visit` methods for `collections`:
+It can also have separate `Visit` methods for `collections`:
 
 ```cs
 void VisitOrderLines(IList<OrderLine> orderLines) { }
@@ -568,7 +568,7 @@ class OrderVisitorBase
 }
 ```
 
-The ones with *child objects* also call `Visit` on their children. Those without children have an empty implementation.
+The ones with *child objects* also call `Visit` on their children. Those without children have empty implementations.
 
 #### Specialized Visitors
 
@@ -580,9 +580,9 @@ If you only want to process `objects` of a specific `type`, you only override `V
 
 ```cs
 /// <summary>
-/// This specialized `Visitor` only processes
-/// `OrderLines` and `Products`,
-/// so the respective `Visit` methods are overridden.
+/// This specialized Visitor only processes
+/// OrderLines and Products,
+/// so the respective Visit methods are overridden.
 /// </summary>
 class OrderSummaryVisitor : OrderVisitorBase
 {
@@ -604,7 +604,7 @@ Here is the code that uses a `StringBuilder` to build it up:
 /// Here the Visit methods are extended,
 /// creating a text that summarizes the order.
 /// </summary>
-class OrderSummaryVisitor2 : OrderVisitorBase
+class OrderSummaryVisitor : OrderVisitorBase
 {
     StringBuilder _sb = new();
 
@@ -640,7 +640,7 @@ You can optimize performance by overriding `Visit` methods that would enter a pa
 /// <summary>
 /// This Visitor aims to optimize the recursive process.
 /// </summary>
-class OrderSummaryVisitor_Step3_Optimize : OrderVisitorBase
+class OrderSummaryVisitor : OrderVisitorBase
 {
     /// <summary>
     /// Override VisitOrder and leave out part of the recursion.
@@ -659,13 +659,60 @@ class OrderSummaryVisitor_Step3_Optimize : OrderVisitorBase
 }
 ```
 
-#### Entry Point
+#### Entry Points
 
-`Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
+`Public` methods might only expose the *entry points* in the recursion, so it is clear where to start. This is why the `Visit` methods were `protected`, not `public`.
 
-`< TODO: Code Sample >`
+```cs
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    StringBuilder _sb = new();
 
-This is why the `Visit` methods were `protected`, not `public`.
+    /// <summary>
+    /// This Execute method is the only one that's public.
+    /// This makes it clear where the process starts.
+    /// The Visit other methods are kept protected
+    /// for internal processing.
+    /// </summary>
+    public string Execute(Order order)
+    {
+        VisitOrder(order);
+        return _sb.ToString();
+    }
+
+    ...
+}
+```
+
+Here is a complete and working code sample of a derived `Visitor`:
+
+```cs
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    public string Execute(Order order)
+    {
+        VisitOrder(order);
+        return _sb.ToString();
+    }
+
+    StringBuilder _sb = new();
+
+    protected override void VisitOrderLine(OrderLine orderLine)
+    {
+        _sb.Append($"{orderLine.Quantity} x ");
+
+        base.VisitOrderLine(orderLine);
+    }
+
+    protected override void VisitProduct(Product product)
+    {
+        _sb.Append($"{product.Name}");
+        _sb.AppendLine();
+
+        base.VisitProduct(product);
+    }
+}
+```
 
 #### Details
 
@@ -673,7 +720,7 @@ Typically the result of a `Visitor` is not put on the call stack, but stored in 
 
 `< TODO: Code Sample >`
 
-#### Changing the Order
+#### Change the Order
 
 `< TODO: Changing the order of processing. >`
 
