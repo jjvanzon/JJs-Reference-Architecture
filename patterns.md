@@ -529,7 +529,6 @@ void VisitOrderLines(IList<OrderLine> orderLines) { }
 And there might be `Visit` methods for special cases:
 
 ```cs
-void VisitProduct(Product product) { }
 void VisitPhysicalProduct(Product product) { }
 void VisitDigitalProduct(Product product) { }
 ```
@@ -724,9 +723,11 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 #### Details
 
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure. This is also why all the `Visit` methods `return void`.
+Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods.
 
 `< TODO: Code Sample >`
+
+This is because the result usually does not have a 1-to-1 mapping with the source structure. This is also why the `Visit` methods here `return void`.
 
 #### Change the Order
 
@@ -748,7 +749,7 @@ The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opi
 
 #### Conclusion
 
-By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
+By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
 
 Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
