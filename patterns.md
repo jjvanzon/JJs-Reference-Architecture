@@ -42,6 +42,10 @@
         - [Visit Methods](#visit-methods)
         - [Base Visitor](#base-visitor)
         - [Specialized Visitors](#specialized-visitors)
+        - [Optimization](#optimization)
+        - [Entry Point](#entry-point)
+        - [Details](#details)
+        - [Changing the Order](#changing-the-order)
         - [Polymorphic Visitation](#polymorphic-visitation)
         - [Accept Methods](#accept-methods)
         - [Conclusion](#conclusion-1)
@@ -532,11 +536,15 @@ void VisitDigitalProduct(Product product) { }
 
 #### Base Visitor
 
-A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node in the structure.
+A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node. Here is an example where an `Order` structure is `Visited`, including its child `objects`.
 
 ```cs
-class VisitorBase
+class OrderVisitorBase
 {
+    /// <summary>
+    /// VisitOrder processes the child objects:
+    /// Customer, Supplier and OrderLines.
+    /// </summary>
     protected virtual void VisitOrder(Order order)
     {
         VisitCustomer(order.Customer);
@@ -548,35 +556,101 @@ class VisitorBase
         }
     }
 
-    protected virtual void VisitCustomer(Customer customer) { }
-    protected virtual void VisitSupplier(Supplier supplier) { }
-
+    /// <summary>
+    /// VisitOrderLine also processes its child object Product.
+    /// </summary>
     protected virtual void VisitOrderLine(OrderLine orderLine)
         => VisitProduct(orderLine.Product);
 
+    protected virtual void VisitCustomer(Customer customer) { }
+    protected virtual void VisitSupplier(Supplier supplier) { }
     protected virtual void VisitProduct(Product product) { }
 }
 ```
 
-All `Visit` methods are `protected virtual` and usually return `void`. They all need to be `overridable` / `virtual` to harnass the power of specialized [`Visitor`](#visitor) `classes`.
+`VisitOrder` and `VisitOrderLine` also call `Visit` methods for their *child* objects. Those are `VisitCustomer`, `VisitSupplier` and `VisitProduct`. Those have no child nodes, so their implementations are empty.
+
+All `Visit` methods are `protected virtual`. This makes them `overridable` to harnass the power of making *specialized* [`Visitors`](#visitor) `classes`.
 
 #### Specialized Visitors
 
-Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need. If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`.
+Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need.
 
-`< TODO: Code Sample >`
+If you only want to process `objects` of a specific `type`, you only override the `Visit` method for that specific `type`.
+
+```cs
+/// <summary>
+/// This specialized `Visitor` is only going to
+/// process `OrderLines` and `Products`,
+/// so the respective `Visit` methods are overridden.
+/// </summary>
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    protected override void VisitOrderLine(OrderLine orderLine)
+        => base.VisitOrderLine(orderLine);
+
+    protected override void VisitProduct(Product product) 
+        => base.VisitProduct(product);
+}
+```
+
+They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
+
+The aim for this new `Visitor` is to create a text, that summarizes the order. 
+Here is the code that uses a `StringBuilder` to build up the text:
+
+```cs
+/// <summary>
+/// Here the Visit methods are extended,
+/// creating a text that summarizes the order.
+/// </summary>
+class OrderSummaryVisitor2 : OrderVisitorBase
+{
+    StringBuilder _sb = new();
+
+    protected override void VisitOrderLine(OrderLine orderLine)
+    {
+        _sb.Append($"{orderLine.Quantity} x ");
+        base.VisitOrderLine(orderLine);
+    }
+
+    protected override void VisitProduct(Product product)
+    {
+        _sb.Append($"{product.Name}");
+        _sb.AppendLine();
+        base.VisitProduct(product);
+    }
+}
+```
+
+The result of the process can be a text like this:
+
+```
+1 x Cool gadget
+2 x Fidget thing
+```
+
+#### Optimization
 
 You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process.
 
 `< TODO: Code Sample >`
 
+#### Entry Point
+
 `Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
 
 `< TODO: Code Sample >`
 
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
+#### Details
+
+Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods. This is because the result usually does not have a 1-to-1 mapping with the source structure. This is also why all the `Visit` methods `return void`.
 
 `< TODO: Code Sample >`
+
+#### Changing the Order
+
+`< TODO: Changing the order of processing. >`
 
 #### Polymorphic Visitation
 
