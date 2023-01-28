@@ -689,13 +689,21 @@ Here is a complete and working code sample of a derived `Visitor`:
 ```cs
 class OrderSummaryVisitor : OrderVisitorBase
 {
+    StringBuilder _sb = new();
+
     public string Execute(Order order)
     {
         VisitOrder(order);
         return _sb.ToString();
     }
 
-    StringBuilder _sb = new();
+    protected override void VisitOrder(Order order)
+    {
+        foreach (var orderLine in order.OrderLines)
+        {
+            VisitOrderLine(orderLine);
+        }
+    }
 
     protected override void VisitOrderLine(OrderLine orderLine)
     {
