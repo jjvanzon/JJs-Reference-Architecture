@@ -27,8 +27,8 @@
     - [IsSupported](#issupported)
     - [Tag Model](#tag-model)
     - [Canonical KeyMapping](#canonical-keymapping)
-    - [Hidden Infrastructure](#hidden-infrastructure)
     - [Facade](#facade)
+    - [Hidden Infrastructure](#hidden-infrastructure)
 - [Namespaces](#namespaces)
 
 
@@ -228,6 +228,12 @@ As messages are [sent back and forth](#multi-dispatch) between [systems](#connec
 
 It all depends on the specific design of your system. But hopefully this demonstrated a few options how to handle [`KeyMappings`](#keymappings), `IDs` and reference numbers in a [Service Oriented Architecture](#-service-oriented-architecture).
 
+### Facade
+
+A [`Facade`](patterns.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
+
+This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural](layers.md#infrastructure) setup.
+
 ### Hidden Infrastructure
 
 When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
@@ -235,12 +241,6 @@ When it comes to handling infrastructure setup, there's a key difference between
 In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the *top-level* project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [data access](patterns.md#repository-interfaces). 
 
 But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the *bottom-level* projects. At least in the case of [multi-dispatch](#multi-dispatch) this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client under the hood. You cannot see that setup from the constructor or the `interface`. The services would handle that internally.
-
-### Facade
-
-A [`Facade`](patterns.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
-
-This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural](layers.md#infrastructure) setup.
 
 
 Namespaces
