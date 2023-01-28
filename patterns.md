@@ -684,7 +684,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 }
 ```
 
-Here is a complete and working code sample of a derived `Visitor`:
+Here is the complete code sample of our derived `Visitor`:
 
 ```cs
 class OrderSummaryVisitor : OrderVisitorBase
