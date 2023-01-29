@@ -828,8 +828,6 @@ abstract class PolymorphicVisitorBase
             case Customer customer:
                 VisitCustomer(customer);
                 break;
-
-            default: throw new UnexpectedTypeException(() => party);
         }
     }
 
@@ -864,8 +862,6 @@ abstract class PolymorphicVisitorBase
             case ProductTypeEnum.Digital:
                 VisitDigitalProduct(product);
                 break;
-
-            default: throw new ValueNotSupportedException(() => productTypeEnum);
         }
     }
 
