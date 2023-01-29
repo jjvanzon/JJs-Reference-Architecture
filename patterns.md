@@ -48,7 +48,7 @@ title: "🧶 Patterns"
         - [Specialized Visitors](#specialized-visitors)
         - [Optimization](#optimization)
         - [Entry Points](#entry-points)
-        - [Details](#details)
+        - [Using Fields](#using-fields)
         - [Polymorphic Visitation](#polymorphic-visitation)
         - [Change the Sequence](#change-the-sequence)
         - [Accept Methods](#accept-methods)
@@ -507,7 +507,7 @@ The reason is, that a [`Facade`](#facade) could create an excessive amount of de
 
 #### Introduction
 
-A [`Visitor`](#visitor) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing code.
+A [`Visitor`](#visitor) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing code.
 
 Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
@@ -727,11 +727,9 @@ class OrderSummaryVisitor : OrderVisitorBase
 }
 ```
 
-#### Details
+#### Using Fields
 
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods.
-
-This is because the result usually does not have a 1-to-1 mapping with the source structure. This is also why the `Visit` methods here `return void`.
+The result of a [`Visitor's`](#visit-methods) operation is typically stored in fields and used across multiple `Visit` methods. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure, which makes it easier to use fields instead of parameters or return values.
 
 #### Polymorphic Visitation
 
@@ -914,6 +912,8 @@ However, `Accept` methods can be used for specialized use-cases for instance to 
 #### Conclusion
 
 By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
+
+However, there might be alternatives. For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections) has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions).
 
 Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different in this [software architecture](index.md). It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
