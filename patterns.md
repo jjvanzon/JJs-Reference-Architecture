@@ -575,11 +575,9 @@ The ones with *child objects* also call `Visit` on their children. Those without
 
 #### Specialized Visitors
 
-All `Visit` methods are `protected virtual`. This makes them `overridable` to harnass the power of making *specialized* [`Visitors`](#visitor) `classes`.
+You can make *specialized* [`Visitor`](#visitor) classes, by overriding the `Visit` methods.
 
-Derived [`Visitors`](#visitor) can `override` any `Visit` method that they need.
-
-If you only want to process `objects` of a specific `type`, you only override `Visit` methods for those specific `types`:
+If you only want to process certain `types` of `objects`, you can override `Visit` methods for those `types` only:
 
 ```cs
 /// <summary>
@@ -637,7 +635,7 @@ The result of the process might be a text like this:
 
 #### Optimization
 
-You can optimize performance by overriding `Visit` methods that would enter a part of the recursive structure that you do not need to process:
+You can make the performance better by `overriding` the `Visit` methods for parts of the recursive structure that don't need to be processed:
 
 ```cs
 /// <summary>
@@ -664,7 +662,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 #### Entry Points
 
-`Public` methods might only expose the *entry points* in the recursion, so it is clear where to start. This is why the `Visit` methods were `protected`, not `public`.
+`Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
 
 ```cs
 class OrderSummaryVisitor : OrderVisitorBase
@@ -686,6 +684,8 @@ class OrderSummaryVisitor : OrderVisitorBase
     ...
 }
 ```
+
+This is why the `Visit` methods are `protected`, not `public`.
 
 Here is the complete code sample of our derived `Visitor`:
 
