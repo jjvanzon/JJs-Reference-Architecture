@@ -27,9 +27,9 @@
 
     <!-- Hacking in class name highlighting for variables in code blocks. -->
     <script>
-      $(window).on('load', () =>
+      $(document).ready(() =>
       {
-          //$(".n").nextAll(".n").first().previous().removeClass("n").addClass("nc");
+          console.log($(".n + .n").length);
           $(".n + .n").previous().removeClass("n").addClass("nc");
           console.log('class name change executed');
       });
