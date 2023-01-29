@@ -1,4 +1,8 @@
-﻿<style>.wrapper { max-width: 90% }</style>
+﻿---
+title: "👨‍💻 Code Style"
+---
+
+<style>.wrapper { max-width: 90% }</style>
 
 👨‍💻 Code Style
 ==============

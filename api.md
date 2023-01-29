@@ -1,4 +1,8 @@
-﻿<style>.wrapper { max-width: 90% }</style>
+﻿---
+title: "🎁 API's"
+---
+
+<style>.wrapper { max-width: 90% }</style>
 
 🎁 API's
 =========

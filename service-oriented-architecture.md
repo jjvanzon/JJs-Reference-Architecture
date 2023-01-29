@@ -1,4 +1,8 @@
-﻿<style>thead{display:none;}</style>
+﻿---
+title: "🌍 Service Oriented Architecture"
+---
+
+<style>thead{display:none;}</style>
 
 🌍 Service Oriented Architecture
 =================================
