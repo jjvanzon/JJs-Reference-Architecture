@@ -513,7 +513,7 @@ Whenever a whole recursive structure needs to be processed, the [`Visitor`](#vis
 
 #### Visit Methods
 
-A [`Visitor`](#visitor) `class` has a set of `Visit` methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
+A [`Visitor`](#visitor) `class` has a set of [`Visit`](#visit-methods) methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
 
 ```cs
 class Visitor
@@ -524,13 +524,13 @@ class Visitor
 }
 ```
 
-It can also have separate `Visit` methods for `collections`:
+It can also have separate [`Visit`](#visit-methods) methods for `collections`:
 
 ```cs
 void VisitOrderLines(IList<OrderLine> orderLines) { }
 ```
 
-And there might be `Visit` methods for special cases:
+And there might be [`Visit`](#visit-methods) methods for special cases:
 
 ```cs
 void VisitPhysicalProduct(Product product) { }
@@ -539,7 +539,7 @@ void VisitDigitalProduct(Product product) { }
 
 #### Base Visitor
 
-A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a `Visit` method for each node. Here is an example where an `Order` structure is `Visited`:
+A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a [`Visit`](#visit-methods) method for each node. Here is an example where an `Order` structure is `Visited`:
 
 ```cs
 class OrderVisitorBase
@@ -571,13 +571,13 @@ class OrderVisitorBase
 }
 ```
 
-The ones with *child objects* also call `Visit` on their children. Those without children have empty implementations.
+The ones with *child objects* also call [`Visit`](#visit-methods) on their children. Those without children have empty implementations.
 
 #### Specialized Visitors
 
-You can make *specialized* [`Visitor`](#visitor) classes, by overriding the `Visit` methods.
+You can make *specialized* [`Visitor`](#visitor) classes, by overriding the [`Visit`](#visit-methods) methods.
 
-If you only want to process certain `types` of `objects`, you can override `Visit` methods for those `types` only:
+If you only want to process certain `types` of `objects`, you can override [`Visit`](#visit-methods) methods for those `types` only:
 
 ```cs
 /// <summary>
@@ -598,12 +598,12 @@ class OrderSummaryVisitor : OrderVisitorBase
 They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
 
 The aim for this new [`Visitor`](#visitor) is to create a text, that summarizes the `Order`. 
-Here is the code that uses a `StringBuilder` to build it up:
+Here is the code that uses a `StringBuilder` for this:
 
 ```cs
 /// <summary>
 /// Here the Visit methods are extended,
-/// creating a text that summarizes the order.
+/// creating a text that summarizes the Order.
 /// </summary>
 class OrderSummaryVisitor : OrderVisitorBase
 {
@@ -635,7 +635,7 @@ The result of the process might be a text like this:
 
 #### Optimization
 
-You can make the performance better by `overriding` `Visit` methods for skipping parts of the recursive structure that don't you don't need:
+You can make the performance better by `overriding` [`Visit`](#visit-methods) methods for skipping parts of the recursive structure that don't you don't need:
 
 ```cs
 /// <summary>
@@ -674,7 +674,7 @@ class OrderSummaryVisitor : OrderVisitorBase
     /// <summary>
     /// This Execute method is the only one that's public.
     /// This makes it clear where the process starts.
-    /// The Visit other methods are kept protected
+    /// The Visit methods are kept protected
     /// for internal processing.
     /// </summary>
     public string Execute(Order order)
@@ -687,7 +687,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 }
 ```
 
-This is why the `Visit` methods are `protected`, not `public`.
+This is why the [`Visit`](#visit-methods) methods are `protected`, not `public`.
 
 Here is the complete code sample of our derived `Visitor`:
 
@@ -729,11 +729,11 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 #### Using Fields
 
-The result of a [`Visitor's`](#visit-methods) operation is typically stored in fields and used across multiple `Visit` methods. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure, which makes it easier to use fields instead of parameters or return values.
+The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It makes our `base` [`Visitors`](#visitor) more reusable too.
 
 #### Polymorphic Visitation
 
-Sometimes there is a `Visit` method for each concrete `type` with the same `base type`.
+Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type` with the same `base type`.
 
 For instance `Customer` and `Supplier` might both derive from a `Party` base type:
 
@@ -742,7 +742,7 @@ class Supplier : Party { }
 class Customer : Party { }
 ```
 
-A [`Visitor`](#visitor) `class` might contain this construction to allow tapping into different levels of the abstraction:
+A [`Visitor`](#visitor) `class` might allow tapping into different levels of the abstraction like this:
 
 ```cs
 protected virtual void VisitPartyPolymorphic(Party party)
@@ -768,11 +768,11 @@ protected virtual void VisitCustomer(Customer customer)
 protected virtual void VisitPartyBase(Party party) { }
 ```
 
-This way you can separately `override` a `Visit` method for `Supplier` or `Customer`.
+This way you can separately `override` a [`Visit`](#visit-methods) method for `Supplier` or `Customer`.
 
 But you could also `override` `VisitPartyBase` instead, where you wish to handle both `Parties` the same way.
 
-The `VisitPartyPolymorphic` method is best used for switching between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized `Visit` methods are called.
+The `VisitPartyPolymorphic` method is best used for switching between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized [`Visit`](#visit-methods) methods are called.
 
 You need all those methods delegating in the right order, for the visitation to work properly.
 
@@ -803,9 +803,9 @@ protected virtual void VisitDigitalProduct(Product product)
 protected virtual void VisitProductBase(Product product) { }
 ```
 
-This way we can create `Visit` methods for specific cases if needed.
+This way we can create [`Visit`](#visit-methods) methods for specific cases if needed.
 
-Here is a full example of a [`Visitor`](#visitor) `class` with polymorphic `Visit` methods:
+Here is a full example of a [`Visitor`](#visitor) `class` with polymorphic [`Visit`](#visit-methods) methods:
 
 ```cs
 abstract class PolymorphicVisitorBase
@@ -881,7 +881,7 @@ abstract class PolymorphicVisitorBase
 
 #### Change the Sequence
 
-You might also `override` a `Visit` method to change the order in which things are processed.
+You might also `override` a [`Visit`](#visit-methods) method to change the order in which things are processed.
 
 ```cs
 /// <summary>
