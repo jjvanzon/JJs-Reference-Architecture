@@ -49,8 +49,8 @@ title: "🧶 Patterns"
         - [Optimization](#optimization)
         - [Entry Points](#entry-points)
         - [Details](#details)
-        - [Change the Order](#change-the-order)
         - [Polymorphic Visitation](#polymorphic-visitation)
+        - [Change the Order](#change-the-order)
         - [Accept Methods](#accept-methods)
         - [Conclusion](#conclusion-1)
     - [Resource Strings](#resource-strings)
@@ -597,7 +597,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
 
-The aim for this new `Visitor` is to create a text, that summarizes the order. 
+The aim for this new [`Visitor`](#visitor) is to create a text, that summarizes the `Order`. 
 Here is the code that uses a `StringBuilder` to build it up:
 
 ```cs
@@ -662,7 +662,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 #### Entry Points
 
-`Public` methods might only expose the *entry points* in the recursion, so it is clear where to start.
+`Public` methods can show us the starting point of the recursion, making it easier to understand where the process begins:
 
 ```cs
 class OrderSummaryVisitor : OrderVisitorBase
@@ -729,23 +729,159 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the `Visit` methods.
 
-`< TODO: Code Sample >`
-
 This is because the result usually does not have a 1-to-1 mapping with the source structure. This is also why the `Visit` methods here `return void`.
+
+#### Polymorphic Visitation
+
+Sometimes there is a `Visit` method for each concrete `type` with the same `base type`.
+
+For instance `Customer` and `Supplier` might both derive from a `Party` base type:
+
+```cs
+class Supplier : Party { }
+class Customer : Party { }
+```
+
+A [`Visitor`](#visitor) `class` might contain this construction to allow tapping into different levels of the abstraction:
+
+```cs
+protected virtual void VisitPartyPolymorphic(Party party)
+{
+    switch (party)
+    {
+        case Supplier supplier:
+            VisitSupplier(supplier);
+            break;
+
+        case Customer customer:
+            VisitCustomer(customer);
+            break;
+    }
+}
+
+protected virtual void VisitSupplier(Supplier supplier)
+    => VisitPartyBase(supplier);
+
+protected virtual void VisitCustomer(Customer customer)
+    => VisitPartyBase(customer);
+
+protected virtual void VisitPartyBase(Party party) { }
+```
+
+This way you can separately `override` a `Visit` method for `Supplier` or `Customer`.
+
+But you could also `override` `VisitPartyBase` instead, where you wish to handle both `Parties` the same way.
+
+The `VisitPartyPolymorphic` method is best used to switch between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized `Visit` methods are called.
+
+You need all those methods delegating in the right order, for the visitation to happen correctly.
+
+Here is another example of polymorphic visitation, where we don't `switch` on an `object type`, but on an `enum` instead:
+
+```cs
+protected virtual void VisitProductPolymorphic(Product product)
+{
+    ProductTypeEnum productTypeEnum = product.GetProductTypeEnum();
+    switch (productTypeEnum)
+    {
+        case ProductTypeEnum.Physical:
+            VisitPhysicalProduct(product);
+            break;
+
+        case ProductTypeEnum.Digital:
+            VisitDigitalProduct(product);
+            break;
+    }
+}
+
+protected virtual void VisitPhysicalProduct(Product product)
+    => VisitProductBase(product);
+
+protected virtual void VisitDigitalProduct(Product product)
+    => VisitProductBase(product);
+
+protected virtual void VisitProductBase(Product product) { }
+```
+
+This way we can create `Visit` methods for specific cases if needed.
+
+Here is a full example of a [`Visitor`](#visitor) `class` with polymorphic `Visit` methods:
+
+```cs
+abstract class PolymorphicVisitorBase
+{
+    protected virtual void VisitOrder(Order order)
+    {
+        VisitPartyPolymorphic(order.Customer);
+        VisitPartyPolymorphic(order.Supplier);
+        VisitOrderLines(order.OrderLines);
+    }
+
+    protected virtual void VisitPartyPolymorphic(Party party)
+    {
+        switch (party)
+        {
+            case Supplier supplier:
+                VisitSupplier(supplier);
+                break;
+
+            case Customer customer:
+                VisitCustomer(customer);
+                break;
+
+            default: throw new UnexpectedTypeException(() => party);
+        }
+    }
+
+    protected virtual void VisitSupplier(Supplier supplier)
+        => VisitPartyBase(supplier);
+
+    protected virtual void VisitCustomer(Customer customer)
+        => VisitPartyBase(customer);
+
+    protected virtual void VisitPartyBase(Party party) { }
+
+    protected virtual void VisitOrderLines(IList<OrderLine> orderLines)
+    {
+        foreach (OrderLine orderLine in orderLines)
+        {
+            VisitOrderLine(orderLine);
+        }
+    }
+
+    protected virtual void VisitOrderLine(OrderLine orderLine)
+        => VisitProductPolymorphic(orderLine.Product);
+
+    protected virtual void VisitProductPolymorphic(Product product)
+    {
+        ProductTypeEnum productTypeEnum = product.GetProductTypeEnum();
+        switch (productTypeEnum)
+        {
+            case ProductTypeEnum.Physical:
+                VisitPhysicalProduct(product);
+                break;
+
+            case ProductTypeEnum.Digital:
+                VisitDigitalProduct(product);
+                break;
+
+            default: throw new ValueNotSupportedException(() => productTypeEnum);
+        }
+    }
+
+    protected virtual void VisitPhysicalProduct(Product product)
+        => VisitProductBase(product);
+
+    protected virtual void VisitDigitalProduct(Product product)
+        => VisitProductBase(product);
+
+    protected virtual void VisitProductBase(Product product) { }
+}
+```
 
 #### Change the Order
 
 `< TODO: Changing the order of processing. >`
-
-#### Polymorphic Visitation
-
-`< TODO:`
-
-`- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.`
-
-`- Visitor pattern: mention that you always need to call polymorphic, otherwise you might not get all the objects when you override the polymorphic. >`
-
-`< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
 
 #### Accept Methods
 
