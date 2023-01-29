@@ -635,7 +635,7 @@ The result of the process might be a text like this:
 
 #### Optimization
 
-You can make the performance better by `overriding` the `Visit` methods for parts of the recursive structure that don't need to be processed:
+You can make the performance better by `overriding` `Visit` methods for skipping parts of the recursive structure that don't you don't need:
 
 ```cs
 /// <summary>
@@ -659,6 +659,8 @@ class OrderSummaryVisitor : OrderVisitorBase
     }
 }
 ```
+
+However, be mindful of the trade-off between performance and completeness, as skipping parts of the structure also means missing out on the deeper objects.
 
 #### Entry Points
 
