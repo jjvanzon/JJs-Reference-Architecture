@@ -560,7 +560,7 @@ class OrderVisitorBase
     }
 
     /// <summary>
-    /// VisitOrderLine also processes its child object Product.
+    /// VisitOrderLine also processes its child object: Product.
     /// </summary>
     protected virtual void VisitOrderLine(OrderLine orderLine)
         => VisitProduct(orderLine.Product);
