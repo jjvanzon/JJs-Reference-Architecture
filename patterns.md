@@ -553,7 +553,7 @@ class OrderVisitorBase
         VisitCustomer(order.Customer);
         VisitSupplier(order.Supplier);
 
-        foreach (var orderLine in order.OrderLines)
+        foreach (var orderLine in order.OrderLines.ToArray())
         {
             VisitOrderLine(orderLine);
         }
@@ -650,7 +650,7 @@ class OrderSummaryVisitor : OrderVisitorBase
     {
         // Customer and Supplier are skipped here for optimization.
 
-        foreach (var orderLine in order.OrderLines)
+        foreach (var orderLine in order.OrderLines.ToArray())
         {
             VisitOrderLine(orderLine);
         }
@@ -704,7 +704,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
     protected override void VisitOrder(Order order)
     {
-        foreach (var orderLine in order.OrderLines)
+        foreach (var orderLine in order.OrderLines.ToArray())
         {
             VisitOrderLine(orderLine);
         }
@@ -893,7 +893,7 @@ class ReversedOrderVisitor : OrderVisitorBase
 {
     protected override void VisitOrder(Order order)
     {
-        foreach (var orderLine in order.OrderLines)
+        foreach (var orderLine in order.OrderLines.ToArray())
         {
             VisitOrderLine(orderLine);
         }
