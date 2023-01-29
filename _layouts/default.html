@@ -27,7 +27,7 @@
 
     <!-- Hacking in class name highlighting for variables in code blocks. -->
     <script>
-      $(document).ready(() =>
+      $(window).on('load', () =>
       {
           $(".n > .n").removeClass("n").addClass("nc");
       });
