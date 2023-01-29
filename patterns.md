@@ -50,7 +50,7 @@ title: "🧶 Patterns"
         - [Entry Points](#entry-points)
         - [Details](#details)
         - [Polymorphic Visitation](#polymorphic-visitation)
-        - [Change the Order](#change-the-order)
+        - [Change the Sequence](#change-the-sequence)
         - [Accept Methods](#accept-methods)
         - [Conclusion](#conclusion-1)
     - [Resource Strings](#resource-strings)
@@ -776,14 +776,14 @@ But you could also `override` `VisitPartyBase` instead, where you wish to handle
 
 The `VisitPartyPolymorphic` method is best used for switching between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized `Visit` methods are called.
 
-You need all those methods delegating in the right order, for the visitation to happen correctly.
+You need all those methods delegating in the right order, for the visitation to work properly.
 
 Here is another example of polymorphic visitation, where we don't `switch` on an `object type`, but on an `enum` instead:
 
 ```cs
 protected virtual void VisitProductPolymorphic(Product product)
 {
-    ProductTypeEnum productTypeEnum = product.GetProductTypeEnum();
+    var productTypeEnum = product.GetProductTypeEnum();
     switch (productTypeEnum)
     {
         case ProductTypeEnum.Physical:
@@ -856,7 +856,7 @@ abstract class PolymorphicVisitorBase
 
     protected virtual void VisitProductPolymorphic(Product product)
     {
-        ProductTypeEnum productTypeEnum = product.GetProductTypeEnum();
+        var productTypeEnum = product.GetProductTypeEnum();
         switch (productTypeEnum)
         {
             case ProductTypeEnum.Physical:
@@ -881,11 +881,29 @@ abstract class PolymorphicVisitorBase
 }
 ```
 
-#### Change the Order
+#### Change the Sequence
 
-You might also override a Visit method to change the order in which things are processed.
+You might also `override` a `Visit` method to change the order in which things are processed.
 
-`< TODO: Code example. Perhaps one where you put Customer and Supplier visitation at the end instead of the beginning. >`
+```cs
+/// <summary>
+/// This Visitor changes the order of processing.
+/// </summary>
+class ReversedOrderVisitor : OrderVisitorBase
+{
+    protected override void VisitOrder(Order order)
+    {
+        foreach (var orderLine in order.OrderLines)
+        {
+            VisitOrderLine(orderLine);
+        }
+
+        // Visit Customer and Supplier last instead of first.
+        VisitCustomer(order.Customer);
+        VisitSupplier(order.Supplier);
+    }
+}
+```
 
 #### Accept Methods
 
@@ -909,7 +927,7 @@ If you follow the following naming convention for `resources` files, [`.NET`](ap
     Resources.nl-NL.resx
     Resources.de-DE.resx
 
-It uses [`.NET`](api.md#dotnet) [`CultureNames`](https://www.csharp-examples.net/culture-names/).
+`nl-NL` and `de-DE` are [`.NET`](api.md#dotnet) [`CultureNames`](https://www.csharp-examples.net/culture-names/).
 
 The culture-inspecific `Resources.resx` is recommended to be in the language `en-US` (`US English`).
 
@@ -986,7 +1004,7 @@ The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToVie
     ToIDAndNameExtensions.cs
     ToItemViewModelExtensions.cs
     ToListItemViewModelExtensions.cs
-    ToPartialViewModelExtentions.cs
+    ToPartialViewModelExtensions.cs
     ToScreenViewModelExtensions.cs
     ToViewModelHelper.cs
     ToViewModelHelper.EmptyViewModels.cs
@@ -996,9 +1014,8 @@ The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToVie
     ToViewModelHelper.Lookups.cs
     ToViewModelHelper.Partials.cs
     ToViewModelHelper.Screens.cs
-    ToViewModelHelper.Values.cs
 
-To be clear: the `ViewModelHelper` files are all `ViewModelHelper partial classes`. The other files have a `class` that has the same name as the file.
+For clarity: the `ViewModelHelper` files are all `ViewModelHelper partial classes`. The other files have a `class` that has the same name as the file.
 
 Inside the `classes`, the methods should be sorted by source [entity](#entities) or application section alphabetically and each section should be headed by a comment line, e.g.:
 
