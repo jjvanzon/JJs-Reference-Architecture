@@ -808,7 +808,7 @@ This way we can create [`Visit`](#visit-methods) methods for specific cases if n
 Here is a full example of a [`Visitor`](#visitor) `class` with polymorphic [`Visit`](#visit-methods) methods:
 
 ```cs
-abstract class PolymorphicVisitorBase
+class PolymorphicVisitorBase
 {
     protected virtual void VisitOrder(Order order)
     {
