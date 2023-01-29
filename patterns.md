@@ -772,7 +772,7 @@ This way you can separately `override` a `Visit` method for `Supplier` or `Custo
 
 But you could also `override` `VisitPartyBase` instead, where you wish to handle both `Parties` the same way.
 
-The `VisitPartyPolymorphic` method is best used to switch between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized `Visit` methods are called.
+The `VisitPartyPolymorphic` method is best used for switching between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized `Visit` methods are called.
 
 You need all those methods delegating in the right order, for the visitation to happen correctly.
 
@@ -881,11 +881,15 @@ abstract class PolymorphicVisitorBase
 
 #### Change the Order
 
-`< TODO: Changing the order of processing. >`
+You might also override a Visit method to change the order in which things are processed.
+
+`< TODO: Code example. Perhaps one where you put Customer and Supplier visitation at the end instead of the beginning. >`
 
 #### Accept Methods
 
-The *classic* [`Visitor`](#visitor) pattern has a bit of a design flaw in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
+The *classic* [`Visitor`](#visitor) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
+
+However, `Accept` methods can be used for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) pattern proposed earlier.
 
 #### Conclusion
 
