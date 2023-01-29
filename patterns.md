@@ -1,5 +1,5 @@
 ﻿---
-title: "🧶 Patterns - 🏛 JJ's Reference Architecture 🏛"
+title: "🧶 Patterns"
 ---
 
 `[ Draft ]`
