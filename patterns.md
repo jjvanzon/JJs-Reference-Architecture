@@ -952,7 +952,7 @@ public static class ResourceFormatter
 This keeps using the *placeholders* safer in other code where you can use:
 
 ```cs
-ResourceFormatter1.Save_WithName("Document");
+ResourceFormatter.Save_WithName("Document");
 ```
 
 Which should return:
