@@ -88,13 +88,14 @@ Appendix B: Knopteksten en berichtteksten in applicaties (resource strings) [ Du
 -------------------------------------------------------------------------------------
 
 `< TODO: Translate to English. >`  
+
+Er is een structuur waarmee we knopteksten en meldingen in onze applicaties kunnen organiseren. Het doel is om deze teksten maximaal herbruikbaar te maken, vertaalwerk te minimaliseren en correcte teksten te gebruiken. Hiervoor plaatsen we algemene teksten op een bepaalde locatie, domein termen op een andere en specifieke projecten krijgen de overige teksten. Dit kan het aantal teksten drastisch verminderen van 10.000 tot misschien een paar 100.
+
+Momenteel worden resources op allerlei plekken geplaatst met willekeurig hoofdlettergebruik en gebruik van leestekens. En in andere gevallen werden ze helemaal niet gebruikt en stond alles hard op één taal.
+
+Om dit beter aan te pakken, zouden we graag willen dat ontwikkelaars zowel Nederlandse als Engelse teksten toevoegen aan de resource files. Als er twijfel is over het Engels, kun je het misschien een collega vragen.
+
 `< TODO: Remove authoratative tone. >`
-
-Er is een bepaalde structuur waar binnen we werken voor knopteksten en meldingen in onze applicaties. De hele bedoeling is maximale herbruikbaarheid, minimaal vertaal werk en correcte teksten. Dat doen we door hele algemene teksten op plaats X te zetten, zo veel mogelijk domein termen op plaats Y, en alleen wat er dan over is, komt in specifieke projecten te staan. Dit kan het verschil betekenen tussen 100'en of 10000 teksten.
-
-Resources worden op dit moment overal neergezet waar ze niet thuis horen, met verkeerd hoofdlettergebruik en verkeerde interpunctie. En op andere plekken worden resources gewoonweg niet gebruikt en staat alles hard op 1 taal.
-
-Hier moet secuurder mee om worden gegaan. Van ontwikkelaars wordt verwacht zowel de Nederlandse taal als de Engelse taal in de resource files te zetten. Bij twijfel over Engels, vraag het een collega.
 
 ### Hoofdletters, interpunctie, spelling
 
