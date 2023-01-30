@@ -27,13 +27,6 @@ title: "🧶 Patterns"
         - [Unlink](#unlink)
         - [NewLinkTo](#newlinkto)
     - [Cascading](#cascading)
-        - [Code Files](#code-files)
-        - [DeleteRelatedEntities](#deleterelatedentities)
-        - [UnlinkRelatedEntities](#unlinkrelatedentities)
-        - [Delete Main Entity](#delete-main-entity)
-        - [Cascading & Repositories](#cascading--repositories)
-        - [Nuance](#nuance)
-        - [Conclusion](#conclusion)
     - [Facade](#facade)
     - [Visitor](#visitor)
         - [Introduction](#introduction-1)
@@ -46,7 +39,7 @@ title: "🧶 Patterns"
         - [Polymorphic Visitation](#polymorphic-visitation)
         - [Change the Sequence](#change-the-sequence)
         - [Accept Methods](#accept-methods)
-        - [Conclusion](#conclusion-1)
+        - [Conclusion](#conclusion)
     - [Resource Strings](#resource-strings)
         - [Visual Studio Editor](#visual-studio-editor)
         - [Naming Conventions](#naming-conventions)
@@ -181,7 +174,7 @@ enum IndustryEnum
 
 <h4 id="collections">Collections</h4>
 
-Creating collections upon initialization is recommended for [entity](#entities) `classes`. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
+Creating collections upon initialization is recommended for [entity](#entities) `classes`. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
 
 ```cs
 class Supplier
@@ -372,9 +365,20 @@ This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it
 One way to implement [`Cascading`](aspects.md#cascading), is through extension methods:  
 `DeleteRelatedEntities` and `UnlinkRelatedEntities`.
 
-#### Code Files
+Contents:
 
-Here is a suggestion for how to organize the code.
+- [Code Files](#cascading-code-files)
+- [DeleteRelatedEntities](#deleterelatedentities)
+- [UnlinkRelatedEntities](#unlinkrelatedentities)
+- [Delete Main Entity](#cascading-delete-main-entity)
+- [Cascading & Repositories](#cascading-and-repositories)
+- [Nuance](#cascading-nuance)
+- [Conclusion](#cascading-conclusion)
+
+
+<h4 id="cascading-code-files">Code Files</h4>
+
+Here is a suggestion for how to organize the [`Cascading`](#cascading) code.
 
 In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) called [`Cascading`](#cascading) and put two code files in it:
 
@@ -387,7 +391,8 @@ JJ.Ordering.Business.csproj
         |- UnlinkRelatedEntitiesExtensions.cs
 ```
 
-#### DeleteRelatedEntities
+
+<h4 id="deleterelatedentities">DeleteRelatedEntities</h4>
 
 Here is how  `DeleteRelatedEntitiesExtensions.cs` might look internally:
 
@@ -440,7 +445,8 @@ public static void DeleteRelatedEntities(this Order order)
 }
 ```
 
-#### UnlinkRelatedEntities
+
+<h4 id="unlinkrelatedentities">UnlinkRelatedEntities</h4>
 
 `UnlinkRelatedEntities` might be a little bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
 
@@ -460,9 +466,10 @@ public static class UnlinkRelatedEntitiesExtensions
 
 Note that it uses the [Unlink](#unlink) pattern discussed earlier.
 
-#### Delete Main Entity
 
-The extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: Where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+<h4 id="cascading-delete-main-entity">Delete Main Entity</h4>
+
+The [`Cascading`](#cascading) extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: Where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -474,9 +481,10 @@ _repository.Delete(entity);
 
 That way we can see explicitly that more `Deletions` take place.
 
-#### Cascading & Repositories
 
-The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
+<h4 id="cascading-and-repositories">Cascading & Repositories</h4>
+
+The [`DeleteRelatedEntities`](#deleterelatedentities) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
 
 You could pass these [`Repositories`](#repository) as *parameters:*
 
@@ -494,15 +502,17 @@ public static void DeleteRelatedEntities(
 }
 ```
 
-Or you might make repositories available through a technique called [dependency injection](practices-and-principles.md#dependency-injection).
+Or you might make [repositories](#repository) available through a technique called [dependency injection](practices-and-principles.md#dependency-injection).
  
 It's up to you. The choice to use *extension* methods was also a matter of preference.
 
-#### Nuance
+
+<h4 id="cascading-nuance">Nuance</h4>
 
 Sometimes an [entity](#entities) does have related [entities](#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
-#### Conclusion
+
+<h4 id="cascading-conclusion">Conclusion</h4>
 
 Hopefully this introduced a way to build up [`Cascading`](#cascading) code by just using a pattern.
 
