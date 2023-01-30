@@ -862,7 +862,7 @@ I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of p
 
 In [`MVC`](#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](aspects.md#postdata-over-http).
 
-[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns.md#viewmodel) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodel) at the server side.
+[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns.md#viewmodels) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns.md#viewmodels) at the server side.
 
 In the [`View`](patterns.md#views) code you would wrap each nesting inside a `using` block:
 
@@ -904,7 +904,7 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodel). This may force you to program partial [`Views`](patterns.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](patterns.md#viewmodels). This may force you to program partial [`Views`](patterns.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
 
 ### Html.BeginCollectionItem
 

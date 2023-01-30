@@ -31,7 +31,13 @@ title: "🧶 Patterns"
     - [Visitor](#visitor)
     - [Resource Strings](#resource-strings)
 - [Presentation Patterns](#presentation-patterns)
-    - [ViewModel](#viewmodel)
+    - [ViewModels](#viewmodels)
+        - [Structure](#structure)
+        - [Screen ViewModels](#screen-viewmodels)
+        - [Entity ViewModels](#entity-viewmodels)
+        - [Keep it Clean](#keep-it-clean)
+        - [How to Model](#how-to-model)
+        - [TODO](#todo)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -1055,55 +1061,82 @@ Extra information in Dutch about how to structure the [`Resource` files](#resour
 Presentation Patterns
 ---------------------
 
-### ViewModel
+### ViewModels
 
-A `ViewModel class` holds the data shown on screen.
+A [`ViewModel`](#viewmodels) `class` holds the data shown on screen.
 
-It is purely a [data objects](#dto). It would only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the `ViewModels` is fully responsible for it.)
+#### Structure
 
-__A `ViewModel` should say *what* is shown, not *how* or *why*.__
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, no methods, no constructors, no member initialization and no list instantiation. This to insist that the code *handling* the `ViewModels` takes full responsibility for the data. This also makes it easier to integrate with different types of technology, being as it keeps the [`ViewModels`](#viewmodels) simple.
 
-Every screen gets a `ViewModel`, e.g. `ProductDetailsViewModel`, `ProductListViewModel`, `ProductEditViewModel`, `CategorySelectorViewModel`.
+#### Screen ViewModels
 
-You can also reuse simple `ViewModels` that represent a single [entity](#entities), e.g. `ProductViewModel`, `CategoryViewModel`.
+Every screen might get a [`ViewModel`](#viewmodels), e.g.: 
 
-`ViewModels` may only use simple types and references to other `ViewModels`. A `ViewModel` should never reference data-store bound [entities](#entities) directly.
+    ProductDetailsViewModel
+    ProductListViewModel
+    ProductEditViewModel
+    CategorySelectorViewModel
 
-Inheritance is *not* advisable, so it is a good plan to make the `ViewModel` `classes` `sealed`.
+These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`) and then the last name is [`ViewModel`](#viewmodels).
 
-Do not convert `ViewModels` to other `ViewNodels` (except for yielding over non-persisted properties). Always convert from functional domain to `ViewModel` and from `ViewModel` to functional domain, never from `ViewModel` to `ViewModel`.
+#### Entity ViewModels
 
-A `ViewModel` should say *what* is shown on screen, not *how*:
-As such it is better to call a property `CanDelete`, than calling it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled` property is up to the [`View`](#views).
+You can also reuse simple `ViewModels` that represent a single [entity](#entities), e.g.:
 
-A `ViewModel` should say *what* is shown on screen, not *why*:
-For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the `ViewModel` should contain a property `IsReadOnly`, not a property named `ThisIsAVerySpecialEntity`. Why it should be displayed read-only should not be part of the `ViewModel`.
+    ProductViewModel
+    CategoryViewModel
+
+#### Keep it Clean
+
+`ViewModels` might only use *simple* `types` and *references* to other `ViewModels`. For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which sneekily can try to connection to a database.
+
+*Inheritance* is not the first-choice to use for `ViewModels`. so it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it. Though no hard rules here.
+
+It is not advised to convert `ViewModels` to other `ViewNodels`. Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+
+#### How to Model
+
+This is the idea for how to model these [`ViewModels`](#viewmodels).
+A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen:
+
+__A [`ViewModel`](#viewmodels) says *what* is shown, not *how* or *why*.__
+
+It says *what* is shown on screen, not *how*:  
+
+Therefor it may be better to call a property `CanDelete`, than calling it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled` property ata all, should be up to a concrete [`View`](#views) using the [`ViewModel`](#viewmodels).
+
+A [`ViewModel`](#viewmodels) should say *what* is shown on screen, not *why*:  
+
+For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. *Why* it should be displayed read-only is not part of the [`ViewModel`](#viewmodels).
+
+#### TODO
 
 `< TODO: Describe the ViewModel pattern more strictly: entity ViewModels, partial ViewModels and screen ViewModels and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen ViewModel, not an entity or partial ViewNodel. LoginViewModel may be an exception. >`
 
 <h4>Considerations</h4>
 
-The reason there should be no inheritance is because that would create an unwanted n² dependency between [`Views`](#views) and the `base` [`ViewModel`](#viewmodel): *`n`* [`Views`](#views) could be dependent on `1` [`ViewModel`](#viewmodel) and *`m`* [`ViewModels`](#viewmodel) could be dependent on 1 `base` [`ViewModel`](#viewmodel), making *`n * m`* [`Views`](#views) dependent on the same `base` [`ViewModel`](#viewmodel). This means that if the `base` [`ViewModel`](#viewmodel) changes *`n * m`* [`Views`](#views) could break, instead of just *`n`*. *`m`* is even likely to become greater than *`n`*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a [`ViewModel`](#viewmodel) could only break `n` [`Views`](#views) (the number of [`Views`](#views) that use that [`ViewModel`](#viewmodel)).
+The reason there should be no inheritance is because that would create an unwanted n² dependency between [`Views`](#views) and the `base` [`ViewModel`](#viewmodels): *`n`* [`Views`](#views) could be dependent on `1` [`ViewModel`](#viewmodels) and *`m`* [`ViewModels`](#viewmodels) could be dependent on 1 `base` [`ViewModel`](#viewmodels), making *`n * m`* [`Views`](#views) dependent on the same `base` [`ViewModel`](#viewmodels). This means that if the `base` [`ViewModel`](#viewmodels) changes *`n * m`* [`Views`](#views) could break, instead of just *`n`*. *`m`* is even likely to become greater than *`n`*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a [`ViewModel`](#viewmodels) could only break `n` [`Views`](#views) (the number of [`Views`](#views) that use that [`ViewModel`](#viewmodels)).
 
 ### Lookup Lists
 
 In a stateless environment, lookup lists in [`Views`](#views) can be expensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your HTML. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
-For small lookup lists you might include a copy of the list in each [entity](#entities) [ViewModel](#viewmodel) and repeat the same lookup list in HTML.
+For small lookup lists you might include a copy of the list in each [entity](#entities) [ViewModel](#viewmodels) and repeat the same lookup list in HTML.
 
-Reusing the same list instance in multiple [entity](#entities) [ViewModels](#viewmodel) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodel) over the line.
+Reusing the same list instance in multiple [entity](#entities) [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an edit [`ViewModel`](#viewmodel). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an edit [`ViewModel`](#viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
 
 For big lookup list the only viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might cache the popup to be reused each time you need to select something from it.
 
 ### ToViewModel
 
-An extension method that convert an [entity](#entities) to a [`ViewModel`](#viewmodel). You can make simple `ToViewModel` methods per [entity](#entities), converting it to a simple [`ViewModel`](#viewmodel) that represents the [entity](#entities). You can also have methods returning more complex [`ViewModels`](#viewmodel), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
+An extension method that convert an [entity](#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [entity](#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [entity](#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
 You may pass [`Repositories`](#repository) to the `ToViewModel` methods if required.
 
-Sometimes you cannot appoint one [entity type](#entities) as the source of a [`ViewModel`](#viewmodel). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
+Sometimes you cannot appoint one [entity type](#entities) as the source of a [`ViewModel`](#viewmodels). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
 
 The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
 
@@ -1133,15 +1166,15 @@ public static OrderEditPopupViewModel ToEditViewModel(this Order order) { ... }
 public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) { ... }
 ```
 
-Some [`ViewModels`](#viewmodel) do not take one primary [entity](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
+Some [`ViewModels`](#viewmodels) do not take one primary [entity](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
 
 ### ToEntity
 
-Extension methods that convert a [`ViewModel`](#viewmodel) to an [entity](#entities).
+Extension methods that convert a [`ViewModel`](#viewmodels) to an [entity](#entities).
 
 You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [entity](#entities), if it exists, it would be updated, if it does not, it would be created.
 
-A more complex `ToEntity` method might also update related [entities](#entities). In that case related [entities](#entities) might be inserted, updated and deleted, depending on whether the [entity](#entities) still exists in the [`ViewModel`](#viewmodel) or in the data store.
+A more complex `ToEntity` method might also update related [entities](#entities). In that case related [entities](#entities) might be inserted, updated and deleted, depending on whether the [entity](#entities) still exists in the [`ViewModel`](#viewmodels) or in the data store.
 
 A `ToEntity` method takes on much of the resposibility of a Save action.
 
@@ -1157,15 +1190,15 @@ Each *user action* on that screen is represented by a *method*.
 
 A `Presenter` represents what a user can do in a screen.
 
-The methods of the `Presenter` work by a [`ViewModel`](#viewmodel)-in, [`ViewModel`](#viewmodel)-out principle.
+The methods of the `Presenter` work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle.
 
-An action method returns a [`ViewModel`](#viewmodel) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodel) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodel) than the [`View`](#views) the `Presenter` is about. Those might be actions that navigate to a different [`View`](#views). That way the `Presenters` are a model for what the user can do with the application.
+An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the `Presenter` is about. Those might be actions that navigate to a different [`View`](#views). That way the `Presenters` are a model for what the user can do with the application.
 
 Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the `Presenters` constructor.
 
 Internally a `Presenter` can use [business logic](layers.md#business-layer) and [`Repositories`](#repository) to access the domain model.
 
-All [`ViewModel`](#viewmodel) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodel) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodel) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodel) to [entities](#entities).
+All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [entities](#entities).
 
 ### ToEntity-Business-ToViewModel Round-Trip
 
@@ -1174,12 +1207,12 @@ A [`Presenter`](#presenter) is a combinator `class`, in that it combines multipl
 A [`Presenter`](#presenter) action method might be organized into phases:
 
 - [Security](aspects.md#security)
-- [`ViewModel`](#viewmodel) [Validation](#validators)
+- [`ViewModel`](#viewmodels) [Validation](#validators)
 - [`ToEntity`](#toentity) / GetEntities
 - [Business](layers.md#business-layer)
 - [`Commit`](api.md#orm)
 - [`ToViewModel`](#toviewmodel)
-- Non-Persisted (yield over non-persisted data from old to new [`ViewModel`](#viewmodel))
+- Non-Persisted (yield over non-persisted data from old to new [`ViewModel`](#viewmodels))
 - Redirect
 
 Not all of the phases must be present. [`ToEntity`](#toviewmodel) / Business / [`ToViewModel`](#toviewmodel) might be the typical phases. Slight variations in order of the phases are possible. But separate these phases, so that they are not intermixed and entangled.
@@ -1197,13 +1230,13 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
-Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entities) to [`ViewModel`](#viewmodel) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entities) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
+Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entities) to [`ViewModel`](#viewmodels) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entities) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
 
 `< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input ViewModel. Sometimes it is even the only way to execute the essense of the user action onto the user input ViewModel. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
 ### NullCoalesce (ViewModels)
 
-When you user input back as a [`ViewModel`](#viewmodel) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodel) and call it in the [`Presenter`](#presenter).
+When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](#presenter).
 
 `< TODO: Better description. Also incorporate:`
 
@@ -1221,7 +1254,7 @@ In `WebForms` this would be an `aspx`.
 
 In [`MVC`](api.md#mvc) it can be an `aspx` or `cshtml`.
 
-Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](#presenter), which produces the [`ViewModel`](#viewmodel), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
+Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](#presenter), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
 
 ### First Full Load – Then Partial Load – Then Native Code
 
@@ -1237,17 +1270,17 @@ But it was always the first choice to do full postbacks.
 
 The reason for this choice is *maintainability*: programming the application navigation in [`C#`](api.md#csharp) using [`Presenters`](#presenter) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](#presenter) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodel) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodel) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
 Some of the difficulties with [`AJAX`](api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](api.md#ajax) in the Aspects section.
 
 ### Temporary ID's
 
-When you edit a list, and between actions you do not commit you may need to generate ID's for the rows that are not committed, otherwise you cannot identify them individually to for instance delete a specific uncommitted row. For this you can add a TemporaryID to the [`ViewModel`](#viewmodel), that are typically Guids.
+When you edit a list, and between actions you do not commit you may need to generate ID's for the rows that are not committed, otherwise you cannot identify them individually to for instance delete a specific uncommitted row. For this you can add a TemporaryID to the [`ViewModel`](#viewmodels), that are typically Guids.
 
-The TemporaryID's can be really temporary and can be regenerated every time you create a new [`ViewModel`](#viewmodel).
+The TemporaryID's can be really temporary and can be regenerated every time you create a new [`ViewModel`](#viewmodels).
 
-The TemporaryID concept breaks down, as soon as you need to use it to refer to something from multiple places in the [`ViewModel`](#viewmodel).
+The TemporaryID concept breaks down, as soon as you need to use it to refer to something from multiple places in the [`ViewModel`](#viewmodels).
 
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
@@ -1255,7 +1288,7 @@ Another alternative is a different ID generation scheme. You may use an [`SQL`](
 
 ### Stateless and Stateful
 
-The [presentation patterns](#presentation-patterns) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodel) and output a new [`ViewModel`](#viewmodel) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodel) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodel) has to be created. You cannot just return the user input [`ViewModel`](#viewmodel). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodel) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodel) remains untouched.
+The [presentation patterns](#presentation-patterns) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
 
 You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
@@ -1277,7 +1310,7 @@ Presentation Patterns (MVC)
 
 In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](#presenter). The responsibilities that are left for the [`MVC`](api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](api.md#mvc) quirks.
 
-The [`Controller`](#controller) may use multiple [`Presenters`](#presenter) and [`ViewModels`](#viewmodel), since it is about multiple screens.
+The [`Controller`](#controller) may use multiple [`Presenters`](#presenter) and [`ViewModels`](#viewmodels), since it is about multiple screens.
 
 [Entity](#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
 
@@ -1287,7 +1320,7 @@ This is a quirk intrinsic to [`ASP.NET MVC`](api.md#mvc). We must conform to the
 
 At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
-Before you do so, you must store the [`ViewModel`](#viewmodel) in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the [`ViewModel`](#viewmodel) is in the TempData dictionary. If the [`ViewModel`](#viewmodel) exist in the TempData, you must use that [`ViewModel`](#viewmodel), otherwise you must create a new [`ViewModel`](#viewmodel).
+Before you do so, you must store the [`ViewModel`](#viewmodels) in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the [`ViewModel`](#viewmodels) is in the TempData dictionary. If the [`ViewModel`](#viewmodels) exist in the TempData, you must use that [`ViewModel`](#viewmodels), otherwise you must create a new [`ViewModel`](#viewmodels).
 
 Here is simplified pseudo-code in which the pattern is applied.
 
@@ -1324,7 +1357,7 @@ If you do not conform to the Post-Redirect-Get pattern in [`MVC`](api.md#mvc), y
 
 ### ValidationMessages in ModelState
 
-For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](#validators) messages, after you have gotten a [`ViewModel`](#viewmodel) from a [`Presenter`](#presenter). If you do not do this, you will get strange application navigation in case of [validation](#validators) errors.
+For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](#validators) messages, after you have gotten a [`ViewModel`](#viewmodels) from a [`Presenter`](#presenter). If you do not do this, you will get strange application navigation in case of [validation](#validators) errors.
 
 You do this in an [`MVC`](api.md#mvc) HTTP GET action method.
 
@@ -1339,11 +1372,11 @@ if (viewModel.ValidationMessages.Any())
 }
 ```
 
-In theory we could communicate all [validation](#validators) messages to [`MVC`](api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](#validators) summary, we simply render all the [validation messages from the [`ViewModel`](#viewmodel) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](#validators) errors, then the [`ViewModel`](#viewmodel) should give the information that the appearance of the field should be different. Our [`View's`](#views) content is totally managed by the [`ViewModel`](#viewmodel).
+In theory we could communicate all [validation](#validators) messages to [`MVC`](api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](#validators) summary, we simply render all the [validation messages from the [`ViewModel`](#viewmodels) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](#validators) errors, then the [`ViewModel`](#viewmodels) should give the information that the appearance of the field should be different. Our [`View's`](#views) content is totally managed by the [`ViewModel`](#viewmodels).
 
 ### Polymorphic RedirectToAction / View()
 
-A [`Presenter`](#presenter) action method may return different types of [`ViewModels`](#viewmodel).
+A [`Presenter`](#presenter) action method may return different types of [`ViewModels`](#viewmodels).
 
 This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns `object` and you should do polymorphic type checks to determine which [`View`](#views) to go to.
 
@@ -1369,7 +1402,7 @@ At the end throw the following exception (from [`JJ.Framework.Exceptions`](api.m
 throw new UnexpectedTypeException(() => viewModel);
 ```
 
-To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](#viewmodel) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
+To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](#viewmodels) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
 ### For Loops for Lists in HTTP Postdata
 
@@ -1384,7 +1417,7 @@ An alternative to for [posting collections](aspects.md#postdata-over-http) is us
 }
 ```
 
-This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](#viewmodel) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](#views) code into partials.
+This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](#viewmodels) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](#views) code into partials.
 
 ### Return URL's
 
@@ -1547,9 +1580,9 @@ The [`TryGet-Insert-Update-Delete` pattern](#tryget-insert-update-delete--full-c
 
 ### DocumentModel
 
-An analog of a [`ViewModel`](#viewmodel), but then for document generation, rather than [`View`](#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
+An analog of a [`ViewModel`](#viewmodels), but then for document generation, rather than [`View`](#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
 
-Just as with [`ViewModels`](#viewmodel), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
+Just as with [`ViewModels`](#viewmodels), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
 
 ### Selector-Model-Generator-Result
 
@@ -1614,7 +1647,7 @@ MVC
 [`MVC`](api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
-- [`Controller`](#controller) - [`ViewModel`](#viewmodel) - view engine – [`View`](#views)
+- [`Controller`](#controller) - [`ViewModel`](#viewmodels) - view engine – [`View`](#views)
 
 
 Other Patterns
