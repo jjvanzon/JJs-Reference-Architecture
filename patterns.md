@@ -965,7 +965,7 @@ public static class ResourceFormatter
 }
 ```
 
-By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code like this:
+By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code:
 
 ```cs
 ResourceFormatter.Save_WithName("Document");
@@ -973,13 +973,13 @@ ResourceFormatter.Save_WithName("Document");
 
 Returns:
 
-```
+```cs
 "Save Document"
 ```
 
 #### ResourceFormatterHelper
 
-You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
+You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from the [`JJ.Framework`](api.md#jj-framework-resourcestrings):
 
 ```cs
 public static class ResourceFormatter
