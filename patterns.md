@@ -130,7 +130,7 @@ Data Access Patterns
 
 *Entities* are the `classes` that represent the *functional domain model*.
 
-__Contents:__
+Contents:
 
 - [Pure Data Objects](#pure-data-objects)
 - [Enums](#enums)
@@ -139,9 +139,10 @@ __Contents:__
 - [Inheritance](#inheritance)
 - [Real Code](#real-code)
 
+
 <h4 id="pure-data-objects">Pure Data Objects</h4>
 
-In this [architecture](index.md), we aim to keep the entity `classes` [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entities).
+In this [architecture](index.md), we aim to keep the [entity](#entities) `classes` [just data](#dto) and free of logic. The [entities](#entities) in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entities).
 
 ```cs
 class Supplier
@@ -153,9 +154,10 @@ class Supplier
 }
 ```
 
+
 <h4 id="enums">Enums</h4>
 
-You might even want to avoid `enums` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
+In the [entity](#entities) `classes` you might even want to avoid `enums` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
 
 ```cs
 class Supplier
@@ -176,9 +178,10 @@ enum IndustryEnum
 }
 ```
 
+
 <h4 id="collections">Collections</h4>
 
-Creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
+Inside the [entity](#entities) `classes`, creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
 
 ```cs
 class Supplier
@@ -187,9 +190,10 @@ class Supplier
 }
 ```
 
+
 <h4 id="virtual-members">Virtual Members</h4>
 
-`Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+In [entity](#entities) `classes` `public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
 ```cs
 class Supplier
@@ -200,13 +204,15 @@ class Supplier
 }
 ```
 
+
 <h4 id="inheritance">Inheritance</h4>
 
-Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
+Generally avoid [inheritance](api.md#inheritance) within your [entity](#entities) models, because it can make using data technologies harder.
+
 
 <h4 id="real-code">Real Code</h4>
 
-These code examples were just illustrative pseudo-code. This is a more realistic example:
+The previous code examples for [entities](#entities) were just illustrative pseudo-code. This might be a more realistic example:
 
 ```cs
 public class Supplier
