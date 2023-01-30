@@ -952,7 +952,7 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 - [Introduction](#resource-strings-introduction)
 - [Visual Studio Editor](#resource-strings-visual-studio-editor)
-- [File Names](#resource-strings-file-names)
+- [File Names](#resource-string-file-names)
 - [Descriptive Names](#resource-strings-descriptive-names)
 - [ResourceFormatter](#resourceformatter)
 - [ResourceFormatterHelper](#resourceformatterhelper)
@@ -960,9 +960,11 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 - [Use the Business Layer](#resource-strings-use-the-business-layer)
 - [For More Information](#resource-strings-more-information)
 
+
 <h4 id="resource-strings-introduction">Introduction</h4>
 
 To store `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used.
+
 
 <h4 id="resource-strings-visual-studio-editor">Visual Studio Editor</h4>
 
@@ -970,7 +972,8 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 ![String Resource Editor](images/resource-string-editor.png)
 
-<h4 id="resource-strings-file-names">File Names</h4>
+
+<h4 id="resource-string-file-names">File Names</h4>
 
 [`.NET`](api.md#dotnet) returns the translations in the right language, of the `CurrentCulture`, if you name your `Resource` files like this:
 
@@ -982,6 +985,7 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 The *culture-independent* `Resources.resx` might be used for the language `US English`.
 
+
 <h4 id="resource-strings-descriptive-names">Descriptive Names</h4>
 
 For clarity it's recommended to keep the [`Resource Name`](#resource-strings-visual-studio-editor) descriptive of the text it represents:
@@ -991,6 +995,7 @@ For clarity it's recommended to keep the [`Resource Name`](#resource-strings-vis
 
     Name: Save_WithName
     Value: "Save {0}"
+
 
 <h4 id="resourceformatter">ResourceFormatter</h4>
 
@@ -1016,6 +1021,7 @@ Returning:
 "Save Document"
 ```
 
+
 <h4 id="resourceformatterhelper">ResourceFormatterHelper</h4>
 
 You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from the [`JJ.Framework`](api.md#jj-framework-resourcestrings):
@@ -1035,17 +1041,20 @@ public static class ResourceFormatter
 
 This eliminates the need to repeat the [`Resource Name`](#resource-strings-visual-studio-editor) in the code. It also encourages consistency by forcing the method names to match the [`Resource Names`](#resource-strings-visual-studio-editor).
 
+
 <h4 id="resource-strings-reusability">Reusability</h4>
 
 [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
+
 
 <h4 id="resource-strings-use-the-business-layer">Use the Business Layer</h4>
 
 [`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
 
+
 <h4 id="resource-strings-more-information">For More Information</h4>
 
-Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
+Extra information in Dutch about how to structure the [`Resource` files](#resource-string-file-names) can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
 
 Presentation Patterns
