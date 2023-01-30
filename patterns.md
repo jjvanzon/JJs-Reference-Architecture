@@ -54,6 +54,14 @@ title: "🧶 Patterns"
         - [Accept Methods](#accept-methods)
         - [Conclusion](#conclusion-1)
     - [Resource Strings](#resource-strings)
+        - [Naming Convention for Resource Files](#naming-convention-for-resource-files)
+        - [Resource Strings Editor in Visual Studio](#resource-strings-editor-in-visual-studio)
+        - [Descriptive Resource Names](#descriptive-resource-names)
+        - [Using Resource Formatters](#using-resource-formatters)
+        - [ResourceFormatterHelper from JJ.Framework.ResourceStrings](#resourceformatterhelper-from-jjframeworkresourcestrings)
+        - [Reusable Resource Strings from JJ.Framework](#reusable-resource-strings-from-jjframework)
+        - [Resource Strings in Business Layer](#resource-strings-in-business-layer)
+        - [More Information](#more-information)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
     - [Lookup Lists](#lookup-lists)
@@ -915,7 +923,11 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 ### Resource Strings
 
-For `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects `resx` files can be used. The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
+For `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects `resx` files can be used.
+
+#### Naming Convention for Resource Files
+
+The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -925,9 +937,13 @@ For `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet
 
 It is suggested that the *culture-inspecific* `Resources.resx` be in the language `US English (en-US)`.
 
+#### Resource Strings Editor in Visual Studio
+
 Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
 
 ![String Resource Editor](images/string-resource-editor.png)
+
+#### Descriptive Resource Names
 
 For clarity it's recommended to keep the `Resource Name` descriptive of the text it represents:
 
@@ -936,6 +952,8 @@ For clarity it's recommended to keep the `Resource Name` descriptive of the text
 
     Name: Save_WithName
     Value: "Save {0}"
+
+#### Using Resource Formatters
 
 You could use `ResourceFormatters` to add the correct values to the `{0}` placeholders:
 
@@ -959,6 +977,8 @@ Returning:
 "Save Document"
 ```
 
+#### ResourceFormatterHelper from JJ.Framework.ResourceStrings
+
 You can also streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
 
 ```cs
@@ -976,9 +996,15 @@ public static class ResourceFormatter
 
 This eliminates the need to repeat the `Resource Name` in the code. It also encourages consistency by forcing the method names to match the `Resource Names`.
 
+#### Reusable Resource Strings from JJ.Framework
+
 [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
-[`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers) makes it possible to reuse them from multiple places.
+#### Resource Strings in Business Layer
+
+[`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`Business assemblies`](namespaces-assemblies-and-folders.md#layers) makes it possible to reuse them from multiple places.
+
+#### More Information
 
 Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
