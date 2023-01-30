@@ -54,8 +54,8 @@ title: "🧶 Patterns"
         - [Accept Methods](#accept-methods)
         - [Conclusion](#conclusion-1)
     - [Resource Strings](#resource-strings)
-        - [Naming Conventions](#naming-conventions)
         - [Visual Studio Editor](#visual-studio-editor)
+        - [Naming Conventions](#naming-conventions)
         - [Descriptive Names](#descriptive-names)
         - [ResourceFormatter](#resourceformatter)
         - [ResourceFormatterHelper](#resourceformatterhelper)
@@ -925,6 +925,12 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 To store `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used.
 
+#### Visual Studio Editor
+
+Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
+
+![String Resource Editor](images/resource-string-editor.png)
+
 #### Naming Conventions
 
 The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
@@ -936,12 +942,6 @@ The following naming convention for `Resource` files allows [`.NET`](api.md#dotn
 [`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used within [`.NET`](api.md#dotnet).
 
 It is suggested that the *culture-inspecific* `Resources.resx` be in the language `US English (en-US)`.
-
-#### Visual Studio Editor
-
-Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
-
-![String Resource Editor](images/resource-string-editor.png)
 
 #### Descriptive Names
 
