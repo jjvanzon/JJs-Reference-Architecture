@@ -157,7 +157,7 @@ class Supplier
 
 <h4 id="enums">Enums</h4>
 
-You might even want to avoid `enums` in the [entity](#entities) `classes` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
+You might even want to avoid `enums` in the [entity](#entities) `classes` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could as [entities](#entities) in your model. This to keep it a purer representaton of the data model:
 
 ```cs
 class Supplier
@@ -193,7 +193,7 @@ class Supplier
 
 <h4 id="virtual-members">Virtual Members</h4>
 
-In [entity](#entities) `classes` `public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](api.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+For [entity](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](api.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
 ```cs
 class Supplier
