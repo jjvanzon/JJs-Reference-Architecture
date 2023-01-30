@@ -965,7 +965,7 @@ public static class ResourceFormatter
 }
 ```
 
-By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code:
+By using `ResourceFormatters`, you can ensure the safe usage of placeholders in the code:
 
 ```cs
 ResourceFormatter.Save_WithName("Document");
