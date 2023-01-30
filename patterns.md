@@ -30,14 +30,6 @@ title: "🧶 Patterns"
     - [Facade](#facade)
     - [Visitor](#visitor)
     - [Resource Strings](#resource-strings)
-        - [Visual Studio Editor](#visual-studio-editor)
-        - [Naming Conventions](#naming-conventions)
-        - [Descriptive Names](#descriptive-names)
-        - [ResourceFormatter](#resourceformatter)
-        - [ResourceFormatterHelper](#resourceformatterhelper)
-        - [Reusability](#reusability)
-        - [Use the Business Layer](#use-the-business-layer)
-        - [For More Information](#for-more-information)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
     - [Lookup Lists](#lookup-lists)
@@ -956,15 +948,29 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 ### Resource Strings
 
+<h4 id="">Contents</h4>
+
+- [Introduction](#resource-strings-introduction)
+- [Visual Studio Editor](#resource-strings-visual-studio-editor)
+- [Naming Conventions](#resource-strings-naming-conventions)
+- [Descriptive Names](#resource-strings-descriptive-names)
+- [ResourceFormatter](#resourceformatter)
+- [ResourceFormatterHelper](#resourceformatterhelper)
+- [Reusability](#resource-strings-reusability)
+- [Use the Business Layer](#resource-strings-use-the-business-layer)
+- [For More Information](#resource-strings-more-information)
+
+<h4 id="resource-strings-introduction">Introduction</h4>
+
 To store `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used.
 
-#### Visual Studio Editor
+<h4 id="resource-strings-visual-studio-editor">Visual Studio Editor</h4>
 
 Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
 
 ![String Resource Editor](images/resource-string-editor.png)
 
-#### Naming Conventions
+<h4 id="resource-strings-naming-conventions">Naming Conventions</h4>
 
 [`.NET`](api.md#dotnet) returns the translations in the right language, of the `CurrentCulture`, if you name your `Resource` files like this:
 
@@ -976,7 +982,7 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 The *culture-independent* `Resources.resx` might be used for the language `US English`.
 
-#### Descriptive Names
+<h4 id="resource-strings-descriptive-names">Descriptive Names</h4>
 
 For clarity it's recommended to keep the [`Resource Name`](#visual-studio-editor) descriptive of the text it represents:
 
@@ -986,7 +992,7 @@ For clarity it's recommended to keep the [`Resource Name`](#visual-studio-editor
     Name: Save_WithName
     Value: "Save {0}"
 
-#### ResourceFormatter
+<h4 id="resourceformatter">ResourceFormatter</h4>
 
 You could use `ResourceFormatters` to add the correct values to the `{0}` placeholders:
 
@@ -1010,7 +1016,7 @@ Returning:
 "Save Document"
 ```
 
-#### ResourceFormatterHelper
+<h4 id="resourceformatterhelper">ResourceFormatterHelper</h4>
 
 You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from the [`JJ.Framework`](api.md#jj-framework-resourcestrings):
 
@@ -1029,15 +1035,15 @@ public static class ResourceFormatter
 
 This eliminates the need to repeat the [`Resource Name`](#visual-studio-editor) in the code. It also encourages consistency by forcing the method names to match the [`Resource Names`](#visual-studio-editor).
 
-#### Reusability
+<h4 id="resource-strings-reusability">Reusability</h4>
 
 [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
-#### Use the Business Layer
+<h4 id="resource-strings-use-the-business-layer">Use the Business Layer</h4>
 
 [`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
 
-#### For More Information
+<h4 id="resource-strings-more-information">For More Information</h4>
 
 Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
