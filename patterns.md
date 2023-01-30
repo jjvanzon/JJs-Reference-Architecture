@@ -59,11 +59,6 @@ title: "🧶 Patterns"
     - [State Flagging](#state-flagging)
     - [DocumentModel](#documentmodel)
     - [Selector-Model-Generator-Result](#selector-model-generator-result)
-        - [Generating a Document](#generating-a-document)
-        - [Data Source Independence](#data-source-independence)
-        - [Multiple Import Formats](#multiple-import-formats)
-        - [Limiting Complexity](#limiting-complexity)
-        - [MVC](#mvc)
 - [Other Patterns](#other-patterns)
     - [Accessor](#accessor)
     - [Adapter](#adapter)
@@ -1558,6 +1553,20 @@ Just as with [`ViewModels`](#viewmodel), inheritance structures are not allowed.
 
 ### Selector-Model-Generator-Result
 
+<h4 id="">Contents</h4>
+
+- [Introduction](#selector-model-generator-result-introduction)
+- [Generating a Document](#generating-a-document)
+- [Data Source Independence](#selector-model-generator-result-data-source-independence)
+- [Multiple Import Formats](#selector-model-generator-result-multiple-import-formats)
+- [Limiting Complexity](#selector-model-generator-result-limiting-complexity)
+- [MVC](#selector-model-generator-result-mvc)
+
+
+<h4 id="selector-model-generator-result-introduction">
+Introduction
+</h4>
+
 For data transformations you may want to split up the transformation in two parts:
 
 - A `Selector` which returns the data as an `object` graph, or `Model`.
@@ -1569,23 +1578,38 @@ This basic pattern is present in many architectures and can be applied to many d
 
 Her follow some examples.
 
-#### Generating a Document
+
+<h4 id="generating-a-document">
+Generating a Document
+</h4>
 
 An example of where it is useful, is generating a document in multiple format e.g. `XLSX`, `CSV` and `PDF`. In that case the data selection and basic tranformations are programmed once (a `Selector` that produces a `Model`) and exporting three different file formats would require programming three different generators. Reusable generators for specific file formats such as `CSV` may be programmed. Those will make programming a specialized generators very easy. So then basically exporting a document is mostly reading out a data source and producing an `object` graph.
 
-#### Data Source Independence
+
+<h4 id="selector-model-generator-result-data-source-independence">
+Data Source Independence
+</h4>
 
 The [`Selector-Model-Generator-Result`](#selector-model-generator-result) pattern is also useful when the same document can have different data sources. Let's say you want to print an invoice out of the system, but print another invoice out of an ordering system in the same formatting e.g. a `PDF`. This requires 2 `Selectors`, 1 `Model` and 1 `Generator`, instead of 2 `Generators` with complex code and potentially different-looking `PDF's`.
 
-#### Multiple Import Formats
+
+<h4 id="selector-model-generator-result-multiple-import-formats">
+Multiple Import Formats
+</h4>
 
 You might want to import similar data out of multiple different data sources or multiple file formats. By splitting the work up into a `Selector` and a `Generator` you can share must of the code between the two imports, and reduce the complexity of the code.
 
-#### Limiting Complexity
+
+<h4 id="selector-model-generator-result-limiting-complexity">
+Limiting Complexity
+</h4>
 
 Even if you do not expect multiple input formats or multiple output formats or a change in input or output format, the split up in a `Selector` and a `Generator` can be used to make the code less complicated to write, and subsequently also prevent errors and save time programming and maintaining the code.
 
-#### MVC
+
+<h4 id="selector-model-generator-result-mvc">
+MVC
+</h4>
 
 [`MVC`](api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
