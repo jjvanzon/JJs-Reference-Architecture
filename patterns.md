@@ -37,7 +37,10 @@ title: "🧶 Patterns"
         - [Entity ViewModels](#entity-viewmodels)
         - [Other Kinds of ViewModels](#other-kinds-of-viewmodels)
         - [How to Model](#how-to-model)
+        - [What, Not How](#what-not-how)
+        - [What, Not Why](#what-not-why)
         - [Keep It Clean](#keep-it-clean)
+        - [Inheritance Considerations](#inheritance-considerations)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -1116,13 +1119,17 @@ Other types of [`ViewModel`](#viewmodels) might be:
 This is the idea for how to model these [`ViewModels`](#viewmodels).
 A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen:
 
-__A [`ViewModel`](#viewmodels) says *what* is shown, not *how* or *why*.__
+__A [`ViewModel`](#viewmodels) says *what* is shown, not *how* nor *why*.__
 
-It says *what* is shown on screen, not *how*:  
+#### What, Not How
+
+It says ***what*** is shown on screen, not ***how***:  
 
 Therefor it may be better to call a property `CanDelete`, than calling it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled` property ata all, should be up to a concrete [`View`](#views) using the [`ViewModel`](#viewmodels).
 
-A [`ViewModel`](#viewmodels) should say *what* is shown on screen, not *why*:  
+#### What, Not Why
+
+A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why***:  
 
 For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. *Why* it should be displayed read-only is not part of the [`ViewModel`](#viewmodels).
 
@@ -1134,7 +1141,7 @@ For instance: if the business logic tells us that an [entity](#entities) is a ve
 
 It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
 
-<h4>Considerations about Inheritance</h4>
+#### Inheritance Considerations
 
 The reason there should be no inheritance is because that would create an unwanted n² dependency between [`Views`](#views) and the `base` [`ViewModel`](#viewmodels): *`n`* [`Views`](#views) could be dependent on `1` [`ViewModel`](#viewmodels) and *`m`* [`ViewModels`](#viewmodels) could be dependent on 1 `base` [`ViewModel`](#viewmodels), making *`n * m`* [`Views`](#views) dependent on the same `base` [`ViewModel`](#viewmodels). This means that if the `base` [`ViewModel`](#viewmodels) changes *`n * m`* [`Views`](#views) could break, instead of just *`n`*. *`m`* is even likely to become greater than *`n`*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a [`ViewModel`](#viewmodels) could only break `n` [`Views`](#views) (the number of [`Views`](#views) that use that [`ViewModel`](#viewmodels)).
 
