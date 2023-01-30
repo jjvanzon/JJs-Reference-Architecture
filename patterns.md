@@ -915,21 +915,21 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 ### Resource Strings
 
-For `Button Text` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used. The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
+For `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects `resx` files can be used. The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
 
     Resources.resx
     Resources.nl-NL.resx
     Resources.de-DE.resx
 
-[`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used in [`.NET`](api.md#dotnet).
+[`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used within [`.NET`](api.md#dotnet).
 
-It is suggested that the culture-inspecific `Resources.resx` be in the language `US English (en-US)`.
+It is suggested that the *culture-inspecific* `Resources.resx` be in the language `US English (en-US)`.
 
 Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
 
 ![String Resource Editor](images/string-resource-editor.png)
 
-For clarity it's recommended to keep the `Resource Name` descriptive of the text it represents. For example:
+For clarity it's recommended to keep the `Resource Name` descriptive of the text it represents:
 
     Name: Save
     Value: "Save"
@@ -959,7 +959,7 @@ Returning:
 "Save Document"
 ```
 
-You can also streamline your code and minimize the risk of typos using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
+You can also streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
 
 ```cs
 public static class ResourceFormatter
@@ -976,7 +976,7 @@ public static class ResourceFormatter
 
 This eliminates the need to repeat the `Resource Name` in the code. It also encourages consistency by forcing the method names to match the `Resource Names`.
 
-[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides you with  reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
+[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
 [`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers) makes it possible to reuse them from multiple places.
 
