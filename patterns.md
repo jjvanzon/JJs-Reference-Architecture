@@ -43,9 +43,9 @@ title: "🧶 Patterns"
         - ["What" not "Why"](#what-not-why)
         - [Keep It Clean](#keep-it-clean)
         - [No Entities](#no-entities)
-        - [No Converting ViewModels to ViewModels](#no-converting-viewmodels-to-viewmodels)
+        - [Converting ViewModels to ViewModels](#converting-viewmodels-to-viewmodels)
         - [No Inheritance](#no-inheritance)
-        - [Inheritance Considerations](#inheritance-considerations)
+        - [Considerations about Inheritance](#considerations-about-inheritance)
         - [TODO](#todo)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
@@ -1076,7 +1076,7 @@ A [`ViewModel`](#viewmodels) `class` holds the data shown on screen.
 
 #### Only Data
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, no methods, no constructors, no member initialization and no list instantiation. This to insist that the code *handling* the `ViewModels` takes full responsibility for the data. This also makes it easier to integrate with different types of technology, being as it keeps the [`ViewModels`](#viewmodels) simple.
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, no methods, no constructors, no member initialization and no list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it easier to integrate with different types of technology, being as it keeps the [`ViewModels`](#viewmodels) simple.
 
 #### Screen ViewModels
 
@@ -1092,17 +1092,17 @@ Every screen might get a [`ViewModel`](#viewmodels), e.g.:
 
 These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`). And then the last part of the name is [`ViewModel`](#viewmodels).
 
-Other alternative to the [`CRUD`](layers.md#crud) actions are `Overview` or `NotFound` or `Login`:
+Other alternatives to the [`CRUD`](layers.md#crud) actions are `Overview` or `NotFound` or `Login`:
 
     NotFoundViewModel
     ProductOverviewViewModel
     LoginViewModel.
 
-There may be other variations, but this is the general idea.
+There may be more variations, but this was the general idea.
     
 #### Entity ViewModels
 
-You can also reuse simple `ViewModels` that represent a single [entity](#entities), e.g.:
+You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [entity](#entities), e.g.:
 
     ProductViewModel
     CategoryViewModel
@@ -1121,7 +1121,7 @@ They may or may not have the word `Partial` in their name.
 
 #### ListItem ViewModels
 
-Similar to the [entity](#entities) [ViewModels](#viewmodels) but then specifically representing a row in list or grid. Some may only need an [`IDNameDto`](api.md#jj-canonical) for that.
+Similar to the [entity](#entities) [`ViewModels`](#viewmodels) but then specifically representing a row in *list* or *grid*. Some may only need an [`IDNameDto`](api.md#jj-canonical) for that.
 
 #### Lookup ViewModels
 
@@ -1129,40 +1129,39 @@ A *lookup* list, for instance the data to pick from a drop-down box.
 
 #### How to Model
 
-This is the idea for how to model these [`ViewModels`](#viewmodels).
-A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen:
+A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. This is the idea for how to model these [`ViewModels`](#viewmodels):
 
-__A [`ViewModel`](#viewmodels) says *what* is shown, not *how* nor *why*.__
+*A [`ViewModel`](#viewmodels) says __what__ is shown, not __how__ nor __why__.*
 
 #### "What" not "How"
 
-It says ***what*** is shown on screen, not ***how***:  
+A [`ViewModel`](#viewmodels) says ***what*** is shown on screen, not ***how:***
 
 Therefor it may be better to call a property `CanDelete`, than calling it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled` property ata all, should be up to a concrete [`View`](#views) using the [`ViewModel`](#viewmodels).
 
 #### "What" not "Why"
 
-A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why***:  
+A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
 For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. *Why* it should be displayed read-only is not part of the [`ViewModel`](#viewmodels).
 
 #### Keep It Clean
 
-`ViewModels` might only use *simple* `types` and *references* to other `ViewModels`.
+[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels).
 
 #### No Entities
 
 For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which sneekily can try to connection to a database.
 
-#### No Converting ViewModels to ViewModels
+#### Converting ViewModels to ViewModels
 
 It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
 
 #### No Inheritance
 
-*Inheritance* is not the first-choice to use for `ViewModels`. so it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it. Though no hard rules here.
+*Inheritance* is not the first-choice to use for [`ViewModels`](#viewmodels). so it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it. Though no hard rules here.
 
-#### Inheritance Considerations
+#### Considerations about Inheritance
 
 The reason there should be no inheritance is because that would create an unwanted n² dependency between [`Views`](#views) and the `base` [`ViewModel`](#viewmodels): *`n`* [`Views`](#views) could be dependent on `1` [`ViewModel`](#viewmodels) and *`m`* [`ViewModels`](#viewmodels) could be dependent on 1 `base` [`ViewModel`](#viewmodels), making *`n * m`* [`Views`](#views) dependent on the same `base` [`ViewModel`](#viewmodels). This means that if the `base` [`ViewModel`](#viewmodels) changes, *`n * m`* [`Views`](#views) could break, instead of just *`n`*. *`m`* is even likely to become greater than *`n`*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a [`ViewModel`](#viewmodels) could only break `n` [`Views`](#views) (the number of [`Views`](#views) that use that [`ViewModel`](#viewmodels)).
 
