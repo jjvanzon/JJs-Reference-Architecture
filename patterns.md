@@ -949,7 +949,7 @@ public static class ResourceFormatter
 }
 ```
 
-This keeps using the placeholders safer in other code where you can use:
+This keeps using the *placeholders* safer in other code where you can use:
 
 ```cs
 ResourceFormatter1.Save_WithName("Document");
@@ -964,7 +964,7 @@ Which should return:
 You could also use `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
 
 ```cs
-public static class ResourceFormatter2
+public static class ResourceFormatter
 {
     private static readonly ResourceFormatterHelper _helper 
         = new (Resources.ResourceManager);
