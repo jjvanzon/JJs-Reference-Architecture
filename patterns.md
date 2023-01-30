@@ -947,19 +947,19 @@ public static class ResourceFormatter
 }
 ```
 
-By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code:
+By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code like this:
 
 ```cs
 ResourceFormatter.Save_WithName("Document");
 ```
 
-Which may return:
+Returning:
 
 ```
 "Save Document"
 ```
 
-You can also streamline your code and minimize the risk of typos with `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings). Check it out:
+You can also streamline your code and minimize the risk of typos using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings). Check it out:
 
 ```cs
 public static class ResourceFormatter
@@ -976,9 +976,9 @@ public static class ResourceFormatter
 
 This eliminates the need to repeat the `Resource Name` in the code. It also encourages consistency by forcing the method names to match the `Resource Names`.
 
-[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides you with  reusable [`Resource strings`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
+[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes further than that. It provides you with  reusable [`Resource strings`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
-[`Resources`](#resource-strings) may play an important role beyond just the presentation. They're also commonly used in the [business layer](layers.md#business-layer), which is why it might be a good idea to store them in [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Keeping the `DisplayNames` of [model](#entities) properties in the back-end makes it possible to reuse them in multiple places.
+[`Resources`](#resource-strings) may play an important role beyond just the presentation. They're also commonly used in the [business layer](layers.md#business-layer). That is why it might be a good idea to store them in [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Keeping the `DisplayNames` of [model](#entities) properties in the back-end makes it possible to reuse them from multiple places.
 
 Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
