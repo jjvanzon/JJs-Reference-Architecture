@@ -35,9 +35,9 @@ title: "🧶 Patterns"
         - [Structure](#structure)
         - [Screen ViewModels](#screen-viewmodels)
         - [Entity ViewModels](#entity-viewmodels)
-        - [Keep it Clean](#keep-it-clean)
+        - [Other Kinds of ViewModels](#other-kinds-of-viewmodels)
         - [How to Model](#how-to-model)
-        - [TODO](#todo)
+        - [Keep It Clean](#keep-it-clean)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -1076,10 +1076,21 @@ Every screen might get a [`ViewModel`](#viewmodels), e.g.:
     ProductDetailsViewModel
     ProductListViewModel
     ProductEditViewModel
+    ProductDeleteViewModel
+    ProductDeletedViewModel
     CategorySelectorViewModel
+    CategoryOverviewViewModel
 
-These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`) and then the last name is [`ViewModel`](#viewmodels).
+These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`). And then the last part of the name is [`ViewModel`](#viewmodels).
 
+Other alternative to the [`CRUD`](layers.md#crud) actions are `Overview` or `NotFound` or `Login`:
+
+    NotFoundViewModel
+    ProductOverviewViewModel
+    LoginViewModel.
+
+There may be other variations, but this is the general idea.
+    
 #### Entity ViewModels
 
 You can also reuse simple `ViewModels` that represent a single [entity](#entities), e.g.:
@@ -1087,13 +1098,18 @@ You can also reuse simple `ViewModels` that represent a single [entity](#entitie
     ProductViewModel
     CategoryViewModel
 
-#### Keep it Clean
+They can be called [entity](#entities) [`ViewModels`](#viewmodels), but they can also be called `Item` [`ViewModels`](#viewmodels).
 
-`ViewModels` might only use *simple* `types` and *references* to other `ViewModels`. For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which sneekily can try to connection to a database.
+#### Other Kinds of ViewModels
 
-*Inheritance* is not the first-choice to use for `ViewModels`. so it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it. Though no hard rules here.
+Other types of [`ViewModel`](#viewmodels) might be:
 
-It is not advised to convert `ViewModels` to other `ViewNodels`. Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+- `PartialViewModel`
+    - For *part* of a screen, to keep overview of the sections, like `LoginViewModel`, `ButtonBarViewModel`, `MenuViewModel`. They may or may not have the word `Partial` in their name.
+- `LookupViewModel`
+    - A *lookup* list, for instance the data to pick  from a drop-down box.
+- `ListItemViewModels`
+    - Similar to the [entity](#entities) [ViewModels](#viewmodels) but then specifically representing a row in list or grid.
 
 #### How to Model
 
@@ -1110,11 +1126,15 @@ A [`ViewModel`](#viewmodels) should say *what* is shown on screen, not *why*:
 
 For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. *Why* it should be displayed read-only is not part of the [`ViewModel`](#viewmodels).
 
-#### TODO
+#### Keep It Clean
 
-`< TODO: Describe the ViewModel pattern more strictly: entity ViewModels, partial ViewModels and screen ViewModels and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen ViewModel, not an entity or partial ViewNodel. LoginViewModel may be an exception. >`
+`ViewModels` might only use *simple* `types` and *references* to other `ViewModels`. For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which sneekily can try to connection to a database.
 
-<h4>Considerations</h4>
+*Inheritance* is not the first-choice to use for `ViewModels`. so it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it. Though no hard rules here.
+
+It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+
+<h4>Considerations about Inheritance</h4>
 
 The reason there should be no inheritance is because that would create an unwanted n² dependency between [`Views`](#views) and the `base` [`ViewModel`](#viewmodels): *`n`* [`Views`](#views) could be dependent on `1` [`ViewModel`](#viewmodels) and *`m`* [`ViewModels`](#viewmodels) could be dependent on 1 `base` [`ViewModel`](#viewmodels), making *`n * m`* [`Views`](#views) dependent on the same `base` [`ViewModel`](#viewmodels). This means that if the `base` [`ViewModel`](#viewmodels) changes *`n * m`* [`Views`](#views) could break, instead of just *`n`*. *`m`* is even likely to become greater than *`n`*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a [`ViewModel`](#viewmodels) could only break `n` [`Views`](#views) (the number of [`Views`](#views) that use that [`ViewModel`](#viewmodels)).
 
