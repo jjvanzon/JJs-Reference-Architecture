@@ -29,17 +29,6 @@ title: "🧶 Patterns"
     - [Cascading](#cascading)
     - [Facade](#facade)
     - [Visitor](#visitor)
-        - [Introduction](#introduction-1)
-        - [Visit Methods](#visit-methods)
-        - [Base Visitor](#base-visitor)
-        - [Specialized Visitors](#specialized-visitors)
-        - [Optimization](#optimization)
-        - [Entry Points](#entry-points)
-        - [Using Fields](#using-fields)
-        - [Polymorphic Visitation](#polymorphic-visitation)
-        - [Change the Sequence](#change-the-sequence)
-        - [Accept Methods](#accept-methods)
-        - [Conclusion](#conclusion)
     - [Resource Strings](#resource-strings)
         - [Visual Studio Editor](#visual-studio-editor)
         - [Naming Conventions](#naming-conventions)
@@ -532,13 +521,29 @@ The reason is, that a [`Facade`](#facade) could create an excessive amount of de
 
 ### Visitor
 
-#### Introduction
+Contents:
+
+- [Introduction](#visitor-introduction)
+- [Visit Methods](#visit-methods)
+- [Base Visitor](#base-visitor)
+- [Specialized Visitors](#specialized-visitors)
+- [Optimization](#visitor-optimization)
+- [Entry Points](#visitor-entry-points)
+- [Using Fields](#visitor-using-fields)
+- [Polymorphic Visitation](#polymorphic-visitation)
+- [Change the Sequence](#visitor-change-the-sequence)
+- [Accept Methods](#accept-methods)
+- [Conclusion](#visitor-conclusion)
+
+
+<h4 id="visitor-introduction">Introduction</h4>
 
 A [`Visitor`](#visitor) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing code.
 
 Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
-#### Visit Methods
+
+<h4 id="visit-methods">Visit Methods</h4>
 
 A [`Visitor`](#visitor) `class` has a set of [`Visit`](#visit-methods) methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
 
@@ -564,7 +569,8 @@ void VisitPhysicalProduct(Product product) { }
 void VisitDigitalProduct(Product product) { }
 ```
 
-#### Base Visitor
+
+<h4 id="base-visitor">Base Visitor</h4>
 
 A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a [`Visit`](#visit-methods) method for each node. Here is an example where an `Order` structure is `Visited`:
 
@@ -600,7 +606,8 @@ class OrderVisitorBase
 
 The ones with *child objects* also call [`Visit`](#visit-methods) on their children. Those without children have empty implementations.
 
-#### Specialized Visitors
+
+<h4 id="specialized-visitors">Specialized Visitors</h4>
 
 You can make *specialized* [`Visitor`](#visitor) classes, by overriding the [`Visit`](#visit-methods) methods.
 
@@ -660,7 +667,8 @@ The result of the process might be a text like this:
 2 x Fidget Thing
 ```
 
-#### Optimization
+
+<h4 id="visitor-optimization">Optimization</h4>
 
 You can make the performance better by `overriding` [`Visit`](#visit-methods) methods for skipping parts of the recursive structure that don't you don't need:
 
@@ -689,7 +697,8 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 However, be mindful of the trade-off between performance and completeness, as skipping parts of the structure also means missing out on the deeper objects.
 
-#### Entry Points
+
+<h4 id="visitor-entry-points">Entry Points</h4>
 
 `Public` methods can show us the starting point of the recursion, making it easier to understand where the process begins:
 
@@ -754,11 +763,13 @@ class OrderSummaryVisitor : OrderVisitorBase
 }
 ```
 
-#### Using Fields
+
+<h4 id="visitor-using-fields">Using Fields</h4>
 
 The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It makes our `base` [`Visitors`](#visitor) more reusable too.
 
-#### Polymorphic Visitation
+
+<h4 id="polymorphic-visitation">Polymorphic Visitation</h4>
 
 Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type` with the same `base type`.
 
@@ -902,7 +913,8 @@ class PolymorphicVisitorBase
 }
 ```
 
-#### Change the Sequence
+
+<h4 id="visitor-change-the-sequence">Change the Sequence</h4>
 
 You might also `override` a [`Visit`](#visit-methods) method to change the order in which things are processed.
 
@@ -926,13 +938,15 @@ class ReversedOrderVisitor : OrderVisitorBase
 }
 ```
 
-#### Accept Methods
+
+<h4 id="accept-methods">Accept Methods</h4>
 
 The *classic* [`Visitor`](#visitor) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
 
 However, `Accept` methods can be used for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) pattern proposed earlier.
 
-#### Conclusion
+
+<h4 id="visitor-conclusion">Conclusion</h4>
 
 By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
 
