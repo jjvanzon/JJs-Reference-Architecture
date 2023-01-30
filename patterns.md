@@ -941,7 +941,7 @@ It is suggested that the *culture-inspecific* `Resources.resx` be in the languag
 
 Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
 
-![String Resource Editor](images/string-resource-editor.png)
+![String Resource Editor](images/resource-string-editor.png)
 
 #### Descriptive Names
 
