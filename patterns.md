@@ -960,7 +960,7 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 [`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used within [`.NET`](api.md#dotnet).
 
-The *culture-inspecific* `Resources.resx` might be used for the language `US English`.
+The *culture-independent* `Resources.resx` might be used for the language `US English`.
 
 #### Descriptive Names
 
