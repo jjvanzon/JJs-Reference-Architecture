@@ -1163,11 +1163,14 @@ It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`]
 
 #### Considerations about Inheritance
 
-The reason there should be no inheritance is because that would create an unwanted n² dependency between [`Views`](#views) and the `base` [`ViewModel`](#viewmodels): *`n`* [`Views`](#views) could be dependent on `1` [`ViewModel`](#viewmodels) and *`m`* [`ViewModels`](#viewmodels) could be dependent on 1 `base` [`ViewModel`](#viewmodels), making *`n * m`* [`Views`](#views) dependent on the same `base` [`ViewModel`](#viewmodels). This means that if the `base` [`ViewModel`](#viewmodels) changes, *`n * m`* [`Views`](#views) could break, instead of just *`n`*. *`m`* is even likely to become greater than *`n`*. If multiple layers of inheritance are used, it gets even worse. That can get out of hand quickly and create a badly maintainable application. By using no inheritance, a [`ViewModel`](#viewmodels) could only break `n` [`Views`](#views) (the number of [`Views`](#views) that use that [`ViewModel`](#viewmodels)).
+Inheritance is not preferred for the [`ViewModel`](#viewmodels) design pattern. Using inheritance to create a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
+
+But this does not mean that inheritance should always be avoided altogether. It may still be possible to use inheritance in a way that is manageable and maintainable, for example by using inheritance conscientiously, or by using other design patterns, such as composition, to reduce the impact of changes.
 
 #### TODO
 
-`< TODO: Code samples. >`
+`< TODO: More examples. >`
+`< TODO: Code samples. Even bad ones. (Color them red.) >`
 
 ### Lookup Lists
 
