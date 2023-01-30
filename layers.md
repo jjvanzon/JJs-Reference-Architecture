@@ -100,27 +100,27 @@ It starts with the database. This can be a *relational database* like [`Microsof
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [entities](patterns.md#entity).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [entities](patterns.md#entities).
     
 It could also be a different data access technology: a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework), or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns.md#entity) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns.md#entity). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns.md#entities). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
 The [`FluentNHibernate API`](api.md#fluent-nhibernate) can help set up these [mappings](patterns.md#mapping).
 
 ### Entities
 
-With all this in place, out come objects called [entities](patterns.md#entity), loaded from the database. These [entity](patterns.md#entity) objects represent the functional domain.
+With all this in place, out come objects called [entities](patterns.md#entities), loaded from the database. These [entity](patterns.md#entities) objects represent the functional domain.
 
 ### Repositories
 
-[`NHibernate`](api.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns.md#repository) instead. You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity type](patterns.md#entity) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
+[`NHibernate`](api.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns.md#repository) instead. You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity type](patterns.md#entities) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
-The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*. The [`Repository interfaces`](patterns.md#repository-interfaces) are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](api.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](patterns.md#repository) and [interfaces](patterns.md#repository-interfaces).
+The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*.
 
 ### Platform Independence
 
@@ -156,13 +156,13 @@ The [`Presenters`](patterns.md#presenter) might delegate to a [`ToViewModel`](pa
 
 ### ToEntity
 
-The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [entity](patterns.md#entity) data, before passing it on to the [business layer](#business-layer).
+The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [entity](patterns.md#entities) data, before passing it on to the [business layer](#business-layer).
 
 ### Facades
 
 [`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
 
-They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#sideeffects). They initiate translation between [entities](patterns.md#entity) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
+They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#sideeffects). They initiate translation between [entities](patterns.md#entities) and [`ViewModels`](patterns.md#viewmodel) and might also execute [security](aspects.md#security) checks.
 
 Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
 
@@ -222,7 +222,7 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
-The [business layer](#business-layer) can use [entities](patterns.md#entity) out of the [data layer](#data-layer). These [entity](patterns.md#entity) classes represent the domain model. But sometimes it would call [repositories](patterns.md#repository) to execute queries.
+The [business layer](#business-layer) can use [entities](patterns.md#entities) out of the [data layer](#data-layer). These [entity](patterns.md#entities) classes represent the domain model. But sometimes it would call [repositories](patterns.md#repository) to execute queries.
 
 ### Magic
 
@@ -246,7 +246,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Enums
 
-[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entity) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). And some pattern-wise logic around [`enums`](aspects.md#enums) might be there in the [business layer](#business-layer) too.
+[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entities) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). And some pattern-wise logic around [`enums`](aspects.md#enums) might be there in the [business layer](#business-layer) too.
 
 ### Resources Strings
 
@@ -254,11 +254,11 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entity) might be done automatically by using a [`SideEffect`](patterns.md#sideeffects) class. Those may be executed in the [business layer](#business-layer).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entities) might be done automatically by using a [`SideEffect`](patterns.md#sideeffects) class. Those may be executed in the [business layer](#business-layer).
 
 ### Cascading
 
-Along with one [entity](patterns.md#entity), other [entities](patterns.md#entity) might be deleted. [Cascading](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entity) when a main [entity](patterns.md#entity) is deleted. [Cascading](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entity) before deleting a related [entity](patterns.md#entity). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns.md#entities), other [entities](patterns.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entities) when a main [entity](patterns.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entities) before deleting a related [entity](patterns.md#entities). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -270,15 +270,15 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Facades
 
-Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#sideeffects), [cascading](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
+Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#sideeffects), [`Cascading`](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or ["CRUD"](practices-and-principles.md#crud). This set of basic operations might not change much, keeping the interfaces relative stable. But *Non-CRUD* operations might be added too.
+The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or `CRUD`. This set of basic operations might not change much, keeping the `interfaces` relative stable. But *Non-CRUD* operations might be added too.
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entity) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
+A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entities) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
 
 
 Perpendicular Layers

@@ -1,4 +1,10 @@
-﻿🧶 Patterns
+﻿---
+title: "🧶 Patterns"
+---
+
+`[ Draft ]`
+
+🧶 Patterns
 ============
 
 [back](.)
@@ -7,21 +13,55 @@
 
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
-    - [Entity](#entity)
+    - [Entities](#entities)
+        - [Pure Data Objects](#pure-data-objects)
+        - [Enums](#enums)
+        - [Collections](#collections)
+        - [Virtual Members](#virtual-members)
+        - [Inheritance](#inheritance)
+        - [Real Code](#real-code)
     - [Mapping](#mapping)
     - [DTO](#dto)
     - [Repository](#repository)
     - [Repository Interfaces](#repository-interfaces)
 - [Business Logic Patterns](#business-logic-patterns)
-    - [Business layer](#business-layer)
+    - [Business Layer](#business-layer)
     - [RepositoryWrappers](#repositorywrappers)
     - [Validators](#validators)
     - [SideEffects](#sideeffects)
     - [LinkTo](#linkto)
+        - [Unlink](#unlink)
+        - [NewLinkTo](#newlinkto)
     - [Cascading](#cascading)
+        - [Code Files](#code-files)
+        - [DeleteRelatedEntities](#deleterelatedentities)
+        - [UnlinkRelatedEntities](#unlinkrelatedentities)
+        - [Delete Main Entity](#delete-main-entity)
+        - [Cascading & Repositories](#cascading--repositories)
+        - [Nuance](#nuance)
+        - [Conclusion](#conclusion)
     - [Facade](#facade)
     - [Visitor](#visitor)
+        - [Introduction](#introduction-1)
+        - [Visit Methods](#visit-methods)
+        - [Base Visitor](#base-visitor)
+        - [Specialized Visitors](#specialized-visitors)
+        - [Optimization](#optimization)
+        - [Entry Points](#entry-points)
+        - [Using Fields](#using-fields)
+        - [Polymorphic Visitation](#polymorphic-visitation)
+        - [Change the Sequence](#change-the-sequence)
+        - [Accept Methods](#accept-methods)
+        - [Conclusion](#conclusion-1)
     - [Resource Strings](#resource-strings)
+        - [Naming Conventions](#naming-conventions)
+        - [Visual Studio Editor](#visual-studio-editor)
+        - [Descriptive Names](#descriptive-names)
+        - [ResourceFormatter](#resourceformatter)
+        - [ResourceFormatterHelper](#resourceformatterhelper)
+        - [Reusability](#reusability)
+        - [Use the Business Layer](#use-the-business-layer)
+        - [For More Information](#for-more-information)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
     - [Lookup Lists](#lookup-lists)
@@ -86,115 +126,173 @@
 Introduction
 ------------
 
-Design patterns are coding techniques to solve common programming problems. They bring consistency to the code. They help us reuse best practices and prevent code from becoming messy. They also are an extension to the software layering.
+Design patterns are coding techniques to solve common programming problems. They can bring consistency to the code. They help us reuse established solutions and improve the overall design of the software. They also are an extension to the software layering.
 
 
 Data Access Patterns
 --------------------
 
-### Entity
+### Entities
 
-These are the classes that represent the domain model.
+*Entities* are the `classes` that represent the *functional domain model*.
 
-The entity classes simply contain properties of simple types or references or lists to other [entities](#entity).
+#### Pure Data Objects
 
-There will be no logic in the entity classes in this [architecture](index.md).
+In this [architecture](index.md), we aim to keep the entity `classes` [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entities).
 
-Collections should be created in the constructor, because [`NHibernate`](api.md#nhibernate) does not always create them, and you do not want to check whether collections are null all over your code.
+```cs
+class Supplier
+{
+    int ID { get; set; }
+    string Name { get; set; }
+    Address Address { get; set; }
+    IList<Product> Products { get; set; }
+}
+```
 
-All public members should be virtual, otherwise persistence technologies can often not work with it.
+#### Enums
 
-Do not use inheritance within your entity model, because it can make using persistence technologies harder, error prone, and it can actually harm performance of queries.
+You might even want to avoid `enums` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
 
-<h4>Alternatives</h4>
+```cs
+class Supplier
+{
+    Industry Industry { get; set; }
+}
 
-Generally avoided, but not prohibited:
+class Industry
+{
+    int ID { get; set; }
+    int Name { get; set; }
+}
 
-- Use inheritance anyway with the aforementioned downsides.
-- Use interfaces for polymorphism instead.
-- Instead of inheritance, consider a composition solution, rather than an inheritance solution.
+enum IndustryEnum
+{
+    Retail = 1,
+    Travel = 2
+}
+```
 
-<h4>Considerations</h4>
+#### Collections
 
-`< TODO: Write some more about the difficulties of inheritance in entity models. >`
+Creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
+
+```cs
+class Supplier
+{
+    var Products { get; set; } = new List<Product>();
+}
+```
+
+#### Virtual Members
+
+`Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+
+```cs
+class Supplier
+{
+    virtual int ID { get; set; }
+    virtual int Name { get; set; }
+    ...
+}
+```
+
+#### Inheritance
+
+Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
+
+#### Real Code
+
+These code examples were just illustrative pseudo-code. This is a more realistic example:
+
+```cs
+public class Supplier
+{
+    public virtual int ID { get; set; }
+    public virtual string Name { get; set; }
+    public virtual Address Address { get; set; }
+    public virtual IList<Product> Products { get; set; } = new List<Product>();
+}
+```
 
 ### Mapping
 
-Mappings are classes programmed for a particular persistence technology, e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entity) model to how the objects are persisted in the data store (e.g. an [`SQL Server`](api.md#sql-server) database).
+`Mappings` are `classes` programmed for a particular [persistence technology](aspects.md#persistence), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 ### DTO
 
-DTO = Data transfer object. DTO's only contain data, no logic. They are used solely to transfer data between different parts of the system, particularly in cases where passing an [entity](#entity) is not handy or efficient.
+`DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of a system. In certain situations, where passing an  [entity](#entities) is not handy or efficient, a `DTO` might be a good alternative.
 
-For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a DTO that is a strongly typed version of these records. In many cases you want to query for [entity](#entity) objects instead, but in some cases this is not fast / efficient enough and you should resort to a DTO.
+For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [entity](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
-DTO's can also be used for other data transfers than for [`SQL`](api.md#sql) queries.
+`DTO's` can be used for other data transfers than [`SQL`](api.md#sql) queries as well.
 
 ### Repository
 
-A `Repository` is like a set of queries. `Repositories` return or save [entities](#entity) in the data store. Simple types, not [entities](#entity), are preferred for parameters. The `Repository` pattern is a way to put queries in a single place. The `Repository's` job is also to provide an optimal set of queries.
+A `Repository` is like a set of queries. `Repositories` return or save [entities](#entities) in the data store. Simple types, not [entities](#entities), are preferred for parameters. The `Repository` pattern is a way to put queries in a single place. The `Repositories'` job is also to provide an optimal set of queries.
 
-Typically, every [entity type](#entity) gets its own `Repository`.
+Typically, every [entity type](#entities) gets its own `Repository`.
 
-It might be best to not expose types from the underlying persistence technology, so the `Repository` abstraction stays neutral.
+It might be best to not expose types from the underlying [persistence technology](aspects.md#persistence), so the `Repository` abstraction stays neutral.
 
 ### Repository Interfaces
 
-Any [Repository type](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled to the underlying persistence technology.
+Any [`Repository type`](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled from the underlying [persistence technology](aspects.md#persistence).
 
+The `Repository interfaces` are also handy for [testing](aspects.md#automated-testing), to create a [fake](#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](api.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](#repository) and `interfaces`.
 
 Business Logic Patterns
 -----------------------
 
-### Business layer
+### Business Layer
 
-[Presentation](layers.md#presentation-layer), [entity](#entity) model and persistence should be straightforward. If anything special needs to happen this belongs in the business layer. Any number of different patterns can be used.
+[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that do not follow any standard [pattern](#introduction).
 
-The business layer externally speaks a language of [entities](#entity) or sometimes [data transfer objects (DTO's)](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for data access.
+The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [`DTO's`](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that business logic works with [entities](#entity) rather than [`Repositories`](#repository) (even though there is a large gray area). This improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.]
+It is preferred that [business logic](layers.md#business-layer) hooks up with  [entity](#entities) `classes` rather than [`Repositories`](#repository). But there is a large gray area. Using [entities](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
 
 ### RepositoryWrappers
 
-Passing around lots of [repositories](#repository) creates long parameter lists, that are prone to change. To combat that problem, combine sets of [`Repositories`](#repository) into `RepositoryWrappers` and pass those around instead. This keeps the parameter lists short and less prone to change.
+Passing around lots of [`Repositories`](#repository) can create long lists of parameters, prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into [`RepositoryWrappers`](#repositorywrappers). Those can then be passed around instead. This keeps the parameter lists shorter.
 
-You can make a single `RepositoryWrapper` with all your domain model's [`Repositories`](#repository).
+You can make a single [`RepositoryWrapper`](#repositorywrappers) with all the [`Repositories`](#repository) out of a [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
 
-But that is not always enough. Some logic will use [`Repositories`](#repository) out of multiple domains, so sometimes you are well off making a custom `RepositoryWrapper` in that case. You could also choose to simply pass around multiple `RepositoryWrappers`: one per domain model.
+Some logic might use [`Repositories`](#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple [`RepositoryWrappers`](#repositorywrappers): one for each [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also make a custom [`RepositoryWrapper`](#repositorywrappers) with [`Repositories`](#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains).
 
-Also, you may want to create different, more limited `RepositoryWrappers`. For instance ones for partial domain models. This keeps the width of dependency narrow, so logic that has nothing to do with certain [`Repositories`](#repository), do not become dependent on all of them.
+You may also want to more limited [`RepositoryWrappers`](#repositorywrappers). For instance one for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency more narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not accidentally become dependent on them.
 
-An alternative to `RepositoryWrappers` might be *dependency injection*. See dependency injection'. There you will find some criticism about the techique, but those might be due to not using a very good dependency injection `API`. `RepositoryWrappers` and dependency injection could well be used in combination with each other.
+An alternative to [`RepositoryWrappers`](#repositorywrappers) might be [dependency injection](practices-and-principles.md#dependency-injection). Under this [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very safe [dependency injection](practices-and-principles.md#dependency-injection) `API`. [`RepositoryWrappers`](#repositorywrappers) and [dependency injection](practices-and-principles.md#dependency-injection) might also go hand in hand in combination with each other.
 
 ### Validators
 
-Use separate `Validator` classes for validation. Make specialized classes derived from [`JJ.Framework.Validation.FluentValidator<T>`](api.md#jj-framework-validation).
+Separate [`Validator`](api.md#jj-framework-validation) `classes` could be used for [validation](aspects.md#validation). Specialized `classes` can be derived from [`VersatileValidator`](api.md#jj-framework-validation) from the [`JJ.Framework`](api.md#jjframework).
 
-Try to keep `Validators` independent from eachother.
+It is recommended to keep [`Validators`](api.md#jj-framework-validation) independent from each other.
 
-If multiple `Validators` should go off, call them individually one by one. Try not to make them delegate to eachother.
+If multiple [`Validators`](api.md#jj-framework-validation) should go off, you might call them individually one by one.
 
-If you do decide to make a complex `Validator`, add a prefix or suffix to the class name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make extra clear that it is not just a simple `Validator`.
+For complex [`Validator`](api.md#jj-framework-validation), it is suggested to add a [prefix or suffix](code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](api.md#jj-framework-validation).
 
-Next to `Validators` saying that user input is wrong, `Validators` can be used to generate warnings, that are not blocking, but help the user do their work.
+Next to [`Validators`](api.md#jj-framework-validation) deciding whether user input is valid, [`Validators`](api.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with an app.
 
-`Validators` can also be used for (complex) delete constraints, for instance when an [entity](#entity) is still in use, you might not be able to delete it.
+[`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [entity](#entities) is still in use, you might not be able to delete it.
 
 ### SideEffects
 
-The business layer executes `SideEffects`, when altering data, for instance storing the date time modified or setting default values, or automatically generating a name.
+The [business layer](layers.md#business-layer) can execute [`SideEffects`](api.md#jj-framework-business) while altering data, for instance to record a *date time modified*, set [default values](aspects.md#defaults), or automatically generate a *name*.
 
-We implement the interface `ISideEffect` for each side effect. It only has one method: Execute, but it allows us to have some sort of polymorphism over `SideEffects` so it is easier to execute multiple of them in one blow, or allows other more generic handlings of the `SideEffects`.
+We could implement an `interface` [`ISideEffect`](api.md#jj-framework-business) for each of these. It has only one method: `Execute`. This gives us some polymorphism over [`SideEffects`](api.md#jj-framework-business) so it is easier to handle them *generically* and for instance `Execute` multiple in a row.
 
-Using separate classes for `SideEffects`, creates overview over those pieces of business logic, that are the most creative of all, and prevents those special things that need to happen from being entangled with other code.
+Using separate `classes` for [`SideEffects`](api.md#jj-framework-business) can create overview over pieces of logic, creative in nature, and prevent things from getting entangled.
 
-`SideEffects` should evaluate the conditions internally as much as possible. So the called of the side effect class does not know what conditions are tied to it doing anything at all. This makes the side effect fully responsible for what happens. The side effect's doing anything can also be dependent on [entity status](aspects.md#entity-status-management).
+[`SideEffects`](api.md#jj-framework-business) might evaluate conditions internally. The caller of the [`SideEffect`](api.md#jj-framework-business) `class` would not know what conditions there are. A [`SideEffect`](api.md#jj-framework-business) could skip over its own execution, when it wouldn't apply. This makes the [`SideEffect`](api.md#jj-framework-business) fully responsible for what happens. What a [`SideEffect`](api.md#jj-framework-business) does can also depend on [status flagging](aspects.md#entity-status-management).
 
 ### LinkTo
 
-This pattern is about *bidirectional relationship synchronization*. It means for instance that if a parent property is set: `myProduct.Supplier = mySupplier`, then automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
+This pattern is about [bidirectional relationship synchronization](aspects.md#bidirectional-relationship-synchronization). That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage bidirectional relationships even when the underlying persistent technology does not have bidirectional relationship synchronization, you can link [entities](#entity) with `LinkTo` methods, instead of assigning properties or adding or removing from related collections directly. By calling the `LinkTo` methods, both ends of the relationship are kept in sync. Here is a template for a `LinkTo` method that works for `1-to-n` relationships. Beware that all the checks and list operations can come with performance penalties.
+To manage [bidirectional relationships](aspects.md#bidirectional-relationship-synchronization), even when the underlying [persistence technology](aspects.md#persistence) doesn't, we could link [entities](#entities) together using [`LinkTo`](#linkto) extension methods. By calling [`LinkTo`](#linkto), both ends of the relationship are updated. Here is a template for a [`LinkTo`](#linkto) method that works for an `1-to-n` relationship:
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -221,13 +319,17 @@ public static void LinkTo(this Child child, Parent parent)
 }
 ```
 
-The class in which to put the `LinkTo` methods, should be called `LinkToExtensions` and it should be put in the `LinkTo` sub-namespace in your project.
+Beware that all the checks and list operations can come with a performance penalty.
 
-Only if the `LinkTo` method name is ambiguous, you can suffix it, e.g.:
+You could put the [`LinkTo`](#linkto) methods together in a `class` named `LinkToExtensions`. You might put it in a [`LinkTo`](#linkto) [`namespace`](namespaces-assemblies-and-folders.md#patterns) in your project.
 
-  LinkToParentDocument
+If a [`LinkTo`](#linkto) method name becomes ambiguous, you could suffix it, for instance:
 
-Next to `LinkTo` method, you might add `Unlink` methods in an `UnlinkExtensions` class:
+    LinkToParentDocument
+
+#### Unlink
+
+Next to [`LinkTo`](#linkto) methods, you might also add [`Unlink`](#unlink) methods in an `UnlinkExtensions class`:
 
 ```cs
 public static void UnlinkParent(this Child child)
@@ -237,7 +339,9 @@ public static void UnlinkParent(this Child child)
 }
 ```
 
-If you are linking objects together that you know are new, you may create better-performing variations for `LinkTo`, called `NewLinkTo`, that omit the expensive checks:
+#### NewLinkTo
+
+If you are linking `objects` together, that you *know are new*, you may use better-performing variations for [`LinkTo`](#linkto), called [`NewLinkTo`](#newlinkto), that omit the expensive checks:
 
 ```cs
 public static void NewLinkTo(this Child child, Parent parent)
@@ -248,69 +352,661 @@ public static void NewLinkTo(this Child child, Parent parent)
 }
 ```
 
-Be aware that executing `NewLinkTo` onto *existing* objects may corrupt the object graph.
+But beware that [`LinkTo`](#linkto) might be a better choice, because executing [`NewLinkTo`](#newlinkto) onto *existing* `objects` may corrupt the `object` graph.
 
 ### Cascading
 
-`< TODO: Describe how the DeleteRelatedEntitiesExtensions and UnlinkRelatedEntitiesExtensions are organized. >`
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [entity](#entities), *child-*[entities](#entities) are `Deleted` too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
+
+This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
+
+One way to implement [`Cascading`](aspects.md#cascading), is through extension methods:  
+`DeleteRelatedEntities` and `UnlinkRelatedEntities`.
+
+#### Code Files
+
+Here is a suggestion for how to organize the code.
+
+In the `csproj` of the [`Business` layer](layers.md#business-layer), you could put a [sub-folder](namespaces-assemblies-and-folders.md#patterns) called [`Cascading`](#cascading) and put two code files in it:
+
+```
+JJ.Ordering.Business.csproj
+    |
+    |- Cascading
+        |
+        |- DeleteRelatedEntitiesExtensions.cs
+        |- UnlinkRelatedEntitiesExtensions.cs
+```
+
+#### DeleteRelatedEntities
+
+Here is how  `DeleteRelatedEntitiesExtensions.cs` might look internally:
+
+```cs
+/// <summary>
+/// Deletes child entities inherently part of the main entity.
+/// </summary>
+public static class DeleteRelatedEntitiesExtensions
+{
+    public static void DeleteRelatedEntities(this Order order)
+    {
+        ...
+    }
+}
+```
+
+In there, child [entities](#entities) are successively `Deleted`:
+
+```cs
+/// <summary>
+/// Deletes child entities inherently part of the main entity.
+/// </summary>
+public static class DeleteRelatedEntitiesExtensions
+{
+    public static void DeleteRelatedEntities(this Order order)
+    {
+        // Delete child entities.
+        foreach (var orderLine in order.OrderLines.ToArray())
+        {
+            _repository.Delete(orderLine);
+        }
+    }
+```
+
+(Note: The `ToArray` can prevent an `Exception` about the loop collection being modified.)
+
+Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too!
+
+```cs
+public static void DeleteRelatedEntities(this Order order)
+{
+    // Delete child entities.
+    foreach (var orderLine in order.OrderLines.ToArray())
+    {
+        // Call cascading on the child entity too!
+        orderLine.UnlinkRelatedEntities(); 
+
+        _repository.Delete(orderLine);
+    }
+}
+```
+
+#### UnlinkRelatedEntities
+
+`UnlinkRelatedEntities` might be a little bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
+
+```cs
+/// <summary>
+/// Unlinks related entities, not inherently part of the main entity.
+/// </summary>
+public static class UnlinkRelatedEntitiesExtensions
+{
+    public static void UnlinkRelatedEntities(this OrderLine orderLine)
+    {
+        orderLine.UnlinkOrder();
+        orderLine.UnlinkProduct();
+    }
+}
+```
+
+Note that it uses the [Unlink](#unlink) pattern discussed earlier.
+
+#### Delete Main Entity
+
+The extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: Where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+
+```cs
+entity.DeleteRelatedEntities();
+entity.UnlinkRelatedEntities();
+
+// Delete main entity separately.
+_repository.Delete(entity);
+```
+
+That way we can see explicitly that more `Deletions` take place.
+
+#### Cascading & Repositories
+
+The [`DeleteRelatedEntities`](#cascading) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
+
+You could pass these [`Repositories`](#repository) as *parameters:*
+
+```cs
+public static void DeleteRelatedEntities(
+    this Order order,
+    /* Repository parameter */
+    IOrderLineRepository repository)
+{
+    foreach (var orderLine in order.OrderLines.ToArray())
+    {
+        orderLine.UnlinkRelatedEntities();
+        repository.Delete(orderLine);
+    }
+}
+```
+
+Or you might make repositories available through a technique called [dependency injection](practices-and-principles.md#dependency-injection).
+ 
+It's up to you. The choice to use *extension* methods was also a matter of preference.
+
+#### Nuance
+
+Sometimes an [entity](#entities) does have related [entities](#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+
+#### Conclusion
+
+Hopefully this introduced a way to build up [`Cascading`](#cascading) code by just using a pattern.
 
 ### Facade
 
-A `Facade` combines several related (usually `CRUD`) operations into one class that also performs additional [business logic](layers.md#business-layer) and [validation](#validators), [`SideEffects`](#sideeffects), integrity constraints, conversions, etc. It delegates to other classes to do the work. If you do it using a `Facade` you should be able to count on it that the integrity is maintained.
+A [`Facade`](#facade) combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [`Validation`](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do something using a [`Facade`](#facade) you should be able to count on it that integrity is maintained.
 
-It is a combinator class: a `Facade` combines other (smaller) parts of the business layer into one offering a single entry point for a lot related operations. It is usually about a partial functional domain, so manages a set of [entity types](#entity) together. You could also call it a combinator class.
+It is a combinator `class`: a [`Facade`](#facade) combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A [`Facade`](#facade) can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [entity](#entities) `types` together.
 
-<h4>Get by ID not in the Facade</h4>
+<h4>Repositories instead of Facades</h4>
 
-Even though `Facades` typically contain CRUD methods and is usually the entry point for all your business logic and data access operations, there is an exception: do not put a Get by ID method in your `Facade`. Execute a simple Get by `ID` onto the [`Repository`](#repository). The reason is that you would get an explosion of dependency and high coupledness, since a simple operation executed all over the place, would now require a reference to a `Facade`, which is a combinator `class`, meaning it is dependent on many [`Repositories`](#repository) and other objects. So a simple Get goes through the [`Repository`](#repository).
+[`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations, that could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [data access layer](layers.md#data-layer) directly.
+
+For example, a simple `Get` by `ID` may be better going through a [`Repository`](#repository). There could be other cases where using [`Repositories`](#repository) directly is a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
+
+The reason is, that a [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository), to limit the interdependence between things.
 
 ### Visitor
 
-A `Visitor` class processes a recursive structure that might involve many objects and multiple types of objects. Usually a `Visitor` translates a complex structure into something else. Examples are calculating a total price over a recursive structure, or filtering down a whole object graph by complex criteria. `Visitors` can result in a well performing process.
+#### Introduction
 
-Whenever a whole recursive structure needs to be processed, the `Visitor` pattern is a good way to go.
+A [`Visitor`](#visitor) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing code.
 
-A `Visitor` class will have a set of `Visit` methods, e.g. `VisitOrder`, VisitProduct, typically one for every type, possibly also one for each collection. A base `Visitor` might simply follow the whole recursive structure, and has a Visit method for each node in the structure. All Visit methods are protected virtual and usually return void. Public methods will only expose the entry points in the recursion. Derived `Visitors` can override any Visit method that they need. If you only want to process objects of a specific type, you only override the Visit method for that specific type. You can optimize performance by overriding Visit methods that would enter a part of the recursive structure that you do not use.
+Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
 
-Typically the result of a `Visitor` is not put on the call stack, but stored in fields and used throughout the Visit methods. This is because the result usually does not have a 1-to-1 mapping with the source structure.
+#### Visit Methods
 
-By creating a base `Visitor` and multiple specialized `Visitors`, you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated calculations that involve complex recursive structures.
+A [`Visitor`](#visitor) `class` has a set of [`Visit`](#visit-methods) methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
 
-The classic `Visitor` pattern has a design flaw in it, that we will not use. The classic `Visitor` requires that classes used by the `Visitor` have to be adapted to the `Visitor`. This is adapting the wrong classes. We will not do that and we will not add Accept methods to classes used by a `Visitor`.
+```cs
+class Visitor
+{
+    void VisitOrder(Order order) { }
+    void VisitOrderLine(OrderLine orderLine) { }
+    void VisitProduct(Product product) { }
+}
+```
 
-A good example of a `Visitor` class is [`.NET's`](api.md#dotnet) own `ExpressionVisitor`, however we follow additional rules.
+It can also have separate [`Visit`](#visit-methods) methods for `collections`:
 
-`< TODO: Make a good text out of this, covering handling polymorphism in Visitors. Merge this with the main text: `
+```cs
+void VisitOrderLines(IList<OrderLine> orderLines) { }
+```
 
-`- Document that a Visitor that handles polymorphism, should have a Polymorphic visitation that delegates to a concrete visitation, that delegates to a base visitation, and you need all those methods delegating in the right order, for the visitation to happen in the correct order.`
+And there might be [`Visit`](#visit-methods) methods for special cases:
 
-`- Visitor pattern: mention that you always need to call polymorphic, otherwise you will not get all the objects when you override the polymorphic. >`
+```cs
+void VisitPhysicalProduct(Product product) { }
+void VisitDigitalProduct(Product product) { }
+```
 
-`< TODO: Code example. >`
+#### Base Visitor
 
-`< TODO: Describe this: Patterns, Visitor: Figure out a good way to prevent calling those Polymorphic visit methods if not required. >`
+A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a [`Visit`](#visit-methods) method for each node. Here is an example where an `Order` structure is `Visited`:
+
+```cs
+class OrderVisitorBase
+{
+    /// <summary>
+    /// VisitOrder processes the child objects:
+    /// Customer, Supplier and OrderLines.
+    /// </summary>
+    protected virtual void VisitOrder(Order order)
+    {
+        VisitCustomer(order.Customer);
+        VisitSupplier(order.Supplier);
+
+        foreach (var orderLine in order.OrderLines.ToArray())
+        {
+            VisitOrderLine(orderLine);
+        }
+    }
+
+    /// <summary>
+    /// VisitOrderLine also processes its child object: Product.
+    /// </summary>
+    protected virtual void VisitOrderLine(OrderLine orderLine)
+        => VisitProduct(orderLine.Product);
+
+    protected virtual void VisitCustomer(Customer customer) { }
+    protected virtual void VisitSupplier(Supplier supplier) { }
+    protected virtual void VisitProduct(Product product) { }
+}
+```
+
+The ones with *child objects* also call [`Visit`](#visit-methods) on their children. Those without children have empty implementations.
+
+#### Specialized Visitors
+
+You can make *specialized* [`Visitor`](#visitor) classes, by overriding the [`Visit`](#visit-methods) methods.
+
+If you only want to process certain `types` of `objects`, you can override [`Visit`](#visit-methods) methods for those `types` only:
+
+```cs
+/// <summary>
+/// This specialized Visitor only processes
+/// OrderLines and Products,
+/// so the respective Visit methods are overridden.
+/// </summary>
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    protected override void VisitOrderLine(OrderLine orderLine)
+        => base.VisitOrderLine(orderLine);
+
+    protected override void VisitProduct(Product product) 
+        => base.VisitProduct(product);
+}
+```
+
+They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
+
+The aim for this new [`Visitor`](#visitor) is to create a text, that summarizes the `Order`. 
+Here is the code that uses a `StringBuilder` for this:
+
+```cs
+/// <summary>
+/// Here the Visit methods are extended,
+/// creating a text that summarizes the Order.
+/// </summary>
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    StringBuilder _sb = new();
+
+    protected override void VisitOrderLine(OrderLine orderLine)
+    {
+        _sb.Append($"{orderLine.Quantity} x ");
+
+        base.VisitOrderLine(orderLine);
+    }
+
+    protected override void VisitProduct(Product product)
+    {
+        _sb.Append($"{product.Name}");
+        _sb.AppendLine();
+
+        base.VisitProduct(product);
+    }
+}
+```
+
+The result of the process might be a text like this:
+
+```
+1 x Cool Gadget
+2 x Fidget Thing
+```
+
+#### Optimization
+
+You can make the performance better by `overriding` [`Visit`](#visit-methods) methods for skipping parts of the recursive structure that don't you don't need:
+
+```cs
+/// <summary>
+/// This Visitor aims to optimize the recursive process.
+/// </summary>
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    /// <summary>
+    /// Override VisitOrder and leave out part of the recursion.
+    /// </summary>
+    protected override void VisitOrder(Order order)
+    {
+        // Customer and Supplier are skipped here for optimization.
+
+        foreach (var orderLine in order.OrderLines.ToArray())
+        {
+            VisitOrderLine(orderLine);
+        }
+
+        // Don't call base here. This method replaced it.
+    }
+}
+```
+
+However, be mindful of the trade-off between performance and completeness, as skipping parts of the structure also means missing out on the deeper objects.
+
+#### Entry Points
+
+`Public` methods can show us the starting point of the recursion, making it easier to understand where the process begins:
+
+```cs
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    StringBuilder _sb = new();
+
+    /// <summary>
+    /// This Execute method is the only one that's public.
+    /// This makes it clear where the process starts.
+    /// The Visit methods are kept protected
+    /// for internal processing.
+    /// </summary>
+    public string Execute(Order order)
+    {
+        VisitOrder(order);
+        return _sb.ToString();
+    }
+
+    ...
+}
+```
+
+This is why the [`Visit`](#visit-methods) methods are `protected`, not `public`.
+
+Here is the complete code sample of our derived `Visitor`:
+
+```cs
+class OrderSummaryVisitor : OrderVisitorBase
+{
+    StringBuilder _sb = new();
+
+    public string Execute(Order order)
+    {
+        VisitOrder(order);
+        return _sb.ToString();
+    }
+
+    protected override void VisitOrder(Order order)
+    {
+        foreach (var orderLine in order.OrderLines.ToArray())
+        {
+            VisitOrderLine(orderLine);
+        }
+    }
+
+    protected override void VisitOrderLine(OrderLine orderLine)
+    {
+        _sb.Append($"{orderLine.Quantity} x ");
+
+        base.VisitOrderLine(orderLine);
+    }
+
+    protected override void VisitProduct(Product product)
+    {
+        _sb.Append($"{product.Name}");
+        _sb.AppendLine();
+
+        base.VisitProduct(product);
+    }
+}
+```
+
+#### Using Fields
+
+The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It makes our `base` [`Visitors`](#visitor) more reusable too.
+
+#### Polymorphic Visitation
+
+Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type` with the same `base type`.
+
+For instance `Customer` and `Supplier` might both derive from a `Party` base type:
+
+```cs
+class Supplier : Party { }
+class Customer : Party { }
+```
+
+A [`Visitor`](#visitor) `class` might allow tapping into different levels of the abstraction like this:
+
+```cs
+protected virtual void VisitPartyPolymorphic(Party party)
+{
+    switch (party)
+    {
+        case Supplier supplier:
+            VisitSupplier(supplier);
+            break;
+
+        case Customer customer:
+            VisitCustomer(customer);
+            break;
+    }
+}
+
+protected virtual void VisitSupplier(Supplier supplier)
+    => VisitPartyBase(supplier);
+
+protected virtual void VisitCustomer(Customer customer)
+    => VisitPartyBase(customer);
+
+protected virtual void VisitPartyBase(Party party) { }
+```
+
+This way you can separately `override` a [`Visit`](#visit-methods) method for `Supplier` or `Customer`.
+
+But you could also `override` `VisitPartyBase` instead, where you wish to handle both `Parties` the same way.
+
+The `VisitPartyPolymorphic` method is best used for switching between different types. It might not be the first choice for `overriding`. However, it's still the best method to *call*, as it ensures that all specialized [`Visit`](#visit-methods) methods are called.
+
+You need all those methods delegating in the right order, for the visitation to work properly.
+
+Here is another example of polymorphic visitation, where we don't `switch` on an `object type`, but on an `enum` instead:
+
+```cs
+protected virtual void VisitProductPolymorphic(Product product)
+{
+    var productTypeEnum = product.GetProductTypeEnum();
+    switch (productTypeEnum)
+    {
+        case ProductTypeEnum.Physical:
+            VisitPhysicalProduct(product);
+            break;
+
+        case ProductTypeEnum.Digital:
+            VisitDigitalProduct(product);
+            break;
+    }
+}
+
+protected virtual void VisitPhysicalProduct(Product product)
+    => VisitProductBase(product);
+
+protected virtual void VisitDigitalProduct(Product product)
+    => VisitProductBase(product);
+
+protected virtual void VisitProductBase(Product product) { }
+```
+
+This way we can create [`Visit`](#visit-methods) methods for specific cases if needed.
+
+Here is a full example of a [`Visitor`](#visitor) `class` with polymorphic [`Visit`](#visit-methods) methods:
+
+```cs
+class PolymorphicVisitorBase
+{
+    protected virtual void VisitOrder(Order order)
+    {
+        VisitPartyPolymorphic(order.Customer);
+        VisitPartyPolymorphic(order.Supplier);
+        VisitOrderLines(order.OrderLines);
+    }
+
+    protected virtual void VisitPartyPolymorphic(Party party)
+    {
+        switch (party)
+        {
+            case Supplier supplier:
+                VisitSupplier(supplier);
+                break;
+
+            case Customer customer:
+                VisitCustomer(customer);
+                break;
+        }
+    }
+
+    protected virtual void VisitSupplier(Supplier supplier)
+        => VisitPartyBase(supplier);
+
+    protected virtual void VisitCustomer(Customer customer)
+        => VisitPartyBase(customer);
+
+    protected virtual void VisitPartyBase(Party party) { }
+
+    protected virtual void VisitOrderLines(IList<OrderLine> orderLines)
+    {
+        foreach (OrderLine orderLine in orderLines)
+        {
+            VisitOrderLine(orderLine);
+        }
+    }
+
+    protected virtual void VisitOrderLine(OrderLine orderLine)
+        => VisitProductPolymorphic(orderLine.Product);
+
+    protected virtual void VisitProductPolymorphic(Product product)
+    {
+        var productTypeEnum = product.GetProductTypeEnum();
+        switch (productTypeEnum)
+        {
+            case ProductTypeEnum.Physical:
+                VisitPhysicalProduct(product);
+                break;
+
+            case ProductTypeEnum.Digital:
+                VisitDigitalProduct(product);
+                break;
+        }
+    }
+
+    protected virtual void VisitPhysicalProduct(Product product)
+        => VisitProductBase(product);
+
+    protected virtual void VisitDigitalProduct(Product product)
+        => VisitProductBase(product);
+
+    protected virtual void VisitProductBase(Product product) { }
+}
+```
+
+#### Change the Sequence
+
+You might also `override` a [`Visit`](#visit-methods) method to change the order in which things are processed.
+
+```cs
+/// <summary>
+/// This Visitor changes the order of processing.
+/// </summary>
+class ReversedOrderVisitor : OrderVisitorBase
+{
+    protected override void VisitOrder(Order order)
+    {
+        foreach (var orderLine in order.OrderLines.ToArray())
+        {
+            VisitOrderLine(orderLine);
+        }
+
+        // Visit Customer and Supplier last instead of first.
+        VisitCustomer(order.Customer);
+        VisitSupplier(order.Supplier);
+    }
+}
+```
+
+#### Accept Methods
+
+The *classic* [`Visitor`](#visitor) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
+
+However, `Accept` methods can be used for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) pattern proposed earlier.
+
+#### Conclusion
+
+By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
+
+There are also alternatives. For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections) has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
+
+Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different here. It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
 ### Resource Strings
 
-For button texts, translations of model properties in different languages, etc., use resx files in your [`.NET`](api.md#dotnet) projects.
+For `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects `resx` files can be used.
 
-If you follow the following naming convention for resources files, [`.NET`](api.md#dotnet) will automatically return the translations into the language of the current culture:
+#### Naming Conventions
+
+The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
 
     Resources.resx
     Resources.nl-NL.resx
     Resources.de-DE.resx
 
-The culture-inspecific resx has the en-US language.
+[`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used within [`.NET`](api.md#dotnet).
 
-The key should be representative of the text itself.
+It is suggested that the *culture-inspecific* `Resources.resx` be in the language `US English (en-US)`.
 
-`< TODO: Mention the resource formatter pattern, e.g. MessageFormatter. >`
+#### Visual Studio Editor
 
-Resources seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the business layer, so are put in the business assemblies. Especially the display names of model properties should be put in the back-end, so they can be reused in multiple applications.
+Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
 
-`JJ.Framework.Resources` contains reusable resource `strings` for common titles such as `Delete`, `Edit`, `Save`, etcetera.
+![String Resource Editor](images/string-resource-editor.png)
 
-Extra information in Dutch about how to structure your resource files can be read in Appendix B.
+#### Descriptive Names
+
+For clarity it's recommended to keep the `Resource Name` descriptive of the text it represents:
+
+    Name: Save
+    Value: "Save"
+
+    Name: Save_WithName
+    Value: "Save {0}"
+
+#### ResourceFormatter
+
+You could use `ResourceFormatters` to add the correct values to the `{0}` placeholders:
+
+```cs
+public static class ResourceFormatter
+{
+    public static string Save_WithName(string name) 
+        => string.Format(Resources.Save_WithName, name);
+}
+```
+
+By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code:
+
+```cs
+ResourceFormatter.Save_WithName("Document");
+```
+
+Returns:
+
+```cs
+"Save Document"
+```
+
+#### ResourceFormatterHelper
+
+You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from the [`JJ.Framework`](api.md#jj-framework-resourcestrings):
+
+```cs
+public static class ResourceFormatter
+{
+    private static readonly ResourceFormatterHelper _helper 
+        = new (Resources.ResourceManager);
+
+    public static string Save => _helper.GetText();
+
+    public static string Save_WithName(string name) 
+        => _helper.GetText_WithOnePlaceHolder(name);
+}
+```
+
+This eliminates the need to repeat the `Resource Name` in the code. It also encourages consistency by forcing the method names to match the `Resource Names`.
+
+#### Reusability
+
+[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
+
+#### Use the Business Layer
+
+[`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
+
+#### For More Information
+
+Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
 
 Presentation Patterns
@@ -318,17 +1014,17 @@ Presentation Patterns
 
 ### ViewModel
 
-A `ViewModel` class holds the data shown on screen.
+A `ViewModel class` holds the data shown on screen.
 
-It is purely a [data objects](#dto). It will only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the `ViewModels` is fully responsible for it.)
+It is purely a [data objects](#dto). It would only have public properties. It should have no methods, no constructor, no member initialization and no list instantiation. (This is to make sure the code creating or handling the `ViewModels` is fully responsible for it.)
 
 __A `ViewModel` should say *what* is shown, not *how* or *why*.__
 
 Every screen gets a `ViewModel`, e.g. `ProductDetailsViewModel`, `ProductListViewModel`, `ProductEditViewModel`, `CategorySelectorViewModel`.
 
-You can also reuse simple `ViewModels` that represent a single [entity](#entity), e.g. `ProductViewModel`, `CategoryViewModel`.
+You can also reuse simple `ViewModels` that represent a single [entity](#entities), e.g. `ProductViewModel`, `CategoryViewModel`.
 
-`ViewModels` may only use simple types and references to other `ViewModels`. A `ViewModel` should never reference data-store bound [entities](#entity) directly.
+`ViewModels` may only use simple types and references to other `ViewModels`. A `ViewModel` should never reference data-store bound [entities](#entities) directly.
 
 Inheritance is *not* advisable, so it is a good plan to make the `ViewModel` `classes` `sealed`.
 
@@ -338,7 +1034,7 @@ A `ViewModel` should say *what* is shown on screen, not *how*:
 As such it is better to call a property `CanDelete`, than calling it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled` property is up to the [`View`](#views).
 
 A `ViewModel` should say *what* is shown on screen, not *why*:
-For instance: if the business logic tells us that an [entity](#entity) is a very special [entity](#entity), and it should be displayed read-only, the `ViewModel` should contain a property `IsReadOnly`, not a property named `ThisIsAVerySpecialEntity`. Why it should be displayed read-only should not be part of the `ViewModel`.
+For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the `ViewModel` should contain a property `IsReadOnly`, not a property named `ThisIsAVerySpecialEntity`. Why it should be displayed read-only should not be part of the `ViewModel`.
 
 `< TODO: Describe the ViewModel pattern more strictly: entity ViewModels, partial ViewModels and screen ViewModels and the words Details, Edit, List, NotFound, Delete, Deleted and Overview. And that those words are there to indicate that it is a screen ViewModel, not an entity or partial ViewNodel. LoginViewModel may be an exception. >`
 
@@ -350,9 +1046,9 @@ The reason there should be no inheritance is because that would create an unwant
 
 In a stateless environment, lookup lists in [`Views`](#views) can be expensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your HTML. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
-For small lookup lists you might include a copy of the list in each [entity](#entity) [ViewModel](#viewmodel) and repeat the same lookup list in HTML.
+For small lookup lists you might include a copy of the list in each [entity](#entities) [ViewModel](#viewmodel) and repeat the same lookup list in HTML.
 
-Reusing the same list instance in multiple [entity](#entity) [ViewModels](#viewmodel) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodel) over the line.
+Reusing the same list instance in multiple [entity](#entities) [ViewModels](#viewmodel) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodel) over the line.
 
 For lookup lists up until say 100 items you might want to have a single list in an edit [`ViewModel`](#viewmodel). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
 
@@ -360,18 +1056,18 @@ For big lookup list the only viable option seems to [`AJAX`](api.md#ajax) the li
 
 ### ToViewModel
 
-An extension method that convert an [entity](#entity) to a [`ViewModel`](#viewmodel). You can make simple `ToViewModel` methods per [entity](#entity), converting it to a simple [`ViewModel`](#viewmodel) that represents the [entity](#entity). You can also have methods returning more complex [`ViewModels`](#viewmodel), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
+An extension method that convert an [entity](#entities) to a [`ViewModel`](#viewmodel). You can make simple `ToViewModel` methods per [entity](#entities), converting it to a simple [`ViewModel`](#viewmodel) that represents the [entity](#entities). You can also have methods returning more complex [`ViewModels`](#viewmodel), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
 You may pass [`Repositories`](#repository) to the `ToViewModel` methods if required.
 
-Sometimes you cannot appoint one [entity type](#entity) as the source of a [`ViewModel`](#viewmodel). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
+Sometimes you cannot appoint one [entity type](#entities) as the source of a [`ViewModel`](#viewmodel). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
 
-The `ToViewModel` classes should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
+The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
 
     ToIDAndNameExtensions.cs
     ToItemViewModelExtensions.cs
     ToListItemViewModelExtensions.cs
-    ToPartialViewModelExtentions.cs
+    ToPartialViewModelExtensions.cs
     ToScreenViewModelExtensions.cs
     ToViewModelHelper.cs
     ToViewModelHelper.EmptyViewModels.cs
@@ -381,11 +1077,10 @@ The `ToViewModel` classes should be put in the sub-folder / sub-namespace `ToVie
     ToViewModelHelper.Lookups.cs
     ToViewModelHelper.Partials.cs
     ToViewModelHelper.Screens.cs
-    ToViewModelHelper.Values.cs
 
-To be clear: the `ViewModelHelper` files are all `ViewModelHelper partial classes`. The other files have a `class` that has the same name as the file.
+For clarity: the `ViewModelHelper` files are all `ViewModelHelper partial classes`. The other files have a `class` that has the same name as the file.
 
-Inside the `classes`, the methods should be sorted by source [entity](#entity) or application section alphabetically and each section should be headed by a comment line, e.g.:
+Inside the `classes`, the methods should be sorted by source [entity](#entities) or application section alphabetically and each section should be headed by a comment line, e.g.:
 
 ```cs
 // Orders
@@ -395,15 +1090,15 @@ public static OrderEditPopupViewModel ToEditViewModel(this Order order) { ... }
 public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) { ... }
 ```
 
-Some [`ViewModels`](#viewmodel) do not take one primary [entity](#entity) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entity) is the this argument. In that case we put it in a `ViewModelHelper` class with static classes without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
+Some [`ViewModels`](#viewmodel) do not take one primary [entity](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
 
 ### ToEntity
 
-Extension methods that convert a [`ViewModel`](#viewmodel) to an [entity](#entity).
+Extension methods that convert a [`ViewModel`](#viewmodel) to an [entity](#entities).
 
-You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [entity](#entity), if it exists, it will be updated, if it does not, it will be created.
+You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [entity](#entities), if it exists, it would be updated, if it does not, it would be created.
 
-A more complex `ToEntity` method might also update related [entities](#entity). In that case related [entities](#entity) might be inserted, updated and deleted, depending on whether the [entity](#entity) still exists in the [`ViewModel`](#viewmodel) or in the data store.
+A more complex `ToEntity` method might also update related [entities](#entities). In that case related [entities](#entities) might be inserted, updated and deleted, depending on whether the [entity](#entities) still exists in the [`ViewModel`](#viewmodel) or in the data store.
 
 A `ToEntity` method takes on much of the resposibility of a Save action.
 
@@ -427,11 +1122,11 @@ Sometimes you also pass infra and config parameters to an action method, but it 
 
 Internally a `Presenter` can use [business logic](layers.md#business-layer) and [`Repositories`](#repository) to access the domain model.
 
-All [`ViewModel`](#viewmodel) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodel) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodel) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodel) to [entities](#entity).
+All [`ViewModel`](#viewmodel) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodel) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodel) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodel) to [entities](#entities).
 
 ### ToEntity-Business-ToViewModel Round-Trip
 
-A [`Presenter`](#presenter) is a combinator class, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other classes. It also combines it with calls to the business layer.
+A [`Presenter`](#presenter) is a combinator `class`, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other `classes`. It also combines it with calls to the business layer.
 
 A [`Presenter`](#presenter) action method might be organized into phases:
 
@@ -459,7 +1154,7 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
-Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entity) to [`ViewModel`](#viewmodel) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entity) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
+Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entities) to [`ViewModel`](#viewmodel) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entities) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
 
 `< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input ViewModel. Sometimes it is even the only way to execute the essense of the user action onto the user input ViewModel. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
@@ -519,7 +1214,7 @@ Another alternative is a different ID generation scheme. You may use an [`SQL`](
 
 The [presentation patterns](#presentation-patterns) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodel) and output a new [`ViewModel`](#viewmodel) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodel) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodel) has to be created. You cannot just return the user input [`ViewModel`](#viewmodel). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodel) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodel) remains untouched.
 
-You will be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment will not work in a stateless environment and you might make some objects long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that will ever happen – the code is still so close to what's needed for stateless, that it will not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that will probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
 ### Considerations
 
@@ -541,7 +1236,7 @@ In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns.md#contr
 
 The [`Controller`](#controller) may use multiple [`Presenters`](#presenter) and [`ViewModels`](#viewmodel), since it is about multiple screens.
 
-[Entity](#entity) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
+[Entity](#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
 
 ### Post-Redirect-Get
 
@@ -607,7 +1302,7 @@ In theory we could communicate all [validation](#validators) messages to [`MVC`]
 
 A [`Presenter`](#presenter) action method may return different types of [`ViewModels`](#viewmodel).
 
-This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns object and you should do polymorphic type checks to determine which [`View`](#views) to go to.
+This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](#presenter) returns `object` and you should do polymorphic type checks to determine which [`View`](#views) to go to.
 
 Here is simplified code for how you can do this in a post method:
 
@@ -713,23 +1408,23 @@ Data Transformation Patterns
 
 ### Converter
 
-A class that converts one data structure to another. Typically more is involved than just converting a single object. A whole object graph might be converted to another, or a flat list or raw data to be parsed might be converted to an object structure or the other way around.
+A `class` that converts one data structure to another. Typically more is involved than just converting a single `object`. A whole `object` graph might be converted to another, or a flat list or raw data to be parsed might be converted to an `object` structure or the other way around.
 
-By implementing it as a `Converter`, it simplifies the code. You can then say that the only responsibility of the class is to simply transform one data structure to another: nothing more, nothing less and leave other responsibilities to other classes.
+By implementing it as a `Converter`, it simplifies the code. You can then say that the only responsibility of the `class` is to simply transform one data structure to another: nothing more, nothing less and leave other responsibilities to other `classes`.
 
 ### TryGet-Insert-Update
 
-When converting one type to another one might use the `TryGet-Insert-Update` pattern. Especially when converting an [entity](#entity) with related [entities](#entity) from one structure to another this pattern will make the code easier to read.
+When converting one type to another one might use the `TryGet-Insert-Update` pattern. Especially when converting an [entity](#entities) with related [entities](#entities) from one structure to another this pattern will make the code easier to read.
 
-[`TryGet`](#tryget) first gets a possible existing destination [entity](#entity).
+[`TryGet`](#tryget) first gets a possible existing destination [entity](#entities).
 
-`Insert` will create the [entity](#entity) if it did not exist yet, possibly setting some defaults.
+`Insert` will create the [entity](#entities) if it did not exist yet, possibly setting some defaults.
 
-`Update` will update the rest of the properties of either the existing or newly created object.
+`Update` will update the rest of the properties of either the existing or newly created `object`.
 
-When you do these actions one by one for one destination [entity](#entity) after another, you will get readable code for complex conversions between data structures.
+When you do these actions one by one for one destination [entity](#entities) after another, you will get readable code for complex conversions between data structures.
 
-Note that deletion of destination objects is not managed by the `TryGet-Insert-Update` pattern.
+Note that deletion of destination `objects` is not managed by the `TryGet-Insert-Update` pattern.
 
 ### TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion
 
@@ -745,7 +1440,7 @@ Used for managing complex conversions between data structures, that require inse
 
 <h4>Considerations</h4>
 
-Converting one collection to another may involve more than creating a destination object for each source object. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [entities](#entity) to figure out which items are obsolete.
+Converting one collection to another may involve more than creating a destination `object` for each source `object`. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [entities](#entities) to figure out which items are obsolete.
 
 In a little more detail:
 
@@ -787,8 +1482,8 @@ The specific way to implement it, is different in every situation. Reasons that 
 - You cannot always count on identity integrity.
 - The key to a destination item might be complex, instead of just an ID.
 - You do not always have a [`Repository`](#repository).
-- It does not always need to be full-`CRUD`.
-- You might need to report exactly what operation is executed on each [entity](#entity).
+- It does not always need to be full-[`CRUD`](layers.md#crud).
+- You might need to report exactly what operation is executed on each [entity](#entities).
 - You might need a separate normalized [*singular* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
 - An alternative `isNew` detection might be needed.
 - Some persistence technologies will behave unexpectedly when first retrieving and then writing and then retrieving again. Intermediate redundant retrievals should be avoided. Or not, depending on the situation.
@@ -809,16 +1504,16 @@ The [`TryGet-Insert-Update-Delete` pattern](#tryget-insert-update-delete--full-c
 
 ### DocumentModel
 
-An analog of a [`ViewModel`](#viewmodel), but then for document generation, rather than [`View`](#views) rendering. It is a class that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
+An analog of a [`ViewModel`](#viewmodel), but then for document generation, rather than [`View`](#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
 
-Just as with [`ViewModels`](#viewmodel), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the DocumentClasses classes sealed.
+Just as with [`ViewModels`](#viewmodel), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
 
 ### Selector-Model-Generator-Result
 
 For data transformations you may want to split up the transformation in two parts:
 
-- A `Selector` which returns the data as an object graph, or Model.
-- A `Generator` (or `Converter`) that converts the object graph (or Model) into a specific format.
+- A `Selector` which returns the data as an `object` graph, or `Model`.
+- A `Generator` (or `Converter`) that converts the `object` graph (or `Model`) into a specific format.
 
 This is especially useful if there are either multiple input formats or multiple output formats or both, or if in the future either the input format or output format could change.
 
@@ -828,7 +1523,7 @@ Her follow some examples.
 
 #### Generating a Document
 
-An example of where it is useful, is generating a document in multiple format e.g. `XLSX`, `CSV` and `PDF`. In that case the data selection and basic tranformations are programmed once (a `Selector` that produces a `Model`) and exporting three different file formats would require programming three different generators. Reusable generators for specific file formats such as `CSV` may be programmed. Those will make programming a specialized generators very easy. So then basically exporting a document is mostly reading out a data source and producing an object graph.
+An example of where it is useful, is generating a document in multiple format e.g. `XLSX`, `CSV` and `PDF`. In that case the data selection and basic tranformations are programmed once (a `Selector` that produces a `Model`) and exporting three different file formats would require programming three different generators. Reusable generators for specific file formats such as `CSV` may be programmed. Those will make programming a specialized generators very easy. So then basically exporting a document is mostly reading out a data source and producing an `object` graph.
 
 #### Data Source Independence
 
@@ -855,7 +1550,7 @@ Other Patterns
 
 ### Accessor
 
-An [`Accessor`](api.md#accessor) class allows access to non-public members of a class. This can be used for testing or for special access to a class from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) class.
+An [`Accessor`](api.md#accessor) `class` allows access to non-public members of a `class`. This can be used for testing or for special access to a `class` from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) `class`.
 
 ### Adapter
 
@@ -863,17 +1558,17 @@ An [`Accessor`](api.md#accessor) class allows access to non-public members of a 
 
 ### Anti-Encapsulation
 
-Encapsulation makes sure a class protects its own data integrity. Anti-encapsulation is the design choice to let a class check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the class itself will guard none of it.
+Encapsulation makes sure a `class` protects its own data integrity. Anti-encapsulation is the design choice to let a `class` check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the `class` itself will guard none of it.
 
 The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](api.md#orm) and data serialization mechanisms.
 
-Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the class cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the class and the other half in another place.
+Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the `class` cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the `class` and the other half in another place.
 
 ### Initialization and Finalization
 
 Cleanup code should be symmetric to the set-up code. Build something up in the constuctor then dispose things in the finalizer, start a service at startup then stop a service at shutdown, etc. If in the constructor you bind an event, then in the destructor you unbind it.
 
-You can also choose to implement IDisposable. This is useful if you want to be able to explicitly trigger finalization. Finalizers/destructors only go off when the garbage collector feels like it, and you might want to imperatively tell an object to clean up its stuff.
+You can also choose to implement IDisposable. This is useful if you want to be able to explicitly trigger finalization. Finalizers/destructors only go off when the garbage collector feels like it, and you might want to imperatively tell an `object` to clean up its stuff.
 
 - If you implement IDisposable, call Dispose from the finalizer/destructor.:
 
@@ -893,11 +1588,11 @@ You can also choose to implement IDisposable. This is useful if you want to be a
     }
     ```
 
-- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the object.
+- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the `object`.
 
 ### Constructor Inheritance
 
-Sort of forces a derived class to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a base class that has specific constructors forces your derived class to call that base constructor, often leading to exposing a similar constructor in the derived class.
+Sort of forces a derived `class` to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a `base class` that has specific constructors forces your derived `class` to call that `base` constructor, often leading to exposing a similar constructor in the derived `class`.
 
 ### Comma Appending
 
@@ -951,19 +1646,19 @@ See: [Using the DebuggerDisplay Attribute](https://learn.microsoft.com/en-us/vis
 
 ### Executor
 
-`Executor` classes are classes that encapsulate a whole process to run. For processes that involve more than just a single function, for instance downloading a file, transforming it and then importing it, involving infrastructure end-points and possibly multiple back-end libraries.
+`Executor classes` are `classes` that encapsulate a whole process to run. For processes that involve more than just a single function, for instance downloading a file, transforming it and then importing it, involving infrastructure end-points and possibly multiple back-end libraries.
 
-By giving each of those processes its own `Executor` class, you make the code overviewable, and also make the process more easily runnable from different contexts, e.g. in a scheduler, behind a service method or by means of a button in a UI or in a utility.
+By giving each of those processes its own `Executor class`, you make the code overviewable, and also make the process more easily runnable from different contexts, e.g. in a scheduler, behind a service method or by means of a button in a UI or in a utility.
 
 ### Inheritance-Helper
 
-One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one base class. This can lead to problems programming a base class, because one base will offer you one set of functionalities and the other base the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
 
-This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with god base classes, all weakneses of inheritance.
+This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
 
 ### Factory
 
-A `Factory class` is a class that constructs instances. But it usually means that it creates a concrete `type`, returning it as an `abstract type`. The concrete `type` that is instantiated depends on the input you pass to the `Factory's` method:
+A `Factory class` is a `class` that constructs instances. But it usually means that it creates a concrete `type`, returning it as an `abstract type`. The concrete `type` that is instantiated depends on the input you pass to the `Factory's` method:
 
 ```cs
 public static class ThingFactory
@@ -992,7 +1687,7 @@ A `class` that returns instances with various states is also simply called a `Fa
 
 ### Factory-Base-Interface
 
-The `Factory-Base-Interface` pattern is a common way the [`Factory`](#factory) pattern is applied. Next to a [`Factory`](#factory), as described above in the [`Factory`](#factory) pattern, you give each concrete implementation that the [`Factory`](#factory) can return a mutual interface, which also becomes the return type of the [`Factory`](#factory) method. To also give each concrete implementation a mutual base class, with common functionality in it, and also to sort of force an implementation to have a specific constructor (see 'Constructor Inheritance').
+The `Factory-Base-Interface` pattern is a common way the [`Factory`](#factory) pattern is applied. Next to a [`Factory`](#factory), as described above in the [`Factory`](#factory) pattern, you give each concrete implementation that the [`Factory`](#factory) can return a mutual `interface`, which also becomes the return type of the [`Factory`](#factory) method. To also give each concrete implementation a mutual `base class`, with common functionality in it, and also to sort of force an implementation to have a specific constructor (see 'Constructor Inheritance').
 
 ### TryGet
 
@@ -1058,15 +1753,15 @@ The word `Helper` might also be used more generally. Like something that 'helps'
 
 ### Info
 
-`Info objects` are like [DTO's](#dto) in that they are usually used for yielding over information from one place to another. `Info` objects can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
+`Info objects` are like [DTO's](#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
 
 ### Mock
 
-A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [entity model](#entity), an alternative [`Repository` implementation](#repository) (that returns `Mock` [entities](#entity) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
+A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [entity model](#entities), an alternative [`Repository` implementation](#repository) (that returns `Mock` [entities](#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
 
 ### Name Constants
 
-To prevent typing in a lot of strings in code, make a static class with constants in it, that become placeholders for the name.
+To prevent typing in a lot of strings in code, make a `static class` with constants in it, that become placeholders for the name.
 
 E.g. `ViewNames`, with constants in it like this:
 
@@ -1095,7 +1790,7 @@ This prevents typing errors and makes "Find all References" possible.
 
 ### Progress and Cancel Callbacks
 
-To make a process cancellable and report process without being dependent on the presentation framework, you can simply pass a few callback delegates to a method or class.
+To make a process cancellable and report process without being dependent on the presentation framework, you can simply pass a few callback delegates to a method or `class`.
 
 ```cs
 public Excute(Action<string> progressCallback, Func<bool> isCanceledCallback)
@@ -1124,19 +1819,19 @@ Sometimes it is useful to separate `Cancel` into two: `Canceling` and `Canceled`
 
 When processing `object` structures, it is best to split everything up into separate methods.
 
-Every [entity type](#entity) will get a method (the 'singular' variation) that processes a single object. That method will not process any underlying related items, only the one object.
+Every [entity type](#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
 
-In case of conversions from one object structure to another, every *destination* [entity](#entity) gets a 'singular' method, not the *source* [entity](#entity), because that would easily create messy, unmanageable code.
+In case of conversions from one `object` structure to another, every *destination* [entity](#entities) gets a 'singular' method, not the *source* [entity](#entities), because that would easily create messy, unmanageable code.
 
 A 'plural' method processes a whole list of items. 'Plural' methods are less useful. Prefer 'singular' methods over 'plural' ones. 'Plural' methods usually do not add anything other than a loop, which is too trivial to create a separate method for. Only when operations must be executed onto a whole list of `objects` (for instance determining a total price of a list of items or when there are specific conditions), it may be useful to create a separate 'plural' method.
 
-'Singular' or 'plural' methods do not process related [entities](#entity) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [entities](#entity)' means [entities](#entity) intrinsically part of the [entity](#entity), not links to reused [entities](#entity). Also, not the parent.
+'Singular' or 'plural' methods do not process related [entities](#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [entities](#entities)' means [entities](#entities) intrinsically part of the [entity](#entities), not links to reused [entities](#entities). Also, not the parent.
 
-There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [entities](#entity) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
+There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [entities](#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
 
 Finer details about the 'singular' form:
 
-- They do not process child [entities](#entity), they can however link to reusable [entities](#entity), such as `enum`-like types, or categories.
+- They do not process child [entities](#entities), they can however link to reusable [entities](#entities), such as `enum`-like types, or categories.
 - They usualy do not assign a parent. The caller of the 'singular' form does that. That way methods are more independent of context and better reusable and code better rewritable. There are exceptions to that rule.
 
 Here is an example of some 'singular', 'plural', non-`Recursive` and `Recursive` methods. Note that the words 'singular' and 'plural' are not used in the method names.
@@ -1187,7 +1882,7 @@ private class MyProcess
 
 ### Wrapper
 
-A `Wrapper class` is a class that wraps one or more other objects. This can be useful in various situations. You might give the `Wrapper` additional helper methods that the wrapped object does not have. You might dispose the underlying `Wrapper object` and create a new one, keeping the references to the `Wrapper object` in tact even though the `Wrapped object` does not exist anymore. You may hide a specific `object` in a `Wrapper` and give it an alternative `interface`, you might wrap multiple `objects` in one `Wrapper` to pass them around as a single `object` for convenience.
+A `Wrapper class` is a `class` that wraps one or more other `objects`. This can be useful in various situations. You might give the `Wrapper` additional helper methods that the wrapped `object` does not have. You might dispose the underlying `Wrapper object` and create a new one, keeping the references to the `Wrapper object` in tact even though the `Wrapped object` does not exist anymore. You may hide a specific `object` in a `Wrapper` and give it an alternative `interface`, you might wrap multiple `objects` in one `Wrapper` to pass them around as a single `object` for convenience.
 
 
 Alternatives

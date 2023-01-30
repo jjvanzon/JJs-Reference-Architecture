@@ -1,4 +1,8 @@
-﻿<style>.wrapper { max-width: 90% }</style>
+﻿---
+title: "👨‍💻 Code Style"
+---
+
+<style>.wrapper { max-width: 90% }</style>
 
 👨‍💻 Code Style
 ==============
@@ -177,7 +181,7 @@ Abstract `classes` might prefer a `Base` suffix:
 
     ProductValidatorBase
 
-It might be quite important to see in code, whether something is a `base` class. But exceptions may be made. For instance, [entity](patterns.md#entity) `classes` might leave out the `Base` suffix for readability reasons.
+It might be quite important to see in code, whether something is a `base` class. But exceptions may be made. For instance, [entity](patterns.md#entities) `classes` might leave out the `Base` suffix for readability reasons.
 
 You might keep *variables* names similar to the `class` names and include the prefixes and suffixes, so it stays clear what they are.
 
@@ -1308,7 +1312,7 @@ Reason: Readability. More obvious what the range limits are.
 
 Passing *infrastructure*-related parameters to constructors or methods, the parameters might be listed in a certain order:
 
-- __[entities](patterns.md#entity)__ (or loose values)
+- __[entities](patterns.md#entities)__ (or loose values)
 - __[persistence](aspects.md#persistence)__
 - __[security](aspects.md#security)__
 - __culture__
@@ -1587,7 +1591,7 @@ Reason:
 
 ### Entity Equality by ID
 
-[Entity](patterns.md#entity) equality checks might be better done by `ID` than by *reference*.
+[Entity](patterns.md#entities) equality checks might be better done by `ID` than by *reference*.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1606,7 +1610,7 @@ if (entity1 == entity2)
 Reason:  
 Code that compares *identities* may be less likely to break, because [persistence frameworks](api.md#orm) don't always ensure *instance* integrity.
 
-(Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns.md#entity) if needed.)
+(Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns.md#entities) if needed.)
 
 ### Compiler Directives
 

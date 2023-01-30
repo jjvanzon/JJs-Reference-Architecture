@@ -1,4 +1,6 @@
-﻿➕ Appendices
+﻿`[ Draft ]`
+
+➕ Appendices
 ==============
 
 [back](.)
@@ -17,9 +19,9 @@ Appendix A: Layering Checklist
 
 This checklist might be used if you want to bulk-program the [architecture](index.md) for an application by going through all the layers one by one, or if you want to build a feature and make sure you have not forgotten any technical issues.
 
-- [`Data`](layers.md#data-layer): [Database structure](database-conventions.md)
+- [`Data`](layers.md#data-layer): [Database structure](database-conventions.md#-database-conventions)
 - [`Data`](layers.md#data-layer): [Data migration](database-conventions.md#upgrade-scripts)
-- [`Data`](layers.md#data-layer): [Entity classes](patterns.md#entity)
+- [`Data`](layers.md#data-layer): [Entity classes](patterns.md#entities)
 - [`Data`](layers.md#data-layer): [`Repository interfaces`](patterns.md#repository-interfaces)
 - [`Data`](layers.md#data-layer): Default [`Repositories`](patterns.md#repository)
 - [`Data`](layers.md#data-layer): [`NHibernate`](api.md#nhibernate) [`Mappings`](patterns.md#mapping)
@@ -28,12 +30,12 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Data`](layers.md#data-layer): Other [`Repositories`](patterns.md#repository) (optional)
 - [`Data`](layers.md#data-layer): Other [`Mappings`](patterns.md#mapping) (optional)
 - [`Data`](layers.md#data-layer): [`Helpers`](patterns.md#helper) 
-- [`Business`](layers.md#business-layer): [`LinkTo`](patterns.md#linkto) ([Bidirectional Relationship Synchronization](aspects.md#bidirectional-relationships))
-- [`Business`](layers.md#business-layer): [`Unlink`](patterns.md#linkto) ([Bidirectional Relationship Synchronization](aspects.md#bidirectional-relationships))
-- [`Business`](layers.md#business-layer): [Cascading](aspects.md#cascading): [`DeleteRelatedEntitiesExtensions`](aspects.md#cascading)
-- [`Business`](layers.md#business-layer): [Cascading](aspects.md#cascading): [`UnlinkRelatedEntitiesExtensions`](aspects.md#cascading)
+- [`Business`](layers.md#business-layer): [`LinkTo`](patterns.md#linkto) ([bidirectional relationship syncing](aspects.md#bidirectional-relationship-synchronization))
+- [`Business`](layers.md#business-layer): [`Unlink`](patterns.md#unlink) ([bidirectional relationship syncing](aspects.md#bidirectional-relationship-synchronization))
+- [`Business`](layers.md#business-layer): [`Cascading`](aspects.md#cascading): [`DeleteRelatedEntities`](patterns.md#cascading)
+- [`Business`](layers.md#business-layer): [`Cascading`](aspects.md#cascading): [`UnlinkRelatedEntities`](patterns.md#cascading)
 - [`Business`](layers.md#business-layer): [`Enums`](aspects.md#enums)
-- [`Business`](layers.md#business-layer): [`Resource `strings``](patterns.md#resource-strings)
+- [`Business`](layers.md#business-layer): [`Resource strings`](patterns.md#resource-strings)
 - [`Business`](layers.md#business-layer): [`EnumExtensions`](aspects.md#enum-like-entities)
 - [`Business`](layers.md#business-layer): [`Validators`](patterns.md#validators)
     - `Delete` [`Validators`](patterns.md#validators) too
@@ -51,7 +53,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Business`](layers.md#business-layer): Other [`Helpers`](patterns.md#helper) (optional)
 - [`Presentation`](layers.md#presentation-layer): [`ViewModels`](patterns.md#viewmodel)
     - `Item` [`ViewModels`](patterns.md#viewmodel)
-    - `ListItem` [`ViewModels`](patterns.md#viewmodel) (some may only need `IDNameDto`, no `ListItem` [`ViewModel`](patterns.md#viewmodel))
+    - `ListItem` [`ViewModels`](patterns.md#viewmodel) (some may only need [`IDNameDto`](api.md#jj-canonical))
     - `Lookup` [`ViewModel`](patterns.md#viewmodel)
     - `List` [`ViewModels`](patterns.md#viewmodel)
     - `Detail` [`ViewModels`](patterns.md#viewmodel)
@@ -84,6 +86,9 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 
 Appendix B: Knopteksten en berichtteksten in applicaties (resource strings) [ Dutch ]
 -------------------------------------------------------------------------------------
+
+`< TODO: Translate to English. >`  
+`< TODO: Remove authoratative tone. >`
 
 Er is een bepaalde structuur waar binnen we werken voor knopteksten en meldingen in onze applicaties. De hele bedoeling is maximale herbruikbaarheid, minimaal vertaal werk en correcte teksten. Dat doen we door hele algemene teksten op plaats X te zetten, zo veel mogelijk domein termen op plaats Y, en alleen wat er dan over is, komt in specifieke projecten te staan. Dit kan het verschil betekenen tussen 100'en of 10000 teksten.
 

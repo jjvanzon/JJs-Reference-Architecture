@@ -9,6 +9,7 @@ Archived text that didn't make the cut for some reason.
 
 - [API's | ORM | Meet in the Middle Queries](#apis--orm--meet-in-the-middle-queries)
 - [Namespaces, Assemblies & Folders | Scrambling Technical and Functional](#namespaces-assemblies--folders--scrambling-technical-and-functional)
+- [Patterns | Cascading](#patterns--cascading)
 
 
 API's | ORM | Meet in the Middle Queries
@@ -18,7 +19,7 @@ API's | ORM | Meet in the Middle Queries
 
 `< TODO: A problem with ORM: meet-in-the-middle querties. You have two ends of a graph, you filter both ends and then want what is in the middle. >`
 
-One time [`ORM`](../api.md#orm) almost fails a little bit, is queries where you link a bunch of [entities](#entity) together, you want a list of [entities](#entity) somewhere in the middle of that chain, you want to filter one end of the relationship chain and also on the other end.
+One time [`ORM`](../api.md#orm) almost fails a little bit, is queries where you link a bunch of [entities](patterns.md#entities) together, you want a list of [entities](patterns.md#entities) somewhere in the middle of that chain, you want to filter one end of the relationship chain and also on the other end.
 
 In [`C#`](api.md#csharp) it seems you can filter in one direction only:
 
@@ -41,5 +42,13 @@ Namespaces, Assemblies & Folders | Scrambling Technical and Functional
 
 ... 
 This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
+
+
+Patterns | Cascading
+--------------------
+
+*2023-01-23*
+
+This succession of calls might be done in a [`Facade`](#facade), whose job is to combine multiple aspects involved in an operation.
 
 [back](..)
