@@ -915,23 +915,21 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 ### Resource Strings
 
-For `Button Texts` and translations of [model](#entities) properties, you could use `resx` files in your [`.NET`](api.md#dotnet) projects.
+For `Button Text` and [model](#entities) property translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used.
 
-If you follow the following naming convention for `resource` files, [`.NET`](api.md#dotnet) can automatically return the translations to the language of the `CurrentCulture`:
+The following naming convention for `Resource` files allows [`.NET`](api.md#dotnet) to return the translations in the language of the `CurrentCulture`:
 
-    Resources.resx
-    Resources.nl-NL.resx
-    Resources.de-DE.resx
+Resources.resx
+Resources.nl-NL.resx
+Resources.de-DE.resx
 
-`nl-NL` and `de-DE` are so called [`.NET`](api.md#dotnet) [`CultureNames`](https://www.csharp-examples.net/culture-names/).
+[`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used in [`.NET`](api.md#dotnet). It is suggested that the culture-inspecific `Resources.resx` be in `US English (en-US)`.
 
-The culture-inspecific `Resources.resx` is recommended to be in the language `en-US` (`US English`).
-
-This is what the `Resource strings` editorin [`Visual Studio`](api.md#visual-studio) looks like:
+Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md#visual-studio):
 
 ![String Resource Editor](images/string-resource-editor.png)
 
-It is recommended to keep the `Resource Name` representative of the text itself. That way it is clearer in the code, what kind of text to expect, for instance:
+For clarity in code, it's recommended to keep the `Resource Name` descriptive of the text it represents. For example:
 
     Name: Save
     Value: "Save"
@@ -939,7 +937,7 @@ It is recommended to keep the `Resource Name` representative of the text itself.
     Name: Save_WithName
     Value: "Save {0}"
 
-`ResourceFormatters` might be used to fill in the right placeholders `{0}` for the [`Resource strings`](#resource-strings).
+You could use `ResourceFormatters` to add the correct values to the `{0}` placeholders in [`Resource strings`](#resource-strings).
 
 ```cs
 public static class ResourceFormatter
@@ -949,19 +947,19 @@ public static class ResourceFormatter
 }
 ```
 
-This keeps using the *placeholders* safer in other code where you can use:
+By using `ResourceFormatters`, you can ensure the safe usage of placeholders in other code:
 
 ```cs
 ResourceFormatter.Save_WithName("Document");
 ```
 
-Which should return:
+Which may return:
 
 ```
 "Save Document"
 ```
 
-You could also use `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
+You can also streamline your code and minimize the risk of typos with `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings). Check it out:
 
 ```cs
 public static class ResourceFormatter
@@ -976,11 +974,11 @@ public static class ResourceFormatter
 }
 ```
 
-The benefit would be that you wouldn't have to repeat the `Resource Name` twice in the code, which can prevent typos. It also forces you to keep the method names the same as the `Resource Names` which is nice for consistency.
+This eliminates the need to repeat the `Resource Name` in the code. It also encourages consistency by forcing the method names to match the `Resource Names`.
 
-[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) contains more. It contains reusable [`Resource strings`](#resource-strings) for common texts such as `Delete`, `Edit`, `Save`, etcetera.
+[`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings) goes even further than that. It provides you with  reusable [`Resource strings`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
-[`Resources`](#resource-strings) seem part of the [presentation](layers.md#presentation-layer), but they are extensively used in the [business layer](layers.md#business-layer) too. That's why they could be put in the [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Especially the `DisplayNames` of [model](#entities) properties might be put in the back-end, so they might be reused in multiple places.
+[`Resources`](#resource-strings) may play an important role beyond just the presentation. They're also commonly used in the [business layer](layers.md#business-layer), which is why it might be a good idea to store them in [`Business Assemblies`](namespaces-assemblies-and-folders.md#layers). Keeping the `DisplayNames` of [model](#entities) properties in the back-end makes it possible to reuse them in multiple places.
 
 Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
