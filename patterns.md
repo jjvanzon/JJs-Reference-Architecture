@@ -521,7 +521,7 @@ The reason is, that a [`Facade`](#facade) could create an excessive amount of de
 
 ### Visitor
 
-Contents:
+<h4>Contents</h4>
 
 - [Introduction](#visitor-introduction)
 - [Visit Methods](#visit-methods)
