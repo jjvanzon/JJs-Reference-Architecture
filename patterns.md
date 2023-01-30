@@ -952,7 +952,7 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 - [Introduction](#resource-strings-introduction)
 - [Visual Studio Editor](#resource-strings-visual-studio-editor)
-- [Naming Conventions](#resource-strings-naming-conventions)
+- [File Names](#resource-strings-file-names)
 - [Descriptive Names](#resource-strings-descriptive-names)
 - [ResourceFormatter](#resourceformatter)
 - [ResourceFormatterHelper](#resourceformatterhelper)
@@ -970,7 +970,7 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 ![String Resource Editor](images/resource-string-editor.png)
 
-<h4 id="resource-strings-naming-conventions">Naming Conventions</h4>
+<h4 id="resource-strings-file-names">File Names</h4>
 
 [`.NET`](api.md#dotnet) returns the translations in the right language, of the `CurrentCulture`, if you name your `Resource` files like this:
 
