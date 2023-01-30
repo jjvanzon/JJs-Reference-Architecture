@@ -14,12 +14,6 @@ title: "🧶 Patterns"
 - [Introduction](#introduction)
 - [Data Access Patterns](#data-access-patterns)
     - [Entities](#entities)
-        - [Pure Data Objects](#pure-data-objects)
-        - [Enums](#enums)
-        - [Collections](#collections)
-        - [Virtual Members](#virtual-members)
-        - [Inheritance](#inheritance)
-        - [Real Code](#real-code)
     - [Mapping](#mapping)
     - [DTO](#dto)
     - [Repository](#repository)
@@ -136,7 +130,16 @@ Data Access Patterns
 
 *Entities* are the `classes` that represent the *functional domain model*.
 
-#### Pure Data Objects
+<h4>Contents</h4>
+
+- [Pure Data Objects](#pure-data-objects)
+- [Enums](#enums)
+- [Collections](#collections)
+- [Virtual Members](#virtual-members)
+- [Inheritance](#inheritance)
+- [Real Code](#real-code)
+
+<h4>Pure Data Objects</h4>
 
 In this [architecture](index.md), we aim to keep the entity `classes` [just data](#dto) and free of logic. The entities in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entities).
 
@@ -150,7 +153,7 @@ class Supplier
 }
 ```
 
-#### Enums
+<h4>Enums</h4>
 
 You might even want to avoid `enums` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could keep in your entity model. This to keep it a purer representaton of the data model:
 
@@ -173,7 +176,7 @@ enum IndustryEnum
 }
 ```
 
-#### Collections
+<h4>Collections</h4>
 
 Creating collections upon initialization is recommended. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating the collection we can omit some `null` checks in the code:
 
@@ -184,7 +187,7 @@ class Supplier
 }
 ```
 
-#### Virtual Members
+<h4>Virtual Members</h4>
 
 `Public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
@@ -197,11 +200,11 @@ class Supplier
 }
 ```
 
-#### Inheritance
+<h4>Inheritance</h4>
 
 Generally avoid [inheritance](api.md#inheritance) within your entity models, because it can make using data technologies harder.
 
-#### Real Code
+<h4>Real Code</h4>
 
 These code examples were just illustrative pseudo-code. This is a more realistic example:
 
