@@ -994,7 +994,7 @@ public static class ResourceFormatter
 }
 ```
 
-This eliminates the need to repeat the `Resource Name` in the code. It also encourages consistency by forcing the method names to match the `Resource Names`.
+This eliminates the need to repeat the [`Resource Name`](#visual-studio-editor) in the code. It also encourages consistency by forcing the method names to match the [`Resource Names`](#visual-studio-editor).
 
 #### Reusability
 
