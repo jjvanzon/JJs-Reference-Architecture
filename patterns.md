@@ -61,7 +61,7 @@ title: "🧶 Patterns"
         - [ResourceFormatterHelper](#resourceformatterhelper)
         - [Reusability](#reusability)
         - [Use the Business Layer](#use-the-business-layer)
-        - [More Information](#more-information)
+        - [For More Information](#for-more-information)
 - [Presentation Patterns](#presentation-patterns)
     - [ViewModel](#viewmodel)
     - [Lookup Lists](#lookup-lists)
@@ -971,7 +971,7 @@ By using `ResourceFormatters`, you can ensure the safe usage of placeholders in 
 ResourceFormatter.Save_WithName("Document");
 ```
 
-Returning:
+Returns:
 
 ```
 "Save Document"
@@ -979,7 +979,7 @@ Returning:
 
 #### ResourceFormatterHelper
 
-You can also streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
+You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from [`JJ.Framework.ResourceStrings`](api.md#jj-framework-resourcestrings):
 
 ```cs
 public static class ResourceFormatter
@@ -1002,9 +1002,9 @@ This eliminates the need to repeat the `Resource Name` in the code. It also enco
 
 #### Use the Business Layer
 
-[`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`Business assemblies`](namespaces-assemblies-and-folders.md#layers) makes it possible to reuse them from multiple places.
+[`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
 
-#### More Information
+#### For More Information
 
 Extra information in Dutch about how to structure the `Resource` files can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
