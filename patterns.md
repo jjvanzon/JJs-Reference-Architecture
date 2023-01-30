@@ -984,7 +984,7 @@ The *culture-independent* `Resources.resx` might be used for the language `US En
 
 <h4 id="resource-strings-descriptive-names">Descriptive Names</h4>
 
-For clarity it's recommended to keep the [`Resource Name`](#visual-studio-editor) descriptive of the text it represents:
+For clarity it's recommended to keep the [`Resource Name`](#resource-strings-visual-studio-editor) descriptive of the text it represents:
 
     Name: Save
     Value: "Save"
@@ -1033,7 +1033,7 @@ public static class ResourceFormatter
 }
 ```
 
-This eliminates the need to repeat the [`Resource Name`](#visual-studio-editor) in the code. It also encourages consistency by forcing the method names to match the [`Resource Names`](#visual-studio-editor).
+This eliminates the need to repeat the [`Resource Name`](#resource-strings-visual-studio-editor) in the code. It also encourages consistency by forcing the method names to match the [`Resource Names`](#resource-strings-visual-studio-editor).
 
 <h4 id="resource-strings-reusability">Reusability</h4>
 
