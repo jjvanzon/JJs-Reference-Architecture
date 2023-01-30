@@ -945,7 +945,7 @@ The *culture-inspecific* `Resources.resx` might be used for the language `US Eng
 
 #### Descriptive Names
 
-For clarity it's recommended to keep the `Resource Name` descriptive of the text it represents:
+For clarity it's recommended to keep the [`Resource Name`](#visual-studio-editor) descriptive of the text it represents:
 
     Name: Save
     Value: "Save"
