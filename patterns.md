@@ -923,7 +923,7 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 ### Resource Strings
 
-For `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects `resx` files can be used.
+To store `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used.
 
 #### Naming Conventions
 
@@ -971,7 +971,7 @@ By using `ResourceFormatters`, you can ensure the safe usage of placeholders in 
 ResourceFormatter.Save_WithName("Document");
 ```
 
-Returns:
+Returning:
 
 ```cs
 "Save Document"
