@@ -933,7 +933,7 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 #### Naming Conventions
 
-[`.NET`](api.md#dotnet) would return the translations in the right language of the `CurrentCulture` if you name your `Resource` files as follows:
+[`.NET`](api.md#dotnet) returns the translations in the right language, of the `CurrentCulture`, if you name your `Resource` files as follows:
 
     Resources.resx
     Resources.nl-NL.resx
