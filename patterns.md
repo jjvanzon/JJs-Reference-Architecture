@@ -1106,7 +1106,7 @@ You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [e
     ProductViewModel
     CategoryViewModel
 
-They might be reused among different [`Screen ViewModels`](#screen-viewmodels). You could also call them `Item` [`ViewModels`](#viewmodels).
+They might be reused among different [`Screen ViewModels`](#screen-viewmodels). You could also call them [`Item ViewModels`](#entity-viewmodels).
 
 #### Partial ViewModels
 
@@ -1120,7 +1120,7 @@ They may or may not have the word `Partial` in their name.
 
 #### ListItem ViewModels
 
-Similar to the [entity](#entities) [`ViewModels`](#viewmodels) but then representing a row in *list* or *grid*, e.g.:
+Similar to the [entity `ViewModels`](#entity-viewmodels) but then representing a row in *list* or *grid*, e.g.:
 
     ProductItemViewModel
     CategoryListItemViewModel
@@ -1156,13 +1156,17 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 
 #### Keeping It Clean
 
-[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). That way the whole [`ViewModel`](#views) layer would be self-contained.
+[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). That way the whole [`ViewModel`](#views) layer stays self-contained.
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which could sneekily try to connect to a database, which might not work in all contexts.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which potentially connect the [`ViewModel`](#viewmodels) to a database, which isn't desired or possible in all contexts.
 
-Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly. An added benefit of decoupling these things, is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
+Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly. 
+
+It is worth noting that linking to an [entity](#entities) can result in the availability of other related [entities](#entities), which may broaden the scope of the view beyond our desires.
+
+An added benefit of decoupling the [`ViewModels`](#viewmodels) from [entities](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
 
 #### ViewModel to ViewModel Conversions
 
