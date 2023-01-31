@@ -39,9 +39,9 @@ title: "🧶 Patterns"
         - [ListItem ViewModels](#listitem-viewmodels)
         - [Lookup ViewModels](#lookup-viewmodels)
         - [How to Model](#how-to-model)
-        - ["What" not "How"](#what-not-how)
-        - ["What" not "Why"](#what-not-why)
-        - [Keep It Clean](#keep-it-clean)
+        - ["What", not "How"](#what-not-how)
+        - ["What", not "Why"](#what-not-why)
+        - [Keeping It Clean](#keeping-it-clean)
         - [No Entities](#no-entities)
         - [ViewModel to ViewModel Conversion](#viewmodel-to-viewmodel-conversion)
         - [Avoid Inheritance](#avoid-inheritance)
@@ -1057,7 +1057,7 @@ This eliminates the need to repeat the [`Resource Name`](#resource-strings-visua
 
 <h4 id="resource-strings-use-the-business-layer">Use the Business Layer</h4>
 
-[`Resource strings`](#resource-strings) may play an important role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
+[`Resource strings`](#resource-strings) may play a role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
 
 
 <h4 id="resource-strings-more-information">For More Information</h4>
@@ -1072,15 +1072,15 @@ Presentation Patterns
 
 `< TODO: Code samples. Even bad ones. (Color them red.) >`
 
-A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to be displayed on screen.
+A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to display on screen.
 
 #### Only Data
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it easier to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple.
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it more doable to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple.
 
 #### Screen ViewModels
 
-Every screen might get a [`ViewModel`](#viewmodels), e.g.: 
+Every screen can get a [`ViewModel`](#viewmodels), e.g.: 
 
     ProductDetailsViewModel
     ProductListViewModel
@@ -1088,9 +1088,9 @@ Every screen might get a [`ViewModel`](#viewmodels), e.g.:
     ProductDeleteViewModel
     ProductDeletedViewModel
 
-These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`). And then the last part of the name is "[`ViewModel`](#viewmodels)".
+These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`). And the names end with [`ViewModel`](#viewmodels).
 
-Other alternatives instead of the [`CRUD`](layers.md#crud) actions are `Overview`, `Selector`, `NotFound` or `Login`:
+Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
 
     ProductOverviewViewModel
     CategorySelectorViewModel
@@ -1106,13 +1106,13 @@ You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [e
     ProductViewModel
     CategoryViewModel
 
-They might be reused among different [`Screen ViewModels`](#screen-viewmodels). You could also call it `Item` [`ViewModels`](#viewmodels).
+They might be reused among different [`Screen ViewModels`](#screen-viewmodels). You could also call them `Item` [`ViewModels`](#viewmodels).
 
 #### Partial ViewModels
 
-[Partial `ViewModels`](#partial-viewmodels) are about *parts* of a screen, to keep overview of the sections, like:
+[`Partial ViewModels`](#partial-viewmodels) describe *parts* of a screen, to keep overview of the sections, like:
 
-    LoginViewModel
+    LoginPartialViewModel
     ButtonBarViewModel
     MenuViewModel
     
@@ -1137,32 +1137,32 @@ IList<IDNameDto> ProductTypeLookup { get; set; }
 
 #### How to Model
 
-A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. This is the idea for how to model these [`ViewModels`](#viewmodels):
+A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. This is the idea for how to model them:
 
-> *A [`ViewModel`](#viewmodels) says __what__ is shown, not __how__ nor __why__.*
+> *A [`ViewModel`](#viewmodels) says __what__ is shown on screen, not __how__ nor __why__.*
 
-#### "What" not "How"
+#### "What", not "How"
 
 A [`ViewModel`](#viewmodels) says ***what*** is shown on screen, not ***how:***
 
-Therefor it may be better to call a property `CanDelete`, than naming it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled` property, should be up to the [`View`](#views) using the [`ViewModel`](#viewmodels).
+Therefore it may be better to call a property `CanDelete`, rather than naming it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
 
-#### "What" not "Why"
+#### "What", not "Why"
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
 For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
-The reason for displaying data read-only should not be the concern of the [view](#views) or [`ViewModel`](#viewmodels).
+The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) and not even for a [view](#views)!
 
-#### Keep It Clean
+#### Keeping It Clean
 
-[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). That way the whole [`ViewModel`](#views) layer is self-contained.
+[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). That way the whole [`ViewModel`](#views) layer would be self-contained.
 
 #### No Entities
 
 For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which could sneekily try to connect to a database, which might not work in all contexts.
 
-Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly as a [`ViewModel`](#viewmodels). An added benefit of decoupling these things, is that it makes it possible to change to an [entity](#entities) [`ViewModel`](#viewmodels) without affect [data access](layers.md#data-layer) or [business logic](layers.md#business-layer).
+Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly as a [`ViewModel`](#viewmodels). An added benefit of decoupling these things, is that it makes it possible to change an [entity](#entities) [`ViewModel`](#viewmodels) without affect [data access](layers.md#data-layer) or [business logic](layers.md#business-layer).
 
 #### ViewModel to ViewModel Conversion
 
