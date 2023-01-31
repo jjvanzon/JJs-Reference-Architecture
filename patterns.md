@@ -1161,9 +1161,11 @@ For instance: if the business logic tells us that an [entity](#entities) is a ve
 
 For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which could sneekily try to connect to a database, which might not work in all contexts.
 
+Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not directly use [entities](#entities) as a [`ViewModel`](#viewmodels). An added benefit of decoupling these things, is that it makes it possible to change to an [entity](#entities) [`ViewModel`](#viewmodels) without affect [data access](layers.md#data-layer) or [business logic](layers.md#business-layer).
+
 #### ViewModel to ViewModel Conversion
 
-It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [functional domain entities](#entities) to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to [functional domain entities](#entities) and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) or other cases where it makes more sense to operate directly on the `ViewModel`. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels);
+It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [functional domain entities](#entities) to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to [functional domain entities](#entities) and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels), and just go from [entity](#entities) to [`ViewModel`](#viewmodels) and back. But there may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) or other cases where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). 
 
 #### Avoid Inheritance
 
@@ -1171,7 +1173,7 @@ Inheritance is not the go-to choice for [`ViewModels`](#viewmodels). So it might
 
 Using inheritance to create a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
 
-Though no hard rules here. It doesn't mean that inheritance should always be avoided altogether. It may still be possible to use inheritance in a way that is manageable and maintainable. For example by applying it carefully, or by using other design patterns, such as composition, to reduce the impact of changes.
+Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable. For example by applying it carefully, or by using other design patterns, such as composition, to reduce the impact of changes.
 
 #### TODO
 
