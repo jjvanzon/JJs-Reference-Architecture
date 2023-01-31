@@ -45,7 +45,6 @@ title: "🧶 Patterns"
         - [No Entities](#no-entities)
         - [ViewModel to ViewModel Conversion](#viewmodel-to-viewmodel-conversion)
         - [Avoid Inheritance](#avoid-inheritance)
-        - [TODO](#todo)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -1071,6 +1070,8 @@ Presentation Patterns
 
 ### ViewModels
 
+`< TODO: Code samples. Even bad ones. (Color them red.) >`
+
 A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to be displayed on screen.
 
 #### Only Data
@@ -1174,10 +1175,6 @@ Inheritance is not the go-to choice for [`ViewModels`](#viewmodels). So it might
 Using inheritance to create a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
 
 Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable. For example by applying it carefully, or by using other design patterns, such as composition, to reduce the impact of changes.
-
-#### TODO
-
-`< TODO: Code samples. Even bad ones. (Color them red.) >`
 
 ### Lookup Lists
 
