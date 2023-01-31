@@ -1076,7 +1076,7 @@ A [`ViewModel`](#viewmodels) `class` provides a simplified and organized represe
 
 #### Only Data
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, no methods, no constructors, no member initialization and no list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it easier to integrate with different types of technology, being as it keeps the [`ViewModels`](#viewmodels) simple.
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This phenomenon may be called [anti-encapsulation](#anti-encapsulation). This also makes it easier to integrate with different types of technology, being as it keeps the [`ViewModels`](#viewmodels) simple.
 
 #### Screen ViewModels
 
@@ -1096,7 +1096,7 @@ Other alternatives to the [`CRUD`](layers.md#crud) actions are `Overview` or `No
 
     NotFoundViewModel
     ProductOverviewViewModel
-    LoginViewModel.
+    LoginViewModel
 
 There may be more variations, but this was the general idea.
     
@@ -1107,11 +1107,11 @@ You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [e
     ProductViewModel
     CategoryViewModel
 
-They can be called [entity](#entities) [`ViewModels`](#viewmodels), but they can also be called `Item` [`ViewModels`](#viewmodels).
+They can be called [entity](#entities) [`ViewModels`](#viewmodels), but they might also be called `Item` [`ViewModels`](#viewmodels).
 
 #### Partial ViewModels
 
-For *part* of a screen, to keep overview of the sections, like:
+[Partial `ViewModels`](#partial-viewmodels) are about *parts* of a screen, to keep overview of the sections, like:
 
     LoginViewModel
     ButtonBarViewModel
@@ -1121,7 +1121,7 @@ They may or may not have the word `Partial` in their name.
 
 #### ListItem ViewModels
 
-Similar to the [entity](#entities) [`ViewModels`](#viewmodels) but then specifically representing a row in *list* or *grid*, e.g.:
+Similar to the [entity](#entities) [`ViewModels`](#viewmodels) but then representing a row in *list* or *grid*, e.g.:
 
     ProductItemViewModel
     CategoryListItemViewModel
@@ -1152,7 +1152,7 @@ Therefor it may be better to call a property `CanDelete`, than calling it `Delet
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
-For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. *Why* it should be displayed read-only is not part of the [`ViewModel`](#viewmodels).
+For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. *Why* it should be displayed read-only is not something the [`ViewModel`](#viewmodels) should concern itself with.
 
 #### Keep It Clean
 
