@@ -43,9 +43,8 @@ title: "🧶 Patterns"
         - ["What" not "Why"](#what-not-why)
         - [Keep It Clean](#keep-it-clean)
         - [No Entities](#no-entities)
-        - [Converting ViewModels to ViewModels](#converting-viewmodels-to-viewmodels)
-        - [No Inheritance](#no-inheritance)
-        - [Considerations about Inheritance](#considerations-about-inheritance)
+        - [ViewModel to ViewModel Conversion](#viewmodel-to-viewmodel-conversion)
+        - [Avoid Inheritance](#avoid-inheritance)
         - [TODO](#todo)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
@@ -1153,19 +1152,19 @@ For instance: if the business logic tells us that an [entity](#entities) is a ve
 
 For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which sneekily can try to connection to a database.
 
-#### Converting ViewModels to ViewModels
+#### ViewModel to ViewModel Conversion
 
 It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
 
-#### No Inheritance
+#### Avoid Inheritance
 
-*Inheritance* is not the first-choice to use for [`ViewModels`](#viewmodels). so it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it. Though no hard rules here.
+Inheritance is not preferred for the [`ViewModel`](#viewmodels) design pattern.
 
-#### Considerations about Inheritance
+*Inheritance* is not the first-choice to use for [`ViewModels`](#viewmodels). So it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it.
 
-Inheritance is not preferred for the [`ViewModel`](#viewmodels) design pattern. Using inheritance to create a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
+Using inheritance to create a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
 
-But this does not mean that inheritance should always be avoided altogether. It may still be possible to use inheritance in a way that is manageable and maintainable, for example by using inheritance conscientiously, or by using other design patterns, such as composition, to reduce the impact of changes.
+Though no hard rules here. It doesn't mean that inheritance should always be avoided altogether. It may still be possible to use inheritance in a way that is manageable and maintainable, for example by using it mindfully, or by using other design patterns, such as composition, to reduce the impact of changes.
 
 #### TODO
 
