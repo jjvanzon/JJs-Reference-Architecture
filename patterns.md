@@ -1071,7 +1071,7 @@ Presentation Patterns
 
 ### ViewModels
 
-A [`ViewModel`](#viewmodels) `class` holds the data shown on screen.
+A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to be displayed on screen.
 
 #### Only Data
 
@@ -1120,11 +1120,20 @@ They may or may not have the word `Partial` in their name.
 
 #### ListItem ViewModels
 
-Similar to the [entity](#entities) [`ViewModels`](#viewmodels) but then specifically representing a row in *list* or *grid*. Some may only need an [`IDNameDto`](api.md#jj-canonical) for that.
+Similar to the [entity](#entities) [`ViewModels`](#viewmodels) but then specifically representing a row in *list* or *grid*, e.g.:
+
+    ProductItemViewModel
+    CategoryListItemViewModel
+
+But some list views only need an [`IDNameDto`](api.md#jj-canonical) for that.
 
 #### Lookup ViewModels
 
-A *lookup* list, for instance the data to pick from a drop-down box.
+A *lookup* list, for instance the data to pick from a drop-down box, e.g.:
+
+```cs
+IList<IDNameDto> ProductTypeLookup { get; set; }
+```
 
 #### How to Model
 
@@ -1150,25 +1159,22 @@ For instance: if the business logic tells us that an [entity](#entities) is a ve
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which sneekily can try to connection to a database.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which could sneekily try to connect to a database, which might not work in all contexts.
 
 #### ViewModel to ViewModel Conversion
 
-It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from functional domain to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to functional domain and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [functional domain entities](#entities) to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to [functional domain entities](#entities) and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. There may be exceptions to for instance to yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) or other cases where it makes more sense to operate directly on the `ViewModel`. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels);
 
 #### Avoid Inheritance
 
-Inheritance is not preferred for the [`ViewModel`](#viewmodels) design pattern.
-
-*Inheritance* is not the first-choice to use for [`ViewModels`](#viewmodels). So it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it.
+Inheritance is not the go-to choice for [`ViewModels`](#viewmodels). So it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it.
 
 Using inheritance to create a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
 
-Though no hard rules here. It doesn't mean that inheritance should always be avoided altogether. It may still be possible to use inheritance in a way that is manageable and maintainable, for example by using it mindfully, or by using other design patterns, such as composition, to reduce the impact of changes.
+Though no hard rules here. It doesn't mean that inheritance should always be avoided altogether. It may still be possible to use inheritance in a way that is manageable and maintainable. For example by applying it carefully, or by using other design patterns, such as composition, to reduce the impact of changes.
 
 #### TODO
 
-`< TODO: More examples. >`
 `< TODO: Code samples. Even bad ones. (Color them red.) >`
 
 ### Lookup Lists

@@ -53,7 +53,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Business`](layers.md#business-layer): Other [`Helpers`](patterns.md#helper) (optional)
 - [`Presentation`](layers.md#presentation-layer): [`ViewModels`](patterns.md#viewmodels)
     - `Item` [`ViewModels`](patterns.md#viewmodels)
-    - `ListItem` [`ViewModels`](patterns.md#viewmodels) (some may only need [`IDNameDto`](api.md#jj-canonical))
+    - `ListItem` [`ViewModels`](patterns.md#viewmodels) (some may only need an [`IDAndName`](api.md#jj-canonical) [`DTO`](patterns.md#dto))
     - `Lookup` [`ViewModel`](patterns.md#viewmodels)
     - `List` [`ViewModels`](patterns.md#viewmodels)
     - `Detail` [`ViewModels`](patterns.md#viewmodels)
