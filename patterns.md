@@ -43,7 +43,7 @@ title: "🧶 Patterns"
         - ["What", not "Why"](#what-not-why)
         - [Keeping It Clean](#keeping-it-clean)
         - [No Entities](#no-entities)
-        - [ViewModel to ViewModel Conversion](#viewmodel-to-viewmodel-conversion)
+        - [ViewModel to ViewModel Conversions](#viewmodel-to-viewmodel-conversions)
         - [Avoid Inheritance](#avoid-inheritance)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
@@ -1162,11 +1162,11 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 
 For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which could sneekily try to connect to a database, which might not work in all contexts.
 
-Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly as a [`ViewModel`](#viewmodels). An added benefit of decoupling these things, is that it makes it possible to change an [entity](#entities) [`ViewModel`](#viewmodels) without affect [data access](layers.md#data-layer) or [business logic](layers.md#business-layer).
+Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly. An added benefit of decoupling these things, is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
 
-#### ViewModel to ViewModel Conversion
+#### ViewModel to ViewModel Conversions
 
-It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [functional domain entities](#entities) to [`ViewModel`](#viewmodels) and from [`ViewModel`](#viewmodels) to [functional domain entities](#entities) and not from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) directly. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels), and just go from [entity](#entities) to [`ViewModel`](#viewmodels) and back. But there may be exceptions. You might for instance yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) or there could be other cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). 
+It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [entities](#entities) to [`ViewModel`](#viewmodels) and back. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). But there may be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
 
 #### Avoid Inheritance
 
@@ -1174,19 +1174,19 @@ Inheritance is not the go-to choice for [`ViewModels`](#viewmodels). So it might
 
 Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
 
-Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable. For example by applying it carefully, or by using other design patterns, such as composition, to reduce the impact of changes.
+Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully. But you could also choose to use other design patterns, such as composition, to reduce the impact of changes.
 
 ### Lookup Lists
 
-In a stateless environment, lookup lists in [`Views`](#views) can be expensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your HTML. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
+In a stateless environment, lookup lists in [`Views`](#views) can be resource-intensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your `HTML`. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
-For small lookup lists you might include a copy of the list in each [entity](#entities) [ViewModel](#viewmodels) and repeat the same lookup list in HTML.
+For small lookup lists you might include a copy of the list in each [Item ViewModel](#entity-viewmodels) and repeat the same lookup list in `HTML`.
 
-Reusing the same list instance in multiple [entity](#entities) [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
+Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an edit [`ViewModel`](#viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data, but it is not supported by Safari, so it is of not much use. You might use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
 
-For big lookup list the only viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might cache the popup to be reused each time you need to select something from it.
+For big lookup list a viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 
 ### ToViewModel
 
