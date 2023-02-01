@@ -45,6 +45,7 @@ title: "🧶 Patterns"
         - [No Entities](#no-entities)
         - [ViewModel to ViewModel Conversions](#viewmodel-to-viewmodel-conversions)
         - [Avoid Inheritance](#avoid-inheritance)
+        - [Conclusion](#conclusion)
     - [Lookup Lists](#lookup-lists)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -1076,7 +1077,16 @@ A [`ViewModel`](#viewmodels) `class` provides a simplified and organized represe
 
 #### Only Data
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it more doable to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple.
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it more doable to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple. For example:
+
+```cs
+public class ProductViewModel
+{ 
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+```
 
 #### Screen ViewModels
 
@@ -1088,7 +1098,11 @@ Every screen can get a [`ViewModel`](#viewmodels), e.g.:
     ProductDeleteViewModel
     ProductDeletedViewModel
 
-These names are built up from parts. They start with an [entity](#entities) name (`Product`, `Category`), then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`). And the names end with [`ViewModel`](#viewmodels).
+These names are built up from parts.
+
+1. They start with an [entity](#entities) name (`Product`, `Category`)
+2. Then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`).
+3. And the names end with [`ViewModel`](#viewmodels).
 
 Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
 
@@ -1098,7 +1112,21 @@ Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms
     LoginViewModel
 
 There may be more variations, but this is the general idea.
-    
+
+Here is a code example of a simple screen view model:
+
+```cs
+public class ProductEditViewModel
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public bool CanDelete { get; set; }
+    public string Category { get; set; }
+    public string ProductType { get; set; }
+}
+```
+
 #### Entity ViewModels
 
 You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [entity](#entities), e.g.:
@@ -1106,7 +1134,33 @@ You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [e
     ProductViewModel
     CategoryViewModel
 
-They might be reused among different [`Screen ViewModels`](#screen-viewmodels). You could also call them [`Item ViewModels`](#entity-viewmodels).
+Code sample:
+
+```cs
+public class CategoryViewModel 
+{ 
+    public int ID { get; set; }
+    public string Name { get; set; }
+}
+```
+
+[`Entity ViewModels`](#entity-viewmodels) might be reused among different [`Screen ViewModels`](#screen-viewmodels).
+
+```cs
+public class ProductEditViewModel
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public bool CanDelete { get; set; }
+    public IList<string> ValidationMessages { get; set; }
+    // Uses Entity ViewModels
+    public CategoryViewModel Category { get; set; }
+    public ProductTypeViewModel ProductType { get; set; }
+}
+```
+
+Another name for [`Entity ViewModels`](#entity-viewmodels) might be [`Item ViewModels`](#entity-viewmodels).
 
 #### Partial ViewModels
 
@@ -1117,6 +1171,22 @@ They might be reused among different [`Screen ViewModels`](#screen-viewmodels). 
     MenuViewModel
     
 They may or may not have the word `Partial` in their name.
+
+Code sample:
+
+```cs
+/// <summary>
+/// PartialViewModel representing a ButtonBar.
+/// </summary>
+public class ButtonBarViewModel 
+{ 
+    public bool CanSave { get; set; }
+    public bool CanDelete { get; set; }
+    public bool CanCreate { get; set; }
+    public bool CanShowList { get; set; }
+    public bool CanGoBack { get; set; }
+}
+```
 
 #### ListItem ViewModels
 
@@ -1179,6 +1249,10 @@ Inheritance is not the go-to choice for [`ViewModels`](#viewmodels). So it might
 Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
 
 Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully. But you could also choose to use other design patterns, such as composition, to reduce the impact of changes.
+
+#### Conclusion
+
+`< TODO: Write something to let the reader know the ViewModel section ends here >`
 
 ### Lookup Lists
 
