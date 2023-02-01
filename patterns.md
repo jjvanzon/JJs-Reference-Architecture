@@ -111,7 +111,7 @@ Data Access Patterns
 
 ### Entities
 
-*Entities* are the `classes` that represent the *functional domain model*.
+`Entities` are the `classes` that represent the *functional domain model*.
 
 Contents:
 
@@ -125,7 +125,7 @@ Contents:
 
 <h4 id="pure-data-objects">Pure Data Objects</h4>
 
-In this [architecture](index.md), we aim to keep the [entity](#entities) `classes` [just data](#dto) and free of logic. The [entities](#entities) in this [architecture](index.md) have properties of simple types and references or lists to other [entities](#entities).
+In this [architecture](index.md), we aim to keep the [`Entity`](#entities) `classes` [just data](#dto) and free of logic. The [`Entities`](#entities) in this [architecture](index.md) have properties of simple types and references or lists to other [`Entities`](#entities).
 
 ```cs
 class Supplier
@@ -140,7 +140,7 @@ class Supplier
 
 <h4 id="enums">Enums</h4>
 
-You might even want to avoid `enums` in the [entity](#entities) `classes` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like entities](aspects.md#enum-like-entities), which you could as [entities](#entities) in your model. This to keep it a purer representaton of the data model:
+You might even want to avoid `enums` in the [`Entity`](#entities) `classes` and put those in the [business layer](layers.md#business-layer) instead. Often the database contain [`enum`-like `Entities`](aspects.md#enum-like-entities), which you could as [`Entities`](#entities) in your model. This to keep it a purer representaton of the data model:
 
 ```cs
 class Supplier
@@ -164,7 +164,7 @@ enum IndustryEnum
 
 <h4 id="collections">Collections</h4>
 
-Creating collections upon initialization is recommended for [entity](#entities) `classes`. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
+Creating collections upon initialization is recommended for [`Entity`](#entities) `classes`. [`NHibernate`](api.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
 
 ```cs
 class Supplier
@@ -176,7 +176,7 @@ class Supplier
 
 <h4 id="virtual-members">Virtual Members</h4>
 
-For [entity](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](api.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](aspects.md#persistence) may not work. This is because [`ORM's`](api.md#orm) want to create [`Proxy classes`](api.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
 ```cs
 class Supplier
@@ -190,12 +190,12 @@ class Supplier
 
 <h4 id="inheritance">Inheritance</h4>
 
-Generally avoid [inheritance](api.md#inheritance) within your [entity](#entities) models, because it can make using data technologies harder.
+Generally avoid [inheritance](api.md#inheritance) within your [`Entity`](#entities) models, because it can make using data technologies harder.
 
 
 <h4 id="real-code">Real Code</h4>
 
-The previous code examples for [entities](#entities) were just illustrative pseudo-code. This might be a more realistic example:
+The previous code examples for [`Entities`](#entities) were just illustrative pseudo-code. This might be a more realistic example:
 
 ```cs
 public class Supplier
@@ -209,21 +209,21 @@ public class Supplier
 
 ### Mapping
 
-`Mappings` are `classes` programmed for a particular [persistence technology](aspects.md#persistence), e.g. [`NHibernate`](api.md#nhibernate), that map the [entity](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](aspects.md#persistence), e.g. [`NHibernate`](api.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](api.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 ### DTO
 
-`DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of a system. In certain situations, where passing an  [entity](#entities) is not handy or efficient, a `DTO` might be a good alternative.
+`DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of a system. In certain situations, where passing an  [`Entity`](#entities) is not handy or efficient, a `DTO` might be a good alternative.
 
-For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [entity](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
+For instance: A specialized, optimized [`SQL`](api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [`Entity`](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
 `DTO's` can be used for other data transfers than [`SQL`](api.md#sql) queries as well.
 
 ### Repository
 
-A `Repository` is like a set of queries. `Repositories` return or save [entities](#entities) in the data store. Simple types, not [entities](#entities), are preferred for parameters. The `Repository` pattern is a way to put queries in a single place. The `Repositories'` job is also to provide an optimal set of queries.
+A `Repository` is like a set of queries. `Repositories` return or save [`Entities`](#entities) in the data store. Simple types, not [`Entities`](#entities), are preferred for parameters. The `Repository` pattern is a way to put queries in a single place. The `Repositories'` job is also to provide an optimal set of queries.
 
-Typically, every [entity type](#entities) gets its own `Repository`.
+Typically, every [`Entity type`](#entities) gets its own `Repository`.
 
 It might be best to not expose types from the underlying [persistence technology](aspects.md#persistence), so the `Repository` abstraction stays neutral.
 
@@ -238,11 +238,11 @@ Business Logic Patterns
 
 ### Business Layer
 
-[Presentation](layers.md#presentation-layer), [entity model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that do not follow any standard [pattern](#introduction).
+[Presentation](layers.md#presentation-layer), [`Entity` model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that do not follow any standard [pattern](#introduction).
 
-The [business layer](layers.md#business-layer) externally speaks a language of [entities](#entities) or sometimes [`DTO's`](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
+The [business layer](layers.md#business-layer) externally speaks a language of [`Entities`](#entities) or sometimes [`DTO's`](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that [business logic](layers.md#business-layer) hooks up with  [entity](#entities) `classes` rather than [`Repositories`](#repository). But there is a large gray area. Using [entities](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
+It is preferred that [business logic](layers.md#business-layer) hooks up with  [`Entity`](#entities) `classes` rather than [`Repositories`](#repository). But there is a large gray area. Using [`Entities`](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
 
 ### RepositoryWrappers
 
@@ -268,7 +268,7 @@ For complex [`Validator`](api.md#jj-framework-validation), it is suggested to ad
 
 Next to [`Validators`](api.md#jj-framework-validation) deciding whether user input is valid, [`Validators`](api.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with an app.
 
-[`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [entity](#entities) is still in use, you might not be able to delete it.
+[`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [`Entity`](#entities) is still in use, you might not be able to delete it.
 
 ### SideEffects
 
@@ -284,7 +284,7 @@ Using separate `classes` for [`SideEffects`](api.md#jj-framework-business) can c
 
 This pattern is about [bidirectional relationship synchronization](aspects.md#bidirectional-relationship-synchronization). That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage [bidirectional relationships](aspects.md#bidirectional-relationship-synchronization), even when the underlying [persistence technology](aspects.md#persistence) doesn't, we could link [entities](#entities) together using [`LinkTo`](#linkto) extension methods. By calling [`LinkTo`](#linkto), both ends of the relationship are updated. Here is a template for a [`LinkTo`](#linkto) method that works for an `1-to-n` relationship:
+To manage [bidirectional relationships](aspects.md#bidirectional-relationship-synchronization), even when the underlying [persistence technology](aspects.md#persistence) doesn't, we could link [`Entities`](#entities) together using [`LinkTo`](#linkto) extension methods. By calling [`LinkTo`](#linkto), both ends of the relationship are updated. Here is a template for a [`LinkTo`](#linkto) method that works for an `1-to-n` relationship:
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -348,7 +348,7 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 
 ### Cascading
 
-[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [entity](#entities), *child-*[entities](#entities) are `Deleted` too. But if they are not inherently part of the main [entity](#entities), they would be [`Unlinked`](#unlink) instead.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [`Entity`](#entities), *child-*[`Entities`](#entities) are `Deleted` too. But if they are not inherently part of the main [`Entity`](#entities), they would be [`Unlinked`](#unlink) instead.
 
 This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
 
@@ -399,7 +399,7 @@ public static class DeleteRelatedEntitiesExtensions
 }
 ```
 
-In there, child [entities](#entities) are successively `Deleted`:
+In there, child [`Entities`](#entities) are successively `Deleted`:
 
 ```cs
 /// <summary>
@@ -419,7 +419,7 @@ public static class DeleteRelatedEntitiesExtensions
 
 (Note: The `ToArray` can prevent an `Exception` about the loop collection being modified.)
 
-Before an extension method `Deletes` a child [entity](#entities), it might call [`Cascading`](#cascading) upon the child [entity](#entities) too!
+Before an extension method `Deletes` a child [`Entity`](#entities), it might call [`Cascading`](#cascading) upon the child [`Entity`](#entities) too!
 
 ```cs
 public static void DeleteRelatedEntities(this Order order)
@@ -459,7 +459,7 @@ Note that it uses the [Unlink](#unlink) pattern discussed earlier.
 
 <h4 id="cascading-delete-main-entity">Delete Main Entity</h4>
 
-The [`Cascading`](#cascading) extension methods delete *related* [entities](#entities), not the *main* [entity](#entities). The idea behind that is: Where a main [entity](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+The [`Cascading`](#cascading) extension methods delete *related* [`Entities`](#entities), not the *main* [`Entity`](#entities). The idea behind that is: Where a main [`Entity`](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -499,7 +499,7 @@ It's up to you. The choice to use *extension* methods was also a matter of prefe
 
 <h4 id="cascading-nuance">Nuance</h4>
 
-Sometimes an [entity](#entities) does have related [entities](#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+Sometimes an [`Entity`](#entities) does have related [`Entities`](#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
 <h4 id="cascading-conclusion">Conclusion</h4>
@@ -510,7 +510,7 @@ Hopefully this introduced a way to build up [`Cascading`](#cascading) code by ju
 
 A [`Facade`](#facade) combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [`Validation`](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do something using a [`Facade`](#facade) you should be able to count on it that integrity is maintained.
 
-It is a combinator `class`: a [`Facade`](#facade) combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A [`Facade`](#facade) can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [entity](#entities) `types` together.
+It is a combinator `class`: a [`Facade`](#facade) combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A [`Facade`](#facade) can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [`Entity`](#entities) `types` together.
 
 <h4>Repositories instead of Facades</h4>
 
@@ -1100,7 +1100,7 @@ Every screen can get a [`ViewModel`](#viewmodels), e.g.:
 
 These names are built up from parts.
 
-1. They start with an [entity](#entities) name (`Product`, `Category`)
+1. They start with an [`Entity`](#entities) name (`Product`, `Category`)
 2. Then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`).
 3. And the names end with [`ViewModel`](#viewmodels).
 
@@ -1124,12 +1124,13 @@ public class ProductEditViewModel
     public bool CanDelete { get; set; }
     public string Category { get; set; }
     public string ProductType { get; set; }
+    public IList<string> ValidationMessages { get; set; }
 }
 ```
 
 #### Entity ViewModels
 
-You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [entity](#entities), e.g.:
+You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [`Entity`](#entities), e.g.:
 
     ProductViewModel
     CategoryViewModel
@@ -1154,6 +1155,7 @@ public class ProductEditViewModel
     public string Description { get; set; }
     public bool CanDelete { get; set; }
     public IList<string> ValidationMessages { get; set; }
+
     // Uses Entity ViewModels
     public CategoryViewModel Category { get; set; }
     public ProductTypeViewModel ProductType { get; set; }
@@ -1190,7 +1192,7 @@ public class ButtonBarViewModel
 
 #### ListItem ViewModels
 
-Similar to the [entity `ViewModels`](#entity-viewmodels) but then representing a row in *list* or *grid*, e.g.:
+Similar to the [`Entity ViewModels`](#entity-viewmodels) but then representing a row in *list* or *grid*, e.g.:
 
     ProductItemViewModel
     CategoryListItemViewModel
@@ -1221,7 +1223,7 @@ Therefore it may be better to call a property `CanDelete`, rather than naming it
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
-For instance: if the business logic tells us that an [entity](#entities) is a very special [entity](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
+For instance: if the business logic tells us that an [`Entity`](#entities) is a very special [`Entity`](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
 The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) and not even for a [view](#views)!
 
 #### Keeping It Clean
@@ -1230,17 +1232,17 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [entities](#entities), which potentially connect the [`ViewModel`](#viewmodels) to a database, which isn't desired or possible in all contexts.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities), which potentially connect the [`ViewModel`](#viewmodels) to a database, which isn't desired or possible in all contexts.
 
-Even when the [`ViewModel`](#entities) looks almost exactly the same as the [entity](#entities), we tend to not use [entities](#entities) directly. 
+Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
-It is worth noting that linking to an [entity](#entities) can result in the availability of other related [entities](#entities), which may broaden the scope of the view beyond our desires.
+It is worth noting that linking to an [`Entity`](#entities) can result in the availability of other related [`Entities`](#entities), which may broaden the scope of the view beyond our desires.
 
-An added benefit of decoupling the [`ViewModels`](#viewmodels) from [entities](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
+An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
 
 #### ViewModel to ViewModel Conversions
 
-It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [entities](#entities) to [`ViewModel`](#viewmodels) and back. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). But there may be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). But there may be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
 
 #### Avoid Inheritance
 
@@ -1268,11 +1270,11 @@ For big lookup list a viable option seems to [`AJAX`](api.md#ajax) the list and 
 
 ### ToViewModel
 
-An extension method that convert an [entity](#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [entity](#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [entity](#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
+An extension method that convert an [`Entity`](#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [`Entity`](#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [`Entity`](#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
 You may pass [`Repositories`](#repository) to the `ToViewModel` methods if required.
 
-Sometimes you cannot appoint one [entity type](#entities) as the source of a [`ViewModel`](#viewmodels). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
+Sometimes you cannot appoint one [`Entity type`](#entities) as the source of a [`ViewModel`](#viewmodels). In that case you cannot logically make it an extension method, but you make it a [`Helper`](patterns.md#helper) method in the `static ViewModelHelpers class`.
 
 The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
 
@@ -1302,15 +1304,15 @@ public static OrderEditPopupViewModel ToEditViewModel(this Order order) { ... }
 public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) { ... }
 ```
 
-Some [`ViewModels`](#viewmodels) do not take one primary [entity](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [entity](#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
+Some [`ViewModels`](#viewmodels) do not take one primary [`Entity`](#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [`Entity`](#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
 
 ### ToEntity
 
-Extension methods that convert a [`ViewModel`](#viewmodels) to an [entity](#entities).
+Extension methods that convert a [`ViewModel`](#viewmodels) to an [`Entity`](#entities).
 
-You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [entity](#entities), if it exists, it would be updated, if it does not, it would be created.
+You typically pass [`Repositories`](#repository) to the method. A simple `ToEntity` method might look up an existing [`Entity`](#entities), if it exists, it would be updated, if it does not, it would be created.
 
-A more complex `ToEntity` method might also update related [entities](#entities). In that case related [entities](#entities) might be inserted, updated and deleted, depending on whether the [entity](#entities) still exists in the [`ViewModel`](#viewmodels) or in the data store.
+A more complex `ToEntity` method might also update related [`Entities`](#entities). In that case related [`Entities`](#entities) might be inserted, updated and deleted, depending on whether the [`Entity`](#entities) still exists in the [`ViewModel`](#viewmodels) or in the data store.
 
 A `ToEntity` method takes on much of the resposibility of a Save action.
 
@@ -1334,7 +1336,7 @@ Sometimes you also pass infra and config parameters to an action method, but it 
 
 Internally a `Presenter` can use [business logic](layers.md#business-layer) and [`Repositories`](#repository) to access the domain model.
 
-All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [entities](#entities).
+All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](#entities).
 
 ### ToEntity-Business-ToViewModel Round-Trip
 
@@ -1366,7 +1368,7 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
-Even though the actual call to the business logic might be trivial, it is still necessary to convert from [entity](#entities) to [`ViewModel`](#viewmodels) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [entity](#entities) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
+Even though the actual call to the business logic might be trivial, it is still necessary to convert from [`Entity`](#entities) to [`ViewModel`](#viewmodels) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](#entities) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
 
 `< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input ViewModel. Sometimes it is even the only way to execute the essense of the user action onto the user input ViewModel. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
@@ -1448,7 +1450,7 @@ In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns.md#contr
 
 The [`Controller`](#controller) may use multiple [`Presenters`](#presenter) and [`ViewModels`](#viewmodels), since it is about multiple screens.
 
-[Entity](#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
+[`Entity`](#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
 
 ### Post-Redirect-Get
 
@@ -1626,15 +1628,15 @@ By implementing it as a `Converter`, it simplifies the code. You can then say th
 
 ### TryGet-Insert-Update
 
-When converting one type to another one might use the `TryGet-Insert-Update` pattern. Especially when converting an [entity](#entities) with related [entities](#entities) from one structure to another this pattern will make the code easier to read.
+When converting one type to another one might use the `TryGet-Insert-Update` pattern. Especially when converting an [`Entity`](#entities) with related [`Entities`](#entities) from one structure to another this pattern will make the code easier to read.
 
-[`TryGet`](#tryget) first gets a possible existing destination [entity](#entities).
+[`TryGet`](#tryget) first gets a possible existing destination [`Entity`](#entities).
 
-`Insert` will create the [entity](#entities) if it did not exist yet, possibly setting some defaults.
+`Insert` will create the [`Entity`](#entities) if it did not exist yet, possibly setting some defaults.
 
 `Update` will update the rest of the properties of either the existing or newly created `object`.
 
-When you do these actions one by one for one destination [entity](#entities) after another, you will get readable code for complex conversions between data structures.
+When you do these actions one by one for one destination [`Entity`](#entities) after another, you will get readable code for complex conversions between data structures.
 
 Note that deletion of destination `objects` is not managed by the `TryGet-Insert-Update` pattern.
 
@@ -1652,7 +1654,7 @@ Used for managing complex conversions between data structures, that require inse
 
 <h4>Considerations</h4>
 
-Converting one collection to another may involve more than creating a destination `object` for each source `object`. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [entities](#entities) to figure out which items are obsolete.
+Converting one collection to another may involve more than creating a destination `object` for each source `object`. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [`Entities`](#entities) to figure out which items are obsolete.
 
 In a little more detail:
 
@@ -1695,7 +1697,7 @@ The specific way to implement it, is different in every situation. Reasons that 
 - The key to a destination item might be complex, instead of just an ID.
 - You do not always have a [`Repository`](#repository).
 - It does not always need to be full-[`CRUD`](layers.md#crud).
-- You might need to report exactly what operation is executed on each [entity](#entities).
+- You might need to report exactly what operation is executed on each [`Entity`](#entities).
 - You might need a separate normalized [*singular* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
 - An alternative `isNew` detection might be needed.
 - Some persistence technologies will behave unexpectedly when first retrieving and then writing and then retrieving again. Intermediate redundant retrievals should be avoided. Or not, depending on the situation.
@@ -1998,7 +2000,7 @@ The word `Helper` might also be used more generally. Like something that 'helps'
 
 ### Mock
 
-A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [entity model](#entities), an alternative [`Repository` implementation](#repository) (that returns `Mock` [entities](#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
+A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [`Entity` model](#entities), an alternative [`Repository` implementation](#repository) (that returns `Mock` [`Entities`](#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
 
 ### Name Constants
 
@@ -2060,19 +2062,19 @@ Sometimes it is useful to separate `Cancel` into two: `Canceling` and `Canceled`
 
 When processing `object` structures, it is best to split everything up into separate methods.
 
-Every [entity type](#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
+Every [`Entity type`](#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
 
-In case of conversions from one `object` structure to another, every *destination* [entity](#entities) gets a 'singular' method, not the *source* [entity](#entities), because that would easily create messy, unmanageable code.
+In case of conversions from one `object` structure to another, every *destination* [`Entity`](#entities) gets a 'singular' method, not the *source* [`Entity`](#entities), because that would easily create messy, unmanageable code.
 
 A 'plural' method processes a whole list of items. 'Plural' methods are less useful. Prefer 'singular' methods over 'plural' ones. 'Plural' methods usually do not add anything other than a loop, which is too trivial to create a separate method for. Only when operations must be executed onto a whole list of `objects` (for instance determining a total price of a list of items or when there are specific conditions), it may be useful to create a separate 'plural' method.
 
-'Singular' or 'plural' methods do not process related [entities](#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [entities](#entities)' means [entities](#entities) intrinsically part of the [entity](#entities), not links to reused [entities](#entities). Also, not the parent.
+'Singular' or 'plural' methods do not process related [`Entities`](#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [`Entities`](#entities)' means [`Entities`](#entities) intrinsically part of the [`Entity`](#entities), not links to reused [`Entities`](#entities). Also, not the parent.
 
-There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [entities](#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
+There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [`Entities`](#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
 
 Finer details about the 'singular' form:
 
-- They do not process child [entities](#entities), they can however link to reusable [entities](#entities), such as `enum`-like types, or categories.
+- They do not process child [`Entities`](#entities), they can however link to reusable [`Entities`](#entities), such as `enum`-like types, or categories.
 - They usualy do not assign a parent. The caller of the 'singular' form does that. That way methods are more independent of context and better reusable and code better rewritable. There are exceptions to that rule.
 
 Here is an example of some 'singular', 'plural', non-`Recursive` and `Recursive` methods. Note that the words 'singular' and 'plural' are not used in the method names.
@@ -2137,7 +2139,7 @@ Alternatives
 
 `- Arch: anemic models and separation of concerns and no rich models can have the consequence that you loose identity and instance integrity, because derived structures are more common. For controls for instance, with gesture events, the original object needs to be found and raised an event on, and you cannot get away with doing it on a derived object unless you clone everything. Not sure how to descrive this clearly. It is about rich models vs. anemic models and when and how to apply which and what are the pros and cons and I do not have a clear image of that yet.`  
 `- Explain the problems with rich models in the business layer comprised of derived classes out of the persistence layer, that extend the model with specific relations, constraints and rules, that you do not enforce in the persistence layer.`  
-`  Problems with putting it in the business layer include that the persistence layer does not know how to instantiate the derived class, so it must instantiate the base class. Also: if rules are strictly enforced in an extended entity model, it is hard to separate creating entities from validating it, so instead of user-generated validation messages, you might get exception messages instead.`  
+`  Problems with putting it in the business layer include that the persistence layer does not know how to instantiate the derived class, so it must instantiate the base class. Also: if rules are strictly enforced in an extended entity model, it is hard to separate creating Entities from validating it, so instead of user-generated validation messages, you might get exception messages instead.`  
 `  Problems with putting the specialized classes in the persistence layer include that the entity model must stay as clean as possible: anything you put in the data layer is hard to get rid of.`  
 `  When you do need an business logic interfacing that is comprised of an 'extended' entity model, then you cannot really use inheritance. You might be able to create a facade class that creates a wrapper class around the 'base' class out of the entity model.`  
 `  Currently the choice is to not make an extended entity model in the business layer.`  
