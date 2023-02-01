@@ -1073,6 +1073,8 @@ Presentation Patterns
 
 `< TODO: Code samples. Even bad ones. (Color them red.) >`
 
+[`ViewModels`](#viewmodels) are as simple as they are valuable in [this architecture](index.md).
+
 A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to display on screen.
 
 #### Only Data
@@ -1100,9 +1102,9 @@ Every screen can get a [`ViewModel`](#viewmodels), e.g.:
 
 These names are built up from parts.
 
-1. They start with an [`Entity`](#entities) name (`Product`, `Category`)
-2. Then something [`CRUD`](layers.md#crud)-related (`Details`, `List`, `Edit`, `Delete`, `Deleted`).
-3. And the names end with [`ViewModel`](#viewmodels).
+1. They start with an [`Entity`](#entities) name: `Product`, `Category`
+2. Then something [`CRUD`](layers.md#crud)-related: `Details`, `List`, `Edit`, `Delete`, `Deleted`
+3. And the names end with: [`ViewModel`](#viewmodels)
 
 Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
 
@@ -1194,10 +1196,31 @@ public class ButtonBarViewModel
 
 Similar to the [`Entity ViewModels`](#entity-viewmodels) but then representing a row in *list* or *grid*, e.g.:
 
-    ProductItemViewModel
+    ProductListItemViewModel
     CategoryListItemViewModel
 
-Some list views only need an [`IDNameDto`](api.md#jj-canonical) for that instead.
+For instance:
+
+```cs
+public class ProductListItemViewModel 
+{ 
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string UsedBy { get; set; }
+    public bool CanDelete { get; set; }
+}
+```
+
+Some list views only need an [`IDNameDto`](api.md#jj-canonical) from the [`JJ.Canonical`](api.md#jj-canonical) project):
+
+```cs
+public class IDAndName
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+}
+```
 
 #### Lookup ViewModels
 
