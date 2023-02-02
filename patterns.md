@@ -43,7 +43,7 @@ title: "🧶 Patterns"
         - ["What", not "Why"](#what-not-why)
         - [Keeping It Clean](#keeping-it-clean)
         - [No Entities](#no-entities)
-        - [ViewModel to ViewModel Conversions](#viewmodel-to-viewmodel-conversions)
+        - [Avoid ViewModel to ViewModel Conversion](#avoid-viewmodel-to-viewmodel-conversion)
         - [Avoid Inheritance](#avoid-inheritance)
         - [Conclusion](#conclusion)
     - [Lookup Lists](#lookup-lists)
@@ -1102,9 +1102,12 @@ Every screen can get a [`ViewModel`](#viewmodels), e.g.:
 
 These names are built up from parts.
 
-1. Start with the [`Entity`](#entities): `Product`, `Category`
-2. Then something [`CRUD`](layers.md#crud)-related: `Details`, `List`, `Edit`, `Delete`, `Deleted`
-3. And end with: [`ViewModel`](#viewmodels)
+1. Start with the [`Entity`](#entities):  
+   `Product`, `Category`
+2. Then something [`CRUD`](layers.md#crud)-related:  
+   `Details`, `List`, `Edit`, `Delete`, `Deleted`
+3. And end with:  
+   [`ViewModel`](#viewmodels)
 
 Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
 
@@ -1171,10 +1174,11 @@ Another name for [`Entity ViewModels`](#entity-viewmodels) might be [`Item ViewM
     LoginPartialViewModel
     ButtonBarViewModel
     MenuViewModel
+    PagerViewModel
     
 They may or may not have the word `Partial` in their name.
 
-Code sample:
+Here is a code sample of a `ButtonBarViewModel`:
 
 ```cs
 /// <summary>
@@ -1190,7 +1194,7 @@ public class ButtonBarViewModel
 }
 ```
 
-The [`Partial ViewModels`](#partial-viewmodels) can be used in [`Screen ViewModels`](#screen-viewmodels) like this:
+The [`Partial ViewModels`](#partial-viewmodels) can be used in [`Screen ViewModels`](#screen-viewmodels). Here some [`Partials`](#partial-viewmodels) are used in the `ProductEditViewModel`:
 
 ```cs
 /// <summary>
@@ -1210,12 +1214,12 @@ public class ProductEditViewModel
 
 #### ListItem ViewModels
 
-Similar to the [`Entity ViewModels`](#entity-viewmodels) but then representing a row in *list* or *grid*, e.g.:
+[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they represent a row in *list* or *grid*. Here are some names they might have::
 
     ProductListItemViewModel
     CategoryListItemViewModel
 
-For instance:
+A `ProductListItemViewModel ` may look as follows:
 
 ```cs
 public class ProductListItemViewModel 
@@ -1228,9 +1232,21 @@ public class ProductListItemViewModel
 }
 ```
 
-Used in a `ListViewModel`:
+They can be used in a `ListViewModel`:
 
-`< TODO: Code Sample >`
+```cs
+/// <summary>
+/// Example of a List ViewModel that uses ListItem ViewModels.
+/// </summary>
+public class ProductListViewModel 
+{
+    public ButtonBarViewModel Buttons { get; set; }
+    public PagerViewModel Pager { get; set; }
+
+    // Here, Product ListItemViewModel is used.
+    public IList<ProductListItemViewModel> Products { get; set; }
+}
+```
 
 Some list views only need an [`IDNameDto`](api.md#jj-canonical) (found in the [`JJ.Canonical`](api.md#jj-canonical) project):
 
@@ -1242,19 +1258,31 @@ public class IDAndName
 }
 ```
 
-Used in a `ListViewModel`:
+Here you can find [`IDAndName`](api.md#jj-canonical) objects used in a `ListViewModel`:
 
-`< TODO: Code Sample >`
+```cs
+/// <summary>
+/// Example of a List ViewModel that uses IDAndName as the item type.
+/// </summary>
+public class ProductListViewModel
+{
+    public ButtonBarViewModel Buttons { get; set; }
+    public PagerViewModel Pager { get; set; }
+
+    // Here, IDAndName is used as a list item.
+    public IList<IDAndName> Products { get; set; }
+}
+```
 
 #### Lookup ViewModels
 
-A *lookup* list, for instance the data to pick from a drop-down box, e.g.:
+A *lookup* list can for instance be the data to pick from a drop-down box, e.g.:
 
 ```cs
 IList<IDNameDto> ProductTypeLookup { get; set; }
 ```
 
-Might be put in a [`Screen ViewModel`](#screen-viewmodels):
+It might be used in a [`Screen ViewModel`](#screen-viewmodels) like so:
 
 `< TODO: Code sample. >`
 
@@ -1291,7 +1319,7 @@ It is worth noting that linking to an [`Entity`](#entities) can result in the av
 
 An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
 
-#### ViewModel to ViewModel Conversions
+#### Avoid ViewModel to ViewModel Conversion
 
 It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). But there may be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
 
