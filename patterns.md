@@ -1292,15 +1292,15 @@ It might be used in a [`Screen ViewModel`](#screen-viewmodels) like so:
 
 #### How to Model
 
-A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. This is the idea for how to model them:
+A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. The idea for how to model them is:
 
-> *A [`ViewModel`](#viewmodels) says __what__ is shown on screen, not __how__ nor __why__.*
+> *A [`ViewModel`](#viewmodels) says __what__ is shown on screen, not __how__ or __why__.*
 
 #### "What", not "How"
 
 A [`ViewModel`](#viewmodels) says ***what*** is shown on screen, not ***how:***
 
-Therefore it may be better to call a property `CanDelete`, rather than naming it `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
+Therefore `CanDelete` may be a better property name than `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
 
 #### "What", not "Why"
 
@@ -1337,7 +1337,7 @@ Though no hard rules here. It doesn't mean that inheritance should always be avo
 
 #### Conclusion
 
-`< TODO: Write something to let the reader know the ViewModel section ends here >`
+The advantage of using [`ViewModels`](#viewmodels) in this manner, is that it enables technology independence, prevents hard coupling to business logic and data access, resulting in a flexible and easy way to model the user interaction.
 
 ### Lookup Lists
 
