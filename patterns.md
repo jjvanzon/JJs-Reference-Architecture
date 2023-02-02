@@ -1102,9 +1102,9 @@ Every screen can get a [`ViewModel`](#viewmodels), e.g.:
 
 These names are built up from parts.
 
-1. They start with an [`Entity`](#entities) name: `Product`, `Category`
+1. Start with the [`Entity`](#entities): `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related: `Details`, `List`, `Edit`, `Delete`, `Deleted`
-3. And the names end with: [`ViewModel`](#viewmodels)
+3. And end with: [`ViewModel`](#viewmodels)
 
 Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
 
@@ -1112,8 +1112,6 @@ Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms
     CategorySelectorViewModel
     NotFoundViewModel
     LoginViewModel
-
-There may be more variations, but this is the general idea.
 
 Here is a code example of a simple screen view model:
 
@@ -1132,12 +1130,12 @@ public class ProductEditViewModel
 
 #### Entity ViewModels
 
-You can also reuse simple [`ViewModels`](#viewmodels) that represent a single [`Entity`](#entities), e.g.:
+You can also reuse [`ViewModels`](#viewmodels) that represent single [`Entities`](#entities), e.g.:
 
     ProductViewModel
     CategoryViewModel
 
-Code sample:
+For instance:
 
 ```cs
 public class CategoryViewModel 
@@ -1147,7 +1145,7 @@ public class CategoryViewModel
 }
 ```
 
-[`Entity ViewModels`](#entity-viewmodels) might be reused among different [`Screen ViewModels`](#screen-viewmodels).
+[`Entity ViewModels`](#entity-viewmodels) might be reused among different [`Screen ViewModels`](#screen-viewmodels), for instance:
 
 ```cs
 public class ProductEditViewModel
@@ -1192,6 +1190,24 @@ public class ButtonBarViewModel
 }
 ```
 
+The [`Partial ViewModels`](#partial-viewmodels) can be used in [`Screen ViewModels`](#screen-viewmodels) like this:
+
+```cs
+/// <summary>
+/// Screen ViewModel with Partials
+/// </summary>
+public class ProductEditViewModel
+{
+    // Partials
+    public ButtonBarViewModel Buttons { get; set; }
+    public LoginPartialViewModel Login { get; set; }
+
+    public ProductViewModel Product { get; set; }
+    public bool IsNew { get; set; }
+    public bool CanDelete { get; set; }
+}
+```
+
 #### ListItem ViewModels
 
 Similar to the [`Entity ViewModels`](#entity-viewmodels) but then representing a row in *list* or *grid*, e.g.:
@@ -1212,7 +1228,11 @@ public class ProductListItemViewModel
 }
 ```
 
-Some list views only need an [`IDNameDto`](api.md#jj-canonical) from the [`JJ.Canonical`](api.md#jj-canonical) project):
+Used in a `ListViewModel`:
+
+`< TODO: Code Sample >`
+
+Some list views only need an [`IDNameDto`](api.md#jj-canonical) (found in the [`JJ.Canonical`](api.md#jj-canonical) project):
 
 ```cs
 public class IDAndName
@@ -1222,6 +1242,10 @@ public class IDAndName
 }
 ```
 
+Used in a `ListViewModel`:
+
+`< TODO: Code Sample >`
+
 #### Lookup ViewModels
 
 A *lookup* list, for instance the data to pick from a drop-down box, e.g.:
@@ -1229,6 +1253,10 @@ A *lookup* list, for instance the data to pick from a drop-down box, e.g.:
 ```cs
 IList<IDNameDto> ProductTypeLookup { get; set; }
 ```
+
+Might be put in a [`Screen ViewModel`](#screen-viewmodels):
+
+`< TODO: Code sample. >`
 
 #### How to Model
 
