@@ -1151,6 +1151,9 @@ public class CategoryViewModel
 [`Entity ViewModels`](#entity-viewmodels) might be reused among different [`Screen ViewModels`](#screen-viewmodels), for instance:
 
 ```cs
+/// <summary>
+/// An Edit ViewModel using several Entity ViewModels.
+/// </summary>
 public class ProductEditViewModel
 {
     public int ID { get; set; }
@@ -1165,7 +1168,7 @@ public class ProductEditViewModel
 }
 ```
 
-Another name for [`Entity ViewModels`](#entity-viewmodels) might be [`Item ViewModels`](#entity-viewmodels).
+[`Entity ViewModels`](#entity-viewmodels) can also be called [`Item ViewModels`](#entity-viewmodels).
 
 #### Partial ViewModels
 
@@ -1176,13 +1179,11 @@ Another name for [`Entity ViewModels`](#entity-viewmodels) might be [`Item ViewM
     MenuViewModel
     PagerViewModel
     
-They may or may not have the word `Partial` in their name.
-
-Here is a code sample of a `ButtonBarViewModel`:
+They may or may not have the word `Partial` in their name. Here is a code sample of a `ButtonBarViewModel`:
 
 ```cs
 /// <summary>
-/// PartialViewModel representing a ButtonBar.
+/// Partial ViewModel representing a ButtonBar.
 /// </summary>
 public class ButtonBarViewModel 
 { 
@@ -1194,17 +1195,20 @@ public class ButtonBarViewModel
 }
 ```
 
+Each property in there says whether you can use a certain button or not.
+
 The [`Partial ViewModels`](#partial-viewmodels) can be used in [`Screen ViewModels`](#screen-viewmodels). Here some [`Partials`](#partial-viewmodels) are used in the `ProductEditViewModel`:
 
 ```cs
 /// <summary>
-/// Screen ViewModel with Partials
+/// Edit ViewModel with Partials
 /// </summary>
 public class ProductEditViewModel
 {
-    // Partials
+    // Partials:
     public ButtonBarViewModel Buttons { get; set; }
     public LoginPartialViewModel Login { get; set; }
+    public PagerViewModel Pager { get; set; }
 
     public ProductViewModel Product { get; set; }
     public bool IsNew { get; set; }
@@ -1214,7 +1218,7 @@ public class ProductEditViewModel
 
 #### ListItem ViewModels
 
-[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they represent a row in *list* or *grid*. Here are some names they might have::
+[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names can might have:
 
     ProductListItemViewModel
     CategoryListItemViewModel
@@ -1232,11 +1236,11 @@ public class ProductListItemViewModel
 }
 ```
 
-They can be used in a `ListViewModel`:
+[`ListItem ViewModels`](#listitem-viewmodels) can be used in a `ListViewModel`:
 
 ```cs
 /// <summary>
-/// Example of a List ViewModel that uses ListItem ViewModels.
+/// Example of a ViewModel using ListItem ViewModels.
 /// </summary>
 public class ProductListViewModel 
 {
@@ -1248,7 +1252,7 @@ public class ProductListViewModel
 }
 ```
 
-Some list views only need an [`IDNameDto`](api.md#jj-canonical) (found in the [`JJ.Canonical`](api.md#jj-canonical) project):
+Some list views only need an [`IDNameDto`](api.md#jj-canonical), which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
 
 ```cs
 public class IDAndName
