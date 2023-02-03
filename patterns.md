@@ -1355,7 +1355,7 @@ Though no hard rules here. It doesn't mean that inheritance should always be avo
 
 #### Conclusion
 
-Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence and prevent hard coupling to business logic and data access, and offer a flexible way to model user interaction. In the coming sections, more patterns will be introduced, shedding light on how these [`ViewModels`](#viewmodels) are used in practice, where they come and go, how they come into play.
+Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, prevent hard coupling to business logic and data access, and offer a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) are used in practice, where they come and go and how they come into play.
 
 ### Lookup Lists
 
