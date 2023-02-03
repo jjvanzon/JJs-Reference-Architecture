@@ -1069,6 +1069,8 @@ Extra information in Dutch about how to structure the [`Resource` files](#resour
 Presentation Patterns
 ---------------------
 
+`< TODO: Make code samples slightly shorter. >`
+
 ### ViewModels
 
 [`ViewModels`](#viewmodels) are as simple as they are valuable in [this architecture](index.md).
@@ -1104,10 +1106,10 @@ These names are built up from parts.
    `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related:  
    `Details`, `List`, `Edit`, `Delete`, `Deleted`
-3. And end with:  
+3. And end it with:  
    [`ViewModel`](#viewmodels)
 
-Instead of [`CRUD`](layers.md#crud) actions, you could also consider using terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
+Instead of [`CRUD`](layers.md#crud) actions, you could also use terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
 
     ProductOverviewViewModel
     CategorySelectorViewModel
@@ -1325,7 +1327,7 @@ Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether i
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
 For instance: if the business logic tells us that an [`Entity`](#entities) is a very special [`Entity`](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
-The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) and not even for a [view](#views)!
+The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) or a [view](#views).
 
 #### Keeping It Clean
 
@@ -1337,21 +1339,53 @@ For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn'
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
+`< TODO: Code sample showing a view model and entity model looking quite similar. >`
+
 It is worth noting that linking to an [`Entity`](#entities) can result in the availability of other related [`Entities`](#entities), which may broaden the scope of the view beyond our desires.
+
+`< TODO: Code sample that shows following an object graph, making objects available, unintentionally coupled with. >`
 
 An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
 
+`< TODO: Code sample showing a view model and entity model looking quite different even though they are about the same entity. >`
+
 #### Avoid ViewModel to ViewModel Conversion
 
-It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back. What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). But there may be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels). For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back. See the [`ToViewModel`](#toviewmodel) and [`ToEntity`](#toentity) patterns.
+
+It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels) directly.
+
+`< TODO: Code sample.>`
+
+What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). But there may be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels).
+
+`< TODO: Code sample of an action operating on ViewModels alone. >`
+
+For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels).
+
+`< TODO: Code sample yielding over non-persisted properties from one view model to the next. >`
 
 #### Avoid Inheritance
 
-Inheritance is not the go-to choice for [`ViewModels`](#viewmodels). So it might be a plan to make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent it.
+Inheritance is not the go-to choice for [`ViewModels`](#viewmodels).
 
-Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#viewmodels), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
+`< TODO: Code sample with base and derived ViewModel. A 'bad example' with too much functional overlap. Perhaps a ProductScreenViewModelBase or something with all sorts of propeties in it, that might be used in specific Screen ViewModel. >`
 
-Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully. But you could also choose to use other design patterns, such as composition, to reduce the impact of changes.
+Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes.
+
+`< TODO: Code sample with a few 'clean' Product Screen ViewModels. >`
+
+To really 'seal' the deal, you could make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent inheritance at all.
+
+`< TODO: Short code sample with a ViewModel class that is sealed. >`
+
+Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully.
+
+`< TODO: A 'clean' ViewModelBase. >`
+
+But you could also choose to use other design patterns, such as composition, to reduce the impact of changes.
+
+`<TODO: Code sample. >`
 
 #### Conclusion
 
