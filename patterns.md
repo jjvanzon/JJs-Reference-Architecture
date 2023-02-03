@@ -1337,7 +1337,7 @@ Though no hard rules here. It doesn't mean that inheritance should always be avo
 
 #### Conclusion
 
-The advantage of using [`ViewModels`](#viewmodels) in this manner, is that it enables technology independence, prevents hard coupling to business logic and data access, resulting in a flexible and easy way to model the user interaction.
+Hopefully this section gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to business logic and data access. They allow you to flexibly model the user interaction. Later sections will introduce more patterns, shedding light on how these [`ViewModels`](#viewmodels) are used in practice, from where they come and go and how they come into play.
 
 ### Lookup Lists
 
