@@ -1071,8 +1071,6 @@ Presentation Patterns
 
 ### ViewModels
 
-`< TODO: Code samples. Even bad ones. (Color them red.) >`
-
 [`ViewModels`](#viewmodels) are as simple as they are valuable in [this architecture](index.md).
 
 A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to display on screen.
@@ -1307,6 +1305,8 @@ public class ProductEditViewModel
     IList<IDAndName> ProductTypeLookup { get; set; }
 }
 ```
+
+`< TODO: Code samples. Even bad ones. (Color them red.) >`
 
 #### How to Model
 
