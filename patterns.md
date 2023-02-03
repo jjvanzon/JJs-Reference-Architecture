@@ -1318,7 +1318,7 @@ A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on s
 
 A [`ViewModel`](#viewmodels) says ***what*** is shown on screen, not ***how:***
 
-Therefore `CanDelete` may be a better property name than `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
+Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
 
 #### "What", not "Why"
 
@@ -1355,7 +1355,7 @@ Though no hard rules here. It doesn't mean that inheritance should always be avo
 
 #### Conclusion
 
-Hopefully this section gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to business logic and data access. They allow you to flexibly model the user interaction. Later sections will introduce more patterns, shedding light on how these [`ViewModels`](#viewmodels) are used in practice, from where they come and go and how they come into play.
+Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence and prevent hard coupling to business logic and data access. They provide a flexible model for user interaction. Later sections will introduce more patterns, shedding light on how these [`ViewModels`](#viewmodels) are used in practice, where they come and go, how they come into play.
 
 ### Lookup Lists
 
