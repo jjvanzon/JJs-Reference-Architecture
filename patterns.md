@@ -1288,7 +1288,25 @@ IList<IDNameDto> ProductTypeLookup { get; set; }
 
 It might be used in a [`Screen ViewModel`](#screen-viewmodels) like so:
 
-`< TODO: Code sample. >`
+```cs
+/// <summary>
+/// Edit ViewModel with a Lookup List in it.
+/// </summary>
+public class ProductEditViewModel
+{
+    // Partials:
+    public ButtonBarViewModel Buttons { get; set; }
+    public LoginPartialViewModel Login { get; set; }
+    public PagerViewModel Pager { get; set; }
+
+    public ProductViewModel Product { get; set; }
+    public bool IsNew { get; set; }
+    public bool CanDelete { get; set; }
+
+    // Here is the Lookup ViewModel.
+    IList<IDAndName> ProductTypeLookup { get; set; }
+}
+```
 
 #### How to Model
 
