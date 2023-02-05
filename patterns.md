@@ -1351,7 +1351,7 @@ An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`]
 
 #### Avoid ViewModel to ViewModel Conversion
 
-Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back. See the [`ToViewModel`](#toviewmodel) and [`ToEntity`](#toentity) patterns.
+Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back using the [`ToViewModel`](#toviewmodel) and [`ToEntity`](#toentity) patterns.
 
 It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels) directly.
 
@@ -1389,9 +1389,11 @@ But you could also choose to use other design patterns, such as composition, to 
 
 #### Conclusion
 
-Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, prevent hard coupling to business logic and data access, and offer a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) are used in practice, where they come and go and how they come into play.
+Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, prevent hard coupling to business logic and data access, and offer a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) are used in practice, where they come and go: how they come into play.
 
 ### Lookup Lists
+
+`< TODO: Consider moving further down. >`
 
 In a stateless environment, lookup lists in [`Views`](#views) can be resource-intensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your `HTML`. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
