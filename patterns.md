@@ -1073,13 +1073,13 @@ Presentation Patterns
 
 ### ViewModels
 
-[`ViewModels`](#viewmodels) are as simple as they are valuable in [this architecture](index.md).
+[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](index.md).
 
-A [`ViewModel`](#viewmodels) `class` provides a simplified and organized representation of the data to display on screen.
+A [`ViewModel`](#viewmodels) provides a simplified and organized representation of the data to display on screen.
 
 #### Only Data
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended it only has `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it more doable to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple. For example:
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for their data. This also makes it better possible to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -1092,31 +1092,30 @@ public class ProductViewModel
 
 #### Screen ViewModels
 
-Every screen can get a [`ViewModel`](#viewmodels), e.g.: 
+Every screen can get a [`ViewModel`](#viewmodels). Here are some [`Screen ViewModels`](#screen-viewmodels) you might find in an application: 
 
     ProductDetailsViewModel
     ProductListViewModel
     ProductEditViewModel
     ProductDeleteViewModel
-    ProductDeletedViewModel
 
-These names are built up from parts.
+These names are built up from parts:
 
-1. Start with the [`Entity`](#entities):  
+1. Start with the [`Entity`](#entities) name:  
    `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related:  
-   `Details`, `List`, `Edit`, `Delete`, `Deleted`
+   `Details`, `List`, `Edit`, `Delete` or `Deleted`
 3. And end it with:  
    [`ViewModel`](#viewmodels)
 
-Instead of [`CRUD`](layers.md#crud) actions, you could also use terms such as `Overview`, `Selector`, `NotFound`, or `Login`:
+Instead of [`CRUD`](layers.md#crud) actions, you could also use terminology like `Overview`, `Selector`, `NotFound`, or `Login`:
 
     ProductOverviewViewModel
     CategorySelectorViewModel
     NotFoundViewModel
     LoginViewModel
 
-Here is a code example of a simple screen view model:
+Here is a code example of a simple [`Screen ViewModel`](#screen-viewmodels):
 
 ```cs
 public class ProductEditViewModel
@@ -1339,7 +1338,39 @@ For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn'
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
-`< TODO: Code sample showing a view model and entity model looking quite similar. >`
+<table><thead>
+<th><a href="#viewmodels"><code>ViewModel</code></a></th>
+<th><a href="#entities"><code>Entity</code></a></th>
+</thead>
+
+<tr><td markdown="1">
+
+```cs
+public class ProductViewModel
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public ProductTypeViewModel ProductType { get; set; }
+    public CategoryViewModel Category { get; set; }
+}
+```
+
+</td><td markdown="1">
+
+```cs
+public class Product
+{
+    public virtual int ID { get; set; }
+    public virtual string Name { get; set; }
+    public virtual string Description { get; set; }
+    public virtual ProductType ProductType { get; set; }
+    public virtual Category Category { get; set; }
+}
+```
+
+</td>
+</tr></table>
 
 It is worth noting that linking to an [`Entity`](#entities) can result in the availability of other related [`Entities`](#entities), which may broaden the scope of the view beyond our desires.
 
