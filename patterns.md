@@ -1214,13 +1214,13 @@ public class ProductEditViewModel
 
 [`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
 
-    ProductListItemViewModel
+    ProductItemViewModel
     CategoryListItemViewModel
 
-A `ProductListItemViewModel` could look as follows:
+A `ProductItemViewModel` could look as follows:
 
 ```cs
-public class ProductListItemViewModel
+public class ProductItemViewModel
 {
     public int ID { get; set; }
     public string Name { get; set; }
@@ -1238,7 +1238,7 @@ public class ProductListItemViewModel
 public class ProductListViewModel
 {
     // Here, Product ListItemViewModel is used.
-    public IList<ProductListItemViewModel> Products { get; set; }
+    public IList<ProductItemViewModel> Products { get; set; }
 }
 ```
 
