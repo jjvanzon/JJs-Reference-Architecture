@@ -1338,25 +1338,7 @@ For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn'
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
-<table><thead>
-<th><a href="#viewmodels"><code>ViewModel</code></a></th>
-<th><a href="#entities"><code>Entity</code></a></th>
-</thead>
-
-<tr><td markdown="1">
-
-```cs
-public class ProductViewModel
-{
-    public int ID { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public ProductTypeViewModel ProductType { get; set; }
-    public CategoryViewModel Category { get; set; }
-}
-```
-
-</td><td markdown="1">
+[`Entity`](#entities):
 
 ```cs
 public class Product
@@ -1369,8 +1351,18 @@ public class Product
 }
 ```
 
-</td>
-</tr></table>
+[`ViewModel`](#viewmodels):
+
+```cs
+public class ProductViewModel
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public ProductTypeViewModel ProductType { get; set; }
+    public CategoryViewModel Category { get; set; }
+}
+```
 
 It is worth noting that linking to an [`Entity`](#entities) can result in the availability of other related [`Entities`](#entities), which may broaden the scope of the view beyond our desires.
 
