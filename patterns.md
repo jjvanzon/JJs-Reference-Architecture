@@ -1212,7 +1212,7 @@ public class ProductEditViewModel
 
 #### ListItem ViewModels
 
-[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
+[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*, which may differ from the [`Entity ViewModel`](#entity-viewmodels). Here are some names they might have:
 
     ProductItemViewModel
     CategoryListItemViewModel
@@ -1237,7 +1237,7 @@ public class ProductItemViewModel
 /// </summary>
 public class ProductListViewModel
 {
-    // Here, Product ListItemViewModel is used.
+    // Here, a ListItem ViewModel is used.
     public IList<ProductItemViewModel> Products { get; set; }
 }
 ```
@@ -1309,16 +1309,16 @@ Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether i
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
-For instance: if the business logic tells us that an [`Entity`](#entities) is a very special [`Entity`](#entities), and it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
+For instance: if the business logic tells us that an [`Entity`](#entities) is a very special [`Entity`](#entities), therefor it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
 The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) or a [view](#views).
 
 #### Keeping It Clean
 
-[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). That way the whole [`ViewModel`](#views) layer stays self-contained.
+[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). This keeps the [`ViewModel`](#views) layer completely self-contained.
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This would potentially connect the [`ViewModel`](#viewmodels) to a database, which isn't desired or possible in all contexts.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible.
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
