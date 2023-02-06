@@ -1345,9 +1345,7 @@ public class Product
 {
     public virtual int ID { get; set; }
     public virtual string Name { get; set; }
-    public virtual string Description { get; set; }
     public virtual ProductType ProductType { get; set; }
-    public virtual Category Category { get; set; }
 }
 ```
 
@@ -1358,9 +1356,7 @@ public class ProductViewModel
 {
     public int ID { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
     public ProductTypeViewModel ProductType { get; set; }
-    public CategoryViewModel Category { get; set; }
 }
 ```
 
