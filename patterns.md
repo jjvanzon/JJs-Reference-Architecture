@@ -1115,7 +1115,7 @@ Instead of [`CRUD`](layers.md#crud) actions, you could also use terminology like
     NotFoundViewModel
     LoginViewModel
 
-Here is a code example of a simple [`Screen ViewModel`](#screen-viewmodels):
+Here is a code example of a [`Screen ViewModel`](#screen-viewmodels):
 
 ```cs
 public class ProductEditViewModel
@@ -1123,10 +1123,10 @@ public class ProductEditViewModel
     public int ID { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public bool CanDelete { get; set; }
     public string Category { get; set; }
     public string ProductType { get; set; }
     public IList<string> ValidationMessages { get; set; }
+    public bool CanDelete { get; set; }
 }
 ```
 
@@ -1157,9 +1157,6 @@ public class ProductEditViewModel
 {
     public int ID { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
-    public bool CanDelete { get; set; }
-    public IList<string> ValidationMessages { get; set; }
 
     // Uses Entity ViewModels
     public CategoryViewModel Category { get; set; }
@@ -1171,7 +1168,7 @@ public class ProductEditViewModel
 
 #### Partial ViewModels
 
-[`Partial ViewModels`](#partial-viewmodels) describe *parts* of a screen, to keep overview of the sections, like:
+[`Partial ViewModels`](#partial-viewmodels) describe *parts* of a screen, to keep overview of its sections, like:
 
     LoginPartialViewModel
     ButtonBarViewModel
@@ -1190,7 +1187,6 @@ public class ButtonBarViewModel
     public bool CanDelete { get; set; }
     public bool CanCreate { get; set; }
     public bool CanShowList { get; set; }
-    public bool CanGoBack { get; set; }
 }
 ```
 
@@ -1204,25 +1200,24 @@ The [`Partial ViewModels`](#partial-viewmodels) can be used in [`Screen ViewMode
 /// </summary>
 public class ProductEditViewModel
 {
+    public int ID { get; set; }
+    public string Name { get; set; }
+
     // Partials:
     public ButtonBarViewModel Buttons { get; set; }
     public LoginPartialViewModel Login { get; set; }
     public PagerViewModel Pager { get; set; }
-
-    public ProductViewModel Product { get; set; }
-    public bool IsNew { get; set; }
-    public bool CanDelete { get; set; }
 }
 ```
 
 #### ListItem ViewModels
 
-[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names can might have:
+[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
 
     ProductListItemViewModel
     CategoryListItemViewModel
 
-A `ProductListItemViewModel ` may look as follows:
+A `ProductListItemViewModel` could look as follows:
 
 ```cs
 public class ProductListItemViewModel 
@@ -1241,11 +1236,8 @@ public class ProductListItemViewModel
 /// <summary>
 /// Example of a ViewModel using ListItem ViewModels.
 /// </summary>
-public class ProductListViewModel 
+public class ProductListViewModel
 {
-    public ButtonBarViewModel Buttons { get; set; }
-    public PagerViewModel Pager { get; set; }
-
     // Here, Product ListItemViewModel is used.
     public IList<ProductListItemViewModel> Products { get; set; }
 }
@@ -1254,10 +1246,13 @@ public class ProductListViewModel
 Some list views only need an [`IDNameDto`](api.md#jj-canonical), which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
 
 ```cs
-public class IDAndName
+namespace JJ.Data.Canonical
 {
-    public int ID { get; set; }
-    public string Name { get; set; }
+    public class IDAndName
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
 }
 ```
 
@@ -1269,9 +1264,6 @@ Here you can find [`IDAndName`](api.md#jj-canonical) objects used in a `ListView
 /// </summary>
 public class ProductListViewModel
 {
-    public ButtonBarViewModel Buttons { get; set; }
-    public PagerViewModel Pager { get; set; }
-
     // Here, IDAndName is used as a list item.
     public IList<IDAndName> Products { get; set; }
 }
@@ -1279,7 +1271,7 @@ public class ProductListViewModel
 
 #### Lookup ViewModels
 
-A *lookup* list can for instance be the data to pick from a drop-down box, e.g.:
+A *lookup* list can hold the data for a control like a drop-down box, e.g.:
 
 ```cs
 IList<IDNameDto> ProductTypeLookup { get; set; }
@@ -1293,21 +1285,14 @@ It might be used in a [`Screen ViewModel`](#screen-viewmodels) like so:
 /// </summary>
 public class ProductEditViewModel
 {
-    // Partials:
-    public ButtonBarViewModel Buttons { get; set; }
-    public LoginPartialViewModel Login { get; set; }
-    public PagerViewModel Pager { get; set; }
-
-    public ProductViewModel Product { get; set; }
-    public bool IsNew { get; set; }
-    public bool CanDelete { get; set; }
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public IDAndName ProductType { get; set; }
 
     // Here is the Lookup ViewModel.
     IList<IDAndName> ProductTypeLookup { get; set; }
 }
 ```
-
-`< TODO: Code samples. Even bad ones. (Color them red.) >`
 
 #### How to Model
 
@@ -1334,7 +1319,7 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities), which potentially connect the [`ViewModel`](#viewmodels) to a database, which isn't desired or possible in all contexts.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This would potentially connect the [`ViewModel`](#viewmodels) to a database, which isn't desired or possible in all contexts.
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
