@@ -1069,8 +1069,6 @@ Extra information in Dutch about how to structure the [`Resource` files](#resour
 Presentation Patterns
 ---------------------
 
-`< TODO: Make code samples slightly shorter. >`
-
 ### ViewModels
 
 [`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](index.md).
