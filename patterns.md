@@ -972,7 +972,7 @@ Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dot
 
 <h4 id="resource-strings-introduction">Introduction</h4>
 
-To store `Button Texts` and [model](#entities) translations in [`.NET`](api.md#dotnet) projects, `resx` files can be used.
+To store `Button Texts` and translations of [domain](#entities) terminology in [`.NET`](api.md#dotnet) projects, you could use `resx` files.
 
 
 <h4 id="resource-strings-visual-studio-editor">Visual Studio Editor</h4>
@@ -984,7 +984,7 @@ Here's what the `Resource strings` editor looks like in [`Visual Studio`](api.md
 
 <h4 id="resource-string-file-names">File Names</h4>
 
-[`.NET`](api.md#dotnet) returns the translations in the right language, of the `CurrentCulture`, if you name your `Resource` files like this:
+[`.NET`](api.md#dotnet) returns the translations in the right language (of the `CurrentCulture`) if you name your `Resource` files like this:
 
     Resources.resx
     Resources.nl-NL.resx
@@ -1048,7 +1048,7 @@ public static class ResourceFormatter
 }
 ```
 
-This eliminates the need to repeat the [`Resource Name`](#resource-strings-visual-studio-editor) in the code. It also encourages consistency by forcing the method names to match the [`Resource Names`](#resource-strings-visual-studio-editor).
+This eliminates the need to repeat the [`Resource Name`](#resource-strings-visual-studio-editor) in the code above. It also encourages consistency by forcing the method names to match the [`Resource Names`](#resource-strings-visual-studio-editor).
 
 
 <h4 id="resource-strings-reusability">Reusability</h4>
@@ -1063,7 +1063,7 @@ This eliminates the need to repeat the [`Resource Name`](#resource-strings-visua
 
 <h4 id="resource-strings-more-information">For More Information</h4>
 
-Extra information in Dutch about how to structure the [`Resource` files](#resource-string-file-names) can be read in [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
+For extra information in Dutch about how to structure the [`Resource` files](#resource-string-file-names), see [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
 
 Presentation Patterns
