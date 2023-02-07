@@ -1077,7 +1077,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 
 #### Only Data
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be purely a [data object](#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for their data. This also makes it better possible to integrate with different types of technology, as it keeps the [`ViewModels`](#viewmodels) simple. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be a pure [data object](#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for their data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -1099,14 +1099,14 @@ Every screen can get a [`ViewModel`](#viewmodels). Here are some [`Screen ViewMo
 
 These names are built up from parts:
 
-1. Start with the [`Entity`](#entities) name:  
+1. Starting with the [`Entity`](#entities) name:  
    `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related:  
    `Details`, `List`, `Edit`, `Delete` or `Deleted`
 3. And end it with:  
    [`ViewModel`](#viewmodels)
 
-Instead of [`CRUD`](layers.md#crud) actions, you could also use terminology like `Overview`, `Selector`, `NotFound`, or `Login`:
+Instead of [`CRUD`](layers.md#crud) actions, you could also use terms like `Overview`, `Selector`, `NotFound`, or `Login`:
 
     ProductOverviewViewModel
     CategorySelectorViewModel
@@ -1162,7 +1162,7 @@ public class ProductEditViewModel
 }
 ```
 
-[`Entity ViewModels`](#entity-viewmodels) can also be called [`Item ViewModels`](#entity-viewmodels).
+[`Entity ViewModels`](#entity-viewmodels) might also be called [`Item ViewModels`](#entity-viewmodels).
 
 #### Partial ViewModels
 
@@ -1204,13 +1204,12 @@ public class ProductEditViewModel
     // Partials:
     public ButtonBarViewModel Buttons { get; set; }
     public LoginPartialViewModel Login { get; set; }
-    public PagerViewModel Pager { get; set; }
 }
 ```
 
 #### ListItem ViewModels
 
-[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*, which may differ from the [`Entity ViewModel`](#entity-viewmodels). Here are some names they might have:
+[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
 
     ProductItemViewModel
     CategoryListItemViewModel
@@ -1237,10 +1236,12 @@ public class ProductListViewModel
 {
     // Here, a ListItem ViewModel is used.
     public IList<ProductItemViewModel> Products { get; set; }
+
+    public PagerViewModel Pager { get; set; }
 }
 ```
 
-Some list views only need an [`IDNameDto`](api.md#jj-canonical), which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
+Some list views only need an [`IDNameDto`](api.md#jj-canonical), a version of which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
 
 ```cs
 namespace JJ.Data.Canonical
@@ -1263,6 +1264,8 @@ public class ProductListViewModel
 {
     // Here, IDAndName is used as a list item.
     public IList<IDAndName> Products { get; set; }
+
+    public PagerViewModel Pager { get; set; }
 }
 ```
 
@@ -1316,7 +1319,7 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible in all situations.
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
