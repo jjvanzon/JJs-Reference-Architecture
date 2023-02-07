@@ -1311,7 +1311,7 @@ Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether i
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
-For instance: if the business logic tells us that an [`Entity`](#entities) is a very special [`Entity`](#entities), therefor it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
+For instance: if the business logic tells us that an [`Entity`](#entities) is a very special [`Entity`](#entities), therefore it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
 The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) or a [view](#views).
 
 #### Keeping It Clean
