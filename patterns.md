@@ -1226,6 +1226,7 @@ public class ProductItemViewModel
 }
 ```
 
+So they can be different from the [`Entity ViewModels`](#entity-viewmodels).  
 [`ListItem ViewModels`](#listitem-viewmodels) can be used in a `ListViewModel`:
 
 ```cs
@@ -1241,7 +1242,7 @@ public class ProductListViewModel
 }
 ```
 
-Some list views only need an [`IDNameDto`](api.md#jj-canonical), a version of which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
+Some list views only need an [`IDAndName`](api.md#jj-canonical) [`DTO`](#dto), a version of which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
 
 ```cs
 namespace JJ.Data.Canonical
@@ -1274,7 +1275,7 @@ public class ProductListViewModel
 A *lookup* list can hold the data for a control like a drop-down box, e.g.:
 
 ```cs
-IList<IDNameDto> ProductTypeLookup { get; set; }
+IList<IDAndName> ProductTypeLookup { get; set; }
 ```
 
 It might be used in a [`Screen ViewModel`](#screen-viewmodels) like so:
