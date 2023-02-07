@@ -1320,7 +1320,7 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 
 #### No Entities
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible in all situations.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible.
 
 Even when the [`ViewModel`](#entities) looks almost exactly the same as the [`Entity`](#entities), we tend to not use [`Entities`](#entities) directly. 
 
