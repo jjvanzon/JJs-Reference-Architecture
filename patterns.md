@@ -1331,7 +1331,7 @@ public class Product
 {
     public virtual int ID { get; set; }
     public virtual string Name { get; set; }
-    public virtual ProductType ProductType { get; set; }
+    public virtual Category Caterogy { get; set; }
 }
 ```
 
@@ -1342,13 +1342,33 @@ public class ProductViewModel
 {
     public int ID { get; set; }
     public string Name { get; set; }
-    public ProductTypeViewModel ProductType { get; set; }
+    public CategoryViewModel Category { get; set; }
 }
 ```
 
-It is worth noting that linking to an [`Entity`](#entities) can result in the availability of other related [`Entities`](#entities), which may broaden the scope of the view beyond our desires.
+It is worth noting that linking to an [`Entity`](#entities) can result in the availability of other related [`Entities`](#entities), which may broaden the scope of the view beyond our intentions.
 
-`< TODO: Code sample that shows following an object graph, making objects available, unintentionally coupled with. >`
+```cs
+/// <summary>
+/// This ViewModel references an Entity, which is not recommended.
+/// </summary>
+public class ProductViewModel
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+
+    // Not recommended: Referencing an Entity from a ViewModel.
+    public Category Category { get; set; }
+}
+
+// Unintentionally, many customers' data is available
+// in the Product view,  because we referenced
+// the Category Entity from a ViewModel.
+var customers =
+    productViewModel.Category.Products
+                                .SelectMany(x => x.Orders)
+                                .Select(x => x.Customer);
+```
 
 An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
 
