@@ -1362,12 +1362,12 @@ public class ProductViewModel
 }
 
 // Unintentionally, many customers' data is available
-// in the Product view,  because we referenced
+// in the Product view, because we referenced
 // the Category Entity from a ViewModel.
 var customers =
     productViewModel.Category.Products
-                                .SelectMany(x => x.Orders)
-                                .Select(x => x.Customer);
+                    .SelectMany(x => x.Orders)
+                    .Select(x => x.Customer);
 ```
 
 An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer).
