@@ -1363,7 +1363,7 @@ public class ProductViewModel
 
 // Unintentionally, many customers' data is available
 // in the Product view, because we referenced
-// the Category Entity from a ViewModel.
+// an Entity from a ViewModel.
 var customers =
     productViewModel.Category.Products
                     .SelectMany(x => x.Orders)
