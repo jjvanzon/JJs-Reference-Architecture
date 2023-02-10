@@ -271,6 +271,6 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows a connection to the `WCF` service using a convenient, strongly typed `interface`.
 | __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` / `Rest` protocols.
 | __`JJ.Services.Ordering.WebApi`__               | There is no reason [`Web API`](https://learn.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) should not be involved in this [service architecture](#-service-oriented-architecture). In fact, the idea of `WCF` being the default for services, might not be a very long-lived.
-| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service in this [architecture](index.md) is an `AppService`. It exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns.md#viewmodel).
+| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service in this [architecture](index.md) is an `AppService`. It exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns.md#viewmodels).
 
 [back](.)

@@ -1,0 +1,70 @@
+<!-- start custom head snippets, customized by JJ with _includes/head-custom.html file -->
+
+<!-- Setup theme-color -->
+{% include head-custom-theme-colors.html %}
+
+<!-- Setup Google Analytics -->
+{% include head-custom-google-analytics.html %}
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}" -->
+
+<!-- JJ.Framework scripts (for RememberScrollPosition). -->
+<script>
+  {% include JJ.Framework.Check.js %}
+  {% include JJ.Framework.Assert.js %}
+  {% include JJ.Framework.Cookie.js %}
+  {% include JJ.Framework.RememberScrollPosition.js %}
+</script>
+
+<!-- Hacking in C# class name highlighting for variables in code blocks. -->
+<script>
+  $(document).ready(() =>
+  {
+      $(".n + .n").prev().removeClass("n").addClass("nc");
+      $(".n + .nf").prev().removeClass("n").addClass("nc");
+  });
+</script>
+
+<!-- Custom Styling -->
+<style>
+  .wrapper { max-width: 85%; } 
+  section { max-width: 100%; margin-top: 0px }
+  section #title { margin: 0 0 10px 0; }
+
+  #site-title
+  {
+    font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 40px;
+    text-align: center;
+    line-height: 42px;
+  }
+
+  .credits { display: block; text-align: center; }
+
+  h4 { font-weight: bold; }
+  ul ul { margin: 0 0 0; }
+  ol ol { margin: 0 0 0; }
+  code
+  { 
+    padding: 0;
+    margin: 0 3px;
+    /* Mixed 0.25 link with 0.75 normal text */
+    color: #F3DB9F; 
+  } 
+  a code { color: #ffcc00}
+  a code:hover { color: #ffeb9b }
+  table { margin: 0 0 10px; }
+  table td { vertical-align: top; }
+  table pre { margin: 0px; }
+  .red, .red * { color: #FF6666 !important }
+  .green, .green * { color: #99D65C !important }
+
+  @media screen and (min-width: 880px)
+  {
+    .wrapper { max-width: 75%; }
+  }
+</style>
+
+<!-- end custom head snippets -->
