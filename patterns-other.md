@@ -1,5 +1,5 @@
 ﻿---
-title: "🧶 Patterns | Other"
+title: "⚙️ Patterns | Other"
 ---
 
 `[ Draft ]`

@@ -1,5 +1,5 @@
 ﻿---
-title: "🧶 Patterns | Presentation"
+title: "🖥️ Patterns | Presentation"
 ---
 
 `[ Draft ]`

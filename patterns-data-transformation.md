@@ -1,11 +1,11 @@
 ﻿---
-title: "🧶 Patterns"
+title: "🐛 Patterns | Data Transformation"
 ---
 
 `[ Draft ]`
 
-🐛 Patterns
-============
+🐛 Patterns | Data Transformation
+==================================
 
 [back](patterns.md)
 
