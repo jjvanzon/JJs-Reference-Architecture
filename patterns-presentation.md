@@ -36,19 +36,20 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 
 <h3>Contents</h3>
 
-- [ViewModels](#viewmodels)
-- [Lookup Lists](#lookup-lists)
-- [ToViewModel](#toviewmodel)
-- [ToEntity](#toentity)
-- [Presenter](#presenter)
-- [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)
-- [NullCoalesce (ViewModels)](#nullcoalesce-viewmodels)
-- [Views](#views)
-- [First Full Load – Then Partial Load – Then Native Code](#first-full-load--then-partial-load--then-native-code)
-- [Temporary ID's](#temporary-ids)
-- [Stateless and Stateful](#stateless-and-stateful)
-- [Considerations](#considerations)
-    - [ToEntity / ToViewModel](#toentity--toviewmodel)
+[Only Data](#only-data)  
+[Screen ViewModels](#screen-viewmodels)  
+[Entity ViewModels](#entity-viewmodels)  
+[Partial ViewModels](#partial-viewmodels)  
+[ListItem ViewModels](#listitem-viewmodels)  
+[Lookup ViewModels](#lookup-viewmodels)  
+[How to Model](#how-to-model)  
+["What", not "How"](#what-not-how)  
+["What", not "Why"](#what-not-why)  
+[Keeping It Clean](#keeping-it-clean)  
+[No Entities](#no-entities)
+[Avoid ViewModel to ViewModel Conversion](#avoid-viewmodel-to-viewmodel-conversion)  
+[Avoid Inheritance](#avoid-inheritance)  
+[Conclusion](#conclusion)  
 
 
 <h3>Only Data</h3>
