@@ -349,7 +349,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Memory</a>
   </th>
   <td>
-      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="patterns.html#mock">mock</a> a data store.
+      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="patterns-other.html#mock">mock</a> a data store.
   </td>
 </tr>
 
@@ -404,7 +404,7 @@ List of API's (and other tech)
        JJ.Framework.Business</a>
   </th>
   <td>
-      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns.html#validators">validation</a>) messages. <a href="patterns.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
+      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns-business-logic.html#validators">validation</a>) messages. <a href="patterns-business-logic.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
   </td>
 </tr>
 
@@ -414,7 +414,7 @@ List of API's (and other tech)
        JJ.Framework.Validation</a>
   </th>
   <td>
-      A nice fluent notation for <a href="patterns.html#validators">validations</a>.
+      A nice fluent notation for <a href="patterns-business-logic.html#validators">validations</a>.
   </td>
 </tr>
 
@@ -617,7 +617,7 @@ List of API's (and other tech)
 
 <tr id="debugger-displays">
   <th>
-    <a href="patterns.html#debuggerdisplays">
+    <a href="patterns-other.html#debuggerdisplays">
        DebuggerDisplays</a>
   </th>
   <td>
@@ -639,7 +639,7 @@ List of API's (and other tech)
 
 <tr id="accessor">
   <th>
-    <a href="patterns.html#accessor">Accessor</a>
+    <a href="patterns-other.html#accessor">Accessor</a>
   </th>
   <td>
       For accessing the internals of <code>types</code> for instance for testing purposes.
@@ -727,8 +727,8 @@ List of API's (and other tech)
 <table>
 
 <tr id="resource-strings">
-  <th><a href="patterns.html#resource-strings">Resource Strings</a></th>
-  <td>For localization, <a href="patterns.html#resource-strings"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
+  <th><a href="patterns-business-logic.html#resource-strings">Resource Strings</a></th>
+  <td>For localization, <a href="patterns-business-logic.html#resource-strings"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-resourcestrings">
