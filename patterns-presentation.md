@@ -36,20 +36,20 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 
 <h3>Contents</h3>
 
-[Only Data](#only-data)  
-[Screen ViewModels](#screen-viewmodels)  
-[Entity ViewModels](#entity-viewmodels)  
-[Partial ViewModels](#partial-viewmodels)  
-[ListItem ViewModels](#listitem-viewmodels)  
-[Lookup ViewModels](#lookup-viewmodels)  
-[How to Model](#how-to-model)  
-["What", not "How"](#what-not-how)  
-["What", not "Why"](#what-not-why)  
-[Keeping It Clean](#keeping-it-clean)  
-[No Entities](#no-entities)
-[Avoid ViewModel to ViewModel Conversion](#avoid-viewmodel-to-viewmodel-conversion)  
-[Avoid Inheritance](#avoid-inheritance)  
-[Conclusion](#conclusion)  
+- [Only Data](#only-data)  
+- [Screen ViewModels](#screen-viewmodels)  
+- [Entity ViewModels](#entity-viewmodels)  
+- [Partial ViewModels](#partial-viewmodels)  
+- [ListItem ViewModels](#listitem-viewmodels)  
+- [Lookup ViewModels](#lookup-viewmodels)  
+- [How to Model](#how-to-model)  
+- ["What", not "How"](#what-not-how)  
+- ["What", not "Why"](#what-not-why)  
+- [Keeping It Clean](#keeping-it-clean)  
+- [No Entities](#no-entities)
+- [Avoid ViewModel to ViewModel Conversion](#avoid-viewmodel-to-viewmodel-conversion)  
+- [Avoid Inheritance](#avoid-inheritance)  
+- [Conclusion](#conclusion)  
 
 
 <h3 id="only-data">Only Data</h3>
