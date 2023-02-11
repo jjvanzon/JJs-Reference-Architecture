@@ -120,7 +120,7 @@ A downside is that when two people try to save a piece of data at the same time,
 
 Another downside to flagging is that the source structure must be adapted to it, which is not always an option / a good option.
 
-The [`TryGet-Insert-Update-Delete` pattern](data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion), though, creates a last-user-wins situation, because not flagging determines whether it is an `Update` or `Insert`, but actual existence of dest `object` determines it.
+The [`TryGet-Insert-Update-Delete` pattern](#tryget-insert-update-delete--full-crud-conversion--collection-conversion), though, creates a last-user-wins situation, because not flagging determines whether it is an `Update` or `Insert`, but actual existence of dest `object` determines it.
 
 
 DocumentModel
