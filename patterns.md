@@ -1,11 +1,14 @@
 ﻿---
-title: "🧶 Patterns | Introduction"
+title: "🧶 Patterns"
 ---
 
-🧶 Patterns | Introduction
-===========================
+🧶 Patterns
+===========
 
 [back](.)
+
+Introduction
+------------
 
 Design patterns are coding techniques to solve common programming problems. They can bring consistency to the code. They help us reuse established solutions and improve the overall design of the software. They also are an extension to the software layering.
 
