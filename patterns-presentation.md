@@ -29,8 +29,7 @@ title: "🧶 Patterns | Presentation"
 ViewModels
 ----------
 
-[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](index.md).
-
+[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](index.md).  
 A [`ViewModel`](#viewmodels) provides a simplified and organized representation of the data to display on screen.
 
 
@@ -358,7 +357,7 @@ An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`]
 `< TODO: Code sample showing a view model and entity model looking quite different even though they are about the same entity. >`
 
 
-<h3 id="view-models-avoid-viewmodel-to-viewmodel-conversion">Avoid ViewModel to ViewModel Conversion</h3>
+<h3 id="avoid-viewmodel-to-viewmodel-conversion">Avoid ViewModel to ViewModel Conversion</h3>
 
 Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back using the [`ToViewModel`](#toviewmodel) and [`ToEntity`](#toentity) patterns.
 
