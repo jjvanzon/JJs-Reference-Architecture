@@ -4,7 +4,7 @@ title: "🧶 Patterns | Presentation"
 
 `[ Draft ]`
 
-🧶 Patterns | Presentation
+🖥️ Patterns | Presentation
 ===========================
 
 [back](patterns.md)

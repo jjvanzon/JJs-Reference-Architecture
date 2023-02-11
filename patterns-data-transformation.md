@@ -4,7 +4,7 @@ title: "🧶 Patterns"
 
 `[ Draft ]`
 
-🧶 Patterns
+🐛 Patterns
 ============
 
 [back](patterns.md)

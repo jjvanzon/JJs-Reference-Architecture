@@ -2,7 +2,7 @@
 title: "🧶 Patterns | Business Logic"
 ---
 
-🧶 Patterns | Business Logic
+🤖 Patterns | Business Logic
 ============================
 
 [back](patterns.md)
