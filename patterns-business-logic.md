@@ -9,7 +9,7 @@ title: "🤖 Patterns | Business Logic"
 
 <h2>Contents</h2>
 
-- [Introduction](#introduction)
+- [Introduction](patterns.md)
 - [RepositoryWrappers](#repositorywrappers)
 - [Validators](#validators)
 - [SideEffects](#sideeffects)
@@ -25,23 +25,23 @@ title: "🤖 Patterns | Business Logic"
 Introduction
 ------------
 
-[Presentation](layers.md#presentation-layer), [`Entity` model](#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](#introduction). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](#introduction) can be used. But also things, that do not follow any standard [pattern](#introduction).
+[Presentation](layers.md#presentation-layer), [`Entity` model](patterns-data-access.md#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](patterns.md). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](patterns.md) can be used. But also things, that do not follow any standard [pattern](patterns.md).
 
-The [business layer](layers.md#business-layer) externally speaks a language of [`Entities`](#entities) or sometimes [`DTO's`](#dto). Internally it can talk to [`Repository interfaces`](#repository-interfaces) for [data access](aspects.md#persistence).
+The [business layer](layers.md#business-layer) externally speaks a language of [`Entities`](patterns-data-access.md#entities) or sometimes [`DTO's`](patterns-data-access.md#dto). Internally it can talk to [`Repository interfaces`](patterns-data-access.md#repository-interfaces) for [data access](aspects.md#persistence).
 
-It is preferred that [business logic](layers.md#business-layer) hooks up with  [`Entity`](#entities) `classes` rather than [`Repositories`](#repository). But there is a large gray area. Using [`Entities`](#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](#repository) variables.
+It is preferred that [business logic](layers.md#business-layer) hooks up with  [`Entity`](patterns-data-access.md#entities) `classes` rather than [`Repositories`](patterns-data-access.md#repository). But there is a large gray area. Using [`Entities`](patterns-data-access.md#entities) improves testability, limits queries and limits interdependence, dependency on a data source and passing around a lot of [`Repository`](patterns-data-access.md#repository) variables.
 
 
 RepositoryWrappers
 ------------------
 
-Passing around lots of [`Repositories`](#repository) can create long lists of parameters, prone to change. To prevent that phenomenon, sets of [`Repositories`](#repository) could be combined into [`RepositoryWrappers`](#repositorywrappers). Those can then be passed around instead. This keeps the parameter lists shorter.
+Passing around lots of [`Repositories`](patterns-data-access.md#repository) can create long lists of parameters, prone to change. To prevent that phenomenon, sets of [`Repositories`](patterns-data-access.md#repository) could be combined into [`RepositoryWrappers`](#repositorywrappers). Those can then be passed around instead. This keeps the parameter lists shorter.
 
-You can make a single [`RepositoryWrapper`](#repositorywrappers) with all the [`Repositories`](#repository) out of a [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
+You can make a single [`RepositoryWrapper`](#repositorywrappers) with all the [`Repositories`](patterns-data-access.md#repository) out of a [functional domains](namespaces-assemblies-and-folders.md#functional-domains) in it.
 
-Some logic might use [`Repositories`](#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple [`RepositoryWrappers`](#repositorywrappers): one for each [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also make a custom [`RepositoryWrapper`](#repositorywrappers) with [`Repositories`](#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains).
+Some logic might use [`Repositories`](patterns-data-access.md#repository) out of multiple [domains](namespaces-assemblies-and-folders.md#functional-domains). You could choose to pass around multiple [`RepositoryWrappers`](#repositorywrappers): one for each [domain model](namespaces-assemblies-and-folders.md#functional-domains). But you could also make a custom [`RepositoryWrapper`](#repositorywrappers) with [`Repositories`](patterns-data-access.md#repository) from multiple [functional domains](namespaces-assemblies-and-folders.md#functional-domains).
 
-You may also want to more limited [`RepositoryWrappers`](#repositorywrappers). For instance one for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency more narrow, so logic that has nothing to do with certain [`Repositories`](#repository), would not accidentally become dependent on them.
+You may also want to more limited [`RepositoryWrappers`](#repositorywrappers). For instance one for each [partial domain](namespaces-assemblies-and-folders.md#partial-domains). This keeps the width of dependency more narrow, so logic that has nothing to do with certain [`Repositories`](patterns-data-access.md#repository), would not accidentally become dependent on them.
 
 An alternative to [`RepositoryWrappers`](#repositorywrappers) might be [dependency injection](practices-and-principles.md#dependency-injection). Under this [link](practices-and-principles.md#dependency-injection) you can find some criticism about the techique, but that might be due to not using a very safe [dependency injection](practices-and-principles.md#dependency-injection) `API`. [`RepositoryWrappers`](#repositorywrappers) and [dependency injection](practices-and-principles.md#dependency-injection) might also go hand in hand in combination with each other.
 
@@ -55,11 +55,11 @@ It is recommended to keep [`Validators`](api.md#jj-framework-validation) indepen
 
 If multiple [`Validators`](api.md#jj-framework-validation) should go off, you might call them individually one by one.
 
-For complex [`Validator`](api.md#jj-framework-validation), it is suggested to add a [prefix or suffix](code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](api.md#jj-framework-validation).
+For complex [`Validator`](api.md#jj-framework-validation), it is suggested to add a [prefix or suffix](code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](api.md#jj-framework-validation).
 
 Next to [`Validators`](api.md#jj-framework-validation) deciding whether user input is valid, [`Validators`](api.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with an app.
 
-[`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [`Entity`](#entities) is still in use, you might not be able to delete it.
+[`Validators`](api.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [`Entity`](patterns-data-access.md#entities) is still in use, you might not be able to delete it.
 
 
 SideEffects
@@ -79,7 +79,7 @@ LinkTo
 
 This pattern is about [bidirectional relationship synchronization](aspects.md#bidirectional-relationship-synchronization). That means that if a parent property is set: `myProduct.Supplier = mySupplier`, automatically the product is added to the child collection too: `mySupplier.Products.Add(myProduct)`.
 
-To manage [bidirectional relationships](aspects.md#bidirectional-relationship-synchronization), even when the underlying [persistence technology](aspects.md#persistence) doesn't, we could link [`Entities`](#entities) together using [`LinkTo`](#linkto) extension methods. By calling [`LinkTo`](#linkto), both ends of the relationship are updated. Here is a template for a [`LinkTo`](#linkto) method that works for an `1-to-n` relationship:
+To manage [bidirectional relationships](aspects.md#bidirectional-relationship-synchronization), even when the underlying [persistence technology](aspects.md#persistence) doesn't, we could link [`Entities`](patterns-data-access.md#entities) together using [`LinkTo`](#linkto) extension methods. By calling [`LinkTo`](#linkto), both ends of the relationship are updated. Here is a template for a [`LinkTo`](#linkto) method that works for an `1-to-n` relationship:
 
 ```cs
 public static void LinkTo(this Child child, Parent parent)
@@ -145,7 +145,7 @@ But beware that [`LinkTo`](#linkto) might be a better choice, because executing 
 Cascading
 ---------
 
-[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [`Entity`](#entities), *child-*[`Entities`](#entities) are `Deleted` too. But if they are not inherently part of the main [`Entity`](#entities), they would be [`Unlinked`](#unlink) instead.
+[`Cascading`](aspects.md#cascading) means that upon `Deleting` a main [`Entity`](patterns-data-access.md#entities), *child-*[`Entities`](patterns-data-access.md#entities) are `Deleted` too. But if they are not inherently part of the main [`Entity`](patterns-data-access.md#entities), they would be [`Unlinked`](#unlink) instead.
 
 This can be implemented as a pattern in [`C#`](api.md#csharp). A reason to do it in [`C#`](api.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
 
@@ -196,7 +196,7 @@ public static class DeleteRelatedEntitiesExtensions
 }
 ```
 
-In there, child [`Entities`](#entities) are successively `Deleted`:
+In there, child [`Entities`](patterns-data-access.md#entities) are successively `Deleted`:
 
 ```cs
 /// <summary>
@@ -216,7 +216,7 @@ public static class DeleteRelatedEntitiesExtensions
 
 (Note: The `ToArray` can prevent an `Exception` about the loop collection being modified.)
 
-Before an extension method `Deletes` a child [`Entity`](#entities), it might call [`Cascading`](#cascading) upon the child [`Entity`](#entities) too!
+Before an extension method `Deletes` a child [`Entity`](patterns-data-access.md#entities), it might call [`Cascading`](#cascading) upon the child [`Entity`](patterns-data-access.md#entities) too!
 
 ```cs
 public static void DeleteRelatedEntities(this Order order)
@@ -235,7 +235,7 @@ public static void DeleteRelatedEntities(this Order order)
 
 <h4 id="unlinkrelatedentities">UnlinkRelatedEntities</h4>
 
-`UnlinkRelatedEntities` might be a little bit easier. It neither requires [`Repositories`](#repository) not does it do much recursion:
+`UnlinkRelatedEntities` might be a little bit easier. It neither requires [`Repositories`](patterns-data-access.md#repository) not does it do much recursion:
 
 ```cs
 /// <summary>
@@ -256,7 +256,7 @@ Note that it uses the [Unlink](#unlink) pattern discussed earlier.
 
 <h4 id="cascading-delete-main-entity">Delete Main Entity</h4>
 
-The [`Cascading`](#cascading) extension methods delete *related* [`Entities`](#entities), not the *main* [`Entity`](#entities). The idea behind that is: Where a main [`Entity`](#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+The [`Cascading`](#cascading) extension methods delete *related* [`Entities`](patterns-data-access.md#entities), not the *main* [`Entity`](patterns-data-access.md#entities). The idea behind that is: Where a main [`Entity`](patterns-data-access.md#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -271,9 +271,9 @@ That way we can see explicitly that more `Deletions` take place.
 
 <h4 id="cascading-and-repositories">Cascading & Repositories</h4>
 
-The [`DeleteRelatedEntities`](#deleterelatedentities) methods might need [`Repositories`](#repository) to perform the `Delete` operations.
+The [`DeleteRelatedEntities`](#deleterelatedentities) methods might need [`Repositories`](patterns-data-access.md#repository) to perform the `Delete` operations.
 
-You could pass these [`Repositories`](#repository) as *parameters:*
+You could pass these [`Repositories`](patterns-data-access.md#repository) as *parameters:*
 
 ```cs
 public static void DeleteRelatedEntities(
@@ -289,14 +289,14 @@ public static void DeleteRelatedEntities(
 }
 ```
 
-Or you might make [repositories](#repository) available through a technique called [dependency injection](practices-and-principles.md#dependency-injection).
+Or you might make [repositories](patterns-data-access.md#repository) available through a technique called [dependency injection](practices-and-principles.md#dependency-injection).
  
 It's up to you. The choice to use *extension* methods was also a matter of preference.
 
 
 <h4 id="cascading-nuance">Nuance</h4>
 
-Sometimes an [`Entity`](#entities) does have related [`Entities`](#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+Sometimes an [`Entity`](patterns-data-access.md#entities) does have related [`Entities`](patterns-data-access.md#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
 <h4 id="cascading-conclusion">Conclusion</h4>
@@ -309,15 +309,15 @@ Facade
 
 A [`Facade`](#facade) combines several related (usually [`CRUD`](layers.md#crud)) operations into one `class` that also performs additional [business logic](layers.md#business-layer) and [`Validation`](#validators), [`SideEffects`](#sideeffects), integrity constraints, [conversions](aspects.md#conversion), etc. It delegates to other `classes` to do the work. If you do something using a [`Facade`](#facade) you should be able to count on it that integrity is maintained.
 
-It is a combinator `class`: a [`Facade`](#facade) combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A [`Facade`](#facade) can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [`Entity`](#entities) `types` together.
+It is a combinator `class`: a [`Facade`](#facade) combines other (smaller) parts of the [business layer](layers.md#business-layer) into one, offering a single entry point for a lot of related operations. A [`Facade`](#facade) can be about a [partial functional domain](namespaces-assemblies-and-folders.md#partial-domains), so managing a *set* of [`Entity`](patterns-data-access.md#entities) `types` together.
 
 <h4>Repositories instead of Facades</h4>
 
 [`Facades`](#facade) may typically contain [`CRUD`](layers.md#crud) operations, that could be used as an entry point for all your [business logic](layers.md#business-layer) and [data access](layers.md#crud) needs. But in some cases, it may be more appropriate to use the [data access layer](layers.md#data-layer) directly.
 
-For example, a simple `Get` by `ID` may be better going through a [`Repository`](#repository). There could be other cases where using [`Repositories`](#repository) directly is a better choice. For instance in the [`ToEntity`](#toentity) and [`ToViewModel`](#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
+For example, a simple `Get` by `ID` may be better going through a [`Repository`](patterns-data-access.md#repository). There could be other cases where using [`Repositories`](patterns-data-access.md#repository) directly is a better choice. For instance in the [`ToEntity`](patterns-presentation.md#toentity) and [`ToViewModel`](patterns-presentation.md#toviewmodel) code, which is usually straightforward [data conversion](aspects.md#conversion).
 
-The reason is, that a [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](#repository), to limit the interdependence between things.
+The reason is, that a [`Facade`](#facade) could create an excessive amount of dependency and high degree of coupling. Because simple operations executed frequently, would require a reference to a [`Facade`](#facade), a [combinator](#facade) `class`, naturally dependent on many other `objects`. So, for a simple `Get` it may be better to use a [`Repository`](patterns-data-access.md#repository), to limit the interdependence between things.
 
 
 Visitor
@@ -775,7 +775,7 @@ Resource Strings
 
 <h4 id="resource-strings-introduction">Introduction</h4>
 
-To store `Button Texts` and translations of [domain](#entities) terminology in [`.NET`](api.md#dotnet) projects, you could use `resx` files.
+To store `Button Texts` and translations of [domain](patterns-data-access.md#entities) terminology in [`.NET`](api.md#dotnet) projects, you could use `resx` files.
 
 
 <h4 id="resource-strings-visual-studio-editor">Visual Studio Editor</h4>
@@ -861,7 +861,7 @@ This eliminates the need to repeat the [`Resource Name`](#resource-strings-visua
 
 <h4 id="resource-strings-use-the-business-layer">Use the Business Layer</h4>
 
-[`Resource strings`](#resource-strings) may play a role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
+[`Resource strings`](#resource-strings) may play a role beyond just presentation. They're also commonly used in the [business layer](layers.md#business-layer). Keeping the `DisplayNames` for [model](patterns-data-access.md#entities) properties in the [`business layer`](layers.md#business-layer) makes it possible to reuse them from multiple places.
 
 
 <h4 id="resource-strings-more-information">For More Information</h4>
