@@ -103,7 +103,7 @@ This means that the *platform-independent* part of the code is separate from the
 Patterns
 --------
 
-The next level in the namespacing can be a [design pattern](patterns-intro.md). It would become a *sub-folder* inside an assembly:
+The next level in the namespacing can be a [design pattern](patterns.md). It would become a *sub-folder* inside an assembly:
 
 - JJ.Data.Calendar.NHibernate.__Mappings__
 - JJ.Business.Calendar.__Validators__
@@ -113,7 +113,7 @@ The next level in the namespacing can be a [design pattern](patterns-intro.md). 
 Partial Domains
 ---------------
 
-For bigger projects, a [design pattern](patterns-intro.md) folder may split up into sub-folders for main [entities](patterns-data-access.md#entities) or *partial domains*:
+For bigger projects, a [design pattern](patterns.md) folder may split up into sub-folders for main [entities](patterns-data-access.md#entities) or *partial domains*:
 
 - JJ.Business.Synthesizer.Validation.__Documents__
 - JJ.Business.Synthesizer.Validation.__Operators__
@@ -186,7 +186,7 @@ The split up per *company* may be the largest concern, while a 2<sup>nd</sup> co
 
 A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](api.md#mvc)).
 
-And a [design pattern](patterns-intro.md) may be a level of detail below that.
+And a [design pattern](patterns.md) may be a level of detail below that.
 
 ### 1st Assembly then Folders
 
@@ -262,7 +262,7 @@ Assembly name:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
 
-Sub-folders for [design patterns](patterns-intro.md):
+Sub-folders for [design patterns](patterns.md):
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern]
@@ -272,7 +272,7 @@ Smaller projects, single sub-folder `Helpers` instead:
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.Helpers]
 
-Bigger projects' [design patterns](patterns-intro.md) split up into main [entities](patterns-data-access.md#entities) or partial domains:
+Bigger projects' [design patterns](patterns.md) split up into main [entities](patterns-data-access.md#entities) or partial domains:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern] [.PartialDomain]

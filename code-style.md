@@ -160,7 +160,7 @@ Suggestions for verbs:
 
 ### Class Names
 
-In this [architecture](index.md), `class` names may end with a [pattern](patterns-intro.md) name or a *verb* converted to a *noun*, e.g.:
+In this [architecture](index.md), `class` names may end with a [pattern](patterns.md) name or a *verb* converted to a *noun*, e.g.:
 
     Converter
     Validator
