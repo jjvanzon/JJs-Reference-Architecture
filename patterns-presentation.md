@@ -188,7 +188,7 @@ public class ProductEditViewModel
 ```
 
 
-<h4 id="listitem-viewmodels">ListItem ViewModels</h3>
+<h3 id="listitem-viewmodels">ListItem ViewModels</h3>
 
 [`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
 
