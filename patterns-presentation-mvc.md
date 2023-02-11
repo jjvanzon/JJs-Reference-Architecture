@@ -7,7 +7,7 @@ title: "🧶 Patterns | Presentation (MVC)"
 🧶 Patterns | Presentation (MVC)
 ================================
 
-[back](.)
+[back](patterns.md)
 
 <h2>Contents</h2>
 
@@ -214,4 +214,5 @@ TODO
 
 `< TODO: Mention: Using Request.UrlReferrer in Http Get actions crashes. Use Request.RawUrl. >`
 
-[back](.)
+[back](patterns.md)
+

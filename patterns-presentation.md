@@ -7,7 +7,7 @@ title: "🧶 Patterns | Presentation"
 🧶 Patterns | Presentation
 ===========================
 
-[back](.)
+[back](patterns.md)
 
 <h3>Contents</h3>
 
@@ -605,4 +605,5 @@ Considerations
 
 `< TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works. >`
 
-[back](.)
+[back](patterns.md)
+

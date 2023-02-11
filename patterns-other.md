@@ -7,7 +7,7 @@ title: "🧶 Patterns | Other"
 🧶 Patterns | Other
 ===================
 
-[back](.)
+[back](patterns.md)
 
 <h2>Contents</h2>
 
@@ -433,4 +433,5 @@ Rich Models
 
 `< TODO: Compare rich models with the 2D separation of concerns. >`
 
-[back](.)
+[back](patterns.md)
+

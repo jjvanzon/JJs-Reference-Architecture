@@ -5,7 +5,7 @@ title: "🧶 Patterns | Business Logic"
 🧶 Patterns | Business Logic
 ============================
 
-[back](.)
+[back](patterns.md)
 
 <h2>Contents</h2>
 
@@ -868,4 +868,4 @@ This eliminates the need to repeat the [`Resource Name`](#resource-strings-visua
 
 For extra information in Dutch about how to structure the [`Resource` files](#resource-string-file-names), see [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
-[back](.)
+[back](patterns.md)

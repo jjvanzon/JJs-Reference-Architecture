@@ -7,7 +7,7 @@ title: "🧶 Patterns"
 🧶 Patterns
 ============
 
-[back](.)
+[back](patterns.md)
 
 <h3>Contents</h3>
 
@@ -197,4 +197,4 @@ MVC
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
 - [`Controller`](#controller) - [`ViewModel`](#viewmodels) - view engine – [`View`](#views)
 
-[back](.)
+[back](patterns.md)
