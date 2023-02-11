@@ -18,7 +18,7 @@ Contents
 - 💽 [Data Access Patterns](patterns-data-access.md)
 - 🤖 [Business Logic Patterns](patterns-business-logic.md)
 - 🖥️ [Presentation Patterns](patterns-presentation.md)
-- 🕸️ [Presentation Patterns(MVC)](patterns-presentation-mvc.md)
+- 🕸️ [Presentation Patterns (MVC)](patterns-presentation-mvc.md)
 - 🐛 [Data Transformation Patterns](patterns-data-transformation.md)
 - ⚙️ [Other Patterns](patterns-other.md)
 
