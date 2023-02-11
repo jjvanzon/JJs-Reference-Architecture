@@ -1,8 +1,8 @@
 ﻿---
-title: "💽 Patterns | Data Access"
+title: "💽 Patterns: Data Access"
 ---
 
-💽 Patterns | Data Access
+💽 Patterns: Data Access
 ==========================
 
 [back](patterns.md)

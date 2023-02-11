@@ -1,10 +1,10 @@
 ﻿---
-title: "⚙️ Patterns | Other"
+title: "⚙️ Patterns: Other"
 ---
 
 `[ Draft ]`
 
-⚙️ Patterns | Other
+⚙️ Patterns: Other
 ===================
 
 [back](patterns.md)

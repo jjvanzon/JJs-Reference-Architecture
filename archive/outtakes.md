@@ -9,8 +9,8 @@ Archived text that didn't make the cut for some reason.
 
 - [API's | ORM | Meet in the Middle Queries](#apis--orm--meet-in-the-middle-queries)
 - [Namespaces, Assemblies & Folders | Scrambling Technical and Functional](#namespaces-assemblies--folders--scrambling-technical-and-functional)
-- [Patterns | Cascading](#patterns--cascading)
-- [Patterns | ViewModels](#patterns--viewmodels)
+- [Patterns: Cascading](#patterns-cascading)
+- [Patterns: ViewModels](#patterns-viewmodels)
 
 
 API's | ORM | Meet in the Middle Queries
@@ -45,14 +45,14 @@ Namespaces, Assemblies & Folders | Scrambling Technical and Functional
 This 'scrambling' of technical and functional concerns, might be rooted in our trying to project something 2-dimensional (functional vs. technical) onto something sequential (written text).
 
 
-Patterns | Cascading
+Patterns: Cascading
 --------------------
 
 *2023-01-23*
 
 This succession of calls might be done in a [`Facade`](#facade), whose job is to combine multiple aspects involved in an operation.
 
-Patterns | ViewModels
+Patterns: ViewModels
 ---------------------
 
 *2023-01-31*
