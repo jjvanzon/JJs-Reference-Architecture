@@ -30,15 +30,15 @@ By implementing it as a `Converter`, it simplifies the code. You can then say th
 TryGet-Insert-Update
 --------------------
 
-When converting one type to another one might use the `TryGet-Insert-Update` pattern. Especially when converting an [`Entity`](#entities) with related [`Entities`](#entities) from one structure to another this pattern will make the code easier to read.
+When converting one type to another one might use the `TryGet-Insert-Update` pattern. Especially when converting an [`Entity`](patterns-data-access.md#entities) with related [`Entities`](patterns-data-access.md##entities) from one structure to another this pattern will make the code easier to read.
 
-[`TryGet`](#tryget) first gets a possible existing destination [`Entity`](#entities).
+[`TryGet`](patterns-other.md#tryget) first gets a possible existing destination [`Entity`](patterns-data-access.md#entities).
 
-`Insert` will create the [`Entity`](#entities) if it did not exist yet, possibly setting some defaults.
+`Insert` will create the [`Entity`](patterns-data-access.md#entities) if it did not exist yet, possibly setting some defaults.
 
 `Update` will update the rest of the properties of either the existing or newly created `object`.
 
-When you do these actions one by one for one destination [`Entity`](#entities) after another, you will get readable code for complex conversions between data structures.
+When you do these actions one by one for one destination [`Entity`](patterns-data-access.md#entities) after another, you will get readable code for complex conversions between data structures.
 
 Note that deletion of destination `objects` is not managed by the `TryGet-Insert-Update` pattern.
 
@@ -49,7 +49,7 @@ TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion
 Used for managing complex conversions between data structures, that require insert, update and delete operations. There is no one way of implementing it, but generally it will involve the following steps:
 
 - Loop through the source collection.
-- [`TryGet`](#tryget): look up an item in the destination collection.
+- [`TryGet`](patterns-other.md#tryget): look up an item in the destination collection.
 - `Insert`: create a new item in the destination collection if none exists.
 - `Update`: update the newly created or existing destination item.
 - Do `Delete` operations after that:
@@ -58,12 +58,12 @@ Used for managing complex conversions between data structures, that require inse
 
 <h3>Considerations</h3>
 
-Converting one collection to another may involve more than creating a destination `object` for each source `object`. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [`Entities`](#entities) to figure out which items are obsolete.
+Converting one collection to another may involve more than creating a destination `object` for each source `object`. What complicates things, is that there may already be a destination collection. That means that insert, update and delete operations are required. There are different ways to handle this depending on the situation. But a general pattern that avoids a lot of complexity, is to do the inserts and updates in one loop, and do the deletes in a second loop. The inserts and updates are done first by looping through the source collection and applying the [`TryGet-Insert-Update` pattern](patterns-other.md#tryget-insert-update) on each item, while the `Delete` operations are done separately after that by comparing collections of [`Entities`](patterns-data-access.md#entities) to figure out which items are obsolete.
 
 In a little more detail:
 
 - Loop through the source collection.
-- [`TryGet`](#tryget): look up an item in the destination collection.
+- [`TryGet`](patterns-other.md#tryget): look up an item in the destination collection.
 - `Insert`: create a new item in the destination collection if none exists.
 - `Update`: update the newly created or existing destination item.
 - Do `Delete` operations after that:
@@ -99,9 +99,9 @@ The specific way to implement it, is different in every situation. Reasons that 
 - You cannot always count on instance integrity.
 - You cannot always count on identity integrity.
 - The key to a destination item might be complex, instead of just an ID.
-- You do not always have a [`Repository`](#repository).
+- You do not always have a [`Repository`](patterns-data-access.md#repository).
 - It does not always need to be full-[`CRUD`](layers.md#crud).
-- You might need to report exactly what operation is executed on each [`Entity`](#entities).
+- You might need to report exactly what operation is executed on each [`Entity`](patterns-data-access.md#entities).
 - You might need a separate normalized [*singular* form](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
 - An alternative `isNew` detection might be needed.
 - Some persistence technologies will behave unexpectedly when first retrieving and then writing and then retrieving again. Intermediate redundant retrievals should be avoided. Or not, depending on the situation.
@@ -120,15 +120,15 @@ A downside is that when two people try to save a piece of data at the same time,
 
 Another downside to flagging is that the source structure must be adapted to it, which is not always an option / a good option.
 
-The [`TryGet-Insert-Update-Delete` pattern](#tryget-insert-update-delete--full-crud-conversion--collection-conversion), though, creates a last-user-wins situation, because not flagging determines whether it is an `Update` or `Insert`, but actual existence of dest `object` determines it.
+The [`TryGet-Insert-Update-Delete` pattern](data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion), though, creates a last-user-wins situation, because not flagging determines whether it is an `Update` or `Insert`, but actual existence of dest `object` determines it.
 
 
 DocumentModel
 -------------
 
-An analog of a [`ViewModel`](#viewmodels), but then for document generation, rather than [`View`](#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
+An analog of a [`ViewModel`](patterns-presentation.md#viewmodels), but then for document generation, rather than [`View`](patterns-presentation.md#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
 
-Just as with [`ViewModels`](#viewmodels), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
+Just as with [`ViewModels`](patterns-presentation.md#viewmodels), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
 
 
 Selector-Model-Generator-Result
@@ -195,6 +195,6 @@ MVC
 [`MVC`](api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
-- [`Controller`](#controller) - [`ViewModel`](#viewmodels) - view engine – [`View`](#views)
+- [`Controller`](patterns-presentation-mvc.md#controller) - [`ViewModel`](patterns-presentation.md#viewmodels) - view engine – [`View`](patterns-presentation.md#views)
 
 [back](patterns.md)
