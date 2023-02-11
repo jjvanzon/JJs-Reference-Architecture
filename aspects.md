@@ -78,7 +78,7 @@
 Introduction
 ------------
 
-What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large scale software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
+What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large scale software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api.md) or applying certain [design patterns](patterns-intro.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api.md#visual-studio).
 
 
 Authoring & Reviewing
@@ -100,7 +100,7 @@ Here are a few examples how to do it:
 
 ### LinkTo
 
-[`LinkTo`](patterns.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
+[`LinkTo`](patterns-business-logic.md#linkto) is a light-weight pattern to link both ends of a relationship in one call.
 
 ### OneToManyRelationship
 
@@ -135,14 +135,14 @@ So the collection of `Products` gets updated.
 
 But this does not cover edge cases like `null` or `Product` is already in collection.
 
-It may be tempting to call a [LinkTo](patterns.md#linkto) method from the property setter instead or use the [OneToManyRelationship](api.md#onetomanyrelationship) `API`. The tendency use an abstraction like is strong.
+It may be tempting to call a [LinkTo](patterns-business-logic.md#linkto) method from the property setter instead or use the [OneToManyRelationship](api.md#onetomanyrelationship) `API`. The tendency use an abstraction like is strong.
 
 ### Omit Inverse Property
 
 Reasons not to have an inverse property can be:
 
 - [Enum-like entities](#enum-Like-entities)
-- [Loosely linked](#loosely-linked-translation-entities) [entity](patterns.md#entities)
+- [Loosely linked](#loosely-linked-translation-entities) [entity](patterns-data-access.md#entities)
 - 1-to-1 relationships
 - The inverse relationship would result in an impractically large list.
 
@@ -170,9 +170,9 @@ Calculation
 Cascading
 ---------
 
-When a main [entity](patterns.md#entities) would be deleted, other [entities](patterns.md#entities) might automatically be deleted, because they are part of the main [entity](patterns.md#entities).
+When a main [entity](patterns-data-access.md#entities) would be deleted, other [entities](patterns-data-access.md#entities) might automatically be deleted, because they are part of the main [entity](patterns-data-access.md#entities).
 
-[Entities](patterns.md#entities) that are linked to the entity to be deleted, but not inherently part of it, would be *unlinked* instead of deleted.
+[Entities](patterns-data-access.md#entities) that are linked to the entity to be deleted, but not inherently part of it, would be *unlinked* instead of deleted.
 
 `< TODO: Write texts. Include: `
 
@@ -230,7 +230,7 @@ Concurrency
 
 In a web-based application time elapses between retrieving data to edit and saving changes. Between these actions the data may have been changed by another user.
 
-In this [architecture](index.md) the concurrency strategy is: the last user wins. This is accomplished in code using [`TryGet-Insert-Update-Delete` pattern](patterns.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion), that results in readable saving code and restoration of state, regardless of what another user did to it.
+In this [architecture](index.md) the concurrency strategy is: the last user wins. This is accomplished in code using [`TryGet-Insert-Update-Delete` pattern](patterns-data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion), that results in readable saving code and restoration of state, regardless of what another user did to it.
 
 <h3>Alternatives</h3>
 
@@ -242,9 +242,9 @@ Another technique for handling concurrency is to assume that other users probabl
 
 The preferred technique in this [architecture](index.md) works OK in high-concurrency situations, with data shared data by users. The strategy is: the last one to save wins. The data is updated to the state the user wants to save. During the save procedure data will be locked (but not in between the user action of retrieving the data and the later action of saving the data). During the save transaction the data will be update to the state the used wants. In situations where data is hardly shared, this will accomplish the desired effect and just save the user's changes. In situations where data is more frequently changed by different users, it may result in successive saving of each user's changes, in case of which the last user wins. In case of even more concurrency, the last one to save will win discarding the losing user's save action, which may cause confusion with the user that lost. In case of even more concurrency, when many transactions accessing the same data run at the same time, the concurrency problems associated with data stores can occur, in the worst case dead-locks. If save procedures are sufficiently short and fast, this might scarcely occur.
 
-The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a [`TryGet-Insert-Update`](patterns.md#tryget-insert-update) pattern for [entities](patterns.md#entities). There wll be no checks regarding whether an object is new or already existed. Not-found objects are simply recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
+The way this strategy of 'last user wins' is accomplished, is by running the save operation in a transaction, adopting a [`TryGet-Insert-Update`](patterns-data-transformation.md#tryget-insert-update) pattern for [entities](patterns-data-access.md#entities). There wll be no checks regarding whether an object is new or already existed. Not-found objects are simply recreated, so that ghost objects (objects read out by one user, deleted by another user) are restored.
 
-Another strategy that will not be used, is trying to keep all users' additions of related [entities](patterns.md#entities). However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related [entity](patterns.md#entities) is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related [entity](patterns.md#entities), or user A's removal of the related [entity](patterns.md#entities)? The ambiguity could be solved by marking which [entities](patterns.md#entities) are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
+Another strategy that will not be used, is trying to keep all users' additions of related [entities](patterns-data-access.md#entities). However, this may create more confusion, ambiguity and code complexity. Here is the ambiguity: When a related [entity](patterns-data-access.md#entities) is not in user A's list and it is in user B's list, does this mean it is user B's addition of the related [entity](patterns-data-access.md#entities), or user A's removal of the related [entity](patterns-data-access.md#entities)? The ambiguity could be solved by marking which [entities](patterns-data-access.md#entities) are actually new, which are unmodified and which are removed. This will add complexity to the code, but does take away the ambiguity. Now here is the confusion: User A that just saved a data set, gets to see a different data set after saving. User B also gets to see a different data set than what he saved. Neither user seems to have control over the data set. In other strategies at least user B gets to see the data exactly how he saved it, while user A gets to see the data how user B overwrote it. The only thing that you might gain from this strategy, is that users can work on the same data set at the same time, and the result is the accumulation of all these user's changes. However, it is much harder to manage and the benefits are little.
 
 
 Configuration
@@ -264,24 +264,24 @@ There is another configuration method in [`.NET`](api.md#dotnet): the Settings d
 Conversion
 ----------
 
-See the following [patterns](patterns.md):
+See the following [patterns](patterns-intro.md):
 
-- [`Converter`](patterns.md#converter)
-- [`TryGet-Insert-Update`](patterns.md#try-get-insert-update)
-- [`TryGet-Insert-Update-Delete` / Full-`CRUD` Conversion / Collection Conversion](patterns.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
-- [Singular, Plural, Non-Recursive, `Recursive` and `WithRelatedEntities`](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
+- [`Converter`](patterns-data-transformation.md#converter)
+- [`TryGet-Insert-Update`](patterns-other.md#try-get-insert-update)
+- [`TryGet-Insert-Update-Delete` / Full-`CRUD` Conversion / Collection Conversion](patterns-data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
+- [Singular, Plural, Non-Recursive, `Recursive` and `WithRelatedEntities`](patterns-data-transformation.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
 
 
 Defaults
 --------
 
-Implemented as [`SideEffects`](patterns.md#sideeffects) that go off in a [`Facades's`](patterns.md#facade) `Create` methods.
+Implemented as [`SideEffects`](patterns-business-logic.md#sideeffects) that go off in a [`Facades's`](patterns-business-logic.md#facade) `Create` methods.
 
 
 Debugging
 ---------
 
-See [`DebuggerDisplays`](patterns.md#debuggerdisplays).
+See [`DebuggerDisplays`](patterns-other.md#debuggerdisplays).
 
 
 Entity Model / Data Model
@@ -299,15 +299,15 @@ Entity Model / Data Model
 Entity Status Management
 ------------------------
 
-[Entity](patterns.md#entities) status management (or 'object status management') is the recording of whether an [entity](patterns.md#entities) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns.md#entities) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
+[Entity](patterns-data-access.md#entities) status management (or 'object status management') is the recording of whether an [entity](patterns-data-access.md#entities) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns-data-access.md#entities) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns-other.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
-There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns.md#entities) and properties get status flagging instead of leaving it up to the [entity](patterns.md#entities) status writers to guess what [entity](patterns.md#entities) status reporting is needed and [entity](patterns.md#entities) status readers to guess of what [entities](patterns.md#entities) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns.md#entities) status management you need.
+There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns-data-access.md#entities) and properties get status flagging instead of leaving it up to the [entity](patterns-data-access.md#entities) status writers to guess what [entity](patterns-data-access.md#entities) status reporting is needed and [entity](patterns-data-access.md#entities) status readers to guess of what [entities](patterns-data-access.md#entities) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns-data-access.md#entities) status management you need.
 
 <h3>Alternatives</h3>
 
-The consequence of explicit [entity](patterns.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns.md#entities) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api.md#jj-framework-data) should offer its own alternative to [entity](patterns.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit [entity](patterns-data-access.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns-data-access.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns-data-access.md#entities) status management up to an [`ORM`](api.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns-data-access.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api.md#jj-framework-data) should offer its own alternative to [entity](patterns-data-access.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns-data-access.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
-This is why the explicit status management solution won over the [entity](patterns.md#entities) status management in the persistence framework.
+This is why the explicit status management solution won over the [entity](patterns-data-access.md#entities) status management in the persistence framework.
 
 
 Enums
@@ -375,7 +375,7 @@ The difference between throwing an InvalidValueException or a ValueNotSupportedE
 
 ### Enum-Like Entities
 
-- [Entity](patterns.md#entities) models often contain enum-like [entities](patterns.md#entities):
+- [Entity](patterns-data-access.md#entities) models often contain enum-like [entities](patterns-data-access.md#entities):
 
 ```cs
 public class SectionType
@@ -387,7 +387,7 @@ public class SectionType
 
 Often you do not need more than these two properties.
 
-It is common to end the enum-like [entity](patterns.md#entities) type with the suffix 'Type' (not a strict requirement).
+It is common to end the enum-like [entity](patterns-data-access.md#entities) type with the suffix 'Type' (not a strict requirement).
 
 The Name property will be filled with the string that is exactly the enum member name:
 
@@ -399,7 +399,7 @@ new SectionType
 }
 ```
 
-- Enum-like [entities](patterns.md#entities) have an enum-equivalent in the *Business* Layer:
+- Enum-like [entities](patterns-data-access.md#entities) have an enum-equivalent in the *Business* Layer:
 
 ```cs
 public enum SectionTypeEnum
@@ -413,9 +413,9 @@ public enum SectionTypeEnum
 }
 ```
 
-Note that the `enums` themselves do not belong in the [entity](patterns.md#entities) model, but in the [`Business` layer](layers.md#business-layer).
+Note that the `enums` themselves do not belong in the [entity](patterns-data-access.md#entities) model, but in the [`Business` layer](layers.md#business-layer).
 
-- It is *not* recommended to give enum-like [entities](patterns.md#entities) a [bidirectional relationship](aspects.md#bidirectional-relationships) to the [entities](patterns.md#entities) that use it.
+- It is *not* recommended to give enum-like [entities](patterns-data-access.md#entities) a [bidirectional relationship](aspects.md#bidirectional-relationships) to the [entities](patterns-data-access.md#entities) that use it.
 
 ```cs
 public class SectionType
@@ -425,9 +425,9 @@ public class SectionType
 }
 ```
 
-The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the [`LinkTo`](patterns.md#linkto) methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
+The problem with this is that the list is likely to become very large, and maintaining this list (for instance in the [`LinkTo`](patterns-business-logic.md#linkto) methods) can result in queries very harmful for performance, while you are not even noticing you are doing anything significant.
 
-- To make assigning an enum-like [entity](patterns.md#entities) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The `enum` extensions allow you to write code as follows to assign `enum`-like [entities](patterns.md#entities):
+- To make assigning an enum-like [entity](patterns-data-access.md#entities) easier, you can put extension methods in your `Business` layer. You can put this in the `Extensions` folder and call the class `EnumExtensions`. They also ensure consistency in the way that enum-like types are handled. The `enum` extensions allow you to write code as follows to assign `enum`-like [entities](patterns-data-access.md#entities):
 
 ```cs
 SectionTypeEnum sectionTypeEnum = section.GetSectionTypeEnum();
@@ -573,15 +573,15 @@ catch (IOException)
 
 In fact, prefer not to retrieve information by catching an exception at all.
 
-- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](api.md#jj-framework-logging) from [`JJ.Framework.Logging`](api.md#jj-framework-logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](api.md#jj-framework-logging) [`Helper`](patterns.md#helper) method.
+- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](api.md#jj-framework-logging) from [`JJ.Framework.Logging`](api.md#jj-framework-logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](api.md#jj-framework-logging) [`Helper`](patterns-other.md#helper) method.
 
 
 Facades
 -------
 
-`Facades` might sound like a pattern to you, but regardless of whether you use the [`Facade`](patterns.md#facade) pattern or not, your system has `Facades` whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
+`Facades` might sound like a pattern to you, but regardless of whether you use the [`Facade`](patterns-business-logic.md#facade) pattern or not, your system has `Facades` whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
 
-If you have an [`MVC`](api.md#mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns.md#controller) that are your `Facades`.
+If you have an [`MVC`](api.md#mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns-presentation-mvc.md#controller) that are your `Facades`.
 
 If you have `Windows` app without a lot of layers, you probably have quite a few `Facades`: each `Form` probably is one.
 
@@ -633,7 +633,7 @@ If you insist on using `Log4Net`, make a separate `ILogger` implementation behin
 Multi-Language / Translations / Culture
 ---------------------------------------
 
-For button texts and other labels in an application: see [Resource `strings`](patterns.md#resource-strings). That does not solve multi-lingual user data, for which multiple solutions are possible.
+For button texts and other labels in an application: see [Resource `strings`](patterns-business-logic.md#resource-strings). That does not solve multi-lingual user data, for which multiple solutions are possible.
 
 `< TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >`
 
@@ -643,7 +643,7 @@ One option to support multi-language, is for a content item to be only available
 
 ### Loosely Linked Translation Entities
 
-One possible solution is each possble naming / grammar structure to each have a generic [entity](patterns.md#entities) type, that can be tied to an arbitrary [entity](patterns.md#entities):
+One possible solution is each possble naming / grammar structure to each have a generic [entity](patterns-data-access.md#entities) type, that can be tied to an arbitrary [entity](patterns-data-access.md#entities):
 
 ```
 NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityID }
@@ -651,11 +651,11 @@ NameAndDescription { ID, Name, Description, CultureName, EntityTypeName, EntityI
 SingularAndPlural { ID, Singular, Plural, CultureName, EntityTypeName, EntityID }
 ```
 
-The combination `{ EntityTypeName, EntityID }` is a alternative key to the [entity](patterns.md#entities). This makes the translation item structure independent on the model it is applied to, which can be a benefit.
+The combination `{ EntityTypeName, EntityID }` is a alternative key to the [entity](patterns-data-access.md#entities). This makes the translation item structure independent on the model it is applied to, which can be a benefit.
 
 ### Many Foreign Keys
 
-Another alternative is to give the translation item [entity](patterns.md#entities) a whole bunch of foreign keys: one for each possible translatable [entity](patterns.md#entities) type.
+Another alternative is to give the translation item [entity](patterns-data-access.md#entities) a whole bunch of foreign keys: one for each possible translatable [entity](patterns-data-access.md#entities) type.
 
 NameAndDescription { ID, Name, Description, CultureName, __ProductID, DepartmentID__ }
 
@@ -663,11 +663,11 @@ A downside of that is that the table structure is dependent on the domain model 
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
-The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the [entities](patterns.md#entities) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
+The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api.md#orm) will cache the [entities](patterns-data-access.md#entities) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
-To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns.md#entities) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns.md#entities).
+To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns-data-access.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns-data-access.md#entities) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns-data-access.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns-data-access.md#entities).
 
-A lot of work to use the loosely linked [entities](patterns.md#entities). This is not unique to loosely linked translation [entities](patterns.md#entities). It is a problem with any alternative key, that non-flushed [entities](patterns.md#entities) cannot be retrieved with a ([`LINQ`](api.md#linq)) query.
+A lot of work to use the loosely linked [entities](patterns-data-access.md#entities). This is not unique to loosely linked translation [entities](patterns-data-access.md#entities). It is a problem with any alternative key, that non-flushed [entities](patterns-data-access.md#entities) cannot be retrieved with a ([`LINQ`](api.md#linq)) query.
 
 
 Naming
@@ -689,7 +689,7 @@ There are a few possibilities:
     - An `API` from [`JJ.Framework.Mvc`](api.md#jj-framework-mvc) for `POST`'ing trees and lists across `HTTP`.
 - [`Html.BeginCollectionItem`](api.md#htmlbegincollectionitem)
     - A commonly used alternative. Can send *one* collection over the wire, not trees.
-- [`for` loops](patterns.md#for-loops-for-lists-in-http-postdata)
+- [`for` loops](patterns-presentation-mvc.md#for-loops-for-lists-in-http-postdata)
     - A pattern that might work without an additional `API` for posting a list over `HTTP`.
 
 Beware that currently the different solutions do not mix well. You might pick just one of the solutions for each screen you'd like to program.
@@ -774,7 +774,7 @@ for enum-like tables.
 
 `In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. >`
 
-Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns.md#repository) in the top-level project, often an [`MVC`](api.md#mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
+Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns-data-access.md#repository) in the top-level project, often an [`MVC`](api.md#mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
 There are the following interfaces:
 
@@ -871,7 +871,7 @@ Calculation Module
 SideEffects
 ------------
 
-See [`SideEffects`](patterns.md#sideeffects) in [Patterns](patterns.md).
+See [`SideEffects`](patterns-business-logic.md#sideeffects).
 
 
 Styling
@@ -992,7 +992,7 @@ public partial class MainForm : SimpleProcessForm
 }
 ```
 
-The [`MyExecutor`](patterns.md#executor) class may look as follows and can call its callbacks at its own discretion:
+The [`MyExecutor`](patterns-other.md#executor) class may look as follows and can call its callbacks at its own discretion:
 
 ```cs
 internal class ExecutorDemo
@@ -1049,7 +1049,7 @@ internal class ExecutorDemo
 Validation
 ----------
 
-See [`Validators`](patterns.md#validators) in [Design Patterns](patterns.md).
+See [`Validators`](patterns-business-logic.md#validators).
 
 
 Versioning (Data)

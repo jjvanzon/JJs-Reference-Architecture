@@ -216,7 +216,7 @@ If you call a `TryGet` you should handle the `null` value that could be returned
 Get-TryGet-GetMany
 ------------------
 
-Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
+Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
 
 ```cs
 public Item GetItem(string searchText)
@@ -256,7 +256,7 @@ public IList<Item> GetItems(string searchText)
 }
 ```
 
-The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
+The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
 
 
 Helper

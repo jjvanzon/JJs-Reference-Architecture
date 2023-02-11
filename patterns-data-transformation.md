@@ -102,7 +102,7 @@ The specific way to implement it, is different in every situation. Reasons that 
 - You do not always have a [`Repository`](#repository).
 - It does not always need to be full-[`CRUD`](layers.md#crud).
 - You might need to report exactly what operation is executed on each [`Entity`](#entities).
-- You might need a separate normalized [*singular* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](patterns.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
+- You might need a separate normalized [*singular* form](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
 - An alternative `isNew` detection might be needed.
 - Some persistence technologies will behave unexpectedly when first retrieving and then writing and then retrieving again. Intermediate redundant retrievals should be avoided. Or not, depending on the situation.
 

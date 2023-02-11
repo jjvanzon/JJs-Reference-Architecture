@@ -100,27 +100,27 @@ It starts with the database. This can be a *relational database* like [`Microsof
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [entities](patterns.md#entities).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [entities](patterns-data-access.md#entities).
     
 It could also be a different data access technology: a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework), or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns.md#entities). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns-data-access.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns-data-access.md#entities). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns-data-access.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
-The [`FluentNHibernate API`](api.md#fluent-nhibernate) can help set up these [mappings](patterns.md#mapping).
+The [`FluentNHibernate API`](api.md#fluent-nhibernate) can help set up these [mappings](patterns-data-access.md#mapping).
 
 ### Entities
 
-With all this in place, out come objects called [entities](patterns.md#entities), loaded from the database. These [entity](patterns.md#entities) objects represent the functional domain.
+With all this in place, out come objects called [entities](patterns-data-access.md#entities), loaded from the database. These [entity](patterns-data-access.md#entities) objects represent the functional domain.
 
 ### Repositories
 
-[`NHibernate`](api.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns.md#repository) instead. You might see a [`Repository`](patterns.md#repository) as a *set of queries*. Each [entity type](patterns.md#entities) could have its own [`Repository`](patterns.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
+[`NHibernate`](api.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns-data-access.md#repository) instead. You might see a [`Repository`](patterns-data-access.md#repository) as a *set of queries*. Each [entity type](patterns-data-access.md#entities) could have its own [`Repository`](patterns-data-access.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns-data-access.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
-The [`Repository`](patterns.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns.md#repository) *implementation*.
+The [`Repository`](patterns-data-access.md#repository) implementations might not used directly, but accessed through [`interfaces`](patterns-data-access.md#repository-interfaces), so that we can indeed use a different data access technology, just by instantiating a different [`Repository`](patterns-data-access.md#repository) *implementation*.
 
 ### Platform Independence
 
@@ -144,63 +144,63 @@ The [presentation layer](#presentation-layer) calls the [business layer](#busine
 
 ### Presenter
 
-It is the [`Presenter`](patterns.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns.md#presenter). Each [`Presenter`](patterns.md#presenter) *method* represents a specific *user action* on that screen.
+It is the [`Presenter`](patterns-presentation.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns-presentation.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns-presentation.md#presenter). Each [`Presenter`](patterns-presentation.md#presenter) *method* represents a specific *user action* on that screen.
 
 ### ViewModel
 
-A [`ViewModel`](patterns.md#viewmodels) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this [architecture](index.md) [`ViewModels`](patterns.md#viewmodels) are a pure [data objects](patterns.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns.md#dto) can also be sent over the line without many surprises.
+A [`ViewModel`](patterns-presentation.md#viewmodels) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this [architecture](index.md) [`ViewModels`](patterns-presentation.md#viewmodels) are a pure [data objects](patterns-data-access.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns-data-access.md#dto) can also be sent over the line without many surprises.
 
 ### ToViewModel
 
-The [`Presenters`](patterns.md#presenter) might delegate to a [`ToViewModel`](patterns.md#toviewmodel) layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
+The [`Presenters`](patterns-presentation.md#presenter) might delegate to a [`ToViewModel`](patterns-presentation.md#toviewmodel) layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
 
 ### ToEntity
 
-The [`Presenters`](patterns.md#presenter) also delegate to a [`ToEntity`](patterns.md#toentity) layer, to translate user input back to [entity](patterns.md#entities) data, before passing it on to the [business layer](#business-layer).
+The [`Presenters`](patterns-presentation.md#presenter) also delegate to a [`ToEntity`](patterns-data-access.md#toentity) layer, to translate user input back to [entity](patterns-data-access.md#entities) data, before passing it on to the [business layer](#business-layer).
 
 ### Facades
 
-[`Presenter`](patterns.md#presenter) classes combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
+[`Presenter`](patterns-presentation.md#presenter) classes combine several [responsibilities](patterns-presentation.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
 
-They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns.md#validators), execute [`SideEffects`](patterns.md#sideeffects). They initiate translation between [entities](patterns.md#entities) and [`ViewModels`](patterns.md#viewmodels) and might also execute [security](aspects.md#security) checks.
+They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns-business-logic.md#validators), execute [`SideEffects`](patterns-business-logic.md#sideeffects). They initiate translation between [entities](patterns-data-access.md#entities) and [`ViewModels`](patterns-presentation.md#viewmodels) and might also execute [security](aspects.md#security) checks.
 
-Because the [`Presenters`](patterns.md#presenter) combine several [responsibilities](patterns.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns.md#facade) or [combinators](patterns.md#facade) of the [presentation layer](#presentation-layer).
+Because the [`Presenters`](patterns-presentation.md#presenter) combine several [responsibilities](patterns-presentation.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns-business-logic.md#facade) or [combinators](patterns-business-logic.md#facade) of the [presentation layer](#presentation-layer).
 
 ### MVC
 
-[`MVC`](api.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api.md#mvc) layer builds on top of the [`Presenter`](patterns.md#presenter) layer.
+[`MVC`](api.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api.md#mvc) layer builds on top of the [`Presenter`](patterns-presentation.md#presenter) layer.
 
 ### MVC Controllers
 
-[`MVC`](api.md#mvc) uses [`Controllers`](patterns.md#controller), which are similar to [`Presenters`](patterns.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
+[`MVC`](api.md#mvc) uses [`Controllers`](patterns-presentation-mvc.md#controller), which are similar to [`Presenters`](patterns-presentation.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns.md#controller) are quite specific to [`MVC`](api.md#mvc). An equivalent might not be present on other presentation platforms.
+[`Controllers`](patterns-presentation-mvc.md#controller) are quite specific to [`MVC`](api.md#mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms, like [`WinForms`](api.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns.md#presenter) and showing the right [`View`](patterns.md#views) depending on their results.
+However, even on other presentation platforms, like [`WinForms`](api.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns-presentation.md#presenter) and showing the right [`View`](patterns-presentation.md#views) depending on their results.
 
 ### URLs
 
-Requests from the web browser automatically make the right [`Controller`](patterns.md#controller) method go off. [`MVC`](api.md#mvc) makes sure of that. Each method in a [`Controller`](patterns.md#controller) tends to get a `URL`.
+Requests from the web browser automatically make the right [`Controller`](patterns-presentation-mvc.md#controller) method go off. [`MVC`](api.md#mvc) makes sure of that. Each method in a [`Controller`](patterns-presentation-mvc.md#controller) tends to get a `URL`.
 
-The parameters of a [`Controller`](patterns.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns.md#viewmodels) parameters are accepted by [`MVC`](api.md#mvc) [`Controllers`](patterns.md#controller). The [`ViewModels`](patterns.md#viewmodels) and are built up from post data by [`MVC`](api.md#mvc) automatically.
+The parameters of a [`Controller`](patterns-presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns-presentation.md#viewmodels) parameters are accepted by [`MVC`](api.md#mvc) [`Controllers`](patterns-presentation-mvc.md#controller). The [`ViewModels`](patterns-presentation.md#viewmodels) and are built up from post data by [`MVC`](api.md#mvc) automatically.
 
 [`JJ.Framework.Mvc`](api.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api.md#mvc).
 
 ### View Engine (Razor)
 
-After the [`Controller`](patterns.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off.
+After the [`Controller`](patterns-presentation-mvc.md#controller) method is done, the view engine kicks in. The view rendering automatically goes off.
 
 ### Views (Razor)
 
-A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns.md#viewmodels) as input, along with the [`View`](patterns.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns-presentation.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns-presentation.md#viewmodels) as input, along with the [`View`](patterns-presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In [`WinForms`](api.md#winforms) the [`Views`](patterns.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns.md#presenter).
+In [`WinForms`](api.md#winforms) the [`Views`](patterns-presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns-presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns-presentation.md#presenter).
 
 ### HTML
 
 The [`Razor`](api.md#razor) engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns.md#views).
+`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns-presentation.md#views).
 
 ### Platform Independence
 
@@ -222,7 +222,7 @@ What is business logic? Basically anything that is not [presentation](#presentat
 
 The [business layer](#business-layer) resides in between the [data access](#data-layer) and the [presentation layer](#presentation-layer).
 
-The [business layer](#business-layer) can use [entities](patterns.md#entities) out of the [data layer](#data-layer). These [entity](patterns.md#entities) classes represent the domain model. But sometimes it would call [repositories](patterns.md#repository) to execute queries.
+The [business layer](#business-layer) can use [entities](patterns-data-access.md#entities) out of the [data layer](#data-layer). These [entity](patterns-data-access.md#entities) classes represent the domain model. But sometimes it would call [repositories](patterns-data-access.md#repository) to execute queries.
 
 ### Magic
 
@@ -230,11 +230,11 @@ The [presentation layer](#presentation-layer) uses the [business layer](#busines
 
 ### Validation
 
-The [business layer](#business-layer) can execute [`Validators`](patterns.md#validators) that verify that the data corresponds to expectations.
+The [business layer](#business-layer) can execute [`Validators`](patterns-business-logic.md#validators) that verify that the data corresponds to expectations.
 
 ### SideEffects
 
-The [business layer](#business-layer) can execute [`SideEffects`](patterns.md#sideeffects) when altering data, for instance updating the *date time modified* or automatically *generating a name* for a new object.
+The [business layer](#business-layer) can execute [`SideEffects`](patterns-business-logic.md#sideeffects) when altering data, for instance updating the *date time modified* or automatically *generating a name* for a new object.
 
 ### Calculations
 
@@ -246,19 +246,19 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Enums
 
-[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns.md#entities) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). And some pattern-wise logic around [`enums`](aspects.md#enums) might be there in the [business layer](#business-layer) too.
+[`Enums`](aspects.md#enums) are like *multiple choice* variables. Some [entities](patterns-data-access.md#entities) in the [data layer](#data-layer) might have corresponding [`enums`](aspects.md#enums) in the [business layer](#business-layer). And some pattern-wise logic around [`enums`](aspects.md#enums) might be there in the [business layer](#business-layer) too.
 
 ### Resources Strings
 
-[Resource `strings`](patterns.md#resource-strings) can make texts in an app [multi-lingual](aspects.md#multi-language--translations--culture). These might be put in the [business layer](#business-layer) to translate terminology from the functional domain.
+[Resource `strings`](patterns-business-logic.md#resource-strings) can make texts in an app [multi-lingual](aspects.md#multi-language--translations--culture). These might be put in the [business layer](#business-layer) to translate terminology from the functional domain.
 
 ### Defaults
 
-Setting [default values](aspects.md#defaults) when creating an [entity](patterns.md#entities) might be done automatically by using a [`SideEffect`](patterns.md#sideeffects) class. Those may be executed in the [business layer](#business-layer).
+Setting [default values](aspects.md#defaults) when creating an [entity](patterns-data-access.md#entities) might be done automatically by using a [`SideEffect`](patterns-business-logic.md#sideeffects) class. Those may be executed in the [business layer](#business-layer).
 
 ### Cascading
 
-Along with one [entity](patterns.md#entities), other [entities](patterns.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns.md#entities) when a main [entity](patterns.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns.md#entities) before deleting a related [entity](patterns.md#entities). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns-data-access.md#entities), other [entities](patterns-data-access.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns-data-access.md#entities) when a main [entity](patterns-data-access.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns-data-access.md#entities) before deleting a related [entity](patterns-data-access.md#entities). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -270,15 +270,15 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Facades
 
-Calling the [business layer](#business-layer) can happen through [`Facades`](patterns.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns.md#validators), [`SideEffects`](patterns.md#sideeffects), [`Cascading`](patterns.md#cascading) and other things in all a row. [`Facades`](patterns.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
+Calling the [business layer](#business-layer) can happen through [`Facades`](patterns-business-logic.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns-business-logic.md#validators), [`SideEffects`](patterns-business-logic.md#sideeffects), [`Cascading`](patterns-business-logic.md#cascading) and other things in all a row. [`Facades`](patterns-business-logic.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
 
 ### CRUD
 
-The [`Facades`](patterns.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or `CRUD`. This set of basic operations might not change much, keeping the `interfaces` relative stable. But *Non-CRUD* operations might be added too.
+The [`Facades`](patterns-business-logic.md#facade) may orient around the basic data operations: **C**reate, **R**ead, **U**pdate and **D**elete or `CRUD`. This set of basic operations might not change much, keeping the `interfaces` relative stable. But *Non-CRUD* operations might be added too.
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns.md#entities) and [repository interfaces](patterns.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
+A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns-data-access.md#entities) and [repository interfaces](patterns-data-access.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
 
 
 Perpendicular Layers
@@ -308,9 +308,9 @@ However it is the [presentation layer](#presentation-layer) in which the final d
 
 The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this  [software architecture](index.md). Let's take [user rights management](aspects.md#security) an example.
 
-[User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns.md#presenter) layer, adapting it to what the user is allowed to do.
+[User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns-presentation.md#presenter) layer, adapting it to what the user is allowed to do.
 
-In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
+In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns-presentation.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
 
 ### Services
 
@@ -320,7 +320,7 @@ What's meant with *services* in this [architecture](index.md), is exposing [busi
 Decoupled
 ---------
 
-[`Presenter`](patterns.md#presenter) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns.md#presenter) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
+[`Presenter`](patterns-presentation.md#presenter) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns-presentation.md#presenter) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns-data-access.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
 
 
 Alternatives
@@ -328,7 +328,7 @@ Alternatives
 
 Here is a variation on this architectural layering, that might also sometimes be used: [data](#data-layer) and [business](#business-layer) in one layer. Benefit: Might be easier to understand. Downside: More likely for [data access](#data-layer) and [business](#business-layer) to get entangled.
 
-Another alternative is: no [repositories](patterns.md#repository). But [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns.md#repository).
+Another alternative is: no [repositories](patterns-data-access.md#repository). But [`C# interfaces`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface) for everything. Not bothering with what's [data](#data-layer) or [business](#business-layer) or [repository](patterns-data-access.md#repository).
 
 It would still keep things [loosely coupled](practices-and-principles.md#loose-coupling) and [separation of concerns](practices-and-principles.md#separation-of-concerns) would also stay intact.
 
