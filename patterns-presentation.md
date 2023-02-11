@@ -52,7 +52,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 [Conclusion](#conclusion)  
 
 
-<h3>Only Data</h3>
+<h3 id="only-data">Only Data</h3>
 
 In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be a pure [data object](#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for their data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
@@ -66,7 +66,7 @@ public class ProductViewModel
 ```
 
 
-<h3>Screen ViewModels</h3>
+<h3 id="screen-viewmodels">Screen ViewModels</h3>
 
 Every screen can get a [`ViewModel`](#viewmodels). Here are some [`Screen ViewModels`](#screen-viewmodels) you might find in an application: 
 
@@ -107,7 +107,7 @@ public class ProductEditViewModel
 ```
 
 
-<h3>Entity ViewModels</h3>
+<h3 id="entity-viewmodels">Entity ViewModels</h3>
 
 You can also reuse [`ViewModels`](#viewmodels) that represent single [`Entities`](#entities), e.g.:
 
@@ -144,7 +144,7 @@ public class ProductEditViewModel
 [`Entity ViewModels`](#entity-viewmodels) might also be called [`Item ViewModels`](#entity-viewmodels).
 
 
-<h3>Partial ViewModels</h3>
+<h3 id="partial-viewmodels">Partial ViewModels</h3>
 
 [`Partial ViewModels`](#partial-viewmodels) describe *parts* of a screen, to keep overview of its sections, like:
 
@@ -188,7 +188,7 @@ public class ProductEditViewModel
 ```
 
 
-<h4>ListItem ViewModels</h3>
+<h4 id="listitem-viewmodels">ListItem ViewModels</h3>
 
 [`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
 
@@ -248,7 +248,7 @@ public class ProductListViewModel
 ```
 
 
-<h3>Lookup ViewModels</h3>
+<h3 id="lookup-viewmodels">Lookup ViewModels</h3>
 
 A *lookup* list can hold the data for a control like a drop-down box, e.g.:
 
@@ -274,21 +274,21 @@ public class ProductEditViewModel
 ```
 
 
-<h3>How to Model</h3>
+<h3 id="how-to-model">How to Model</h3>
 
 A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. The idea for how to model them is:
 
 > *A [`ViewModel`](#viewmodels) says __what__ is shown on screen, not __how__ or __why__.*
 
 
-<h3>"What", not "How"</h3>
+<h3 id="what-not-how">"What", not "How"</h3>
 
 A [`ViewModel`](#viewmodels) says ***what*** is shown on screen, not ***how:***
 
 Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
 
 
-<h3>"What", not "Why"</h3>
+<h3 id="what-not-why">"What", not "Why"</h3>
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
@@ -296,12 +296,12 @@ For instance: if the business logic tells us that an [`Entity`](#entities) is a 
 The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) or a [view](#views).
 
 
-<h3>Keeping It Clean</h3>
+<h3 id="keeping-it-clean">Keeping It Clean</h3>
 
 [`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). This keeps the [`ViewModel`](#views) layer completely self-contained.
 
 
-<h3>No Entities</h3>
+<h3 id="no-entities">No Entities</h3>
 
 For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible.
 
@@ -358,7 +358,7 @@ An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`]
 `< TODO: Code sample showing a view model and entity model looking quite different even though they are about the same entity. >`
 
 
-<h3>Avoid ViewModel to ViewModel Conversion</h3>
+<h3 id="avoid-viewmodel-to-viewmodel-conversion">Avoid ViewModel to ViewModel Conversion</h3>
 
 Prefer converting from [`Entities`](#entities) to [`ViewModel`](#viewmodels) and back using the [`ToViewModel`](#toviewmodel) and [`ToEntity`](#toentity) patterns.
 
@@ -375,7 +375,7 @@ For instance, you might yield over non-persisted properties from [`ViewModel`](#
 `< TODO: Code sample yielding over non-persisted properties from one view model to the next. >`
 
 
-<h3>Avoid Inheritance</h3>
+<h3 id="avoid-inheritance">Avoid Inheritance</h3>
 
 Inheritance is not the go-to choice for [`ViewModels`](#viewmodels):
 
@@ -398,7 +398,7 @@ But you could also choose to use other design patterns, such as composition, to 
 `<TODO: Code sample. >`
 
 
-<h3>Conclusion</h3>
+<h3 id="conclusion">Conclusion</h3>
 
 Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to business logic and data access, offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come and go.
 
