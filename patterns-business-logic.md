@@ -710,7 +710,7 @@ This may seem like a lot of code, but note that the `base class` is set up with 
 
 <h4 id="visitor-change-the-sequence">Change the Sequence</h4>
 
-You might also `override` a [`Visit`](#visit-methods) method to change the order in which things are processed.
+You might also `override` a [`Visit`](#visit-methods) method to change the order in which things are processed:
 
 ```cs
 /// <summary>
@@ -735,9 +735,11 @@ class ReversedOrderVisitor : OrderVisitorBase
 
 <h4 id="accept-methods">Accept Methods</h4>
 
-The *classic* [`Visitor`](#visitor) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods. This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate from the rest of the code.
+The *classic* [`Visitor`](#visitor) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods.
 
-However, `Accept` methods can be used for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) pattern proposed earlier.
+This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separated from the rest of the code.
+
+However, `Accept` methods could be useful for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) proposed earlier.
 
 
 <h4 id="visitor-conclusion">Conclusion</h4>
