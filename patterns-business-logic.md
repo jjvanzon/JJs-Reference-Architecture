@@ -705,7 +705,7 @@ class PolymorphicVisitorBase
 }
 ```
 
-This may seem like a lot of code, but note, the `base class` can be set up with fixed patterns, and is written only once, so that the specialized [`Visitor`](#visitor) `classes` are much simpler.
+This may seem like a lot of code, but note that the `base class` is set up with fixed patterns, and is written only once, so that the specialized [`Visitor`](#visitor) `classes` can be made much simpler.
 
 
 <h4 id="visitor-change-the-sequence">Change the Sequence</h4>
