@@ -565,14 +565,14 @@ The result of a [`Visitor's`](#visitor) operation is typically stored in *fields
 
 <h4 id="polymorphic-visitation">Polymorphic Visitation</h4>
 
-A `Customer` and `Supplier` might both derive from a `Party` base type:
+A `Customer` and `Supplier` might both derive from a `Party base` type:
 
 ```cs
 class Supplier : Party { }
 class Customer : Party { }
 ```
 
-Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type` with the same `base type`. A [`Visitor`](#visitor) `class` might allow tapping into different levels of the abstraction like this:
+Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type`. A [`Visitor`](#visitor) `class` might allow tapping into different levels of the abstraction like this:
 
 ```cs
 protected virtual void VisitPartyPolymorphic(Party party)
