@@ -433,7 +433,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
 
-The aim for this new [`Visitor`](#visitor) is to create a text, that summarizes the `Order`. 
+The aim for this simple new [`Visitor`](#visitor) is to create a text, that summarizes the `Order`. 
 Here is the code that uses a `StringBuilder` for this:
 
 ```cs
@@ -468,6 +468,8 @@ The result of the process might be a text like this:
 1 x Cool Gadget
 2 x Fidget Thing
 ```
+
+Note that this is just a simple example. The more complicated the structures: this is where the [`Visitor`](#visitor) pattern really starts to shine.
 
 
 <h4 id="visitor-optimization">Optimization</h4>
