@@ -527,8 +527,6 @@ class OrderSummaryVisitor : OrderVisitorBase
 }
 ```
 
-This is why the [`Visit`](#visit-methods) methods are `protected`, not `public`.
-
 Here is the complete code sample of our derived `Visitor`:
 
 ```cs
