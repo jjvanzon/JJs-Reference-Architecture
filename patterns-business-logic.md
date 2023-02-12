@@ -560,7 +560,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 <h4 id="visitor-using-fields">Using Fields</h4>
 
-The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It makes our `base` [`Visitors`](#visitor) more reusable too.
+The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. In the examples above, we are talking about the `StringBuilder` field. This is because the result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It also makes our `base` [`Visitors`](#visitor) more reusable.
 
 
 <h4 id="polymorphic-visitation">Polymorphic Visitation</h4>
