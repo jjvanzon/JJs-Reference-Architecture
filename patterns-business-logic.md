@@ -635,7 +635,7 @@ protected virtual void VisitProductBase(Product product) { }
 
 This way we can create [`Visit`](#visit-methods) methods for specific cases if needed.
 
-Here is a full example of a [`Visitor`](#visitor) `class` with polymorphic [`Visit`](#visit-methods) methods:
+Here is a full example of a [`Visitor`](#visitor) `base class` with polymorphic [`Visit`](#visit-methods) methods:
 
 ```cs
 class PolymorphicVisitorBase
@@ -704,6 +704,8 @@ class PolymorphicVisitorBase
     protected virtual void VisitProductBase(Product product) { }
 }
 ```
+
+This may seem like quite a bit of code, but note, that this is the `base class` we write once, so that the specialized [`Visitor`](#visitor) `classes` are simple.
 
 
 <h4 id="visitor-change-the-sequence">Change the Sequence</h4>
