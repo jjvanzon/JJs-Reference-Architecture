@@ -354,6 +354,17 @@ var customers =
 
 An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](patterns-data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer):
 
+`ViewModel`:
+
+```cs
+public class CustomerViewModel
+{
+    public string CustomerNumber { get; set; }
+    public string FirstName { get; set; }
+    public string CouponCode { get; set; }
+}
+```
+
 `Entity`:
 
 ```cs
@@ -365,16 +376,6 @@ public class Customer
 }
 ```
 
-`ViewModel`:
-
-```cs
-public class CustomerViewModel
-{
-    public string CustomerNumber { get; set; }
-    public string FirstName { get; set; }
-    public string CouponCode { get; set; }
-}
-```
 
 <h3 id="avoid-viewmodel-to-viewmodel-conversion">Avoid ViewModel to ViewModel Conversion</h3>
 
