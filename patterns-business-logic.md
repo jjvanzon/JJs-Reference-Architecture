@@ -746,7 +746,11 @@ However, `Accept` methods could be useful for specialized use-cases for instance
 
 By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
 
-There are also alternatives. For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections) has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
+There are also alternatives.
+
+For instance, if you won't write multiple specialized visitors, it is also an option, not to bother with a [`base Visitor`](#base-visitor), and just program a (recursive) [`Converter`](aspects.md#conversion), that processes the part of the structure you are interested in.
+
+Another option might be [`JJ.Framework.Collections`](api.md#jj-framework-collections), which has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
 
 Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different here. It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
