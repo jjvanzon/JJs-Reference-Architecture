@@ -561,7 +561,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 <h4 id="visitor-using-fields">Using Fields</h4>
 
-The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. In the examples above, we are talking about the `StringBuilder` field. The result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It makes our `base` [`Visitors`](#visitor) more reusable as well.
+The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. In the examples above, we are talking about the `StringBuilder` field. The result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It keeps our `base` [`Visitors`](#visitor) more reusable as well.
 
 
 <h4 id="polymorphic-visitation">Polymorphic Visitation</h4>
@@ -747,7 +747,7 @@ However, `Accept` methods could be useful for specialized use-cases for instance
 
 However, there are also alternatives for the [`Visitor`](#visitor) pattern.
 
-For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections), which has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
+For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections), which allows [`LINQ`](api.md#linq)-style processing of recursive structures, for instance with the  method: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which works for simpler scenarios.
 
 You could also skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](aspects.md#conversion) instead, if you're only interested in a specific part of the structure.
 
