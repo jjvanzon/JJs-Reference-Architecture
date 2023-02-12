@@ -335,6 +335,7 @@ Visitor
 - [Polymorphic Visitation](#polymorphic-visitation)
 - [Change the Sequence](#visitor-change-the-sequence)
 - [Accept Methods](#accept-methods)
+- [Alternatives](#visitor-alternatives)
 - [Conclusion](#visitor-conclusion)
 
 
@@ -742,15 +743,19 @@ This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separate
 However, `Accept` methods could be useful for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) proposed earlier.
 
 
+<h4 id="visitor-alternatives">Alternatives</h4>
+
+However, there are also alternatives for the [`Visitor`](#visitor) pattern.
+
+For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections), which has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
+
+You could also skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](aspects.md#conversion) instead, if you're only interested in a specific part of the structure.
+
+But the [`Visitor`](#visitor) pattern might be more ideal, when the structure is quite complicated, or when you want to process the same structure in many different ways.
+
 <h4 id="visitor-conclusion">Conclusion</h4>
 
 By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
-
-There are also alternatives.
-
-For instance, you could skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](aspects.md#conversion) instead if you're only interested in a specific part of the structure. But the [`Visitor`](#visitor) pattern might be more ideal, when the structure is quite complicated, or when you want to process the same structure in multiple different ways.
-
-Another option might be [`JJ.Framework.Collections`](api.md#jj-framework-collections), which has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
 
 Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different here. It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
 
