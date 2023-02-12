@@ -266,11 +266,11 @@ Conversion
 
 See the following [patterns](patterns.md):
 
-- [`Converter`](patterns-data-transformation.md#converter)
-- [`TryGet-Insert-Update`](patterns-other.md#try-get-insert-update)
-- [`TryGet-Insert-Update-Delete` / Full-`CRUD` Conversion / Collection Conversion](patterns-data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
-- [Singular, Plural, Non-Recursive, `Recursive` and `WithRelatedEntities`](patterns-data-transformation.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
-- [`Visitor`](patterns-business-logic.md#visitor)
+- [Converter](patterns-data-transformation.md#converter)
+- [TryGet-Insert-Update](patterns-other.md#try-get-insert-update)
+- [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](patterns-data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
+- [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](patterns-data-transformation.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
+- [Visitor](patterns-business-logic.md#visitor)
 
 
 Defaults
