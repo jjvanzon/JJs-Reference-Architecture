@@ -469,7 +469,7 @@ The result of the process might be a text like this:
 2 x Fidget Thing
 ```
 
-Note that this is just a simple example. The more complicated the structures: this is where the [`Visitor`](#visitor) pattern really starts to shine.
+Don't be underwhelmed. This is just a simple example. The more complicated the structures: this is where the [`Visitor`](#visitor) pattern really starts to shine.
 
 
 <h4 id="visitor-optimization">Optimization</h4>
