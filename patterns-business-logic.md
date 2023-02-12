@@ -747,7 +747,7 @@ However, `Accept` methods could be useful for specialized use-cases for instance
 
 However, there are also alternatives for the [`Visitor`](#visitor) pattern.
 
-For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections), which allows [`LINQ`](api.md#linq)-style processing of recursive structures, for instance with the  method: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which works for simpler scenarios.
+For instance, [`JJ.Framework.Collections`](api.md#jj-framework-collections), which allows [`LINQ`](api.md#linq)-style processing of recursive structures, with methods like [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which work for simpler scenarios.
 
 You could also skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](aspects.md#conversion) instead, if you're only interested in a specific part of the structure.
 
