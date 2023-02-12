@@ -748,7 +748,7 @@ By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`]
 
 There are also alternatives.
 
-For instance, if you won't write multiple specialized visitors, it is also an option, not to bother with a [`base Visitor`](#base-visitor), and just program a (recursive) [`Converter`](aspects.md#conversion), that processes the part of the structure you are interested in.
+For instance, you could skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](aspects.md#conversion) instead if you're only interested in a specific part of the structure. But the [`Visitor`](#visitor) pattern might be more ideal, when the structure is quite complicated, or when you want to process the same structure in multiple different ways.
 
 Another option might be [`JJ.Framework.Collections`](api.md#jj-framework-collections), which has a method for [`LINQ`](api.md#linq)-style processing of recursive structures: [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which might work for simpler scenarios.
 
