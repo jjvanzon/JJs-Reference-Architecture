@@ -427,14 +427,10 @@ What we're trying to prevent here is too much interdependence between [`ViewMode
 Product product = _productRepository.Get(id);
 
 // Business Logic
-decimal vatFactor = _taxCalculator.VatFactor;
-decimal priceWithVat = product.PriceWithoutVat * vatFactor;
+decimal priceWithVat = product.PriceWithoutVat * _taxCalculator.VatFactor;
 
 // Presentation
-EditViewModel viewModel = new()
-{
-    Price = priceWithVat
-};
+var viewModel = new EditViewModel { Price = priceWithVat };
 ```
 
 This give us finer control over where the data comes from and goes.
