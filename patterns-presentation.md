@@ -406,6 +406,9 @@ Avoid ViewModel to ViewModel Conversion
 It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels) directly:
 
 ```cs
+/// <summary>
+/// Conversion from ViewModel to ViewModel is not recommended.
+/// </summary>
 public static void Convert(
     EditViewModel userInput, ProductViewModel viewModel)
 {
