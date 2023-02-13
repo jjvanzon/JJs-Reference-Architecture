@@ -423,22 +423,18 @@ public static void Convert(
 What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back:
 
 ```cs
-public EditViewModel Show(int id)
+// Data Access
+Product product = _productRepository.Get(id);
+
+// Business Logic
+decimal vatFactor = _taxCalculator.VatFactor;
+decimal priceWithVat = product.PriceWithoutVat * vatFactor;
+
+// Presentation
+EditViewModel viewModel = new()
 {
-    // Data Access
-    Product product = _productRepository.Get(id);
-
-    // Business Logic
-    decimal vatFactor = _taxCalculator.VatFactor;
-
-    // Presentation
-    var viewModel = new EditViewModel
-    {
-        Price = product.PriceWithoutTax * vatFactor
-    };
-
-    return viewModel;
-}
+    Price = priceWithVat
+};
 ```
 
 This give us finer control over where the data comes from and goes.
