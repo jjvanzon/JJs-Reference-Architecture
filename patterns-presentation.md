@@ -430,15 +430,13 @@ What we're trying to prevent here is too much interdependence between [`ViewMode
 Product product = _productRepository.Get(id);
 
 // Business Logic
-decimal priceWithVat = product.PriceWithoutVat * _taxCalculator.VatFactor;
+decimal price = product.PriceWithoutVat * _taxCalculator.VatFactor;
 
 // Presentation
-var viewModel = new EditViewModel { Price = priceWithVat };
+var viewModel = new EditViewModel { Price = price };
 ```
 
-This give us finer control over where the data comes from and goes.
-
-But there are exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels) instead:
+This give us finer control over where the data comes from and goes. But there are exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels) instead:
 
 `< TODO: Code sample of an action operating on ViewModels alone. >`
 
