@@ -438,7 +438,13 @@ var viewModel = new EditViewModel { Price = price };
 
 This give us finer control over where the data comes from and goes. But there are exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels) instead:
 
-`< TODO: Code sample of an action operating on ViewModels alone. >`
+```cs
+public void ExpandNode(TreeViewModel viewModel, int id)
+{
+    NodeViewModel node = viewModel.Nodes.Single(x => x.ID == id);
+    node.IsExpanded = true;
+}
+```
 
 For instance, you might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels):
 
