@@ -451,8 +451,6 @@ It might have to do with properties, that aren't going to be stored permanently.
 ```cs
 public QuizViewModel Answer(QuizViewModel userInput)
 {
-    ...
-
     var viewModel = new QuizViewModel();
 
     // Yield over non-persisted properties.
