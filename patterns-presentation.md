@@ -449,9 +449,18 @@ public void ExpandNode(TreeViewModel viewModel, int id)
 It might have to do with properties, that aren't going to be stored permanently. You might also yield over other non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) like so:
 
 ```cs
-var viewModel = new QuizViewModel();
-viewModel.SelectedOption = userInput.SelectedOption;
-viewModel.AnswerVisible = userInput.AnswerVisible;
+public QuizViewModel Answer(QuizViewModel userInput)
+{
+    ...
+
+    var viewModel = new QuizViewModel();
+
+    // Yield over non-persisted properties.
+    viewModel.SelectedOption = userInput.SelectedOption;
+    viewModel.AnswerVisible = userInput.AnswerVisible;
+
+    return viewModel;
+}
 ```
 
 
