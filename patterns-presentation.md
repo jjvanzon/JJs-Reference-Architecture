@@ -267,7 +267,7 @@ A *lookup* list can hold the data for a control like a drop-down box, e.g.:
 IList<IDAndName> ProductTypeLookup { get; set; }
 ```
 
-It might be used in a [`Screen ViewModel`](#screen-viewmodels) like so:
+It might be used in a [`Screen ViewModel`](#screen-viewmodels) like this:
 
 ```cs
 /// <summary>
