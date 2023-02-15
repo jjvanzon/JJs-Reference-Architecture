@@ -468,15 +468,39 @@ Avoid Inheritance
 
 Inheritance is not the go-to choice for [`ViewModels`](#viewmodels).
 
-Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes:
+Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain:
 
 `< TODO: Add to Demo project. >`
 
 ```cs
-public class ProductListViewModel
+public class BaseViewModel
 {
-    public IList<ProductViewModel> Products { get; set; }
-    public PagerViewModel Pager { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
+
+public class HomePageViewModel : BaseViewModel
+{
+    // ...
+}
+
+public class ProductEditViewModel : BaseViewModel
+{
+    // ...
+}
+```
+
+Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, how interdependent by using inheritance.
+
+By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes:
+
+`< TODO: Add to Demo project. >`
+
+```cs
+public class HomePageViewModel
+{
+    public string PageTitle { get; set; }
+    public string UserDisplayName { get; set; }
 }
 
 public class ProductEditViewModel
@@ -488,9 +512,19 @@ public class ProductEditViewModel
 }
 ```
 
+In these examples, each [`ViewModel`](#viewmodels) is self-sufficient and does not affect the other.
+
 To really 'seal' the deal, you could make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent inheritance at all:
 
 `< TODO: Short code sample with a ViewModel class that is sealed. >`
+
+```cs
+public sealed class HomePageViewModel
+{
+    public string PageTitle { get; set; }
+    public string UserDisplayName { get; set; }
+}
+```
 
 Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully:
 
