@@ -466,13 +466,27 @@ public QuizViewModel Answer(QuizViewModel userInput)
 Avoid Inheritance
 </h3>
 
-Inheritance is not the go-to choice for [`ViewModels`](#viewmodels):
-
-`< TODO: Code sample with base and derived ViewModel. A 'bad example' with too much functional overlap. Perhaps a ProductScreenViewModelBase or something with all sorts of propeties in it, that might be used in specific Screen ViewModel. >`
+Inheritance is not the go-to choice for [`ViewModels`](#viewmodels).
 
 Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain. By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes:
 
-`< TODO: Code sample with a few 'clean' Product Screen ViewModels. >`
+`< TODO: Add to Demo project. >`
+
+```cs
+public class ProductListViewModel
+{
+    public IList<ProductViewModel> Products { get; set; }
+    public PagerViewModel Pager { get; set; }
+}
+
+public class ProductEditViewModel
+{
+    public int ID { get; set; }
+    public int Name { get; set; }
+    public int Description { get; set; }
+    public IList<string> ValidationMessages { get; set; }
+}
+```
 
 To really 'seal' the deal, you could make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent inheritance at all:
 
@@ -480,11 +494,24 @@ To really 'seal' the deal, you could make the [`ViewModel`](#viewmodels) `classe
 
 Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully:
 
-`< TODO: A 'clean' ViewModelBase. >`
+`< TODO: Add to Demo project. >`
 
-But you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
+```cs
+public abstract class ScreenViewModelBase
+{
+    public bool Successful { get; set; }
+    public IList<string> ValidationMessages { get; set; }
+    public bool Visible { get; set; }
+}
+```
+
+Keeping the members in the base class very general, and not applicable to specific situations, might make it less likely to break views upon change unintendedly.
+
+As an alternative, you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
 
 `<TODO: Code sample. >`
+
+Although a change to a child object used by multiple view models can still have an impact when using composition, the modular nature of composition allows for a potentially smaller scope of dependence, reducing the overall impact of the change.
 
 
 <h3 id="view-models-conclusion">
