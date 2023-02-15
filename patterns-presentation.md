@@ -12,16 +12,16 @@ title: "🖥️ Patterns : Presentation"
 <h3>Contents</h3>
 
 - [ViewModels](#viewmodels)
-- [Lookup Lists](#lookup-lists)
 - [ToViewModel](#toviewmodel)
 - [ToEntity](#toentity)
 - [Presenter](#presenter)
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)
-- [NullCoalesce (ViewModels)](#nullcoalesce-viewmodels)
 - [Views](#views)
+- [Lookup Lists](#lookup-lists)
 - [First Full Load – Then Partial Load – Then Native Code](#first-full-load--then-partial-load--then-native-code)
-- [Temporary ID's](#temporary-ids)
 - [Stateless and Stateful](#stateless-and-stateful)
+- [NullCoalesce (ViewModels)](#nullcoalesce-viewmodels)
+- [Temporary ID's](#temporary-ids)
 - [Considerations](#considerations)
     - [ToEntity / ToViewModel](#toentity--toviewmodel)
 
@@ -483,22 +483,6 @@ Conclusion
 Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to business logic and data access, offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come and go.
 
 
-Lookup Lists
-------------
-
-`< TODO: Consider moving further down. >`
-
-In a stateless environment, lookup lists in [`Views`](#views) can be resource-intensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your `HTML`. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
-
-For small lookup lists you might include a copy of the list in each [Item ViewModel](#entity-viewmodels) and repeat the same lookup list in `HTML`.
-
-Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
-
-For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
-
-For big lookup list a viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
-
-
 ToViewModel
 -----------
 
@@ -610,19 +594,6 @@ Even though the actual call to the business logic might be trivial, it is still 
 
 `< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input ViewModel. Sometimes it is even the only way to execute the essense of the user action onto the user input ViewModel. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
 
-
-NullCoalesce (ViewModels)
--------------------------
-
-When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](#presenter).
-
-`< TODO: Better description. Also incorporate:`
-
-`- Also add a code example.`  
-`- Consider making a separate pattern description for NullCoalesce methods in general and move it to the Other Patterns section to which you then refer from this section NullCoalesce (ViewModels).`
-`- NullCoalesce. Applied to viewmodels that are passed to Presenters. The choice is made here to only NullCoalesce things that a View / client technology might leave out. Theoretically it might be better to NullCoalesce everything in the ViewModel, but this does take full traversal of the tree, which comes with a (small) performance penalty. Also: the NullCoalesce procedures take some typing time for the programmer, and requires maintenance when the structure changes. That is why the choice is made to only NullCoalesce a select set of things, that is adapted to our specific needs, rather than something that will always work. >`
-
-
 Views
 -----
 
@@ -635,6 +606,22 @@ In `WebForms` this would be an `aspx`.
 In [`MVC`](api.md#mvc) it can be an `aspx` or `cshtml`.
 
 Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](#presenter), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
+
+
+Lookup Lists
+------------
+
+`< TODO: Consider moving further down. >`
+
+In a stateless environment, lookup lists in [`Views`](#views) can be resource-intensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your `HTML`. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
+
+For small lookup lists you might include a copy of the list in each [Item ViewModel](#entity-viewmodels) and repeat the same lookup list in `HTML`.
+
+Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
+
+For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](api.md#jquery) trick to populate a drop down just before you slide it open.
+
+For big lookup list a viable option seems to [`AJAX`](api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 
 
 First Full Load – Then Partial Load – Then Native Code
@@ -657,6 +644,27 @@ Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instanc
 Some of the difficulties with [`AJAX`](api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](api.md#ajax) in the Aspects section.
 
 
+Stateless and Stateful
+----------------------
+
+The [presentation patterns](#️-patterns--presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
+
+You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](patterns-data-access.md#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+
+
+NullCoalesce (ViewModels)
+-------------------------
+
+When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](#presenter).
+
+`< TODO: Better description. Also incorporate:`
+
+`- Also add a code example.`  
+`- Consider making a separate pattern description for NullCoalesce methods in general and move it to the Other Patterns section to which you then refer from this section NullCoalesce (ViewModels).`
+`- NullCoalesce. Applied to viewmodels that are passed to Presenters. The choice is made here to only NullCoalesce things that a View / client technology might leave out. Theoretically it might be better to NullCoalesce everything in the ViewModel, but this does take full traversal of the tree, which comes with a (small) performance penalty. Also: the NullCoalesce procedures take some typing time for the programmer, and requires maintenance when the structure changes. That is why the choice is made to only NullCoalesce a select set of things, that is adapted to our specific needs, rather than something that will always work. >`
+
+
+
 Temporary ID's
 --------------
 
@@ -669,14 +677,6 @@ The TemporaryID concept breaks down, as soon as you need to use it to refer to s
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
 Another alternative is a different ID generation scheme. You may use an [`SQL`](api.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
-
-
-Stateless and Stateful
-----------------------
-
-The [presentation patterns](#️-patterns--presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
-
-You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](patterns-data-access.md#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
 
 Considerations
