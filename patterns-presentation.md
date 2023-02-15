@@ -490,7 +490,7 @@ public class ProductEditViewModel : BaseViewModel
 }
 ```
 
-Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, how interdependent by using inheritance.
+Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, because we used inheritance.
 
 By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes:
 
@@ -505,18 +505,15 @@ public class HomePageViewModel
 
 public class ProductEditViewModel
 {
-    public int ID { get; set; }
-    public int Name { get; set; }
-    public int Description { get; set; }
-    public IList<string> ValidationMessages { get; set; }
+    public int ProductID { get; set; }
+    public int ProductName { get; set; }
+    public int ProductDescription { get; set; }
 }
 ```
 
 In these examples, each [`ViewModel`](#viewmodels) is self-sufficient and does not affect the other.
 
 To really 'seal' the deal, you could make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent inheritance at all:
-
-`< TODO: Short code sample with a ViewModel class that is sealed. >`
 
 ```cs
 public sealed class HomePageViewModel
@@ -526,7 +523,7 @@ public sealed class HomePageViewModel
 }
 ```
 
-Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is manageable and maintainable, by applying it carefully:
+Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is maintainable by applying it carefully:
 
 `< TODO: Add to Demo project. >`
 
@@ -539,20 +536,20 @@ public abstract class ScreenViewModelBase
 }
 ```
 
-Keeping the members in the base class very general, and not applicable to specific situations, might make it less likely to break views upon change unintendedly.
+Keeping the members in the base class very general, and not applicable to specific situations, might make it less likely to break views upon change.
 
 As an alternative, you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
 
 `<TODO: Code sample. >`
 
-Although a change to a child object used by multiple view models can still have an impact when using composition, the modular nature of composition allows for a potentially smaller scope of dependence, reducing the overall impact of the change.
+Although a child object used by multiple view models can still have an impact when making a change, the modular nature of composition allows for a potentially smaller scope of dependence, reducing the overall impact on the multiple views.
 
 
 <h3 id="view-models-conclusion">
 Conclusion
 </h3>
 
-Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to business logic and data access, offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come and go.
+Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to business logic and data access, offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come from and go.
 
 
 Presenter
