@@ -446,9 +446,13 @@ public void ExpandNode(TreeViewModel viewModel, int id)
 }
 ```
 
-You also might yield over non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels):
+It might have to do with properties, that aren't going to be stored permanently. You might also yield over other non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) like so:
 
-`< TODO: Code sample yielding over non-persisted properties from one view model to the next. >`
+```cs
+var viewModel = new QuizViewModel();
+viewModel.SelectedOption = userInput.SelectedOption;
+viewModel.AnswerVisible = userInput.AnswerVisible;
+```
 
 
 <h3 id="view-models-avoid-inheritance">
