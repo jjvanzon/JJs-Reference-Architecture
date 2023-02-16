@@ -567,7 +567,7 @@ public class ProductEditViewModel
 }
 ```
 
-The `ScreenViewModel` class defines common properties that can be used for any screen or page, such as the title and visibility. The `ValidationViewModel` has properties for data validation on a page. They are reused: The `HomePage` uses common properties and has a `Login`. The `ProductEdit` view uses common properties and has `Validation`.
+The `ScreenViewModel` class defines common properties that can be used for any screen or page, such as a title. The `ValidationViewModel` has properties for data validation in a view. They are reused: The `HomePage` uses common properties and has a `Login`. The `ProductEdit` view uses common properties and has `Validation`.
 
 By using *composition*, changes to a child object, used by multiple views, can still have consequences. But the modular nature of composition allows for a potentially smaller scope of dependence than *inheritance*, reducing the overall impact.
 
