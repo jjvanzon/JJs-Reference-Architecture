@@ -436,7 +436,7 @@ decimal price = entity.PriceWithoutVat * _taxCalculator.VatFactor;
 var viewModel = new EditViewModel { Price = price };
 ```
 
-This give us finer control over where the data comes from and goes. But there might be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels) instead:
+This gives us finer control over where the data comes from and goes. But there might be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels) instead:
 
 ```cs
 public void ExpandNode(TreeViewModel viewModel, int id)
