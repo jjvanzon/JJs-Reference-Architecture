@@ -576,7 +576,7 @@ By using [composition](#view-models-composition), changes to a child object can 
 Realistic Example
 </h3>
 
-Finally, here is a realistic example of one of these [`ViewModels`](#viewmodels):
+Finally, here is a more realistic example of a `ProductEdit` [`ViewModel`](#viewmodels):
 
 ```cs
 // Screen ViewModel
