@@ -429,7 +429,7 @@ public static void Convert(
 What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back:
 
 ```cs
-Product entity = _productRepository.Get(id);
+Product entity = _repository.Get(id);
 
 decimal price = entity.PriceWithoutVat * _taxCalculator.VatFactor;
 
