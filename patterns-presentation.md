@@ -263,7 +263,7 @@ public class ProductListViewModel
 Lookup ViewModels
 </h3>
 
-A *lookup* list can provide the data for a control, like a drop-down select box, e.g.:
+A *lookup* list can provide the data for drop-down select boxes or other controls, e.g.:
 
 ```cs
 IList<IDAndName> ProductTypeLookup { get; set; }
@@ -400,7 +400,7 @@ public class Customer
 }
 ```
 
-Here the [`Entity`](patterns-data-access.md#entities) and [`ViewModel`](#viewmodels) looked completely different, which is totally fine.
+Here the [`Entity`](patterns-data-access.md#entities) and [`ViewModel`](#viewmodels) look completely different, which is totally fine.
 
 
 <h3 id="avoid-viewmodel-to-viewmodel-conversion">
@@ -447,17 +447,16 @@ public void ExpandNode(TreeViewModel viewModel, int id)
 }
 ```
 
-It may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#viewmodels) like this:
+This may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#viewmodels) like this:
 
 ```cs
 public QuizViewModel Answer(QuizViewModel userInput)
 {
-    var viewModel = new QuizViewModel
-    {
-        // Yield over non-persisted properties.
-        SelectedOption = userInput.SelectedOption,
-        AnswerVisible = userInput.AnswerVisible
-    };
+    var viewModel = new QuizViewModel();
+
+    // Yield over non-persisted properties.
+    viewModel.SelectedOption = userInput.SelectedOption;
+    viewModel.AnswerVisible = userInput.AnswerVisible;
 
     return viewModel;
 }
@@ -532,7 +531,7 @@ public abstract class ScreenViewModel
 }
 ```
 
-By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break views upon change.
+By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break views as the software evolves.
 
 <h3 id="view-models-composition">
 Composition
@@ -570,13 +569,13 @@ The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view
 
 `ScreenViewModel` and the `ValidationViewModel` classes are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation.
 
-By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than inheritance.
+By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than [inheritance](#view-models-avoid-inheritance).
 
 <h3 id="view-models-realistic-example">
 Realistic Example
 </h3>
 
-Finally, here is a more realistic example of a `ProductEdit` [`ViewModel`](#viewmodels):
+Finally, here is a realistic example of a `ProductEdit` [`ViewModel`](#viewmodels):
 
 ```cs
 // Screen ViewModel
