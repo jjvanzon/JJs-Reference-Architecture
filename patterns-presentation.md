@@ -84,7 +84,7 @@ These names are built up from parts:
 1. Starting with the [`Entity`](patterns-data-access.md#entities) name:  
    `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related:  
-   `Details`, `List`, `Edit`, `Delete` or `Deleted`
+   `Details`, `List`, `Edit` or `Delete`
 3. And end it with:  
    [`ViewModel`](#viewmodels)
 
