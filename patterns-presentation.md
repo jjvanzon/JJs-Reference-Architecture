@@ -48,6 +48,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 - [No Entities](#view-models-no-entities)
 - [Avoid ViewModel to ViewModel Conversion](#avoid-viewmodel-to-viewmodel-conversion)  
 - [Avoid Inheritance](#view-models-avoid-inheritance)  
+- [Composition](#view-models-composition)
 - [Conclusion](#view-models-conclusion)  
 
 
@@ -530,11 +531,41 @@ public abstract class ScreenViewModelBase
 }
 ```
 
-Keeping the members in the base class very general, and not applicable to specific situations, might make it less likely to break views upon change.
+By keeping the members in the base class very general, and not applicable to specific situations, it makes it less likely to break views upon change.
+
+<h3 id="view-models-composition">
+Composition
+</h3>
 
 As an alternative, you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
 
-`<TODO: Code sample. >`
+`< TODO: Add to Demo project. >`
+
+```cs
+public class ScreenViewModel
+{
+    public string Title { get; set; }
+    public bool Visible { get; set; }
+}
+
+public class ValidationViewModel
+{
+    public bool Successful { get; set; }
+    public IList<string> ValidationMessages { get; set; }
+}
+
+public class HomePageViewModel
+{
+    public ScreenViewModel Screen { get; set; }
+    public LoginPartialViewModel Login { get; set; }
+}
+
+public class ProductEditViewModel
+{
+    public ScreenViewModel Screen { get; set; }
+    public ValidationViewModel Validation { get; set; }
+}
+```
 
 Although a child object used by multiple view models can still have an impact when making a change, the modular nature of composition allows for a potentially smaller scope of dependence, reducing the overall impact.
 
