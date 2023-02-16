@@ -49,6 +49,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 - [Avoid ViewModel to ViewModel Conversion](#avoid-viewmodel-to-viewmodel-conversion)  
 - [Avoid Inheritance](#view-models-avoid-inheritance)  
 - [Composition](#view-models-composition)
+- [Realistic Example](#view-models-realistic-example)
 - [Conclusion](#view-models-conclusion)  
 
 
@@ -571,6 +572,31 @@ The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view
 
 By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than inheritance.
 
+<h3 id="view-models-realistic-example">
+Realistic Example
+</h3>
+
+Here's a more realistic example of a [`ViewModel`](#viewmodels):
+
+```cs
+/// Screen ViewModel
+public class ProductEditViewModel
+{
+    // Entity ViewModel
+    public ProductViewModel Product { get; set; }
+
+    // Partial ViewModels
+    public ButtonBarViewModel Buttons { get; set; }
+    public LoginPartialViewModel Login { get; set; }
+
+    // Lookup ViewModels
+    public IList<IDAndName> CategoryLookup { get; set; }
+    public IList<IDAndName> ProductTypeLookup { get; set; }
+
+    // Composition
+    public ValidationViewModel Validation { get; set; }
+}
+```
 
 <h3 id="view-models-conclusion">
 Conclusion
