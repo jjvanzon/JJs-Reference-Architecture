@@ -399,6 +399,8 @@ public class Customer
 }
 ```
 
+Here the [`Entity`](patterns-data-access.md#entities) and [`ViewModel`](#viewmodels) looked completely different, which is totally fine.
+
 
 <h3 id="avoid-viewmodel-to-viewmodel-conversion">
 Avoid ViewModel to ViewModel Conversion
