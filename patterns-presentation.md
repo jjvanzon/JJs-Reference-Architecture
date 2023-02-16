@@ -579,7 +579,7 @@ Realistic Example
 Finally, here is a realistic example of one of these [`ViewModels`](#viewmodels):
 
 ```cs
-/// Screen ViewModel
+// Screen ViewModel
 public class ProductEditViewModel
 {
     // Entity ViewModel
