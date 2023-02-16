@@ -56,7 +56,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 Only Data
 </h3>
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be a pure [data object](patterns-data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for their data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be a pure [data object](patterns-data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -141,13 +141,13 @@ public class ProductEditViewModel
     public int ID { get; set; }
     public string Name { get; set; }
 
-    // Uses Entity ViewModels
+    // Using Entity ViewModels
     public CategoryViewModel Category { get; set; }
     public ProductTypeViewModel ProductType { get; set; }
 }
 ```
 
-[`Entity ViewModels`](#entity-viewmodels) might also be called [`Item ViewModels`](#entity-viewmodels).
+[`Entity ViewModels`](#entity-viewmodels) are a kind of `Item ViewModel`.
 
 
 <h3 id="partial-viewmodels">
@@ -200,7 +200,7 @@ public class ProductEditViewModel
 ListItem ViewModels
 </h3>
 
-[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might have:
+[`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might get:
 
     ProductItemViewModel
     CategoryListItemViewModel
@@ -218,7 +218,7 @@ public class ProductItemViewModel
 ```
 
 So they can be different from the [`Entity ViewModels`](#entity-viewmodels).  
-[`ListItem ViewModels`](#listitem-viewmodels) can be used in a `ListViewModel`:
+[`ListItem ViewModels`](#listitem-viewmodels) can be used inside a `ListViewModel`:
 
 ```cs
 /// <summary>
@@ -262,7 +262,7 @@ public class ProductListViewModel
 Lookup ViewModels
 </h3>
 
-A *lookup* list can hold the data for a control like a drop-down box, e.g.:
+A *lookup* list can provide the data for a control, like a drop-down select box, e.g.:
 
 ```cs
 IList<IDAndName> ProductTypeLookup { get; set; }
@@ -318,14 +318,14 @@ The *reason* for displaying data read-only should not be a concern for a [`ViewM
 Keeping It Clean
 </h3>
 
-[`ViewModels`](#viewmodels) might only use *simple* `types` and *references* to other [`ViewModels`](#viewmodels). This keeps the [`ViewModel`](#views) layer completely self-contained.
+[`ViewModels`](#viewmodels) might only use *simple* `types` and references to other [`ViewModels`](#viewmodels). This keeps the [`ViewModel`](#views) layer completely self-contained.
 
 
 <h3 id="view-models-no-entities">
 No Entities
 </h3>
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](patterns-data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or possible.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](patterns-data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
 
 Even when the [`ViewModel`](patterns-data-access.md#entities) looks almost exactly the same as the [`Entity`](patterns-data-access.md#entities), we tend to not use [`Entities`](patterns-data-access.md#entities) directly. 
 
@@ -351,7 +351,7 @@ public class ProductViewModel
 }
 ```
 
-It is worth noting that linking to an [`Entity`](patterns-data-access.md#entities) can result in the availability of other related [`Entities`](patterns-data-access.md#entities), which may broaden the scope of the view beyond our intentions:
+It is worth noting that linking to an [`Entity`](patterns-data-access.md#entities) can result in the availability of other related [`Entities`](patterns-data-access.md#entities), which may broaden the scope of the [view](#views) beyond our intentions:
 
 ```cs
 /// <summary>
@@ -427,13 +427,10 @@ public static void Convert(
 What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back:
 
 ```cs
-// Data Access
-Product product = _productRepository.Get(id);
+Product entity = _productRepository.Get(id);
 
-// Business Logic
-decimal price = product.PriceWithoutVat * _taxCalculator.VatFactor;
+decimal price = entity.PriceWithoutVat * _taxCalculator.VatFactor;
 
-// Presentation
 var viewModel = new EditViewModel { Price = price };
 ```
 
@@ -442,21 +439,22 @@ This give us finer control over where the data comes from and goes. But there mi
 ```cs
 public void ExpandNode(TreeViewModel viewModel, int id)
 {
-    NodeViewModel node = viewModel.Nodes.Single(x => x.ID == id);
+    var node = viewModel.Nodes.Single(x => x.ID == id);
     node.IsExpanded = true;
 }
 ```
 
-It might have to do with properties, that aren't going to be stored permanently. You might also yield over other non-persisted properties from [`ViewModel`](#viewmodels) to [`ViewModel`](#viewmodels) like so:
+It may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#viewmodels) like this:
 
 ```cs
 public QuizViewModel Answer(QuizViewModel userInput)
 {
-    var viewModel = new QuizViewModel();
-
-    // Yield over non-persisted properties.
-    viewModel.SelectedOption = userInput.SelectedOption;
-    viewModel.AnswerVisible = userInput.AnswerVisible;
+    var viewModel = new QuizViewModel
+    {
+        // Yield over non-persisted properties.
+        SelectedOption = userInput.SelectedOption,
+        AnswerVisible = userInput.AnswerVisible
+    };
 
     return viewModel;
 }
@@ -491,7 +489,7 @@ public class ProductEditViewModel : ScreenViewModel
 
 Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, because we used inheritance.
 
-By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes:
+By avoiding inheritance, a [`ViewModel`](#viewmodels) can only break things that directly depend on it, reducing the potential impact of changes:
 
 ```cs
 public class HomePageViewModel
@@ -531,7 +529,7 @@ public abstract class ScreenViewModel
 }
 ```
 
-By keeping the members in the base class very general, and not applicable to specific situations, it makes it less likely to break views upon change.
+By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break views upon change.
 
 <h3 id="view-models-composition">
 Composition
@@ -540,18 +538,6 @@ Composition
 As an alternative, you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
 
 ```cs
-public class ScreenViewModel
-{
-    public string Title { get; set; }
-    public bool Visible { get; set; }
-}
-
-public class ValidationViewModel
-{
-    public bool Successful { get; set; }
-    public IList<string> ValidationMessages { get; set; }
-}
-
 public class HomePageViewModel
 {
     public ScreenViewModel Screen { get; set; }
@@ -563,11 +549,23 @@ public class ProductEditViewModel
     public ScreenViewModel Screen { get; set; }
     public ValidationViewModel Validation { get; set; }
 }
+
+public class ScreenViewModel
+{
+    public string Title { get; set; }
+    public bool Visible { get; set; }
+}
+
+public class ValidationViewModel
+{
+    public bool Successful { get; set; }
+    public IList<string> ValidationMessages { get; set; }
+}
 ```
 
-The `ScreenViewModel` class defines common properties that can be used for any screen or page, such as the title. The `ValidationViewModel` has properties for data validation in a view. They are reused: The `HomePage` uses common properties and has a `Login`. The `ProductEdit` view uses common properties and has `Validation`.
+The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`. The reused `ScreenViewModel` class defines common properties that can be used for any screen or page, such as the title. The `ValidationViewModel` has properties for data validation in a [views](#views).
 
-By using *composition*, changes to a child object, used by multiple views, can still have an impact. But the modular nature of composition allows for a potentially smaller scope of dependency than inheritance.
+By using *composition*, changes to a child object can still have an impact on multiple [views](#views). But the modular nature of composition allows for a potentially smaller scope of dependency than inheritance.
 
 
 <h3 id="view-models-conclusion">
