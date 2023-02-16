@@ -470,21 +470,19 @@ Inheritance is not the go-to choice for [`ViewModels`](#viewmodels).
 
 Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain:
 
-`< TODO: Add to Demo project. >`
-
 ```cs
-public class BaseViewModel
+public abstract class ScreenViewModelBase
 {
     public string Name { get; set; }
     public string Description { get; set; }
 }
 
-public class HomePageViewModel : BaseViewModel
+public class HomePageViewModel : ScreenViewModelBase
 {
     // ...
 }
 
-public class ProductEditViewModel : BaseViewModel
+public class ProductEditViewModel : ScreenViewModelBase
 {
     // ...
 }
@@ -493,8 +491,6 @@ public class ProductEditViewModel : BaseViewModel
 Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, because we used inheritance.
 
 By avoiding inheritance, a [`ViewModel`](#viewmodels) will only break the [`Views`](#views) that directly depend on it, reducing the potential impact of changes:
-
-`< TODO: Add to Demo project. >`
 
 ```cs
 public class HomePageViewModel
@@ -525,14 +521,12 @@ public sealed class HomePageViewModel
 
 Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is maintainable by applying it carefully:
 
-`< TODO: Add to Demo project. >`
-
 ```cs
 public abstract class ScreenViewModelBase
 {
+    public bool Visible { get; set; }
     public bool Successful { get; set; }
     public IList<string> ValidationMessages { get; set; }
-    public bool Visible { get; set; }
 }
 ```
 
@@ -542,7 +536,7 @@ As an alternative, you could also choose to use other design patterns, such as c
 
 `<TODO: Code sample. >`
 
-Although a child object used by multiple view models can still have an impact when making a change, the modular nature of composition allows for a potentially smaller scope of dependence, reducing the overall impact on the multiple views.
+Although a child object used by multiple view models can still have an impact when making a change, the modular nature of composition allows for a potentially smaller scope of dependence, reducing the overall impact.
 
 
 <h3 id="view-models-conclusion">
