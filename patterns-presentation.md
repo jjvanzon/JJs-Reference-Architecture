@@ -535,7 +535,7 @@ By keeping the members in the base class very general, and not applicable to spe
 Composition
 </h3>
 
-As an alternative, you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
+As an alternative, you could also choose to use other design patterns, such as [composition](#view-models-composition), to reduce the impact of changes:
 
 ```cs
 public class HomePageViewModel
@@ -563,9 +563,11 @@ public class ValidationViewModel
 }
 ```
 
-The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`. The reused `ScreenViewModel` class defines common properties that can be used for any screen or page, such as the title. The `ValidationViewModel` has properties for data validation in a [views](#views).
+The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
 
-By using *composition*, changes to a child object can still have an impact on multiple [views](#views). But the modular nature of composition allows for a potentially smaller scope of dependency than inheritance.
+`ScreenViewModel` and the `ValidationViewModel` classes are reused. `ScreenViewModel` defines common properties that can be used for any screen or page. The `ValidationViewModel` has properties for data validation.
+
+By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than inheritance.
 
 
 <h3 id="view-models-conclusion">
