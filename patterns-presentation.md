@@ -85,7 +85,7 @@ These names are built up from parts:
    `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related:  
    `Details`, `List`, `Edit` or `Delete`
-3. And end it with:  
+3. And it ends with:  
    [`ViewModel`](#viewmodels)
 
 Instead of [`CRUD`](layers.md#crud) actions, you could also use terms like `Overview`, `Selector`, `NotFound`, or `Login`:
