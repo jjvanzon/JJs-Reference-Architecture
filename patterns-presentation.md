@@ -472,18 +472,18 @@ Inheritance is not the go-to choice for [`ViewModels`](#viewmodels).
 Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain:
 
 ```cs
-public abstract class ScreenViewModelBase
+public abstract class ScreenViewModel
 {
     public string Name { get; set; }
     public string Description { get; set; }
 }
 
-public class HomePageViewModel : ScreenViewModelBase
+public class HomePageViewModel : ScreenViewModel
 {
     // ...
 }
 
-public class ProductEditViewModel : ScreenViewModelBase
+public class ProductEditViewModel : ScreenViewModel
 {
     // ...
 }
@@ -523,7 +523,7 @@ public sealed class HomePageViewModel
 Though no hard rules here. It doesn't mean that inheritance should always be avoided. It may still be possible to use inheritance in a way that is maintainable by applying it carefully:
 
 ```cs
-public abstract class ScreenViewModelBase
+public abstract class ScreenViewModel
 {
     public bool Visible { get; set; }
     public bool Successful { get; set; }
@@ -538,8 +538,6 @@ Composition
 </h3>
 
 As an alternative, you could also choose to use other design patterns, such as composition, to reduce the impact of changes:
-
-`< TODO: Add to Demo project. >`
 
 ```cs
 public class ScreenViewModel
