@@ -608,6 +608,11 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 Presenter
 ---------
 
+A `Presenter` models the user interactions. A non-visual blue-print of the user interface.
+
+
+<h3>Contents</h3>
+
 - [Introduction](#presenters-introduction)
 - [The Role of the Presenter](#the-role-of-the-presenter)
 - [Working with ViewModels](#presenters-working-with-viewmodels)
@@ -616,35 +621,30 @@ Presenter
 - [Conclusion](#presenters-conclusion)
 
 
-<h3 id="presenters-introduction">Introduction</h3>
-
-A `Presenter` models the user interactions. A non-visual blue-print of the user interface.
-
-
 <h3 id="the-role-of-the-presenter">The Role of the Presenter</h3>
 
-Each [`View`](#views) gets its own `Presenter`.
+Each [`View`](#views) gets its own [`Presenter`](#presenter).
 
-A `Presenter` represents what a user can do in a screen.
+A [`Presenter`](#presenter) represents what a user can do in a screen.
 
 Each *user action* on that screen is represented by a *method*.
 
 
 <h3 id="presenters-working-with-viewmodels">Working with ViewModels</h3>
 
-The methods of the `Presenter` work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the `Presenter` is about. Those might be actions that navigate to a different [`View`](#views). That way the `Presenters` are a model for what the user can do with the application.
+The methods of the [`Presenter`](#presenter) work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenter) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenter) are a model for what the user can do with the application.
 
 
 <h3 id="presenters-internal-implementation">Internal Implementation</h3>
 
-Internally a `Presenter` can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
+Internally a [`Presenter`](#presenter) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
 
-Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the `Presenters` constructor.
+Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenter) constructor.
 
 
 <h3 id="presenters-delegating-viewmodel-creation">Delegating ViewModel Creation</h3>
 
-All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the `Presenter` layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the `Presenter` a needless hatch ('doorgeefluik'), because the `Presenter` is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
+All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenter`](#presenter) layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the [`Presenter`](#presenter) a needless hatch ('doorgeefluik'), because the [`Presenter`](#presenter) is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
 
 
 <h3 id="presenters-conclusion">Conclusion</h3>
