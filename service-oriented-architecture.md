@@ -1,5 +1,6 @@
 ﻿---
 title: "🌍 Service Oriented Architecture"
+image: "/images/esb.png"
 ---
 
 <style>thead{display:none;}</style>
