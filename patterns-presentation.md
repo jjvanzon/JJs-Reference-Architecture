@@ -58,7 +58,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 Only Data
 </h3>
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) it is meant to be a pure [data object](patterns-data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](patterns-data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
