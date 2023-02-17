@@ -1,5 +1,6 @@
 ﻿---
 title: "🎁 API's"
+image: "/images/api-preview.png"
 ---
 
 <style>.wrapper { max-width: 90% }</style>
