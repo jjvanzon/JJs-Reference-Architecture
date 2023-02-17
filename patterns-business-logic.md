@@ -1,5 +1,6 @@
 ﻿---
 title: "🤖 Patterns : Business Logic"
+image: "/images/visitor-pattern-code-sample-2.png"
 ---
 
 🤖 Patterns : Business Logic
