@@ -1,5 +1,6 @@
 ﻿---
 title: "🖥️ Patterns : Presentation"
+image: "/images/view-model-code-sample.png"
 ---
 
 `[ Draft ]`
@@ -531,7 +532,7 @@ public abstract class ScreenViewModel
 }
 ```
 
-By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break views as the software evolves.
+By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break the software as it evolves.
 
 <h3 id="view-models-composition">
 Composition
@@ -567,7 +568,7 @@ public class ValidationViewModel
 
 The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
 
-`ScreenViewModel` and the `ValidationViewModel` classes are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation.
+`ScreenViewModel` and the `ValidationViewModel` are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation.
 
 By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than [inheritance](#view-models-avoid-inheritance).
 
