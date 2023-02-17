@@ -13,7 +13,7 @@ image: "/images/view-model-code-sample.png"
 <h3>Contents</h3>
 
 - [ViewModels](#viewmodels)
-- [Presenter](#presenter)
+- [Presenters](#presenters)
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)
 - [ToViewModel](#toviewmodel)
 - [ToEntity](#toentity)
@@ -605,8 +605,8 @@ Conclusion
 Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](layers.md#business-layer) and [data access](layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come from and go.
 
 
-Presenter
----------
+Presenters
+----------
 
 A `Presenter` models the user interactions. A non-visual blue-print of the user interface.
 
@@ -623,41 +623,41 @@ A `Presenter` models the user interactions. A non-visual blue-print of the user 
 
 <h3 id="the-role-of-the-presenter">The Role of the Presenter</h3>
 
-Each [`View`](#views) gets its own [`Presenter`](#presenter).
+Each [`View`](#views) gets its own [`Presenter`](#presenters).
 
-A [`Presenter`](#presenter) represents what a user can do in a screen.
+A [`Presenter`](#presenters) represents what a user can do in a screen.
 
 Each *user action* on that screen is represented by a *method*.
 
 
 <h3 id="presenters-working-with-viewmodels">Working with ViewModels</h3>
 
-The methods of the [`Presenter`](#presenter) work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenter) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenter) are a model for what the user can do with the application.
+The methods of the [`Presenter`](#presenters) work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
 
 
 <h3 id="presenters-internal-implementation">Internal Implementation</h3>
 
-Internally a [`Presenter`](#presenter) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
+Internally a [`Presenter`](#presenters) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
 
-Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenter) constructor.
+Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenters) constructor.
 
 
 <h3 id="presenters-delegating-viewmodel-creation">Delegating ViewModel Creation</h3>
 
-All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenter`](#presenter) layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the [`Presenter`](#presenter) a needless hatch ('doorgeefluik'), because the [`Presenter`](#presenter) is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
+All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenter`](#presenters) layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the [`Presenter`](#presenters) a needless hatch ('doorgeefluik'), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
 
 
 <h3 id="presenters-conclusion">Conclusion</h3>
 
-The [`Presenter`](#presenter) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenter) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [`presentation logic`](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`] creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenter) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
+The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [`presentation logic`](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`] creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
 
 
 ToEntity-Business-ToViewModel Round-Trip
 ----------------------------------------
 
-A [`Presenter`](#presenter) is a combinator `class`, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other `classes`. It also combines it with calls to the business layer.
+A [`Presenter`](#presenters) is a combinator `class`, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other `classes`. It also combines it with calls to the business layer.
 
-A [`Presenter`](#presenter) action method might be organized into phases:
+A [`Presenter`](#presenters) action method might be organized into phases:
 
 - [Security](aspects.md#security)
 - [`ViewModel`](#viewmodels) [Validation](patterns-business-logic.md#validators)
@@ -670,7 +670,7 @@ A [`Presenter`](#presenter) action method might be organized into phases:
 
 Not all of the phases must be present. [`ToEntity`](#toviewmodel) / Business / [`ToViewModel`](#toviewmodel) might be the typical phases. Slight variations in order of the phases are possible. But separate these phases, so that they are not intermixed and entangled.
 
-Comment the phases in the code in the [`Presenter`](#presenter) action method:
+Comment the phases in the code in the [`Presenter`](#presenters) action method:
 
 ```cs
 // ToEntity
@@ -753,7 +753,7 @@ In `WebForms` this would be an `aspx`.
 
 In [`MVC`](api.md#mvc) it can be an `aspx` or `cshtml`.
 
-Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](#presenter), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
+Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](#presenters), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
 
 
 Lookup Lists
@@ -785,7 +785,7 @@ When programming page navigation, the first choice for showing content is a *ful
 
 But it was always the first choice to do full postbacks.
 
-The reason for this choice is *maintainability*: programming the application navigation in [`C#`](api.md#csharp) using [`Presenters`](#presenter) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](#presenter) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason for this choice is *maintainability*: programming the application navigation in [`C#`](api.md#csharp) using [`Presenters`](#presenters) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](#presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
 Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
@@ -795,15 +795,15 @@ Some of the difficulties with [`AJAX`](api.md#ajax) have been solved by employin
 Stateless and Stateful
 ----------------------
 
-The [presentation patterns](#️-patterns--presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenter) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
+The [presentation patterns](#️-patterns--presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenters) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
 
-You would be making assumptions in your [`Presenter`](#presenter) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](patterns-data-access.md#repository) and [`Presenters`](#presenter). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+You would be making assumptions in your [`Presenter`](#presenters) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](patterns-data-access.md#repository) and [`Presenters`](#presenters). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
 
 NullCoalesce (ViewModels)
 -------------------------
 
-When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](#presenter).
+When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](#presenters).
 
 `< TODO: Better description. Also incorporate:`
 

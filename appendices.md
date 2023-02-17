@@ -71,11 +71,11 @@ This checklist might be used if you want to bulk-program the [architecture](inde
     - [`WithRelatedEntities` forms](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
     - From screen [`ViewModel`](patterns-presentation.md#viewmodels)
     - `DocumentViewModel` (optional)
-- [`Presentation`](layers.md#presentation-layer): [`Presenters`](patterns-presentation.md#presenter)
-    - `List` [`Presenters`](patterns-presentation.md#presenter)
-    - `Detail` [`Presenters`](patterns-presentation.md#presenter)
-    - (`Edit` [`Presenters`](patterns-presentation.md#presenter))
-    - `Save` methods in `Detail` (or `Edit`) [`Presenters`](patterns-presentation.md#presenter).
+- [`Presentation`](layers.md#presentation-layer): [`Presenters`](patterns-presentation.md#presenters)
+    - `List` [`Presenters`](patterns-presentation.md#presenters)
+    - `Detail` [`Presenters`](patterns-presentation.md#presenters)
+    - (`Edit` [`Presenters`](patterns-presentation.md#presenters))
+    - `Save` methods in `Detail` (or `Edit`) [`Presenters`](patterns-presentation.md#presenters).
     - `MainPresenter` (optional)
 - [`Presentation`](layers.md#presentation-layer):
     - [`Views`](patterns-presentation.md#views) ([`MVC`](api.md#mvc) / `UserControls` / ... )
