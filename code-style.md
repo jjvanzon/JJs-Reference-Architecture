@@ -1,5 +1,6 @@
 ﻿---
 title: "👨‍💻 Code Style"
+image: "/images/code-style-preview.png"
 ---
 
 <style>.wrapper { max-width: 90% }</style>
