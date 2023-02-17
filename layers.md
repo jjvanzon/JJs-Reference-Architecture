@@ -1,4 +1,8 @@
-﻿🧅 Layers
+﻿---
+image: "/images/perpendicular-layers.png"
+---
+
+🧅 Layers
 ==========
 
 [back](.)
