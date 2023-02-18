@@ -626,9 +626,9 @@ A [`Presenter`](#presenters) models the user interactions: a non-visual blue-pri
 The Role of the Presenter
 </h3>
 
-Each [`View`](#views) gets its own [`Presenter`](#presenters).
+Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen, the [`Presenters`](#presenters) model the *actions* a user can perform on screen.
 
-A [`Presenter`](#presenters) represents what a user can do in a screen.
+Each [`View`](#views) gets its own [`Presenter`](#presenters).
 
 Each *user action* on that screen is represented by a *method*.
 
