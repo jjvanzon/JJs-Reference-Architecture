@@ -803,8 +803,8 @@ A [`Presenter`](#presenters) action method might have different steps:
 |---|---|
 | [`Security` checks](aspects.md#security) | Executing the necessary [security checks](aspects.md#security) to prevent unauthorized access.
 | [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) before converting it to an [`Entity`](patterns-data-access.md#entities). This can be useful in case the data cannot be converted to an [`Entity`](patterns-data-access.md#entities). Otherwise [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) might be preferred instead.
-| [`GetEntities`](patterns-data-access.md#repositories) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
 | [`ToEntity`](#toentity) | Converting [ViewModel](#viewmodels) data into [`Entity`](patterns-data-access.md#entities) data.
+| [`GetEntities`](patterns-data-access.md#repositories) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
 | [`Business`](layers.md#business-layer) | Executing the necessary [business logic](layers.md#business-layer) for data [`validation`](patterns-business-logic.md#validators), [calculations](aspects.md#calculation), and decisions based on the data.
 | [`Commit`](api.md#orm) | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 | [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, preparing it for display in the UI.
