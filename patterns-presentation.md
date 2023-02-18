@@ -633,20 +633,20 @@ Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen
 Each [`View`](#views) gets its own [`Presenter`](#presenters), for instance:
 
 ```cs
-LoginPresenter { }
-ProductListPresenter { }
-ProductEditPresenter { }
-ProductDetailsPresenter { }
-CategorySelectionPresenter { }
+class LoginPresenter { }
+class ProductListPresenter { }
+class ProductEditPresenter { }
+class ProductDetailsPresenter { }
+class CategorySelectionPresenter { }
 ```
 
 Each *user action* is represented by a *method*, like:
 
 ```cs
-ProductEditPresenter
+class ProductEditPresenter
 {
-    Show() { }
-    Save() { }
+    void Show() { }
+    void Save() { }
 }
 ```
 
@@ -677,14 +677,11 @@ Other action method parameters are also things the user chose:
 ```cs
 class ProductEditPresenter
 {
-    /// <summary>
-    /// The parameter productID is a choice from the user.
-    /// </summary>
-    ProductEditViewModel Show(int productID) { }
+    void Show(string productNumber) { }
 }
 ```
 
-An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about:
+An action method can return a different [`ViewModel`](#viewmodels), not only the one that the [`Presenter`](#presenters) is about:
 
 ```cs
 class ProductEditPresenter
@@ -693,7 +690,7 @@ class ProductEditPresenter
     {
         if (!successful)
         {
-            // Keep editing
+            // Stay in the edit view
             return new ProductEditViewModel();
         }
 
@@ -703,9 +700,9 @@ class ProductEditPresenter
 }
 ```
 
-Those might be actions that navigate to a different [`View`](#views).
+Those actions can navigate to a different [`View`](#views).
 
-That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
+Following those guidelines, the [`Presenters`](#presenters) can be a structured model for what the user can do with the application.
 
 
 <h3 id="presenters-infrastructure-and-configuration">
@@ -714,12 +711,35 @@ Infrastructure & Configuration
 
 Sometimes you also pass [infra and config](layers.md#infrastructure) parameters to an action method:
 
-`< TODO: Code sample >`
+```cs
+class ProductEditPresenter
+{
+    object Save(
+        ProductEditViewModel userInput, 
+        IAuthenticator authenticator) // Infra-related parameter
+    {
+        
+    }
+}
+```
 
 But it is preferred that the main chunk of the [infra and settings](layers.md#infrastructure) is passed to the [`Presenters`](#presenters) constructor:
 
-`< TODO: Code sample >`
+```cs
+class ProductEditPresenter
+{
+    /// <summary>
+    /// Passing infra-related parameters to the constructor.
+    /// </summary>
+    public ProductEditPresenter(
+        IMyRepository repository,
+        IAuthenticator authenticator,
+        string cultureName)
+    { 
 
+    }
+}
+```
 
 <h3 id="presenters-internal-implementation">
 Internal Implementation
@@ -798,18 +818,6 @@ This seems a bit of a throw-together of concepts, but that's how it is for a [co
 
 Not all of the steps need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are possible.
 
-It might be an idea to *comment* the steps in the code in the [`Presenter`](#presenters) action method, like this:
-
-```cs
-// ToEntity
-Dinner dinner = userInput.ToEntity(_dinnerRepository);
-
-// Business
-_dinnerFacade.Cancel(dinner);
-
-// ToViewModel
-DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
-```
 
 <h3 id="presenters-complete-example">
 Complete Example

@@ -14,6 +14,8 @@ Archived text that didn't make the cut for some reason.
 - [Patterns : ViewModels](#patterns--viewmodels)
     - [2023-01-31](#2023-01-31)
     - [2023-02-15](#2023-02-15)
+- [Patterns : Presenters](#patterns--presenters)
+    - [2023-02-18](#2023-02-18)
 
 
 API's | ORM | Meet in the Middle Queries
@@ -85,5 +87,23 @@ public class ProductEditViewModel : ProductScreenViewModelBase
     public IList<string> ValidationMessages { get; set; }
 }
 ```
+
+## Patterns : Presenters
+
+### 2023-02-18
+
+It might be an idea to *comment* the steps in the code in the [`Presenter`](#presenters) action method, like this:
+
+```cs
+// ToEntity
+Dinner dinner = userInput.ToEntity(_dinnerRepository);
+
+// Business
+_dinnerFacade.Cancel(dinner);
+
+// ToViewModel
+DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
+```
+
 
 [back](..)
