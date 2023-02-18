@@ -619,6 +619,7 @@ This section describes how they are implemented in [this architecture](index.md)
 - [Internal Implementation](#presenters-internal-implementation)  
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
+- [Complete Example](#presenters-complete-example)
 - [Overhead](#presenters-overhead)
 - [Conclusion](#presenters-conclusion)  
 
@@ -733,13 +734,37 @@ Delegating ViewModel Creation
 
 It is preferred that [`ViewModel`](#viewmodels) creation is delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenters`](#presenters)):
 
-`< TODO: Code sample >`
+```cs
+public ProductEditViewModel Show(int id)
+{
+    // Delegate to ToViewModel layer
+    var viewModel = entity.ToEditViewModel();
+}
+```
 
-This because then when the [`ViewModel` creation](#viewmodels) aspect should be adapted, there is but one place in the code to look.
+This is because then when the [`ViewModel` creation](#viewmodels) aspect should be adapted, there is but one place in the code to look.
 
 It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
 
-`< TODO: Code sample >`
+```cs
+public object Save(ProductEditViewModel userInput)
+{
+    // Security
+    SecurityAsserter.AssertLogIn();
+
+    // ToEntity
+    Product entity = userInput.ToEntity(_repository);
+
+    // Business
+    new SideEffect_SetDateModified(entity).Execute();
+
+    // Save
+    _repository.Commit();
+
+    // Redirect
+    return new ProductListViewModel();
+}
+```
 
 This way it is also resposible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities).
 
@@ -764,7 +789,7 @@ A [`Presenter`](#presenters) action method might have different steps:
     - `< TODO: Describe >`
 - [`ToViewModel`](#toviewmodel)
     - `< TODO: Describe >`
-- `NonPersisted`
+- `NonPersisted Data`
     - Yielding over non-persisted data from old to new [`ViewModel`](#viewmodels).
 - Redirect
     - `< TODO: Describe >`
@@ -786,9 +811,45 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
+<h3 id="presenters-complete-example">
+Complete Example
+</h3>
+
 Here is a code sample with more steps in it:
 
-`< TODO: Code sample with all steps in it. >`
+`< Test this code sample >`
+
+```cs
+public ProductEditViewModel Save(ProductEditViewModel userInput)
+{
+    // Security
+    SecurityAsserter.AssertLoggedIn();
+
+    // ToEntity
+    Product entity = userInput.ToEntity(_repository);
+
+    // Validation
+    IValidator validator = new ProductValidator(entity);
+    
+    if (!validator.IsValid)
+    {
+        // ToViewModel
+        var viewModel = entity.ToEditViewModel();
+
+        // Non-Persisted Data        
+        viewModel.Messages = validator.Messages;
+    }
+
+    // Business
+    new SideEffect_SetDateModified(entity).Execute();
+    
+    // Save
+    _repository.Commit();
+
+    // Redirect
+    return new ProductListViewModel();
+}
+```
 
 
 <h3 id="presenters-overhead">
@@ -797,7 +858,7 @@ Overhead
 
 Even though the actual call to the [business logic](layers.md#business-layer) might be trivial, it may still be necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back.
 
-One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. That's needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer) and using [`entity` models](patterns-data-access.md#entities).
+One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer).
 
 You might save the computer some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
 
