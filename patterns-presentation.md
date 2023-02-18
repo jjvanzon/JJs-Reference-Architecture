@@ -608,7 +608,6 @@ Presenters
 ----------
 
 A [`Presenter`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
-
 This section describes how they are implemented in [this architecture](index.md).
 
 
@@ -630,10 +629,25 @@ The Role of the Presenter
 
 Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen, the [`Presenters`](#presenters) model the *actions* a user can perform on screen.
 
-Each [`View`](#views) gets its own [`Presenter`](#presenters).
+Each [`View`](#views) gets its own [`Presenter`](#presenters), for instance:
 
-Each *user action* is represented by a *method*.
+```cs
+class LoginPresenter { }
+class ProductListPresenter { }
+class ProductEditPresenter { }
+class ProductDetailsPresenter { }
+class CategorySelectionPresenter { }
+```
 
+Each *user action* is represented by a *method*. Some pseudo-code:
+
+```cs
+class ProductEditPresenter
+{
+    void Show() { }
+    void Save() { }
+}
+```
 
 <h3 id="presenters-working-with-viewmodels">
 Working with ViewModels
@@ -641,15 +655,30 @@ Working with ViewModels
 
 The methods of the [`Presenter`](#presenters) work by a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen:
 
-`< TODO: Code sample. >`
+```cs
+class ProductEditPresenter
+{
+    ProductEditViewModel Show() { }
+}
+```
 
 Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited:
 
-`< TODO: Code sample. >`
+```cs
+class ProductEditPresenter
+{
+    void Save(ProductEditViewModel userInput) { }
+}
+```
 
 Other action method parameters are also things the user chose:
 
-`< TODO: Code sample. >`
+```cs
+class ProductEditPresenter
+{
+    ProductEditViewModel Show(int productID) { }
+}
+```
 
 An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about:
 
@@ -769,6 +798,7 @@ The [`Presenter`](#presenters) pattern is a commonly used design pattern for mod
 
 `< TODO: Describe platform independence benefit. >`
 `< TODO: Additional text: All logic is hidden under a shell of ViewModels and user actions, to base the views and interaction on. >`
+`< TODO: Add code samples to demo project. >`
 
 ToViewModel
 -----------
