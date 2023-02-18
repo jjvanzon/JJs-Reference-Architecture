@@ -804,9 +804,9 @@ A [`Presenter`](#presenters) action method might have different steps:
 | [`Security` checks](aspects.md#security) | Executing the necessary [security checks](aspects.md#security) to prevent unauthorized access.
 | [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) before converting it to an [`Entity`](patterns-data-access.md#entities). This can be useful in case the data cannot be converted to an [`Entity`](patterns-data-access.md#entities). Otherwise [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) might be preferred instead.
 | [`ToEntity`](#toentity) | Converting [ViewModel](#viewmodels) data into [`Entity`](patterns-data-access.md#entities) data.
-| [`GetEntities`](patterns-data-access.md#repositories) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
+| [`GetEntities`](patterns-data-access.md#repository) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
 | [`Business`](layers.md#business-layer) | Executing the necessary [business logic](layers.md#business-layer) for data [`validation`](patterns-business-logic.md#validators), [calculations](aspects.md#calculation), and decisions based on the data.
-| [`Commit`](api.md#orm) | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
+| `Commit` | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 | [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, preparing it for display in the UI.
 | `NonPersisted Data` | Copying data that does not need to be persisted, such as calculated values or temporary state, from the old [`ViewModel`](#viewmodels) to the new.
 | `Redirect` | Redirecting the user to a different page or action by returning a different [`ViewModel`](#viewmodels). The UI layer can respond by redirecting to the appropriate page, such as to a success page or back to the home screen.
