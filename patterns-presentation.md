@@ -798,21 +798,23 @@ A [`Presenter`](#presenters) is a [combinator `class`](patterns-business-logic.m
 A [`Presenter`](#presenters) action method might have different steps:
 
 - [`Security` checks](aspects.md#security)
-    - `< TODO: Describe >`
-- [`ViewModel`](#viewmodels) [Validation](patterns-business-logic.md#validators)
-    - `< TODO: Describe >`
-- [`ToEntity`](#toentity) / [`GetEntities`](patterns-data-access.md#repositories)
-    - `< TODO: Describe >`
+    - Executing the necessary [security checks](aspects.md#security) to prevent unauthorized access.
+- [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators)
+    - [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) before converting it to an [`Entity`](patterns-data-access.md#entities). This can be useful in case the data cannot be converted to an [`Entity`](patterns-data-access.md#entities). Otherwise [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) might be preferred instead.
+- [`GetEntities`](patterns-data-access.md#repositories)
+    - Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
+- [`ToEntity`](#toentity) 
+    - Converting [ViewModel](#viewmodels) data into [`Entity`](patterns-data-access.md#entities) data.
 - [`Business`](layers.md#business-layer)
-    - `< TODO: Describe >`
+    - Executing the necessary [business logic](layers.md#business-layer) for data [`validation`](patterns-business-logic.md#validators), [calculations](aspects.md#calculation), and decisions based on the data.
 - [`Commit`](api.md#orm)
-    - `< TODO: Describe >`
+    - Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 - [`ToViewModel`](#toviewmodel)
-    - `< TODO: Describe >`
+    - Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, preparing it for display in the UI.
 - `NonPersisted Data`
-    - Yielding over non-persisted data from old to new [`ViewModel`](#viewmodels).
-- Redirect
-    - `< TODO: Describe >`
+    - Copying data that does not need to be persisted, such as calculated values or temporary state, from the old [`ViewModel`](#viewmodels) to the new.
+- `Redirect`
+    - Redirecting the user to a different page or action by returning a different [`ViewModel`](#viewmodels). The UI layer can respond by redirecting to the appropriate page, such as to a success page or back to the home screen.
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). It is recommended to separate these steps, so that they do not get intermixed or entangled.
 
