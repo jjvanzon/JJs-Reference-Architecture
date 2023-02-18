@@ -814,14 +814,14 @@ A [`Presenter`](#presenters) action method might have different steps:
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
-Not all of the steps need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are possible.
+Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are also possible.
 
 
 <h3 id="presenters-complete-example">
 Complete Example
 </h3>
 
-Here is a code sample with more steps in it:
+Here is a code sample with most of the discussed steps in it:
 
 `< Test this code sample >`
 
