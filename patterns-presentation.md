@@ -820,7 +820,7 @@ Here is a code sample with more steps in it:
 `< Test this code sample >`
 
 ```cs
-public ProductEditViewModel Save(ProductEditViewModel userInput)
+public object Save(ProductEditViewModel userInput)
 {
     // Security
     SecurityAsserter.AssertLoggedIn();
@@ -862,11 +862,11 @@ One reason might be the stateless nature of the web. It requires restoring state
 
 You might save the computer some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
 
-Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead.
+Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead:
 
 `< TODO: Code sample. >`
 
-This may not be the first option to consider, but sometimes it makes more sense.
+This may not be the first option to consider, but sometimes it makes sense.
 
 
 <h3 id="presenters-conclusion">
@@ -875,8 +875,8 @@ Conclusion
 
 The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [presentation logic](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`](#viewmodels) creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
 
-`< TODO: Describe platform independence benefit. >`
-`< TODO: Additional text: All logic is hidden under a shell of ViewModels and user actions, to base the views and interaction on. >`
+`< TODO: Describe platform independence benefit. >`  
+`< TODO: Additional text: All logic is hidden under a shell of ViewModels and user actions, to base the views and interaction on. >`  
 `< TODO: Add code samples to demo project. >`
 
 ToViewModel
