@@ -649,9 +649,11 @@ Other action method parameters are also things the user chose:
 
 `< TODO: Code sample. >`
 
-An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views):
+An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about:
 
 `< TODO: Code sample. >`
+
+Those might be actions that navigate to a different [`View`](#views).
 
 That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
 
@@ -667,11 +669,11 @@ Internally a [`Presenter`](#presenters) can use [business logic](layers.md#busin
 Infrastructure & Configuration
 </h3>
 
-Sometimes you also pass infra and config parameters to an action method:
+Sometimes you also pass [infra and config](layers.md#infrastructure) parameters to an action method:
 
 `< TODO: Code sample >`
 
-But it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenters) constructor:
+But it is preferred that the main chunk of the [infra and settings](layers.md#infrastructure) is passed to the [`Presenters`](#presenters) constructor:
 
 `< TODO: Code sample >`
 
@@ -684,13 +686,13 @@ It is preferred that [`ViewModel`](#viewmodels) creation is delegated to the [`T
 
 `< TODO: Code sample >`
 
-This because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look.
+This because then when the [`ViewModel` creation`](#viewmodels) aspect should be adapted, there is but one place in the code to look.
 
 It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
 
 `< TODO: Code sample >`
 
-This way it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
+This way it is also resposible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities).
 
 
 <h3 id="toentity-business-toviewmodel-round-trip">
@@ -718,11 +720,11 @@ A [`Presenter`](#presenters) action method might have different steps:
 - Redirect
     - `< TODO: Describe >`
 
-This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade).
+This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). It is recommended to separate these steps, so that they do not get intermixed or entangled.
 
-Not all of the steps need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are possible. But it is recommended to separate these steps, so that they do not get intermixed or entangled.
+Not all of the steps need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are possible.
 
-It might be an idea to comment the steps in the code in the [`Presenter`](#presenters) action method, like this:
+It might be an idea to *comment* the steps in the code in the [`Presenter`](#presenters) action method, like this:
 
 ```cs
 // ToEntity
