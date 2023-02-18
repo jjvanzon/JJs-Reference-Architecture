@@ -615,8 +615,8 @@ This section describes how they are implemented in [this architecture](index.md)
 
 - [The Role of the Presenter](#the-role-of-the-presenter)  
 - [Working with ViewModels](#presenters-working-with-viewmodels)  
-- [Internal Implementation](#presenters-internal-implementation)  
 - [Infrastructure & Configuration](#presenters-infrastructure-and-configuration)
+- [Internal Implementation](#presenters-internal-implementation)  
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
 - [Overhead](#presenters-overhead)
@@ -627,25 +627,25 @@ This section describes how they are implemented in [this architecture](index.md)
 The Role of the Presenter
 </h3>
 
-Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen, the [`Presenters`](#presenters) model the *actions* a user can perform on screen.
+Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen, the [`Presenters`](#presenters) model the *actions* a user can perform on the screen.
 
 Each [`View`](#views) gets its own [`Presenter`](#presenters), for instance:
 
 ```cs
-class LoginPresenter { }
-class ProductListPresenter { }
-class ProductEditPresenter { }
-class ProductDetailsPresenter { }
-class CategorySelectionPresenter { }
+LoginPresenter { }
+ProductListPresenter { }
+ProductEditPresenter { }
+ProductDetailsPresenter { }
+CategorySelectionPresenter { }
 ```
 
-Each *user action* is represented by a *method*. Some pseudo-code:
+Each *user action* is represented by a *method*, like:
 
 ```cs
-class ProductEditPresenter
+ProductEditPresenter
 {
-    void Show() { }
-    void Save() { }
+    Show() { }
+    Save() { }
 }
 ```
 
@@ -676,24 +676,35 @@ Other action method parameters are also things the user chose:
 ```cs
 class ProductEditPresenter
 {
+    /// <summary>
+    /// The parameter productID is a choice from the user.
+    /// </summary>
     ProductEditViewModel Show(int productID) { }
 }
 ```
 
 An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about:
 
-`< TODO: Code sample. >`
+```cs
+class ProductEditPresenter
+{
+    object Save(ProductEditViewModel userInput)
+    {
+        if (!successful)
+        {
+            // Keep editing
+            return new ProductEditViewModel();
+        }
+
+        // Redirect to list
+        return new ProductListViewModel();
+    }
+}
+```
 
 Those might be actions that navigate to a different [`View`](#views).
 
 That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
-
-
-<h3 id="presenters-internal-implementation">
-Internal Implementation
-</h3>
-
-Internally a [`Presenter`](#presenters) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
 
 
 <h3 id="presenters-infrastructure-and-configuration">
@@ -707,6 +718,13 @@ Sometimes you also pass [infra and config](layers.md#infrastructure) parameters 
 But it is preferred that the main chunk of the [infra and settings](layers.md#infrastructure) is passed to the [`Presenters`](#presenters) constructor:
 
 `< TODO: Code sample >`
+
+
+<h3 id="presenters-internal-implementation">
+Internal Implementation
+</h3>
+
+Internally a [`Presenter`](#presenters) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
 
 
 <h3 id="presenters-delegating-viewmodel-creation">
