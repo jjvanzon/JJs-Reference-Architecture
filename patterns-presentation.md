@@ -3,6 +3,8 @@ title: "🖥️ Patterns : Presentation"
 image: "/images/view-model-code-sample.png"
 ---
 
+<style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } </style>
+
 `[ Draft ]`
 
 🖥️ Patterns : Presentation
@@ -809,7 +811,7 @@ A [`Presenter`](#presenters) action method might have different steps:
 | `NonPersisted Data` | Copying data that does not need to be persisted, such as calculated values or temporary state, from the old [`ViewModel`](#viewmodels) to the new.
 | `Redirect` | Redirecting the user to a different page or action by returning a different [`ViewModel`](#viewmodels). The UI layer can respond by redirecting to the appropriate page, such as to a success page or back to the home screen.
 
-This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). It is recommended to separate these steps, so that they do not get intermixed or entangled.
+This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
 Not all of the steps need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are possible.
 
