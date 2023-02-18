@@ -607,17 +607,19 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 Presenters
 ----------
 
-A `Presenter` models the user interactions. A non-visual blue-print of the user interface.
+A [`Presenter`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
 
 
 <h3>Contents</h3>
 
-[The Role of the Presenter](#the-role-of-the-presenter)  
-[Working with ViewModels](#presenters-working-with-viewmodels)  
-[Internal Implementation](#presenters-internal-implementation)  
-[Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
-[ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
-[Conclusion](#presenters-conclusion)  
+- [The Role of the Presenter](#the-role-of-the-presenter)  
+- [Working with ViewModels](#presenters-working-with-viewmodels)  
+- [Internal Implementation](#presenters-internal-implementation)  
+- [Infra & Config](#presenters-infra-and-config)
+- [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
+- [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
+- [Overhead](#presenters-overhead)
+- [Conclusion](#presenters-conclusion)  
 
 
 <h3 id="the-role-of-the-presenter">
@@ -635,7 +637,7 @@ Each *user action* on that screen is represented by a *method*.
 Working with ViewModels
 </h3>
 
-The methods of the [`Presenter`](#presenters) work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
+The methods of the [`Presenter`](#presenters) work by a [`ViewModel`](#viewmodels)- in, [`ViewModel`](#viewmodels)- out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
 
 
 <h3 id="presenters-internal-implementation">
@@ -643,6 +645,11 @@ Internal Implementation
 </h3>
 
 Internally a [`Presenter`](#presenters) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
+
+
+<h3 id="presenters-infra-and-config">
+Infra & Config
+</h3>
 
 Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenters) constructor.
 
@@ -658,22 +665,22 @@ All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel
 ToEntity-Business-ToViewModel Round-Trip
 </h3>
 
-A [`Presenter`](#presenters) is a combinator `class`, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other `classes`. It also combines it with calls to the business layer.
+A [`Presenter`](#presenters) is a combinator `class`, in that it combines multiple smaller aspects of the logic, by delegating to other `classes`.
 
 A [`Presenter`](#presenters) action method might be organized into phases:
 
-- [`Security`](aspects.md#security)
+- [`Security` checks](aspects.md#security)
 - [`ViewModel`](#viewmodels) [Validation](patterns-business-logic.md#validators)
 - [`ToEntity`](#toentity) / `GetEntities`
 - [`Business`](layers.md#business-layer)
 - [`Commit`](api.md#orm)
 - [`ToViewModel`](#toviewmodel)
-- Non-Persisted (yield over non-persisted data from old to new [`ViewModel`](#viewmodels))
+- `NonPersisted` (yield over non-persisted data from old to new [`ViewModel`](#viewmodels))
 - Redirect
 
-Not all of the phases must be present. [`ToEntity`](#toviewmodel) / Business / [`ToViewModel`](#toviewmodel) might be the typical phases. Slight variations in order of the phases are possible. But separate these phases, so that they are not intermixed and entangled.
+Not all of the phases need to be present. [`ToEntity`](#toviewmodel) / `Business` / [`ToViewModel`](#toviewmodel) might be the typical phases. Slight variations in order of the phases are possible. But it is recommended to separate these phases, so that they do not get intermixed or entangled.
 
-Comment the phases in the code in the [`Presenter`](#presenters) action method:
+It might be an idea to comment the phases in the code in the [`Presenter`](#presenters) action method, like so:
 
 ```cs
 // ToEntity
@@ -686,9 +693,17 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
-Even though the actual call to the business logic might be trivial, it is still necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. You might save the computer some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other native code.
+<h3 id="presenters-overhead">
+Overhead
+</h3>
 
-`< TODO: Mention actions that operate onto ViewModels instead.>`
+Even though the actual call to the business logic might be trivial, it may still be necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back.
+
+One reason is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. That's needed to delegate responsibilities to the right parts of the system, like delegate to the [`business layer`](layers.md#business-layer) using [`entity models`](patterns-data-access.md#entities).
+
+You might save the computer some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other native code.
+
+Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead. This may not be the first option to consider, but sometimes it makes sense.
 
 
 <h3 id="presenters-conclusion">
