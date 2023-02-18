@@ -801,7 +801,7 @@ A [`Presenter`](#presenters) action method might have different steps:
     - `< TODO: Describe >`
 - [`ViewModel`](#viewmodels) [Validation](patterns-business-logic.md#validators)
     - `< TODO: Describe >`
-- [`ToEntity`](#toentity) / `GetEntities`
+- [`ToEntity`](#toentity) / [`GetEntities`](patterns-data-access.md#repositories)
     - `< TODO: Describe >`
 - [`Business`](layers.md#business-layer)
     - `< TODO: Describe >`
@@ -872,7 +872,13 @@ You might save the computer some work by doing [partial loads instead of full lo
 
 Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead:
 
-`< TODO: Code sample. >`
+```cs
+public void ExpandNode(TreeViewModel viewModel, int id)
+{
+    var node = viewModel.Nodes.Single(x => x.ID == id);
+    node.IsExpanded = true;
+}
+```
 
 This may not be the first option to consider, but sometimes it makes sense.
 
