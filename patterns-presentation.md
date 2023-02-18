@@ -808,8 +808,9 @@ A [`Presenter`](#presenters) action method might have different steps:
 | [`Business`](layers.md#business-layer) | Executing the necessary [business logic](layers.md#business-layer) for [data `validation`](patterns-business-logic.md#validators), [calculations](aspects.md#calculation), and decisions based on the data.
 | `Commit` | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 | [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, to prepare it for the [`view`](#views) generator.
-| `NonPersisted Data` | Copying data that does not need to be stored, such as data selections or search criteria, from the old [`ViewModel`](#viewmodels) to the new.
-| `Redirect` | Redirecting the user to a different page or action by returning a different [`ViewModel`](#viewmodels). The UI layer can respond by redirecting to the appropriate page, like a success page or home screen.
+| `NonPersisted Data` | Copying data that does not need to be stored, such as selections or search criteria, from the old [`ViewModel`](#viewmodels) to the new.
+| `Redirect` | Redirecting the user by returning a different [`ViewModel`](#viewmodels), which can trigger the UI layer to redirect to the appropriate page or action, such as a success page or home screen
+
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
