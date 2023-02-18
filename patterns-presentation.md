@@ -609,6 +609,8 @@ Presenters
 
 A [`Presenter`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
 
+This section describes how they are implemented in [this architecture](index.md).
+
 
 <h3>Contents</h3>
 
@@ -737,6 +739,8 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
+Here is a code sample with more steps in it:
+
 `< TODO: Code sample with all steps in it. >`
 
 
@@ -754,7 +758,7 @@ Some actions might also operate onto [`ViewModels`](#viewmodels) directly instea
 
 `< TODO: Code sample. >`
 
-This may not be the first option to consider, but sometimes it makes sense.
+This may not be the first option to consider, but sometimes it makes more sense.
 
 
 <h3 id="presenters-conclusion">
@@ -764,6 +768,7 @@ Conclusion
 The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [presentation logic](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`](#viewmodels) creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
 
 `< TODO: Describe platform independence benefit. >`
+`< TODO: Additional text: All logic is hidden under a shell of ViewModels and user actions, to base the views and interaction on. >`
 
 ToViewModel
 -----------
