@@ -3,7 +3,7 @@ title: "🖥️ Patterns : Presentation"
 image: "/images/view-model-code-sample.png"
 ---
 
-<style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } </style>
+<style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>
 
 `[ Draft ]`
 
