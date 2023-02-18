@@ -615,7 +615,7 @@ This section describes how they are implemented in [this architecture](index.md)
 
 - [The Role of the Presenter](#the-role-of-the-presenter)  
 - [Working with ViewModels](#presenters-working-with-viewmodels)  
-- [Infrastructure & Configuration](#presenters-infrastructure-and-configuration)
+- [Infrastructure and Configuration](#presenters-infrastructure-and-configuration)
 - [Internal Implementation](#presenters-internal-implementation)  
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
@@ -706,7 +706,7 @@ Following those guidelines, the [`Presenters`](#presenters) can be a structured 
 
 
 <h3 id="presenters-infrastructure-and-configuration">
-Infrastructure & Configuration
+Infrastructure and Configuration
 </h3>
 
 Sometimes you also pass [infra and config](layers.md#infrastructure) parameters to an action method:
@@ -718,7 +718,7 @@ class ProductEditPresenter
         ProductEditViewModel userInput, 
         IAuthenticator authenticator) // Infra-related parameter
     {
-        
+        // ...
     }
 }
 ```
@@ -735,8 +735,8 @@ class ProductEditPresenter
         IMyRepository repository,
         IAuthenticator authenticator,
         string cultureName)
-    { 
-
+    {
+        // ...
     }
 }
 ```
