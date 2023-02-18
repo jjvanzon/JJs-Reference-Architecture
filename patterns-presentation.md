@@ -615,7 +615,7 @@ A [`Presenter`](#presenters) models the user interactions: a non-visual blue-pri
 - [The Role of the Presenter](#the-role-of-the-presenter)  
 - [Working with ViewModels](#presenters-working-with-viewmodels)  
 - [Internal Implementation](#presenters-internal-implementation)  
-- [Infra & Config](#presenters-infra-and-config)
+- [Infrastructure & Configuration](#presenters-infrastructure-and-configuration)
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
 - [Overhead](#presenters-overhead)
@@ -630,14 +630,30 @@ Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen
 
 Each [`View`](#views) gets its own [`Presenter`](#presenters).
 
-Each *user action* on that screen is represented by a *method*.
+Each *user action* is represented by a *method*.
 
 
 <h3 id="presenters-working-with-viewmodels">
 Working with ViewModels
 </h3>
 
-The methods of the [`Presenter`](#presenters) work with a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
+The methods of the [`Presenter`](#presenters) work by a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen:
+
+`< TODO: Code sample. >`
+
+Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited:
+
+`< TODO: Code sample. >`
+
+Other action method parameters are also things the user chose:
+
+`< TODO: Code sample. >`
+
+An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views):
+
+`< TODO: Code sample. >`
+
+That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
 
 
 <h3 id="presenters-internal-implementation">
@@ -647,20 +663,34 @@ Internal Implementation
 Internally a [`Presenter`](#presenters) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
 
 
-<h3 id="presenters-infra-and-config">
-Infra & Config
+<h3 id="presenters-infrastructure-and-configuration">
+Infrastructure & Configuration
 </h3>
 
-Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenters) constructor.
+Sometimes you also pass infra and config parameters to an action method:
+
+`< TODO: Code sample >`
+
+But it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenters) constructor:
+
+`< TODO: Code sample >`
 
 
 <h3 id="presenters-delegating-viewmodel-creation">
 Delegating ViewModel Creation
 </h3>
 
-It is preferred tat [`ViewModel`](#viewmodels) creation is delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenters`](#presenters)), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look.
+It is preferred that [`ViewModel`](#viewmodels) creation is delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenters`](#presenters)):
 
-It does not make the [`Presenter`](#presenters) a needless hatch ('doorgeefluik'), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
+`< TODO: Code sample >`
+
+This because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look.
+
+It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
+
+`< TODO: Code sample >`
+
+This way it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
 
 
 <h3 id="toentity-business-toviewmodel-round-trip">
@@ -669,22 +699,30 @@ ToEntity-Business-ToViewModel Round-Trip
 
 A [`Presenter`](#presenters) is a [combinator `class`](patterns-business-logic.md#facade), in that it combines multiple smaller aspects of the logic, by delegating to other `classes`.
 
-A [`Presenter`](#presenters) action method might be organized into phases:
+A [`Presenter`](#presenters) action method might have different steps:
 
 - [`Security` checks](aspects.md#security)
+    - `< TODO: Describe >`
 - [`ViewModel`](#viewmodels) [Validation](patterns-business-logic.md#validators)
+    - `< TODO: Describe >`
 - [`ToEntity`](#toentity) / `GetEntities`
+    - `< TODO: Describe >`
 - [`Business`](layers.md#business-layer)
+    - `< TODO: Describe >`
 - [`Commit`](api.md#orm)
+    - `< TODO: Describe >`
 - [`ToViewModel`](#toviewmodel)
-- `NonPersisted` (yield over non-persisted data from old to new [`ViewModel`](#viewmodels))
+    - `< TODO: Describe >`
+- `NonPersisted`
+    - Yielding over non-persisted data from old to new [`ViewModel`](#viewmodels).
 - Redirect
+    - `< TODO: Describe >`
 
-This seems a bit of a throw-together of ideas, but that's how it is a [combinator `class`](patterns-business-logic.md#facade).
+This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade).
 
-Not all of the phases need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical phases. Slight variations in order of the phases are possible. But it is recommended to separate these phases, so that they do not get intermixed or entangled.
+Not all of the steps need to be present. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are possible. But it is recommended to separate these steps, so that they do not get intermixed or entangled.
 
-It might be an idea to comment the phases in the code in the [`Presenter`](#presenters) action method, like this:
+It might be an idea to comment the steps in the code in the [`Presenter`](#presenters) action method, like this:
 
 ```cs
 // ToEntity
@@ -697,17 +735,24 @@ _dinnerFacade.Cancel(dinner);
 DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 ```
 
+`< TODO: Code sample with all steps in it. >`
+
+
 <h3 id="presenters-overhead">
 Overhead
 </h3>
 
 Even though the actual call to the [business logic](layers.md#business-layer) might be trivial, it may still be necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back.
 
-One reason is the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. That's needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer) and using [`entity` models](patterns-data-access.md#entities).
+One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. That's needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer) and using [`entity` models](patterns-data-access.md#entities).
 
 You might save the computer some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
 
-Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead. This may not be the first option to consider, but sometimes it makes sense.
+Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead.
+
+`< TODO: Code sample. >`
+
+This may not be the first option to consider, but sometimes it makes sense.
 
 
 <h3 id="presenters-conclusion">
@@ -716,7 +761,7 @@ Conclusion
 
 The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [presentation logic](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`](#viewmodels) creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
 
-`< TODO: Platform independence benefit. >`
+`< TODO: Describe platform independence benefit. >`
 
 ToViewModel
 -----------
