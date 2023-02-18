@@ -14,7 +14,6 @@ image: "/images/view-model-code-sample.png"
 
 - [ViewModels](#viewmodels)
 - [Presenters](#presenters)
-- [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)
 - [ToViewModel](#toviewmodel)
 - [ToEntity](#toentity)
 - [Views](#views)
@@ -618,10 +617,12 @@ A `Presenter` models the user interactions. A non-visual blue-print of the user 
 - [Working with ViewModels](#presenters-working-with-viewmodels)
 - [Internal Implementation](#presenters-internal-implementation)
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)
+- [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)
 - [Conclusion](#presenters-conclusion)
 
 
-<h3 id="the-role-of-the-presenter">The Role of the Presenter</h3>
+<h3 id="the-role-of-the-presenter">
+The Role of the Presenter</h3>
 
 Each [`View`](#views) gets its own [`Presenter`](#presenters).
 
@@ -630,30 +631,28 @@ A [`Presenter`](#presenters) represents what a user can do in a screen.
 Each *user action* on that screen is represented by a *method*.
 
 
-<h3 id="presenters-working-with-viewmodels">Working with ViewModels</h3>
+<h3 id="presenters-working-with-viewmodels">
+Working with ViewModels</h3>
 
 The methods of the [`Presenter`](#presenters) work by a [`ViewModel`](#viewmodels)-in, [`ViewModel`](#viewmodels)-out principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen. Action methods can also *receive* a [`ViewModel`](#viewmodels) parameter containing the data the user has edited. Other action method parameters are also things the user chose. An action method can return a different [`ViewModel`](#viewmodels) than the [`View`](#views) the [`Presenter`](#presenters) is about. Those might be actions that navigate to a different [`View`](#views). That way the [`Presenters`](#presenters) are a model for what the user can do with the application.
 
 
-<h3 id="presenters-internal-implementation">Internal Implementation</h3>
+<h3 id="presenters-internal-implementation">
+Internal Implementation</h3>
 
 Internally a [`Presenter`](#presenters) can use [business logic](layers.md#business-layer) and [`Repositories`](patterns-data-access.md#repository) to access the domain model.
 
 Sometimes you also pass infra and config parameters to an action method, but it is preferred that the main chunk of the infra and settings is passed to the [`Presenters`](#presenters) constructor.
 
 
-<h3 id="presenters-delegating-viewmodel-creation">Delegating ViewModel Creation</h3>
+<h3 id="presenters-delegating-viewmodel-creation">
+Delegating ViewModel Creation</h3>
 
 All [`ViewModel`](#viewmodels) creation should be delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenter`](#presenters) layer), because then when the [`ViewModel`](#viewmodels) creation aspect should be adapted, there is but one place in the code to look. It does not make the [`Presenter`](#presenters) a needless hatch ('doorgeefluik'), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation, it is also resposible for retrieving data, calling business logic and converting [`ViewModels`](#viewmodels) to [`Entities`](patterns-data-access.md#entities).
 
 
-<h3 id="presenters-conclusion">Conclusion</h3>
-
-The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [`presentation logic`](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`] creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
-
-
-ToEntity-Business-ToViewModel Round-Trip
-----------------------------------------
+<h3 id="#toentity-business-toviewmodel-round-trip">
+ToEntity-Business-ToViewModel Round-Trip</h3>
 
 A [`Presenter`](#presenters) is a combinator `class`, in that it combines multiple smaller aspects of the [presentation logic](layers.md#presentation-layer), by delegating to other `classes`. It also combines it with calls to the business layer.
 
@@ -685,7 +684,13 @@ DinnerDetailsViewModel viewModel = dinner.ToDetailsViewModel();
 
 Even though the actual call to the business logic might be trivial, it is still necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back. This is due to the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. You might save the computer some work by doing partial loads instead of full loads or maybe even do [`JavaScript`](api.md#javascript) or other native code.
 
-`< TODO: Consider this: Patterns, Presentation: There is something wrong with the pattern 'ToEntity-Business-ToViewModel-NonPersisted' sometimes it is way more efficient to execute the essence of the user action onto the user input ViewModel. Sometimes it is even the only way to execute the essense of the user action onto the user input ViewModel. Examples are removing a row an uncommitted row or collapsing a node in a tree view. >`
+`< TODO: Mention actions that operate onto ViewModels instead.>`
+
+
+<h3 id="presenters-conclusion">
+Conclusion</h3>
+
+The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [`presentation logic`](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`](#viewmodels) creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
 
 
 ToViewModel
