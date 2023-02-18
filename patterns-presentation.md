@@ -607,7 +607,7 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 Presenters
 ----------
 
-A [`Presenter`](#presenters) models the user interactions: a non-visual blue-print of the user interface.
+A [`Presenter`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
 
 
 <h3>Contents</h3>
@@ -686,7 +686,7 @@ It is preferred that [`ViewModel`](#viewmodels) creation is delegated to the [`T
 
 `< TODO: Code sample >`
 
-This because then when the [`ViewModel` creation`](#viewmodels) aspect should be adapted, there is but one place in the code to look.
+This because then when the [`ViewModel` creation](#viewmodels) aspect should be adapted, there is but one place in the code to look.
 
 It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
 
