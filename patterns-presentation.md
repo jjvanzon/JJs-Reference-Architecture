@@ -642,7 +642,7 @@ class ProductDetailsPresenter { }
 class CategorySelectionPresenter { }
 ```
 
-Each *user action* is represented by a *method*, like:
+Each *user action* is represented by a *method*, like these:
 
 ```cs
 class ProductEditPresenter
@@ -674,7 +674,7 @@ class ProductEditPresenter
 }
 ```
 
-Other action method parameters are also things the user chose:
+Other action method parameters are also things the user has chosen:
 
 ```cs
 class ProductEditPresenter
@@ -702,9 +702,7 @@ class ProductEditPresenter
 }
 ```
 
-Those actions can navigate to a different [`View`](#views).
-
-Following those guidelines, the [`Presenters`](#presenters) can be a structured model for what the user can do with the application.
+Following those guidelines, the [`Presenters`](#presenters) form a structured model for what the user can do with the application.
 
 
 <h3 id="presenters-infrastructure-and-configuration">
@@ -802,17 +800,17 @@ A [`Presenter`](#presenters) action method might have different steps:
 |   |   |
 |---|---|
 | [`Security` checks](aspects.md#security) | Executing the necessary [security checks](aspects.md#security) to prevent unauthorized access.
-| [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) before converting it to an [`Entity`](patterns-data-access.md#entities). This can be useful when the data cannot always be converted to an [`Entity`](patterns-data-access.md#entities). If possible [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) might be preferred.
+| [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) before converting it to an [`Entity`](patterns-data-access.md#entities). This can be useful when the data cannot always be converted to an [`Entity`](patterns-data-access.md#entities). If possible [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) is preferred.
 | [`ToEntity`](#toentity) | Converting [ViewModel](#viewmodels) data into [`Entity`](patterns-data-access.md#entities) data.
 | [`GetEntities`](patterns-data-access.md#repository) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
-| [`Business`](layers.md#business-layer) | Executing the necessary [business logic](layers.md#business-layer) for [data `validation`](patterns-business-logic.md#validators), [calculations](aspects.md#calculation), and decisions based on the data.
+| [`Business`](layers.md#business-layer) | Executing the necessary [`Business` logic](layers.md#business-layer) for [data `Validation`](patterns-business-logic.md#validators), [`Calculations`](aspects.md#calculation), and decisions based on the data.
 | `Commit` | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
-| [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, to prepare it for the [`view`](#views) generator.
-| `NonPersisted Data` | Copying data that does not need to be stored, such as selections or search criteria, from the old [`ViewModel`](#viewmodels) to the new.
-| `Redirect` | Redirecting the user by returning a different [`ViewModel`](#viewmodels), which can trigger the UI layer to redirect to the appropriate page or action, such as a success page or home screen
+| [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, to prepare it for the [`view`](#views).
+| `NonPersisted Data` | Copying data that does not need to be stored, from the old [`ViewModel`](#viewmodels) to the new, such as selections or search criteria.
+| `Redirect` | Redirecting the user by returning a different [`ViewModel`](#viewmodels), which can trigger the UI layer to redirect to the appropriate place as a success page or home screen.
 
 
-This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade). Separating these steps is recommended, so that they do not get intermixed or entangled.
+This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade) like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
 Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are also possible.
 
@@ -844,6 +842,8 @@ public object Save(ProductEditViewModel userInput)
 
         // Non-Persisted Data        
         viewModel.Messages = validator.Messages;
+
+        return viewModel;
     }
 
     // Business
@@ -864,9 +864,9 @@ Overhead
 
 Even though the actual call to the [business logic](layers.md#business-layer) might be trivial, it may still be necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back.
 
-One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer).
+One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer), that expectrs [`Entities`](patterns-data-access.md#entities).
 
-You might save the computer some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
+You might save the system some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
 
 Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead:
 
