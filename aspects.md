@@ -62,6 +62,7 @@
         - [Organize by Access Level](#organize-by-access-level)
         - [Access Yes or No](#access-yes-or-no)
         - [Organize by Feature](#organize-by-feature)
+        - [TODO](#todo-2)
 - [SideEffects](#sideeffects)
 - [Styling](#styling)
 - [Text Processing](#text-processing)
@@ -763,18 +764,6 @@ Various solutions are available for scheduling a process (periodically) in time.
 Security
 --------
 
-`< TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection... >`
-
-`< TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web? >`
-
-`< TODO: Aspects, Security: If content is to be protected with authorization, then for partial Presenters you need to do authorization checks if the Presenter cass is public, and do not have to do authorization if the Presenter class is internal. >`
-
-for enum-like tables.
-
-`< TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.`
-
-`In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. >`
-
 Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns-data-access.md#repository) in the top-level project, often an [`MVC`](api.md#mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
 There are the following interfaces:
@@ -867,6 +856,18 @@ Ordering
 Email Campaigns
 Calculation Module
 ```
+
+#### TODO
+
+`< TODO: Security needs a lot more topics. IP checking, encrypting information, secure HTTP, preventing various sorts of injection... >`
+
+`< TODO: Check if these topics are covered, otherwise make a neat description of it: Password hashing, .NET has intrinsic security API's, but when you use Framework.Security it allows you to interface with a security API through a common interface, which makes it easier to switch to another security API when we want to. Framework.Security keeps us from being strongly dependent on a specific security API. Mention the IPChecker in JJ.Framework.Web? >`
+
+`< TODO: Aspects, Security: If content is to be protected with authorization, then for partial Presenters you need to do authorization checks if the Presenter cass is public, and do not have to do authorization if the Presenter class is internal. >`
+
+`< TODO: Mention: Security? Guids can be safe for security. For instance, for smaller underlying entities you could not guess the ID and sneekily change someone elses data, when only the user-ownership of higher objects are checked.`
+
+`In other words: If you can enter ID's of child objects by inspecting HTML, you can screw up another user's data or another document's data if you do not check if the original belongs to the right document / user. >`
 
 
 SideEffects
