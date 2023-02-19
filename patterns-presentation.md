@@ -809,8 +809,7 @@ A [`Presenter`](#presenters) action method might have different steps:
 | `NonPersisted Data` | Copying data that does not need to be stored, from the old [`ViewModel`](#viewmodels) to the new, such as selections or search criteria.
 | `Redirect` | Redirecting the user by returning a different [`ViewModel`](#viewmodels), which can trigger the UI layer to redirect to the appropriate place as a success page or home screen.
 
-
-This seems a bit of a throw-together of concepts, but that's how it is for a [combinator `class`](patterns-business-logic.md#facade) like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
+This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
 Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are also possible.
 
