@@ -732,7 +732,7 @@ class ProductEditPresenter
     /// Passing infra-related parameters to the constructor.
     /// </summary>
     public ProductEditPresenter(
-        IMyRepository repository,
+        IRepository repository,
         IAuthenticator authenticator,
         string cultureName)
     {
@@ -767,11 +767,8 @@ This is because then when the [`ViewModel` creation](#viewmodels) aspect should 
 It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
 
 ```cs
-public object Save(ProductEditViewModel userInput)
+public ProductEditViewModel Save(ProductEditViewModel userInput)
 {
-    // Security
-    SecurityAsserter.AssertLogIn();
-
     // ToEntity
     Product entity = userInput.ToEntity(_repository);
 
@@ -781,8 +778,9 @@ public object Save(ProductEditViewModel userInput)
     // Save
     _repository.Commit();
 
-    // Redirect
-    return new ProductListViewModel();
+    // ToViewModel
+    ProductEditViewModel viewModel = entity.ToEditViewModel();
+    return viewModel;
 }
 ```
 
@@ -820,39 +818,35 @@ Complete Example
 
 Here is a code sample with most of the discussed steps in it:
 
-`< TODO: Test this code sample >`
-
 ```cs
 public object Save(ProductEditViewModel userInput)
 {
     // Security
-    SecurityAsserter.AssertLoggedIn();
+    SecurityAsserter.AssertLogIn();
 
     // ToEntity
     Product entity = userInput.ToEntity(_repository);
 
-    // Validation
+    // Business
     IValidator validator = new ProductValidator(entity);
-    
-    if (!validator.IsValid)
+    if (validator.IsValid)
     {
-        // ToViewModel
-        var viewModel = entity.ToEditViewModel();
+        new SideEffect_SetDateModified(entity).Execute();
 
-        // Non-Persisted Data        
-        viewModel.Messages = validator.Messages;
+        // Save
+        _repository.Commit();
 
-        return viewModel;
+        // Redirect
+        return new ProductListViewModel();
     }
 
-    // Business
-    new SideEffect_SetDateModified(entity).Execute();
-    
-    // Save
-    _repository.Commit();
+    // ToViewModel
+    var viewModel = entity.ToEditViewModel();
 
-    // Redirect
-    return new ProductListViewModel();
+    // Non-Persisted Data  
+    viewModel.Validation.Messages = validator.Messages;
+
+    return viewModel;
 }
 ```
 
@@ -888,7 +882,7 @@ The [`Presenter`](#presenters) pattern is a commonly used design pattern for mod
 
 The [Presenters](#presenters) form a [platform-independent](layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](#viewmodels) and user actions. This makes it possible to swap out the front-end while leaving the underlying system intact.
 
-`< TODO: Add code samples to demo project. >`
+`< TODO: Test the bigger code samples. >`
 
 ToViewModel
 -----------
@@ -961,8 +955,6 @@ Any code used in the [`View`](#views) should be simple. That is: most tasks shou
 Lookup Lists
 ------------
 
-`< TODO: Consider moving further down. >`
-
 In a stateless environment, lookup lists in [`Views`](#views) can be resource-intensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your `HTML`. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
 For small lookup lists you might include a copy of the list in each [Item ViewModel](#entity-viewmodels) and repeat the same lookup list in `HTML`.
@@ -1000,6 +992,8 @@ Stateless and Stateful
 The [presentation patterns](#️-patterns--presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](#presenters) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
 
 You would be making assumptions in your [`Presenter`](#presenters) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](patterns-data-access.md#repository) and [`Presenters`](#presenters). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+
+`< TODO: Added benefit: Transactional. >`
 
 
 NullCoalesce (ViewModels)
