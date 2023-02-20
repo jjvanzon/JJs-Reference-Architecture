@@ -882,12 +882,13 @@ The [`Presenter`](#presenters) pattern is a commonly used design pattern for mod
 
 The [Presenters](#presenters) form a [platform-independent](layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](#viewmodels) and user actions. This makes it possible to swap out the front-end while leaving the underlying system intact.
 
-<h3>TODO</j3>
+<h3>TODO</h3>
 
 `< TODO: Test the bigger code samples. >`
 `< TODO: Improve writing style. >`  
 `< TODO: Spell check. >`  
 `< TODO: Grammar check. >`  
+
 
 ToViewModel
 -----------
