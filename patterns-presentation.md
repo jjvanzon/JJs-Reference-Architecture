@@ -857,7 +857,7 @@ Overhead
 
 Even though the actual call to the [business logic](layers.md#business-layer) might be trivial, it may still be necessary to convert from [`Entity`](patterns-data-access.md#entities) to [`ViewModel`](#viewmodels) and back.
 
-One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer), that expectrs [`Entities`](patterns-data-access.md#entities).
+One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer), that expects [`Entities`](patterns-data-access.md#entities).
 
 You might save the system some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
 
@@ -882,7 +882,12 @@ The [`Presenter`](#presenters) pattern is a commonly used design pattern for mod
 
 The [Presenters](#presenters) form a [platform-independent](layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](#viewmodels) and user actions. This makes it possible to swap out the front-end while leaving the underlying system intact.
 
+<h3>TODO</j3>
+
 `< TODO: Test the bigger code samples. >`
+`< TODO: Improve writing style. >`  
+`< TODO: Spell check. >`  
+`< TODO: Grammar check. >`  
 
 ToViewModel
 -----------
