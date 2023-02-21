@@ -810,34 +810,37 @@ Complete Example
 Here is a code sample with most of the discussed steps in it:
 
 ```cs
-public object Save(ProductEditViewModel userInput)
+public class ProductEditPresenter
 {
-    // Security
-    SecurityAsserter.AssertLogIn();
-
-    // ToEntity
-    Product entity = userInput.ToEntity(_repository);
-
-    // Business
-    IValidator validator = new ProductValidator(entity);
-    if (validator.IsValid)
+    public object Save(ProductEditViewModel userInput)
     {
-        new SideEffect_SetDateModified(entity).Execute();
+        // Security
+        SecurityAsserter.AssertLogIn();
 
-        // Save
-        _repository.Commit();
+        // ToEntity
+        Product entity = userInput.ToEntity(_repository);
 
-        // Redirect
-        return new ProductListViewModel();
+        // Business
+        IValidator validator = new ProductValidator(entity);
+        if (validator.IsValid)
+        {
+            new SideEffect_SetDateModified(entity).Execute();
+
+            // Save
+            _repository.Commit();
+
+            // Redirect
+            return new ProductListViewModel();
+        }
+
+        // ToViewModel
+        var viewModel = entity.ToEditViewModel();
+
+        // Non-Persisted Data  
+        viewModel.Validation.Messages = validator.Messages;
+
+        return viewModel;
     }
-
-    // ToViewModel
-    var viewModel = entity.ToEditViewModel();
-
-    // Non-Persisted Data  
-    viewModel.Validation.Messages = validator.Messages;
-
-    return viewModel;
 }
 ```
 
