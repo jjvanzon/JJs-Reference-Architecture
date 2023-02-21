@@ -893,7 +893,7 @@ The [Presenters](#presenters) form a [platform-independent](layers.md#platform-i
 ToViewModel
 -----------
 
-An extension method that convert an [`Entity`](patterns-data-access.md#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [`Entity`](patterns-data-access.md#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [`Entity`](patterns-data-access.md#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
+An extension method that converts an [`Entity`](patterns-data-access.md#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [`Entity`](patterns-data-access.md#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [`Entity`](patterns-data-access.md#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
 You may pass [`Repositories`](patterns-data-access.md#repository) to the `ToViewModel` methods if required.
 
