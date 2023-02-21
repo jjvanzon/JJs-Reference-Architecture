@@ -555,7 +555,7 @@ public class ProductEditViewModel
 }
 ```
 
-The `HomePage` uses `Screens'` common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
+The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
 
 `ScreenViewModel` and the `ValidationViewModel` are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation.
 
