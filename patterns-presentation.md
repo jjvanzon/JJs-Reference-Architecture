@@ -800,7 +800,7 @@ A [`Presenter`](#presenters) action method might have different steps:
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
-Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in order of the steps are also possible.
+Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in the order of the steps are also possible.
 
 
 <h3 id="presenters-complete-example">
