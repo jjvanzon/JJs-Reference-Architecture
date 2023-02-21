@@ -449,7 +449,7 @@ public void ExpandNode(TreeViewModel viewModel, int id)
 }
 ```
 
-This may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#viewmodels) like this:
+It may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#viewmodels) like this:
 
 ```cs
 public QuizViewModel Answer(QuizViewModel userInput)
@@ -533,7 +533,7 @@ public abstract class ScreenViewModel
 }
 ```
 
-By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break the software as it evolves.
+By keeping the members in the base class very general, and not applicable to specific situations, it would be less likely to break as the software evolves.
 
 <h3 id="view-models-composition">
 Composition
@@ -553,21 +553,9 @@ public class ProductEditViewModel
     public ScreenViewModel Screen { get; set; }
     public ValidationViewModel Validation { get; set; }
 }
-
-public class ScreenViewModel
-{
-    public string Title { get; set; }
-    public bool Visible { get; set; }
-}
-
-public class ValidationViewModel
-{
-    public bool Successful { get; set; }
-    public IList<string> ValidationMessages { get; set; }
-}
 ```
 
-The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
+The `HomePage` uses `Screens'` common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
 
 `ScreenViewModel` and the `ValidationViewModel` are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation.
 
