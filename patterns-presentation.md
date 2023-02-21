@@ -796,7 +796,7 @@ A [`Presenter`](#presenters) action method might have different steps:
 | `Commit` | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 | [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, to prepare it for the [`view`](#views).
 | `NonPersisted Data` | Copying data that does not need to be stored, from the old [`ViewModel`](#viewmodels) to the new, such as selections or search criteria.
-| `Redirect` | Redirection by returning different [`ViewModels`](#viewmodels), to trigger the UI to go to the appropriate page like a success message or the home screen.
+| `Redirect` | Redirection by returning a different [`ViewModel`](#viewmodels), to trigger the UI to go to the appropriate page like a success message or the home screen.
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
