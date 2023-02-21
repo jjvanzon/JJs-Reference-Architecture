@@ -611,6 +611,7 @@ This section describes how they are implemented in [this architecture](index.md)
 - [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
 - [Complete Example](#presenters-complete-example)
 - [Overhead](#presenters-overhead)
+- [Operating onto ViewModels Directly](#presenters-operating-onto-view-models-directly)
 - [Conclusion](#presenters-conclusion)  
 
 
@@ -854,6 +855,8 @@ Even though the actual call to the [business logic](layers.md#business-layer) mi
 One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer), that expects [`Entities`](patterns-data-access.md#entities).
 
 You might save the system some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
+
+<h3 id="presenters-operating-onto-view-models-directly">Operating onto ViewModels Directly</h3>
 
 Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead:
 
