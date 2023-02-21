@@ -208,10 +208,10 @@ ListItem ViewModels
     ProductItemViewModel
     CategoryListItemViewModel
 
-A `ProductItemViewModel` could look as follows:
+A `CategoryItemViewModel` could look as follows:
 
 ```cs
-public class ProductItemViewModel
+public class CategoryItemViewModel
 {
     public int ID { get; set; }
     public string Name { get; set; }
@@ -227,10 +227,10 @@ So they can be different from the [`Entity ViewModels`](#entity-viewmodels).
 /// <summary>
 /// Example of a ViewModel using ListItem ViewModels.
 /// </summary>
-public class ProductListViewModel
+public class CategoryListViewModel
 {
     // Here, a ListItem ViewModel is used.
-    public IList<ProductItemViewModel> Products { get; set; }
+    public IList<CategoryItemViewModel> Categories { get; set; }
 }
 ```
 
@@ -253,10 +253,10 @@ Here you can find [`IDAndName`](api.md#jj-canonical) objects used in a `ListView
 /// <summary>
 /// Example of a List ViewModel that uses IDAndName as the item type.
 /// </summary>
-public class ProductListViewModel
+public class CategoryListViewModel
 {
     // Here, IDAndName is used as a list item.
-    public IList<IDAndName> Products { get; set; }
+    public IList<IDAndName> Categories { get; set; }
 }
 ```
 
