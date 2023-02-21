@@ -755,6 +755,9 @@ This is because then when the [`ViewModel` creation](#viewmodels) aspect should 
 It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
 
 ```cs
+/// <summary>
+/// An action method with multiple responsibilities.
+/// </summary>
 public ProductEditViewModel Save(ProductEditViewModel userInput)
 {
     // ToEntity
