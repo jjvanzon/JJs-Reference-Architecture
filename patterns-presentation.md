@@ -557,7 +557,7 @@ public class ProductEditViewModel
 
 The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
 
-`ScreenViewModel` and the `ValidationViewModel` are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation.
+`ScreenViewModel` and the `ValidationViewModel` are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation, like `Messages` and a `Successful` flag.
 
 By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than [inheritance](#view-models-avoid-inheritance).
 
