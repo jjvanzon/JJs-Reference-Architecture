@@ -205,8 +205,8 @@ ListItem ViewModels
 
 [`ListItem ViewModels`](#listitem-viewmodels) are similar to the [`Entity ViewModels`](#entity-viewmodels) but instead they might represent a row in *list* or *grid*. Here are some names they might get:
 
-    ProductItemViewModel
-    CategoryListItemViewModel
+    ProductListItemViewModel
+    CategoryItemViewModel
 
 A `CategoryItemViewModel` could look as follows:
 
