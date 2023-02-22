@@ -122,7 +122,7 @@ class ProductEditPresenter
 }
 ```
 
-But it is preferred that the main chunk of the [infra and settings](layers.md#infrastructure) is passed to the [`Presenters`](#presenters) constructor:
+But it is preferred that the main chunk of the [infra and settings](layers.md#infrastructure) is passed to the [`Presenter's`](#presenters) constructor:
 
 ```cs
 class ProductEditPresenter
@@ -190,12 +190,12 @@ public ProductEditViewModel Save(ProductEditViewModel userInput)
 
 This way the [`Presenter`](#presenters) layer is also responsible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities). So it isn't a needless [pass-through layer](#pass-through-layers-) just delegating [`ViewModel`](#viewmodels) creation. It is a [combinator `class`](patterns-business-logic.md#facade), in that it combines multiple smaller aspects of the logic, by delegating work to various parts of the system.
 
-A [`Presenter`](#presenters) action method might have the following steps:
+A [`Presenter`](#presenters) action method can have the following steps:
 
 |   |   |
 |---|---|
 | [`Security` checks](aspects.md#security) | Executing the necessary [security checks](aspects.md#security) to prevent unauthorized access.
-| [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) before converting it to an [`Entity`](patterns-data-access.md#entities). This can be useful when the data cannot always be converted to an [`Entity`](patterns-data-access.md#entities). If possible, [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) is preferred.
+| [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | If possible, [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) is preferred. But sometimes the data can't be converted to an [`Entity`](patterns-data-access.md#entities) yet. [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) might be useful in that case. 
 | [`ToEntity`](#toentity) | Converting [ViewModel](#viewmodels) data into [`Entity`](patterns-data-access.md#entities) data.
 | [`GetEntities`](patterns-data-access.md#repository) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
 | [`Business`](layers.md#business-layer) | Executing the necessary [`Business` logic](layers.md#business-layer) for [data `Validation`](patterns-business-logic.md#validators), [`Calculations`](aspects.md#calculation), and decisions based on the data.
