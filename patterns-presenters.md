@@ -176,14 +176,14 @@ public ProductEditViewModel Save(ProductEditViewModel userInput)
     // ToEntity
     Product entity = userInput.ToEntity(_repository);
 
-    // Business
+    // Business Logic
     new SideEffect_SetDateModified(entity).Execute();
 
     // Save
     _repository.Commit();
 
     // ToViewModel
-    ProductEditViewModel viewModel = entity.ToEditViewModel();
+    var viewModel = entity.ToEditViewModel();
     return viewModel;
 }
 ```
@@ -198,7 +198,7 @@ A [`Presenter`](#presenters) action method can have the following steps:
 | [`ViewModel`](#viewmodels) [`Validation`](patterns-business-logic.md#validators) | If possible, [`Entity`](patterns-data-access.md#entities) [`Validation`](patterns-business-logic.md#validators) is preferred. But sometimes the data can't be converted to an [`Entity`](patterns-data-access.md#entities) yet. [`Validating`](patterns-business-logic.md#validators) a [`ViewModel`](#viewmodels) might be useful in that case. 
 | [`ToEntity`](#toentity) | Converting [ViewModel](#viewmodels) data into [`Entity`](patterns-data-access.md#entities) data.
 | [`GetEntities`](patterns-data-access.md#repository) | Retrieving [`Entity`](patterns-data-access.md#entities) data from the database.    
-| [`Business`](layers.md#business-layer) | Executing the necessary [`Business` logic](layers.md#business-layer) for [data `Validation`](patterns-business-logic.md#validators), [`Calculations`](aspects.md#calculation), and decisions based on the data.
+| [`Business Logic`](layers.md#business-layer) | Executing the necessary [logic](layers.md#business-layer) for [data `Validation`](patterns-business-logic.md#validators), [`Calculations`](aspects.md#calculation), and decisions based on the data.
 | `Commit` | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 | [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, to prepare it for the [`view`](#views).
 | `NonPersisted Data` | Copying data that does not need to be stored, from the old [`ViewModel`](#viewmodels) to the new, such as selections or search criteria.
@@ -206,7 +206,7 @@ A [`Presenter`](#presenters) action method can have the following steps:
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like our [`Presenters`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
-Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in the order of the steps are also possible.
+Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business Logic`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in the order of the steps are also possible.
 
 
 Complete Example
@@ -225,7 +225,7 @@ public class ProductEditPresenter
         // ToEntity
         Product entity = userInput.ToEntity(_repository);
 
-        // Business
+        // Business Logic
         IValidator validator = new ProductValidator(entity);
         if (validator.IsValid)
         {
