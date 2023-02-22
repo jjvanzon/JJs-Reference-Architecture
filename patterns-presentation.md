@@ -881,7 +881,6 @@ The [Presenters](#presenters) form a [platform-independent](layers.md#platform-i
 
 <h3>TODO</h3>
 
-`< TODO: Improve writing style. >`  
 `< TODO: Spell check. >`  
 `< TODO: Grammar check. >`  
 
