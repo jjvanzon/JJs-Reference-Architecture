@@ -1,7 +1,7 @@
 ﻿---
 title: "🕺 Presenters"
 image: "/images/presenter-code-sample.png"
-description: "Learn how to improve your user interface design with Presenters: a software design pattern for modeling user interaction. This article provides practical tips for implementing Presenters in your own projects, helping you make your user interface more flexible and reliable."
+description: "Learn how to improve your user interfaces with Presenters: a software design pattern for modeling user interaction. This article provides practical tips using them in your own projects, helping you make your user interface more flexible and reliable."
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>
