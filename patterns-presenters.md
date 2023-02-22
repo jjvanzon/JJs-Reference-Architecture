@@ -9,7 +9,7 @@ title: "🎤 The Presenter Pattern"
 
 [back](patterns-presentation.md)
 
-[`Presenters`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
+[`Presenters`](#presenters) model the user interactions. A non-visual blue-print of the user interface.
 This section describes how they are implemented in [this architecture](index.md).
 
 <h2>Contents</h2>
