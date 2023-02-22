@@ -752,14 +752,14 @@ public ProductEditViewModel Show(int id)
 }
 ```
 
-This way, [`ViewModel` creation](#viewmodels) is in centralized spot, so that changes have to be made in one place only.
+This way, [`ViewModel` creation](#viewmodels) is in centralized spot, so that changes only have to be made in one place.
 
 
 <h3 id="presenter-responsibilities">
 Presenter Responsibilities
 </h3>
 
-The responsibility of the [`Presenter`](#presenters) is not limited to [`ViewModel`](#viewmodels) creation alone, as you can see in the following code:
+The responsibility of the [`Presenter`](#presenters) is not limited to [`ViewModel`](#viewmodels) creation alone, as you can see here:
 
 ```cs
 /// <summary>
@@ -782,9 +782,9 @@ public ProductEditViewModel Save(ProductEditViewModel userInput)
 }
 ```
 
-This way it the [`Presenter`](#presenters) layer is also resposible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities). So the the [`Presenter`](#presenters) layer isn't a needless [pass-through layer](#pass-through-layers-) just delegating [`ViewModel`](#viewmodels) creation. It is a [combinator `class`](patterns-business-logic.md#facade), in that it combines multiple smaller aspects of the logic, by delegating work to other parts of the system.
+This way it the [`Presenter`](#presenters) layer is also resposible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities). So it isn't a needless [pass-through layer](#pass-through-layers-) just delegating [`ViewModel`](#viewmodels) creation. It is a [combinator `class`](patterns-business-logic.md#facade), in that it combines multiple smaller aspects of the logic, by delegating work to various parts of the system.
 
-A [`Presenter`](#presenters) action method might have one or more of the following steps:
+A [`Presenter`](#presenters) action method might have the following steps:
 
 |   |   |
 |---|---|
@@ -796,7 +796,7 @@ A [`Presenter`](#presenters) action method might have one or more of the followi
 | `Commit` | Saving changes made to the [`Entities`](patterns-data-access.md#entities) to the database.
 | [`ToViewModel`](#toviewmodel) | Mapping [`Entity`](patterns-data-access.md#entities) data to the corresponding [`ViewModel`](#viewmodels) `properties`, to prepare it for the [`view`](#views).
 | `NonPersisted Data` | Copying data that does not need to be stored, from the old [`ViewModel`](#viewmodels) to the new, such as selections or search criteria.
-| `Redirect` | Redirection by returning a different [`ViewModel`](#viewmodels), to trigger the UI to go to the appropriate page like a success message or the home screen.
+| `Redirect` | Returning a different [`ViewModel`](#viewmodels), to trigger the UI to go to the appropriate page like a success message or the home screen.
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
@@ -853,7 +853,7 @@ Even though the actual call to the [business logic](layers.md#business-layer) mi
 
 One reason might be the stateless nature of the web. It requires restoring state from the [`View`](#views) to the [`Entity`](patterns-data-access.md#entities) model in between requests. This is because the [`ViewModel`](#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](patterns-data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](layers.md#business-layer), that expects [`Entities`](patterns-data-access.md#entities).
 
-You might save the system some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
+You might save the server some work by doing *partial loads* instead of *full loads* or maybe execute client-native code. For more info, see: [First Full Load – Then Partial Load – Then Client-Native Code](#first-full-load--then-partial-load--then-client-native-code).
 
 
 <h3 id="presenters-using-view-models-directly">Using ViewModels Directly</h3>
@@ -970,6 +970,12 @@ For big lookup list a viable option seems to [`AJAX`](api.md#ajax) the list and 
 
 First Full Load – Then Partial Load – Then Client-Native Code
 -------------------------------------------------------------
+
+You might save the server some work by doing [partial loads instead of full loads](api.md#ajax) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
+
+[Partial loads](api.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
+
+[`JavaScript`](api.md#javascript) is client-native code, that could omit server code altoghether, but potentially with a penalty on maintainability, because the client-code may be written in a way that is more dependent on specific [view](#views) details, which might easily change as the server-code evolves.
 
 You could also call it: first choice full load.
 
