@@ -597,7 +597,7 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 Presenters
 ----------
 
-See [Presenter Pattern](patterns-presenters.md).
+See [The Presenter Pattern](patterns-presenters.md).
 
 
 ToViewModel

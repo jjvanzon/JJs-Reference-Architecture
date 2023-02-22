@@ -4,12 +4,12 @@ title: "🎤 The Presenter Pattern"
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>
 
-🖥️ The Presenter Pattern
-=========================
+🎤 Presenters
+=============
 
 [back](patterns-presentation.md)
 
-A [`Presenter`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
+[`Presenters`](#presenters) models the user interactions. A non-visual blue-print of the user interface.
 This section describes how they are implemented in [this architecture](index.md).
 
 <h2>Contents</h2>
@@ -259,7 +259,8 @@ One reason might be the stateless nature of the web. It requires restoring state
 You might save the server some work by doing *partial loads* instead of *full loads* or maybe execute client-native code. For more info, see: [First Full Load – Then Partial Load – Then Client-Native Code](#first-full-load--then-partial-load--then-client-native-code).
 
 
-<h3 id="presenters-using-view-models-directly">Using ViewModels Directly</h3>
+Using ViewModels Directly
+-------------------------
 
 Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead:
 
