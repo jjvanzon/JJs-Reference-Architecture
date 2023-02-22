@@ -1,6 +1,6 @@
 ﻿---
 title: "🕺 Presenters"
-image: "/images/presenter-code-sample.png"
+image: "/images/presenter-code-sample-2.png"
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>
