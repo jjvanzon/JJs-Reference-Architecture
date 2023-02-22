@@ -1,5 +1,6 @@
 ﻿---
 title: "🕺 Presenters"
+description: "An implementation of a design pattern for programming software, that models the user interactions. A non-visual blue-print of the user interface."
 image: "/images/presenter-code-sample.png"
 ---
 
