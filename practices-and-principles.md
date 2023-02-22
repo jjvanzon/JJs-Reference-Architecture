@@ -51,7 +51,7 @@
     - [Entity Design](#entity-design)
     - [Execution Order Dependence (👎)](#execution-order-dependence-)
     - [Handy Extras / Ya Ain't Gonna Need It (👎)](#handy-extras--ya-aint-gonna-need-it-)
-    - [Hatch / 'Doorgeefluik' (👎)](#hatch--doorgeefluik-)
+    - [Pass-Through Layers (👎)](#pass-through-layers-)
     - [Hollow Interface](#hollow-interface)
     - [Interface Contamination](#interface-contamination)
     - [Interface Neutrality](#interface-neutrality)
@@ -610,7 +610,7 @@ It is better to keep the code minimalistic and add the extras at the time that y
 
 Specialized case: Overloads that are never used, should be removed from the code.
 
-### Hatch / 'Doorgeefluik' (👎)
+### Pass-Through Layers (👎)
 
 A method, that does not do anything but delegate to another method. For example: let's say there is a method `GetImage` in both an `ImageRepository` and an `ImageFacade`. All `ImageFacade.GetImage` does is call `ImageRepository.GetImage`.
 

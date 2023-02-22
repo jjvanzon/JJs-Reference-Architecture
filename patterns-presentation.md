@@ -608,7 +608,7 @@ This section describes how they are implemented in [this architecture](index.md)
 - [Infrastructure and Configuration](#presenters-infrastructure-and-configuration)
 - [Internal Implementation](#presenters-internal-implementation)  
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
-- [ToEntity-Business-ToViewModel Round-Trip](#toentity-business-toviewmodel-round-trip)  
+- [Presenter Responsibilities](#presenter-responsibilities)  
 - [Complete Example](#presenters-complete-example)
 - [Overhead](#presenters-overhead)
 - [Using ViewModels Directly](#presenters-using-view-models-directly)
@@ -641,11 +641,12 @@ class ProductEditPresenter
 }
 ```
 
+
 <h3 id="presenters-working-with-viewmodels">
 Working with ViewModels
 </h3>
 
-The methods of the [`Presenter`](#presenters) work by a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen:
+The action methods of the [`Presenter`](#presenters) work by a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen:
 
 ```cs
 class ProductEditPresenter
@@ -741,7 +742,7 @@ Internally a [`Presenter`](#presenters) can use [business logic](layers.md#busin
 Delegating ViewModel Creation
 </h3>
 
-It is preferred that [`ViewModel`](#viewmodels) creation is delegated to the [`ToViewModel`](#toviewmodel) layer (rather than inlining it in the [`Presenters`](#presenters)):
+It is preferred that [`ViewModel`](#viewmodels) creation is delegated to the [`ToViewModel`](#toviewmodel) layer (creating them directly within the [`Presenters`](#presenters)):
 
 ```cs
 public ProductEditViewModel Show(int id)
@@ -751,9 +752,14 @@ public ProductEditViewModel Show(int id)
 }
 ```
 
-This is because then when the [`ViewModel` creation](#viewmodels) aspect should be adapted, there is but one place in the code to look.
+This way, [`ViewModel` creation](#viewmodels) is in centralized spot, so that changes have to be made in one place only.
 
-It does not make the [`Presenter`](#presenters) a needless [hatch ('doorgeefluik')](practices-and-principles.md#hatch--doorgeefluik-), because the [`Presenter`](#presenters) is responsible for more than just [`ViewModel`](#viewmodels) creation:
+
+<h3 id="presenter-responsibilities">
+Presenter Responsibilities
+</h3>
+
+The responsibility of the [`Presenter`](#presenters) is not limited to [`ViewModel`](#viewmodels) creation alone, as you can see in the following code:
 
 ```cs
 /// <summary>
@@ -776,16 +782,9 @@ public ProductEditViewModel Save(ProductEditViewModel userInput)
 }
 ```
 
-This way it is also resposible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities).
+This way it the [`Presenter`](#presenters) layer is also resposible for [retrieving data](layers.md#data-layer), calling [business logic](layers.md#business-layer) and converting [`ViewModels`](#viewmodels) back to [`Entities`](patterns-data-access.md#entities). So the the [`Presenter`](#presenters) layer isn't a needless [pass-through layer](#pass-through-layers-) just delegating [`ViewModel`](#viewmodels) creation. It is a [combinator `class`](patterns-business-logic.md#facade), in that it combines multiple smaller aspects of the logic, by delegating work to other parts of the system.
 
-
-<h3 id="toentity-business-toviewmodel-round-trip">
-ToEntity-Business-ToViewModel Round-Trip
-</h3>
-
-A [`Presenter`](#presenters) is a [combinator `class`](patterns-business-logic.md#facade), in that it combines multiple smaller aspects of the logic, by delegating to other `classes`.
-
-A [`Presenter`](#presenters) action method might have different steps:
+A [`Presenter`](#presenters) action method might have one or more of the following steps:
 
 |   |   |
 |---|---|
@@ -856,6 +855,7 @@ One reason might be the stateless nature of the web. It requires restoring state
 
 You might save the system some work by doing [partial loads instead of full loads](#first-full-load--then-partial-load--then-client-native-code) or maybe even do [`JavaScript`](api.md#javascript) or other client-native code.
 
+
 <h3 id="presenters-using-view-models-directly">Using ViewModels Directly</h3>
 
 Some actions might also operate onto [`ViewModels`](#viewmodels) directly instead:
@@ -881,7 +881,6 @@ The [Presenters](#presenters) form a [platform-independent](layers.md#platform-i
 
 <h3>TODO</h3>
 
-`< TODO: Test the bigger code samples. >`  
 `< TODO: Improve writing style. >`  
 `< TODO: Spell check. >`  
 `< TODO: Grammar check. >`  
