@@ -24,9 +24,9 @@ title: "🕸️ Patterns : Presentation (MVC)"
 Controller
 ----------
 
-In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns-presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](patterns-presentation.md#presenter). The responsibilities that are left for the [`MVC`](api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](api.md#mvc) quirks.
+In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns-presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](patterns-presentation.md#presenters). The responsibilities that are left for the [`MVC`](api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](api.md#mvc) quirks.
 
-The [`Controller`](#controller) may use multiple [`Presenters`](patterns-presentation.md#presenter) and [`ViewModels`](patterns-presentation.md#viewmodels), since it is about multiple screens.
+The [`Controller`](#controller) may use multiple [`Presenters`](patterns-presentation.md#presenters) and [`ViewModels`](patterns-presentation.md#viewmodels), since it is about multiple screens.
 
 [`Entity`](patterns-data-access.md#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
 
@@ -77,7 +77,7 @@ If you do not conform to the Post-Redirect-Get pattern in [`MVC`](api.md#mvc), y
 ValidationMessages in ModelState
 --------------------------------
 
-For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](patterns-business-logic.md#validators) messages, after you have gotten a [`ViewModel`](patterns-presentation.md#viewmodels) from a [`Presenter`](patterns-presentation.md#presenter). If you do not do this, you will get strange application navigation in case of [validation](patterns-business-logic.md#validators) errors.
+For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](patterns-business-logic.md#validators) messages, after you have gotten a [`ViewModel`](patterns-presentation.md#viewmodels) from a [`Presenter`](patterns-presentation.md#presenters). If you do not do this, you will get strange application navigation in case of [validation](patterns-business-logic.md#validators) errors.
 
 You do this in an [`MVC`](api.md#mvc) HTTP GET action method.
 
@@ -98,9 +98,9 @@ In theory we could communicate all [validation](patterns-business-logic.md#valid
 Polymorphic RedirectToAction / View()
 -------------------------------------
 
-A [`Presenter`](patterns-presentation.md#presenter) action method may return different types of [`ViewModels`](patterns-presentation.md#viewmodels).
+A [`Presenter`](patterns-presentation.md#presenters) action method may return different types of [`ViewModels`](patterns-presentation.md#viewmodels).
 
-This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](patterns-presentation.md#presenter) returns `object` and you should do polymorphic type checks to determine which [`View`](patterns-presentation.md#views) to go to.
+This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](patterns-presentation.md#presenters) returns `object` and you should do polymorphic type checks to determine which [`View`](patterns-presentation.md#views) to go to.
 
 Here is simplified code for how you can do this in a post method:
 

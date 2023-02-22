@@ -25,7 +25,7 @@ Software can be built up of layers. This article describes how layers could be s
     - [Platform Independence](#platform-independence)
 - [Presentation Layer](#presentation-layer)
     - [Calls the Business Layer](#calls-the-business-layer)
-    - [Presenter](#presenter)
+    - [Presenter](#presenters)
     - [ViewModel](#viewmodel)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)
@@ -148,7 +148,7 @@ The [presentation layer](#presentation-layer) calls the [business layer](#busine
 
 ### Presenter
 
-It is the [`Presenter`](patterns-presentation.md#presenter) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns-presentation.md#presenter) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns-presentation.md#presenter). Each [`Presenter`](patterns-presentation.md#presenter) *method* represents a specific *user action* on that screen.
+It is the [`Presenter`](patterns-presentation.md#presenters) classes that talk to this [business layer](#business-layer). The [`Presenters`](patterns-presentation.md#presenters) together form a model of *application navigation*. Each screen might get its own [`Presenter`](patterns-presentation.md#presenters). Each [`Presenter`](patterns-presentation.md#presenters) *method* represents a specific *user action* on that screen.
 
 ### ViewModel
 
@@ -156,31 +156,31 @@ A [`ViewModel`](patterns-presentation.md#viewmodels) would contain a specific su
 
 ### ToViewModel
 
-The [`Presenters`](patterns-presentation.md#presenter) might delegate to a [`ToViewModel`](patterns-presentation.md#toviewmodel) layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
+The [`Presenters`](patterns-presentation.md#presenters) might delegate to a [`ToViewModel`](patterns-presentation.md#toviewmodel) layer, to translate the data and the results from the [business logic](#business-layer) to a subset of data that is shown on screen.
 
 ### ToEntity
 
-The [`Presenters`](patterns-presentation.md#presenter) also delegate to a [`ToEntity`](patterns-data-access.md#toentity) layer, to translate user input back to [entity](patterns-data-access.md#entities) data, before passing it on to the [business layer](#business-layer).
+The [`Presenters`](patterns-presentation.md#presenters) also delegate to a [`ToEntity`](patterns-data-access.md#toentity) layer, to translate user input back to [entity](patterns-data-access.md#entities) data, before passing it on to the [business layer](#business-layer).
 
 ### Facades
 
-[`Presenter`](patterns-presentation.md#presenter) classes combine several [responsibilities](patterns-presentation.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
+[`Presenter`](patterns-presentation.md#presenters) classes combine several [responsibilities](patterns-presentation.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
 
 They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns-business-logic.md#validators), execute [`SideEffects`](patterns-business-logic.md#sideeffects). They initiate translation between [entities](patterns-data-access.md#entities) and [`ViewModels`](patterns-presentation.md#viewmodels) and might also execute [security](aspects.md#security) checks.
 
-Because the [`Presenters`](patterns-presentation.md#presenter) combine several [responsibilities](patterns-presentation.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns-business-logic.md#facade) or [combinators](patterns-business-logic.md#facade) of the [presentation layer](#presentation-layer).
+Because the [`Presenters`](patterns-presentation.md#presenters) combine several [responsibilities](patterns-presentation.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns-business-logic.md#facade) or [combinators](patterns-business-logic.md#facade) of the [presentation layer](#presentation-layer).
 
 ### MVC
 
-[`MVC`](api.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api.md#mvc) layer builds on top of the [`Presenter`](patterns-presentation.md#presenter) layer.
+[`MVC`](api.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api.md#mvc) layer builds on top of the [`Presenter`](patterns-presentation.md#presenters) layer.
 
 ### MVC Controllers
 
-[`MVC`](api.md#mvc) uses [`Controllers`](patterns-presentation-mvc.md#controller), which are similar to [`Presenters`](patterns-presentation.md#presenter) in that they group together related *user actions* and each user action gets a specific *method*.
+[`MVC`](api.md#mvc) uses [`Controllers`](patterns-presentation-mvc.md#controller), which are similar to [`Presenters`](patterns-presentation.md#presenters) in that they group together related *user actions* and each user action gets a specific *method*.
 
 [`Controllers`](patterns-presentation-mvc.md#controller) are quite specific to [`MVC`](api.md#mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms, like [`WinForms`](api.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns-presentation.md#presenter) and showing the right [`View`](patterns-presentation.md#views) depending on their results.
+However, even on other presentation platforms, like [`WinForms`](api.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns-presentation.md#presenters) and showing the right [`View`](patterns-presentation.md#views) depending on their results.
 
 ### URLs
 
@@ -198,7 +198,7 @@ After the [`Controller`](patterns-presentation-mvc.md#controller) method is done
 
 A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns-presentation.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns-presentation.md#viewmodels) as input, along with the [`View`](patterns-presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In [`WinForms`](api.md#winforms) the [`Views`](patterns-presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns-presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns-presentation.md#presenter).
+In [`WinForms`](api.md#winforms) the [`Views`](patterns-presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns-presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns-presentation.md#presenters).
 
 ### HTML
 
@@ -312,9 +312,9 @@ However it is the [presentation layer](#presentation-layer) in which the final d
 
 The infrastructure tends to be [loosely coupled](practices-and-principles.md#loose-coupling) in this  [software architecture](index.md). Let's take [user rights management](aspects.md#security) an example.
 
-[User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns-presentation.md#presenter) layer, adapting it to what the user is allowed to do.
+[User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns-presentation.md#presenters) layer, adapting it to what the user is allowed to do.
 
-In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns-presentation.md#presenter) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
+In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns-presentation.md#presenters) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
 
 ### Services
 
@@ -324,7 +324,7 @@ What's meant with *services* in this [architecture](index.md), is exposing [busi
 Decoupled
 ---------
 
-[`Presenter`](patterns-presentation.md#presenter) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns-presentation.md#presenter) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns-data-access.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
+[`Presenter`](patterns-presentation.md#presenters) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns-presentation.md#presenters) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns-data-access.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
 
 
 Alternatives
