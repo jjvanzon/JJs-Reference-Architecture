@@ -596,7 +596,7 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 
 <h2 id="presenters">Presenters</h2>
 
-See [The Presenter Pattern](patterns-presenters.md).
+See the [Presenters](patterns-presenters.md) article.
 
 
 ToViewModel

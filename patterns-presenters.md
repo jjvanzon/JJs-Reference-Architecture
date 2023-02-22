@@ -1,5 +1,5 @@
 ﻿---
-title: "🎤 The Presenter Pattern"
+title: "🎤 Presenters"
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>
