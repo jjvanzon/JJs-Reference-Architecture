@@ -1,6 +1,6 @@
 ﻿---
 title: "🕺 Presenters"
-description: "Learn how to improve your user interface design with presenters: a powerful software design pattern for modeling user interaction. This article provides practical tips for implementing presenters in your own projects, helping you make your user interface more flexible and reliable."
+description: "Learn how to improve your user interface design with presenters: a software design pattern for modeling user interaction. This article provides practical tips for implementing presenters in your own projects, helping you make your user interface more flexible and reliable."
 image: "/images/presenter-code-sample.png"
 ---
 
