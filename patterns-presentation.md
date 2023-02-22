@@ -14,19 +14,19 @@ image: "/images/view-model-code-sample.png"
 
 <h3>Contents</h3>
 
-- [ViewModels](#viewmodels)
-- [Presenters](#presenters)
-- [ToViewModel](#toviewmodel)
-- [ToEntity](#toentity)
-- [Views](#views)
-- [Lookup Lists](#lookup-lists)
-- [First Full Load – Then Partial Load – Then Client-Native Code](#first-full-load--then-partial-load--then-client-native-code)
-- [Stateless and Stateful](#stateless-and-stateful)
-- [NullCoalesce (ViewModels)](#nullcoalesce-viewmodels)
-- [Temporary ID's](#temporary-ids)
-- [Considerations](#considerations)
-    - [ToEntity / ToViewModel](#toentity--toviewmodel)
-
+<ul>
+<li><a href="#viewmodels">ViewModels</a></li>
+<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/patterns-presenters.html">Presenters</a></li>
+<li><a href="#toviewmodel">ToViewModel</a></li>
+<li><a href="#toentity">ToEntity</a></li>
+<li><a href="#views">Views</a></li>
+<li><a href="#lookup-lists">Lookup Lists</a></li>
+<li><a href="#first-full-load--then-partial-load--then-client-native-code">First Full Load – Then Partial Load – Then Client-Native Code</a></li>
+<li><a href="#stateless-and-stateful">Stateless and Stateful</a></li>
+<li><a href="#nullcoalesce-viewmodels">NullCoalesce (ViewModels)</a></li>
+<li><a href="#temporary-ids">Temporary ID's</a></li>
+<li><a href="#considerations">Considerations</a></li>
+</ul>
 
 ViewModels
 ----------
@@ -594,8 +594,7 @@ Conclusion
 Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](layers.md#business-layer) and [data access](layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come from and go.
 
 
-Presenters
-----------
+<h2 id="presenters">Presenters</h2>
 
 See [The Presenter Pattern](patterns-presenters.md).
 
