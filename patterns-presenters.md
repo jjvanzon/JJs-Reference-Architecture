@@ -32,7 +32,7 @@ The Role of the Presenter
 
 Unlike the [`ViewModels`](#viewmodels), which model the *data* shown on a screen, the [`Presenters`](#presenters) model the *actions* a user can perform on the screen.
 
-Each [`View`](#views) gets its own [`Presenter`](#presenters), for instance:
+Each [`View`](#views) can get its own [`Presenter`](#presenters), for instance:
 
 ```cs
 class LoginPresenter { }
@@ -42,7 +42,7 @@ class ProductDetailsPresenter { }
 class CategorySelectionPresenter { }
 ```
 
-Each *user action* is represented by a *method*, like these:
+Each *user action* would be represented by a *method*, like these:
 
 ```cs
 class ProductEditPresenter
@@ -56,7 +56,7 @@ class ProductEditPresenter
 Working with ViewModels
 -----------------------
 
-The action methods of the [`Presenter`](#presenters) work by a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen:
+Our action methods of the [`Presenter`](#presenters) work by a [`ViewModel-in`](#viewmodels), [`ViewModel-out`](#viewmodels) principle. An action method returns a [`ViewModel`](#viewmodels) that contains the data to display on screen:
 
 ```cs
 class ProductEditPresenter
@@ -159,7 +159,7 @@ public ProductEditViewModel Show(int id)
 }
 ```
 
-This way, [`ViewModel` creation](#viewmodels) is in centralized spot, so that changes only have to be made in one place.
+This way, [`ViewModel` creation](#viewmodels) is in a centralized spot, so that changes only have to be made in one place.
 
 
 Delegating More Responsibilities
@@ -204,7 +204,7 @@ A [`Presenter`](#presenters) action method might have the following steps:
 | `NonPersisted Data` | Copying data that does not need to be stored, from the old [`ViewModel`](#viewmodels) to the new, such as selections or search criteria.
 | `Redirect` | Returning a different [`ViewModel`](#viewmodels), to trigger the UI to go to the appropriate page like a success message or the home screen.
 
-This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like the [`Presenter`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
+This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](patterns-business-logic.md#facade), like our [`Presenters`](#presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
 Not all of the steps are needed. [`ToEntity`](#toviewmodel) / [`Business`](layers.md#business-layer) / [`ToViewModel`](#toviewmodel) might be the typical steps. Slight variations in the order of the steps are also possible.
 
