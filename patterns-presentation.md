@@ -608,7 +608,7 @@ This section describes how they are implemented in [this architecture](index.md)
 - [Infrastructure and Configuration](#presenters-infrastructure-and-configuration)
 - [Internal Implementation](#presenters-internal-implementation)  
 - [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
-- [Presenter Responsibilities](#presenter-responsibilities)  
+- [Delegating More Responsibilities](#presenter-delegating-more-responsibilities)  
 - [Complete Example](#presenters-complete-example)
 - [Overhead](#presenters-overhead)
 - [Using ViewModels Directly](#presenters-using-view-models-directly)
@@ -755,8 +755,8 @@ public ProductEditViewModel Show(int id)
 This way, [`ViewModel` creation](#viewmodels) is in centralized spot, so that changes only have to be made in one place.
 
 
-<h3 id="presenter-responsibilities">
-Presenter Responsibilities
+<h3 id="presenter-delegating-more-responsibilities">
+Delegating More Responsibilities
 </h3>
 
 The responsibility of the [`Presenter`](#presenters) is not limited to [`ViewModel`](#viewmodels) creation alone, as you can see here:
@@ -877,7 +877,7 @@ Conclusion
 
 The [`Presenter`](#presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#presenters) for each [`View`](#views) and working with [`ViewModels`](#viewmodels), we can achieve a clear modularization of our [presentation logic](layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`](#viewmodels) creation to the [`ToViewModel`](#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#presenters) to focus on its primary responsibility of modeling user interaction, delegating work to the various parts of the system.
 
-The [Presenters](#presenters) form a [platform-independent](layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](#viewmodels) and user actions. This makes it possible to swap out the front-end while leaving the underlying system intact.
+The [`Presenters`](#presenters) form a [platform-independent](layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](#viewmodels) and user actions. This makes it possible to swap out the front-end while leaving the underlying system intact.
 
 
 ToViewModel
