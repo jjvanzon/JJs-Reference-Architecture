@@ -210,7 +210,7 @@ Separation of concerns can also be applied to technical aspects, such as [valida
 In this [architecture](index.md) we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
-|                | [`Dto`](patterns-data-access.md#dto) | [`Mapping`](patterns-data-access.md#mapping) | [`Validator`](patterns-business-logic.md#validators) | [`ViewModel`](patterns-presentation.md#viewmodels) | [`Presenter`](patterns-presentation.md#presenters) | `...` |
+|                | [`Dto`](patterns-data-access.md#dto) | [`Mapping`](patterns-data-access.md#mapping) | [`Validator`](patterns-business-logic.md#validators) | [`ViewModel`](patterns-presentation.md#viewmodels) | [`Presenter`](patterns-presenters.md#-presenters) | `...` |
 |----------------|-----|-----|-----|-----|-----|-----|
 | __`Order`__    | `OrderDto`    | `OrderMapping`    | `OrderValidator`    | `OrderViewModel`    | `OrderPresenter`    | `...` |
 | __`Product`__  | `ProductDto`  | `ProductMapping`  | `ProductValidator`  | `ProductViewModel`  | `ProductPresenter`  | `...` |
@@ -274,7 +274,7 @@ An object that is used everywhere and can do anything. Consider splitting it up 
 
 ### Combination of Concerns
 
-After separating all different aspects of both functionality and technique, you can recombine these separated aspects in specific spots in the code: [`Facades`](patterns-business-logic.md#facade) or [`Presenters`](patterns-presentation.md#presenters) or in very specific `classes` that are a like a machine to perform very specific functionalities in a controlled way. See [`Facades`](aspects.md#facades) in [Aspects](aspects.md) and [`Facade`](patterns-business-logic.md#facade) in [Patterns](patterns-business-logic.md).
+After separating all different aspects of both functionality and technique, you can recombine these separated aspects in specific spots in the code: [`Facades`](patterns-business-logic.md#facade) or [`Presenters`](patterns-presenters.md#-presenters) or in very specific `classes` that are a like a machine to perform very specific functionalities in a controlled way. See [`Facades`](aspects.md#facades) in [Aspects](aspects.md) and [`Facade`](patterns-business-logic.md#facade) in [Patterns](patterns-business-logic.md).
 
 ### 2 API's for the Same Thing (👎)
 
@@ -412,7 +412,7 @@ Here are rules for null-checks for other constructs:
 
 #### ViewModels
 
-- [`ViewModels`](patterns-presentation.md#viewmodels) that are passed to [`Presenters`](patterns-presentation.md#presenters) may contain nulls.
+- [`ViewModels`](patterns-presentation.md#viewmodels) that are passed to [`Presenters`](patterns-presenters.md#-presenters) may contain nulls.
 - You can use the [`NullCoalesce`](patterns-presentation.md#nullcoalesce-viewmodels) pattern to resolve the nulls before processing the [`ViewModel`](patterns-presentation.md#viewmodels) object, so that null-checks can be omitted from the rest of the code.
 
 #### Custom-Programmed Framework API's
