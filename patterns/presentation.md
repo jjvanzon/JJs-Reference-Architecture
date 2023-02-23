@@ -18,7 +18,7 @@ redirect_from:
 
 <ul>
 <li><a href="#viewmodels">ViewModels</a></li>
-<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecturepresenters.html">Presenters</a></li>
+<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/presenters">Presenters</a></li>
 <li><a href="#toviewmodel">ToViewModel</a></li>
 <li><a href="#toentity">ToEntity</a></li>
 <li><a href="#views">Views</a></li>
