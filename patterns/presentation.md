@@ -12,13 +12,13 @@ redirect_from:
 🖥️ Patterns : Presentation
 ===========================
 
-[back](/patterns/README.md)
+[back](README.md)
 
 <h3>Contents</h3>
 
 <ul>
 <li><a href="#viewmodels">ViewModels</a></li>
-<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/patterns/presenters.html">Presenters</a></li>
+<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecturepresenters.html">Presenters</a></li>
 <li><a href="#toviewmodel">ToViewModel</a></li>
 <li><a href="#toentity">ToEntity</a></li>
 <li><a href="#views">Views</a></li>
@@ -61,7 +61,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 Only Data
 </h3>
 
-In [this architecture](index.md) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](/patterns/data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](index.md) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -86,7 +86,7 @@ Every screen can get a [`ViewModel`](#viewmodels). Here are some [`Screen ViewMo
 
 These names are built up from parts:
 
-1. Starting with the [`Entity`](/patterns/data-access.md#entities) name:  
+1. Starting with the [`Entity`](data-access.md#entities) name:  
    `Product`, `Category`
 2. Then something [`CRUD`](layers.md#crud)-related:  
    `Details`, `List`, `Edit` or `Delete`
@@ -120,7 +120,7 @@ public class ProductEditViewModel
 Entity ViewModels
 </h3>
 
-You can also reuse [`ViewModels`](#viewmodels) that represent single [`Entities`](/patterns/data-access.md#entities), e.g.:
+You can also reuse [`ViewModels`](#viewmodels) that represent single [`Entities`](data-access.md#entities), e.g.:
 
     ProductViewModel
     CategoryViewModel
@@ -236,7 +236,7 @@ public class CategoryListViewModel
 }
 ```
 
-Some list views only need an [`IDAndName`](api.md#jj-canonical) [`DTO`](/patterns/data-access.md#dto), a version of which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
+Some list views only need an [`IDAndName`](api.md#jj-canonical) [`DTO`](data-access.md#dto), a version of which can be found in the [`JJ.Canonical`](api.md#jj-canonical) project:
 
 ```cs
 namespace JJ.Data.Canonical
@@ -315,7 +315,7 @@ Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether i
 
 A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
-For instance: if the business logic tells us that an [`Entity`](/patterns/data-access.md#entities) is a very special [`Entity`](/patterns/data-access.md#entities), therefore it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
+For instance: if the business logic tells us that an [`Entity`](data-access.md#entities) is a very special [`Entity`](data-access.md#entities), therefore it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
 The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) or a [view](#views).
 
 
@@ -330,11 +330,11 @@ Keeping It Clean
 No Entities
 </h3>
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](/patterns/data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](index.md) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
 
-Even when the [`ViewModel`](/patterns/data-access.md#entities) looks almost exactly the same as the [`Entity`](/patterns/data-access.md#entities), we tend to not use [`Entities`](/patterns/data-access.md#entities) directly. 
+Even when the [`ViewModel`](data-access.md#entities) looks almost exactly the same as the [`Entity`](data-access.md#entities), we tend to not use [`Entities`](data-access.md#entities) directly. 
 
-[`Entity`](/patterns/data-access.md#entities):
+[`Entity`](data-access.md#entities):
 
 ```cs
 public class Product
@@ -356,7 +356,7 @@ public class ProductViewModel
 }
 ```
 
-It is worth noting that linking to an [`Entity`](/patterns/data-access.md#entities) can result in the availability of other related [`Entities`](/patterns/data-access.md#entities), which may broaden the scope of the [view](#views) beyond our intentions:
+It is worth noting that linking to an [`Entity`](data-access.md#entities) can result in the availability of other related [`Entities`](data-access.md#entities), which may broaden the scope of the [view](#views) beyond our intentions:
 
 ```cs
 /// <summary>
@@ -380,7 +380,7 @@ var customers =
                     .Select(x => x.Customer);
 ```
 
-An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](/patterns/data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer):
+An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](layers.md#data-layer) or the [business logic](layers.md#business-layer):
 
 [`ViewModel`](#viewmodels):
 
@@ -393,7 +393,7 @@ public class CustomerViewModel
 }
 ```
 
-[`Entity`](/patterns/data-access.md#entities):
+[`Entity`](data-access.md#entities):
 
 ```cs
 public class Customer
@@ -404,7 +404,7 @@ public class Customer
 }
 ```
 
-Here the [`Entity`](/patterns/data-access.md#entities) and [`ViewModel`](#viewmodels) look completely different, which is totally fine.
+Here the [`Entity`](data-access.md#entities) and [`ViewModel`](#viewmodels) look completely different, which is totally fine.
 
 
 <h3 id="avoid-viewmodel-to-viewmodel-conversion">
@@ -431,7 +431,7 @@ public static void Convert(
 }
 ```
 
-What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](/patterns/data-access.md#entities) to [`ViewModel`](#viewmodels) and back:
+What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](data-access.md#entities) to [`ViewModel`](#viewmodels) and back:
 
 ```cs
 Product entity = _repository.Get(id);
@@ -598,17 +598,17 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 
 <h2 id="presenters">Presenters</h2>
 
-See the [Presenters](/patterns/presenters.md) article.
+See the [Presenters](presenters.md) article.
 
 
 ToViewModel
 -----------
 
-An extension method that converts an [`Entity`](/patterns/data-access.md#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [`Entity`](/patterns/data-access.md#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [`Entity`](/patterns/data-access.md#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
+An extension method that converts an [`Entity`](data-access.md#entities) to a [`ViewModel`](#viewmodels). You can make simple `ToViewModel` methods per [`Entity`](data-access.md#entities), converting it to a simple [`ViewModel`](#viewmodels) that represents the [`Entity`](data-access.md#entities). You can also have methods returning more complex [`ViewModels`](#viewmodels), such as `ToDetailsViewModel()` or `ToCategoryTreeEditViewModel()`.
 
-You may pass [`Repositories`](/patterns/data-access.md#repository) to the `ToViewModel` methods if required.
+You may pass [`Repositories`](data-access.md#repository) to the `ToViewModel` methods if required.
 
-Sometimes you cannot appoint one [`Entity type`](/patterns/data-access.md#entities) as the source of a [`ViewModel`](#viewmodels). In that case you cannot logically make it an extension method, but you make it a [`Helper`](/patterns/other.md#helper) method in the `static ViewModelHelpers class`.
+Sometimes you cannot appoint one [`Entity type`](data-access.md#entities) as the source of a [`ViewModel`](#viewmodels). In that case you cannot logically make it an extension method, but you make it a [`Helper`](other.md#helper) method in the `static ViewModelHelpers class`.
 
 The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToViewModel` in your csproj. For an app with many [`Views`](#views) a split it up into the following files may be a good plan:
 
@@ -628,7 +628,7 @@ The `ToViewModel classes` should be put in the sub-folder / sub-namespace `ToVie
 
 For clarity: the `ViewModelHelper` files are all `ViewModelHelper partial classes`. The other files have a `class` that has the same name as the file.
 
-Inside the `classes`, the methods should be sorted by source [entity](/patterns/data-access.md#entities) or application section alphabetically and each section should be headed by a comment line, e.g.:
+Inside the `classes`, the methods should be sorted by source [entity](data-access.md#entities) or application section alphabetically and each section should be headed by a comment line, e.g.:
 
 ```cs
 // Orders
@@ -638,17 +638,17 @@ public static OrderEditPopupViewModel ToEditViewModel(this Order order) { ... }
 public static OrderDeletePopupViewModel ToDeleteViewModel(this IList<Order> orders) { ... }
 ```
 
-Some [`ViewModels`](#viewmodels) do not take one primary [`Entity`](/patterns/data-access.md#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [`Entity`](/patterns/data-access.md#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
+Some [`ViewModels`](#viewmodels) do not take one primary [`Entity`](data-access.md#entities) as input. So it does not make sense to turn it into an extension method, because you cannot decide which [`Entity`](data-access.md#entities) is the this argument. In that case we put it in a `ViewModelHelper class` with `static classes` without this arguments. `ViewModelHelper` is also part of the `ToViewModel` layer.
 
 
 ToEntity
 --------
 
-Extension methods that convert a [`ViewModel`](#viewmodels) to an [`Entity`](/patterns/data-access.md#entities).
+Extension methods that convert a [`ViewModel`](#viewmodels) to an [`Entity`](data-access.md#entities).
 
-You typically pass [`Repositories`](/patterns/data-access.md#repository) to the method. A simple `ToEntity` method might look up an existing [`Entity`](/patterns/data-access.md#entities), if it exists, it would be updated, if it does not, it would be created.
+You typically pass [`Repositories`](data-access.md#repository) to the method. A simple `ToEntity` method might look up an existing [`Entity`](data-access.md#entities), if it exists, it would be updated, if it does not, it would be created.
 
-A more complex `ToEntity` method might also update related [`Entities`](/patterns/data-access.md#entities). In that case related [`Entities`](/patterns/data-access.md#entities) might be inserted, updated and deleted, depending on whether the [`Entity`](/patterns/data-access.md#entities) still exists in the [`ViewModel`](#viewmodels) or in the data store.
+A more complex `ToEntity` method might also update related [`Entities`](data-access.md#entities). In that case related [`Entities`](data-access.md#entities) might be inserted, updated and deleted, depending on whether the [`Entity`](data-access.md#entities) still exists in the [`ViewModel`](#viewmodels) or in the data store.
 
 A `ToEntity` method takes on much of the resposibility of a Save action.
 
@@ -666,7 +666,7 @@ In `WebForms` this would be an `aspx`.
 
 In [`MVC`](api.md#mvc) it can be an `aspx` or `cshtml`.
 
-Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](/patterns/presenters.md#-presenters), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
+Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](presenters.md#-presenters), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](layers.md#business-layer).
 
 
 Lookup Lists
@@ -702,7 +702,7 @@ When programming page navigation, the first choice for showing content is a *ful
 
 But it was always the first choice to do full postbacks.
 
-The reason for this choice is *maintainability*: programming the application navigation in [`C#`](api.md#csharp) using [`Presenters`](/patterns/presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](/patterns/presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason for this choice is *maintainability*: programming the application navigation in [`C#`](api.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](api.md#javascript). Also: when you do not use [`AJAX`](api.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
 Furthermore [`AJAX'ing`](api.md#ajax) comes with extra difficulties. For instance that [`MVC`](api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](api.md#ajax) call, big code blocks of [`JavaScript`](api.md#javascript) for doing [`AJAX`](api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
@@ -712,9 +712,9 @@ Some of the difficulties with [`AJAX`](api.md#ajax) have been solved by employin
 Stateless and Stateful
 ----------------------
 
-The [presentation patterns](#️-patterns-presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](/patterns/presenters.md#-presenters) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
+The [presentation patterns](#️-patterns-presentation) may differ slightly if used in a stateful environment, but most of it stays in tact. For instance that [`Presenters`](presenters.md#-presenters) have action methods that take a [`ViewModel`](#viewmodels) and output a new [`ViewModel`](#viewmodels) is still useful in that setting. In a stateless environment such as web, it is needed, because the input [`ViewModel`](#viewmodels) only contains the user input, not the data that is only displayed and also not the lookup lists for drop down list boxes, etc. So in a stateless environment a new [`ViewModel`](#viewmodels) has to be created. You cannot just return the user input [`ViewModel`](#viewmodels). You would think that in a stateful environment, such as a `Windows` application, this would not be necessary anymore, because the read-only [`View`](#views) data does not get lost between user actions. However, creating a new [`ViewModel`](#viewmodels) is still useful, because it creates a kind of transaction, so that when something fails in the action, the original [`ViewModel`](#viewmodels) remains untouched.
 
-You would be making assumptions in your [`Presenter`](/patterns/presenters.md#-presenters) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](/patterns/data-access.md#repository) and [`Presenters`](/patterns/presenters.md#-presenters). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
+You would be making assumptions in your [`Presenter`](presenters.md#-presenters) code when you program a stateful or stateful application. Some things in a stateful environment environment would not work in a stateless environment and you might make some `objects` long-lived in a stateful environment, such as `Context`, [`Repositories`](data-access.md#repository) and [`Presenters`](presenters.md#-presenters). But even if you build code around those assumptions, then when switching to a stateless environment –  if that would ever happen – the code is still so close to what's needed for stateless, that it might not come with any insurmountable problems. I would not beforehand worry about 'will this work in stateless', because then you would write a lot of logic and waste a lot of energy programming something that might probably never be used. And programming something for no reason at all, handling edge cases that would never occur, is a really counter-intuitive, unproductive way of working.
 
 `< TODO: Added benefit: Transactional. >`
 
@@ -722,7 +722,7 @@ You would be making assumptions in your [`Presenter`](/patterns/presenters.md#-p
 NullCoalesce (ViewModels)
 -------------------------
 
-When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](/patterns/presenters.md#-presenters).
+When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](presenters.md#-presenters).
 
 `< TODO: Better description. Also incorporate:`
 
@@ -753,5 +753,5 @@ Considerations
 
 `< TODO: Explain the argument that ViewModel, ToEntity and ToViewModel does require programming a lot of conversion code, but gives you complete freedom over your program navigation, but the alternative, a framework prevents writing this conversion code for each application, but has the downside that you are stuck with what the framework offers and loose the complete freedom over your how your program navigation works. >`
 
-[back](/patterns/README.md)
+[back](README.md)
 
