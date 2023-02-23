@@ -21,7 +21,7 @@ Software architecture has thousands of definitions. If you believe them all, the
 
 But the emphasis here, is on actually building the software.
 
-It is about modular design of software components, which can be done by splitting up code into functionalities, like a shopping cart, or financial reports, or splitting up code into technical aspects, like [validation](patterns/business-logic.md#validators), [security](aspects.md#security) and [persistence](aspects.md#persistence). You might also split up by both technical aspects and functional aspects at the same time, giving you a more fine-grained (2-dimensional!) separation of concerns.
+It is about modular design of software components, which can be done by splitting up code into functionalities, like a shopping cart, or financial reports, or splitting up code into technical aspects, like [validation](/patterns/business-logic.md#validators), [security](aspects.md#security) and [persistence](aspects.md#persistence). You might also split up by both technical aspects and functional aspects at the same time, giving you a more fine-grained (2-dimensional!) separation of concerns.
 
 Software architecture also has a strong focus on maintainability and being prepared the future as a system grows.
 
