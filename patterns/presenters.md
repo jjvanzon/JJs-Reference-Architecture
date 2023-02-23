@@ -209,7 +209,7 @@ A [`Presenter`](#-presenters) action method can have the following steps:
 
 This seems a bit of a throw-together of concepts, but that's how it is for a [combinator class](business-logic.md#facade), like our [`Presenters`](#-presenters). Separating these steps is recommended, so that they do not get intermixed or entangled.
 
-Not all of the steps are needed. [`ToEntity`](presentation.md#toviewmodel) / [`Business Logic`](../layers.md#business-layer) / [`ToViewModel`](presentation.md#toviewmodel) might be the typical steps. Slight variations in the order of the steps are also possible.
+Not all of the steps are needed. [`ToEntity`](presentation.md#toentity) / [`Business Logic`](../layers.md#business-layer) / [`ToViewModel`](presentation.md#toviewmodel) might be the typical steps. Slight variations in the order of the steps are also possible.
 
 
 Complete Example
