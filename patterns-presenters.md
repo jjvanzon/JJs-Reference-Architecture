@@ -16,16 +16,16 @@ This section describes how they are implemented in [this architecture](index.md)
 
 <h2>Contents</h2>
 
-- [The Role of the Presenter](#the-role-of-the-presenter)  
-- [Working with ViewModels](#presenters-working-with-viewmodels)  
-- [Infrastructure and Configuration](#presenters-infrastructure-and-configuration)
-- [Internal Implementation](#presenters-internal-implementation)  
-- [Delegating ViewModel Creation](#presenters-delegating-viewmodel-creation)  
-- [Delegating More Responsibilities](#presenter-delegating-more-responsibilities)  
-- [Complete Example](#presenters-complete-example)
-- [Overhead](#presenters-overhead)
-- [Using ViewModels Directly](#presenters-using-view-models-directly)
-- [Conclusion](#presenters-conclusion)  
+- [The Role of the Presenter](#the-role-of-the-presenter)
+- [Working with ViewModels](#working-with-viewmodels)
+- [Infrastructure and Configuration](#infrastructure-and-configuration)
+- [Internal Implementation](#internal-implementation)
+- [Delegating ViewModel Creation](#delegating-viewmodel-creation)
+- [Delegating More Responsibilities](#delegating-more-responsibilities)
+- [Complete Example](#complete-example)
+- [Overhead](#overhead)
+- [Using ViewModels Directly](#using-viewmodels-directly)
+- [Conclusion](#conclusion)
 
 
 The Role of the Presenter
