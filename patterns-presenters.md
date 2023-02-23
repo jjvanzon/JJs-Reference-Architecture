@@ -84,7 +84,7 @@ class ProductEditPresenter
 }
 ```
 
-An action method can return a different [`ViewModel`](patterns-presentation.md#viewmodels), not only the one that the [`Presenter`](#-presenters) is about:
+The [`Presenter's`](#-presenters) action methods are not limited to returning a single type of [`ViewModel`](patterns-presentation.md#viewmodels). It is also possible to return different types of[`ViewModels`](patterns-presentation.md#viewmodels):
 
 ```cs
 class ProductEditPresenter
