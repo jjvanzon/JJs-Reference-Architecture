@@ -1,5 +1,7 @@
 ﻿---
 title: "🧶 Patterns"
+redirect_from:
+  - /patterns.md
 ---
 
 🧶 Patterns

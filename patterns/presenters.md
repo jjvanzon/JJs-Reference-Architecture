@@ -1,6 +1,8 @@
 ﻿---
 title: "🕺 Presenters"
 image: "/images/presenter-code-sample.png"
+redirect_from:
+  - /patterns-presenters.md
 description: "Learn how to improve your user interfaces by using Presenters: a software design pattern for modeling user interaction. This article provides practical tips using them in your own projects, helping you make your user interfaces more flexible and reliable."
 ---
 

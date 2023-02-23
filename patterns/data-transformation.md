@@ -1,5 +1,7 @@
 ﻿---
 title: "🐛 Patterns : Data Transformation"
+redirect_from:
+  - /patterns-data-transformation.md
 ---
 
 `[ Draft ]`

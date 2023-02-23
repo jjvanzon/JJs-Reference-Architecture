@@ -1,6 +1,8 @@
 ﻿---
 title: "🖥️ Patterns : Presentation"
 image: "/images/view-model-code-sample.png"
+redirect_from:
+  - /patterns-presentation.md
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>

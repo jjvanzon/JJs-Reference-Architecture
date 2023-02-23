@@ -1,5 +1,7 @@
 ﻿---
 title: "💽 Patterns : Data Access"
+redirect_from:
+  - /patterns-data-access.md
 ---
 
 💽 Patterns : Data Access
