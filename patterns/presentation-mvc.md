@@ -26,7 +26,7 @@ redirect_from:
 Controller
 ----------
 
-In an [`ASP.NET MVC`](/api.md#mvc) application a [`Controller`](presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](/JJs-Reference-Architecture) most of the responsibility is delegated to [`Presenters`](presenters.md#-presenters). The responsibilities that are left for the [`MVC`](/api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](/api.md#mvc) quirks.
+In an [`ASP.NET MVC`](../api.md#mvc) application a [`Controller`](presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](../JJs-Reference-Architecture) most of the responsibility is delegated to [`Presenters`](presenters.md#-presenters). The responsibilities that are left for the [`MVC`](../api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](../api.md#mvc) quirks.
 
 The [`Controller`](#controller) may use multiple [`Presenters`](presenters.md#-presenters) and [`ViewModels`](presentation.md#viewmodels), since it is about multiple screens.
 
@@ -36,7 +36,7 @@ The [`Controller`](#controller) may use multiple [`Presenters`](presenters.md#-p
 Post-Redirect-Get
 -----------------
 
-This is a quirk intrinsic to [`ASP.NET MVC`](/api.md#mvc). We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
+This is a quirk intrinsic to [`ASP.NET MVC`](../api.md#mvc). We must conform to the Post-Redirect-Get pattern to make sure the page navigation works as expected.
 
 At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
@@ -73,15 +73,15 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 
 <h4>Considerations</h4>
 
-If you do not conform to the Post-Redirect-Get pattern in [`MVC`](/api.md#mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](/api.md#mvc) keeps complaining about [validation](business-logic.md#validators) errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
+If you do not conform to the Post-Redirect-Get pattern in [`MVC`](../api.md#mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](../api.md#mvc) keeps complaining about [validation](business-logic.md#validators) errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
 
 ValidationMessages in ModelState
 --------------------------------
 
-For the architecture to integrate well with [`MVC`](/api.md#mvc), you have to make [`MVC`](/api.md#mvc) aware that there are [validation](business-logic.md#validators) messages, after you have gotten a [`ViewModel`](presentation.md#viewmodels) from a [`Presenter`](presenters.md#-presenters). If you do not do this, you will get strange application navigation in case of [validation](business-logic.md#validators) errors.
+For the architecture to integrate well with [`MVC`](../api.md#mvc), you have to make [`MVC`](../api.md#mvc) aware that there are [validation](business-logic.md#validators) messages, after you have gotten a [`ViewModel`](presentation.md#viewmodels) from a [`Presenter`](presenters.md#-presenters). If you do not do this, you will get strange application navigation in case of [validation](business-logic.md#validators) errors.
 
-You do this in an [`MVC`](/api.md#mvc) HTTP GET action method.
+You do this in an [`MVC`](../api.md#mvc) HTTP GET action method.
 
 The way we do it here is as follows:
 
@@ -94,7 +94,7 @@ if (viewModel.ValidationMessages.Any())
 }
 ```
 
-In theory we could communicate all [validation](business-logic.md#validators) messages to [`MVC`](/api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](/api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](business-logic.md#validators) summary, we simply render all the [validation messages from the [`ViewModel`](presentation.md#viewmodels) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](business-logic.md#validators) errors, then the [`ViewModel`](presentation.md#viewmodels) should give the information that the appearance of the field should be different. Our [`View's`](presentation.md#views) content is totally managed by the [`ViewModel`](presentation.md#viewmodels).
+In theory we could communicate all [validation](business-logic.md#validators) messages to [`MVC`](../api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](../api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](business-logic.md#validators) summary, we simply render all the [validation messages from the [`ViewModel`](presentation.md#viewmodels) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](business-logic.md#validators) errors, then the [`ViewModel`](presentation.md#viewmodels) should give the information that the appearance of the field should be different. Our [`View's`](presentation.md#views) content is totally managed by the [`ViewModel`](presentation.md#viewmodels).
 
 
 Polymorphic RedirectToAction / View()
@@ -102,7 +102,7 @@ Polymorphic RedirectToAction / View()
 
 A [`Presenter`](presenters.md#-presenters) action method may return different types of [`ViewModels`](presentation.md#viewmodels).
 
-This means that in the [`MVC`](/api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](presenters.md#-presenters) returns `object` and you should do polymorphic type checks to determine which [`View`](presentation.md#views) to go to.
+This means that in the [`MVC`](../api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](presenters.md#-presenters) returns `object` and you should do polymorphic type checks to determine which [`View`](presentation.md#views) to go to.
 
 Here is simplified code for how you can do this in a post method:
 
@@ -120,7 +120,7 @@ if (detailsViewModel != null)
 }
 ```
 
-At the end throw the following exception (from [`JJ.Framework.Exceptions`](/api.md#jj-framework-exceptions)):
+At the end throw the following exception (from [`JJ.Framework.Exceptions`](../api.md#jj-framework-exceptions)):
 
 ```cs
 throw new UnexpectedTypeException(() => viewModel);
@@ -132,7 +132,7 @@ To prevent repeating this code for each [`Controller`](#controller) action, you 
 For Loops for Lists in HTTP Postdata
 ------------------------------------
 
-An alternative to for [posting collections](/aspects.md#postdata-over-http) is using for-loops.
+An alternative to for [posting collections](../aspects.md#postdata-over-http) is using for-loops.
 
 ```cs
 @Html.TextBoxFor(x => x.MyItem.MyProperty)
@@ -169,7 +169,7 @@ public ActionResult Login(... string ret = null)
 }
 ```
 
-ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](/api.md#ajax) CALL.
+ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](../api.md#ajax) CALL.
 
 - For full page loads, the ret parameter must be set to:
 
@@ -177,7 +177,7 @@ ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](/api.md#ajax) CALL.
   Request.RawUrl
   ```
 
-- For [`AJAX`](/api.md#ajax) calls the ret parameter must be set to:
+- For [`AJAX`](../api.md#ajax) calls the ret parameter must be set to:
 
   ```cs
   Url.Action(ActionNames.Index)

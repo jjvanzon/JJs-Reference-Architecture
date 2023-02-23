@@ -102,7 +102,7 @@ The specific way to implement it, is different in every situation. Reasons that 
 - You cannot always count on identity integrity.
 - The key to a destination item might be complex, instead of just an ID.
 - You do not always have a [`Repository`](data-access.md#repository).
-- It does not always need to be full-[`CRUD`](/layers.md#crud).
+- It does not always need to be full-[`CRUD`](../layers.md#crud).
 - You might need to report exactly what operation is executed on each [`Entity`](data-access.md#entities).
 - You might need a separate normalized [*singular* form](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) of the conversion, that may conflict with the way of working in the [*plural* form](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities).
 - An alternative `isNew` detection might be needed.
@@ -194,7 +194,7 @@ Even if you do not expect multiple input formats or multiple output formats or a
 MVC
 </h3>
 
-[`MVC`](/api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
+[`MVC`](../api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
 - [`Controller`](presentation-mvc.md#controller) - [`ViewModel`](presentation.md#viewmodels) - view engine – [`View`](presentation.md#views)

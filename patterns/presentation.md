@@ -33,7 +33,7 @@ redirect_from:
 ViewModels
 ----------
 
-[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](/JJs-Reference-Architecture).  
+[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](../JJs-Reference-Architecture).  
 A [`ViewModel`](#viewmodels) provides a simplified and organized representation of the data to display on screen.
 
 
@@ -61,7 +61,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 Only Data
 </h3>
 
-In [this architecture](/JJs-Reference-Architecture) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](../JJs-Reference-Architecture) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -88,12 +88,12 @@ These names are built up from parts:
 
 1. Starting with the [`Entity`](data-access.md#entities) name:  
    `Product`, `Category`
-2. Then something [`CRUD`](/layers.md#crud)-related:  
+2. Then something [`CRUD`](../layers.md#crud)-related:  
    `Details`, `List`, `Edit` or `Delete`
 3. And it ends with:  
    [`ViewModel`](#viewmodels)
 
-Instead of [`CRUD`](/layers.md#crud) actions, you could also use terms like `Overview`, `Selector`, `NotFound`, or `Login`:
+Instead of [`CRUD`](../layers.md#crud) actions, you could also use terms like `Overview`, `Selector`, `NotFound`, or `Login`:
 
     ProductOverviewViewModel
     CategorySelectorViewModel
@@ -236,7 +236,7 @@ public class CategoryListViewModel
 }
 ```
 
-Some list views only need an [`IDAndName`](/api.md#jj-canonical) [`DTO`](data-access.md#dto), a version of which can be found in the [`JJ.Canonical`](/api.md#jj-canonical) project:
+Some list views only need an [`IDAndName`](../api.md#jj-canonical) [`DTO`](data-access.md#dto), a version of which can be found in the [`JJ.Canonical`](../api.md#jj-canonical) project:
 
 ```cs
 namespace JJ.Data.Canonical
@@ -249,7 +249,7 @@ namespace JJ.Data.Canonical
 }
 ```
 
-Here you can find [`IDAndName`](/api.md#jj-canonical) objects used in a `ListViewModel`:
+Here you can find [`IDAndName`](../api.md#jj-canonical) objects used in a `ListViewModel`:
 
 ```cs
 /// <summary>
@@ -330,7 +330,7 @@ Keeping It Clean
 No Entities
 </h3>
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](/JJs-Reference-Architecture) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](../JJs-Reference-Architecture) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
 
 Even when the [`ViewModel`](data-access.md#entities) looks almost exactly the same as the [`Entity`](data-access.md#entities), we tend to not use [`Entities`](data-access.md#entities) directly. 
 
@@ -380,7 +380,7 @@ var customers =
                     .Select(x => x.Customer);
 ```
 
-An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](/layers.md#data-layer) or the [business logic](/layers.md#business-layer):
+An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](../layers.md#data-layer) or the [business logic](../layers.md#business-layer):
 
 [`ViewModel`](#viewmodels):
 
@@ -593,7 +593,7 @@ public class ProductEditViewModel
 Conclusion
 </h3>
 
-Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](/layers.md#business-layer) and [data access](/layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come from and go.
+Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](../layers.md#business-layer) and [data access](../layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come from and go.
 
 
 <h2 id="presenters">Presenters</h2>
@@ -664,9 +664,9 @@ It might be `HTML`.
 
 In `WebForms` this would be an `aspx`.
 
-In [`MVC`](/api.md#mvc) it can be an `aspx` or `cshtml`.
+In [`MVC`](../api.md#mvc) it can be an `aspx` or `cshtml`.
 
-Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](presenters.md#-presenters), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](/layers.md#business-layer).
+Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](presenters.md#-presenters), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](../layers.md#business-layer).
 
 
 Lookup Lists
@@ -678,35 +678,35 @@ For small lookup lists you might include a copy of the list in each [Item ViewMo
 
 Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](/api.md#jquery) trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](../api.md#jquery) trick to populate a drop down just before you slide it open.
 
-For big lookup list a viable option seems to [`AJAX`](/api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](/api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
+For big lookup list a viable option seems to [`AJAX`](../api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 
 
 First Full Load – Then Partial Load – Then Client-Native Code
 -------------------------------------------------------------
 
-You might save the server some work by doing [partial loads instead of full loads](/api.md#ajax) or maybe even do [`JavaScript`](/api.md#javascript) or other client-native code.
+You might save the server some work by doing [partial loads instead of full loads](../api.md#ajax) or maybe even do [`JavaScript`](../api.md#javascript) or other client-native code.
 
-[Partial loads](/api.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
+[Partial loads](../api.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
 
-[`JavaScript`](/api.md#javascript) is client-native code, that could omit server code altoghether, but potentially with a penalty on maintainability, because the client-code may be written in a way that is more dependent on specific [view](#views) details, which might easily change as the server-code evolves.
+[`JavaScript`](../api.md#javascript) is client-native code, that could omit server code altoghether, but potentially with a penalty on maintainability, because the client-code may be written in a way that is more dependent on specific [view](#views) details, which might easily change as the server-code evolves.
 
 You could also call it: first choice full load.
 
 In web technology you could also call it:
 
-Full postback - [`AJAX`](/api.md#ajax) - [`JavaScript`](/api.md#javascript)
+Full postback - [`AJAX`](../api.md#ajax) - [`JavaScript`](../api.md#javascript)
 
-When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](/JJs-Reference-Architecture). Only if there is a very good reason, we might use [`AJAX`](/api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](/api.md#javascript).
+When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](../JJs-Reference-Architecture). Only if there is a very good reason, we might use [`AJAX`](../api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api.md#javascript).
 
 But it was always the first choice to do full postbacks.
 
-The reason for this choice is *maintainability*: programming the application navigation in [`C#`](/api.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](/api.md#javascript). Also: when you do not use [`AJAX`](/api.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason for this choice is *maintainability*: programming the application navigation in [`C#`](../api.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](../api.md#javascript). Also: when you do not use [`AJAX`](../api.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore [`AJAX'ing`](/api.md#ajax) comes with extra difficulties. For instance that [`MVC`](/api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](/api.md#ajax) call, big code blocks of [`JavaScript`](/api.md#javascript) for doing [`AJAX`](/api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](/api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore [`AJAX'ing`](../api.md#ajax) comes with extra difficulties. For instance that [`MVC`](../api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](../api.md#ajax) call, big code blocks of [`JavaScript`](../api.md#javascript) for doing [`AJAX`](../api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](../api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
-Some of the difficulties with [`AJAX`](/api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](/api.md#ajax) in the Aspects section.
+Some of the difficulties with [`AJAX`](../api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](../api.md#ajax) in the Aspects section.
 
 
 Stateless and Stateful
@@ -722,7 +722,7 @@ You would be making assumptions in your [`Presenter`](presenters.md#-presenters)
 NullCoalesce (ViewModels)
 -------------------------
 
-When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](/api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](presenters.md#-presenters).
+When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](../api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](presenters.md#-presenters).
 
 `< TODO: Better description. Also incorporate:`
 
@@ -743,7 +743,7 @@ The TemporaryID concept breaks down, as soon as you need to use it to refer to s
 
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
-Another alternative is a different ID generation scheme. You may use an [`SQL`](/api.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
+Another alternative is a different ID generation scheme. You may use an [`SQL`](../api.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
 
 
 Considerations
