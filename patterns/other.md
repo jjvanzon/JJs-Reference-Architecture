@@ -9,7 +9,7 @@ redirect_from:
 ⚙️ Patterns : Other
 ===================
 
-[back](patterns.md)
+[back](patterns/README.md)
 
 <h2>Contents</h2>
 
@@ -435,5 +435,5 @@ Rich Models
 
 `< TODO: Compare rich models with the 2D separation of concerns. >`
 
-[back](patterns.md)
+[back](patterns/README.md)
 

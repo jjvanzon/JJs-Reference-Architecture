@@ -9,7 +9,7 @@ redirect_from:
 🕸️ Patterns : Presentation (MVC)
 ================================
 
-[back](patterns.md)
+[back](patterns/README.md)
 
 <h2>Contents</h2>
 
@@ -216,5 +216,5 @@ TODO
 
 `< TODO: Mention: Using Request.UrlReferrer in Http Get actions crashes. Use Request.RawUrl. >`
 
-[back](patterns.md)
+[back](patterns/README.md)
 

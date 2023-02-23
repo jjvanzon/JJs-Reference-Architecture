@@ -7,7 +7,7 @@ redirect_from:
 💽 Patterns : Data Access
 ==========================
 
-[back](patterns.md)
+[back](patterns/README.md)
 
 <h2>Contents</h2>
 
@@ -151,4 +151,4 @@ Any [`Repository type`](#repository) will get an associated `Repository interfac
 
 The `Repository interfaces` are also handy for [testing](aspects.md#automated-testing), to create a [fake](patterns/other.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](api.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](#repository) and `interfaces`.
 
-[back](patterns.md)
+[back](patterns/README.md)

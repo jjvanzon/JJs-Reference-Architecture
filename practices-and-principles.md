@@ -203,7 +203,7 @@ This is the concept that you split your code into pieces and create separate cla
 
 Separation of concerns can be a split up into functionalities, such as code that handles a whole order and code that handles a separate product. The split up into functional concerns is usually similar to the split up into [entities](patterns/data-access.md#entities), for instance [entities](patterns/data-access.md#entities) like `Order`, `Product`, `Customer`, but this is not necessarily leading for the split up into functionality.
 
-Separation of concerns can also be applied to technical aspects, such as [validation](patterns/business-logic.md#validators), [calculation](aspects.md#calculation) and [security](aspects.md#security). For instance: you can split up the code to check the [validity](patterns/business-logic.md#validators) of an order's data from the code that [calculates](aspects.md#calculation) the total price of the order. The split up into technical concerns is usually similar to the split up into [design patterns](patterns.md).
+Separation of concerns can also be applied to technical aspects, such as [validation](patterns/business-logic.md#validators), [calculation](aspects.md#calculation) and [security](aspects.md#security). For instance: you can split up the code to check the [validity](patterns/business-logic.md#validators) of an order's data from the code that [calculates](aspects.md#calculation) the total price of the order. The split up into technical concerns is usually similar to the split up into [design patterns](patterns/README.md).
 
 #### Classes
 
@@ -480,7 +480,7 @@ For [entity models](patterns/data-access.md#entities), consider the name Order.O
 
 'Conceptual names' are bad practice. It is hard to define what that means. But it has to do with the names not being specific enough or only vaguely related to what it is really about.
 
-Often combining a domain term with a [design pattern](patterns.md) gives you a more specific name:
+Often combining a domain term with a [design pattern](patterns/README.md) gives you a more specific name:
 
     CustomerViewModel
 

@@ -8,11 +8,11 @@ redirect_from:
 🤖 Patterns : Business Logic
 ============================
 
-[back](patterns.md)
+[back](patterns/README.md)
 
 <h2>Contents</h2>
 
-- [Introduction](patterns.md)
+- [Introduction](patterns/README.md)
 - [RepositoryWrappers](#repositorywrappers)
 - [Validators](#validators)
 - [SideEffects](#sideeffects)
@@ -28,7 +28,7 @@ redirect_from:
 Introduction
 ------------
 
-[Presentation](layers.md#presentation-layer), [`Entity` model](patterns/data-access.md#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](patterns.md). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](patterns.md) can be used. But also things, that do not follow any standard [pattern](patterns.md).
+[Presentation](layers.md#presentation-layer), [`Entity` model](patterns/data-access.md#entities) and [persistence](aspects.md#persistence) should be straightforward [pattern-wise](patterns/README.md). If anything 'special' needs to happen it belongs in the [business layer](layers.md#business-layer). Any number of different [patterns](patterns/README.md) can be used. But also things, that do not follow any standard [pattern](patterns/README.md).
 
 The [business layer](layers.md#business-layer) externally speaks a language of [`Entities`](patterns/data-access.md#entities) or sometimes [`DTO's`](patterns/data-access.md#dto). Internally it can talk to [`Repository interfaces`](patterns/data-access.md#repository-interfaces) for [data access](aspects.md#persistence).
 
@@ -874,4 +874,4 @@ This eliminates the need to repeat the [`Resource Name`](#resource-strings-visua
 
 For extra information in Dutch about how to structure the [`Resource` files](#resource-string-file-names), see [Appendix B](appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
-[back](patterns.md)
+[back](patterns/README.md)

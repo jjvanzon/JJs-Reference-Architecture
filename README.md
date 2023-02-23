@@ -11,7 +11,7 @@ Contents
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
 - 🍱 [Namespaces, Assemblies & Folders](namespaces-assemblies-and-folders.md)
-- 🧶 [Patterns : Introduction](patterns.md)
+- 🧶 [Patterns : Introduction](patterns/README.md)
 - 💽 [Patterns : Data Access](patterns/data-access.md)
 - 🤖 [Patterns : Business Logic](patterns/business-logic.md)
 - 🖥️ [Patterns : Presentation ](patterns/presentation.md)
