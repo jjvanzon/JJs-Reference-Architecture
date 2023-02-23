@@ -1,7 +1,7 @@
 ﻿---
 title: "🕸️ Patterns : Presentation (MVC)"
 redirect_from:
-  - /patterns/presentation-mvc.md
+  - /patterns-presentation-mvc.md
 ---
 
 `[ Draft ]`
