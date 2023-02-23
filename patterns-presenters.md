@@ -84,7 +84,7 @@ class ProductEditPresenter
 }
 ```
 
-The [`Presenter's`](#-presenters) action methods are not limited to returning a single type of [`ViewModel`](patterns-presentation.md#viewmodels). It is also possible to return different [`ViewModel`](patterns-presentation.md#viewmodels) types:
+The [`Presenter's`](#-presenters) action methods are not limited to returning a single type of [`ViewModel`](patterns-presentation.md#viewmodels). It is possible to return different [`ViewModel`](patterns-presentation.md#viewmodels) types as well:
 
 ```cs
 class ProductEditPresenter
