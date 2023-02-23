@@ -7,7 +7,7 @@ redirect_from:
 🧶 Patterns
 ===========
 
-[back](.)
+[back](..)
 
 Introduction
 ------------
@@ -24,4 +24,4 @@ Contents
 - 🐛 [Data Transformation Patterns](data-transformation.md)
 - ⚙️ [Other Patterns](other.md)
 
-[back](.)
+[back](..)
