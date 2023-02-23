@@ -1,7 +1,7 @@
 ﻿---
 title: "⚙️ Patterns : Other"
 redirect_from:
-  - /patterns-other.md
+  - /patterns/other.md
 ---
 
 `[ Draft ]`
@@ -218,7 +218,7 @@ If you call a `TryGet` you should handle the `null` value that could be returned
 Get-TryGet-GetMany
 ------------------
 
-Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
+Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](patterns/other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
 
 ```cs
 public Item GetItem(string searchText)
@@ -258,7 +258,7 @@ public IList<Item> GetItems(string searchText)
 }
 ```
 
-The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
+The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](patterns/other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
 
 
 Helper
@@ -272,13 +272,13 @@ The word `Helper` might also be used more generally. Like something that 'helps'
 Info
 ----
 
-`Info objects` are like [DTO's](patterns-data-access.md#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](patterns-data-access.md#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
+`Info objects` are like [DTO's](patterns/data-access.md#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](patterns/data-access.md#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
 
 
 Mock
 ----
 
-A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [`Entity` model](patterns-data-access.md#entities), an alternative [`Repository` implementation](patterns-data-access.md#repository) (that returns `Mock` [`Entities`](patterns-data-access.md#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
+A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [`Entity` model](patterns/data-access.md#entities), an alternative [`Repository` implementation](patterns/data-access.md#repository) (that returns `Mock` [`Entities`](patterns/data-access.md#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
 
 
 Name Constants
@@ -350,19 +350,19 @@ Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities
 
 When processing `object` structures, it is best to split everything up into separate methods.
 
-Every [`Entity type`](patterns-data-access.md#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
+Every [`Entity type`](patterns/data-access.md#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
 
-In case of conversions from one `object` structure to another, every *destination* [`Entity`](patterns-data-access.md#entities) gets a 'singular' method, not the *source* [`Entity`](patterns-data-access.md#entities), because that would easily create messy, unmanageable code.
+In case of conversions from one `object` structure to another, every *destination* [`Entity`](patterns/data-access.md#entities) gets a 'singular' method, not the *source* [`Entity`](patterns/data-access.md#entities), because that would easily create messy, unmanageable code.
 
 A 'plural' method processes a whole list of items. 'Plural' methods are less useful. Prefer 'singular' methods over 'plural' ones. 'Plural' methods usually do not add anything other than a loop, which is too trivial to create a separate method for. Only when operations must be executed onto a whole list of `objects` (for instance determining a total price of a list of items or when there are specific conditions), it may be useful to create a separate 'plural' method.
 
-'Singular' or 'plural' methods do not process related [`Entities`](patterns-data-access.md#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [`Entities`](patterns-data-access.md#entities)' means [`Entities`](patterns-data-access.md#entities) intrinsically part of the [`Entity`](patterns-data-access.md#entities), not links to reused [`Entities`](patterns-data-access.md#entities). Also, not the parent.
+'Singular' or 'plural' methods do not process related [`Entities`](patterns/data-access.md#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [`Entities`](patterns/data-access.md#entities)' means [`Entities`](patterns/data-access.md#entities) intrinsically part of the [`Entity`](patterns/data-access.md#entities), not links to reused [`Entities`](patterns/data-access.md#entities). Also, not the parent.
 
-There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [`Entities`](patterns-data-access.md#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
+There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [`Entities`](patterns/data-access.md#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
 
 Finer details about the 'singular' form:
 
-- They do not process child [`Entities`](patterns-data-access.md#entities), they can however link to reusable [`Entities`](patterns-data-access.md#entities), such as `enum`-like types, or categories.
+- They do not process child [`Entities`](patterns/data-access.md#entities), they can however link to reusable [`Entities`](patterns/data-access.md#entities), such as `enum`-like types, or categories.
 - They usualy do not assign a parent. The caller of the 'singular' form does that. That way methods are more independent of context and better reusable and code better rewritable. There are exceptions to that rule.
 
 Here is an example of some 'singular', 'plural', non-`Recursive` and `Recursive` methods. Note that the words 'singular' and 'plural' are not used in the method names.

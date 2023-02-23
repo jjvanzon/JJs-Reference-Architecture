@@ -54,7 +54,7 @@ The 2<sup>nd</sup> level in the namespacing splits up into the following parts:
 
 |             |             |
 |-------------|-------------|
-| [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the [entity](patterns-data-access.md#entities) models and storage of data.
+| [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the [entity](patterns/data-access.md#entities) models and storage of data.
 | [JJ.__Business__](layers.md#business-layer) | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
 | [JJ.__Presentation__](layers.md#presentation-layer) | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
 | [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
@@ -81,7 +81,7 @@ The 3<sup>rd</sup> level in the namespacing would be the *functional domain:*
 
 The 'functional domain' of the [framework layer](api.md#jjframework) might be a technical [aspect](aspects.md#-aspects):
 
-- [JJ.Framework.__Validation__](patterns-business-logic.md#validators)
+- [JJ.Framework.__Validation__](patterns/business-logic.md#validators)
 - [JJ.Framework.__Security__](aspects.md#security)
 - [JJ.Framework.__Logging__](aspects.md#logging)
 
@@ -114,7 +114,7 @@ The next level in the namespacing can be a [design pattern](patterns.md). It wou
 Partial Domains
 ---------------
 
-For bigger projects, a [design pattern](patterns.md) folder may split up into sub-folders for main [entities](patterns-data-access.md#entities) or *partial domains*:
+For bigger projects, a [design pattern](patterns.md) folder may split up into sub-folders for main [entities](patterns/data-access.md#entities) or *partial domains*:
 
 - JJ.Business.Synthesizer.Validation.__Documents__
 - JJ.Business.Synthesizer.Validation.__Operators__
@@ -273,7 +273,7 @@ Smaller projects, single sub-folder `Helpers` instead:
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.Helpers]
 
-Bigger projects' [design patterns](patterns.md) split up into main [entities](patterns-data-access.md#entities) or partial domains:
+Bigger projects' [design patterns](patterns.md) split up into main [entities](patterns/data-access.md#entities) or partial domains:
 
     Company.SoftwareLayer.FunctionalDomain [.Technology] [.Tests]
         [.DesignPattern] [.PartialDomain]

@@ -1,7 +1,7 @@
 ﻿---
 title: "🕸️ Patterns : Presentation (MVC)"
 redirect_from:
-  - /patterns-presentation-mvc.md
+  - /patterns/presentation-mvc.md
 ---
 
 `[ Draft ]`
@@ -26,11 +26,11 @@ redirect_from:
 Controller
 ----------
 
-In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns-presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](patterns-presenters.md#-presenters). The responsibilities that are left for the [`MVC`](api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](api.md#mvc) quirks.
+In an [`ASP.NET MVC`](api.md#mvc) application a [`Controller`](patterns/presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](index.md) most of the responsibility is delegated to [`Presenters`](patterns/presenters.md#-presenters). The responsibilities that are left for the [`MVC`](api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](api.md#mvc) quirks.
 
-The [`Controller`](#controller) may use multiple [`Presenters`](patterns-presenters.md#-presenters) and [`ViewModels`](patterns-presentation.md#viewmodels), since it is about multiple screens.
+The [`Controller`](#controller) may use multiple [`Presenters`](patterns/presenters.md#-presenters) and [`ViewModels`](patterns/presentation.md#viewmodels), since it is about multiple screens.
 
-[`Entity`](patterns-data-access.md#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
+[`Entity`](patterns/data-access.md#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
 
 
 Post-Redirect-Get
@@ -40,7 +40,7 @@ This is a quirk intrinsic to [`ASP.NET MVC`](api.md#mvc). We must conform to the
 
 At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
-Before you do so, you must store the [`ViewModel`](patterns-presentation.md#viewmodels) in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the [`ViewModel`](patterns-presentation.md#viewmodels) is in the TempData dictionary. If the [`ViewModel`](patterns-presentation.md#viewmodels) exist in the TempData, you must use that [`ViewModel`](patterns-presentation.md#viewmodels), otherwise you must create a new [`ViewModel`](patterns-presentation.md#viewmodels).
+Before you do so, you must store the [`ViewModel`](patterns/presentation.md#viewmodels) in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the [`ViewModel`](patterns/presentation.md#viewmodels) is in the TempData dictionary. If the [`ViewModel`](patterns/presentation.md#viewmodels) exist in the TempData, you must use that [`ViewModel`](patterns/presentation.md#viewmodels), otherwise you must create a new [`ViewModel`](patterns/presentation.md#viewmodels).
 
 Here is simplified pseudo-code in which the pattern is applied.
 
@@ -73,13 +73,13 @@ There might be an exception to the rule to always `RedirectToAction` at the end 
 
 <h4>Considerations</h4>
 
-If you do not conform to the Post-Redirect-Get pattern in [`MVC`](api.md#mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](api.md#mvc) keeps complaining about [validation](patterns-business-logic.md#validators) errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
+If you do not conform to the Post-Redirect-Get pattern in [`MVC`](api.md#mvc), you may get to see ugly URL's. When you hit the back button, you might go to an unexpected page, or get an error. You may see original values that you changed re-appear in the user interface. You may also see that [`MVC`](api.md#mvc) keeps complaining about [validation](patterns/business-logic.md#validators) errors, that you already resolved. So conform to the Post-Redirect-Get pattern to stay out of trouble.
 
 
 ValidationMessages in ModelState
 --------------------------------
 
-For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](patterns-business-logic.md#validators) messages, after you have gotten a [`ViewModel`](patterns-presentation.md#viewmodels) from a [`Presenter`](patterns-presenters.md#-presenters). If you do not do this, you will get strange application navigation in case of [validation](patterns-business-logic.md#validators) errors.
+For the architecture to integrate well with [`MVC`](api.md#mvc), you have to make [`MVC`](api.md#mvc) aware that there are [validation](patterns/business-logic.md#validators) messages, after you have gotten a [`ViewModel`](patterns/presentation.md#viewmodels) from a [`Presenter`](patterns/presenters.md#-presenters). If you do not do this, you will get strange application navigation in case of [validation](patterns/business-logic.md#validators) errors.
 
 You do this in an [`MVC`](api.md#mvc) HTTP GET action method.
 
@@ -94,15 +94,15 @@ if (viewModel.ValidationMessages.Any())
 }
 ```
 
-In theory we could communicate all [validation](patterns-business-logic.md#validators) messages to [`MVC`](api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](patterns-business-logic.md#validators) summary, we simply render all the [validation messages from the [`ViewModel`](patterns-presentation.md#viewmodels) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](patterns-business-logic.md#validators) errors, then the [`ViewModel`](patterns-presentation.md#viewmodels) should give the information that the appearance of the field should be different. Our [`View's`](patterns-presentation.md#views) content is totally managed by the [`ViewModel`](patterns-presentation.md#viewmodels).
+In theory we could communicate all [validation](patterns/business-logic.md#validators) messages to [`MVC`](api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](patterns/business-logic.md#validators) summary, we simply render all the [validation messages from the [`ViewModel`](patterns/presentation.md#viewmodels) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](patterns/business-logic.md#validators) errors, then the [`ViewModel`](patterns/presentation.md#viewmodels) should give the information that the appearance of the field should be different. Our [`View's`](patterns/presentation.md#views) content is totally managed by the [`ViewModel`](patterns/presentation.md#viewmodels).
 
 
 Polymorphic RedirectToAction / View()
 -------------------------------------
 
-A [`Presenter`](patterns-presenters.md#-presenters) action method may return different types of [`ViewModels`](patterns-presentation.md#viewmodels).
+A [`Presenter`](patterns/presenters.md#-presenters) action method may return different types of [`ViewModels`](patterns/presentation.md#viewmodels).
 
-This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](patterns-presenters.md#-presenters) returns `object` and you should do polymorphic type checks to determine which [`View`](patterns-presentation.md#views) to go to.
+This means that in the [`MVC`](api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](patterns/presenters.md#-presenters) returns `object` and you should do polymorphic type checks to determine which [`View`](patterns/presentation.md#views) to go to.
 
 Here is simplified code for how you can do this in a post method:
 
@@ -126,7 +126,7 @@ At the end throw the following exception (from [`JJ.Framework.Exceptions`](api.m
 throw new UnexpectedTypeException(() => viewModel);
 ```
 
-To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](patterns-presentation.md#viewmodels) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
+To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](patterns/presentation.md#viewmodels) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
 
 For Loops for Lists in HTTP Postdata
@@ -143,7 +143,7 @@ An alternative to for [posting collections](aspects.md#postdata-over-http) is us
 }
 ```
 
-This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](patterns-presentation.md#viewmodels) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](patterns-presentation.md#views) code into partials.
+This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](patterns/presentation.md#viewmodels) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](patterns/presentation.md#views) code into partials.
 
 
 Return URL's
@@ -194,7 +194,7 @@ ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](api.md#ajax) CALL.
     new { ret = Request.RawUrl });
   ```
 
-- A return URL should always be optional, otherwise you could never serparately debug a [`View`](patterns-presentation.md#views).
+- A return URL should always be optional, otherwise you could never serparately debug a [`View`](patterns/presentation.md#views).
 - That way you have an easily codeable, well maintainable solution.
 - Do not use RefferrerUrl, because that only works for HttpPost, not HttpGet. Use Request.RawUrl instead.
 

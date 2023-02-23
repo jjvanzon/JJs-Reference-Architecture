@@ -120,7 +120,7 @@ Casing
 | Abbreviations not preferred                                       |
 | Abbreviations of 2 letters with capitals.                         | `ID`
 | Abbreviations of 3 letters or more in pascal case.                | `Mvc`
-| [`MVC`](api.md#mvc) partial [`View`](patterns-presentation.md#views) names in pascal case, starting with underscore | `_MyPartialView`
+| [`MVC`](api.md#mvc) partial [`View`](patterns/presentation.md#views) names in pascal case, starting with underscore | `_MyPartialView`
 | For long identifiers, underscores to separate 'the pieces'        | `Sine_OperatorCalculator_VarFrequency`
 
 
@@ -156,7 +156,7 @@ Suggestions for verbs:
 | `Save`      |
 | `Set`       |
 | `Try`       |
-| [`TryGet`](patterns-other.md#tryget) | Returns `null` if an `object` does not exist.
+| [`TryGet`](patterns/other.md#tryget) | Returns `null` if an `object` does not exist.
 | `Validate`  | Generating [`validation`](aspects.md#validation) messages for user-input errors.
 
 ### Class Names
@@ -182,7 +182,7 @@ Abstract `classes` might prefer a `Base` suffix:
 
     ProductValidatorBase
 
-It might be quite important to see in code, whether something is a `base` class. But exceptions may be made. For instance, [entity](patterns-data-access.md#entities) `classes` might leave out the `Base` suffix for readability reasons.
+It might be quite important to see in code, whether something is a `base` class. But exceptions may be made. For instance, [entity](patterns/data-access.md#entities) `classes` might leave out the `Base` suffix for readability reasons.
 
 You might keep *variables* names similar to the `class` names and include the prefixes and suffixes, so it stays clear what they are.
 
@@ -195,7 +195,7 @@ Apart form *pattern names*, here are some other suggested 'last names' for `clas
 | `Invoker`    | Something that invokes a method, possibly based on input or specific conditions.
 | `Provider`   | A `class` that provides something. It can be useful to have a separate `class` that provides something if there are many conditions or contextual dependencies involved in retrieving something. A `Provider` might also be used when something is retrieved conditionally or if retrieval is postponed until later.
 | `Asserter`   | A `class` meant to throw `Exceptions` under certain conditions.
-|              | Any verb might become a `class` name, by turning it into a verby noun, e.g. `Convert` => [`Converter`](patterns-data-transformation.md#converter).
+|              | Any verb might become a `class` name, by turning it into a verby noun, e.g. `Convert` => [`Converter`](patterns/data-transformation.md#converter).
 
 ### Boolean Names
 
@@ -310,7 +310,7 @@ Variable names that describe parts of *file paths* might easily become ambiguous
 | `existing...`            | Denoting that something already existed (in the database).
 | `new...`                 | Denoting that the object was just newly created.
 | `original...`            | May denote that this is an original value that was (temporarily) replaced.
-| [`...WithRelatedEntities`](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities)<br>[`...WithRelatedObjects`](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) | Indicating that it does more than handling a single object. Related objects linked to it are also included.
+| [`...WithRelatedEntities`](patterns/other.md#singular-plural-non-recursive-recursive-and-withrelatedentities)<br>[`...WithRelatedObjects`](patterns/other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) | Indicating that it does more than handling a single object. Related objects linked to it are also included.
 | `Versatile...`           | `Versatile` in that it might handle a multitude of types or situations.
 | `...With...`             | When making a specialized `class` that works well for a specific situation, you might use the word `With` in the `class` name e.g.:<br> `CostCalculator`<br>`CostWithTaxCalculator`
 | `...Polymorphic`         | Handling a variety of (derived) `types`, which may need different ways of processing.
@@ -1313,7 +1313,7 @@ Reason: Readability. More obvious what the range limits are.
 
 Passing *infrastructure*-related parameters to constructors or methods, the parameters might be listed in a certain order:
 
-- __[entities](patterns-data-access.md#entities)__ (or loose values)
+- __[entities](patterns/data-access.md#entities)__ (or loose values)
 - __[persistence](aspects.md#persistence)__
 - __[security](aspects.md#security)__
 - __culture__
@@ -1592,7 +1592,7 @@ Reason:
 
 ### Entity Equality by ID
 
-[Entity](patterns-data-access.md#entities) equality checks might be better done by `ID` than by *reference*.
+[Entity](patterns/data-access.md#entities) equality checks might be better done by `ID` than by *reference*.
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -1611,7 +1611,7 @@ if (entity1 == entity2)
 Reason:  
 Code that compares *identities* may be less likely to break, because [persistence frameworks](api.md#orm) don't always ensure *instance* integrity.
 
-(Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns-data-access.md#entities) if needed.)
+(Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns/data-access.md#entities) if needed.)
 
 ### Compiler Directives
 
