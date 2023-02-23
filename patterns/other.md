@@ -41,7 +41,7 @@ redirect_from:
 Accessor
 --------
 
-An [`Accessor`](api.md#accessor) `class` allows access to non-public members of a `class`. This can be used for testing or for special access to a `class` from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) `class`.
+An [`Accessor`](/api.md#accessor) `class` allows access to non-public members of a `class`. This can be used for testing or for special access to a `class` from special places. [`JJ.Framework.Reflection`](/api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](/api.md#accessor) `class`.
 
 
 Adapter
@@ -55,7 +55,7 @@ Anti-Encapsulation
 
 Encapsulation makes sure a `class` protects its own data integrity. Anti-encapsulation is the design choice to let a `class` check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the `class` itself will guard none of it.
 
-The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](api.md#orm) and data serialization mechanisms.
+The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](/api.md#orm) and data serialization mechanisms.
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the `class` cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the `class` and the other half in another place.
 
@@ -159,9 +159,9 @@ By giving each of those processes its own `Executor class`, you make the code ov
 Inheritance-Helper
 ------------------
 
-One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+One weakness of inheritance in [`.NET`](/api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](/practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
 
-This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
+This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](/practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
 
 
 Factory
@@ -266,7 +266,7 @@ Helper
 
 `Helper classes` are `static classes` with `static` methods that help with a particular aspect of programming. They can make other code shorter or prevent repeating of code, for functions that do not require any more structure than a flat list of methods.
 
-The word `Helper` might also be used more generally. Like something that 'helps' in general. For instance a project might have a [`Helpers`](namespaces-assemblies-and-folders.md#structure) folder with a limited number of (smaller) `classes` in it.
+The word `Helper` might also be used more generally. Like something that 'helps' in general. For instance a project might have a [`Helpers`](/namespaces-assemblies-and-folders.md#structure) folder with a limited number of (smaller) `classes` in it.
 
 
 Info
