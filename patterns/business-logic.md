@@ -788,7 +788,7 @@ To store `Button Texts` and translations of [domain](data-access.md#entities) te
 
 Here's what the `Resource strings` editor looks like in [`Visual Studio`](../api.md#visual-studio):
 
-![String Resource Editor](images/resource-string-editor.png)
+![String Resource Editor](../images/resource-string-editor.png)
 
 
 <h4 id="resource-string-file-names">File Names</h4>

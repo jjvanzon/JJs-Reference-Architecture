@@ -18,7 +18,7 @@ redirect_from:
 
 <ul>
 <li><a href="#viewmodels">ViewModels</a></li>
-<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/presenters">Presenters</a></li>
+<li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/patterns/presenters.html">Presenters</a></li>
 <li><a href="#toviewmodel">ToViewModel</a></li>
 <li><a href="#toentity">ToEntity</a></li>
 <li><a href="#views">Views</a></li>
@@ -598,7 +598,7 @@ Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might b
 
 <h2 id="presenters">Presenters</h2>
 
-See the [Presenters](presenters.md) article.
+See the [`Presenters`](presenters.md) article.
 
 
 ToViewModel
