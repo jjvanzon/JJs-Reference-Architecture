@@ -33,7 +33,7 @@ redirect_from:
 ViewModels
 ----------
 
-[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](/index.md).  
+[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](/JJs-Reference-Architecture).  
 A [`ViewModel`](#viewmodels) provides a simplified and organized representation of the data to display on screen.
 
 
@@ -61,7 +61,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 Only Data
 </h3>
 
-In [this architecture](/index.md) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](/JJs-Reference-Architecture) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -330,7 +330,7 @@ Keeping It Clean
 No Entities
 </h3>
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](/index.md) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
+For instance, a [`ViewModel`](#viewmodels) in [this architecture](/JJs-Reference-Architecture) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
 
 Even when the [`ViewModel`](data-access.md#entities) looks almost exactly the same as the [`Entity`](data-access.md#entities), we tend to not use [`Entities`](data-access.md#entities) directly. 
 
@@ -698,7 +698,7 @@ In web technology you could also call it:
 
 Full postback - [`AJAX`](/api.md#ajax) - [`JavaScript`](/api.md#javascript)
 
-When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](/index.md). Only if there is a very good reason, we might use [`AJAX`](/api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](/api.md#javascript).
+When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](/JJs-Reference-Architecture). Only if there is a very good reason, we might use [`AJAX`](/api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](/api.md#javascript).
 
 But it was always the first choice to do full postbacks.
 

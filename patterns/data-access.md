@@ -35,7 +35,7 @@ Entities
 
 <h3 id="pure-data-objects">Pure Data Objects</h3>
 
-In this [architecture](/index.md), we aim to keep the [`Entity`](#entities) `classes` [just data](#dto) and free of logic. The [`Entities`](#entities) in this [architecture](/index.md) have properties of simple types and references or lists to other [`Entities`](#entities).
+In this [architecture](/JJs-Reference-Architecture), we aim to keep the [`Entity`](#entities) `classes` [just data](#dto) and free of logic. The [`Entities`](#entities) in this [architecture](/JJs-Reference-Architecture) have properties of simple types and references or lists to other [`Entities`](#entities).
 
 ```cs
 class Supplier
