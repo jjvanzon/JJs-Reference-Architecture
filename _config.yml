@@ -9,6 +9,7 @@ plugins:
   - jekyll-redirect-from
 whitelist:
   - jekyll-redirect-from
+safe: false
 relative_links:
   enabled: true
   collections: true
