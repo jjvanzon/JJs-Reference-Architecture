@@ -258,7 +258,7 @@ Overhead
 
 Even though the actual call to the [business logic](../layers.md#business-layer) might be trivial, it may still be necessary to convert from [`Entity`](data-access.md#entities) to [`ViewModel`](presentation.md#viewmodels) and back.
 
-One reason might be the stateless nature of the web. It requires restoring state from the [`View`](presentation.md#views) to the [`Entity`](data-access.md#entities) model in between requests. This is because the [`ViewModel`](presentation.md#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](../layers.md#business-layer), that expects [`Entities`](data-access.md#entities).
+One reason might be the stateless nature of the web. It requires restoring state from the [`View`](presentation.md#views) to the [`Entity`](data-access.md#entities) model in between requests. This is because the [`ViewModel`](presentation.md#viewmodels) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](../layers.md#business-layer), which expects [`Entities`](data-access.md#entities).
 
 You might save the server some work by doing *partial loads* instead of *full loads* or maybe execute client-native code. For more info, see: [First Full Load – Then Partial Load – Then Client-Native Code](presentation.md#first-full-load--then-partial-load--then-client-native-code).
 
@@ -284,7 +284,7 @@ Conclusion
 
 The [`Presenter`](#-presenters) pattern is a commonly used design pattern for modeling user interactions in an application. By creating a [`Presenter`](#-presenters) for each [`View`](presentation.md#views) and working with [`ViewModels`](presentation.md#viewmodels), we can achieve a clear modularization of our [presentation logic](../layers.md#presentation-layer) and we ensure that each component has a specific responsibility. Delegating [`ViewModel`](presentation.md#viewmodels) creation to the [`ToViewModel`](presentation.md#toviewmodel) layer enables separation of concerns and allows the [`Presenter`](#-presenters) to focus on its primary responsibility of modeling user interaction and delegating work to the various parts of the system.
 
-The [`Presenters`](#-presenters) form a [platform-independent](../layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](presentation.md#viewmodels) and user actions. This makes it possible to swap out the front-end while leaving the underlying system intact.
+The [`Presenters`](#-presenters) form a [platform-independent](../layers.md#platform-independence-1) layer below the actual front-end technology. All logic is hidden under a shell of [`ViewModels`](presentation.md#viewmodels) and user actions. This makes it possible to swap out the [front-end](../layers.md#platform-independence-1) while leaving the underlying system intact.
 
 [back](.)
 
