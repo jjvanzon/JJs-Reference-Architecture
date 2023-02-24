@@ -1,6 +1,7 @@
 ﻿---
 title: "🌍 Service Oriented Architecture"
 image: "/images/esb-banner.png"
+description: "Service Oriented Architecture is about linking systems together. It focuses on software integration. It revolves around a so called Enterprise Service Bus: A pattern for exchanging data between different systems of different organizations in different formats with different protocols."
 ---
 
 <style>thead{display:none;}</style>
