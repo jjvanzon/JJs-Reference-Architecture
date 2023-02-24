@@ -99,6 +99,7 @@
     - [Nesting too Deep](#nesting-too-deep)
     - [Toilet-Role Principle](#toilet-role-principle)
 - [Problem Solving](#problem-solving)
+    - [Short List](#short-list)
     - [Bug Solving](#bug-solving)
     - [Core of the Problem](#core-of-the-problem)
     - [Do It Right, Or Don't Do It At All](#do-it-right-or-dont-do-it-at-all)
@@ -1121,6 +1122,25 @@ Someone reading you code will look at it through the hole of a toilet-role, seei
 
 Problem Solving
 ---------------
+
+### Short List
+
+- [Reproduce the bug](#reproduce-the-bug)
+- Hypothesize, observe & experiment
+- List symptoms
+- [Narrow the scope](#narrow-the-scope) / [make a smaller test case](#smaller-test) / isolate the problem
+- [Environment](#environmental-causes): Does it happen everywhere?
+- Impact: Small or large?
+- [Alternatives](#look-for-alternatives): Weigh them off
+- [Short term / long term solutions](#short-term--long-term-solution)
+- [Ghosthunt](#ghost-hunt): Is it a real problem?]
+- [Simplify code](#solve-by-simplifying)
+- [Diagnostics](#use-diagnostics--improve-diagnostics):
+    - [Read error message](#questions-to-ask).
+    - [Google error message](#questions-to-ask).
+    - [Find logging](#use-diagnostics--improve-diagnostics).
+    - [Program logging](#use-diagnostics--improve-diagnostics)
+    - Use step-by-step debugging.
 
 ### Bug Solving
 
