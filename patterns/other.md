@@ -1,5 +1,7 @@
 ﻿---
 title: "⚙️ Patterns : Other"
+redirect_from:
+  - /patterns-other.md
 ---
 
 `[ Draft ]`
@@ -7,7 +9,7 @@ title: "⚙️ Patterns : Other"
 ⚙️ Patterns : Other
 ===================
 
-[back](patterns.md)
+[back](README.md)
 
 <h2>Contents</h2>
 
@@ -39,7 +41,7 @@ title: "⚙️ Patterns : Other"
 Accessor
 --------
 
-An [`Accessor`](api.md#accessor) `class` allows access to non-public members of a `class`. This can be used for testing or for special access to a `class` from special places. [`JJ.Framework.Reflection`](api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](api.md#accessor) `class`.
+An [`Accessor`](../api.md#accessor) `class` allows access to non-public members of a `class`. This can be used for testing or for special access to a `class` from special places. [`JJ.Framework.Reflection`](../api.md#jj-framework-reflection) has an implementation of a reusable [`Accessor`](../api.md#accessor) `class`.
 
 
 Adapter
@@ -53,7 +55,7 @@ Anti-Encapsulation
 
 Encapsulation makes sure a `class` protects its own data integrity. Anti-encapsulation is the design choice to let a `class` check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the `class` itself will guard none of it.
 
-The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](api.md#orm) and data serialization mechanisms.
+The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](../api.md#orm) and data serialization mechanisms.
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the `class` cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the `class` and the other half in another place.
 
@@ -157,9 +159,9 @@ By giving each of those processes its own `Executor class`, you make the code ov
 Inheritance-Helper
 ------------------
 
-One weakness of inheritance in [`.NET`](api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+One weakness of inheritance in [`.NET`](../api.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](../practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
 
-This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
+This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](../practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
 
 
 Factory
@@ -216,7 +218,7 @@ If you call a `TryGet` you should handle the `null` value that could be returned
 Get-TryGet-GetMany
 ------------------
 
-Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
+Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
 
 ```cs
 public Item GetItem(string searchText)
@@ -256,7 +258,7 @@ public IList<Item> GetItems(string searchText)
 }
 ```
 
-The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](patterns-other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
+The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
 
 
 Helper
@@ -264,19 +266,19 @@ Helper
 
 `Helper classes` are `static classes` with `static` methods that help with a particular aspect of programming. They can make other code shorter or prevent repeating of code, for functions that do not require any more structure than a flat list of methods.
 
-The word `Helper` might also be used more generally. Like something that 'helps' in general. For instance a project might have a [`Helpers`](namespaces-assemblies-and-folders.md#structure) folder with a limited number of (smaller) `classes` in it.
+The word `Helper` might also be used more generally. Like something that 'helps' in general. For instance a project might have a [`Helpers`](../namespaces-assemblies-and-folders.md#structure) folder with a limited number of (smaller) `classes` in it.
 
 
 Info
 ----
 
-`Info objects` are like [DTO's](patterns-data-access.md#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](patterns-data-access.md#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
+`Info objects` are like [DTO's](data-access.md#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](data-access.md#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
 
 
 Mock
 ----
 
-A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [`Entity` model](patterns-data-access.md#entities), an alternative [`Repository` implementation](patterns-data-access.md#repository) (that returns `Mock` [`Entities`](patterns-data-access.md#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
+A `Mock object` is used in testing as a replacement for a `object` used in production. This could be an [`Entity` model](data-access.md#entities), an alternative [`Repository` implementation](data-access.md#repository) (that returns `Mock` [`Entities`](data-access.md#entities) instead of data out of a database). A `Mock object` could even be a database record. Unlike other patterns the convention is to put the word `Mock` at the beginning of the `class` rather than at the end.
 
 
 Name Constants
@@ -348,19 +350,19 @@ Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities
 
 When processing `object` structures, it is best to split everything up into separate methods.
 
-Every [`Entity type`](patterns-data-access.md#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
+Every [`Entity type`](data-access.md#entities) will get a method (the 'singular' variation) that processes a single `object`. That method will not process any underlying related items, only the one `object`.
 
-In case of conversions from one `object` structure to another, every *destination* [`Entity`](patterns-data-access.md#entities) gets a 'singular' method, not the *source* [`Entity`](patterns-data-access.md#entities), because that would easily create messy, unmanageable code.
+In case of conversions from one `object` structure to another, every *destination* [`Entity`](data-access.md#entities) gets a 'singular' method, not the *source* [`Entity`](data-access.md#entities), because that would easily create messy, unmanageable code.
 
 A 'plural' method processes a whole list of items. 'Plural' methods are less useful. Prefer 'singular' methods over 'plural' ones. 'Plural' methods usually do not add anything other than a loop, which is too trivial to create a separate method for. Only when operations must be executed onto a whole list of `objects` (for instance determining a total price of a list of items or when there are specific conditions), it may be useful to create a separate 'plural' method.
 
-'Singular' or 'plural' methods do not process related [`Entities`](patterns-data-access.md#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [`Entities`](patterns-data-access.md#entities)' means [`Entities`](patterns-data-access.md#entities) intrinsically part of the [`Entity`](patterns-data-access.md#entities), not links to reused [`Entities`](patterns-data-access.md#entities). Also, not the parent.
+'Singular' or 'plural' methods do not process related [`Entities`](data-access.md#entities) unless they have the method suffix `WithRelatedEntities` or `Recursive` at the end of the method name. Keep the `Recursive` and `RelatedEntities` methods separate from the not-`WithRelatedEntities` methods. Related [`Entities`](data-access.md#entities)' means [`Entities`](data-access.md#entities) intrinsically part of the [`Entity`](data-access.md#entities), not links to reused [`Entities`](data-access.md#entities). Also, not the parent.
 
-There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [`Entities`](patterns-data-access.md#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
+There is a subtle difference between `WithRelatedEntities` and  `Recursive`. They are similar, but `Recursive` processing can pass the same `object type` again and again, while processing with related [`Entities`](data-access.md#entities) processes a tree of `objects`, in which the same `object type` does not recur at a deeper level.
 
 Finer details about the 'singular' form:
 
-- They do not process child [`Entities`](patterns-data-access.md#entities), they can however link to reusable [`Entities`](patterns-data-access.md#entities), such as `enum`-like types, or categories.
+- They do not process child [`Entities`](data-access.md#entities), they can however link to reusable [`Entities`](data-access.md#entities), such as `enum`-like types, or categories.
 - They usualy do not assign a parent. The caller of the 'singular' form does that. That way methods are more independent of context and better reusable and code better rewritable. There are exceptions to that rule.
 
 Here is an example of some 'singular', 'plural', non-`Recursive` and `Recursive` methods. Note that the words 'singular' and 'plural' are not used in the method names.
@@ -433,5 +435,5 @@ Rich Models
 
 `< TODO: Compare rich models with the 2D separation of concerns. >`
 
-[back](patterns.md)
+[back](README.md)
 

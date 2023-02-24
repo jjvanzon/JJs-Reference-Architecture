@@ -350,7 +350,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Memory</a>
   </th>
   <td>
-      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="patterns-other.html#mock">mock</a> a data store.
+      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="patterns/other.html#mock">mock</a> a data store.
   </td>
 </tr>
 
@@ -405,7 +405,7 @@ List of API's (and other tech)
        JJ.Framework.Business</a>
   </th>
   <td>
-      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns-business-logic.html#validators">validation</a>) messages. <a href="patterns-business-logic.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
+      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns/business-logic.html#validators">validation</a>) messages. <a href="patterns/business-logic.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
   </td>
 </tr>
 
@@ -415,7 +415,7 @@ List of API's (and other tech)
        JJ.Framework.Validation</a>
   </th>
   <td>
-      A nice fluent notation for <a href="patterns-business-logic.html#validators">validations</a>.
+      A nice fluent notation for <a href="patterns/business-logic.html#validators">validations</a>.
   </td>
 </tr>
 
@@ -618,7 +618,7 @@ List of API's (and other tech)
 
 <tr id="debugger-displays">
   <th>
-    <a href="patterns-other.html#debuggerdisplays">
+    <a href="patterns/other.html#debuggerdisplays">
        DebuggerDisplays</a>
   </th>
   <td>
@@ -640,7 +640,7 @@ List of API's (and other tech)
 
 <tr id="accessor">
   <th>
-    <a href="patterns-other.html#accessor">Accessor</a>
+    <a href="patterns/other.html#accessor">Accessor</a>
   </th>
   <td>
       For accessing the internals of <code>types</code> for instance for testing purposes.
@@ -728,8 +728,8 @@ List of API's (and other tech)
 <table>
 
 <tr id="resource-strings">
-  <th><a href="patterns-business-logic.html#resource-strings">Resource Strings</a></th>
-  <td>For localization, <a href="patterns-business-logic.html#resource-strings"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
+  <th><a href="patterns/business-logic.html#resource-strings">Resource Strings</a></th>
+  <td>For localization, <a href="patterns/business-logic.html#resource-strings"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-resourcestrings">
@@ -835,9 +835,9 @@ Web
 
 `AJAX` is a way to load part of a web page, so the whole page does not have to be refreshed. This may make the user interaction smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns-other.md#wrapper) functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](#javascript) code.
+For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns/other.md#wrapper) functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](#javascript) code.
 
-Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns-presentation.md#first-full-load--then-partial-load--then-client-native-code).
+Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns/presentation.md#first-full-load--then-partial-load--then-client-native-code).
 
 ### JavaScript / TypeScript
 
@@ -845,7 +845,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](patterns-presentation.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
+For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](patterns/presentation.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
 
 [`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. You could refactor [`C#`](#csharp) code, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face when compiling.
 
@@ -853,7 +853,7 @@ For web, other technology was preferred in this [architecture](index.md): The id
 
 But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I guess the love for [`C#`](#csharp) was strong.
 
-The idea was that a full page load was 1<sup>st</sup> choice, [`AJAX'ing`](#ajax) the 2<sup>nd</sup> choice, and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns-presentation.md#first-full-load--then-partial-load--then-client-native-code).
+The idea was that a full page load was 1<sup>st</sup> choice, [`AJAX'ing`](#ajax) the 2<sup>nd</sup> choice, and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns/presentation.md#first-full-load--then-partial-load--then-client-native-code).
 
 For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries: [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
@@ -863,9 +863,9 @@ I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of p
 
 In [`MVC`](#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](aspects.md#postdata-over-http).
 
-[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns-presentation.md#viewmodels) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns-presentation.md#viewmodels) at the server side.
+[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns/presentation.md#viewmodels) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns/presentation.md#viewmodels) at the server side.
 
-In the [`View`](patterns-presentation.md#views) code you would wrap each nesting inside a `using` block:
+In the [`View`](patterns/presentation.md#views) code you would wrap each nesting inside a `using` block:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
@@ -885,7 +885,7 @@ In the [`View`](patterns-presentation.md#views) code you would wrap each nesting
 
 So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block.
 
-There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](patterns-presentation.md#views).
+There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](patterns/presentation.md#views).
 
 Input fields in a nested structure look as follows:
 
@@ -905,7 +905,7 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](patterns-presentation.md#viewmodels). This may force you to program partial [`Views`](patterns-presentation.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](patterns/presentation.md#viewmodels). This may force you to program partial [`Views`](patterns/presentation.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
 
 ### Html.BeginCollectionItem
 
@@ -987,9 +987,9 @@ internal interface IConnectionStrings
 
 *Bidirectional relationship synchronization* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns-other.md#rich-models), [entity](patterns-data-access.md#entities), `API` or otherwise.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns/other.md#rich-models), [entity](patterns/data-access.md#entities), `API` or otherwise.
 
-There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns-business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
+There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
 ### XML
 
@@ -1009,7 +1009,7 @@ To include a file as an embedded resource, you could set the following property 
 
 ![](images/sql-as-embedded-resource.png)
 
-[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](patterns-other.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](patterns/other.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
 ```cs
 string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");
@@ -1020,7 +1020,7 @@ Data
 
 ### Entity Framework
 
-[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework) and [repository interfaces](patterns-data-access.md#repository-interfaces).
+[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework) and [repository interfaces](patterns/data-access.md#repository-interfaces).
 
 At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](#jj-framework-data-entity-framework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
@@ -1032,11 +1032,11 @@ When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework),
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) is used in some projects, because an employer favored it, and other projects joined the club.
 
-[`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate) and [repository interfaces](patterns-data-access.md#repository).
+[`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate) and [repository interfaces](patterns/data-access.md#repository).
 
 ### ORM
 
-An `ORM` aims to make it easier to focus on the logic around an [entity](patterns-data-access.md#entities) model, while saving things to a database is pretty much done for you.
+An `ORM` aims to make it easier to focus on the logic around an [entity](patterns/data-access.md#entities) model, while saving things to a database is pretty much done for you.
 
 Here follow some issues you could encounter while using an `ORM`, and some suggestions for how to deal with it.
 
@@ -1046,7 +1046,7 @@ This information was gathered from experience, built up with [`NHibernate`](#nhi
 
 Here is something that happens in [`ORM`](#orm) sometimes:
 
-Some methods of data retrieval work with uncommitted / non-flushed [entities](patterns-data-access.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](patterns-data-access.md#entities). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance considerably:
+Some methods of data retrieval work with uncommitted / non-flushed [entities](patterns/data-access.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](patterns/data-access.md#entities). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance considerably:
 
 | Method | Data Read |
 |--------|----------|
@@ -1065,11 +1065,11 @@ A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes
 
 The trouble with `Flush` is, that it might be executed when things are not done yet, and incomplete data might go to the database, upon which database may give an error. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
 
-`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns-data-access.md#entities). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
+`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](patterns/data-access.md#entities). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
 
 Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](aspects.md#exceptions) on the child object's `ParentID` column.
 
-It may also help to create [entities](patterns-data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose a identity generation scheme, that does not require flushing an [entity](patterns-data-access.md#entities) pre-maturely.
+It may also help to create [entities](patterns/data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose a identity generation scheme, that does not require flushing an [entity](patterns/data-access.md#entities) pre-maturely.
 
 #### Read-Write Order
 
@@ -1077,11 +1077,11 @@ It seems [`ORM's`](#orm) like it when you first read the data out, and then star
 
 #### Bridge Entities
 
-An *bridge* [entity](patterns-data-access.md#entities) applies to `n => n` relationships and may require an additional table to make the link between the [entities](patterns-data-access.md#entities):
+An *bridge* [entity](patterns/data-access.md#entities) applies to `n => n` relationships and may require an additional table to make the link between the [entities](patterns/data-access.md#entities):
 
 <img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
 
-Using an [`ORM`](#orm), the bridge [entity](patterns-data-access.md#entities) might not be visible in the code, but can be managed as two collections inside the two main [entities](patterns-data-access.md#entities):
+Using an [`ORM`](#orm), the bridge [entity](patterns/data-access.md#entities) might not be visible in the code, but can be managed as two collections inside the two main [entities](patterns/data-access.md#entities):
 
 ```cs
 class Question
@@ -1097,7 +1097,7 @@ class Category
 
 The [`ORM`](#orm) can do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](aspects.md#exceptions) to go off, while [`ORM`](#orm) tries to guard the integrity of the relationship.
 
-These problems almost all go away, if you map a *bridge* [entity](patterns-data-access.md#entities) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](patterns-data-access.md#entities) hold a list of *bridge* [entities](patterns-data-access.md#entities) instead. In turn, the bridge [entity](patterns-data-access.md#entities) would link back to the two main [entities](patterns-data-access.md#entities):
+These problems almost all go away, if you map a *bridge* [entity](patterns/data-access.md#entities) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](patterns/data-access.md#entities) hold a list of *bridge* [entities](patterns/data-access.md#entities) instead. In turn, the bridge [entity](patterns/data-access.md#entities) would link back to the two main [entities](patterns/data-access.md#entities):
 
 ```cs
 class QuestionCategory
@@ -1117,7 +1117,7 @@ class Category
 }
 ```
 
-This also has the advantage, that the [entity](patterns-data-access.md#entities) model would not need to be refactored, if you'd want to add properties to a *combination* of things.
+This also has the advantage, that the [entity](patterns/data-access.md#entities) model would not need to be refactored, if you'd want to add properties to a *combination* of things.
 
 It might be advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` might do better:
 
@@ -1129,21 +1129,21 @@ This is because it gives 1 handle to the combination of 2 thing. This gives [`OR
 
 You might not want to map *binary* and other *serialized data* fields using [`ORM`](#orm), because it can harm performance quite a bit.
 
-Retrieving some loose fields of an [entity](patterns-data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
+Retrieving some loose fields of an [entity](patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
 Using separate [`SQL`](#sql) statements for retrieving blobs might be a better alternative.
 
 #### Inheritance
 
-Particular surprises might emerge when using *inheritance* in your [entity](patterns-data-access.md#entities) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns-data-access.md#entities) models if you can.
+Particular surprises might emerge when using *inheritance* in your [entity](patterns/data-access.md#entities) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](patterns/data-access.md#entities) models if you can.
 
 ##### Problem: Entity / Proxy Type Mismatch
 
-When retrieving an [entity](patterns-data-access.md#entities) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns-data-access.md#entities) type, but an instance of a type derived from your [entity](patterns-data-access.md#entities), a so called `Proxy`. This `Proxy` adds to your [entity](patterns-data-access.md#entities) a sort of connectedness to the database.
+When retrieving an [entity](patterns/data-access.md#entities) through [`ORM`](#orm), it will likely not return an instance of your [entity](patterns/data-access.md#entities) type, but an instance of a type derived from your [entity](patterns/data-access.md#entities), a so called `Proxy`. This `Proxy` adds to your [entity](patterns/data-access.md#entities) a sort of connectedness to the database.
 
 ##### Problem: Base Proxy / Derived Proxy Type Mismatch
 
-When you retrieved an [entity](patterns-data-access.md#entities) from `NHibernate` that has inheritance, using the base type it returns a `Proxy` of the base type instead of a `Proxy` of the derived type, which makes reference comparisons between base `Proxies` and derived class `Proxies` fail.
+When you retrieved an [entity](patterns/data-access.md#entities) from `NHibernate` that has inheritance, using the base type it returns a `Proxy` of the base type instead of a `Proxy` of the derived type, which makes reference comparisons between base `Proxies` and derived class `Proxies` fail.
 
 ##### Problem: 2 Proxies / 1 Entity
 
@@ -1159,23 +1159,23 @@ You can then `Unproxy` both and it will return the underlying object, which is i
 
 ##### Alternative: Unproxy for Type Evaluation
 
-To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it will compare `Proxy` types instead of your [entity](patterns-data-access.md#entities) type. This can be confusing.
+To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it will compare `Proxy` types instead of your [entity](patterns/data-access.md#entities) type. This can be confusing.
 
 ##### Alternative: ID Comparison
 
-[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns-data-access.md#entities) equality checks.
+[ID comparison](code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](patterns/data-access.md#entities) equality checks.
 
 ##### Alternative: 1-to-1 Relationship
 
-An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns-data-access.md#entities). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
+An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](patterns/data-access.md#entities). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
 
 ##### Alternative: Interfaces
 
-Letting two [entity](patterns-data-access.md#entities) types use a mutual `interface` might be an alternative too.
+Letting two [entity](patterns/data-access.md#entities) types use a mutual `interface` might be an alternative too.
 
 ##### Alternative: No Inheritance
 
-By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns-data-access.md#entities) models, if at all possible.
+By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](patterns/data-access.md#entities) models, if at all possible.
 
 #### Generic Interfaces
 
@@ -1273,7 +1273,7 @@ foreach (IngredientDto record in records)
 
 The column names in the [`SQL`](#sql) are *case sensitive!*
 
-It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](patterns-data-access.md#entities) type name, so they stay grouped together:
+It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](patterns/data-access.md#entities) type name, so they stay grouped together:
 
 ![](images/sql-file-names.png)
 
@@ -1349,10 +1349,10 @@ One variation of [`SqlExecutor`](#sql-executor) included the ability to add plac
 
 #### Behind Repositories
 
-The [`repository`](patterns-data-access.md#repository) pattern is used in this [architecture](index.md).  
-The [`repository`](patterns-data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
+The [`repository`](patterns/data-access.md#repository) pattern is used in this [architecture](index.md).  
+The [`repository`](patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
 
-Using [`SQL`](#sql) combined with [`repositories`](patterns-data-access.md#repository) can be simplified with [`SqlExecutor`](#sql).
+Using [`SQL`](#sql) combined with [`repositories`](patterns/data-access.md#repository) can be simplified with [`SqlExecutor`](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
@@ -1401,11 +1401,11 @@ interface IMyRepository : IRepository
 
 This would result in:
 
-- Keeping all the queries of an [entity](patterns-data-access.md#entities) together in a [`repository`](patterns-data-access.md#repository).
-- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns-data-access.md#entities) behind an [`SqlExecutor`](#sql-executor).
-- All that data access would be hidden behind [`repository interfaces`](patterns-data-access.md#repository-interfaces) decoupling the persistence technology.
+- Keeping all the queries of an [entity](patterns/data-access.md#entities) together in a [`repository`](patterns/data-access.md#repository).
+- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns/data-access.md#entities) behind an [`SqlExecutor`](#sql-executor).
+- All that data access would be hidden behind [`repository interfaces`](patterns/data-access.md#repository-interfaces) decoupling the persistence technology.
  
-It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns-data-access.md#entities), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
+It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns/data-access.md#entities), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
 You might also find split up into separate assemblies: 
 

@@ -6,6 +6,10 @@ plugins:
   - jekyll-default-layout
   - jekyll-seo
   - jekyll-seo-tag
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
+safe: false
 relative_links:
   enabled: true
   collections: true

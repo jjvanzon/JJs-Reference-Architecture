@@ -1,6 +1,7 @@
 ﻿---
 title: "🌍 Service Oriented Architecture"
-image: "/images/esb.png"
+image: "/images/esb-banner.png"
+description: "Service Oriented Architecture is about linking systems together. It focuses on software integration. It revolves around a so called Enterprise Service Bus: A pattern for exchanging data between different systems of different organizations in different formats with different protocols."
 ---
 
 <style>thead{display:none;}</style>
@@ -104,13 +105,13 @@ Standard [ESB's](#the-esb-concept) can be complex and difficult to learn, requir
 ESB Model
 ---------
 
-On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns-data-access.md#entities) for administrating [`Connection`](#connections) settings and registering [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
+On top of a [`Canonical`](#canonical-model) model, we might need more facilities. The [`ESB`](#the-esb-concept) could offer a [model](patterns/data-access.md#entities) for administrating [`Connection`](#connections) settings and registering [`Enterprises`](#enterprises) that can log in to our [system](#connectiontypes) to get access to our services.
 
-Next: The main [entities](patterns-data-access.md#entities) of the [`ESB`](#the-esb-concept) model:
+Next: The main [entities](patterns/data-access.md#entities) of the [`ESB`](#the-esb-concept) model:
 
 ### Enterprises
 
-`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the [`ESB` database](#esb-model). Those who need to log in, will get a `User` [entity](patterns-data-access.md#entities) with encrypted credentials.
+`Enterprises` participating in this [service architecture](#-service-oriented-architecture) would be registered in the [`ESB` database](#esb-model). Those who need to log in, will get a `User` [entity](patterns/data-access.md#entities) with encrypted credentials.
 
 ### ConnectionTypes
 
@@ -124,7 +125,7 @@ Note that some `Connections` might not be *between* [`Enterprises`](#enterprises
 
 ### KeyMappings
 
-Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns-data-access.md#entities) and [logic](layers.md#business-layer) to manage those kinds of [`ReferenceNumbers`](#canonical-keymapping), which might also be referred to as [`KeyMappings`](#canonical-keymapping).
+Different systems might handle similar sorts of data, like `Orders` and `Customers`. However, they are likely to use different [`Identifiers`](#canonical-keymapping). To facilitate communication between these systems, it may be necessary to map these [`Identifiers`](#canonical-keymapping) to each other. An [`ESB` model](#esb-model) can have [entities](patterns/data-access.md#entities) and [logic](layers.md#business-layer) to manage those kinds of [`ReferenceNumbers`](#canonical-keymapping), which might also be referred to as [`KeyMappings`](#canonical-keymapping).
 
 ### Transmissions
 
@@ -162,7 +163,7 @@ Then when for instance running price updates, you can simply *skip* the [systems
 
 ### Tag Model
 
-The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to add `Tag` models. You might use those `Tags` in [domain models](patterns-data-access.md#entities) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) when it needs it.
+The [`Canonical`](#canonical-model) model should focus on data, that plays a logical role in your company. But another [system](#connectiontypes) may need data that is not relevant to you. To avoid cluttering the [`Canonical`](#canonical-model) model with unnecessary structure, you could choose to add `Tag` models. You might use those `Tags` in [domain models](patterns/data-access.md#entities) too, to add data, that does not apply to your business processes. But this data can still be sent along to another [system](#connectiontypes) when it needs it.
 
 Here are some examples of `Tag` models in pseudo-code:
 
@@ -173,7 +174,7 @@ You might also make the `Tags` *culture-specific:*
 
     Tag { Name, Value, CultureName }
 
-Or choose to *loosely link* `Tags` to [entities](patterns-data-access.md#entities), like so:
+Or choose to *loosely link* `Tags` to [entities](patterns/data-access.md#entities), like so:
 
     Tag { Name, Value, EntityTypeName, EntityID }
 
@@ -235,7 +236,7 @@ It all depends on the specific design of your system. But hopefully this demonst
 
 ### Facade
 
-A [`Facade`](patterns-business-logic.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
+A [`Facade`](patterns/business-logic.md#facade) is a `class` or `interface` that sits in front of other `classes` and `interfaces`. Its goal is to provide an easier way to access a more complex system.
 
 This concept is used in this [architecture](#index.md) to give a service an even simpler `interface` than the underlying [business](layers.md#business-layer). It may hide interactions with multiple [systems](#connectiontypes) and hide [infrastructural](layers.md#infrastructure) setup.
 
@@ -243,7 +244,7 @@ This concept is used in this [architecture](#index.md) to give a service an even
 
 When it comes to handling infrastructure setup, there's a key difference between the [application architecture](introduction.md#application-architecture-vs-service-architecture) and this [service oriented architecture](#-service-oriented-architecture)
 
-In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the *top-level* project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [data access](patterns-data-access.md#repository-interfaces). 
+In the [application architecture](introduction.md#application-architecture-vs-service-architecture), the *top-level* project was responsible for determining the [infrastructural context](layers.md#infrastructure) and passing it down to the lower layers, for instance as `interfaces` on [security](aspects.md#security) and [data access](patterns/data-access.md#repository-interfaces). 
 
 But the [service architecture](#-service-oriented-architecture) determines the [infrastructural context](layers.md#infrastructure) in the *bottom-level* projects. At least in the case of [multi-dispatch](#multi-dispatch) this seems necessary. For instance, a bottom-level project like `JJ.Services.Ordering.Email` would not reveal that there is an `SMTP` client under the hood. You cannot see that setup from the constructor or the `interface`. The services would handle that internally.
 
@@ -272,6 +273,6 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.Services.Ordering.Wcf.Client`__           | Allows a connection to the `WCF` service using a convenient, strongly typed `interface`.
 | __`JJ.Services.Ordering.JsonRest`__             | Exposes the [multi-dispatch](#multi-dispatch) `Ordering` service using the `Json` / `Rest` protocols.
 | __`JJ.Services.Ordering.WebApi`__               | There is no reason [`Web API`](https://learn.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api) should not be involved in this [service architecture](#-service-oriented-architecture). In fact, the idea of `WCF` being the default for services, might not be a very long-lived.
-| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service in this [architecture](index.md) is an `AppService`. It exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns-presentation.md#viewmodels).
+| __`JJ.Presentation.Shop.AppService.Wcf`__       | A special kind of service in this [architecture](index.md) is an `AppService`. It exposes [presentation logic](layers.md#presentation-layer) instead of [business logic](layers.md#business-layer) by returning [`ViewModels`](patterns/presentation.md#viewmodels).
 
 [back](.)
