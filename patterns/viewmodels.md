@@ -1,11 +1,11 @@
 ﻿---
-title: "👓 ViewModels"
+title: "🪟 ViewModels"
 image: "/images/view-model-code-sample.png"
 description: "A ViewModel provides a simplified and organized representation of the data to display on screen."
 ---
 
 
-👓 ViewModels
+🪟 ViewModels
 ==============
 
 [back](.)
