@@ -114,11 +114,11 @@ Lookup Lists
 
 In a stateless environment, lookup lists in [`Views`](#views) can be resource-intensive. For instance a drop down list in each row of a grid in which you choose from 1000 items may easily bloat your `HTML`. You might repeat the same list of 1000 items for each grid row. There are multiple ways to combat this problem.
 
-For small lookup lists you might include a copy of the list in each [Item ViewModel](#entity-viewmodels) and repeat the same lookup list in `HTML`.
+For small lookup lists you might include a copy of the list in each [Item ViewModel](viewmodels.md#entity-viewmodels) and repeat the same lookup list in `HTML`.
 
 Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](../api.md#jquery) trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](viewmodels.md#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](../api.md#jquery) trick to populate a drop down just before you slide it open.
 
 For big lookup list a viable option seems to [`AJAX`](../api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 

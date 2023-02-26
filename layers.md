@@ -153,7 +153,7 @@ It is the [`Presenter`](patterns/presenters.md#-presenters) classes that talk to
 
 ### ViewModel
 
-A [`ViewModel`](patterns/presentation.md#viewmodels) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this [architecture](index.md) [`ViewModels`](patterns/presentation.md#viewmodels) are a pure [data objects](patterns/data-access.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns/data-access.md#dto) can also be sent over the line without many surprises.
+A [`ViewModel`](patterns/viewmodels.md) would contain a specific subset of data: exactly the selection of data, that is shown on screen. In this [architecture](index.md) [`ViewModels`](patterns/viewmodels.md) are a pure [data objects](patterns/data-access.md#dto), no logic. So they can be more easily used with different presentation technologies. These pure [data objects](patterns/data-access.md#dto) can also be sent over the line without many surprises.
 
 ### ToViewModel
 
@@ -167,7 +167,7 @@ The [`Presenters`](patterns/presenters.md#-presenters) also delegate to a [`ToEn
 
 [`Presenter`](patterns/presenters.md#-presenters) classes combine several [responsibilities](patterns/presentation.md#toentity-business-toviewmodel-round-trip) around [presentation](#presentation-layer).
 
-They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns/business-logic.md#validators), execute [`SideEffects`](patterns/business-logic.md#sideeffects). They initiate translation between [entities](patterns/data-access.md#entities) and [`ViewModels`](patterns/presentation.md#viewmodels) and might also execute [security](aspects.md#security) checks.
+They call upon the [business layer](#business-layer) to `Save`, [`Validate`](patterns/business-logic.md#validators), execute [`SideEffects`](patterns/business-logic.md#sideeffects). They initiate translation between [entities](patterns/data-access.md#entities) and [`ViewModels`](patterns/viewmodels.md) and might also execute [security](aspects.md#security) checks.
 
 Because the [`Presenters`](patterns/presenters.md#-presenters) combine several [responsibilities](patterns/presentation.md#toentity-business-toviewmodel-round-trip) together, they can be called the [`Facades`](patterns/business-logic.md#facade) or [combinators](patterns/business-logic.md#facade) of the [presentation layer](#presentation-layer).
 
@@ -187,7 +187,7 @@ However, even on other presentation platforms, like [`WinForms`](api.md#winforms
 
 Requests from the web browser automatically make the right [`Controller`](patterns/presentation-mvc.md#controller) method go off. [`MVC`](api.md#mvc) makes sure of that. Each method in a [`Controller`](patterns/presentation-mvc.md#controller) tends to get a `URL`.
 
-The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/presentation.md#viewmodels) parameters are accepted by [`MVC`](api.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/presentation.md#viewmodels) and are built up from post data by [`MVC`](api.md#mvc) automatically.
+The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/viewmodels.md) parameters are accepted by [`MVC`](api.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/viewmodels.md) and are built up from post data by [`MVC`](api.md#mvc) automatically.
 
 [`JJ.Framework.Mvc`](api.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api.md#mvc).
 
@@ -197,7 +197,7 @@ After the [`Controller`](patterns/presentation-mvc.md#controller) method is done
 
 ### Views (Razor)
 
-A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns/presentation.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns/presentation.md#viewmodels) as input, along with the [`View`](patterns/presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns/presentation.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns/viewmodels.md) as input, along with the [`View`](patterns/presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
 In [`WinForms`](api.md#winforms) the [`Views`](patterns/presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns/presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns/presenters.md#-presenters).
 

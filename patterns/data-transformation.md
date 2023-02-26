@@ -128,9 +128,9 @@ The [`TryGet-Insert-Update-Delete` pattern](#tryget-insert-update-delete--full-c
 DocumentModel
 -------------
 
-An analog of a [`ViewModel`](presentation.md#viewmodels), but then for document generation, rather than [`View`](presentation.md#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
+An analog of a [`ViewModel`](viewmodels.md), but then for document generation, rather than [`View`](presentation.md#views) rendering. It is a `class` that contains all data that should be displayed in the document. It can end with the suffix `Model` instead of `DocumentModel` for brevity, but then it must be clear from the context that we are talking about a document model.
 
-Just as with [`ViewModels`](presentation.md#viewmodels), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
+Just as with [`ViewModels`](viewmodels.md), inheritance structures are not allowed. To prevent inheritance structures it may be wise to make the `DocumentClasses classes sealed`.
 
 
 Selector-Model-Generator-Result
@@ -197,6 +197,6 @@ MVC
 [`MVC`](../api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
-- [`Controller`](presentation-mvc.md#controller) - [`ViewModel`](presentation.md#viewmodels) - view engine – [`View`](presentation.md#views)
+- [`Controller`](presentation-mvc.md#controller) - [`ViewModel`](viewmodels.md) - view engine – [`View`](presentation.md#views)
 
 [back](README.md)
