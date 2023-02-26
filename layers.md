@@ -1,4 +1,5 @@
 ﻿---
+title: "🧅 Layers"
 image: "/images/perpendicular-layers.png"
 ---
 
@@ -25,7 +26,7 @@ Software can be built up of layers. This article describes how layers could be s
     - [Platform Independence](#platform-independence)
 - [Presentation Layer](#presentation-layer)
     - [Calls the Business Layer](#calls-the-business-layer)
-    - [Presenter](#presenters)
+    - [Presenter](#presenter)
     - [ViewModel](#viewmodel)
     - [ToViewModel](#toviewmodel)
     - [ToEntity](#toentity)

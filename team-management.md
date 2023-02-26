@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "👥 Team Management"
+---
+
+`[ Draft ]`
 
 👥 Team Management
 ===================

@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "📀 Database Conventions"
+---
+
+`[ Draft ]`
 
 📀 Database Conventions
 ========================

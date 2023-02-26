@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "🚀 Software Lifecycle"
+---
+
+`[ Draft ]`
 
 🚀 Software Lifecycle
 ======================

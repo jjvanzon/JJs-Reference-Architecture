@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "➕ Appendices"
+---
+
+`[ Draft ]`
 
 ➕ Appendices
 ==============

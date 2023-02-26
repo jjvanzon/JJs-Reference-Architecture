@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "🧱 Aspects"
+---
+
+`[ Draft ]`
 
 🧱 Aspects
 ===========

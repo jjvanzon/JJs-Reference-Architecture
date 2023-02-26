@@ -1,4 +1,8 @@
-﻿⚠ Platform Compatibility 
+﻿---
+title: "⚠ Platform Compatibility"
+---
+
+⚠ Platform Compatibility 
 =========================
 
 [back](.)

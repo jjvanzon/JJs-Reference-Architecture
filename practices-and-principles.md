@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "🏗 Practices & Principles"
+---
+
+`[ Draft ]`
 
 🏗 Practices & Principles
 ==========================

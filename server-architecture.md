@@ -1,4 +1,8 @@
-﻿`[ Draft ]`
+﻿---
+title: "🗄 Server Architecture"
+---
+
+`[ Draft ]`
 
 🗄 Server Architecture
 ======================
