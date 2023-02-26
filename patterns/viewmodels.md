@@ -10,8 +10,8 @@ description: "A ViewModel provides a simplified and organized representation of 
 
 [back](.)
 
-[`ViewModels`](#viewmodels) are as simple as they are invaluable in [this architecture](../JJs-Reference-Architecture).  
-A [`ViewModel`](#viewmodels) provides a simplified and organized representation of the data to display on screen.
+[`ViewModels`](#-viewmodels) are as simple as they are invaluable in [this architecture](../JJs-Reference-Architecture).  
+A [`ViewModel`](#-viewmodels) provides a simplified and organized representation of the data to display on screen.
 
 <img src="../images/view-model-code-sample.png" width="700" />
 
@@ -39,7 +39,7 @@ A [`ViewModel`](#viewmodels) provides a simplified and organized representation 
 Only Data
 ---------
 
-In [this architecture](../JJs-Reference-Architecture) a [`ViewModel`](#viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#viewmodels):
+In [this architecture](../JJs-Reference-Architecture) a [`ViewModel`](#-viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#-viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#-viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#-viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -54,7 +54,7 @@ public class ProductViewModel
 Screen ViewModels
 -----------------
 
-Every screen can get a [`ViewModel`](#viewmodels). Here are some [`Screen ViewModels`](#screen-viewmodels) you might find in an application: 
+Every screen can get a [`ViewModel`](#-viewmodels). Here are some [`Screen ViewModels`](#screen-viewmodels) you might find in an application: 
 
     ProductDetailsViewModel
     ProductListViewModel
@@ -68,7 +68,7 @@ These names are built up from parts:
 2. Then something [`CRUD`](../layers.md#crud)-related:  
    `Details`, `List`, `Edit` or `Delete`
 3. And it ends with:  
-   [`ViewModel`](#viewmodels)
+   [`ViewModel`](#-viewmodels)
 
 Instead of [`CRUD`](../layers.md#crud) actions, you could also use terms like `Overview`, `Selector`, `NotFound`, or `Login`:
 
@@ -96,7 +96,7 @@ public class ProductEditViewModel
 Entity ViewModels
 -----------------
 
-You can also reuse [`ViewModels`](#viewmodels) that represent single [`Entities`](data-access.md#entities), e.g.:
+You can also reuse [`ViewModels`](#-viewmodels) that represent single [`Entities`](data-access.md#entities), e.g.:
 
     ProductViewModel
     CategoryViewModel
@@ -267,15 +267,15 @@ public class ProductEditViewModel
 How to Model
 ------------
 
-A [`ViewModel`](#viewmodels) is an abstract representation of what is shown on screen. The idea for how to model them is:
+A [`ViewModel`](#-viewmodels) is an abstract representation of what is shown on screen. The idea for how to model them is:
 
-> *A [`ViewModel`](#viewmodels) says __what__ is shown on screen, not __how__ or __why__.*
+> *A [`ViewModel`](#-viewmodels) says __what__ is shown on screen, not __how__ or __why__.*
 
 
 "What", not "How"
 -----------------
 
-A [`ViewModel`](#viewmodels) says ***what*** is shown on screen, not ***how:***
+A [`ViewModel`](#-viewmodels) says ***what*** is shown on screen, not ***how:***
 
 Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether it is a `Button` or a hyperlink or `Visible` or `Enabled`, should be up to the [`View`](#views) instead.
 
@@ -283,22 +283,22 @@ Therefore `CanDelete` may be a better name than `DeleteButtonVisible`. Whether i
 "What", not "Why"
 -----------------
 
-A [`ViewModel`](#viewmodels) should say ***what*** is shown on screen, not ***why:***  
+A [`ViewModel`](#-viewmodels) should say ***what*** is shown on screen, not ***why:***  
 
-For instance: if the business logic tells us that an [`Entity`](data-access.md#entities) is a very special [`Entity`](data-access.md#entities), therefore it should be displayed read-only, the [`ViewModel`](#viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
-The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#viewmodels) or a [view](#views).
+For instance: if the business logic tells us that an [`Entity`](data-access.md#entities) is a very special [`Entity`](data-access.md#entities), therefore it should be displayed read-only, the [`ViewModel`](#-viewmodels) might contain a property `IsReadOnly` or `CanEdit`, not a property named `ThisIsAVerySpecialEntity`. 
+The *reason* for displaying data read-only should not be a concern for a [`ViewModel`](#-viewmodels) or a [view](presentation.md#views).
 
 
 Keeping It Clean
 ----------------
 
-[`ViewModels`](#viewmodels) might only use *simple* `types` and references to other [`ViewModels`](#viewmodels). This keeps the [`ViewModel`](#views) layer completely self-contained.
+[`ViewModels`](#-viewmodels) might only use *simple* `types` and references to other [`ViewModels`](#-viewmodels). This keeps the [`ViewModel`](presentation.md#views) layer completely self-contained.
 
 
 No Entities
 -----------
 
-For instance, a [`ViewModel`](#viewmodels) in [this architecture](../JJs-Reference-Architecture) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#viewmodels) to a database, which is not always desired or even possible.
+For instance, a [`ViewModel`](#-viewmodels) in [this architecture](../JJs-Reference-Architecture) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#-viewmodels) to a database, which is not always desired or even possible.
 
 Even when the [`ViewModel`](data-access.md#entities) looks almost exactly the same as the [`Entity`](data-access.md#entities), we tend to not use [`Entities`](data-access.md#entities) directly. 
 
@@ -313,7 +313,7 @@ public class Product
 }
 ```
 
-[`ViewModel`](#viewmodels):
+[`ViewModel`](#-viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -324,7 +324,7 @@ public class ProductViewModel
 }
 ```
 
-It is worth noting that linking to an [`Entity`](data-access.md#entities) can result in the availability of other related [`Entities`](data-access.md#entities), which may broaden the scope of the [view](#views) beyond our intentions:
+It is worth noting that linking to an [`Entity`](data-access.md#entities) can result in the availability of other related [`Entities`](data-access.md#entities), which may broaden the scope of the [view](presentation.md#views) beyond our intentions:
 
 ```cs
 /// <summary>
@@ -348,9 +348,9 @@ var customers =
                     .Select(x => x.Customer);
 ```
 
-An added benefit of decoupling the [`ViewModels`](#viewmodels) from [`Entities`](data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#viewmodels) without affecting the [data access layer](../layers.md#data-layer) or the [business logic](../layers.md#business-layer):
+An added benefit of decoupling the [`ViewModels`](#-viewmodels) from [`Entities`](data-access.md#entities), is that it makes it possible to change a [`ViewModel`](#-viewmodels) without affecting the [data access layer](../layers.md#data-layer) or the [business logic](../layers.md#business-layer):
 
-[`ViewModel`](#viewmodels):
+[`ViewModel`](#-viewmodels):
 
 ```cs
 public class CustomerViewModel
@@ -372,13 +372,13 @@ public class Customer
 }
 ```
 
-Here the [`Entity`](data-access.md#entities) and [`ViewModel`](#viewmodels) look completely different, which is totally fine.
+Here the [`Entity`](data-access.md#entities) and [`ViewModel`](#-viewmodels) look completely different, which is totally fine.
 
 
 Avoid ViewModel to ViewModel Conversion
 ---------------------------------------
 
-It is not advised to convert [`ViewModels`](#viewmodels) to other [`ViewModels`](#viewmodels) directly:
+It is not advised to convert [`ViewModels`](#-viewmodels) to other [`ViewModels`](#-viewmodels) directly:
 
 ```cs
 /// <summary>
@@ -398,7 +398,7 @@ public static void Convert(
 }
 ```
 
-What we're trying to prevent here is too much interdependence between [`ViewModels`](#viewmodels). Prefer converting from [`Entities`](data-access.md#entities) to [`ViewModel`](#viewmodels) and back:
+What we're trying to prevent here is too much interdependence between [`ViewModels`](#-viewmodels). Prefer converting from [`Entities`](data-access.md#entities) to [`ViewModel`](#-viewmodels) and back:
 
 ```cs
 Product entity = _repository.Get(id);
@@ -408,7 +408,7 @@ decimal price = entity.PriceWithoutVat * _taxCalculator.VatFactor;
 var viewModel = new EditViewModel { Price = price };
 ```
 
-This gives us finer control over where the data comes from and goes. But there might be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#viewmodels) instead:
+This gives us finer control over where the data comes from and goes. But there might be exceptions. There could be cases, where it makes more sense to operate directly on the [`ViewModels`](#-viewmodels) instead:
 
 ```cs
 public void ExpandNode(TreeViewModel viewModel, int id)
@@ -418,7 +418,7 @@ public void ExpandNode(TreeViewModel viewModel, int id)
 }
 ```
 
-It may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#viewmodels) like this:
+It may be about properties, that aren't intended for permanent storage. You can also pass other non-persisted properties between [`ViewModel`](#-viewmodels) like this:
 
 ```cs
 public QuizViewModel Answer(QuizViewModel userInput)
@@ -437,9 +437,9 @@ public QuizViewModel Answer(QuizViewModel userInput)
 Avoid Inheritance
 -----------------
 
-Inheritance is not the go-to choice for [`ViewModels`](#viewmodels).
+Inheritance is not the go-to choice for [`ViewModels`](#-viewmodels).
 
-Using inheritance creating a `base` [`ViewModel`](#viewmodels) can lead to a high number of interdependencies between the [`Views`](#views) and the [`ViewModels`](#viewmodels). If the `base` [`ViewModel`](#viewmodels) changes, it can potentially break many [`Views`](#views), making the application harder to maintain:
+Using inheritance creating a `base` [`ViewModel`](#-viewmodels) can lead to a high number of interdependencies between the [`Views`](presentation.md#views) and the [`ViewModels`](#-viewmodels). If the `base` [`ViewModel`](#-viewmodels) changes, it can potentially break many [`Views`](presentation.md#views), making the application harder to maintain:
 
 ```cs
 public abstract class ScreenViewModel
@@ -459,9 +459,9 @@ public class ProductEditViewModel : ScreenViewModel
 }
 ```
 
-Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, because we used inheritance.
+Here the `BaseViewModel` contains the properties `Name` and `Description`. These properties might potentially mean something different for the `HomePage` and `ProductEdit` [views](#-viewmodels). If we decide to rename the `base` properties to be more specific, or to change their purpose, we could be breaking multiple views, because we used inheritance.
 
-By avoiding inheritance, a [`ViewModel`](#viewmodels) can only break things that directly depend on it, reducing the potential impact of changes:
+By avoiding inheritance, a [`ViewModel`](#-viewmodels) can only break things that directly depend on it, reducing the potential impact of changes:
 
 ```cs
 public class HomePageViewModel
@@ -478,9 +478,9 @@ public class ProductEditViewModel
 }
 ```
 
-In these examples, each [`ViewModel`](#viewmodels) is self-sufficient and does not affect the other.
+In these examples, each [`ViewModel`](#-viewmodels) is self-sufficient and does not affect the other.
 
-To really 'seal' the deal, you could make the [`ViewModel`](#viewmodels) `classes` `sealed` to prevent inheritance at all:
+To really 'seal' the deal, you could make the [`ViewModel`](#-viewmodels) `classes` `sealed` to prevent inheritance at all:
 
 ```cs
 public sealed class HomePageViewModel
@@ -507,7 +507,7 @@ By keeping the members in the base class very general, and not applicable to spe
 Composition
 -----------
 
-As an alternative, you could also choose to use other design patterns, such as [composition](#view-models-composition), to reduce the impact of changes:
+As an alternative, you could also choose to use other design patterns, such as [composition](#composition), to reduce the impact of changes:
 
 ```cs
 public class HomePageViewModel
@@ -523,17 +523,17 @@ public class ProductEditViewModel
 }
 ```
 
-The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](#views) uses common properties and has `Validation`.
+The `HomePage` uses common properties and has a `Login`. The `ProductEdit` [view](presentation.md#views) uses common properties and has `Validation`.
 
 `ScreenViewModel` and the `ValidationViewModel` are reused. `ScreenViewModel` defines common properties for any screen or page. The `ValidationViewModel` has properties for data validation, like `ValidationMessages` and a `Successful` flag.
 
-By using [composition](#view-models-composition), changes to a child object can still have an impact on multiple [views](#views). But the modular nature of [composition](#view-models-composition) allows for a potentially smaller scope of dependency than [inheritance](#view-models-avoid-inheritance).
+By using [composition](#composition), changes to a child object can still have an impact on multiple [views](presentation.md#views). But the modular nature of [composition](#composition) allows for a potentially smaller scope of dependency than [inheritance](#avoid-inheritance).
 
 
 Realistic Example
 -----------------
 
-Finally, here is a realistic example of a `ProductEdit` [`ViewModel`](#viewmodels):
+Finally, here is a realistic example of a `ProductEdit` [`ViewModel`](#-viewmodels):
 
 ```cs
 // Screen ViewModel
@@ -559,6 +559,6 @@ public class ProductEditViewModel
 Conclusion
 ----------
 
-Hopefully this gave a good impression of how [`ViewModels`](#viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](../layers.md#business-layer) and [data access](../layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#viewmodels) might be used in practice. To see where they come from and go.
+Hopefully this gave a good impression of how [`ViewModels`](#-viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](../layers.md#business-layer) and [data access](../layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#-viewmodels) might be used in practice. To see where they come from and go.
 
 [back](.)
