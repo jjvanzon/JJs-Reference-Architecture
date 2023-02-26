@@ -11,7 +11,7 @@ description: "Code style helps us make things easier to read. It is about  using
 
 [back](.)
 
-[Code style](#-code-style) helps us make things easier to read. It is about  using clear names as well as white space. It also covers specific preferences for language constructs.
+[Code style](#-code-style) helps us make things easier to read. It is about  using *clear names* as well as *white space*. It also covers specific preferences for *language constructs*.
 
 <img src="images/code-style-preview.png" width="700" />
 
