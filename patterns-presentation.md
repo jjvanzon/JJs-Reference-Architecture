@@ -1,4 +1,4 @@
-`[ Moved ]`
+`[` [`Moved`](patterns/presentation.md) `]`
 
 Patterns : Presentation
 =======================

@@ -1,4 +1,4 @@
-`[ Moved ]`
+`[` [`Moved`](patterns/business-logic.md) `]`
 
 Patterns : Business
 ===================
