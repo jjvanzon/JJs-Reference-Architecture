@@ -1,24 +1,28 @@
+[back](.)
+
 Patterns
 ========
 
 `[` [`Moved`](patterns) `]`
 
-[back](.)
-
 ViewModels
 ----------
-See the [`ViewModels`](patterns/viewmodels.md) article.
+
+`[` [`Moved`](patterns/viewmodels.md) `]`
 
 Presenters
 ----------
-See the [`Presenters`](patterns/presenters.md) article.
+
+`[` [`Moved`](patterns/presenters.md) `]`
 
 Visitor
 -------
-Moved [here](patterns/business-logic.md#visitor).
+
+`[` [`Moved`](patterns/business-logic.md#visitor). `]`
 
 Resource Strings
 ----------------
-Moved [here](patterns/business-logic.md#resource-strings)
+
+`[` [`Moved`](patterns/business-logic.md#resource-strings) `]`
 
 [back](.)

@@ -1,16 +1,18 @@
+[back](.)
+
 Patterns : Business
 ===================
 
 `[` [`Moved`](patterns/business-logic.md) `]`
 
-[back](.)
-
 Visitor
 -------
-Moved [here](patterns/business-logic.md#visitor).
+
+`[` [`Moved`](patterns/business-logic.md#visitor) `]`
 
 Resource Strings
 ----------------
-Moved [here](patterns/business-logic.md#resource-strings)
+
+`[` [`Moved`](patterns/business-logic.md#resource-strings) `]`
 
 [back](.)

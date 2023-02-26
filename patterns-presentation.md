@@ -1,18 +1,18 @@
-
+[back](.)
 
 Patterns : Presentation
 =======================
 
  `[` [`Moved`](patterns/presentation.md) `]`
 
-[back](.)
-
 ViewModels
 ----------
-See the [`ViewModels`](patterns/viewmodels.md) article.
+
+`[` [`Moved`](patterns/viewmodels.md) `]`
 
 Presenters
 ----------
-See the [`Presenters`](patterns/presenters.md) article.
+
+`[` [`Moved`](patterns/presenters.md) `]`
 
 [back](.)
