@@ -1,7 +1,7 @@
-<!-- Stub for durable links -->
+`[ Moved ]`
 
-Patterns : Presentation (Moved)
-===============================
+Patterns : Presentation
+=======================
 
 [back](.)
 

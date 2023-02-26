@@ -1,7 +1,7 @@
-<!-- Stub for durable links -->
+`[ Moved ]`
 
-Patterns : Business (Moved)
-===========================
+Patterns : Business
+===================
 
 [back](.)
 
