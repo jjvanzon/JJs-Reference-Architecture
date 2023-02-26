@@ -11,6 +11,8 @@ description: "Service Oriented Architecture is about linking systems together. I
 
 [back](.)
 
+<img src="images/esb.png" width="700" />
+
 <h3>Contents</h3>
 
 - [Introduction](#introduction)
