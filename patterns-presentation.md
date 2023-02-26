@@ -1,14 +1,18 @@
-<!-- For durable links -->
+<!-- Stub for durable links -->
 
 Patterns
 ========
 
+[back](.)
+
 ViewModels
 ----------
 
-Moved [here](patterns/viewmodels.md).
+See the [`ViewModels`](patterns/viewmodels.md) article.
 
 Presenters
 ----------
 
-Moved [here](patterns/presenters.md).
+See the [`Presenters`](patterns/presenters.md) article.
+
+[back](.)
