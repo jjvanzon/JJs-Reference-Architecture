@@ -11,11 +11,12 @@ description: "Service Oriented Architecture is about linking systems together. I
 
 [back](.)
 
-<img src="images/esb.png" width="700" />
+The next part of this [software architecture](index.md) is the *Service Oriented Architecture*. It's about linking systems together. It focuses on software integration.
+
+<img src="images/esb-banner.png" width="700" />
 
 <h3>Contents</h3>
 
-- [Introduction](#introduction)
 - [The ESB Concept](#the-esb-concept)
 - [Canonical Model](#canonical-model)
 - [Less Integration Code](#less-integration-code)
@@ -38,12 +39,6 @@ description: "Service Oriented Architecture is about linking systems together. I
     - [Facade](#facade)
     - [Hidden Infrastructure](#hidden-infrastructure)
 - [Namespaces](#namespaces)
-
-
-Introduction
-------------
-
-The next part of this [software architecture](index.md) is the *Service Oriented Architecture*. It's about linking systems together. It focuses on software integration.
 
 
 The ESB Concept
