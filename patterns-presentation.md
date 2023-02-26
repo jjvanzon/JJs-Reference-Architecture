@@ -1,6 +1,6 @@
-`[` [`Moved`](patterns/presentation.md) `]`
 
-Patterns : Presentation
+
+Patterns : Presentation `[` [`Moved`](patterns/presentation.md) `]`
 =======================
 
 [back](.)
