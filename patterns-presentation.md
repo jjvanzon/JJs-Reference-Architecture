@@ -10,6 +10,10 @@ ViewModels
 
 `[` [`Moved`](patterns/viewmodels.md) `]`
 
+### Avoid ViewModel to ViewModel Conversion
+
+`[` [`Moved`](patterns/viewmodels.md#avoid-viewmodel-to-viewmodel-conversion) `]`
+
 Presenters
 ----------
 
