@@ -26,7 +26,7 @@ redirect_from:
 Controller
 ----------
 
-In an [`ASP.NET MVC`](../api.md#mvc) application a [`Controller`](presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](../JJs-Reference-Architecture) most of the responsibility is delegated to [`Presenters`](presenters.md#-presenters). The responsibilities that are left for the [`MVC`](../api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](../api.md#mvc) quirks.
+In an [`ASP.NET MVC`](../api.md#mvc) application a [`Controller`](presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](..) most of the responsibility is delegated to [`Presenters`](presenters.md#-presenters). The responsibilities that are left for the [`MVC`](../api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](../api.md#mvc) quirks.
 
 The [`Controller`](#controller) may use multiple [`Presenters`](presenters.md#-presenters) and [`ViewModels`](viewmodels.md), since it is about multiple screens.
 

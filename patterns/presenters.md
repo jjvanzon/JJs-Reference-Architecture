@@ -14,7 +14,7 @@ description: "Learn how to improve your user interfaces by using Presenters: a s
 [back](.)
 
 [`Presenters`](#-presenters) model the user interactions. A non-visual blue-print of the user interface.
-This section describes how they are implemented in [this architecture](../JJs-Reference-Architecture).
+This section describes how they are implemented in [this architecture](..).
 
 <img src="../images/presenter-code-sample.png" width="700" />
 

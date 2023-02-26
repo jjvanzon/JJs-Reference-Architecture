@@ -138,7 +138,7 @@ In web technology you could also call it:
 
 Full postback - [`AJAX`](../api.md#ajax) - [`JavaScript`](../api.md#javascript)
 
-When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](../JJs-Reference-Architecture). Only if there is a very good reason, we might use [`AJAX`](../api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api.md#javascript).
+When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](..). Only if there is a very good reason, we might use [`AJAX`](../api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api.md#javascript).
 
 But it was always the first choice to do full postbacks.
 

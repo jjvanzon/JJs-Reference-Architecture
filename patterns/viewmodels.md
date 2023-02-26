@@ -1,16 +1,16 @@
 ﻿---
-title: "🪟 ViewModels"
+title: "👓 ViewModels"
 image: "/images/view-model-code-sample.png"
 description: "A ViewModel provides a simplified and organized representation of the data to display on screen."
 ---
 
 
-🪟 ViewModels
+👓 ViewModels
 ==============
 
 [back](.)
 
-[`ViewModels`](#-viewmodels) are as simple as they are invaluable in [this architecture](../JJs-Reference-Architecture).  
+[`ViewModels`](#-viewmodels) are as simple as they are invaluable in [this architecture](..).  
 A [`ViewModel`](#-viewmodels) provides a simplified and organized representation of the data to display on screen.
 
 <img src="../images/view-model-code-sample.png" width="700" />
@@ -39,7 +39,7 @@ A [`ViewModel`](#-viewmodels) provides a simplified and organized representation
 Only Data
 ---------
 
-In [this architecture](../JJs-Reference-Architecture) a [`ViewModel`](#-viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#-viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#-viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#-viewmodels):
+In [this architecture](..) a [`ViewModel`](#-viewmodels) is meant to be a pure [data object](data-access.md#dto). It's recommended that [`ViewModels`](#-viewmodels) only have `public` properties, *no* methods, *no* constructors, *no* member initialization and *no* list instantiation. This to insist that the code *handling* the [`ViewModels`](#-viewmodels) takes full responsibility for the data. This also makes it better possible to integrate with different types of technology. Here is an example of a simple [`ViewModel`](#-viewmodels):
 
 ```cs
 public class ProductViewModel
@@ -298,7 +298,7 @@ Keeping It Clean
 No Entities
 -----------
 
-For instance, a [`ViewModel`](#-viewmodels) in [this architecture](../JJs-Reference-Architecture) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#-viewmodels) to a database, which is not always desired or even possible.
+For instance, a [`ViewModel`](#-viewmodels) in [this architecture](..) isn't supposed to reference any [`Entities`](data-access.md#entities). This is because it would potentially connect the [`ViewModel`](#-viewmodels) to a database, which is not always desired or even possible.
 
 Even when the [`ViewModel`](data-access.md#entities) looks almost exactly the same as the [`Entity`](data-access.md#entities), we tend to not use [`Entities`](data-access.md#entities) directly. 
 
