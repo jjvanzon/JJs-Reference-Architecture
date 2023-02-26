@@ -11,7 +11,7 @@ description: "Service Oriented Architecture is about linking systems together. I
 
 [back](.)
 
-[Service Oriented Architecture](#-service-oriented-architecture) is about linking systems together. It focuses on software integrations.
+[Service Oriented Architecture](#-service-oriented-architecture) is about linking systems together. It focuses on *software integration*.
 
 <img src="images/esb-banner.png" width="700" />
 
