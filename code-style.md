@@ -1,7 +1,7 @@
 ﻿---
 title: "👨‍💻 Code Style"
 image: "/images/code-style-preview.png"
-description: "Code style helps us make things easier to read. It is about  using clear names as well as white space. It also covers specific preferences for language constructs"
+description: "Code makes things easier to read. It is about  using clear names as well as white space. It also covers specific preferences for language constructs"
 ---
 
 <style>.wrapper { max-width: 90% }</style>
@@ -11,7 +11,7 @@ description: "Code style helps us make things easier to read. It is about  using
 
 [back](.)
 
-[Code style](#-code-style) helps us make things easier to read. It is about  using clear *names* as well as *white space*.  
+[Code style](#-code-style) makes things easier to read. It is about  using clear *names* as well as *white space*.  
 It also covers specific preferences for *language constructs*.
 
 <img src="images/code-style-preview.png" width="700" />
