@@ -1,6 +1,6 @@
 ﻿---
 title: "🖥️ Patterns : Presentation"
-image: "/images/view-model-banner.png"
+image: "/images/presentation-layer.png"
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>

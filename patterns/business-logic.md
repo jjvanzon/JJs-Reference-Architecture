@@ -1,6 +1,6 @@
 ﻿---
 title: "🤖 Patterns : Business Logic"
-image: "/images/visitor-pattern.png"
+image: "/images/business-layer.png"
 ---
 
 🤖 Patterns : Business Logic
