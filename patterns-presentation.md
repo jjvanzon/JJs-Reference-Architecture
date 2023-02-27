@@ -20,3 +20,6 @@ Presenters
 `[` [`Moved`](patterns/presenters.md) `]`
 
 [back](.)
+
+<div style="min-height: 512px">
+</div>
