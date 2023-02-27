@@ -1,10 +1,12 @@
 ﻿---
-title: "🎄 Patterns : Visitors"
+title: "🎄 Visitor Pattern"
 image: "/images/visitor-pattern.png"
+description: "The Visitor pattern is great for processing complex recursive tree structures, involving many objects and multiple types of objects. It usually translates a tree structure into something else."
+
 ---
 
-🎄 Patterns : Visitors
-=======================
+🎄 Visitor Pattern
+===================
 
 [back](.)
 
@@ -27,15 +29,15 @@ image: "/images/visitor-pattern.png"
 Introduction
 ------------
 
-A [`Visitor`](#visitor) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#visitor) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#visitor) can result in well performing code.
+A [`Visitor`](#-visitor-pattern) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#-visitor-pattern) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#-visitor-pattern) can result in well performing code.
 
-Whenever a whole recursive structure needs to be processed, the [`Visitor`](#visitor) pattern may be a good way to go.
+Whenever a whole recursive structure needs to be processed, the [`Visitor`](#-visitor-pattern) pattern may be a good way to go.
 
 
 Visit Methods
 -------------
 
-A [`Visitor`](#visitor) `class` has a set of [`Visit`](#visit-methods) methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
+A [`Visitor`](#-visitor-pattern) `class` has a set of [`Visit`](#visit-methods) methods, e.g. `VisitOrder`, `VisitProduct`, typically one for every `type`:
 
 ```cs
 class Visitor
@@ -63,7 +65,7 @@ void VisitDigitalProduct(Product product) { }
 Base Visitor
 ------------
 
-A `base` [`Visitor`](#visitor) might simply follow the whole recursive structure, and has a [`Visit`](#visit-methods) method for each node. Here is an example where an `Order` structure is `Visited`:
+A `base` [`Visitor`](#-visitor-pattern) might simply follow the whole recursive structure, and has a [`Visit`](#visit-methods) method for each node. Here is an example where an `Order` structure is `Visited`:
 
 ```cs
 class OrderVisitorBase
@@ -101,7 +103,7 @@ The ones with *child objects* also call [`Visit`](#visit-methods) on their child
 Specialized Visitors
 --------------------
 
-You can make *specialized* [`Visitor`](#visitor) classes, by overriding the [`Visit`](#visit-methods) methods.
+You can make *specialized* [`Visitor`](#-visitor-pattern) classes, by overriding the [`Visit`](#visit-methods) methods.
 
 If you only want to process certain `types` of `objects`, you can override [`Visit`](#visit-methods) methods for those `types` only:
 
@@ -123,7 +125,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 
 They call their `base` methods. Keep those calls in there, so the `base` will process the rest of the recursive structure!
 
-The aim for this simple new [`Visitor`](#visitor) is to create a text, that summarizes the `Order`. 
+The aim for this simple new [`Visitor`](#-visitor-pattern) is to create a text, that summarizes the `Order`. 
 Here is the code that uses a `StringBuilder` for this:
 
 ```cs
@@ -159,7 +161,7 @@ The result of the process might be a text like this:
 2 x Fidget Thing
 ```
 
-Don't be underwhelmed. This is just a simple example. The more complicated the structures: this is where the [`Visitor`](#visitor) pattern really starts to shine.
+Don't be underwhelmed. This is just a simple example. The more complicated the structures: this is where the [`Visitor`](#-visitor-pattern) pattern really starts to shine.
 
 
 Optimization
@@ -253,7 +255,7 @@ class OrderSummaryVisitor : OrderVisitorBase
 Using Fields
 ------------
 
-The result of a [`Visitor's`](#visitor) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. In the examples above, we are talking about the `StringBuilder` field. The result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It keeps our `base` [`Visitors`](#visitor) more reusable as well.
+The result of a [`Visitor's`](#-visitor-pattern) operation is typically stored in *fields* and used across multiple [`Visit`](#visit-methods) methods. In the examples above, we are talking about the `StringBuilder` field. The result structure might not have a straightforward, 1-to-1 relationship with the source structure. This makes fields the better choice over parameters and return values. It keeps our `base` [`Visitors`](#-visitor-pattern) more reusable as well.
 
 
 Polymorphic Visitation
@@ -266,7 +268,7 @@ class Supplier : Party { }
 class Customer : Party { }
 ```
 
-Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type`. A [`Visitor`](#visitor) `class` might allow tapping into different levels of the abstraction like this:
+Sometimes there is a [`Visit`](#visit-methods) method for each concrete `type`. A [`Visitor`](#-visitor-pattern) `class` might allow tapping into different levels of the abstraction like this:
 
 ```cs
 protected virtual void VisitPartyPolymorphic(Party party)
@@ -329,7 +331,7 @@ protected virtual void VisitProductBase(Product product) { }
 
 This way we can create [`Visit`](#visit-methods) methods for specific cases if needed.
 
-Here is a full example of a [`Visitor`](#visitor) `base class` with polymorphic [`Visit`](#visit-methods) methods:
+Here is a full example of a [`Visitor`](#-visitor-pattern) `base class` with polymorphic [`Visit`](#visit-methods) methods:
 
 ```cs
 class PolymorphicVisitorBase
@@ -399,7 +401,7 @@ class PolymorphicVisitorBase
 }
 ```
 
-This may seem like a lot of code, but note that the `base class` is set up with fixed patterns, and is written only once, so that the specialized [`Visitor`](#visitor) `classes` can be made much simpler.
+This may seem like a lot of code, but note that the `base class` is set up with fixed patterns, and is written only once, so that the specialized [`Visitor`](#-visitor-pattern) `classes` can be made much simpler.
 
 
 Change the Sequence
@@ -431,9 +433,9 @@ class ReversedOrderVisitor : OrderVisitorBase
 Accept Methods
 --------------
 
-The *classic* [`Visitor`](#visitor) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#visitor) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods.
+The *classic* [`Visitor`](#-visitor-pattern) pattern has a bit of a drawback in my opinion. It requires that `classes` *used by* the [`Visitor`](#-visitor-pattern) have to be *adapted*. `Accept` methods would be added to them. I think this is adapting the wrong `classes`. My advice would be not to do that, and leave out these `Accept` methods.
 
-This would keep the [`Visitor`](#visitor) `classes` self-sufficient and separated from the rest of the code.
+This would keep the [`Visitor`](#-visitor-pattern) `classes` self-sufficient and separated from the rest of the code.
 
 However, `Accept` methods could be useful for specialized use-cases for instance to prevent the [polymorphic visitation](#polymorphic-visitation) proposed earlier.
 
@@ -441,20 +443,20 @@ However, `Accept` methods could be useful for specialized use-cases for instance
 Alternatives
 ------------
 
-However, there are also alternatives for the [`Visitor`](#visitor) pattern.
+However, there are also alternatives for the [`Visitor`](#-visitor-pattern) pattern.
 
 For instance, [`JJ.Framework.Collections`](../api.md#jj-framework-collections), which allows [`LINQ`](../api.md#linq)-style processing of recursive structures, with methods like [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which work for simpler scenarios.
 
 You could also skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](../aspects.md#conversion) instead, if you're only interested in a specific part of the structure.
 
-But the [`Visitor`](#visitor) pattern might be more ideal, when the structure is quite complicated, or when you want to process the same structure in many different ways.
+But the [`Visitor`](#-visitor-pattern) pattern might be more ideal, when the structure is quite complicated, or when you want to process the same structure in many different ways.
 
 
 Conclusion
 ----------
 
-By creating a `base` [`Visitor`](#visitor) and multiple specialized [`Visitors`](#visitor), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
+By creating a `base` [`Visitor`](#-visitor-pattern) and multiple specialized [`Visitors`](#-visitor-pattern), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
 
-Another good example of a [`Visitor`](#visitor) `class` is [`.NET's`](../api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#visitor) might be different here. It can still be called a [`Visitor`](#visitor) if it operates by slightly different rules.
+Another good example of a [`Visitor`](#-visitor-pattern) `class` is [`.NET's`](../api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#-visitor-pattern) might be different here. It can still be called a [`Visitor`](#-visitor-pattern) if it operates by slightly different rules.
 
 [back](.)
