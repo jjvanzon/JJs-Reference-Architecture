@@ -28,7 +28,7 @@ redirect_from:
 Introduction
 ------------
 
-[Presentation](/layers.md#presentation-layer), [`Entity` model](data-access.md#entities) and [persistence](../aspects.md#persistence) should be straightforward [pattern-wise](README.md). If anything 'special' needs to happen it belongs in the [business layer](../layers.md#business-layer). Any number of different [patterns](README.md) can be used. But also things, that do not follow any standard [pattern](README.md).
+[Presentation](../layers.md#presentation-layer), [`Entity` model](data-access.md#entities) and [persistence](../aspects.md#persistence) should be straightforward [pattern-wise](README.md). If anything 'special' needs to happen it belongs in the [business layer](../layers.md#business-layer). Any number of different [patterns](README.md) can be used. But also things, that do not follow any standard [pattern](README.md).
 
 The [business layer](../layers.md#business-layer) externally speaks a language of [`Entities`](data-access.md#entities) or sometimes [`DTO's`](data-access.md#dto). Internally it can talk to [`Repository interfaces`](data-access.md#repository-interfaces) for [data access](../aspects.md#persistence).
 
