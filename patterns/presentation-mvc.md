@@ -26,9 +26,9 @@ redirect_from:
 Controller
 ----------
 
-In an [`ASP.NET MVC`](../api.md#mvc) application a [`Controller`](presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](../JJs-Reference-Architecture) most of the responsibility is delegated to [`Presenters`](presenters.md#-presenters). The responsibilities that are left for the [`MVC`](../api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](../api.md#mvc) quirks.
+In an [`ASP.NET MVC`](../api.md#mvc) application a [`Controller`](presentation-mvc.md#controller) has a lot of responsibilities, but in this [architecture](..) most of the responsibility is delegated to [`Presenters`](presenters.md#-presenters). The responsibilities that are left for the [`MVC`](../api.md#mvc) [`Controllers`](#controller) are the URL routing, the HTTP verbs, redirections, setting up infrastructural context and miscellaneous [`MVC`](../api.md#mvc) quirks.
 
-The [`Controller`](#controller) may use multiple [`Presenters`](presenters.md#-presenters) and [`ViewModels`](presentation.md#viewmodels), since it is about multiple screens.
+The [`Controller`](#controller) may use multiple [`Presenters`](presenters.md#-presenters) and [`ViewModels`](viewmodels.md), since it is about multiple screens.
 
 [`Entity`](data-access.md#entities) names put in [`Controller`](#controller) are plural by convention. So Customer**s**Controller not `CustomerController`.
 
@@ -40,7 +40,7 @@ This is a quirk intrinsic to [`ASP.NET MVC`](../api.md#mvc). We must conform to 
 
 At the end of a post action, you must call `RedirectToAction()` to redirect to a Get action.
 
-Before you do so, you must store the [`ViewModel`](presentation.md#viewmodels) in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the [`ViewModel`](presentation.md#viewmodels) is in the TempData dictionary. If the [`ViewModel`](presentation.md#viewmodels) exist in the TempData, you must use that [`ViewModel`](presentation.md#viewmodels), otherwise you must create a new [`ViewModel`](presentation.md#viewmodels).
+Before you do so, you must store the [`ViewModel`](viewmodels.md) in the `TempData` dictionary. In the Get action that you redirect to, you have to check if the [`ViewModel`](viewmodels.md) is in the TempData dictionary. If the [`ViewModel`](viewmodels.md) exist in the TempData, you must use that [`ViewModel`](viewmodels.md), otherwise you must create a new [`ViewModel`](viewmodels.md).
 
 Here is simplified pseudo-code in which the pattern is applied.
 
@@ -79,7 +79,7 @@ If you do not conform to the Post-Redirect-Get pattern in [`MVC`](../api.md#mvc)
 ValidationMessages in ModelState
 --------------------------------
 
-For the architecture to integrate well with [`MVC`](../api.md#mvc), you have to make [`MVC`](../api.md#mvc) aware that there are [validation](business-logic.md#validators) messages, after you have gotten a [`ViewModel`](presentation.md#viewmodels) from a [`Presenter`](presenters.md#-presenters). If you do not do this, you will get strange application navigation in case of [validation](business-logic.md#validators) errors.
+For the architecture to integrate well with [`MVC`](../api.md#mvc), you have to make [`MVC`](../api.md#mvc) aware that there are [validation](business-logic.md#validators) messages, after you have gotten a [`ViewModel`](viewmodels.md) from a [`Presenter`](presenters.md#-presenters). If you do not do this, you will get strange application navigation in case of [validation](business-logic.md#validators) errors.
 
 You do this in an [`MVC`](../api.md#mvc) HTTP GET action method.
 
@@ -94,13 +94,13 @@ if (viewModel.ValidationMessages.Any())
 }
 ```
 
-In theory we could communicate all [validation](business-logic.md#validators) messages to [`MVC`](../api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](../api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](business-logic.md#validators) summary, we simply render all the [validation messages from the [`ViewModel`](presentation.md#viewmodels) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](business-logic.md#validators) errors, then the [`ViewModel`](presentation.md#viewmodels) should give the information that the appearance of the field should be different. Our [`View's`](presentation.md#views) content is totally managed by the [`ViewModel`](presentation.md#viewmodels).
+In theory we could communicate all [validation](business-logic.md#validators) messages to [`MVC`](../api.md#mvc) instead of just communicating a single generic error message. In theory [`MVC`](../api.md#mvc) could be used to color the right input fields red automatically, but in practice this breaks easily without an obvious explanation. So instead we manage it ourselves. If we want a [validation](business-logic.md#validators) summary, we simply render all the [validation messages from the [`ViewModel`](viewmodels.md) ourselves and not use the `Html.ValidationSummary()` method at all. If we want to change the appearance of input fields if they have [validation](business-logic.md#validators) errors, then the [`ViewModel`](viewmodels.md) should give the information that the appearance of the field should be different. Our [`View's`](presentation.md#views) content is totally managed by the [`ViewModel`](viewmodels.md).
 
 
 Polymorphic RedirectToAction / View()
 -------------------------------------
 
-A [`Presenter`](presenters.md#-presenters) action method may return different types of [`ViewModels`](presentation.md#viewmodels).
+A [`Presenter`](presenters.md#-presenters) action method may return different types of [`ViewModels`](viewmodels.md).
 
 This means that in the [`MVC`](../api.md#mvc) [`Controller`](#controller) action methods, the [`Presenter`](presenters.md#-presenters) returns `object` and you should do polymorphic type checks to determine which [`View`](presentation.md#views) to go to.
 
@@ -126,7 +126,7 @@ At the end throw the following exception (from [`JJ.Framework.Exceptions`](../ap
 throw new UnexpectedTypeException(() => viewModel);
 ```
 
-To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](presentation.md#viewmodels) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
+To prevent repeating this code for each [`Controller`](#controller) action, you could program a generalized method that returns the right ActionResult depending on the [`ViewModel`](viewmodels.md) type. Do consider the performance penalty that it may impose and it is worth saying that such a method is not very easy code.
 
 
 For Loops for Lists in HTTP Postdata
@@ -143,7 +143,7 @@ An alternative to for [posting collections](../aspects.md#postdata-over-http) is
 }
 ```
 
-This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](presentation.md#viewmodels) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](presentation.md#views) code into partials.
+This solution only works if the expressions you pass to the `Html` helpers contain the full path to a [`ViewModel`](viewmodels.md) property (or hack the `HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix`) and therefore it does not work if you want to split up your [`View`](presentation.md#views) code into partials.
 
 
 Return URL's

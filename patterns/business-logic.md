@@ -1,6 +1,6 @@
 ﻿---
 title: "🤖 Patterns : Business Logic"
-image: "/images/visitor-pattern-code-sample-2.png"
+image: "/images/visitor-pattern-2.png"
 redirect_from:
   - /patterns-business-logic.md
 ---

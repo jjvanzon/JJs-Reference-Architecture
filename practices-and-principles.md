@@ -215,7 +215,7 @@ Separation of concerns can also be applied to technical aspects, such as [valida
 In this [architecture](index.md) we apply both a split up into functional and technical aspects, creating a 2dimensional separation of concerns. This produces a matrix of classes:
 
 
-|                | [`Dto`](patterns/data-access.md#dto) | [`Mapping`](patterns/data-access.md#mapping) | [`Validator`](patterns/business-logic.md#validators) | [`ViewModel`](patterns/presentation.md#viewmodels) | [`Presenter`](patterns/presenters.md#-presenters) | `...` |
+|                | [`Dto`](patterns/data-access.md#dto) | [`Mapping`](patterns/data-access.md#mapping) | [`Validator`](patterns/business-logic.md#validators) | [`ViewModel`](patterns/viewmodels.md) | [`Presenter`](patterns/presenters.md#-presenters) | `...` |
 |----------------|-----|-----|-----|-----|-----|-----|
 | __`Order`__    | `OrderDto`    | `OrderMapping`    | `OrderValidator`    | `OrderViewModel`    | `OrderPresenter`    | `...` |
 | __`Product`__  | `ProductDto`  | `ProductMapping`  | `ProductValidator`  | `ProductViewModel`  | `ProductPresenter`  | `...` |
@@ -417,8 +417,8 @@ Here are rules for null-checks for other constructs:
 
 #### ViewModels
 
-- [`ViewModels`](patterns/presentation.md#viewmodels) that are passed to [`Presenters`](patterns/presenters.md#-presenters) may contain nulls.
-- You can use the [`NullCoalesce`](patterns/presentation.md#nullcoalesce-viewmodels) pattern to resolve the nulls before processing the [`ViewModel`](patterns/presentation.md#viewmodels) object, so that null-checks can be omitted from the rest of the code.
+- [`ViewModels`](patterns/viewmodels.md) that are passed to [`Presenters`](patterns/presenters.md#-presenters) may contain nulls.
+- You can use the [`NullCoalesce`](patterns/presentation.md#nullcoalesce-viewmodels) pattern to resolve the nulls before processing the [`ViewModel`](patterns/viewmodels.md) object, so that null-checks can be omitted from the rest of the code.
 
 #### Custom-Programmed Framework API's
 
@@ -489,7 +489,7 @@ Often combining a domain term with a [design pattern](patterns/README.md) gives 
 
     CustomerViewModel
 
-This instead of calling it just `Customer` or just [`ViewModel`](patterns/presentation.md#viewmodels).
+This instead of calling it just `Customer` or just [`ViewModel`](patterns/viewmodels.md).
 
 Here are a few more examples:
 
@@ -1600,7 +1600,7 @@ See also: [`TryGet-Insert-Update`](patterns/other.md#tryget-insert-update).
 
 ### Whirlpool Anti-Pattern / Inappropriate Conversions
 
-This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a [`ViewModel`](patterns/presentation.md#viewmodels) to an [entity](patterns/data-access.md#entities). However, additional conversions such as converting one type of [`ViewModel`](patterns/presentation.md#viewmodels) to another type of [`ViewModel`](patterns/presentation.md#viewmodels) are not recommended.
+This [architecture](index.md) contains multiple layers that require converting one type to another, for instance converting a [`ViewModel`](patterns/viewmodels.md) to an [entity](patterns/data-access.md#entities). However, additional conversions such as converting one type of [`ViewModel`](patterns/viewmodels.md) to another type of [`ViewModel`](patterns/viewmodels.md) are not recommended.
 
 `< TODO: Describe that it is also called the Whirlpool anti-pattern. Related to Inappropriate conversions. It is when data get converted in one form to another to another to another with very little need, not even for abstraction layers. You could consider moving more of the conversion logic that is spread into a single place instead and refactor away some of the conversions. You could also consider that instead of converting from source to dest and then reprocessing dest and then reprocessing dest, you just convert source to multiple dest items, not relying on intermediate data transformations. >`
 

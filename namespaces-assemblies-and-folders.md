@@ -1,6 +1,6 @@
 ﻿---
 title: "🍱 Namespaces, Assemblies & Folders"
-image: "/images/namespaces-assemblies-and-folders-preview.png"
+image: "/images/namespaces-assemblies-and-folders.png"
 ---
 
 <style>thead{display:none;}</style>
