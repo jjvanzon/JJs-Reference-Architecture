@@ -1,6 +1,6 @@
 ﻿---
 title: "🎄 Visitor Pattern"
-image: "/images/visitor-pattern.png"
+image: "/images/visitor-pattern-banner.png"
 description: "The Visitor pattern is good at processing complex recursive tree structures, involving many objects and multiple types of objects. It usually translates a tree structure into something else."
 
 ---
@@ -12,7 +12,7 @@ description: "The Visitor pattern is good at processing complex recursive tree s
 
 [`Visitor`](#-visitor-pattern) `classes` process recursive tree structures that might involve many `objects` and multiple `types` of `objects`.
 
-<img src="../images/visitor-pattern.png" width="700" />
+<img src="../images/visitor-pattern-banner.png" width="700" />
 
 <h2>Contents</h2>
 
