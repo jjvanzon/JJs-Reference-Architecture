@@ -8,7 +8,7 @@ description: "A ViewModel provides a simplified and organized representation of 
 🪟 ViewModels
 ==============
 
-[back](.)
+[back](presentation.md)
 
 [`ViewModels`](#-viewmodels) are as simple as they are invaluable in [this architecture](..).  
 A [`ViewModel`](#-viewmodels) provides a simplified and organized representation of the data to display on screen.
@@ -561,4 +561,4 @@ Conclusion
 
 Hopefully this gave a good impression of how [`ViewModels`](#-viewmodels) might be structured. They can enable technology independence, preventing hard coupling to [business logic](../layers.md#business-layer) and [data access](../layers.md#data-layer), offering a flexible way to model the user interaction. In the coming sections, more patterns will be introduced, to illustrate how these [`ViewModels`](#-viewmodels) might be used in practice. To see where they come from and go.
 
-[back](.)
+[back](presentation.md)
