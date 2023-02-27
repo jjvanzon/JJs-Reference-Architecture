@@ -1,6 +1,6 @@
 ﻿---
 title: "🖥️ Patterns : Presentation"
-image: "/images/view-model-code-sample.png"
+image: "/images/view-model-banner.png"
 redirect_from:
   - /patterns-presentation.md
 ---
