@@ -275,7 +275,7 @@ See the following [patterns](patterns/README.md):
 - [TryGet-Insert-Update](patterns/other.md#try-get-insert-update)
 - [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](patterns/data-transformation.md#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
 - [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](patterns/data-transformation.md#singular-plural-non-recursive-recursive-and-withrelatedentities)
-- [Visitor](patterns/business-logic.md#visitor)
+- [Visitor](patterns/visitors.md)
 
 
 Defaults

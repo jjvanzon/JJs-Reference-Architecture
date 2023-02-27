@@ -22,7 +22,7 @@ Presenters
 Visitor
 -------
 
-`[` [`Moved`](patterns/business-logic.md#visitor). `]`
+`[` [`Moved`](patterns/visitors.md). `]`
 
 Resource Strings
 ----------------

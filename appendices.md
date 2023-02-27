@@ -51,7 +51,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Business`](layers.md#business-layer): [`RepositoryWrappers`](patterns/data-access.md#repositorywrappers)
 - [`Business`](layers.md#business-layer): [`Dtos`](patterns/data-access.md#dto) (optional)
 - [`Business`](layers.md#business-layer): [`Calculations`](aspects.md#calculation)
-- [`Business`](layers.md#business-layer): [`Visitors`](patterns/business-logic.md#visitor)
+- [`Business`](layers.md#business-layer): [`Visitors`](patterns/visitors.md)
 - [`Business`](layers.md#business-layer): [`Factories`](patterns/other.md#factory) (optional)
 - [`Business`](layers.md#business-layer): [`EntityWrappers`](patterns/other.md#wrapper) (optional)
 - [`Business`](layers.md#business-layer): Other [`Helpers`](patterns/other.md#helper) (optional)
