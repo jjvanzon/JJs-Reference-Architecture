@@ -1,7 +1,7 @@
 ﻿---
 title: "🎄 Visitor Pattern"
 image: "/images/visitor-pattern.png"
-description: "The Visitor pattern is great for processing complex recursive tree structures, involving many objects and multiple types of objects. It usually translates a tree structure into something else."
+description: "The Visitor pattern is good at processing complex recursive tree structures, involving many objects and multiple types of objects. It usually translates a tree structure into something else."
 
 ---
 
@@ -9,6 +9,10 @@ description: "The Visitor pattern is great for processing complex recursive tree
 ===================
 
 [back](.)
+
+[`Visitor`](#-visitor-pattern) `classes` process recursive tree structures that might involve many `objects` and multiple `types` of `objects`.
+
+<img src="../images/visitor-pattern.png" width="700" />
 
 <h2>Contents</h2>
 
@@ -29,7 +33,7 @@ description: "The Visitor pattern is great for processing complex recursive tree
 Introduction
 ------------
 
-A [`Visitor`](#-visitor-pattern) `class` processes a recursive tree structure that might involve many `objects` and multiple `types` of `objects`. Usually a [`Visitor`](#-visitor-pattern) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#-visitor-pattern) can result in well performing code.
+Usually a [`Visitor`](#-visitor-pattern) translates a complex structure into something else. Examples are calculating total costs over a recursive structure, or filtering down a whole `object` graph by complex criteria. [`Visitors`](#-visitor-pattern) can result in well performing code.
 
 Whenever a whole recursive structure needs to be processed, the [`Visitor`](#-visitor-pattern) pattern may be a good way to go.
 
