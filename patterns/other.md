@@ -1,7 +1,5 @@
 ﻿---
 title: "⚙️ Patterns : Other"
-redirect_from:
-  - /patterns-other.md
 ---
 
 `[ Draft ]`
