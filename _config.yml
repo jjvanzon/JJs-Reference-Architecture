@@ -1,6 +1,7 @@
 theme: jekyll-theme-midnight
 title: 🏛 JJ's Reference Architecture 🏛
 description: about software development techniques
+basewebsite: /JJs-Reference-Architecture
 plugins:
   - jekyll-relative-links
   - jekyll-default-layout
