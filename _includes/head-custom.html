@@ -10,7 +10,7 @@
 <!-- link rel="shortcut icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}" -->
 
 {% if page.keywords %}
-<meta name="keywords" content="{{ page.keywords | escape }}">
+<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
 {% endif %}
 
 <!-- JJ.Framework scripts (for RememberScrollPosition). -->
