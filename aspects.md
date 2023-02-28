@@ -639,7 +639,7 @@ If you insist on using `Log4Net`, make a separate `ILogger` implementation behin
 Multi-Language / Translations / Culture
 ---------------------------------------
 
-For button texts and other labels in an application: see [Resource `strings`](patterns/business-logic.md#resource-strings). That does not solve multi-lingual user data, for which multiple solutions are possible.
+For button texts and other labels in an application: see [Resource `strings`](patterns/resource-strings.md). That does not solve multi-lingual user data, for which multiple solutions are possible.
 
 `< TODO: Mention: Setting the thread culture rather than custom handling of the current culture. Also: prefer using the culture name as a key in the database directly, rather than a surrogate key. >`
 

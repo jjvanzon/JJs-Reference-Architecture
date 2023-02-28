@@ -27,6 +27,7 @@ image: "/images/business-layer.png"
 <li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/patterns/resource-strings.html">Resource Strings</a></li>
 </ul>
 
+
 Introduction
 ------------
 

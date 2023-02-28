@@ -111,13 +111,13 @@ This eliminates the need to repeat the [`Resource Name`](#visual-studio-editor) 
 Reusability
 -----------
 
-[`JJ.Framework.ResourceStrings`](../api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
+[`JJ.Framework.ResourceStrings`](../api.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#-resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
 
 Use the Business Layer
 ----------------------
 
-[`Resource strings`](#resource-strings) may play a role beyond just presentation. They're also commonly used in the [business layer](../layers.md#business-layer). Keeping the `DisplayNames` for [model](data-access.md#entities) properties in the [`business layer`](../layers.md#business-layer) makes it possible to reuse them from multiple places.
+[`Resource strings`](#-resource-strings) may play a role beyond just presentation. They're also commonly used in the [business layer](../layers.md#business-layer). Keeping the `DisplayNames` for [model](data-access.md#entities) properties in the [`business layer`](../layers.md#business-layer) makes it possible to reuse them from multiple places.
 
 
 For More Information
