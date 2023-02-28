@@ -86,7 +86,7 @@ Bridge Entities
 
 An *bridge* [entity](patterns/data-access.md#entities) applies to `n => n` relationships and may require an additional table to make the link between the [entities](patterns/data-access.md#entities):
 
-<img src="images/bridge-entity-table-with-composite-key.png" width="200"/>
+<img src="../images/bridge-entity-table-with-composite-key.png" width="200"/>
 
 Using an [`ORM`](#orm), the bridge [entity](patterns/data-access.md#entities) might not be visible in the code, but can be managed as two collections inside the two main [entities](patterns/data-access.md#entities):
 
@@ -128,7 +128,7 @@ This also has the advantage, that the [entity](patterns/data-access.md#entities)
 
 It might be advised, that the bridge table not rely on a *composite* key of the two `ID's`. A single *surrogate* `ID` might do better:
 
-<img src="images/bridge-entity-table-with-surrogate-key.png" width="200"/>
+<img src="../images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
 This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that don't look pretty, etc.
 

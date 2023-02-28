@@ -989,7 +989,7 @@ For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nu
 
 To include a file as an embedded resource, you could set the following property in [`Visual Studio`](#visual-studio):
 
-![](images/sql-as-embedded-resource.png)
+![](../images/sql-as-embedded-resource.png)
 
 [`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](patterns/other.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
@@ -1020,7 +1020,7 @@ Executing queries onto a database would normally be done through [`ORM`](#orm), 
 
 Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`:
 
-![](images/sql-sub-folder.png)
+![](../images/sql-sub-folder.png)
 
 The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](#sql-executor) might be used.
 
@@ -1028,7 +1028,7 @@ With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-type
 
 The first choice of doing it might be to make the [`SQL`](#sql) files embedded resources:
 
-![](images/sql-as-embedded-resource.png)
+![](../images/sql-as-embedded-resource.png)
 
 This deploys the [`SQL`](#sql) together with your `EXE` or `DLL`, because compiles the [`SQL`](#sql) file right into the assembly.
 
@@ -1040,7 +1040,7 @@ update Ingredient set Name = @name where ID = @id;
 
 Then you can put an enum in the [`Sql`](#sql) folder in your `.NET` project:
 
-![](images/sql-enum.png)
+![](../images/sql-enum.png)
 
 Add `enum` members that correspond to the file names of the [`SQL`](#sql) files:
 
@@ -1102,7 +1102,7 @@ The column names in the [`SQL`](#sql) are *case sensitive!*
 
 It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](patterns/data-access.md#entities) type name, so they stay grouped together:
 
-![](images/sql-file-names.png)
+![](../images/sql-file-names.png)
 
 #### With NHibernate
 
@@ -1126,7 +1126,7 @@ An implementation of [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibern
 
 It might be a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use loose *files:*
 
-![](images/sql-as-content-file.png)
+![](../images/sql-as-content-file.png)
 
 Here is code to create the [`SqlExecutor`](#sql-executor) and execute the [`SQL`](#sql) file:
 
