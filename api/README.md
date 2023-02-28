@@ -13,6 +13,6 @@ Contents
 --------
 
 - 📀 [ORM](misc.md)
-- 📦 [API's Misc](misc.md)
+- 📦 [Misc](misc.md)
 
 [back](..)
