@@ -7,7 +7,7 @@ description: "A technique in .NET to store button texts and translations of doma
 🌍 Resource Strings
 ====================
 
-[back](.)
+[back](business-logic.md)
 
 There is a technique in [`.NET`](../api.md#dotnet) to store `Button Texts` and translations of [domain](data-access.md#entities) terminology: `Resource Strings`. Translations can be stored in `resx` files and edited in [`Visual Studio`](../api.md#visual-studio) like this:
 
@@ -115,4 +115,4 @@ For More Information
 
 For extra information in Dutch about how to structure the [`Resource` files](#file-names), see [Appendix B](../appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
-[back](.)
+[back](business-logic.md)
