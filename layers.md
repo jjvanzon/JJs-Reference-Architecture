@@ -105,13 +105,13 @@ It starts with the database. This can be a *relational database* like [`Microsof
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api/misc.md#orm)), like [`NHibernate`](api/misc.md#nhibernate). This [`ORM`](api/misc.md#orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api/misc.md#orm)), like [`NHibernate`](api/orm.md#nhibernate). This [`ORM`](api/misc.md#orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
     
-It could also be a different data access technology: a different [`ORM`](api/misc.md#orm), like [`Entity Framework`](api/misc.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/misc.md#sql) to execute raw [`SQL`](api/misc.md#sql) onto the database.
+It could also be a different data access technology: a different [`ORM`](api/misc.md#orm), like [`Entity Framework`](api/orm.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/misc.md#sql) to execute raw [`SQL`](api/misc.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns/data-access.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns/data-access.md#entities). [`NHibernate`](api/misc.md#nhibernate) needs [mappings](patterns/data-access.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns/data-access.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns/data-access.md#entities). [`NHibernate`](api/orm.md#nhibernate) needs [mappings](patterns/data-access.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
 The [`FluentNHibernate API`](api/misc.md#fluent-nhibernate) can help set up these [mappings](patterns/data-access.md#mapping).
 
@@ -121,7 +121,7 @@ With all this in place, out come objects called [entities](patterns/data-access.
 
 ### Repositories
 
-[`NHibernate`](api/misc.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns/data-access.md#repository) instead. You might see a [`Repository`](patterns/data-access.md#repository) as a *set of queries*. Each [entity type](patterns/data-access.md#entities) could have its own [`Repository`](patterns/data-access.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns/data-access.md#repository) keep the rest of the code independent of [`NHibernate`](api/misc.md#nhibernate), in case you would like to switch to a different data technology.
+[`NHibernate`](api/orm.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns/data-access.md#repository) instead. You might see a [`Repository`](patterns/data-access.md#repository) as a *set of queries*. Each [entity type](patterns/data-access.md#entities) could have its own [`Repository`](patterns/data-access.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns/data-access.md#repository) keep the rest of the code independent of [`NHibernate`](api/orm.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
@@ -131,7 +131,7 @@ The [`Repository`](patterns/data-access.md#repository) implementations might not
 
 The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part.
 
-The platform-*specific* part concerns itself with [`NHibernate`](api/misc.md#nhibernate) and [`SQL Server`](api/misc.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/misc.md#sql-server) or [`NHibernate`](api/misc.md#nhibernate) at all.
+The platform-*specific* part concerns itself with [`NHibernate`](api/orm.md#nhibernate) and [`SQL Server`](api/misc.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/misc.md#sql-server) or [`NHibernate`](api/orm.md#nhibernate) at all.
 
 This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also helps deploy the same code to different environments like *mobile*, *Windows* or *web*.
 

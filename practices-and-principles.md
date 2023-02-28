@@ -257,9 +257,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api/misc.md#nhibernate) and an [`SQL Server`](api/misc.md#sql-server) database. You could not use the [entity model](patterns/data-access.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api/misc.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api/orm.md#nhibernate) and an [`SQL Server`](api/misc.md#sql-server) database. You could not use the [entity model](patterns/data-access.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api/misc.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns/data-access.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns/data-access.md#entities) in [`XML`](api/misc.md#xml), while in a web environment we might store things in [`SQL Server`](api/misc.md#sql-server) Server using [`NHibernate`](api/misc.md#nhibernate).
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns/data-access.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns/data-access.md#entities) in [`XML`](api/misc.md#xml), while in a web environment we might store things in [`SQL Server`](api/misc.md#sql-server) Server using [`NHibernate`](api/orm.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -675,7 +675,7 @@ So many overloads you cannot see which to pick.
 
 An interface tries to abstract / generalize multiple similar problems into one solution. If an interface exposes the underlying solution, we speak of a leaky abstraction.
 
-For example: this [`Repository interface`](patterns/data-access.md#repository-interfaces) exposes the underlying [`NHibernate`](api/misc.md#nhibernate) technology:
+For example: this [`Repository interface`](patterns/data-access.md#repository-interfaces) exposes the underlying [`NHibernate`](api/orm.md#nhibernate) technology:
 
 ```cs
 interface IMyRepository
@@ -684,7 +684,7 @@ interface IMyRepository
 }
 ```
 
-The [`Repository interface`](patterns/data-access.md#repository-interfaces) should not have shown [`NHibernate`](api/misc.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the [`Repository's`](patterns/data-access.md#repository) job is to offer a set of optimal queries. With the leaky interface above, a [`Repository`](patterns/data-access.md#repository) cannot do its job anymore.
+The [`Repository interface`](patterns/data-access.md#repository-interfaces) should not have shown [`NHibernate`](api/orm.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the [`Repository's`](patterns/data-access.md#repository) job is to offer a set of optimal queries. With the leaky interface above, a [`Repository`](patterns/data-access.md#repository) cannot do its job anymore.
 
 The following example is better.
 

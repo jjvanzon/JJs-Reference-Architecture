@@ -73,7 +73,7 @@ enum IndustryEnum
 
 <h3 id="collections">Collections</h3>
 
-Creating collections upon initialization is recommended for [`Entity`](#entities) `classes`. [`NHibernate`](../api/misc.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
+Creating collections upon initialization is recommended for [`Entity`](#entities) `classes`. [`NHibernate`](../api/orm.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
 
 ```cs
 class Supplier
@@ -85,7 +85,7 @@ class Supplier
 
 <h3 id="virtual-members">Virtual Members</h3>
 
-For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](../aspects.md#persistence) may not work. This is because [`ORM's`](../api/misc.md#orm) want to create [`Proxy classes`](../api/misc.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](../aspects.md#persistence) may not work. This is because [`ORM's`](../api/misc.md#orm) want to create [`Proxy classes`](../api/orm.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
 ```cs
 class Supplier
@@ -99,7 +99,7 @@ class Supplier
 
 <h3 id="inheritance">Inheritance</h3>
 
-Generally avoid [inheritance](../api/misc.md#inheritance) within your [`Entity`](#entities) models, because it can make using data technologies harder.
+Generally avoid [inheritance](../api/orm.md#inheritance) within your [`Entity`](#entities) models, because it can make using data technologies harder.
 
 
 <h3 id="real-code">Real Code</h3>
@@ -120,7 +120,7 @@ public class Supplier
 Mapping
 -------
 
-`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/misc.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/misc.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/orm.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/misc.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 
 DTO

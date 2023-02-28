@@ -113,7 +113,7 @@ The [OneToManyRelationship](api/misc.md#onetomanyrelationship) is an `API` from 
 
 ### Entity Framework
 
-[`Entity Framework`](api/misc.md#entity-framework) automatically does inverse property management for you.
+[`Entity Framework`](api/orm.md#entity-framework) automatically does inverse property management for you.
 
 ### Property Setters
 
@@ -734,7 +734,7 @@ Performance
 Persistence
 -----------
 
-To access a data store (usually a database), [`JJ.Framework.Data`](api/misc.md#jj-framework-data) will be used. Through that framework you can access data using different underlying persistence technologies, such as [`NHibernate`](api/misc.md#nhibernate) and [`Entity Framework`](#entity-framework) or even flat files or [`XML`](api/misc.md#xml). The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
+To access a data store (usually a database), [`JJ.Framework.Data`](api/misc.md#jj-framework-data) will be used. Through that framework you can access data using different underlying persistence technologies, such as [`NHibernate`](api/orm.md#nhibernate) and [`Entity Framework`](#entity-framework) or even flat files or [`XML`](api/misc.md#xml). The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
 
 The main interface of the framework is `IContext`.
 

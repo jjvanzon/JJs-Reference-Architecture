@@ -252,7 +252,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="#nhibernate">NHibernate</a>
+    <a href="orm.html#nhibernate">NHibernate</a>
   </th>
   <td>
       A type of <a href="#orm"><code>ORM</code></a>. Chosen in several <code>JJ</code> project because an employer also so happened to use it.
@@ -265,7 +265,7 @@ List of API's (and other tech)
        QueryOver</a>
   </th>
   <td>
-      A strongly-typed query language like <a href="#linq"><code>LINQ</code></a>, but then the <a href="#nhibernate"><code>NHibernate</code></a> version.
+      A strongly-typed query language like <a href="#linq"><code>LINQ</code></a>, but then the <a href="orm.html#nhibernate"><code>NHibernate</code></a> version.
   </td>
 </tr>
 
@@ -281,10 +281,10 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="#entity-framework">Entity Framework</a>
+    <a href="orm.html#entity-framework">Entity Framework</a>
   </th>
   <td>
-      A type of <a href="#orm"><code>ORM</code></a>. Chosen less in the <code>JJ</code> projects, because of more experience with <a href="#nhibernate"><code>NHibernate</code></a>. Worth considering though.
+      A type of <a href="#orm"><code>ORM</code></a>. Chosen less in the <code>JJ</code> projects, because of more experience with <a href="orm.html#nhibernate"><code>NHibernate</code></a>. Worth considering though.
   </td>
 </tr>
 
@@ -312,7 +312,7 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="#sql"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="#nhibernate"><code>NHibernate</code></a> or <a href="#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
+      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="#sql"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="orm.html#nhibernate"><code>NHibernate</code></a> or <a href="orm.html#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
   </td>
 </tr>
 
@@ -322,7 +322,7 @@ List of API's (and other tech)
        JJ.Framework.Data.EntityFramework</a>
   </th>
   <td>
-      <a href="#entity-framework"><code>Entity Framework</code></a> extension to work with <code>interfaces</code> from <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a>.
+      <a href="orm.html#entity-framework"><code>Entity Framework</code></a> extension to work with <code>interfaces</code> from <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a>.
   </td>
 </tr>
 
@@ -342,7 +342,7 @@ List of API's (and other tech)
        JJ.Framework.Data.NHibernate</a>
   </th>
   <td>
-      <a href="#nhibernate"><code>NHibernate</code></a> extension to work with <code>interfaces</code> from <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a>.
+      <a href="orm.html#nhibernate"><code>NHibernate</code></a> extension to work with <code>interfaces</code> from <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a>.
   </td>
 </tr>
 
@@ -971,7 +971,7 @@ internal interface IConnectionStrings
 
 This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns/other.md#rich-models), [entity](patterns/data-access.md#entities), `API` or otherwise.
 
-There may be other options available. [`NHibernate`](#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
+There may be other options available. [`NHibernate`](orm.md#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](orm.md#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
 ### XML
 
@@ -1106,7 +1106,7 @@ It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](
 
 #### With NHibernate
 
-If you use [`SqlExecutor`](#sql-executor) in combination with [`NHibernate`](#nhibernate) you might want to 
+If you use [`SqlExecutor`](#sql-executor) in combination with [`NHibernate`](orm.md#nhibernate) you might want to 
 use the [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) instead of the default [`SqlExecutorFactory`](#sql-executor):
 
 ```cs
@@ -1116,7 +1116,7 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
     SqlSourceTypeEnum.EmbeddedResource, session);
 ```
 
-This version uses an `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as [`NHibernate`](#nhibernate), we made it aware of its `ISession`.
+This version uses an `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as [`NHibernate`](orm.md#nhibernate), we made it aware of its `ISession`.
 
 An implementation of [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
 

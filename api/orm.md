@@ -18,16 +18,16 @@ An `ORM` aims to make it easier to focus on the logic around an [entity](pattern
 - [Bridge Entities](#bridge-entities)
 - [Binary Fields](#binary-fields)
 - [Inheritance](#inheritance)
-  - [Problem: Entity / Proxy Type Mismatch](#problem-entity--proxy-type-mismatch)
-  - [Problem: Base Proxy / Derived Proxy Type Mismatch](#problem-base-proxy--derived-proxy-type-mismatch)
-  - [Problem: 2 Proxies / 1 Entity](#problem-2-proxies--1-entity)
-  - [Problem: Query Performance](#problem-query-performance)
-  - [Alternative: Unproxy for Reference Comparison](#alternative-unproxy-for-reference-comparison)
-  - [Alternative: Unproxy for Type Evaluation](#alternative-unproxy-for-type-evaluation)
-  - [Alternative: ID Comparison](#alternative-id-comparison)
-  - [Alternative: 1-to-1 Relationship](#alternative-1-to-1-relationship)
-  - [Alternative: Interfaces](#alternative-interfaces)
-  - [Alternative: No Inheritance](#alternative-no-inheritance)
+    - [Problem: Entity / Proxy Type Mismatch](#problem-entity--proxy-type-mismatch)
+    - [Problem: Base Proxy / Derived Proxy Type Mismatch](#problem-base-proxy--derived-proxy-type-mismatch)
+    - [Problem: 2 Proxies / 1 Entity](#problem-2-proxies--1-entity)
+    - [Problem: Query Performance](#problem-query-performance)
+    - [Alternative: Unproxy for Reference Comparison](#alternative-unproxy-for-reference-comparison)
+    - [Alternative: Unproxy for Type Evaluation](#alternative-unproxy-for-type-evaluation)
+    - [Alternative: ID Comparison](#alternative-id-comparison)
+    - [Alternative: 1-to-1 Relationship](#alternative-1-to-1-relationship)
+    - [Alternative: Interfaces](#alternative-interfaces)
+    - [Alternative: No Inheritance](#alternative-no-inheritance)
 - [Generic Interfaces](#generic-interfaces)
 - [Conclusion](#conclusion)
 - [Entity Framework](#entity-framework)
@@ -78,7 +78,7 @@ It may also help to create [entities](patterns/data-access.md#entities) in a spe
 Read-Write Order
 ----------------
 
-It seems [`ORM's`](#orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#committed--uncommitted-objects).
+It seems [`ORM's`](#orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#uncommitted-objects).
 
 
 Bridge Entities

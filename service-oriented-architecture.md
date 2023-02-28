@@ -257,7 +257,7 @@ These [namespaces](namespaces-assemblies-and-folders.md) use a hypothetical `Ord
 | __`JJ.LocalServices`__                          | Root [`namespace`](namespaces-assemblies-and-folders.md) for `Windows` services. (Not part of this [service architecture](#-service-oriented-architecture), but this is where that other type of service goes.)
 | __`JJ.Data.Canonical`__                         | Where the [`Canonical` entities](#canonical-model) are modeled.
 | __`JJ.Data.Esb`__                               | [Models](#esb-model) for [`Enterprises`](#enterprises), `Users`, [`ConnectionTypes`](#connectiontypes), [`Connections`](#connections), etc. Basically, the configuration settings of this architecture.
-| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api/misc.md#nhibernate).
+| __`JJ.Data.Esb.NHibernate`__                    | Stores the [`Esb` model](#esb-model) using [`NHibernate`](api/orm.md#nhibernate).
 | __`JJ.Data.Esb.SqlClient`__                     | [`SQL`](api/misc.md#sql) queries for working with the [`Esb`](#esb-model) database.
 | __`JJ.Business.Canonical`__                     | Shared [logic](layers.md#business-layer) that operates on [`Canonical`](#canonical-model) models.
 | __`JJ.Business.Esb`__                           | [Business logic](layers.md#business-layer) for managing the [`Esb` model](#esb-model).
