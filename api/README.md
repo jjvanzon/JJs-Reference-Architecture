@@ -7,10 +7,7 @@ title: "🎁 API's"
 
 [back](..)
 
-This [software architecture](../index.md)'s technology choices are described here.
-
-Contents
---------
+This [software architecture's](../index.md) technology choices are described here.
 
 - 📀 [ORM](orm.md)
 - 📦 [Misc](misc.md)
