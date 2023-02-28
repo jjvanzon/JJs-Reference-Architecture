@@ -11,10 +11,7 @@ Documentation about software development techniques. Used as a base in several h
 
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
-- 🍱 [Namespaces, Assemblies & Folders](namespaces-assemblies-and-folders.md)
-- 💽 [Patterns : Data Access](patterns/data-access.md)
-- 🤖 [Patterns : Business Logic](patterns/business-logic.md)
-- 🖥️ [Patterns : Presentation ](patterns/presentation.md) `[ Draft ]`
+- 🖥️ [Patterns](patterns/README.md) `[ Draft ]`
 - 🎁 [API's](api.md)
 - 🌍 [Service Oriented Architecture](service-oriented-architecture.md)
 - 👨‍💻 [Code Style](code-style.md)
