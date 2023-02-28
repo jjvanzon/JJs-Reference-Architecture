@@ -10,6 +10,8 @@ keywords:
   - .net
   - coding
   - programming
+  - software engineering
+  - software development
   - design patterns
   - software design
   - software architecture
