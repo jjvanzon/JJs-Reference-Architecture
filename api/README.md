@@ -12,7 +12,7 @@ This [software architecture](..\index.md)'s technology choices are described her
 Contents
 --------
 
-- 📀 [ORM](misc.md)
+- 📀 [ORM](orm.md)
 - 📦 [Misc](misc.md)
 
 [back](..)
