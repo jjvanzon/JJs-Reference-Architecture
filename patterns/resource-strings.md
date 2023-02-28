@@ -2,6 +2,21 @@
 title: "🌍 Resource Strings"
 image: "/images/resource-string-editor.png"
 description: "A technique in .NET to store button texts and translations of domain terminology."
+keywords:
+  - resource strings
+  - string resources
+  - translations
+  - globalization
+  - localization
+  - resx
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 🌍 Resource Strings
@@ -22,7 +37,6 @@ There is a technique in [`.NET`](../api.md#dotnet) to store translations for but
 - [Reusability](#reusability)
 - [Use the Business Layer](#use-the-business-layer)
 - [For More Information](#for-more-information)
-
 
 
 File Names
