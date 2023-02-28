@@ -15,8 +15,7 @@ image: "/images/business-layer.png"
 <li><a href="#repositorywrappers">RepositoryWrappers</a></li>
 <li><a href="#validators">Validators</a></li>
 <li><a href="#sideeffects">SideEffects</a></li>
-<li><a href="#linkto">LinkTo</a></li>
-<li>
+<li><a href="#linkto">LinkTo</a>
     <ul>
     <li><a href="#unlink">Unlink</a></li> 
     <li><a href="#newlinkto">NewLinkTo</a></li> 
