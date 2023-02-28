@@ -1,6 +1,7 @@
 ﻿---
 title: "🌍 Resource Strings"
 image: "/images/resource-string-editor.png"
+description: "A technique in .NET to store button texts and translations of domain terminology."
 ---
 
 🌍 Resource Strings
@@ -8,10 +9,14 @@ image: "/images/resource-string-editor.png"
 
 [back](.)
 
+There is a technique in [`.NET`](../api.md#dotnet) to store `Button Texts` and translations of [domain](data-access.md#entities) terminology: `Resource Strings`.
+
+Translations can be stored in `resx` files with this editor in [`Visual Studio`](../api.md#visual-studio):
+
+![String Resource Editor](../images/resource-string-editor.png)
+
 <h2>Contents</h2>
 
-- [Introduction](#introduction)
-- [Visual Studio Editor](#visual-studio-editor)
 - [File Names](#file-names)
 - [Descriptive Names](#descriptive-names)
 - [ResourceFormatters](#resourceformatters)
@@ -20,19 +25,6 @@ image: "/images/resource-string-editor.png"
 - [Use the Business Layer](#use-the-business-layer)
 - [For More Information](#for-more-information)
 
-
-Introduction
-------------
-
-To store `Button Texts` and translations of [domain](data-access.md#entities) terminology in [`.NET`](../api.md#dotnet) projects, you could use `resx` files.
-
-
-Visual Studio Editor
---------------------
-
-Here's what the `Resource strings` editor looks like in [`Visual Studio`](../api.md#visual-studio):
-
-![String Resource Editor](../images/resource-string-editor.png)
 
 
 File Names
@@ -52,7 +44,7 @@ The *culture-independent* `Resources.resx` might be used for the language `US En
 Descriptive Names
 -----------------
 
-For clarity it's recommended to keep the [`Resource Name`](#visual-studio-editor) descriptive of the text it represents:
+For clarity it's recommended to keep the [`Resource Name`](#-resource-strings) descriptive of the text it represents:
 
     Name: Save
     Value: "Save"
@@ -105,7 +97,7 @@ public static class ResourceFormatter
 }
 ```
 
-This eliminates the need to repeat the [`Resource Name`](#visual-studio-editor) in the code above. It also encourages consistency by forcing the method names to match the [`Resource Names`](#visual-studio-editor).
+This eliminates the need to repeat the [`Resource Name`](#-resource-strings) in the code above. It also encourages consistency by forcing the method names to match the [`Resource Names`](#-resource-strings).
 
 
 Reusability
