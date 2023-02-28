@@ -9,7 +9,6 @@ title: "🎁 API's"
 
 Here this [software architecture](..\index.md)'s technology choices are described.
 
-
 Contents
 --------
 
