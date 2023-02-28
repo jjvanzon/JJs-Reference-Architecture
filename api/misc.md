@@ -1,12 +1,12 @@
 ﻿---
-title: "🎁 API's"
+title: "📦 API's Misc"
 image: "/images/api-preview.png"
 ---
 
 <style>.wrapper { max-width: 90% }</style>
 
-🎁 API's
-=========
+🎁 API's Misc
+==============
 
 [back](.)
 
