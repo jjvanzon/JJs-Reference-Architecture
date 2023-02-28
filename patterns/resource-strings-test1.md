@@ -1,7 +1,7 @@
 ﻿---
 title: "🌍 Resource Strings"
 image: "/images/resource-strings-page.png"
-description: "A technique in .NET to store button texts and translations of domain terminology."
+description: "A technique in .NET to store button texts and translations of domain terminology. Translations can be stored in resx files and edited in Visual Studio"
 keywords:
   - resource strings
   - string resources
