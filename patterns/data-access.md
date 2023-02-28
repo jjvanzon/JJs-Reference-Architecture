@@ -1,7 +1,6 @@
 ﻿---
 title: "💽 Patterns : Data Access"
-redirect_from:
-  - /patterns-data-access.md
+image: "/images/data-layer.png"
 ---
 
 💽 Patterns : Data Access
