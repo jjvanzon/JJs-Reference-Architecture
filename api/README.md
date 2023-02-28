@@ -7,7 +7,8 @@ title: "🎁 API's"
 
 [back](..)
 
-Here this [software architecture](index.md)'s technology choices are described.
+Here this [software architecture](..\index.md)'s technology choices are described.
+
 
 Contents
 --------
