@@ -9,9 +9,7 @@ description: "A technique in .NET to store button texts and translations of doma
 
 [back](.)
 
-There is a technique in [`.NET`](../api.md#dotnet) to store `Button Texts` and translations of [domain](data-access.md#entities) terminology: `Resource Strings`.
-
-Translations can be stored in `resx` files with this editor in [`Visual Studio`](../api.md#visual-studio):
+There is a technique in [`.NET`](../api.md#dotnet) to store `Button Texts` and translations of [domain](data-access.md#entities) terminology: `Resource Strings`. Translations can be stored in `resx` files and edited in [`Visual Studio`](../api.md#visual-studio) like this:
 
 ![String Resource Editor](../images/resource-string-editor.png)
 
