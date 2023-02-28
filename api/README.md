@@ -12,6 +12,6 @@ This [software architecture](index.md)'s technology choices are described here.
 Contents
 --------
 
-- 📦 [API's Misc](api-misc.md)
+- 📦 [API's Misc](misc.md)
 
 [back](..)
