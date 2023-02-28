@@ -39,7 +39,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Business`](layers.md#business-layer): [`Cascading`](aspects.md#cascading): [`DeleteRelatedEntities`](patterns/business-logic.md#cascading)
 - [`Business`](layers.md#business-layer): [`Cascading`](aspects.md#cascading): [`UnlinkRelatedEntities`](patterns/business-logic.md#cascading)
 - [`Business`](layers.md#business-layer): [`Enums`](aspects.md#enums)
-- [`Business`](layers.md#business-layer): [`Resource strings`](patterns/business-logic.md#resource-strings)
+- [`Business`](layers.md#business-layer): [`Resource strings`](patterns/resource-strings.md)
 - [`Business`](layers.md#business-layer): [`EnumExtensions`](aspects.md#enum-like-entities)
 - [`Business`](layers.md#business-layer): [`Validators`](patterns/business-logic.md#validators)
     - `Delete` [`Validators`](patterns/business-logic.md#validators) too
@@ -124,7 +124,7 @@ Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar 
 
 ### Tips
 
-1. Gebruik van placeholders zoals {0} is ok, maar dan liefst wel met een class erbij, die de placeholders vervangt (een `ResourceFormatter`). Zie `JJ.Framework.Resources` voor een voorbeeld. Je kunt dan het beste de resources zelf internal te maken en alleen de class die de placeholders vervangt `public` maken. Hou het geschikt voor meerdere talen, want een creatief met placeholder opgebouwde [resource string](patterns/business-logic.md#resource-strings) werkt al gauw niet voor een andere taal.
+1. Gebruik van placeholders zoals {0} is ok, maar dan liefst wel met een class erbij, die de placeholders vervangt (een `ResourceFormatter`). Zie `JJ.Framework.Resources` voor een voorbeeld. Je kunt dan het beste de resources zelf internal te maken en alleen de class die de placeholders vervangt `public` maken. Hou het geschikt voor meerdere talen, want een creatief met placeholder opgebouwde [resource string](patterns/resource-strings.md) werkt al gauw niet voor een andere taal.
 2. Maak je niet druk om dat het kan resulteren in teksten met hoofdlettergebruik zoals: "Het __Ordernummer__ is niet ingevuld bij de __Bestelling__." Zouden we dit aanpakken, dan doen we dit misschien liever dynamisch via een algoritme om het hoofdlettergebruik kloppend te maken.
 3. Het is misschien verstandig om teksten in de applicatie algemeen te houden. Dus bijv. "Artikelen", i.p.v. "Artikelen in dit boek". Dit scheelt vertaalwerk. Ook deze 'dubbele punt' notatie is verstandig: "Artikel 1: Naam is verplicht." Daarbij zijn de teksten "Artikel", "Naam" en "{0} is verplicht." waarschijnlijk al vertaald en hoeft dat niet nog eens opnieuw. Deze 'dubbele punt' notatie ("Artikel 1:"), kan zorgen dat het ook blijft werken voor talen met een andere zinsbouw.
 

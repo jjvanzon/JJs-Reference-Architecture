@@ -13,7 +13,7 @@ Visitor
 Resource Strings
 ----------------
 
-`[` [`Moved`](patterns/business-logic.md#resource-strings) `]`
+`[` [`Moved`](patterns/resource-strings.md) `]`
 
 [back](.)
 

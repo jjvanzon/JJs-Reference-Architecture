@@ -10,6 +10,8 @@ keywords:
   - .net
   - coding
   - programming
+  - software engineering
+  - software development
   - design patterns
   - software design
   - software architecture
@@ -18,7 +20,7 @@ keywords:
 🎄 The Visitor Pattern
 =======================
 
-[back](.)
+[back](business-logic.md)
 
 [`Visitor`](#-the-visitor-pattern) `classes` process recursive tree structures that might involve many `objects` and multiple `types` of `objects`.
 
@@ -473,4 +475,4 @@ By creating a `base` [`Visitor`](#-the-visitor-pattern) and multiple specialized
 
 Another good example of a [`Visitor`](#-the-visitor-pattern) `class` is [`.NET's`](../api.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#-the-visitor-pattern) might be different here. It can still be called a [`Visitor`](#-the-visitor-pattern) if it operates by slightly different rules.
 
-[back](.)
+[back](business-logic.md)

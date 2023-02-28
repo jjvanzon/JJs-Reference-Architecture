@@ -728,8 +728,8 @@ List of API's (and other tech)
 <table>
 
 <tr id="resource-strings">
-  <th><a href="patterns/business-logic.html#resource-strings">Resource Strings</a></th>
-  <td>For localization, <a href="patterns/business-logic.html#resource-strings"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
+  <th><a href="patterns/resource-strings.html">Resource Strings</a></th>
+  <td>For localization, <a href="patterns/resource-strings.html"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-resourcestrings">

@@ -255,7 +255,7 @@ One thing can be [converted](aspects.md#conversion) to another. Conversions migh
 
 ### Resources Strings
 
-[Resource `strings`](patterns/business-logic.md#resource-strings) can make texts in an app [multi-lingual](aspects.md#multi-language--translations--culture). These might be put in the [business layer](#business-layer) to translate terminology from the functional domain.
+[Resource `strings`](patterns/resource-strings.md) can make texts in an app [multi-lingual](aspects.md#multi-language--translations--culture). These might be put in the [business layer](#business-layer) to translate terminology from the functional domain.
 
 ### Defaults
 
