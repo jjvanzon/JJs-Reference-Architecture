@@ -26,7 +26,7 @@ keywords:
 
 There is a technique in [`.NET`](../api.md#dotnet) to store translations for button texts. It's called: `Resource Strings`. Translations can be stored in `resx` files and edited in [`Visual Studio`](../api.md#visual-studio):
 
-![String Resource Editor](../images/resource-strings-editor.png)
+![Resource String Editor](../images/resource-strings-editor.png)
 
 <h2>Contents</h2>
 
