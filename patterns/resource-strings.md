@@ -1,6 +1,6 @@
 ﻿---
 title: "🌍 Resource Strings"
-image: "/images/resource-string-editor.png"
+image: "/images/resource-strings-page.png"
 description: "A technique in .NET to store button texts and translations of domain terminology."
 keywords:
   - resource strings
@@ -26,7 +26,7 @@ keywords:
 
 There is a technique in [`.NET`](../api.md#dotnet) to store translations for button texts. It's called: `Resource Strings`. Translations can be stored in `resx` files and edited in [`Visual Studio`](../api.md#visual-studio):
 
-![String Resource Editor](../images/resource-string-editor.png)
+![String Resource Editor](../images/resource-strings-editor.png)
 
 <h2>Contents</h2>
 
