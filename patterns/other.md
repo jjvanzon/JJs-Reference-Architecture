@@ -53,7 +53,7 @@ Anti-Encapsulation
 
 Encapsulation makes sure a `class` protects its own data integrity. Anti-encapsulation is the design choice to let a `class` check none of its data integrity. Then you know that something else is 100% responsible for the integrity of it, and the `class` itself will guard none of it.
 
-The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](../api/misc.md#orm) and data serialization mechanisms.
+The reason not to use encapsulation is that it can go against the grain of frameworks, such as [`ORM's`](../api/orm.md#-orm) and data serialization mechanisms.
 
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the `class` cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the `class` and the other half in another place.
 

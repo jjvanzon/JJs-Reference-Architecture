@@ -85,7 +85,7 @@ class Supplier
 
 <h3 id="virtual-members">Virtual Members</h3>
 
-For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](../aspects.md#persistence) may not work. This is because [`ORM's`](../api/misc.md#orm) want to create [`Proxy classes`](../api/orm.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](../aspects.md#persistence) may not work. This is because [`ORM's`](../api/orm.md#-orm) want to create [`Proxy classes`](../api/orm.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
 ```cs
 class Supplier

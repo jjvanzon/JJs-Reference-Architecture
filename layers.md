@@ -105,9 +105,9 @@ It starts with the database. This can be a *relational database* like [`Microsof
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api/misc.md#orm)), like [`NHibernate`](api/orm.md#nhibernate). This [`ORM`](api/misc.md#orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api/orm.md#-orm)), like [`NHibernate`](api/orm.md#nhibernate). This [`ORM`](api/orm.md#-orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
     
-It could also be a different data access technology: a different [`ORM`](api/misc.md#orm), like [`Entity Framework`](api/orm.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/misc.md#sql) to execute raw [`SQL`](api/misc.md#sql) onto the database.
+It could also be a different data access technology: a different [`ORM`](api/orm.md#-orm), like [`Entity Framework`](api/orm.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/misc.md#sql) to execute raw [`SQL`](api/misc.md#sql) onto the database.
 
 ### Mappings
 

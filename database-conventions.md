@@ -40,7 +40,7 @@ Developing a database generally involves the following steps:
 - Make foreign keys on columns that link to other tables
 - Add indexes on foreign keys columns
 - Add unique indexes
-    - However, sometimes [`ORM's`](api/misc.md#orm) will trip over unique keys at which we promptly remove the unique constraint.
+    - However, sometimes [`ORM's`](api/orm.md#-orm) will trip over unique keys at which we promptly remove the unique constraint.
     - Note that you do not need an additional index when there is already a unique constriant whose first column is the column you would like to index.
 - Add indexes to search columns and alternative keys
 - Add indexes for problem queries

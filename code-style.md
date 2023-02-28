@@ -1615,7 +1615,7 @@ if (entity1 == entity2)
 </td></tr></table>
 
 Reason:  
-Code that compares *identities* may be less likely to break, because [persistence frameworks](api/misc.md#orm) don't always ensure *instance* integrity.
+Code that compares *identities* may be less likely to break, because [persistence frameworks](api/orm.md#-orm) don't always ensure *instance* integrity.
 
 (Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns/data-access.md#entities) if needed.)
 

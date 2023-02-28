@@ -25,7 +25,7 @@ API's | ORM | Meet in the Middle Queries
 
 `< TODO: A problem with ORM: meet-in-the-middle querties. You have two ends of a graph, you filter both ends and then want what is in the middle. >`
 
-One time [`ORM`](../api/misc.md#orm) almost fails a little bit, is queries where you link a bunch of [entities](patterns/data-access.md#entities) together, you want a list of [entities](patterns/data-access.md#entities) somewhere in the middle of that chain, you want to filter one end of the relationship chain and also on the other end.
+One time [`ORM`](../api/orm.md#-orm) almost fails a little bit, is queries where you link a bunch of [entities](patterns/data-access.md#entities) together, you want a list of [entities](patterns/data-access.md#entities) somewhere in the middle of that chain, you want to filter one end of the relationship chain and also on the other end.
 
 In [`C#`](api/misc.md#csharp) it seems you can filter in one direction only:
 

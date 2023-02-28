@@ -311,7 +311,7 @@ There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`]
 
 <h3>Alternatives</h3>
 
-The consequence of explicit [entity](patterns/data-access.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns/data-access.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns/data-access.md#entities) status management up to an [`ORM`](api/misc.md#orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns/data-access.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api/misc.md#jj-framework-data) should offer its own alternative to [entity](patterns/data-access.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns/data-access.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api/misc.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api/misc.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit [entity](patterns/data-access.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns/data-access.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns/data-access.md#entities) status management up to an [`ORM`](api/orm.md#-orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns/data-access.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api/misc.md#jj-framework-data) should offer its own alternative to [entity](patterns/data-access.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns/data-access.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api/misc.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api/misc.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
 This is why the explicit status management solution won over the [entity](patterns/data-access.md#entities) status management in the persistence framework.
 
@@ -669,7 +669,7 @@ A downside of that is that the table structure is dependent on the domain model 
 
 ### Comparison Loosely Linked vs Many Foreign Keys
 
-The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api/misc.md#orm) will cache the [entities](patterns/data-access.md#entities) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
+The foreign key solution does have a big benefit over the generic key solution, because [ORM's](api/orm.md#-orm) will cache the [entities](patterns/data-access.md#entities) in memory and be immediately available throught the object graph, even translation items that have not been committed to the database yet. With generic keys, you cannot query the translation items until they are flushed to the database.
 
 To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns/data-access.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns/data-access.md#entities) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns/data-access.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns/data-access.md#entities).
 
@@ -738,7 +738,7 @@ To access a data store (usually a database), [`JJ.Framework.Data`](api/misc.md#j
 
 The main interface of the framework is `IContext`.
 
-See also: [`ORM`](api/misc.md#orm).
+See also: [`ORM`](api/orm.md#-orm).
 
 
 Platform Compatibility
