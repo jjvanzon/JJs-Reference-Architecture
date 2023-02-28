@@ -13,11 +13,11 @@ Design patterns are coding techniques to solve common programming problems. They
 Contents
 --------
 
-- 💽 [Data Access Patterns](data-access.md)
-- 🤖 [Business Logic Patterns](business-logic.md)
+- 💽 [Data Access](data-access.md)
+- 🤖 [Business Logic](business-logic.md)
 - 🖥️ [Presentation Patterns](presentation.md) `[ Draft ]`
 - 🕸️ [Presentation Patterns (MVC)](presentation-mvc.md) `[ Draft ]`
-- 🐛 [Data Transformation Patterns](data-transformation.md) `[ Draft ]`
+- 🐛 [Data Transformation](data-transformation.md) `[ Draft ]`
 - ⚙️ [Other Patterns](other.md) `[ Draft ]`
-- 
+
 [back](..)
