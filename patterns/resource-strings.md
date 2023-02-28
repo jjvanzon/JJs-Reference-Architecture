@@ -6,7 +6,7 @@ image: "/images/resource-string-editor.png"
 🌍 Resource Strings
 ====================
 
-[back](README.md)
+[back](.)
 
 <h2>Contents</h2>
 
@@ -125,5 +125,4 @@ For More Information
 
 For extra information in Dutch about how to structure the [`Resource` files](#file-names), see [Appendix B](../appendices.md#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-).
 
-
-[back](README.md)
+[back](.)
