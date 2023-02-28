@@ -1,7 +1,7 @@
 ﻿---
 title: "🎄 The Visitor Pattern"
 image: "/images/visitor-pattern.png"
-description: "For processing complex recursive tree structures, involving many objects and multiple types of objects, the Visitor pattern is a good choice. It's usually about translating a tree structure into something else."
+description: "For processing complex recursive tree structures, involving many objects and multiple types of objects, the Visitor pattern is a good option. It's usually about translating a tree structure into something else."
 keywords:
   - visitor pattern
   - tree traversal
