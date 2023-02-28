@@ -109,7 +109,7 @@ They mostly conform to `Microsoft` standards described in these articles:
 - [C# Coding Conventions](http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx)  
 - [Coding Techniques and Programming Practices](http://msdn.microsoft.com/en-us/library/aa260844%28v=vs.60%29.aspx)
 
-A tool like [`ReSharper`](api.md#resharper) may help. Its settings can be fine-tuned to closely match the preferences. It then checks the code style and can auto-format for you.
+A tool like [`ReSharper`](api/misc.md#resharper) may help. Its settings can be fine-tuned to closely match the preferences. It then checks the code style and can auto-format for you.
 
 
 Casing
@@ -126,7 +126,7 @@ Casing
 | Abbreviations not preferred                                       |
 | Abbreviations of 2 letters with capitals.                         | `ID`
 | Abbreviations of 3 letters or more in pascal case.                | `Mvc`
-| [`MVC`](api.md#mvc) partial [`View`](patterns/presentation.md#views) names in pascal case, starting with underscore | `_MyPartialView`
+| [`MVC`](api/misc.md#mvc) partial [`View`](patterns/presentation.md#views) names in pascal case, starting with underscore | `_MyPartialView`
 | For long identifiers, underscores to separate 'the pieces'        | `Sine_OperatorCalculator_VarFrequency`
 
 
@@ -286,7 +286,7 @@ For number sequences the following names might be used:
     SortOrder
     Rank
 
-Perhaps don't use the word `Index` on its own, because that's an [`SQL`](api.md#sql) keyword.
+Perhaps don't use the word `Index` on its own, because that's an [`SQL`](api/misc.md#sql) keyword.
 
 ### File-Related Variable Names
 
@@ -697,7 +697,7 @@ Spaces and Braces
 
 ### Auto-Formatting
 
-Perhaps start out with [`Visual Studio's`](api.md#visual-studio) auto-formatting enabled and set to its defaults.  
+Perhaps start out with [`Visual Studio's`](api/misc.md#visual-studio) auto-formatting enabled and set to its defaults.  
 
 Reason: Less surprising to the next developer.
 
@@ -1559,7 +1559,7 @@ sbyte
 </td></tr></table>
 
 Reason:  
-For compatibility with more variations of [`.NET`](api.md#dotnet).
+For compatibility with more variations of [`.NET`](api/misc.md#dotnet).
 
 ### No Decisions from Exceptions
 
@@ -1615,7 +1615,7 @@ if (entity1 == entity2)
 </td></tr></table>
 
 Reason:  
-Code that compares *identities* may be less likely to break, because [persistence frameworks](api.md#orm) don't always ensure *instance* integrity.
+Code that compares *identities* may be less likely to break, because [persistence frameworks](api/misc.md#orm) don't always ensure *instance* integrity.
 
 (Also consider doing [null checks](practices-and-principles.md#null-checks) on the [entities](patterns/data-access.md#entities) if needed.)
 

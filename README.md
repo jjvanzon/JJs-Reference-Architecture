@@ -13,7 +13,7 @@ Contents
 - 🍱 [Namespaces, Assemblies & Folders](namespaces-assemblies-and-folders.md)
 - 🧶 [Patterns](patterns/README.md)
 - 🧱 [Aspects](aspects.md)
-- 🎁 [API's](api.md)
+- 🎁 [API's](api/misc.md)
 - 🏗 [Practices & Principles](practices-and-principles.md)
 - 🌍 [Service Oriented Architecture](service-oriented-architecture.md)
 - 📀 [Database Conventions](database-conventions.md)

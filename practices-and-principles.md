@@ -257,9 +257,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api.md#nhibernate) and an [`SQL Server`](api.md#sql-server) database. You could not use the [entity model](patterns/data-access.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api/misc.md#nhibernate) and an [`SQL Server`](api/misc.md#sql-server) database. You could not use the [entity model](patterns/data-access.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api/misc.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns/data-access.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns/data-access.md#entities) in [`XML`](api.md#xml), while in a web environment we might store things in [`SQL Server`](api.md#sql-server) Server using [`NHibernate`](api.md#nhibernate).
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns/data-access.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns/data-access.md#entities) in [`XML`](api/misc.md#xml), while in a web environment we might store things in [`SQL Server`](api/misc.md#sql-server) Server using [`NHibernate`](api/misc.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -283,7 +283,7 @@ After separating all different aspects of both functionality and technique, you 
 
 ### 2 API's for the Same Thing (👎)
 
-Choose one API and stick with it. It is not recommended to use e.g. two different [`XML`](api.md#xml) `API's` in your application.
+Choose one API and stick with it. It is not recommended to use e.g. two different [`XML`](api/misc.md#xml) `API's` in your application.
 
 ### Copy-Paste Programming (👎)
 
@@ -384,7 +384,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to [DTO's](patterns/data-access.md#dto) as do for [entities](patterns/data-access.md#entities). Especially if they just transfer data from [`SQL`](api.md#sql) statements to application logic.
+- Usually the same rules apply to [DTO's](patterns/data-access.md#dto) as do for [entities](patterns/data-access.md#entities). Especially if they just transfer data from [`SQL`](api/misc.md#sql) statements to application logic.
 
 #### Strings
     
@@ -402,7 +402,7 @@ Here are rules for null-checks for other constructs:
 
 #### Parameters
 
-- Execute null-checks on arguments of public methods. Use `NullException` (out of [`JJ.Framework.Reflection`](api.md#jj-framework-reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
+- Execute null-checks on arguments of public methods. Use `NullException` (out of [`JJ.Framework.Reflection`](api/misc.md#jj-framework-reflection). You can omit null-checks on arguments of private methods, if the rest of the class already guarantees it is not null.
 - Avoid allowing null parameters.
 - But if a parameter *is* nullable, you can denote this in several ways.
 - Assign null as the default value of the parameter, so it is clear that it can accept null:  
@@ -422,7 +422,7 @@ Here are rules for null-checks for other constructs:
 
 #### Custom-Programmed Framework API's
 
-- For `API's` in [our own framework](api.md#jjframework) you can count on an object when you call a `Get` method.
+- For `API's` in [our own framework](api/misc.md#jjframework) you can count on an object when you call a `Get` method.
 - You'd have to take `null` into consideration when you call [`TryGet`](patterns/other.md#tryget).
 
 #### Your Own Application Code
@@ -431,11 +431,11 @@ Here are rules for null-checks for other constructs:
 
 #### Third-party API's
     
-- Some [`.NET API's`](api.md#dotnet) and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
+- Some [`.NET API's`](api/misc.md#dotnet) and third party `API's` may return null when you call a `Get` method. Some do not. You have to learn which methods can return null and do null-checks appropriately.
 
 <h4>Alternatives</h4>
 
-Nullability problems might be solved next to automatically by newer [`C#`](api.md#csharp) versions.
+Nullability problems might be solved next to automatically by newer [`C#`](api/misc.md#csharp) versions.
 
 ### Process that Checks Itself (👎)
 
@@ -494,9 +494,9 @@ This instead of calling it just `Customer` or just [`ViewModel`](patterns/viewmo
 Here are a few more examples:
 
 - `CustomerListReload`
-    - It was a [`Controller`](patterns/presentation-mvc.md#controller) action name intended to be a [`AJAX`](api.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
+    - It was a [`Controller`](patterns/presentation-mvc.md#controller) action name intended to be a [`AJAX`](api/misc.md#ajax) variation of the `Index` action. Not only should `CustomerList` be replaced with `Index`, but also the word `Reload` is not clear. It may have something to do with reloading some piece of index, but it really is the [`AJAX`](api/misc.md#ajax) variation of `Index`, so perhaps a suffix [`Ajax`](api/misc.md#ajax) would be more appropriate. `IndexAjax` would have been a better name.
 - A class name `Cooking` is also a good example of an conceptual name. Cooking? If you have to ask 'What about it?', you got a conceptual name, that should be made more specific.
-- A [`View`](patterns/presentation.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns/presentation-mvc.md#controller) `Action`, the [`.NET`](api.md#dotnet) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
+- A [`View`](patterns/presentation.md#views) named `_CollectionListAction.cshtml`: The name Action is a conceptual name. It has something to do with an `Action`. More specifically: multiple actions, and more specifically: it is an `ActionBar`. The word `Action` is too general. It can refer to a [`Controller`](patterns/presentation-mvc.md#controller) `Action`, the [`.NET`](api/misc.md#dotnet) `Action<T>` class, etc.  Perhaps `_IndexActionBar.cshtml` would have been better.
 - Conceptual names are also ones which do not include the pattern name at the end.
 
 ### Delegitis (👎)
@@ -675,7 +675,7 @@ So many overloads you cannot see which to pick.
 
 An interface tries to abstract / generalize multiple similar problems into one solution. If an interface exposes the underlying solution, we speak of a leaky abstraction.
 
-For example: this [`Repository interface`](patterns/data-access.md#repository-interfaces) exposes the underlying [`NHibernate`](api.md#nhibernate) technology:
+For example: this [`Repository interface`](patterns/data-access.md#repository-interfaces) exposes the underlying [`NHibernate`](api/misc.md#nhibernate) technology:
 
 ```cs
 interface IMyRepository
@@ -684,7 +684,7 @@ interface IMyRepository
 }
 ```
 
-The [`Repository interface`](patterns/data-access.md#repository-interfaces) should not have shown [`NHibernate`](api.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the [`Repository's`](patterns/data-access.md#repository) job is to offer a set of optimal queries. With the leaky interface above, a [`Repository`](patterns/data-access.md#repository) cannot do its job anymore.
+The [`Repository interface`](patterns/data-access.md#repository-interfaces) should not have shown [`NHibernate`](api/misc.md#nhibernate)-related types, because it is supposed to hide the underlying technology. You can also do too much with the interface now. AbstractCriterion allows you to build any query you want. That is also leaky about this interface. It is the [`Repository's`](patterns/data-access.md#repository) job is to offer a set of optimal queries. With the leaky interface above, a [`Repository`](patterns/data-access.md#repository) cannot do its job anymore.
 
 The following example is better.
 
@@ -765,7 +765,7 @@ Not always bad practice, but is can be a cause of confusion.
 
 Syntactic sugar is creating a notation that does not add anything, other than a simpler notation.
 
-Object initializers are an example of syntactic sugar. In [`C#`](api.md#csharp) 2.0 you had to initialize an object's properties as follows:
+Object initializers are an example of syntactic sugar. In [`C#`](api/misc.md#csharp) 2.0 you had to initialize an object's properties as follows:
 
 ```cs
 Cat cat = new Cat();
@@ -773,7 +773,7 @@ cat.Age = 7;
 cat.Name = "Nala";
 ```
 
-In later versions of [`C#`](api.md#csharp) you are able to do the same thing with the following code:
+In later versions of [`C#`](api/misc.md#csharp) you are able to do the same thing with the following code:
 
 ```cs
 var cat = new Cat 
@@ -999,7 +999,7 @@ The solution is to make `Execute()` public and insist that that it is called exp
 
 `< TODO: Update the remark below. Another solution is to actually do all 'the work' in the constructor, instead of having a separate Execute method, which you could also document in the alternatives above. >`
 
-([`JJ.Framework.Validation`](api.md#jj-framework-validation) uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
+([`JJ.Framework.Validation`](api/misc.md#jj-framework-validation) uses this anti-pattern however, because there is too much danger that someone forgets to call Execute. It uses a trick to be able to initialize the members anyway, but it is quite dirty.)
 
 ### Cross-Referencing (👎)
 
@@ -1056,7 +1056,7 @@ If a class is long, for instance 800+ code lines, consider if it should be split
 
 In both cases this usually means that the method or class has too many responsibilities.
 
-This code smell can also apply to other code than [`C#`](api.md#csharp) classes and methods.
+This code smell can also apply to other code than [`C#`](api/misc.md#csharp) classes and methods.
 
 ### Nested Loops (👎)
 
@@ -1558,7 +1558,7 @@ When you code keeps producing errors when you make a change, this could be an in
 
 ### Tooleritis
 
-Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](api.md#winforms) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
+Too many tools / separate little programs to fix little things, rather than having a coherent system with all the needed capabilities. A lot of single-run, sometimes-run processes, started separately in separate little console and [WinForms](api/misc.md#winforms) apps... while one coherent management application might be better. Tooleritis can also be the result of the system's having too many ifs, ands and buts.
 
 ### Tools to make Tools to make Tools
 

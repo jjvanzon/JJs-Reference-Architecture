@@ -102,7 +102,7 @@ It might be `HTML`.
 
 In `WebForms` this would be an `aspx`.
 
-In [`MVC`](../api.md#mvc) it can be an `aspx` or `cshtml`.
+In [`MVC`](../api/misc.md#mvc) it can be an `aspx` or `cshtml`.
 
 Any code used in the [`View`](#views) should be simple. That is: most tasks should be done by the [`Presenter`](presenters.md#-presenters), which produces the [`ViewModel`](#viewmodels), which is simply shown on screen. The [`View`](#views) should not contain [business logic](../layers.md#business-layer).
 
@@ -116,35 +116,35 @@ For small lookup lists you might include a copy of the list in each [Item ViewMo
 
 Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to save you some memory, but a message formatter may actually repeat the list when sending a [`ViewModel`](#viewmodels) over the line.
 
-For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](viewmodels.md#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](../api.md#jquery) trick to populate a drop down just before you slide it open.
+For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](viewmodels.md#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](../api/misc.md#jquery) trick to populate a drop down just before you slide it open.
 
-For big lookup list a viable option seems to [`AJAX`](../api.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
+For big lookup list a viable option seems to [`AJAX`](../api/misc.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api/misc.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 
 
 First Full Load – Then Partial Load – Then Client-Native Code
 -------------------------------------------------------------
 
-You might save the server some work by doing [partial loads instead of full loads](../api.md#ajax) or maybe even do [`JavaScript`](../api.md#javascript) or other client-native code.
+You might save the server some work by doing [partial loads instead of full loads](../api/misc.md#ajax) or maybe even do [`JavaScript`](../api/misc.md#javascript) or other client-native code.
 
-[Partial loads](../api.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
+[Partial loads](../api/misc.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
 
-[`JavaScript`](../api.md#javascript) is client-native code, that could omit server code altoghether, but potentially with a penalty on maintainability, because the client-code may be written in a way that is more dependent on specific [view](#views) details, which might easily change as the server-code evolves.
+[`JavaScript`](../api/misc.md#javascript) is client-native code, that could omit server code altoghether, but potentially with a penalty on maintainability, because the client-code may be written in a way that is more dependent on specific [view](#views) details, which might easily change as the server-code evolves.
 
 You could also call it: first choice full load.
 
 In web technology you could also call it:
 
-Full postback - [`AJAX`](../api.md#ajax) - [`JavaScript`](../api.md#javascript)
+Full postback - [`AJAX`](../api/misc.md#ajax) - [`JavaScript`](../api/misc.md#javascript)
 
-When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](..). Only if there is a very good reason, we might use [`AJAX`](../api.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api.md#javascript).
+When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](..). Only if there is a very good reason, we might use [`AJAX`](../api/misc.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api/misc.md#javascript).
 
 But it was always the first choice to do full postbacks.
 
-The reason for this choice is *maintainability*: programming the application navigation in [`C#`](../api.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](../api.md#javascript). Also: when you do not use [`AJAX`](../api.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason for this choice is *maintainability*: programming the application navigation in [`C#`](../api/misc.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](../api/misc.md#javascript). Also: when you do not use [`AJAX`](../api/misc.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore [`AJAX'ing`](../api.md#ajax) comes with extra difficulties. For instance that [`MVC`](../api.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](../api.md#ajax) call, big code blocks of [`JavaScript`](../api.md#javascript) for doing [`AJAX`](../api.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](../api.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore [`AJAX'ing`](../api/misc.md#ajax) comes with extra difficulties. For instance that [`MVC`](../api/misc.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](../api/misc.md#ajax) call, big code blocks of [`JavaScript`](../api/misc.md#javascript) for doing [`AJAX`](../api/misc.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](../api/misc.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
-Some of the difficulties with [`AJAX`](../api.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](../api.md#ajax) in the Aspects section.
+Some of the difficulties with [`AJAX`](../api/misc.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](../api/misc.md#ajax) in the Aspects section.
 
 
 Stateless and Stateful
@@ -160,7 +160,7 @@ You would be making assumptions in your [`Presenter`](presenters.md#-presenters)
 NullCoalesce (ViewModels)
 -------------------------
 
-When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](../api.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](presenters.md#-presenters).
+When you user input back as a [`ViewModel`](#viewmodels) from your presentation framework of choice, for instance [`MVC`](../api/misc.md#mvc), you might encounter null-lists in it, for lists that do not have any items. To prevent other code from doing `NullCoalescing` or instead tripping over the nulls, you can centralize the `NullCoalescing` of pieces of [`ViewModel`](#viewmodels) and call it in the [`Presenter`](presenters.md#-presenters).
 
 `< TODO: Better description. Also incorporate:`
 
@@ -181,7 +181,7 @@ The TemporaryID concept breaks down, as soon as you need to use it to refer to s
 
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
-Another alternative is a different ID generation scheme. You may use an [`SQL`](../api.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
+Another alternative is a different ID generation scheme. You may use an [`SQL`](../api/misc.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
 
 
 Considerations

@@ -12,7 +12,7 @@ Documentation about software development techniques. Used as a base in several h
 - 📢 [Introduction](introduction.md)
 - 🧅 [Layers](layers.md)
 - 🧶 [Patterns](patterns/README.md) `[ Draft ]`
-- 🎁 [API's](api.md)
+- 🎁 [API's](api/misc.md)
 - 🌍 [Service Oriented Architecture](service-oriented-architecture.md)
 - 👨‍💻 [Code Style](code-style.md)
 - ⚠ [Platform Compatibility](platform-compatibility.md)
