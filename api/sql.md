@@ -16,7 +16,7 @@ keywords:
   - software architecture
 ---
 
-🗄️SQL
+🗄SQL
 ======
 
 [back](.)
