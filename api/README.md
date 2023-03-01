@@ -11,6 +11,6 @@ This [software architecture's](../index.md) technology choices are described her
 
 - 📀 [ORM](orm.md)
 - 🗄️ [SQL](sql.md)
-- 📦 [Misc](misc.md)
+- 🧱 [Misc](misc.md)
 
 [back](..)
