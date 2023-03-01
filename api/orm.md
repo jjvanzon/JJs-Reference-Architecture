@@ -217,6 +217,6 @@ NHibernate
 Conclusion
 ----------
 
-If all this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself anymore.
+If all this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are really worth it? Well, they can be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself.
 
 [back](.)
