@@ -21,7 +21,7 @@ image: "/images/presentation-layer.png"
 <li><a href="#toentity">ToEntity</a></li>
 <li><a href="#views">Views</a></li>
 <li><a href="#lookup-lists">Lookup Lists</a></li>
-<li><a href="#first-full-load--then-partial-load--then-client-native-code">First Full Load – Then Partial Load – Then Client-Native Code</a></li>
+<li><a href="#full-load--partial-load--client-native-code">Full Load – Partial Load – Client-Native Code</a></li>
 <li><a href="#stateless-and-stateful">Stateless and Stateful</a></li>
 <li><a href="#nullcoalesce-viewmodels">NullCoalesce (ViewModels)</a></li>
 <li><a href="#temporary-ids">Temporary ID's</a></li>
@@ -121,8 +121,8 @@ For lookup lists up until say 100 items you might want to have a single list in 
 For big lookup list a viable option seems to [`AJAX`](../api/misc.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api/misc.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 
 
-First Full Load – Then Partial Load – Then Client-Native Code
--------------------------------------------------------------
+Full Load – Partial Load – Client-Native Code
+---------------------------------------------
 
 You might save the server some work by doing [partial loads instead of full loads](../api/misc.md#ajax) or maybe even do [`JavaScript`](../api/misc.md#javascript) or other client-native code.
 

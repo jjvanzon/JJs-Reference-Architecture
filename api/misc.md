@@ -10,7 +10,7 @@ image: "/images/api-preview.png"
 
 [back](.)
 
-This article describes some of the technology choices in this [software architecture](index.md).
+This article describes some of the technology choices in this [software architecture](../index.md).
 
 <h3>Contents</h3>
 
@@ -817,9 +817,9 @@ Web
 
 `AJAX` is a way to load part of a web page, so the whole page does not have to be refreshed. This may make the user interaction smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team programmed [wrapper](patterns/other.md#wrapper) functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](#javascript) code.
+For `AJAX'ing` such partial web content, our team programmed [wrapper](../patterns/other.md#wrapper) functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](#javascript) code.
 
-Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](patterns/presentation.md#first-full-load--then-partial-load--then-client-native-code).
+Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [First Full Load – Then Partial Load – Then Native Code](../patterns/presentation.md#full-load--partial-load--client-native-code).
 
 ### JavaScript / TypeScript
 
@@ -827,7 +827,7 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](patterns/presentation.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
+For web, other technology was preferred in this [architecture](../index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](../patterns/presentation.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
 
 [`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. You could refactor [`C#`](#csharp) code, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face when compiling.
 
@@ -835,7 +835,7 @@ For web, other technology was preferred in this [architecture](index.md): The id
 
 But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I guess the love for [`C#`](#csharp) was strong.
 
-The idea was that a full page load was 1<sup>st</sup> choice, [`AJAX'ing`](#ajax) the 2<sup>nd</sup> choice, and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](patterns/presentation.md#first-full-load--then-partial-load--then-client-native-code).
+The idea was that a full page load was 1<sup>st</sup> choice, [`AJAX'ing`](#ajax) the 2<sup>nd</sup> choice, and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [First Full Load – Then Partial Load – Then Native Code](../patterns/presentation.md#full-load--partial-load--client-native-code).
 
 For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries: [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
@@ -843,11 +843,11 @@ I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of p
 
 ### Html.BeginCollection
 
-In [`MVC`](#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](aspects.md#postdata-over-http).
+In [`MVC`](#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](../aspects.md#postdata-over-http).
 
-[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](patterns/viewmodels.md) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](patterns/viewmodels.md) at the server side.
+[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](../patterns/viewmodels.md) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](../patterns/viewmodels.md) at the server side.
 
-In the [`View`](patterns/presentation.md#views) code you would wrap each nesting inside a `using` block:
+In the [`View`](../patterns/presentation.md#views) code you would wrap each nesting inside a `using` block:
 
 ```cs
 @using (Html.BeginItem(() => Model.MyItem))
@@ -867,7 +867,7 @@ In the [`View`](patterns/presentation.md#views) code you would wrap each nesting
 
 So each time you enter a level, the `HtmlHelper` is called again and the code wrapped in a `using` block.
 
-There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](patterns/presentation.md#views).
+There can be as many collections as needed, and as much nesting as you like. The nesting can even be spread around multiple partial [views](../patterns/presentation.md#views).
 
 Input fields in a nested structure look as follows:
 
@@ -887,11 +887,11 @@ But not like this:
 Html.TextBoxFor(x => myLoopItem.MyItem.MyProperty)
 ```
 
-Otherwise the input fields might not bind to the [`ViewModel`](patterns/viewmodels.md). This may force you to program partial [`Views`](patterns/presentation.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
+Otherwise the input fields might not bind to the [`ViewModel`](../patterns/viewmodels.md). This may force you to program partial [`Views`](../patterns/presentation.md#views) sometimes. That may be good practice anyway, so might not be such a big trade-off.
 
 ### Html.BeginCollectionItem
 
-In [`MVC`](#mvc) it is not so apparent how to [send a collection as `HTTP postdata`](aspects.md#postdata-over-http).
+In [`MVC`](#mvc) it is not so apparent how to [send a collection as `HTTP postdata`](../aspects.md#postdata-over-http).
 
 One alternative is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
 
@@ -920,7 +920,7 @@ Misc
 
 [`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dotnet), so we programmed our own. These extensions to [`.NET`](#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
-They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](layers.md#loosely-coupled). They are sort part of the [software architecture](index.md) described here.
+They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](../layers.md#loosely-coupled). They are sort part of the [software architecture](../index.md) described here.
 
 ### Configuration
 
@@ -969,9 +969,9 @@ internal interface IConnectionStrings
 
 *Bidirectional relationship synchronization* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](patterns/other.md#rich-models), [entity](patterns/data-access.md#entities), `API` or otherwise.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](../patterns/other.md#rich-models), [entity](../patterns/data-access.md#entities), `API` or otherwise.
 
-There may be other options available. [`NHibernate`](orm.md#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](orm.md#entity-framework) might do this synchronization automatically. The [`LinkTo`](patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
+There may be other options available. [`NHibernate`](orm.md#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](orm.md#entity-framework) might do this synchronization automatically. The [`LinkTo`](../patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
 ### XML
 
@@ -991,7 +991,7 @@ To include a file as an embedded resource, you could set the following property 
 
 ![](../images/sql-as-embedded-resource.png)
 
-[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](patterns/other.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](../patterns/other.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
 ```cs
 string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");
@@ -1016,13 +1016,13 @@ See the [`ORM`](orm.md) article.
 
 [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
 
-Executing queries onto a database would normally be done through [`ORM`](#orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
+Executing queries onto a database would normally be done through [`ORM`](orm.md), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
 Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`:
 
 ![](../images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](index.md) the [`SqlExecutor API`](#sql-executor) might be used.
+The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](#sql-executor) might be used.
 
 With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single line of code.
 
@@ -1100,7 +1100,7 @@ foreach (IngredientDto record in records)
 
 The column names in the [`SQL`](#sql) are *case sensitive!*
 
-It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](patterns/data-access.md#entities) type name, so they stay grouped together:
+It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](../patterns/data-access.md#entities) type name, so they stay grouped together:
 
 ![](../images/sql-file-names.png)
 
@@ -1176,10 +1176,10 @@ One variation of [`SqlExecutor`](#sql-executor) included the ability to add plac
 
 #### Behind Repositories
 
-The [`repository`](patterns/data-access.md#repository) pattern is used in this [architecture](index.md).  
-The [`repository`](patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
+The [`repository`](../patterns/data-access.md#repository) pattern is used in this [architecture](../index.md).  
+The [`repository`](../patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
 
-Using [`SQL`](#sql) combined with [`repositories`](patterns/data-access.md#repository) can be simplified with [`SqlExecutor`](#sql).
+Using [`SQL`](#sql) combined with [`repositories`](../patterns/data-access.md#repository) can be simplified with [`SqlExecutor`](#sql).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
@@ -1228,11 +1228,11 @@ interface IMyRepository : IRepository
 
 This would result in:
 
-- Keeping all the queries of an [entity](patterns/data-access.md#entities) together in a [`repository`](patterns/data-access.md#repository).
-- Keeping overview of all the [`SQL`](#sql) of all the [entities](patterns/data-access.md#entities) behind an [`SqlExecutor`](#sql-executor).
-- All that data access would be hidden behind [`repository interfaces`](patterns/data-access.md#repository-interfaces) decoupling the persistence technology.
+- Keeping all the queries of an [entity](../patterns/data-access.md#entities) together in a [`repository`](../patterns/data-access.md#repository).
+- Keeping overview of all the [`SQL`](#sql) of all the [entities](../patterns/data-access.md#entities) behind an [`SqlExecutor`](#sql-executor).
+- All that data access would be hidden behind [`repository interfaces`](../patterns/data-access.md#repository-interfaces) decoupling the persistence technology.
  
-It may seem overhead all the layers, but it might add up after adding more queries for more [entities](patterns/data-access.md#entities), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
+It may seem overhead all the layers, but it might add up after adding more queries for more [entities](../patterns/data-access.md#entities), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
 You might also find split up into separate assemblies: 
 
@@ -1244,6 +1244,6 @@ Separating the general things from the technology-specific things.
 
 #### Database Upgrade Scripts
 
-[`SQL`](#sql) executed solely for database upgrading, might not be put in the main projects, but a project on the side. Suggestions of how to organize database upgrading might be found [here](database-conventions.md#upgrade-scripts).
+[`SQL`](#sql) executed solely for database upgrading, might not be put in the main projects, but a project on the side. Suggestions of how to organize database upgrading might be found [here](../database-conventions.md#upgrade-scripts).
 
 [back](.)
