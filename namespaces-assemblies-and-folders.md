@@ -57,7 +57,7 @@ The 2<sup>nd</sup> level in the namespacing splits up into the following parts:
 | [JJ.__Data__](layers.md#data-layer) | The [`Data`](layers.md#data-layer) layer including the [entity](patterns/data-access.md#entities) models and storage of data.
 | [JJ.__Business__](layers.md#business-layer) | The [`Business`](layers.md#business-layer) logic: guarding the rules of the system.
 | [JJ.__Presentation__](layers.md#presentation-layer) | The [`Presentation`](layers.md#presentation-layer) layer: the visual part of a program.
-| [JJ.__Framework__](api.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
+| [JJ.__Framework__](api/misc.md#jjframework) | Reusable code, independent from any functional domain. Any layer in the [software architecture](index.md) can have reusable code to support it.
 
 And second in line:
 
@@ -79,7 +79,7 @@ The 3<sup>rd</sup> level in the namespacing would be the *functional domain:*
 - JJ.Presentation.__Calendar__  
 - JJ.Presentation.__Synthesizer__  
 
-The 'functional domain' of the [framework layer](api.md#jjframework) might be a technical [aspect](aspects.md#-aspects):
+The 'functional domain' of the [framework layer](api/misc.md#jjframework) might be a technical [aspect](aspects.md#-aspects):
 
 - [JJ.Framework.__Validation__](patterns/business-logic.md#validators)
 - [JJ.Framework.__Security__](aspects.md#security)
@@ -89,16 +89,16 @@ The 'functional domain' of the [framework layer](api.md#jjframework) might be a 
 Technologies
 ------------
 
-The 4<sup>th</sup> level in the namespacing denotes which [technology](api.md#-apis) is used. It is sort of analogous to a file extension. You might find two assemblies: one *platform-independent* and one *platform-specific:*
+The 4<sup>th</sup> level in the namespacing denotes which [technology](api/misc.md#-apis) is used. It is sort of analogous to a file extension. You might find two assemblies: one *platform-independent* and one *platform-specific:*
 
 - JJ.Data.Calendar  
-- JJ.Data.Calendar.[__NHibernate__](api.md#nhibernate)
+- JJ.Data.Calendar.[__NHibernate__](api/orm.md#nhibernate)
 - JJ.Presentation.Calendar  
-- JJ.Presentation.Calendar.[__Mvc__](api.md#mvc)
+- JJ.Presentation.Calendar.[__Mvc__](api/misc.md#mvc)
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
-This means that the *platform-independent* part of the code is separate from the *platform-specific* part. This also means, that quite a portion of the code can be shared between platforms. That way we can choose which [technologies](api.md#-apis) we want to depend on.
+This means that the *platform-independent* part of the code is separate from the *platform-specific* part. This also means, that quite a portion of the code can be shared between platforms. That way we can choose which [technologies](api/misc.md#-apis) we want to depend on.
 
 
 Patterns
@@ -185,7 +185,7 @@ What happened here, is an attempt to organize things into *bigger and smaller* c
 
 The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layer](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
-A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api.md#-apis) used (e.g. [`NHibernate`](api.md#nhibernate), [`MVC`](api.md#mvc)).
+A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api/misc.md#-apis) used (e.g. [`NHibernate`](api/orm.md#nhibernate), [`MVC`](api/misc.md#mvc)).
 
 And a [design pattern](patterns/README.md) may be a level of detail below that.
 

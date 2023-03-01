@@ -192,7 +192,7 @@ Even if you do not expect multiple input formats or multiple output formats or a
 MVC
 </h3>
 
-[`MVC`](../api.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
+[`MVC`](../api/misc.md#mvc) itself contains a specialized version of this very pattern. The following layering stacks are completely analogous to eachother:
 
 - [`Selector` - `Model` - `Generator` – `Result`](#selector-model-generator-result)
 - [`Controller`](presentation-mvc.md#controller) - [`ViewModel`](viewmodels.md) - view engine – [`View`](presentation.md#views)

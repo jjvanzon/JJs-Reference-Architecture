@@ -101,19 +101,19 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api.md#sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api/misc.md#sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api/misc.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
-The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api.md#orm)), like [`NHibernate`](api.md#nhibernate). This [`ORM`](api.md#orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
+The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api/orm.md#-orm)), like [`NHibernate`](api/orm.md#nhibernate). This [`ORM`](api/orm.md#-orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
     
-It could also be a different data access technology: a different [`ORM`](api.md#orm), like [`Entity Framework`](api.md#entity-framework), or [`XML`](api.md#xml) files, or perhaps [`SqlClient`](api.md#sql) to execute raw [`SQL`](api.md#sql) onto the database.
+It could also be a different data access technology: a different [`ORM`](api/orm.md#-orm), like [`Entity Framework`](api/orm.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/misc.md#sql) to execute raw [`SQL`](api/misc.md#sql) onto the database.
 
 ### Mappings
 
-[Entity](patterns/data-access.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns/data-access.md#entities). [`NHibernate`](api.md#nhibernate) needs [mappings](patterns/data-access.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
+[Entity](patterns/data-access.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns/data-access.md#entities). [`NHibernate`](api/orm.md#nhibernate) needs [mappings](patterns/data-access.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
-The [`FluentNHibernate API`](api.md#fluent-nhibernate) can help set up these [mappings](patterns/data-access.md#mapping).
+The [`FluentNHibernate API`](api/misc.md#fluent-nhibernate) can help set up these [mappings](patterns/data-access.md#mapping).
 
 ### Entities
 
@@ -121,7 +121,7 @@ With all this in place, out come objects called [entities](patterns/data-access.
 
 ### Repositories
 
-[`NHibernate`](api.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns/data-access.md#repository) instead. You might see a [`Repository`](patterns/data-access.md#repository) as a *set of queries*. Each [entity type](patterns/data-access.md#entities) could have its own [`Repository`](patterns/data-access.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns/data-access.md#repository) keep the rest of the code independent of [`NHibernate`](api.md#nhibernate), in case you would like to switch to a different data technology.
+[`NHibernate`](api/orm.md#nhibernate) might not be directly accessed by the rest of the code. The other code might talk to the [`Repositories`](patterns/data-access.md#repository) instead. You might see a [`Repository`](patterns/data-access.md#repository) as a *set of queries*. Each [entity type](patterns/data-access.md#entities) could have its own [`Repository`](patterns/data-access.md#repository). Next to providing a central place to manage an optimal set of queries, the [`Repositories`](patterns/data-access.md#repository) keep the rest of the code independent of [`NHibernate`](api/orm.md#nhibernate), in case you would like to switch to a different data technology.
 
 ### Repository Interfaces
 
@@ -131,7 +131,7 @@ The [`Repository`](patterns/data-access.md#repository) implementations might not
 
 The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part.
 
-The platform-*specific* part concerns itself with [`NHibernate`](api.md#nhibernate) and [`SQL Server`](api.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api.md#xml) file under it and not use [`SQL Server`](api.md#sql-server) or [`NHibernate`](api.md#nhibernate) at all.
+The platform-*specific* part concerns itself with [`NHibernate`](api/orm.md#nhibernate) and [`SQL Server`](api/misc.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/misc.md#sql-server) or [`NHibernate`](api/orm.md#nhibernate) at all.
 
 This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also helps deploy the same code to different environments like *mobile*, *Windows* or *web*.
 
@@ -173,23 +173,23 @@ Because the [`Presenters`](patterns/presenters.md#-presenters) combine several [
 
 ### MVC
 
-[`MVC`](api.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api.md#mvc) layer builds on top of the [`Presenter`](patterns/presenters.md#-presenters) layer.
+[`MVC`](api/misc.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api/misc.md#mvc) layer builds on top of the [`Presenter`](patterns/presenters.md#-presenters) layer.
 
 ### MVC Controllers
 
-[`MVC`](api.md#mvc) uses [`Controllers`](patterns/presentation-mvc.md#controller), which are similar to [`Presenters`](patterns/presenters.md#-presenters) in that they group together related *user actions* and each user action gets a specific *method*.
+[`MVC`](api/misc.md#mvc) uses [`Controllers`](patterns/presentation-mvc.md#controller), which are similar to [`Presenters`](patterns/presenters.md#-presenters) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns/presentation-mvc.md#controller) are quite specific to [`MVC`](api.md#mvc). An equivalent might not be present on other presentation platforms.
+[`Controllers`](patterns/presentation-mvc.md#controller) are quite specific to [`MVC`](api/misc.md#mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms, like [`WinForms`](api.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns/presenters.md#-presenters) and showing the right [`View`](patterns/presentation.md#views) depending on their results.
+However, even on other presentation platforms, like [`WinForms`](api/misc.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns/presenters.md#-presenters) and showing the right [`View`](patterns/presentation.md#views) depending on their results.
 
 ### URLs
 
-Requests from the web browser automatically make the right [`Controller`](patterns/presentation-mvc.md#controller) method go off. [`MVC`](api.md#mvc) makes sure of that. Each method in a [`Controller`](patterns/presentation-mvc.md#controller) tends to get a `URL`.
+Requests from the web browser automatically make the right [`Controller`](patterns/presentation-mvc.md#controller) method go off. [`MVC`](api/misc.md#mvc) makes sure of that. Each method in a [`Controller`](patterns/presentation-mvc.md#controller) tends to get a `URL`.
 
-The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/viewmodels.md) parameters are accepted by [`MVC`](api.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/viewmodels.md) and are built up from post data by [`MVC`](api.md#mvc) automatically.
+The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/viewmodels.md) parameters are accepted by [`MVC`](api/misc.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/viewmodels.md) and are built up from post data by [`MVC`](api/misc.md#mvc) automatically.
 
-[`JJ.Framework.Mvc`](api.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api.md#mvc).
+[`JJ.Framework.Mvc`](api/misc.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api/misc.md#mvc).
 
 ### View Engine (Razor)
 
@@ -197,21 +197,21 @@ After the [`Controller`](patterns/presentation-mvc.md#controller) method is done
 
 ### Views (Razor)
 
-A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api.md#razor). It offers a concise syntax for programming [`Views`](patterns/presentation.md#views), that combines [`C#`](api.md#csharp) with `HTML.` [`Razor`](api.md#razor) has tight integration with [`MVC`](api.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns/viewmodels.md) as input, along with the [`View`](patterns/presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api/misc.md#razor). It offers a concise syntax for programming [`Views`](patterns/presentation.md#views), that combines [`C#`](api/misc.md#csharp) with `HTML.` [`Razor`](api/misc.md#razor) has tight integration with [`MVC`](api/misc.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns/viewmodels.md) as input, along with the [`View`](patterns/presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In [`WinForms`](api.md#winforms) the [`Views`](patterns/presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns/presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns/presenters.md#-presenters).
+In [`WinForms`](api/misc.md#winforms) the [`Views`](patterns/presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns/presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns/presenters.md#-presenters).
 
 ### HTML
 
-The [`Razor`](api.md#razor) engine produces a piece of `HTML` received by the web browser. 
+The [`Razor`](api/misc.md#razor) engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns/presentation.md#views).
+`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api/misc.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns/presentation.md#views).
 
 ### Platform Independence
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* part from the *platform independent* part. 
 
-The *platform-specific* part concerns itself with [`MVC`](api.md#mvc), `HTML` and [`Razor`](api.md#razor), while the *platform independent* part is unaware of which presentation technology is used.
+The *platform-specific* part concerns itself with [`MVC`](api/misc.md#mvc), `HTML` and [`Razor`](api/misc.md#razor), while the *platform independent* part is unaware of which presentation technology is used.
 
 That means that we can use similar logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
 
@@ -263,7 +263,7 @@ Setting [default values](aspects.md#defaults) when creating an [entity](patterns
 
 ### Cascading
 
-Along with one [entity](patterns/data-access.md#entities), other [entities](patterns/data-access.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns/data-access.md#entities) when a main [entity](patterns/data-access.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns/data-access.md#entities) before deleting a related [entity](patterns/data-access.md#entities). In this [architecture](index.md) this might be done in [`C#`](api.md#csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns/data-access.md#entities), other [entities](patterns/data-access.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns/data-access.md#entities) when a main [entity](patterns/data-access.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns/data-access.md#entities) before deleting a related [entity](patterns/data-access.md#entities). In this [architecture](index.md) this might be done in [`C#`](api/misc.md#csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -283,7 +283,7 @@ The [`Facades`](patterns/business-logic.md#facade) may orient around the basic d
 
 ### Platform Independence
 
-A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns/data-access.md#entities) and [repository interfaces](patterns/data-access.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api.md#jjframework). These choices are inherently part of this [software architecture](index.md).
+A [business layer](#business-layer) might be *platform independent* in this [architecture](index.md), so that the code can be used anywhere. When most things are built upon [entities](patterns/data-access.md#entities) and [repository interfaces](patterns/data-access.md#repository-interfaces), the [business logic](#business-layer) is relatively independent, which means that the magic of the software would be deployable on many platforms. Sometimes this might require specific [`API`](api/misc.md#list-of-apis-and-other-tech) choices, generic interfaces and [in-house programmed `API's`](api/misc.md#jjframework). These choices are inherently part of this [software architecture](index.md).
 
 
 Perpendicular Layers
@@ -299,7 +299,7 @@ At the bottom you can see [Data](#data-layer), [Business](#business-layer) and [
 
 ### Framework
 
-The [Framework](api.md#jjframework) layer consists of `API's` that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
+The [Framework](api/misc.md#jjframework) layer consists of `API's` that could support any aspect of software development, so could be used in any part of the layering. That is why it stretches right from [Data](#data-layer) to [Presentation](#presentation-layer) in the [diagram](#perpendicular-layers).
 
 ### Infrastructure
 
@@ -315,7 +315,7 @@ The infrastructure tends to be [loosely coupled](practices-and-principles.md#loo
 
 [User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns/presenters.md#-presenters) layer, adapting it to what the user is allowed to do.
 
-In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns/presenters.md#-presenters) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
+In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns/presenters.md#-presenters) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api/misc.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
 
 ### Services
 
@@ -325,7 +325,7 @@ What's meant with *services* in this [architecture](index.md), is exposing [busi
 Decoupled
 ---------
 
-[`Presenter`](patterns/presenters.md#-presenters) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns/presenters.md#-presenters) also decouple the [presentation technology](api.md#presentation) so it can be flexibly replaced. The [repositories](patterns/data-access.md#repository) decouple the [data technology](api.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
+[`Presenter`](patterns/presenters.md#-presenters) `classes` decouple [presentation](#presentation-layer) from [business logic](#business-layer) so you have full flexibility in the [presentation layer](#presentation-layer). [`Presenters`](patterns/presenters.md#-presenters) also decouple the [presentation technology](api/misc.md#presentation) so it can be flexibly replaced. The [repositories](patterns/data-access.md#repository) decouple the [data technology](api/misc.md#data). And the generic interfaces on [infrastructure](#infrastructure) decouple the [infrastructure](#infrastructure). Everything is decoupled to keep our options open. 
 
 
 Alternatives

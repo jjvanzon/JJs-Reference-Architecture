@@ -260,7 +260,7 @@ Even though the actual call to the [business logic](../layers.md#business-layer)
 
 One reason might be the stateless nature of the web. It requires restoring state from the [`View`](presentation.md#views) to the [`Entity`](data-access.md#entities) model in between requests. This is because the [`ViewModel`](viewmodels.md) sent to the server may be incomplete, only containing the editable parts of the page. Restoration of [`Entity`](data-access.md#entities) state is also needed to delegate responsibilities to the right parts of the system, like delegate to the [business layer](../layers.md#business-layer), which expects [`Entities`](data-access.md#entities).
 
-You might save the server some work by doing *partial loads* instead of *full loads* or maybe execute client-native code. For more info, see: [First Full Load – Then Partial Load – Then Client-Native Code](presentation.md#first-full-load--then-partial-load--then-client-native-code).
+You might save the server some work by doing *partial loads* instead of *full loads* or maybe execute client-native code. For more info, see: [First Full Load – Then Partial Load – Then Client-Native Code](presentation.md#full-load--partial-load--client-native-code).
 
 
 Using ViewModels Directly

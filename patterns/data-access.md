@@ -73,7 +73,7 @@ enum IndustryEnum
 
 <h3 id="collections">Collections</h3>
 
-Creating collections upon initialization is recommended for [`Entity`](#entities) `classes`. [`NHibernate`](../api.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
+Creating collections upon initialization is recommended for [`Entity`](#entities) `classes`. [`NHibernate`](../api/orm.md#nhibernate) does not always create the collections for us. By creating a collection we can omit some `null` checks in the code:
 
 ```cs
 class Supplier
@@ -85,7 +85,7 @@ class Supplier
 
 <h3 id="virtual-members">Virtual Members</h3>
 
-For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](../aspects.md#persistence) may not work. This is because [`ORM's`](../api.md#orm) want to create [`Proxy classes`](../api.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
+For [`Entity`](#entities) `classes`, `public` members should be `virtual`, otherwise [persistence technologies](../aspects.md#persistence) may not work. This is because [`ORM's`](../api/orm.md#-orm) want to create [`Proxy classes`](../api/orm.md#problem-entity--proxy-type-mismatch), that tend to override all the properties.
 
 ```cs
 class Supplier
@@ -99,7 +99,7 @@ class Supplier
 
 <h3 id="inheritance">Inheritance</h3>
 
-Generally avoid [inheritance](../api.md#inheritance) within your [`Entity`](#entities) models, because it can make using data technologies harder.
+Generally avoid [inheritance](../api/orm.md#inheritance) within your [`Entity`](#entities) models, because it can make using data technologies harder.
 
 
 <h3 id="real-code">Real Code</h3>
@@ -120,7 +120,7 @@ public class Supplier
 Mapping
 -------
 
-`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/orm.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/misc.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 
 DTO
@@ -128,9 +128,9 @@ DTO
 
 `DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of a system. In certain situations, where passing an  [`Entity`](#entities) is not handy or efficient, a `DTO` might be a good alternative.
 
-For instance: A specialized, optimized [`SQL`](../api.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [`Entity`](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
+For instance: A specialized, optimized [`SQL`](../api/misc.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [`Entity`](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
-`DTO's` can be used for other data transfers than [`SQL`](../api.md#sql) queries as well.
+`DTO's` can be used for other data transfers than [`SQL`](../api/misc.md#sql) queries as well.
 
 
 Repository
@@ -148,6 +148,6 @@ Repository Interfaces
 
 Any [`Repository type`](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled from the underlying [persistence technology](../aspects.md#persistence).
 
-The `Repository interfaces` are also handy for [testing](../aspects.md#automated-testing), to create a [fake](other.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](../api.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](#repository) and `interfaces`.
+The `Repository interfaces` are also handy for [testing](../aspects.md#automated-testing), to create a [fake](other.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](../api/misc.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](#repository) and `interfaces`.
 
 [back](README.md)

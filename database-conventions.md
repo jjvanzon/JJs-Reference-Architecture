@@ -40,7 +40,7 @@ Developing a database generally involves the following steps:
 - Make foreign keys on columns that link to other tables
 - Add indexes on foreign keys columns
 - Add unique indexes
-    - However, sometimes [`ORM's`](api.md#orm) will trip over unique keys at which we promptly remove the unique constraint.
+    - However, sometimes [`ORM's`](api/orm.md#-orm) will trip over unique keys at which we promptly remove the unique constraint.
     - Note that you do not need an additional index when there is already a unique constriant whose first column is the column you would like to index.
 - Add indexes to search columns and alternative keys
 - Add indexes for problem queries
@@ -85,13 +85,13 @@ Naming Conventions
 | Triggers          | `TR_MyTable_OnInsert` / `trgMyTable_Insert` / `...`
 
 - Avoid using keywords as column names. Think of a different name instead.
-- `Index` is an [`SQL Server`](api.md#sql-server) keyword! Avoid that name. Think of another one. `IndexNumber` or `SortOrder`.
+- `Index` is an [`SQL Server`](api/misc.md#sql-server) keyword! Avoid that name. Think of another one. `IndexNumber` or `SortOrder`.
 
 
 Rules
 -----
 
-Do not use the following object types, because these things are managed in [`.NET`](api.md#dotnet):
+Do not use the following object types, because these things are managed in [`.NET`](api/misc.md#dotnet):
 
 - Views
 - Stored Procedures
@@ -126,13 +126,13 @@ Database upgrade scripts are managed as follows.
 
 ### Excel Sheet
 
-Each database structure gets an Excel in which all the upgrade [`SQL`](api.md#sql) scripts are registered.
+Each database structure gets an Excel in which all the upgrade [`SQL`](api/misc.md#sql) scripts are registered.
 
-The Excel sheet and [`SQL`](api.md#sql) scripts are put in a [Visual Studio](api.md#visual-studio) project to manage them easily.
+The Excel sheet and [`SQL`](api/misc.md#sql) scripts are put in a [Visual Studio](api/misc.md#visual-studio) project to manage them easily.
 
 Always edit the Excel in the dev branch, because Excels cannot be merged.
 
-The name of an [`SQL`](api.md#sql) file has a specific format:
+The name of an [`SQL`](api/misc.md#sql) file has a specific format:
 
     2014-08-28 040 ShopDB Supplier.Name not null.sql
 
@@ -159,11 +159,11 @@ Also include a column saying whether you have scripted it at all (for if you are
 
 For upgrades that should only be executed on a specific database, put 'N/A' (or 'N.V.T.' in Dutch) in the appropriate spread sheet cell.
 
-You can also add something to the [`SQL`](api.md#sql) file name to indicate this:
+You can also add something to the [`SQL`](api/misc.md#sql) file name to indicate this:
 
     2015-01-23 010 OrderDB SHOPDB ONLY Order.DeliveryDateTimeUtc.sql
 
-Some things should be done manually and not with [`SQL`](api.md#sql). Those actions should also be mentioned in the Excel:
+Some things should be done manually and not with [`SQL`](api/misc.md#sql). Those actions should also be mentioned in the Excel:
 
     2015-01-23 020 OrderDB OrderID Identity Yes DO MANUALLY
 
@@ -185,9 +185,9 @@ This section covered:
 
 ### Scripts
 
-The individual upgrade [`SQL`](api.md#sql) scripts should not contain GO statements. GO is not an [`SQL`](api.md#sql) keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple [`SQL`](api.md#sql) files in the database upgrade scripts.
+The individual upgrade [`SQL`](api/misc.md#sql) scripts should not contain GO statements. GO is not an [`SQL`](api/misc.md#sql) keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple [`SQL`](api/misc.md#sql) files in the database upgrade scripts.
 
-Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of [`SQL Server`](api.md#sql-server) anyway.
+Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of [`SQL Server`](api/misc.md#sql-server) anyway.
 
 The upgrade scripts should be incremental: DO make assumptions about the previous state of the database structure and script a specific change. Do not write scripts like 'if not exists' then add, or 'drop and create table' scripts, because you may be throwing away data, or execute things on the wrong database. It is better to make a specific change and *not* be tolerant to differences.
 
@@ -216,7 +216,7 @@ After you have executed them, put TRUE in the appropriate spread sheet cells.
 
 You could execute the scripts one by one, but there is a handier, safer way to do it.
 
-With some creative copying and pasting the [`SQL`](api.md#sql) file names, you can create a composite upgrade script like this:
+With some creative copying and pasting the [`SQL`](api/misc.md#sql) file names, you can create a composite upgrade script like this:
 
 ```sql
 begin try
@@ -275,7 +275,7 @@ This section covered:
 
 ### SqlScripts Table
 
-Consider maintaining a list of executed database upgrade [`SQL`](api.md#sql) scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
+Consider maintaining a list of executed database upgrade [`SQL`](api/misc.md#sql) scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
 
 If you do this, then the stored procedure above would have to be changed so it inserts a record in this database table.
 
@@ -283,23 +283,23 @@ If you do this, then the stored procedure above would have to be changed so it i
 C#-Based Migrations
 -------------------
 
-Some data migrations are easier to program using [`C#`](api.md#csharp) than [`SQL`](api.md#sql) scripts.
+Some data migrations are easier to program using [`C#`](api/misc.md#csharp) than [`SQL`](api/misc.md#sql) scripts.
 
-Sometimes the contrast between how easy it is to do in [`C#`](api.md#csharp) or [`SQL`](api.md#sql) is so large, that the benefits of programming it in [`C#`](api.md#csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
+Sometimes the contrast between how easy it is to do in [`C#`](api/misc.md#csharp) or [`SQL`](api/misc.md#sql) is so large, that the benefits of programming it in [`C#`](api/misc.md#csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
 
-A benefit of [`SQL`](api.md#sql) scripts is that it always operates on the right intermediate version of the [entity](patterns/data-access.md#entities) model, while [`C#`](api.md#csharp) code always operates on the latest version of the [entity](patterns/data-access.md#entities) model. This means that earlier [`C#`](api.md#csharp)-based migrations might not compile anymore for a newer version of the [entity](patterns/data-access.md#entities) model, and can only work with an older version of the model.
+A benefit of [`SQL`](api/misc.md#sql) scripts is that it always operates on the right intermediate version of the [entity](patterns/data-access.md#entities) model, while [`C#`](api/misc.md#csharp) code always operates on the latest version of the [entity](patterns/data-access.md#entities) model. This means that earlier [`C#`](api/misc.md#csharp)-based migrations might not compile anymore for a newer version of the [entity](patterns/data-access.md#entities) model, and can only work with an older version of the model.
 
-This problem with [`C#`](api.md#csharp)-based migrations can be mitigated in several ways. Here are a few ideas:
+This problem with [`C#`](api/misc.md#csharp)-based migrations can be mitigated in several ways. Here are a few ideas:
 
 <h3>Always Rerunnable Tool</h3>
 
-Replace the one-off [`C#`](api.md#csharp) migration by a tool that does something more general, that can operate on any version of the model.
+Replace the one-off [`C#`](api/misc.md#csharp) migration by a tool that does something more general, that can operate on any version of the model.
 
 For instance, in a certain project, resaving most data to the database using newer business logic would set a lot of things right in the data and this procedure was rerunnable at any time, regardless of the version of the model. 'Run the resaver' would be the description in the list of data migrations to execute.
 
 <h3>Get Specific Version, Build, Get Specific Version, Build</h3>
 
-You can let the [`C#`](api.md#csharp)-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a [`C#`](api.md#csharp)-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
+You can let the [`C#`](api/misc.md#csharp)-based migration operate on a specific version of the model by getting the older version of the software from source control, then building it. Each time you have to do a [`C#`](api/misc.md#csharp)-based migration, you can make a separate executable, that operates on a specific version of the code. As soon as a migration does not compile anymore, you can simply outcomment or remove it.
 
 <h3>Snapshots of Entity Model</h3>
 

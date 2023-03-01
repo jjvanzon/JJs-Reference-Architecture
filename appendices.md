@@ -28,9 +28,9 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Data`](layers.md#data-layer): [Entity classes](patterns/data-access.md#entities)
 - [`Data`](layers.md#data-layer): [`Repository interfaces`](patterns/data-access.md#repository-interfaces)
 - [`Data`](layers.md#data-layer): Default [`Repositories`](patterns/data-access.md#repository)
-- [`Data`](layers.md#data-layer): [`NHibernate`](api.md#nhibernate) [`Mappings`](patterns/data-access.md#mapping)
-- [`Data`](layers.md#data-layer): [`SQL` queries](api.md#sql)
-- [`Data`](layers.md#data-layer): [`NHibernate`](api.md#nhibernate) [`Repositories`](patterns/data-access.md#repository) (optional)
+- [`Data`](layers.md#data-layer): [`NHibernate`](api/orm.md#nhibernate) [`Mappings`](patterns/data-access.md#mapping)
+- [`Data`](layers.md#data-layer): [`SQL` queries](api/misc.md#sql)
+- [`Data`](layers.md#data-layer): [`NHibernate`](api/orm.md#nhibernate) [`Repositories`](patterns/data-access.md#repository) (optional)
 - [`Data`](layers.md#data-layer): Other [`Repositories`](patterns/data-access.md#repository) (optional)
 - [`Data`](layers.md#data-layer): Other [`Mappings`](patterns/data-access.md#mapping) (optional)
 - [`Data`](layers.md#data-layer): [`Helpers`](patterns/other.md#helper) 
@@ -57,7 +57,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Business`](layers.md#business-layer): Other [`Helpers`](patterns/other.md#helper) (optional)
 - [`Presentation`](layers.md#presentation-layer): [`ViewModels`](patterns/viewmodels.md)
     - `Item` [`ViewModels`](patterns/viewmodels.md#entity-viewmodels)
-    - `ListItem` [`ViewModels`](patterns/viewmodels.md#listitem-viewmodels) (some may only need an [`IDAndName`](api.md#jj-canonical) [`DTO`](patterns/data-access.md#dto))
+    - `ListItem` [`ViewModels`](patterns/viewmodels.md#listitem-viewmodels) (some may only need an [`IDAndName`](api/misc.md#jj-canonical) [`DTO`](patterns/data-access.md#dto))
     - `Lookup` [`ViewModel`](patterns/viewmodels.md#lookup-viewmodels)
     - `List` [`ViewModels`](patterns/viewmodels.md#screen-viewmodels)
     - `Detail` [`ViewModels`](patterns/viewmodels.md#screen-viewmodels)
@@ -82,7 +82,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
     - `Save` methods in `Detail` (or `Edit`) [`Presenters`](patterns/presenters.md#-presenters).
     - [`MainPresenter`](patterns/presenters.md#-presenters) (optional)
 - [`Presentation`](layers.md#presentation-layer):
-    - [`Views`](patterns/presentation.md#views) ([`MVC`](api.md#mvc) / `UserControls` / ... )
+    - [`Views`](patterns/presentation.md#views) ([`MVC`](api/misc.md#mvc) / `UserControls` / ... )
     - `List` [`Views`](patterns/presentation.md#views)
     - `Detail` [`Views`](patterns/presentation.md#views)
     - `Main` [`View`](patterns/presentation.md#views) (optional)
@@ -116,7 +116,7 @@ Resources worden met de assemblies meegecompileerd*.
 Termen worden zo veel mogelijk hergebruikt. Daarom zijn er plekken bedacht waar de termen thuis horen. Je kunt in deze volgorde op zoek naar een resource die misschien al bestaat:
 
 1. "Save", "Close", "Edit", etc. staan in `JJ.Framework.Resources`, toegankelijk via de `CommonResourceFormatter` class.
-2. Validatiemeldingen uit [`JJ.Framework.Validation`](api.md#jj-framework-validation), toegankelijk via de `ValidationResourceFormatter` class.
+2. Validatiemeldingen uit [`JJ.Framework.Validation`](api/misc.md#jj-framework-validation), toegankelijk via de `ValidationResourceFormatter` class.
 3. CanonicalModel: een tussenmodel voor uitwisseling van gegevens tussen verschillende systemen, toegankelijk via de `CanonicalResourceFormatter` class.
 4. Business layers bevatten alleen vertalingen voor de overige teksten die niet in het canonical model staan.
 5. Ook teksten die niet direct domeintermen zijn, maar wel in applicaties worden gebruikt op plekken waar het gaat over een bepaald functioneel domein, mogen in de business layer worden gezet.
