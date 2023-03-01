@@ -220,7 +220,7 @@ List of API's (and other tech)
        JJ.Framework.Canonical</a>
   </th>
   <td>
-      Types to share data between <code>JJ</code> projects. Small scale <a href="service-oriented-architecture.html#canonical-model"><code>Canonical</code></a> model for generic handling of <code>Successful</code> flags, <code>Validation Messages</code> and combinations of <code>IDs</code> and <code>Names</code>.
+      Types to share data between <code>JJ</code> projects. Small scale <a href="../service-oriented-architecture.html#canonical-model"><code>Canonical</code></a> model for generic handling of <code>Successful</code> flags, <code>Validation Messages</code> and combinations of <code>IDs</code> and <code>Names</code>.
   </td>
 </tr>
 
@@ -332,7 +332,7 @@ List of API's (and other tech)
        JJ.Framework.Data.Memory</a>
   </th>
   <td>
-      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="patterns/other.html#mock">mock</a> a data store.
+      Extension to the <code>interfaces</code> specified in <a href="#jj-framework-data"><code>JJ.Framework.Data</code></a> that allow working with <em>in-memory</em> data for instance to <a href="../patterns/other.html#mock">mock</a> a data store.
   </td>
 </tr>
 
@@ -387,7 +387,7 @@ List of API's (and other tech)
        JJ.Framework.Business</a>
   </th>
   <td>
-      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="patterns/business-logic.html#validators">validation</a>) messages. <a href="patterns/business-logic.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
+      Types for supporting a business layer and/or <code>API</code>. <a href="#onetomanyrelationship">Bidirectional relationship synchronization</a>. <code>Result</code> types to pass data, succes flags and (<a href="../patterns/business-logic.html#validators">validation</a>) messages. <a href="../patterns/business-logic.html#sideeffects"><code>ISideEffect</code></a>: Used for some polymorphism between small pieces of business logic that go off as a result of data modification.
   </td>
 </tr>
 
@@ -397,7 +397,7 @@ List of API's (and other tech)
        JJ.Framework.Validation</a>
   </th>
   <td>
-      A nice fluent notation for <a href="patterns/business-logic.html#validators">validations</a>.
+      A nice fluent notation for <a href="../patterns/business-logic.html#validators">validations</a>.
   </td>
 </tr>
 
@@ -472,7 +472,7 @@ List of API's (and other tech)
        JavaScript</a>
   </th>
   <td>
-      Used to support UI details in web. In this <a href="index.html">architecture</a> most (UI) logic would be handled in <a href="#csharp"><code>C#</code></a> instead.
+      Used to support UI details in web. In this <a href="../index.html">architecture</a> most (UI) logic would be handled in <a href="#csharp"><code>C#</code></a> instead.
   </td>
 </tr>
 
@@ -552,13 +552,13 @@ List of API's (and other tech)
        WinForms</a>
   </th>
   <td>
-      Used in some projects: in small <a href="aspects.html#utilities">utilities</a> and <a href="https://github.com/jjvanzon/JJ.Synthesizer"><code>JJ.Synthesizer</code></a> uses it as the top-most layer.
+      Used in some projects: in small <a href="../aspects.html#utilities">utilities</a> and <a href="https://github.com/jjvanzon/JJ.Synthesizer"><code>JJ.Synthesizer</code></a> uses it as the top-most layer.
   </td>
 </tr>
 
 <tr id="simple-process-form">
   <th><a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms">SimpleProcessForm</a></th>
-  <td>Part of <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms"><code>JJ.Framework.WinForms</code></a>. A base user interface for a <a href="aspects.html#utilities">utility</a> that runs a process.</td>
+  <td>Part of <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.WinForms"><code>JJ.Framework.WinForms</code></a>. A base user interface for a <a href="../aspects.html#utilities">utility</a> that runs a process.</td>
 </tr>
 
 <tr id="jj-framework-vectorgraphics">
@@ -600,7 +600,7 @@ List of API's (and other tech)
 
 <tr id="debugger-displays">
   <th>
-    <a href="patterns/other.html#debuggerdisplays">
+    <a href="../patterns/other.html#debuggerdisplays">
        DebuggerDisplays</a>
   </th>
   <td>
@@ -622,7 +622,7 @@ List of API's (and other tech)
 
 <tr id="accessor">
   <th>
-    <a href="patterns/other.html#accessor">Accessor</a>
+    <a href="../patterns/other.html#accessor">Accessor</a>
   </th>
   <td>
       For accessing the internals of <code>types</code> for instance for testing purposes.
@@ -710,8 +710,8 @@ List of API's (and other tech)
 <table>
 
 <tr id="resource-strings">
-  <th><a href="patterns/resource-strings.html">Resource Strings</a></th>
-  <td>For localization, <a href="patterns/resource-strings.html"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
+  <th><a href="../patterns/resource-strings.html">Resource Strings</a></th>
+  <td>For localization, <a href="../patterns/resource-strings.html"><code>resx</code></a> files can be used in <a href="#visual-studio"><code>Visual Studio</code></a>.</td>
 </tr>
 
 <tr id="jj-framework-resourcestrings">
@@ -725,8 +725,8 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="aspects.html#localization">Localization</a></th>
-  <td>More ideas about <a href="aspects.html#localization">localization</a>.</td>
+  <th><a href="../aspects.html#localization">Localization</a></th>
+  <td>More ideas about <a href="../aspects.html#localization">localization</a>.</td>
 </tr>
 
 </table>
@@ -746,8 +746,8 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="aspects.html#configuration">Configuration</a></th>
-  <td>More info about <a href="aspects.html#configuration">configuration</a>.</td>
+  <th><a href="../aspects.html#configuration">Configuration</a></th>
+  <td>More info about <a href="../aspects.html#configuration">configuration</a>.</td>
 </tr>
 
 </table>
@@ -762,16 +762,16 @@ List of API's (and other tech)
        JJ.Framework.Security</a>
   </th>
   <td>
-      A generic interfacing for <a href="aspects.html#security">authenticating a user</a> and yet to be tested hashed salted password authentication.
+      A generic interfacing for <a href="../aspects.html#security">authenticating a user</a> and yet to be tested hashed salted password authentication.
   </td>
 </tr>
 
 <tr>
   <th>
-    <a href="aspects.html#security">Security</a>
+    <a href="../aspects.html#security">Security</a>
   </th>
   <td>
-      If more might be needed security-wise, it may be hidden behind <a href="aspects.html#security">generic interfaces</a>, abstracting the security system.
+      If more might be needed security-wise, it may be hidden behind <a href="../aspects.html#security">generic interfaces</a>, abstracting the security system.
   </td>
 </tr>
 
@@ -794,7 +794,7 @@ List of API's (and other tech)
 
 <tr>
   <th>
-    <a href="aspects.html#logging">Logging</a>
+    <a href="../aspects.html#logging">Logging</a>
   </th>
   <td>
       More info how <a href="#jj-framework-logging"><code>JJ.Framework.Logging</code></a> might be extended to contain more code for logging.
