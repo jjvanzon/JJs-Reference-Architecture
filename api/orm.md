@@ -29,9 +29,9 @@ An `ORM` aims to make it easier to focus on the logic around an [entity](../patt
     - [Alternative: Interfaces](#alternative-interfaces)
     - [Alternative: No Inheritance](#alternative-no-inheritance)
 - [Generic Interfaces](#generic-interfaces)
-- [Conclusion](#conclusion)
 - [Entity Framework](#entity-framework)
 - [NHibernate](#nhibernate)
+- [Conclusion](#conclusion)
 
 
 Introduction
@@ -194,12 +194,6 @@ Generic Interfaces
 Data access in this [architecture](../index.md) is favored behind generic interfaces from [`JJ.Framework.Data`](#jj-framework-data).
 
 
-Conclusion
-----------
-
-If this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself anymore.
-
-
 Entity Framework
 ----------------
 
@@ -219,5 +213,10 @@ NHibernate
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) might be hidden behind abstractions using [`JJ.Framework.Data.NHibernate`](misc.md#jj-framework-data-nhibernate) and [repository interfaces](../patterns/data-access.md#repository).
 
+
+Conclusion
+----------
+
+If all this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are worth it? Well, they might be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself anymore.
 
 [back](.)
