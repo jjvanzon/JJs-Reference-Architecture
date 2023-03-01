@@ -39,10 +39,10 @@ This article describes some of the technology choices in this [software architec
   - [Entity Framework](#entity-framework)
   - [NHibernate](#nhibernate)
 
-<ul><li><ul>
+<ul>
   <li><a href="orm.html">ORM</a></li>
   <li><a href="sql.html">SQL</a></li>
-</ul></li></ul>
+</ul>
 
 Introduction
 ------------
