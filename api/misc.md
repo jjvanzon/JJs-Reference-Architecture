@@ -986,7 +986,7 @@ string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sq
 ```
 [back](.)
 
-<div style="min-height: 256px">
+<div style="min-height: 512px">
 </div>
 
 <h2 id="data-1">Data</h2>
