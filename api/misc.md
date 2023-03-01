@@ -35,13 +35,16 @@ This article describes some of the technology choices in this [software architec
   - [OneToManyRelationship](#onetomanyrelationship)
   - [XML](#xml)
   - [Embedded Resources](#embedded-resources)
-- [Data](#data-1)
-  - [Entity Framework](#entity-framework)
-  - [NHibernate](#nhibernate)
 
 <ul>
-  <li><a href="orm.html">ORM</a></li>
-  <li><a href="sql.html">SQL</a></li>
+  <li><a href="#data-1">Data</a>
+    <ul>
+      <li><a href="orm.html#entity-framework">Entity Framework</a></li>
+      <li><a href="orm.html#nhibernate">NHibernate</a></li>
+      <li><a href="orm.html">ORM</a></li>
+      <li><a href="sql.html">SQL</a></li>
+    <ul>
+  <li>
 </ul>
 
 Introduction
@@ -993,19 +996,18 @@ To include a file as an embedded resource, you could set the following property 
 string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");
 ```
 
-Data
-----
+<h2 id="data-1">Data</h2>
 
-### Entity Framework
-
+<h3 id="entity-framework">Entity Framework</h3>
 See the [`ORM`](orm.md#entity-framework) article.
 
-### NHibernate
-
+<h3 id="nhibernate">NHibernate</h3>
 See the [`ORM`](orm.md#nhibernate) article.
 
 <h3 id="orm">ORM</h3>
-
 See the [`ORM`](orm.md) article.
+
+<h3 id="sql">SQL</h3>
+See the [`SQL`](sql.sql) article.
 
 [back](.)
