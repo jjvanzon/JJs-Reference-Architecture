@@ -40,8 +40,8 @@ This article describes some of the technology choices in this [software architec
   - [NHibernate](#nhibernate)
 
 <ul><li><ul>
-  <li><a href="orm.md">ORM</a></li>
-  <li><a href="sql.md">SQL</a></li>
+  <li><a href="orm.html">ORM</a></li>
+  <li><a href="sql.html">SQL</a></li>
 </ul></li></ul>
 
 Introduction
