@@ -120,7 +120,7 @@ public class Supplier
 Mapping
 -------
 
-`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/orm.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/sql.md-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/orm.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/misc.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 
 DTO
