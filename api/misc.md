@@ -1005,7 +1005,7 @@ string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sq
 
 <h3 id="sql">SQL</h3>
 
-`[` [`Moved`](sql.sql) `]`
+`[` [`Moved`](sql.md) `]`
 
 <div style="min-height: 512px">
 </div>
