@@ -37,13 +37,14 @@ This article describes some of the technology choices in this [software architec
   - [Embedded Resources](#embedded-resources)
 
 <ul>
-  <li><a href="#data-1">Data</a>
+  <li>
+    <a href="#data-1">Data</a>
     <ul>
       <li><a href="orm.html#entity-framework">Entity Framework</a></li>
       <li><a href="orm.html#nhibernate">NHibernate</a></li>
       <li><a href="orm.html">ORM</a></li>
       <li><a href="sql.html">SQL</a></li>
-    <ul>
+    </ul>
   </li>
 </ul>
 
