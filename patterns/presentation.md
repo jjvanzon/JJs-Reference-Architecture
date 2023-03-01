@@ -181,7 +181,7 @@ The TemporaryID concept breaks down, as soon as you need to use it to refer to s
 
 An alternative is to let a data store generate the ID's by flushing pendings statements to the data store, which might give you data-store-generated ID's. But this method fails when the data violates database constraints. Since the data does not have to be valid until we press save, this is usually not a viable option, not to speak of that switching to another persistence technology might not give you data-store-generated ID's upon flushing at all.
 
-Another alternative is a different ID generation scheme. You may use an [`SQL`](../api/misc.md#sql) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
+Another alternative is a different ID generation scheme. You may use an [`SQL`](../api/sql.md) Sequence, or use GUID's, which you assign from your code. Switching from int ID's to GUID's is a high impact change though, and does come with performance and storage penalties.
 
 
 Considerations

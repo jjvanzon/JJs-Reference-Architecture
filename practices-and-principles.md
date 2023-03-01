@@ -384,7 +384,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to [DTO's](patterns/data-access.md#dto) as do for [entities](patterns/data-access.md#entities). Especially if they just transfer data from [`SQL`](api/misc.md#sql) statements to application logic.
+- Usually the same rules apply to [DTO's](patterns/data-access.md#dto) as do for [entities](patterns/data-access.md#entities). Especially if they just transfer data from [`SQL`](api/sql.md) statements to application logic.
 
 #### Strings
     

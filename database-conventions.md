@@ -126,13 +126,13 @@ Database upgrade scripts are managed as follows.
 
 ### Excel Sheet
 
-Each database structure gets an Excel in which all the upgrade [`SQL`](api/misc.md#sql) scripts are registered.
+Each database structure gets an Excel in which all the upgrade [`SQL`](api/sql.md) scripts are registered.
 
-The Excel sheet and [`SQL`](api/misc.md#sql) scripts are put in a [Visual Studio](api/misc.md#visual-studio) project to manage them easily.
+The Excel sheet and [`SQL`](api/sql.md) scripts are put in a [Visual Studio](api/misc.md#visual-studio) project to manage them easily.
 
 Always edit the Excel in the dev branch, because Excels cannot be merged.
 
-The name of an [`SQL`](api/misc.md#sql) file has a specific format:
+The name of an [`SQL`](api/sql.md) file has a specific format:
 
     2014-08-28 040 ShopDB Supplier.Name not null.sql
 
@@ -159,11 +159,11 @@ Also include a column saying whether you have scripted it at all (for if you are
 
 For upgrades that should only be executed on a specific database, put 'N/A' (or 'N.V.T.' in Dutch) in the appropriate spread sheet cell.
 
-You can also add something to the [`SQL`](api/misc.md#sql) file name to indicate this:
+You can also add something to the [`SQL`](api/sql.md) file name to indicate this:
 
     2015-01-23 010 OrderDB SHOPDB ONLY Order.DeliveryDateTimeUtc.sql
 
-Some things should be done manually and not with [`SQL`](api/misc.md#sql). Those actions should also be mentioned in the Excel:
+Some things should be done manually and not with [`SQL`](api/sql.md). Those actions should also be mentioned in the Excel:
 
     2015-01-23 020 OrderDB OrderID Identity Yes DO MANUALLY
 
@@ -185,7 +185,7 @@ This section covered:
 
 ### Scripts
 
-The individual upgrade [`SQL`](api/misc.md#sql) scripts should not contain GO statements. GO is not an [`SQL`](api/misc.md#sql) keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple [`SQL`](api/misc.md#sql) files in the database upgrade scripts.
+The individual upgrade [`SQL`](api/sql.md) scripts should not contain GO statements. GO is not an [`SQL`](api/sql.md) keyword, it is a Management Studio command telling it to execute the script up until that point. What must be separated by GO statements in Management Studio must be split up into multiple [`SQL`](api/sql.md) files in the database upgrade scripts.
 
 Also get rid of any automatically generated SET ANSI\_NULLS ON and SET QUOTED\_IDENTIFIER ON statements. Those are the default behavior anyway, and it just add unnecessary fluff to your scripts. Also:  SET ANSI\_NULLS OFF will generate an error in future versions of [`SQL Server`](api/misc.md#sql-server) anyway.
 
@@ -216,7 +216,7 @@ After you have executed them, put TRUE in the appropriate spread sheet cells.
 
 You could execute the scripts one by one, but there is a handier, safer way to do it.
 
-With some creative copying and pasting the [`SQL`](api/misc.md#sql) file names, you can create a composite upgrade script like this:
+With some creative copying and pasting the [`SQL`](api/sql.md) file names, you can create a composite upgrade script like this:
 
 ```sql
 begin try
@@ -275,7 +275,7 @@ This section covered:
 
 ### SqlScripts Table
 
-Consider maintaining a list of executed database upgrade [`SQL`](api/misc.md#sql) scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
+Consider maintaining a list of executed database upgrade [`SQL`](api/sql.md) scripts in a table, because it happens too often, that someone has put a database somewhere, without administrating the Excel file, no matter how many times you say it.
 
 If you do this, then the stored procedure above would have to be changed so it inserts a record in this database table.
 
@@ -283,11 +283,11 @@ If you do this, then the stored procedure above would have to be changed so it i
 C#-Based Migrations
 -------------------
 
-Some data migrations are easier to program using [`C#`](api/misc.md#csharp) than [`SQL`](api/misc.md#sql) scripts.
+Some data migrations are easier to program using [`C#`](api/misc.md#csharp) than [`SQL`](api/sql.md) scripts.
 
-Sometimes the contrast between how easy it is to do in [`C#`](api/misc.md#csharp) or [`SQL`](api/misc.md#sql) is so large, that the benefits of programming it in [`C#`](api/misc.md#csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
+Sometimes the contrast between how easy it is to do in [`C#`](api/misc.md#csharp) or [`SQL`](api/sql.md) is so large, that the benefits of programming it in [`C#`](api/misc.md#csharp) outweigh the downsides. It could be a factor 20 difference in development time in some cases.
 
-A benefit of [`SQL`](api/misc.md#sql) scripts is that it always operates on the right intermediate version of the [entity](patterns/data-access.md#entities) model, while [`C#`](api/misc.md#csharp) code always operates on the latest version of the [entity](patterns/data-access.md#entities) model. This means that earlier [`C#`](api/misc.md#csharp)-based migrations might not compile anymore for a newer version of the [entity](patterns/data-access.md#entities) model, and can only work with an older version of the model.
+A benefit of [`SQL`](api/sql.md) scripts is that it always operates on the right intermediate version of the [entity](patterns/data-access.md#entities) model, while [`C#`](api/misc.md#csharp) code always operates on the latest version of the [entity](patterns/data-access.md#entities) model. This means that earlier [`C#`](api/misc.md#csharp)-based migrations might not compile anymore for a newer version of the [entity](patterns/data-access.md#entities) model, and can only work with an older version of the model.
 
 This problem with [`C#`](api/misc.md#csharp)-based migrations can be mitigated in several ways. Here are a few ideas:
 

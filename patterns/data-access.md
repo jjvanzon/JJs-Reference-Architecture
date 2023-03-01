@@ -128,9 +128,9 @@ DTO
 
 `DTO` = *data transfer object*. `DTO's` only contain data, no logic. They are used to transfer data between different parts of a system. In certain situations, where passing an  [`Entity`](#entities) is not handy or efficient, a `DTO` might be a good alternative.
 
-For instance: A specialized, optimized [`SQL`](../api/misc.md#sql) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [`Entity`](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
+For instance: A specialized, optimized [`SQL`](../api/sql.md) query may return a result with a particular record structure. You could program a `DTO` that is a strongly typed version of these records. In many cases you want to query for [`Entity`](#entities) `objects` instead, but in some cases this is not fast / efficient enough and you might resort to a `DTO`.
 
-`DTO's` can be used for other data transfers than [`SQL`](../api/misc.md#sql) queries as well.
+`DTO's` can be used for other data transfers than [`SQL`](../api/sql.md) queries as well.
 
 
 Repository

@@ -7,6 +7,8 @@ keywords:
   - object relational mapper
   - nhibernate
   - entity framework
+  - database
+  - db
   - c#
   - .net
   - coding
@@ -60,9 +62,9 @@ This information was gathered from experience, built up with [`NHibernate`](#nhi
 Uncommitted Objects
 -------------------
 
-Here is something that happens in [`ORM`](#orm) sometimes:
+Here is something that happens in [`ORM`](#-orm) sometimes:
 
-Some methods of data retrieval work with uncommitted / non-flushed [entities](../patterns/data-access.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](../patterns/data-access.md#entities). This asymmetry might be common in [`ORM's`](#orm), since doing it another way might harm performance considerably:
+Some methods of data retrieval work with uncommitted / non-flushed [entities](../patterns/data-access.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](../patterns/data-access.md#entities). This asymmetry might be common in [`ORM's`](#-orm), since doing it another way might harm performance considerably:
 
 | Method | Data Read |
 |--------|----------|
@@ -71,13 +73,13 @@ Some methods of data retrieval work with uncommitted / non-flushed [entities](..
 | `IContext.TryGet` | 1st committed, then uncommitted
 | Navigation properties /<br>following the object graph | 1st committed, then uncommitted
 
-It appears to have to do with, when the [`ORM`](#orm) goes to the database to query for objects.
+It appears to have to do with, when the [`ORM`](#-orm) goes to the database to query for objects.
 
 
 Flush
 -----
 
-`Flushing` in [`NHibernate`](#nhibernate) would mean that all the pending [`SQL`](misc.md#sql) statements are executed onto the database, without committing the transaction yet.
+`Flushing` in [`NHibernate`](#nhibernate) would mean that all the pending [`SQL`](sql.md) statements are executed onto the database, without committing the transaction yet.
 
 A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes when [`NHibernate`](#nhibernate) is confused about the order in which to execute things, a `Flush` may help it execute things in the right order.
 
@@ -93,7 +95,7 @@ It may also help to create [entities](../patterns/data-access.md#entities) in a 
 Read-Write Order
 ----------------
 
-It seems [`ORM's`](#orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#uncommitted-objects).
+It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#uncommitted-objects).
 
 
 Bridge Entities
@@ -103,7 +105,7 @@ An *bridge* [entity](../patterns/data-access.md#entities) applies to `n => n` re
 
 <img src="../images/bridge-entity-table-with-composite-key.png" width="200"/>
 
-Using an [`ORM`](#orm), the bridge [entity](../patterns/data-access.md#entities) might not be visible in the code, but can be managed as two collections inside the two main [entities](../patterns/data-access.md#entities):
+Using an [`ORM`](#-orm), the bridge [entity](../patterns/data-access.md#entities) might not be visible in the code, but can be managed as two collections inside the two main [entities](../patterns/data-access.md#entities):
 
 ```cs
 class Question
@@ -117,9 +119,9 @@ class Category
 }
 ```
 
-The [`ORM`](#orm) can do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](../aspects.md#exceptions) to go off, while [`ORM`](#orm) tries to guard the integrity of the relationship.
+The [`ORM`](#-orm) can do quite a bit of magic under the hood, to keep these collections in sync. Perhaps a little too much for its own good. You might expect quite a few [`Exceptions`](../aspects.md#exceptions) to go off, while [`ORM`](#-orm) tries to guard the integrity of the relationship.
 
-These problems almost all go away, if you map a *bridge* [entity](../patterns/data-access.md#entities) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#orm) can manage with less hardship. You can let both [entities](../patterns/data-access.md#entities) hold a list of *bridge* [entities](../patterns/data-access.md#entities) instead. In turn, the bridge [entity](../patterns/data-access.md#entities) would link back to the two main [entities](../patterns/data-access.md#entities):
+These problems almost all go away, if you map a *bridge* [entity](../patterns/data-access.md#entities) instead. This turns the `n => n` relationship into two `1 => n` relationships which [`ORM`](#-orm) can manage with less hardship. You can let both [entities](../patterns/data-access.md#entities) hold a list of *bridge* [entities](../patterns/data-access.md#entities) instead. In turn, the bridge [entity](../patterns/data-access.md#entities) would link back to the two main [entities](../patterns/data-access.md#entities):
 
 ```cs
 class QuestionCategory
@@ -145,17 +147,17 @@ It might be advised, that the bridge table not rely on a *composite* key of the 
 
 <img src="../images/bridge-entity-table-with-surrogate-key.png" width="200"/>
 
-This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that don't look pretty, etc.
+This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#-orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that don't look pretty, etc.
 
 
 Binary Fields
 -------------
 
-You might not want to map *binary* and other *serialized data* fields using [`ORM`](#orm), because it can harm performance quite a bit.
+You might not want to map *binary* and other *serialized data* fields using [`ORM`](#-orm), because it can harm performance quite a bit.
 
 Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
-Using separate [`SQL`](misc.md#sql) statements for retrieving blobs might be a better alternative.
+Using separate [`SQL`](sql.md) statements for retrieving blobs might be a better alternative.
 
 Inheritance
 -----------
@@ -164,7 +166,7 @@ Particular surprises might emerge when using *inheritance* in your [entity](../p
 
 ### Problem: Entity / Proxy Type Mismatch
 
-When retrieving an [entity](../patterns/data-access.md#entities) through [`ORM`](#orm), it will likely not return an instance of your [entity](../patterns/data-access.md#entities) type, but an instance of a type derived from your [entity](../patterns/data-access.md#entities), a so called `Proxy`. This `Proxy` adds to your [entity](../patterns/data-access.md#entities) a sort of connectedness to the database.
+When retrieving an [entity](../patterns/data-access.md#entities) through [`ORM`](#-orm), it will likely not return an instance of your [entity](../patterns/data-access.md#entities) type, but an instance of a type derived from your [entity](../patterns/data-access.md#entities), a so called `Proxy`. This `Proxy` adds to your [entity](../patterns/data-access.md#entities) a sort of connectedness to the database.
 
 ### Problem: Base Proxy / Derived Proxy Type Mismatch
 
@@ -192,7 +194,7 @@ To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it wil
 
 ### Alternative: 1-to-1 Relationship
 
-An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](../patterns/data-access.md#entities). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#orm) gets less confused.
+An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](../patterns/data-access.md#entities). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#-orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#-orm) gets less confused.
 
 ### Alternative: Interfaces
 
@@ -212,7 +214,7 @@ Data access in this [architecture](../index.md) is favored behind generic interf
 Entity Framework
 ----------------
 
-[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`]( misc.md#jj-framework-data-entity-framework) and [repository interfaces](../patterns/data-access.md#repository-interfaces).
+[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#-orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`]( misc.md#jj-framework-data-entity-framework) and [repository interfaces](../patterns/data-access.md#repository-interfaces).
 
 At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
@@ -222,7 +224,7 @@ When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework),
 NHibernate
 ----------
 
-[`NHibernate`](https://www.nuget.org/packages/NHibernate) is a technology used for data access. A so called [`ORM`](#orm) (**O**bject **R**elational **M**apper). It is comparable to [`Entity Framework`](#entity-framework).
+[`NHibernate`](https://www.nuget.org/packages/NHibernate) is a technology used for data access. A so called [`ORM`](#-orm) (**O**bject **R**elational **M**apper). It is comparable to [`Entity Framework`](#entity-framework).
 
 [`NHibernate`](https://www.nuget.org/packages/NHibernate) is used in some projects, because an employer favored it, and other projects joined the club.
 
@@ -232,6 +234,6 @@ NHibernate
 Conclusion
 ----------
 
-If all this makes you lose grip on reality and wonder whether [`ORM's`](#orm) are really worth it? Well, they can be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself.
+If all this makes you lose grip on reality and wonder whether [`ORM's`](#-orm) are really worth it? Well, they can be. They allow you to program focusing on the meaning of things, rather than how to store it. Even though that is ambiguous because the story above suggests you'd still be better off knowing what it does and how it does it. You just don't need to do it yourself.
 
 [back](.)

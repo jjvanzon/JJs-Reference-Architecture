@@ -33,7 +33,7 @@ In [`C#`](api/misc.md#csharp) it seems you can filter in one direction only:
 FirstList.Where(x => ...).SecondList.Where(x => ...).LastList.Where(x => ...);
 ```
 
-If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a [`LINQ`](api/misc.md#linq) query won't do, while in [`SQL`](api/misc.md#sql) it would seem so trivial. The solution in [`C#`](api/misc.md#csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
+If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a [`LINQ`](api/misc.md#linq) query won't do, while in [`SQL`](api/sql.md) it would seem so trivial. The solution in [`C#`](api/misc.md#csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
 
 ```cs
 var list = FirstList.Where(x => ...).SecondList.Where(x => ...).ToArray();
