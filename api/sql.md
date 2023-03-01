@@ -42,11 +42,11 @@ Executing queries onto a database would normally be done through [`ORM`](orm.md)
 Using SqlExecutor
 -----------------
 
-Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`:
+Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](misc.md#dotnet) projects, under a sub-folder named `Sql`:
 
 ![](../images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#sql) in [`.NET`](#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](#sql-executor) might be used.
+The classic way of executing [`SQL`](#sql) in [`.NET`](misc.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](#sql-executor) might be used.
 
 With an `API` like that, we can execute [`SQL`](#sql) command in a strongly-typed way, often with only a single line of code.
 
@@ -133,7 +133,7 @@ With NHibernate
 ---------------
 
 If you use [`SqlExecutor`](#sql-executor) in combination with [`NHibernate`](orm.md#nhibernate) you might want to 
-use the [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) instead of the default [`SqlExecutorFactory`](#sql-executor):
+use the [`NHibernateSqlExecutorFactory`](misc.md#jj-framework-data-nhibernate) instead of the default [`SqlExecutorFactory`](misc.md#sql-executor):
 
 ```cs
 ISession session = ...;
@@ -144,19 +144,19 @@ ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
 
 This version uses an `ISession`. In order for the [`SQL`](#sql) to run in the same transaction as [`NHibernate`](orm.md#nhibernate), we made it aware of its `ISession`.
 
-An implementation of [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
+An implementation of [`NHibernateSqlExecutorFactory`](misc.md#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](misc.md#jj-framework-data-nhibernate).
 
 
 SQL Files
 ---------
 
-*(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
+*(This feature might not be available in the [`JJ.Framework`](misc.md#jjframework).)*
 
 It might be a good choice to include the [`SQL`](#sql) as an embedded resource, but you can also use loose *files:*
 
 ![](../images/sql-as-content-file.png)
 
-Here is code to create the [`SqlExecutor`](#sql-executor) and execute the [`SQL`](#sql) file:
+Here is code to create the [`SqlExecutor`](misc.md#sql-executor) and execute the [`SQL`](#sql) file:
 
 ```cs
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
@@ -171,7 +171,7 @@ So the `SqlEnum` cannot be used here. You'd use a (relative) file path.
 SQL Strings
 -----------
 
-*(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
+*(This feature might not be available in the [`JJ.Framework`](misc.md#jjframework).)*
 
 It is not recommended to use [`SQL`](#sql) strings in your code. But it is possible all the same using code like this:
 
@@ -190,7 +190,7 @@ But it might make it harder to track down all the [`SQL`](#sql) of your project 
 String Concat
 -------------
 
-*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
+*[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](misc.md#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](misc.md#sql-executor) from [`JJ.Framework`](misc.md#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
 Here is a trick to prevent the use of `string` concatenation: When you want to filter something conditionally, depending on a parameter being filled in or not, then the following expression might be used in the [`SQL`](#sql) script's `where` clause:
 
@@ -204,13 +204,13 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 - Another case where `string` concatenation might be helpful, is an [`SQL`](#sql) script where you wish to include a *database name* or *schema name*.
 - There might be other examples where [`SQL`](#sql) string concatenation might be used as an exception to the rule.
 
-One variation of [`SqlExecutor`](#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
+One variation of [`SqlExecutor`](misc.md#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](misc.md#jjframework).)* 
 
 Behind Repositories
 -------------------
 
 The [`repository`](../patterns/data-access.md#repository) pattern is used in this [architecture](../index.md).  
-The [`repository`](../patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
+The [`repository`](../patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](misc.md#jj-framework-data).  
 
 Using [`SQL`](#sql) combined with [`repositories`](../patterns/data-access.md#repository) can be simplified with [`SqlExecutor`](#sql).
 
@@ -224,7 +224,7 @@ where CategoryID = @categoryID
 and MinStartDate >= @minStartDate
 ```
 
-[`C#:`](#csharp)
+[`C#:`](misc.md#csharp)
 
 ```cs
 enum SqlEnum
@@ -262,10 +262,10 @@ interface IMyRepository : IRepository
 This would result in:
 
 - Keeping all the queries of an [entity](../patterns/data-access.md#entities) together in a [`repository`](../patterns/data-access.md#repository).
-- Keeping overview of all the [`SQL`](#sql) of all the [entities](../patterns/data-access.md#entities) behind an [`SqlExecutor`](#sql-executor).
+- Keeping overview of all the [`SQL`](#sql) of all the [entities](../patterns/data-access.md#entities) behind an [`SqlExecutor`](misc.md#sql-executor).
 - All that data access would be hidden behind [`repository interfaces`](../patterns/data-access.md#repository-interfaces) decoupling the persistence technology.
  
-It may seem overhead all the layers, but it might add up after adding more queries for more [entities](../patterns/data-access.md#entities), that are either [`SQL`](#sql) or [`ORM`](#orm) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
+It may seem overhead all the layers, but it might add up after adding more queries for more [entities](../patterns/data-access.md#entities), that are either [`SQL`](#sql) or [`ORM`](orm.md) queries. Of course you could skip layers, but this is how it is done in some of the `JJ` projects.
 
 You might also find split up into separate assemblies: 
 
