@@ -1,5 +1,5 @@
 ---
-title: "💻 JJ's Reference Architecture 📲"
+title: "📲 JJ's Reference Architecture 🧑‍💻"
 ---
 
 Contents 
