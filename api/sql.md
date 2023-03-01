@@ -282,4 +282,6 @@ Database Upgrade Scripts
 
 [`SQL`](#-sql) executed solely for database upgrading, might not be put in the main projects, but a project on the side. Suggestions of how to organize database upgrading might be found [here](../database-conventions.md#upgrade-scripts).
 
+[Test broken link](#test-broken-link)
+
 [back](.)
