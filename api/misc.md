@@ -1009,3 +1009,5 @@ string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sq
 
 <div style="min-height: 512px">
 </div>
+
+[back](.)
