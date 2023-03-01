@@ -11,15 +11,16 @@ This article describes some of the technology choices in this [software architec
 
 <h2>Contents</h2>
 
-- [SQL](#sql)
-  - [With NHibernate](#with-nhibernate)
-  - [SQL Files](#sql-files)
-  - [SQL Strings](#sql-strings)
-  - [String Concat](#string-concat)
-  - [Behind Repositories](#behind-repositories)
-  - [Database Upgrade Scripts](#database-upgrade-scripts)
+- [SqlExecutor](#sqlexecutor)
+- [With NHibernate](#with-nhibernate)
+- [SQL Files](#sql-files)
+- [SQL Strings](#sql-strings)
+- [String Concat](#string-concat)
+- [Behind Repositories](#behind-repositories)
+- [Database Upgrade Scripts](#database-upgrade-scripts)
 
-### Using SqlExecutor
+SqlExecutor
+-----------------
 
 [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
 
@@ -111,7 +112,9 @@ It might be an idea to let the [`SQL`](#sql) file names begin with the [entity](
 
 ![](../images/sql-file-names.png)
 
-#### With NHibernate
+
+With NHibernate
+---------------
 
 If you use [`SqlExecutor`](#sql-executor) in combination with [`NHibernate`](orm.md#nhibernate) you might want to 
 use the [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) instead of the default [`SqlExecutorFactory`](#sql-executor):
@@ -127,7 +130,9 @@ This version uses an `ISession`. In order for the [`SQL`](#sql) to run in the sa
 
 An implementation of [`NHibernateSqlExecutorFactory`](#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](#jj-framework-data-nhibernate).
 
-#### SQL Files
+
+SQL Files
+---------
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
@@ -146,7 +151,9 @@ sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient_Update.sql", new { id, name });
 
 So the `SqlEnum` cannot be used here. You'd use a (relative) file path.
 
-#### SQL Strings
+
+SQL Strings
+-----------
 
 *(This feature might not be available in the [`JJ.Framework`](#jjframework).)*
 
@@ -163,7 +170,9 @@ In that case no [`SQL`](#sql) files have to be included in your project.
 
 But it might make it harder to track down all the [`SQL`](#sql) of your project and optimize it. Using [`SQL`](#sql) strings may also circumvent another layer of protection against [`SQL`](#sql) injection attacks.
 
-#### String Concat
+
+String Concat
+-------------
 
 *[`SQL`](#sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](#sql-executor) from [`JJ.Framework`](#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
@@ -181,7 +190,8 @@ But there might be exceptional cases where [`SQL`](#sql) string concatenation wo
 
 One variation of [`SqlExecutor`](#sql-executor) included the ability to add placeholders to the [`SQL`](#sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](#jjframework).)* 
 
-#### Behind Repositories
+Behind Repositories
+-------------------
 
 The [`repository`](../patterns/data-access.md#repository) pattern is used in this [architecture](../index.md).  
 The [`repository`](../patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](#jj-framework-data).  
@@ -249,7 +259,9 @@ You might also find split up into separate assemblies:
 
 Separating the general things from the technology-specific things.
 
-#### Database Upgrade Scripts
+
+Database Upgrade Scripts
+------------------------
 
 [`SQL`](#sql) executed solely for database upgrading, might not be put in the main projects, but a project on the side. Suggestions of how to organize database upgrading might be found [here](../database-conventions.md#upgrade-scripts).
 
