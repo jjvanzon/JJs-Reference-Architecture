@@ -257,9 +257,9 @@ It is clear from the assembly name which technique is used, and what the functio
 
 The result of this split up is that we are not stuck with a 1-to-1 relation between an application and its platform.
 
-For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api/orm.md#nhibernate) and an [`SQL Server`](api/misc.md#sql-server) database. You could not use the [entity model](patterns/data-access.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api/misc.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
+For instance: if an Ordering back-end was programmed to use a very specific persistence technology, you might only use it with [`NHibernate`](api/orm.md#nhibernate) and an [`SQL Server`](api/sql.md-server) database. You could not use the [entity model](patterns/data-access.md#entities) on a platform that does not support this (e.g. mobile platforms). If a Cms front-end is programmed to specifically use [`MVC`](api/misc.md#mvc), it can only be deployed as a web site and not as a Windows application or mobile app.
 
-By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns/data-access.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns/data-access.md#entities) in [`XML`](api/misc.md#xml), while in a web environment we might store things in [`SQL Server`](api/misc.md#sql-server) Server using [`NHibernate`](api/orm.md#nhibernate).
+By further splitting up our assemblies we can reuse the Ordering back-end in multiple front-ends. Furthermore: a single front-end could be deployed to either web or mobile platform and we can store [entity models](patterns/data-access.md#entities) differently depending on the infrastructural context. On a mobile platform we might store an [entity model](patterns/data-access.md#entities) in [`XML`](api/misc.md#xml), while in a web environment we might store things in [`SQL Server`](api/sql.md-server) Server using [`NHibernate`](api/orm.md#nhibernate).
 
 #### Framework Assemblies
 
@@ -384,7 +384,7 @@ Here are rules for null-checks for other constructs:
 
 #### DTOs
 
-- Usually the same rules apply to [DTO's](patterns/data-access.md#dto) as do for [entities](patterns/data-access.md#entities). Especially if they just transfer data from [`SQL`](api/misc.md#sql) statements to application logic.
+- Usually the same rules apply to [DTO's](patterns/data-access.md#dto) as do for [entities](patterns/data-access.md#entities). Especially if they just transfer data from [`SQL`](api/sql.md) statements to application logic.
 
 #### Strings
     

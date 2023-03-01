@@ -101,13 +101,13 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api/misc.md#sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api/misc.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api/sql.md-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api/misc.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
 The database might not be directly accessed by the rest of the code. It may go through an *object-relational mapper* (or [`ORM`](api/orm.md#-orm)), like [`NHibernate`](api/orm.md#nhibernate). This [`ORM`](api/orm.md#-orm) would translate database records to objects called [entities](patterns/data-access.md#entities).
     
-It could also be a different data access technology: a different [`ORM`](api/orm.md#-orm), like [`Entity Framework`](api/orm.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/misc.md#sql) to execute raw [`SQL`](api/misc.md#sql) onto the database.
+It could also be a different data access technology: a different [`ORM`](api/orm.md#-orm), like [`Entity Framework`](api/orm.md#entity-framework), or [`XML`](api/misc.md#xml) files, or perhaps [`SqlClient`](api/sql.md) to execute raw [`SQL`](api/sql.md) onto the database.
 
 ### Mappings
 
@@ -131,7 +131,7 @@ The [`Repository`](patterns/data-access.md#repository) implementations might not
 
 The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part.
 
-The platform-*specific* part concerns itself with [`NHibernate`](api/orm.md#nhibernate) and [`SQL Server`](api/misc.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/misc.md#sql-server) or [`NHibernate`](api/orm.md#nhibernate) at all.
+The platform-*specific* part concerns itself with [`NHibernate`](api/orm.md#nhibernate) and [`SQL Server`](api/sql.md-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/sql.md-server) or [`NHibernate`](api/orm.md#nhibernate) at all.
 
 This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also helps deploy the same code to different environments like *mobile*, *Windows* or *web*.
 

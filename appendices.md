@@ -29,7 +29,7 @@ This checklist might be used if you want to bulk-program the [architecture](inde
 - [`Data`](layers.md#data-layer): [`Repository interfaces`](patterns/data-access.md#repository-interfaces)
 - [`Data`](layers.md#data-layer): Default [`Repositories`](patterns/data-access.md#repository)
 - [`Data`](layers.md#data-layer): [`NHibernate`](api/orm.md#nhibernate) [`Mappings`](patterns/data-access.md#mapping)
-- [`Data`](layers.md#data-layer): [`SQL` queries](api/misc.md#sql)
+- [`Data`](layers.md#data-layer): [`SQL` queries](api/sql.md)
 - [`Data`](layers.md#data-layer): [`NHibernate`](api/orm.md#nhibernate) [`Repositories`](patterns/data-access.md#repository) (optional)
 - [`Data`](layers.md#data-layer): Other [`Repositories`](patterns/data-access.md#repository) (optional)
 - [`Data`](layers.md#data-layer): Other [`Mappings`](patterns/data-access.md#mapping) (optional)

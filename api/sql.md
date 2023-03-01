@@ -20,7 +20,7 @@ This article describes some of the technology choices in this [software architec
 - [Database Upgrade Scripts](#database-upgrade-scripts)
 
 SqlExecutor
------------------
+-----------
 
 [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
 

@@ -286,7 +286,7 @@ For number sequences the following names might be used:
     SortOrder
     Rank
 
-Perhaps don't use the word `Index` on its own, because that's an [`SQL`](api/misc.md#sql) keyword.
+Perhaps don't use the word `Index` on its own, because that's an [`SQL`](api/sql.md) keyword.
 
 ### File-Related Variable Names
 

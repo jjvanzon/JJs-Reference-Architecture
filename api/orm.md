@@ -77,7 +77,7 @@ It appears to have to do with, when the [`ORM`](#orm) goes to the database to qu
 Flush
 -----
 
-`Flushing` in [`NHibernate`](#nhibernate) would mean that all the pending [`SQL`](misc.md#sql) statements are executed onto the database, without committing the transaction yet.
+`Flushing` in [`NHibernate`](#nhibernate) would mean that all the pending [`SQL`](sql.md) statements are executed onto the database, without committing the transaction yet.
 
 A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes when [`NHibernate`](#nhibernate) is confused about the order in which to execute things, a `Flush` may help it execute things in the right order.
 
@@ -155,7 +155,7 @@ You might not want to map *binary* and other *serialized data* fields using [`OR
 
 Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
-Using separate [`SQL`](misc.md#sql) statements for retrieving blobs might be a better alternative.
+Using separate [`SQL`](sql.md) statements for retrieving blobs might be a better alternative.
 
 Inheritance
 -----------
@@ -216,7 +216,7 @@ Entity Framework
 
 At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
-When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](misc.md#sql-server) installation.
+When using [`Entity Framework`](https://www.nuget.org/packages/EntityFramework), transactions might not work unless you enable `MSDTC` (**M**icrosoft **D**istributed **T**ransaction **C**oordinator). That is a `Windows` service belonging to the [`SQL Server`](sql.md-server) installation.
 
 
 NHibernate
