@@ -229,13 +229,13 @@ List of API's (and other tech)
 </tr>
 
 <tr>
-  <th><a href="#orm">ORM</a></th>
+  <th><a href="orm.html">ORM</a></th>
   <td>Hides most <a href="sql.html"><code>SQL</code></a>, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
 </tr>
 
 <tr>
   <th><a href="sql.html">SQL</a></th>
-  <td>For performance reasons <a href="sql.html"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="#orm"><code>ORM</code></a>.</td>
+  <td>For performance reasons <a href="sql.html"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="orm.html"><code>ORM</code></a>.</td>
 </tr>
 
 <tr>
@@ -243,7 +243,7 @@ List of API's (and other tech)
     <a href="orm.html#nhibernate">NHibernate</a>
   </th>
   <td>
-      A type of <a href="#orm"><code>ORM</code></a>. Chosen in several <code>JJ</code> project because an employer also so happened to use it.
+      A type of <a href="orm.html"><code>ORM</code></a>. Chosen in several <code>JJ</code> project because an employer also so happened to use it.
   </td>
 </tr>
 
@@ -263,7 +263,7 @@ List of API's (and other tech)
        FluentNHibernate</a>
   </th>
   <td>
-      A way to define <a href="#orm"><code>ORM</code></a> mappings with fluent notation.
+      A way to define <a href="orm.html"><code>ORM</code></a> mappings with fluent notation.
   </td>
 </tr>
 
@@ -272,7 +272,7 @@ List of API's (and other tech)
     <a href="orm.html#entity-framework">Entity Framework</a>
   </th>
   <td>
-      A type of <a href="#orm"><code>ORM</code></a>. Chosen less in the <code>JJ</code> projects, because of more experience with <a href="orm.html#nhibernate"><code>NHibernate</code></a>. Worth considering though.
+      A type of <a href="orm.html"><code>ORM</code></a>. Chosen less in the <code>JJ</code> projects, because of more experience with <a href="orm.html#nhibernate"><code>NHibernate</code></a>. Worth considering though.
   </td>
 </tr>
 
@@ -300,7 +300,7 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="sql.html"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="orm.html#nhibernate"><code>NHibernate</code></a> or <a href="orm.html#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
+      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="sql.html"><code>SQL</code></a>, <a href="orm.html"><code>ORM</code></a>, <a href="orm.html#nhibernate"><code>NHibernate</code></a> or <a href="orm.html#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
   </td>
 </tr>
 
