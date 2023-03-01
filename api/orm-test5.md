@@ -1,6 +1,6 @@
 ﻿---
 title: "📀 ORM"
-description: "ORM provides focus on logic around entity objects, saving things to a database automatically. This article lists issues you could encounter using ORM, and suggestions for how to deal with it."
+description: "ORM saves things to a database automatically, while you can focus on the logic around entity objects. This article lists issues you could encounter using ORM, and suggestions for how to deal with it."
 image: "/images/orm-page.png"
 keywords:
   - orm
