@@ -242,12 +242,12 @@ List of API's (and other tech)
 
 <tr>
   <th><a href="#orm">ORM</a></th>
-  <td>Hides most <a href="#sql"><code>SQL</code></a>, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
+  <td>Hides most <a href="sql.html"><code>SQL</code></a>, exposing an object graph, to focus on the logic, instead of on the data storage.</td>
 </tr>
 
 <tr>
-  <th><a href="#sql">SQL</a></th>
-  <td>For performance reasons <a href="#sql"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="#orm"><code>ORM</code></a>.</td>
+  <th><a href="sql.html">SQL</a></th>
+  <td>For performance reasons <a href="sql.html"><code>SQL</code></a> is hand-programmed incidentally, combined with <a href="#orm"><code>ORM</code></a>.</td>
 </tr>
 
 <tr>
@@ -312,7 +312,7 @@ List of API's (and other tech)
        JJ.Framework.Data</a>
   </th>
   <td>
-      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="#sql"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="orm.html#nhibernate"><code>NHibernate</code></a> or <a href="orm.html#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
+      Helps hide data access behind abstractions. It does not expose whether it is <a href="#sql-server"><code>SQL Server</code></a>, <a href="sql.html"><code>SQL</code></a>, <a href="#orm"><code>ORM</code></a>, <a href="orm.html#nhibernate"><code>NHibernate</code></a> or <a href="orm.html#entity-framework"><code>Entity Framework</code></a>. It would just offer abstracted convenient methods instead. For more information see <a href="https://github.com/jjvanzon/JJ.Framework/tree/master/Framework/Data">documentation</a>.
   </td>
 </tr>
 
@@ -351,7 +351,7 @@ List of API's (and other tech)
     <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient">JJ.Framework.Data.SqlClient</a>
   </th>
   <td>
-      Also know as <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient"><strong><code>SqlExecutor</code></strong></a>. Work more easily with <a href="#sql"><code>SqlClient</code></a> with less code.
+      Also know as <a href="https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Data.SqlClient"><strong><code>SqlExecutor</code></strong></a>. Work more easily with <a href="sql.html"><code>SqlClient</code></a> with less code.
   </td>
 </tr>
 
