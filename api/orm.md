@@ -1,5 +1,20 @@
 ﻿---
 title: "📀 ORM"
+description: "ORM makes it easier to focus on the logic around entity objects, while saving to a database goes automatically. This article lists issues you could encounter using ORM, and suggestions for how to deal with it."
+image: "/images/orm-page.png"
+keywords:
+  - orm
+  - object relational mapper
+  - nhibernate
+  - entity framework
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 📀 ORM
@@ -7,7 +22,7 @@ title: "📀 ORM"
 
 [back](.)
 
-An `ORM` aims to make it easier to focus on the logic around an [entity](../patterns/data-access.md#entities) model, while saving things to a database is pretty much done for you.
+An `ORM` aims to make it easier to focus on the logic around [entity](../patterns/data-access.md#entities) objects, while saving things to a database is pretty much done for you.
 
 <h3>Contents</h3>
 
