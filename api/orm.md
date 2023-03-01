@@ -7,6 +7,8 @@ keywords:
   - object relational mapper
   - nhibernate
   - entity framework
+  - database
+  - db
   - c#
   - .net
   - coding
