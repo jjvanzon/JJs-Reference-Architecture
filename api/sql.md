@@ -1,5 +1,19 @@
 ﻿---
 title: "🗄️ SQL"
+description: "Describing the role of SQL in JJ's Software Architecture. SQL is a language for data retrieval and manipulation and other actions executed onto a database."
+keywords:
+  - sql
+  - structured query language
+  - database
+  - db
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 🗄️ SQL
@@ -7,11 +21,12 @@ title: "🗄️ SQL"
 
 [back](.)
 
-This article describes some of the technology choices in this [software architecture](../index.md).
+[`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
 
 <h2>Contents</h2>
 
-- [SqlExecutor](#sqlexecutor)
+- [Introduction](#introduction)
+- [Using SqlExecutor](#using-sqlexecutor)
 - [With NHibernate](#with-nhibernate)
 - [SQL Files](#sql-files)
 - [SQL Strings](#sql-strings)
@@ -19,12 +34,13 @@ This article describes some of the technology choices in this [software architec
 - [Behind Repositories](#behind-repositories)
 - [Database Upgrade Scripts](#database-upgrade-scripts)
 
-SqlExecutor
------------
-
-[`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
+Introduction
+------------
 
 Executing queries onto a database would normally be done through [`ORM`](orm.md), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
+
+Using SqlExecutor
+-----------------
 
 Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](#dotnet) projects, under a sub-folder named `Sql`:
 
