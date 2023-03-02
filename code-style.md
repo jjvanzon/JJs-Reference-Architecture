@@ -102,7 +102,7 @@ It also covers specific preferences for *language constructs*.
 Introduction
 ------------
 
-This article lists code style preferences, that might be followed in some of the `JJ` projects.
+This article lists code style preferences, that might be followed in some of the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects.
 
 They mostly conform to `Microsoft` standards described in these articles:
 
