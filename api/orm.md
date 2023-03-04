@@ -54,9 +54,9 @@ An `ORM` aims to make it easier to focus on the logic around [entity](../pattern
 Introduction
 ------------
 
-Here follow some issues you could encounter while using an `ORM`, and some suggestions for how to deal with it.
+Here follow some issues you could encounter while using an [`ORM`](#-orm), and some suggestions for how to deal with it.
 
-This information was gathered from experience, built up with [`NHibernate`](#nhibernate). It might be possible that other `ORM's` have similar issues, due to how `ORM's` work internally.
+This information was gathered from experience, built up with [`NHibernate`](#nhibernate). It might be possible that other [`ORM's`](#-orm) have similar issues, due to how [`ORM's`](#-orm) work internally.
 
 
 Uncommitted Objects
@@ -208,13 +208,13 @@ By now maybe it may be clear, that the main advice is not to use inheritance in 
 Generic Interfaces
 ------------------
 
-Data access in this [architecture](../index.md) is favored behind generic interfaces from [`JJ.Framework.Data`](#jj-framework-data).
+Data access in this [architecture](../index.md) is favored behind generic interfaces from [`JJ.Framework.Data`](misc.md#jj-framework-data).
 
 
 Entity Framework
 ----------------
 
-[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#-orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`]( misc.md#jj-framework-data-entity-framework) and [repository interfaces](../patterns/data-access.md#repository-interfaces).
+[`Entity Framework`](https://www.nuget.org/packages/EntityFramework) is a framework for data access, a so called [`ORM`](#-orm) (**O**bject **R**elational **M**apper). [`Entity Framework`](https://www.nuget.org/packages/EntityFramework) might be hidden behind abstractions using [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework) and [repository interfaces](../patterns/data-access.md#repository-interfaces).
 
 At one point we noticed a slow down in [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework). But it hadn't even been modified. Probably caused by an upgrade to a newer version of [`Entity Framework`](https://www.nuget.org/packages/EntityFramework). Unfortunately [`JJ.Framework.Data.EntityFramework`](misc.md#jj-framework-data-entity-framework) was not upgraded since then. The reason was most apps used [`NHibernate`](#nhibernate) instead.
 
