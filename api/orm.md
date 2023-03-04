@@ -24,7 +24,7 @@ keywords:
 
 [back](.)
 
-An `ORM` aims to make it easier to focus on the logic around [entity](../patterns/data-access.md#entities) objects, while saving things to a database is pretty much done for you.
+An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](../patterns/data-access.md#entities) objects, while saving things to a database is pretty much done for you.
 
 <h3>Contents</h3>
 
