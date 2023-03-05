@@ -15,7 +15,7 @@ description: "Service Oriented Architecture is about linking systems together. I
 
 <img src="images/esb-banner.png" width="700" />
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [The ESB Concept](#the-esb-concept)
 - [Canonical Model](#canonical-model)

@@ -210,7 +210,7 @@ public class CategoryListViewModel
 }
 ```
 
-Some list views only need an [`IDAndName`](../api/misc.md#jj-canonical) [`DTO`](data-access.md#dto), a version of which can be found in the [`JJ.Canonical`](../api/misc.md#jj-canonical) project:
+Some list views only need an [`IDAndName`](../api/table.md#jj-canonical) [`DTO`](data-access.md#dto), a version of which can be found in the [`JJ.Canonical`](../api/table.md#jj-canonical) project:
 
 ```cs
 namespace JJ.Data.Canonical
@@ -223,7 +223,7 @@ namespace JJ.Data.Canonical
 }
 ```
 
-Here you can find [`IDAndName`](../api/misc.md#jj-canonical) objects used in a `ListViewModel`:
+Here you can find [`IDAndName`](../api/table.md#jj-canonical) objects used in a `ListViewModel`:
 
 ```cs
 /// <summary>

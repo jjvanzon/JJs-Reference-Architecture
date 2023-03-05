@@ -7,7 +7,7 @@ title: "📢 Introduction"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Definition of Software Architecture](#definition-of-software-architecture)
 - [Inter-Disciplinary Aspects](#inter-disciplinary-aspects)

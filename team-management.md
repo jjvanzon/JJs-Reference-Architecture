@@ -9,7 +9,7 @@ title: "👥 Team Management"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Focus Points](#focus-points)

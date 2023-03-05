@@ -55,29 +55,29 @@ An alternative to [`RepositoryWrappers`](#repositorywrappers) might be [dependen
 Validators
 ----------
 
-Separate [`Validator`](../api/misc.md#jj-framework-validation) `classes` could be used for [validation](../aspects.md#validation). Specialized `classes` can be derived from [`VersatileValidator`](../api/misc.md#jj-framework-validation) from the [`JJ.Framework`](../api/misc.md#jjframework).
+Separate [`Validator`](../api/table.md#jj-framework-validation) `classes` could be used for [validation](../aspects.md#validation). Specialized `classes` can be derived from [`VersatileValidator`](../api/table.md#jj-framework-validation) from the [`JJ.Framework`](../api/misc.md#jjframework).
 
-It is recommended to keep [`Validators`](../api/misc.md#jj-framework-validation) independent from each other.
+It is recommended to keep [`Validators`](../api/table.md#jj-framework-validation) independent from each other.
 
-If multiple [`Validators`](../api/misc.md#jj-framework-validation) should go off, you might call them individually one by one.
+If multiple [`Validators`](../api/table.md#jj-framework-validation) should go off, you might call them individually one by one.
 
-For complex [`Validator`](../api/misc.md#jj-framework-validation), it is suggested to add a [prefix or suffix](../code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](../api/misc.md#jj-framework-validation).
+For complex [`Validator`](../api/table.md#jj-framework-validation), it is suggested to add a [prefix or suffix](../code-style.md#prefixes-and-suffixes) to the name such as [`Recursive`](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) or `Versatile` to make it clear that it is more than a simple [`Validator`](../api/table.md#jj-framework-validation).
 
-Next to [`Validators`](../api/misc.md#jj-framework-validation) deciding whether user input is valid, [`Validators`](../api/misc.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with an app.
+Next to [`Validators`](../api/table.md#jj-framework-validation) deciding whether user input is valid, [`Validators`](../api/table.md#jj-framework-validation) could also be used to generate *warnings*, that are not blocking, but help the user work with an app.
 
-[`Validators`](../api/misc.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [`Entity`](data-access.md#entities) is still in use, you might not be able to delete it.
+[`Validators`](../api/table.md#jj-framework-validation) might also be used for *delete constraints*. For instance when an [`Entity`](data-access.md#entities) is still in use, you might not be able to delete it.
 
 
 SideEffects
 -----------
 
-The [business layer](../layers.md#business-layer) can execute [`SideEffects`](../api/misc.md#jj-framework-business) while altering data, for instance to record a *date time modified*, set [default values](../aspects.md#defaults), or automatically generate a *name*.
+The [business layer](../layers.md#business-layer) can execute [`SideEffects`](../api/table.md#jj-framework-business) while altering data, for instance to record a *date time modified*, set [default values](../aspects.md#defaults), or automatically generate a *name*.
 
-We could implement an `interface` [`ISideEffect`](../api/misc.md#jj-framework-business) for each of these. It has only one method: `Execute`. This gives us some polymorphism over [`SideEffects`](../api/misc.md#jj-framework-business) so it is easier to handle them *generically* and for instance `Execute` multiple in a row.
+We could implement an `interface` [`ISideEffect`](../api/table.md#jj-framework-business) for each of these. It has only one method: `Execute`. This gives us some polymorphism over [`SideEffects`](../api/table.md#jj-framework-business) so it is easier to handle them *generically* and for instance `Execute` multiple in a row.
 
-Using separate `classes` for [`SideEffects`](../api/misc.md#jj-framework-business) can create overview over pieces of logic, creative in nature, and prevent things from getting entangled.
+Using separate `classes` for [`SideEffects`](../api/table.md#jj-framework-business) can create overview over pieces of logic, creative in nature, and prevent things from getting entangled.
 
-[`SideEffects`](../api/misc.md#jj-framework-business) might evaluate conditions internally. The caller of the [`SideEffect`](../api/misc.md#jj-framework-business) `class` would not know what conditions there are. A [`SideEffect`](../api/misc.md#jj-framework-business) could skip over its own execution, when it wouldn't apply. This makes the [`SideEffect`](../api/misc.md#jj-framework-business) fully responsible for what happens. What a [`SideEffect`](../api/misc.md#jj-framework-business) does can also depend on [status flagging](../aspects.md#entity-status-management).
+[`SideEffects`](../api/table.md#jj-framework-business) might evaluate conditions internally. The caller of the [`SideEffect`](../api/table.md#jj-framework-business) `class` would not know what conditions there are. A [`SideEffect`](../api/table.md#jj-framework-business) could skip over its own execution, when it wouldn't apply. This makes the [`SideEffect`](../api/table.md#jj-framework-business) fully responsible for what happens. What a [`SideEffect`](../api/table.md#jj-framework-business) does can also depend on [status flagging](../aspects.md#entity-status-management).
 
 
 LinkTo
@@ -153,7 +153,7 @@ Cascading
 
 [`Cascading`](../aspects.md#cascading) means that upon `Deleting` a main [`Entity`](data-access.md#entities), *child-*[`Entities`](data-access.md#entities) are `Deleted` too. But if they are not inherently part of the main [`Entity`](data-access.md#entities), they would be [`Unlinked`](#unlink) instead.
 
-This can be implemented as a pattern in [`C#`](../api/misc.md#csharp). A reason to do it in [`C#`](../api/misc.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
+This can be implemented as a pattern in [`C#`](../api/table.md#csharp). A reason to do it in [`C#`](../api/table.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
 
 One way to implement [`Cascading`](../aspects.md#cascading), is through extension methods:  
 `DeleteRelatedEntities` and `UnlinkRelatedEntities`.

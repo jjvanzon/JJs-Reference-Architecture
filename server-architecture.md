@@ -9,7 +9,7 @@ title: "🗄 Server Architecture"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [DTAP](#dtap)
@@ -30,8 +30,8 @@ The server subdivision is subject to the needs of the organization, so this over
 
 | Stage       | Name                                | Remarks | Configuration Focus Points |
 |-------------|-------------------------------------|---------|----------------------------|
-| Development | Database server                     | Stores a development copy of all the databases we use. | [`SQL Server`](api/misc.md#sql-server), decent performance, particular focus on having enough RAM.
-| Development | App server                          | Where development can use a shared FTP server if needed, run long processes to aleviate the development workstations. Can also host shared web services, be it third party, be it internally developed ones, even though for that last thing it is usually better to run it on the development workstations. | [`IIS`](api/misc.md#iis), preferrably many-core. [`SQL Server`](api/misc.md#sql-server) installation is advised, for delegating number crunching from the main development database server to another server. RAM is also important, since heavy number crunching processes may use a lot of memory.
+| Development | Database server                     | Stores a development copy of all the databases we use. | [`SQL Server`](api/table.md#sql-server), decent performance, particular focus on having enough RAM.
+| Development | App server                          | Where development can use a shared FTP server if needed, run long processes to aleviate the development workstations. Can also host shared web services, be it third party, be it internally developed ones, even though for that last thing it is usually better to run it on the development workstations. | [`IIS`](api/table.md#iis), preferrably many-core. [`SQL Server`](api/table.md#sql-server) installation is advised, for delegating number crunching from the main development database server to another server. RAM is also important, since heavy number crunching processes may use a lot of memory.
 | Development | Source control server               | For storing the source control database, running the source control services, running builds, unit tests and code analysis upon each check-in. | TFS. Must be decent configuration for each checking requires a heavy process to run, and the development team has to be able to work efficiently.
 | Development | Workstations                        | Each software developer's own machine. | Two 21" monitors. No laptops, those run 2x slower. Core i5 for junior and medior developmers. Core i7 for senior developers and sofware architects, since they will more commonly work with larger solutions.<br>At least 8 GB RAM, so you can run large-cache applications and services. SSD for of 256 GB. Split up into a C: drive for windows `< TODO: specify size >` and a D: drive for data, main source code, but also aother frequenty accessed things. An extra 'spinning disk' drive with at least 256 GB storage for amont other things the ability to hold large database backup files.
 | Development | Laptop                              | One laptop for a whole team, just to connect to your workstation when you are in a meeting or being on the road to a customer | Relatively low specs. Core i3, a moderate amount of RAM.

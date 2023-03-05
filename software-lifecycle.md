@@ -9,7 +9,7 @@ title: "🚀 Software Lifecycle"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Branching, Versioning & Release Management](#branching-versioning--release-management)
 - [Tech Test / Short Code Review Checklist](#tech-test--short-code-review-checklist)

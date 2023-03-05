@@ -9,7 +9,7 @@ title: "🧱 Aspects"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Authoring & Reviewing](#authoring--reviewing)
@@ -83,7 +83,7 @@ title: "🧱 Aspects"
 Introduction
 ------------
 
-What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large scale software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api/misc.md) or applying certain [design patterns](patterns/README.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api/misc.md#visual-studio).
+What are called *aspects* here, are technical concerns like [security](#security), [logging](#logging) and [validation](#validation) and many more. In medium to large scale software development projects, decisions might need to be made about some of these concepts. The decision can take the form of the usage of an [`API`](api/misc.md) or applying certain [design patterns](patterns/README.md). Or they might already be solved by the programming language you use. Some aspects might not even be mentioned here, because they are for instance automatically solved by the database engine or te [`Visual Studio IDE`](api/table.md#visual-studio).
 
 
 Authoring & Reviewing
@@ -109,7 +109,7 @@ Here are a few examples how to do it:
 
 ### OneToManyRelationship
 
-The [OneToManyRelationship](api/misc.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](api/misc.md#jj-framework-business) that can manage the two ends of a relationship automatically.
+The [OneToManyRelationship](api/misc.md#onetomanyrelationship) is an `API` from [`JJ.Framework.Business`](api/table.md#jj-framework-business) that can manage the two ends of a relationship automatically.
 
 ### Entity Framework
 
@@ -214,7 +214,7 @@ Code style an be enforced with different methods:
 - The [Code Style](code-style.md) handbook, such as is part of this [Reference Architecture](index.md).
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
 - Using Visual Studio's code style options from the Options screen.
-- [`ReSharper`](api/misc.md#resharper)!
+- [`ReSharper`](api/table.md#resharper)!
 
 
 Collections / List Processing
@@ -263,7 +263,7 @@ We will use 3 ways of storing configuration settings:
 - Reading out the appSettings section.
 - Reading out the connectionStrings section.
 
-There is another configuration method in [`.NET`](api/misc.md#dotnet): the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
+There is another configuration method in [`.NET`](api/table.md#dotnet): the Settings designer in the project properties. We will not use that, because it is very error-prone. The synchronization between the entered data and the XML does not work very well, and this creates the risk that you might put production settings in a test environment or test settings in a production environment.
 
 
 Conversion
@@ -307,11 +307,11 @@ Entity Status Management
 
 [Entity](patterns/data-access.md#entities) status management (or 'object status management') is the recording of whether an [entity](patterns/data-access.md#entities) is new, dirty, clean or deleted. Also it is recording if individual properties are dirty or clean. Currently [entity](patterns/data-access.md#entities) status management is done explicitly by using an EntityStatusManager class, that is simply a [wrapper](patterns/other.md#wrapper) for some dictionaries and HashSets that store this information. Then EntityStatusManager is then passed around the [presentation](layers.md#presentation-layer) and business layer for a particular functional domain.
 
-There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api/misc.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns/data-access.md#entities) and properties get status flagging instead of leaving it up to the [entity](patterns/data-access.md#entities) status writers to guess what [entity](patterns/data-access.md#entities) status reporting is needed and [entity](patterns/data-access.md#entities) status readers to guess of what [entities](patterns/data-access.md#entities) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns/data-access.md#entities) status management you need.
+There is are reusable `EntityStatusManager` classes in [`JJ.Framework.Business`](api/table.md#jj-framework-business), but you are probably better off custom programming one for every functional domain that needs it. That custom-programmed class can then be more specific about exactly which [entities](patterns/data-access.md#entities) and properties get status flagging instead of leaving it up to the [entity](patterns/data-access.md#entities) status writers to guess what [entity](patterns/data-access.md#entities) status reporting is needed and [entity](patterns/data-access.md#entities) status readers to guess of what [entities](patterns/data-access.md#entities) and properties it can expect status to be properly supplied. With a specifically programmed EntityStatusManager you could make members like IsNew(Order) and NameIsDirty(Customer), to be way more specific about what [entity](patterns/data-access.md#entities) status management you need.
 
 <h3>Alternatives</h3>
 
-The consequence of explicit [entity](patterns/data-access.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns/data-access.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns/data-access.md#entities) status management up to an [`ORM`](api/orm.md#-orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns/data-access.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api/misc.md#jj-framework-data) should offer its own alternative to [entity](patterns/data-access.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns/data-access.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api/misc.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api/misc.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
+The consequence of explicit [entity](patterns/data-access.md#entities) status management through the EntityStatusManager class is that if you forget to call it, the [entity](patterns/data-access.md#entities) status may not be correctly reflected by the EntityStatusManager. An alternative is to leave [entity](patterns/data-access.md#entities) status management up to an [`ORM`](api/orm.md#-orm) or other persistence technology. Not all persistence technologies provide this information. To consistently have [entity](patterns/data-access.md#entities) status management through IContext across all platforms, [`JJ.Framework.Data`](api/table.md#jj-framework-data) should offer its own alternative to [entity](patterns/data-access.md#entities) status management for persistence technologies that do not provide it. This is a difficult task and a project on its own. To lay the responsibility over [entity](patterns/data-access.md#entities) status management at the Persistence side, it would make [`JJ.Framework.Data`](api/table.md#jj-framework-data) much more complicated, and would require at least a form of property interception to respond to property changes to record IsDirty status for properties. Complicating [`JJ.Framework.Data`](api/table.md#jj-framework-data) also harms the more or less impartial nature of it, since it should be an interface onto other persistence technologies, rather than a replacement of it.
 
 This is why the explicit status management solution won over the [entity](patterns/data-access.md#entities) status management in the persistence framework.
 
@@ -546,11 +546,11 @@ Exceptions
 - Do null-checks on arguments of public methods.
 - Sometimes miscellaneous checks need to be performed on public methods.
 - Arguments of private methods do not have to be checked if the class already enforces the rule elsewhere.
-- For null-checks, use NullException (in [`JJ.Framework.Exceptions`](api/misc.md#jj-framework-exceptions)).
+- For null-checks, use NullException (in [`JJ.Framework.Exceptions`](api/table.md#jj-framework-exceptions)).
 - Use NotImplementedException for methods you have not finished yet.
 - Use NotSupportedException for interface methods that are not supported.
-- Use InvalidValueException or ValueNotSupportedException (in [`JJ.Framework.Exceptions`](api/misc.md#jj-framework-exceptions)) in the default in a switch statement over an enum value.
-- Use other exception types out of [`JJ.Framework.Exceptions`](api/misc.md#jj-framework-exceptions).
+- Use InvalidValueException or ValueNotSupportedException (in [`JJ.Framework.Exceptions`](api/table.md#jj-framework-exceptions)) in the default in a switch statement over an enum value.
+- Use other exception types out of [`JJ.Framework.Exceptions`](api/table.md#jj-framework-exceptions).
 - Otherwise just throw the Exception base class.
 - Mention the variable or property name in the exception message.
 - Mention the ID of an object in the exception message.
@@ -579,7 +579,7 @@ catch (IOException)
 
 In fact, prefer not to retrieve information by catching an exception at all.
 
-- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](api/misc.md#jj-framework-logging) from [`JJ.Framework.Logging`](api/misc.md#jj-framework-logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](api/misc.md#jj-framework-logging) [`Helper`](patterns/other.md#helper) method.
+- To show a full exception message `Exception.ToString()` does a pretty good job including inner exceptions. If you like you can use [`ExceptionHelper`](api/table.md#jj-framework-logging) from [`JJ.Framework.Logging`](api/table.md#jj-framework-logging) to get a neatly formatted exception text. It also has a [`GetInnermostException`](api/table.md#jj-framework-logging) [`Helper`](patterns/other.md#helper) method.
 
 
 Facades
@@ -587,7 +587,7 @@ Facades
 
 `Facades` might sound like a pattern to you, but regardless of whether you use the [`Facade`](patterns/business-logic.md#facade) pattern or not, your system has `Facades` whether you know it or not. Most systems have points where multiple responsibilities come together and are combined.
 
-If you have an [`MVC`](api/misc.md#mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns/presentation-mvc.md#controller) that are your `Facades`.
+If you have an [`MVC`](api/table.md#mvc) web app and you think you do not have `Facades`, then it is probably the [`Controllers`](patterns/presentation-mvc.md#controller) that are your `Facades`.
 
 If you have `Windows` app without a lot of layers, you probably have quite a few `Facades`: each `Form` probably is one.
 
@@ -608,7 +608,7 @@ Logging
 
 Be careful how much you log. Logging unhandled exceptions is usually good enough. If you log a lot, it creates a performance penalty and can impose a serious strain on your infrastructure. Servers have crashed under the pressure of logging. A simple try-catch on a main level and a call to the logger will usually suffice.
 
-For logging we might use our own `API`: [`JJ.Framework.Logging`](api/misc.md#jj-framework-logging). It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
+For logging we might use our own `API`: [`JJ.Framework.Logging`](api/table.md#jj-framework-logging). It has an easy interface and simple configuration. It allows you to log to a file or debug output and is extensible to support more such logging channels. You can use a log level with your log calls and configure which log levels are included in which logging channel. For instance: you might only log exceptions to a file, but log debug information to the debug output.
 
 Config example:
 
@@ -633,7 +633,7 @@ Config example:
 </configuration>
 ```
 
-If you insist on using `Log4Net`, make a separate `ILogger` implementation behind which you hide `Log4Net`. The downside of `Log4Net` is that its configuration can be quite verbose and complicated. [`JJ.Framework.Logging`](api/misc.md#jj-framework-logging) is simple and can run on all platforms.
+If you insist on using `Log4Net`, make a separate `ILogger` implementation behind which you hide `Log4Net`. The downside of `Log4Net` is that its configuration can be quite verbose and complicated. [`JJ.Framework.Logging`](api/table.md#jj-framework-logging) is simple and can run on all platforms.
 
 
 Multi-Language / Translations / Culture
@@ -673,7 +673,7 @@ The foreign key solution does have a big benefit over the generic key solution, 
 
 To work with non-flushed loosely linked translation items, you would have to do some sort of caching. You could do the caching in the [repositories](patterns/data-access.md#repository) / [data access layer](layers.md#data-layer), but that does increase the logic complexity of your possibly so simple and elegant data access layer. You could also opt to make caching a business logic concern and pass around [entity](patterns/data-access.md#entities) cache objects or translation [`Facades`](#facades) around your business layer, as a substitute for getting them from a [repository](patterns/data-access.md#repository) directly, which would not work for non-flushed ('uncommitted') [entities](patterns/data-access.md#entities).
 
-A lot of work to use the loosely linked [entities](patterns/data-access.md#entities). This is not unique to loosely linked translation [entities](patterns/data-access.md#entities). It is a problem with any alternative key, that non-flushed [entities](patterns/data-access.md#entities) cannot be retrieved with a ([`LINQ`](api/misc.md#linq)) query.
+A lot of work to use the loosely linked [entities](patterns/data-access.md#entities). This is not unique to loosely linked translation [entities](patterns/data-access.md#entities). It is a problem with any alternative key, that non-flushed [entities](patterns/data-access.md#entities) cannot be retrieved with a ([`LINQ`](api/table.md#linq)) query.
 
 
 Naming
@@ -687,12 +687,12 @@ Network Communication
 
 ### Postdata over HTTP
 
-In [`MVC`](api/misc.md#mvc) it is not so straightforward to `POST` a collection of items or nested structures over `HTTP`.
+In [`MVC`](api/table.md#mvc) it is not so straightforward to `POST` a collection of items or nested structures over `HTTP`.
 
 There are a few possibilities:
 
 - [`Html.BeginCollection`](api/misc.md#htmlbegincollection)
-    - An `API` from [`JJ.Framework.Mvc`](api/misc.md#jj-framework-mvc) for `POST`'ing trees and lists across `HTTP`.
+    - An `API` from [`JJ.Framework.Mvc`](api/table.md#jj-framework-mvc) for `POST`'ing trees and lists across `HTTP`.
 - [`Html.BeginCollectionItem`](api/misc.md#htmlbegincollectionitem)
     - A commonly used alternative. Can send *one* collection over the wire, not trees.
 - [`for` loops](patterns/presentation-mvc.md#for-loops-for-lists-in-http-postdata)
@@ -726,7 +726,7 @@ Performance
 
 `< TODO: Aspects, Performance: Some optimizations seem only possible with inheritance and many classes, such as the fastest static dispatch and e.g. preventing dictionary lookups by having only one value stored per object instead of a dictionary for multiple objects. Oh, that is not necessarly inheritance. But why is inheritance the only construct that can do that, because inheritance also comes with downsides. >`
 
-\> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in [`C#`](api/misc.md#csharp) for structures that complex, while inheritance syntax is clearer in [`C#`](api/misc.md#csharp). Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
+\> It is because delegates are not as fast because the pointer needs to be dereferenced, and delegates may have a more confusing syntax in [`C#`](api/table.md#csharp) for structures that complex, while inheritance syntax is clearer in [`C#`](api/table.md#csharp). Also: the prevention of dictionaries has nothing to do with inheritance, it has to do with graphs, which can be accomplished with objects referencing eachother. The reason you seem bound to a construct for the OperatorCalculator is that for CalculateSample have a reference to a specific SampleCalculator you need to turn the CalculateSample method into a SampleCalculator class, because functions cannot contain have instance members.>
 
 `< TODO: Aspects, Performance: Detail about nested loops: just traversing multiple levels is not a bad nested loop. Lookups of 5 to 7 items do not require a dictionary. >`
 
@@ -734,7 +734,7 @@ Performance
 Persistence
 -----------
 
-To access a data store (usually a database), [`JJ.Framework.Data`](api/misc.md#jj-framework-data) will be used. Through that framework you can access data using different underlying persistence technologies, such as [`NHibernate`](api/orm.md#nhibernate) and [`Entity Framework`](#entity-framework) or even flat files or [`XML`](api/misc.md#xml). The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
+To access a data store (usually a database), [`JJ.Framework.Data`](api/table.md#jj-framework-data) will be used. Through that framework you can access data using different underlying persistence technologies, such as [`NHibernate`](api/orm.md#nhibernate) and [`Entity Framework`](#entity-framework) or even flat files or [`XML`](api/misc.md#xml). The framework gives you a single interfacing regardless of the underlying persistence technology, loosely coupling the business logic and front-ends from the way you store your data.
 
 The main interface of the framework is `IContext`.
 
@@ -768,7 +768,7 @@ Various solutions are available for scheduling a process (periodically) in time.
 Security
 --------
 
-Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns/data-access.md#repository) in the top-level project, often an [`MVC`](api/misc.md#mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
+Authentication, authorization and user rights management in the application architecture will be interfaced with using pretty much the same pattern as the way we interface with persistence. Just like we create an `IContext` and [repositories](patterns/data-access.md#repository) in the top-level project, often an [`MVC`](api/table.md#mvc) app, and pass it to the layers below that, the security context is also created in the top-level project, and passed to the layers below that. Both persistence and security are infrastructural things, and they will be handled in a symmetric way.
 
 There are the following interfaces:
 
@@ -909,7 +909,7 @@ Transactions
 Type Safety
 -----------
 
-[`C#`](api/misc.md#csharp) has type-safety built in. For type safety in [`JavaScript`](api/misc.md#javascript), use [`TypeScript`](api/misc.md#typescript).
+[`C#`](api/table.md#csharp) has type-safety built in. For type safety in [`JavaScript`](api/table.md#javascript), use [`TypeScript`](api/misc.md#typescript).
 
 
 Automated Testing
@@ -976,7 +976,7 @@ Utilities
 
 Utilities are small programs or processes that are not run very often. It can be a small program for IT. For example: health checks, loading stuff in a database, things to run for deployment.
 
-[`JJ.Framework.WinForms`](api/misc.md#simple-process-form) contains a reusable window, [`SimpleProcessForm`](api/misc.md#simple-process-form), to start and cancel the process and show progress information.
+[`JJ.Framework.WinForms`](api/table.md#simple-process-form) contains a reusable window, [`SimpleProcessForm`](api/table.md#simple-process-form), to start and cancel the process and show progress information.
 
 ![](images/utility.png)
 

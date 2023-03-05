@@ -10,7 +10,7 @@ image: "/images/namespaces-assemblies-and-folders.png"
  
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Company Name / Root Namespace](#company-name--root-namespace)
@@ -94,7 +94,7 @@ The 4<sup>th</sup> level in the namespacing denotes which [technology](api/misc.
 - JJ.Data.Calendar  
 - JJ.Data.Calendar.[__NHibernate__](api/orm.md#nhibernate)
 - JJ.Presentation.Calendar  
-- JJ.Presentation.Calendar.[__Mvc__](api/misc.md#mvc)
+- JJ.Presentation.Calendar.[__Mvc__](api/table.md#mvc)
 - JJ.Framework.Logging  
 - JJ.Framework.Logging.__DebugOutput__  
 
@@ -185,7 +185,7 @@ What happened here, is an attempt to organize things into *bigger and smaller* c
 
 The split up per *company* may be the largest concern, while a 2<sup>nd</sup> concern is the split up into [main layer](layers.md#-layers) ([data](layers.md#data-layer), [business](layers.md#business-layer), [presentation](layers.md#presentation-layer)).
 
-A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api/misc.md#-apis) used (e.g. [`NHibernate`](api/orm.md#nhibernate), [`MVC`](api/misc.md#mvc)).
+A functional domain (`Calendar`, `Ordering`) was considered a larger concern than the specific [technology](api/misc.md#-apis) used (e.g. [`NHibernate`](api/orm.md#nhibernate), [`MVC`](api/table.md#mvc)).
 
 And a [design pattern](patterns/README.md) may be a level of detail below that.
 
