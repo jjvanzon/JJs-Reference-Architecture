@@ -16,7 +16,7 @@ It also covers specific preferences for *language constructs*.
 
 <img src="images/code-style.png" width="700" />
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Casing](#casing)

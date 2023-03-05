@@ -5,7 +5,7 @@ Outtakes
 
 Archived text that didn't make the cut for some reason.
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [API's | ORM | Meet in the Middle Queries](#apis--orm--meet-in-the-middle-queries)
 - [Namespaces, Assemblies & Folders | Scrambling Technical and Functional](#namespaces-assemblies--folders--scrambling-technical-and-functional)

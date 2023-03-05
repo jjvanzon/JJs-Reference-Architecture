@@ -7,7 +7,7 @@ title: "⚠ Platform Compatibility"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Unity 4.3.4 / .NET Compatibility Issues](#unity-434--net-compatibility-issues)

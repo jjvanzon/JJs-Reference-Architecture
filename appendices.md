@@ -9,7 +9,7 @@ title: "➕ Appendices"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Appendix A: Layering Checklist](#appendix-a-layering-checklist)
 - [Appendix B: Knopteksten en berichtteksten in applicaties (resource strings) [ Dutch ]](#appendix-b-knopteksten-en-berichtteksten-in-applicaties-resource-strings--dutch-)

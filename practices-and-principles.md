@@ -9,7 +9,7 @@ title: "🏗 Practices & Principles"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Responsibilities](#responsibilities)

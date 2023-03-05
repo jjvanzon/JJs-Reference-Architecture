@@ -10,7 +10,7 @@ image: "/images/api-preview.png"
 
 This article describes some of the technology choices in this [software architecture](../index.md).
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Web](#web)
     - [AJAX](#ajax)

@@ -10,7 +10,7 @@ image: "/images/namespaces-assemblies-and-folders.png"
  
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Introduction](#introduction)
 - [Company Name / Root Namespace](#company-name--root-namespace)

@@ -11,7 +11,7 @@ title: "📜 Table of API's"
 
 This article lists some of the tech used in the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects.
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Code](#code)
 - [Data](#data)

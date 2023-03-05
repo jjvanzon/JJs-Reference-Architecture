@@ -12,7 +12,7 @@ image: "/images/presentation-layer.png"
 
 [back](README.md)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 <ul>
 <li><a href="https://jjvanzon.github.io/JJs-Reference-Architecture/patterns/viewmodels.html">ViewModels</a></li>

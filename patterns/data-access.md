@@ -22,7 +22,7 @@ Entities
 
 `Entities` are the `classes` that represent the *functional domain model*.
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Pure Data Objects](#pure-data-objects)
 - [Enums](#enums)

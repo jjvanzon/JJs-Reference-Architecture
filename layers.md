@@ -10,7 +10,7 @@ image: "/images/perpendicular-layers.png"
 
 Software can be built up of layers. This article describes how layers could be structured. Each layer comes with different technology.
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [3 Layers](#3-layers)
     - [Connections Between Layers](#connections-between-layers)

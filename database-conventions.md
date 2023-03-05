@@ -9,7 +9,7 @@ title: "📀 Database Conventions"
 
 [back](.)
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 
 - [Developing a Database](#developing-a-database)
 - [Naming Conventions](#naming-conventions)
