@@ -212,29 +212,3 @@ To include a file as an embedded resource, you could set the following property 
 string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");
 ```
 [back](.)
-
-<div style="min-height: 512px">
-</div>
-
-<h2 id="data-1">Data</h2>
-
-<h3 id="entity-framework">Entity Framework</h3>
-
-`[` [`Moved`](orm.md#entity-framework) `]`
-
-<h3 id="nhibernate">NHibernate</h3>
-
-`[` [`Moved`](orm.md#nhibernate) `]`
-
-<h3 id="orm">ORM</h3>
-
-`[` [`Moved`](orm.md) `]`
-
-<h3 id="sql">SQL</h3>
-
-`[` [`Moved`](sql.md) `]`
-
-<div style="min-height: 512px">
-</div>
-
-[back](.)
