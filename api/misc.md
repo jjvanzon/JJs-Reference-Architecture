@@ -12,8 +12,6 @@ This article describes some of the technology choices in this [software architec
 
 <h3>Contents</h3>
 
-- [Introduction](#introduction)
-- [More Elaborate Descriptions](#more-elaborate-descriptions)
 - [Web](#web)
     - [AJAX](#ajax)
     - [JavaScript / TypeScript](#javascript--typescript)
@@ -25,19 +23,6 @@ This article describes some of the technology choices in this [software architec
     - [OneToManyRelationship](#onetomanyrelationship)
     - [XML](#xml)
     - [Embedded Resources](#embedded-resources)
-
-Introduction
-------------
-
-This article lists some of the tech used in the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects. Most are listed out in the [table](table.md) below.
-
-Some technology is described in more detail, mostly [data](table.md#data) technologies, but also [web](table.md#web) technology.
-
-
-More Elaborate Descriptions
----------------------------
-
-For some of these things you can find more elaborate descriptions below: mostly about [data](table.md#data) store technologies, but also some about [web](table.md#web) technology and [others](#misc).
 
 
 Web
