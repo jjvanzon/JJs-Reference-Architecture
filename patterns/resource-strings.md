@@ -24,7 +24,7 @@ keywords:
 
 [back](business-logic.md)
 
-There is a technique in [`.NET`](../api/misc.md#dotnet) to store translations for button texts. It's called: `Resource Strings`. Translations can be stored in `resx` files and edited in [`Visual Studio`](../api/misc.md#visual-studio):
+There is a technique in [`.NET`](../api/table.md#dotnet) to store translations for button texts. It's called: `Resource Strings`. Translations can be stored in `resx` files and edited in [`Visual Studio`](../api/table.md#visual-studio):
 
 ![Resource String Editor](../images/resource-strings-editor.png)
 
@@ -42,13 +42,13 @@ There is a technique in [`.NET`](../api/misc.md#dotnet) to store translations fo
 File Names
 ----------
 
-[`.NET`](../api/misc.md#dotnet) returns the translations in the right language (of the `CurrentCulture`) if you name your `Resource` files like this:
+[`.NET`](../api/table.md#dotnet) returns the translations in the right language (of the `CurrentCulture`) if you name your `Resource` files like this:
 
     Resources.resx
     Resources.nl-NL.resx
     Resources.de-DE.resx
 
-[`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used within [`.NET`](../api/misc.md#dotnet).
+[`CultureNames`](https://www.csharp-examples.net/culture-names/) like `nl-NL` and `de-DE` are commonly used within [`.NET`](../api/table.md#dotnet).
 
 The *culture-independent* `Resources.resx` might be used for the language `US English`.
 
@@ -94,7 +94,7 @@ Returning:
 ResourceFormatterHelper
 -----------------------
 
-You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from the [`JJ.Framework`](../api/misc.md#jj-framework-resourcestrings):
+You can streamline your code and minimize the risk of typos by using the `ResourceFormatterHelper` from the [`JJ.Framework`](../api/table.md#jj-framework-resourcestrings):
 
 ```cs
 public static class ResourceFormatter
@@ -115,7 +115,7 @@ This eliminates the need to repeat the [`Resource Name`](#-resource-strings) in 
 Reusability
 -----------
 
-[`JJ.Framework.ResourceStrings`](../api/misc.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#-resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
+[`JJ.Framework.ResourceStrings`](../api/table.md#jj-framework-resourcestrings) goes even further than that. It provides reusable [`Resources`](#-resource-strings) for common phrases like `Delete`, `Edit`, `Save`, and more. No more typing out the same messages over and over again!
 
 
 Use the Business Layer

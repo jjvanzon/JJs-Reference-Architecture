@@ -147,7 +147,7 @@ Code
 
 <tr>
   <th>
-    <a href="#jjframework">
+    <a href="misc.html#jjframework">
        JJ.Framework</a></th>
   <td>
       In-house programmed extensions to the <a href="#dotnet"><code>.NET Framework</code></a>.<br/>
@@ -438,7 +438,7 @@ Presentation
 
 <tr id="javascript">
   <th>
-    <a href="#javascript--typescript">
+    <a href="misc.html#javascript--typescript">
        JavaScript</a>
   </th>
   <td>
@@ -448,7 +448,7 @@ Presentation
 
 <tr id="typescript">
   <th>
-    <a href="#javascript--typescript">
+    <a href="misc.html#javascript--typescript">
        TypeScript</a>
   </th>
   <td>
@@ -457,7 +457,7 @@ Presentation
 </tr>
 
 <tr>
-  <th><a href="#ajax">AJAX</a></th>
+  <th><a href="misc.html#ajax">AJAX</a></th>
   <td>For retrieving / posting back parts of pages to the server and back.</td>
 </tr>
 
@@ -477,7 +477,7 @@ Presentation
   <td>
       Used to support UI details in web.
       Remembering scroll position, cookie functions, URL parsing.
-      Might be extended with one-line <a href="#ajax"><code>AJAX</code></a> functions one day.
+      Might be extended with one-line <a href="misc.html#ajax"><code>AJAX</code></a> functions one day.
   </td>
 </tr>
 
@@ -493,7 +493,7 @@ Presentation
 
 <tr>
   <th>
-    <a href="#htmlbegincollection">Html.BeginCollection</a>
+    <a href="misc.html#htmlbegincollection">Html.BeginCollection</a>
   </th>
   <td>
       Part of <a href="#jj-framework-mvc"><code>JJ.Framework.Mvc</code></a>. Makes it possible to send tree structures over <code>HTTP</code> to the server-side <a href="#mvc"><code>MVC</code></a>.
@@ -502,10 +502,10 @@ Presentation
 
 <tr>
   <th>
-    <a href="#htmlbegincollectionitem">Html.BeginCollectionItem</a>
+    <a href="misc.html#htmlbegincollectionitem">Html.BeginCollectionItem</a>
   </th>
   <td>
-      Alternative for <a href="#jjframework"><code>JJ.Framework</code></a>'s <a href="#htmlbegincollection"><code>Html.BeginCollection</code></a>.
+      Alternative for <a href="#jjframework"><code>JJ.Framework</code></a>'s <a href="misc.html#htmlbegincollection"><code>Html.BeginCollection</code></a>.
       Allows sending a collection over <code>HTTP</code> to server-side <a href="#mvc"><code>MVC</code></a>, but not trees.
   </td>
 </tr>
@@ -645,8 +645,8 @@ Processing / IO
        JJ.Framework.Xml</a>
   </th>
   <td>
-      A convenient way to map <a href="#xml"><code>XML</code></a> to (<a href="#csharp"><code>C#</code></a>) classes.<br/>
-      Access <a href="#xml"><code>XML</code></a> nodes more safely, with null and uniqueness checks.
+      A convenient way to map <a href="misc.html#xml"><code>XML</code></a> to (<a href="#csharp"><code>C#</code></a>) classes.<br/>
+      Access <a href="misc.html#xml"><code>XML</code></a> nodes more safely, with null and uniqueness checks.
   </td>
 </tr>
 
@@ -661,7 +661,7 @@ Processing / IO
 </tr>
 
 <tr>
-  <th><a href="#embedded-resources">Embedded Resources</a></th>
+  <th><a href="misc.html#embedded-resources">Embedded Resources</a></th>
   <td>Embedded resources allow compiling files and content right inside a <code>DLL</code> or <code>EXE</code>.</td>
 </tr>
 
@@ -671,7 +671,7 @@ Processing / IO
       EmbeddedResourceReader</a>
   </th>
   <td>
-      Makes it a little easier to get <a href="#embedded-resources">embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
+      Makes it a little easier to get <a href="misc.html#embedded-resources">embedded resource</a> <code>Streams</code>, <code>bytes</code> and <code>strings</code>.
   </td>
 </tr>
 
@@ -713,11 +713,11 @@ Other
 
 <tr>
   <th>
-    <a href="#configuration">
+    <a href="misc.html#configuration">
        JJ.Framework.Configuration</a>
   </th>
   <td>
-      For working with complex <a href="#configuration">configuration</a> files. Easier than <code>System.Configuration</code>.
+      For working with complex <a href="misc.html#configuration">configuration</a> files. Easier than <code>System.Configuration</code>.
   </td>
 </tr>
 

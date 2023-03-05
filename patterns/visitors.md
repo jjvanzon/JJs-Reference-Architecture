@@ -461,7 +461,7 @@ Alternatives
 
 However, there are also alternatives for the [`Visitor`](#-the-visitor-pattern) pattern.
 
-For instance, [`JJ.Framework.Collections`](../api/misc.md#jj-framework-collections), which allows [`LINQ`](../api/misc.md#linq)-style processing of recursive structures, with methods like [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which work for simpler scenarios.
+For instance, [`JJ.Framework.Collections`](../api/table.md#jj-framework-collections), which allows [`LINQ`](../api/table.md#linq)-style processing of recursive structures, with methods like [`.SelectRecursive`](https://www.nuget.org/packages/JJ.Framework.Collections#recursive-collection-extensions), which work for simpler scenarios.
 
 You could also skip the [`base Visitor`](#base-visitor) and program a (recursive) [converter](../aspects.md#conversion) instead, if you're only interested in a specific part of the structure.
 
@@ -473,6 +473,6 @@ Conclusion
 
 By creating a `base` [`Visitor`](#-the-visitor-pattern) and multiple specialized [`Visitors`](#-the-visitor-pattern), you can create short and powerful code for processing recursive structures. A coding error is easily made, and can break calculations easily. However, it is the best and fastest choice for complicated processes that involve complex recursive structures.
 
-Another good example of a [`Visitor`](#-the-visitor-pattern) `class` is [`.NET's`](../api/misc.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#-the-visitor-pattern) might be different here. It can still be called a [`Visitor`](#-the-visitor-pattern) if it operates by slightly different rules.
+Another good example of a [`Visitor`](#-the-visitor-pattern) `class` is [`.NET's`](../api/table.md#dotnet) own [`ExpressionVisitor`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor). However, the style of the [`Visitors`](#-the-visitor-pattern) might be different here. It can still be called a [`Visitor`](#-the-visitor-pattern) if it operates by slightly different rules.
 
 [back](business-logic.md)

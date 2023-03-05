@@ -101,7 +101,7 @@ The *data layer* models and stores the data. It might be built up of the followi
 
 ### Database (DB)
 
-It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api/misc.md#sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api/misc.md#xml) file, *flat* file or even just *in-memory* data.
+It starts with the database. This can be a *relational database* like [`Microsoft SQL Server`](api/table.md#sql-server), which structuredly stores the data into tables and relationships. But it could also be another type of data store: an [`XML`](api/misc.md#xml) file, *flat* file or even just *in-memory* data.
 
 ### ORM (NHibernate)
 
@@ -113,7 +113,7 @@ It could also be a different data access technology: a different [`ORM`](api/orm
 
 [Entity](patterns/data-access.md#entities) objects have *properties*, that map to *columns* in the database, and properties that point to *related* [entities](patterns/data-access.md#entities). [`NHibernate`](api/orm.md#nhibernate) needs [mappings](patterns/data-access.md#mapping), that define which *class* maps to which *table* and which *column* map to which *property*.
 
-The [`FluentNHibernate API`](api/misc.md#fluent-nhibernate) can help set up these [mappings](patterns/data-access.md#mapping).
+The [`FluentNHibernate API`](api/table.md#fluent-nhibernate) can help set up these [mappings](patterns/data-access.md#mapping).
 
 ### Entities
 
@@ -131,7 +131,7 @@ The [`Repository`](patterns/data-access.md#repository) implementations might not
 
 The dashed line going right through the [diagram](#data-layer) above, separates the *platform-specific* part from the *platform independent* part.
 
-The platform-*specific* part concerns itself with [`NHibernate`](api/orm.md#nhibernate) and [`SQL Server`](api/misc.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/misc.md#sql-server) or [`NHibernate`](api/orm.md#nhibernate) at all.
+The platform-*specific* part concerns itself with [`NHibernate`](api/orm.md#nhibernate) and [`SQL Server`](api/table.md#sql-server). The platform *independent* part is unaware of the underlying storage technology. You may as well stick an [`XML`](api/misc.md#xml) file under it and not use [`SQL Server`](api/table.md#sql-server) or [`NHibernate`](api/orm.md#nhibernate) at all.
 
 This makes it possible, to program against the same model, regardless of how it is stored. This platform-independence, also helps deploy the same code to different environments like *mobile*, *Windows* or *web*.
 
@@ -173,23 +173,23 @@ Because the [`Presenters`](patterns/presenters.md#-presenters) combine several [
 
 ### MVC
 
-[`MVC`](api/misc.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api/misc.md#mvc) layer builds on top of the [`Presenter`](patterns/presenters.md#-presenters) layer.
+[`MVC`](api/table.md#mvc) is the technology of choice in this [architecture](index.md) for programming *user interfaces* for *web technology*. In this [architecture](index.md) the [`MVC`](api/table.md#mvc) layer builds on top of the [`Presenter`](patterns/presenters.md#-presenters) layer.
 
 ### MVC Controllers
 
-[`MVC`](api/misc.md#mvc) uses [`Controllers`](patterns/presentation-mvc.md#controller), which are similar to [`Presenters`](patterns/presenters.md#-presenters) in that they group together related *user actions* and each user action gets a specific *method*.
+[`MVC`](api/table.md#mvc) uses [`Controllers`](patterns/presentation-mvc.md#controller), which are similar to [`Presenters`](patterns/presenters.md#-presenters) in that they group together related *user actions* and each user action gets a specific *method*.
 
-[`Controllers`](patterns/presentation-mvc.md#controller) are quite specific to [`MVC`](api/misc.md#mvc). An equivalent might not be present on other presentation platforms.
+[`Controllers`](patterns/presentation-mvc.md#controller) are quite specific to [`MVC`](api/table.md#mvc). An equivalent might not be present on other presentation platforms.
 
-However, even on other presentation platforms, like [`WinForms`](api/misc.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns/presenters.md#-presenters) and showing the right [`View`](patterns/presentation.md#views) depending on their results.
+However, even on other presentation platforms, like [`WinForms`](api/table.md#winforms), it might be advisable, to have a *central spot* to manage calls to the [`Presenters`](patterns/presenters.md#-presenters) and showing the right [`View`](patterns/presentation.md#views) depending on their results.
 
 ### URLs
 
-Requests from the web browser automatically make the right [`Controller`](patterns/presentation-mvc.md#controller) method go off. [`MVC`](api/misc.md#mvc) makes sure of that. Each method in a [`Controller`](patterns/presentation-mvc.md#controller) tends to get a `URL`.
+Requests from the web browser automatically make the right [`Controller`](patterns/presentation-mvc.md#controller) method go off. [`MVC`](api/table.md#mvc) makes sure of that. Each method in a [`Controller`](patterns/presentation-mvc.md#controller) tends to get a `URL`.
 
-The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/viewmodels.md) parameters are accepted by [`MVC`](api/misc.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/viewmodels.md) and are built up from post data by [`MVC`](api/misc.md#mvc) automatically.
+The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/viewmodels.md) parameters are accepted by [`MVC`](api/table.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/viewmodels.md) and are built up from post data by [`MVC`](api/table.md#mvc) automatically.
 
-[`JJ.Framework.Mvc`](api/misc.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api/misc.md#mvc).
+[`JJ.Framework.Mvc`](api/misc.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api/table.md#mvc).
 
 ### View Engine (Razor)
 
@@ -197,21 +197,21 @@ After the [`Controller`](patterns/presentation-mvc.md#controller) method is done
 
 ### Views (Razor)
 
-A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api/misc.md#razor). It offers a concise syntax for programming [`Views`](patterns/presentation.md#views), that combines [`C#`](api/misc.md#csharp) with `HTML.` [`Razor`](api/misc.md#razor) has tight integration with [`MVC`](api/misc.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns/viewmodels.md) as input, along with the [`View`](patterns/presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
+A [view engine](#view-engine-razor) that might be used in this [architecture](index.md) is [`Razor`](api/table.md#razor). It offers a concise syntax for programming [`Views`](patterns/presentation.md#views), that combines [`C#`](api/table.md#csharp) with `HTML.` [`Razor`](api/table.md#razor) has tight integration with [`MVC`](api/table.md#mvc). The [view engine](#view-engine-razor) can use a [`ViewModel`](patterns/viewmodels.md) as input, along with the [`View`](patterns/presentation.md#views) template (`*.cshtml`). The output is a specific piece of `HTML` sent back to the web browser.
 
-In [`WinForms`](api/misc.md#winforms) the [`Views`](patterns/presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns/presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns/presenters.md#-presenters).
+In [`WinForms`](api/table.md#winforms) the [`Views`](patterns/presentation.md#views) would be the `Forms` and `UserControls`. It is advisable that even if a [`View`](patterns/presentation.md#views) can have *code-behind*, to only put simple code in it and delegate the real work to  [`Presenters`](patterns/presenters.md#-presenters).
 
 ### HTML
 
-The [`Razor`](api/misc.md#razor) engine produces a piece of `HTML` received by the web browser. 
+The [`Razor`](api/table.md#razor) engine produces a piece of `HTML` received by the web browser. 
 
-`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api/misc.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns/presentation.md#views).
+`HTML` here can be replaced by the type of presentation output. In [`WinForms`](api/table.md#winforms) it might be the controls and their data. But it can also be a generated `PDF` file. Anything that can come out of a presentation technology might be considered a [`View`](patterns/presentation.md#views).
 
 ### Platform Independence
 
 The dashed line going right through the [diagram](#presentation-layer) above separates the *platform-specific* part from the *platform independent* part. 
 
-The *platform-specific* part concerns itself with [`MVC`](api/misc.md#mvc), `HTML` and [`Razor`](api/misc.md#razor), while the *platform independent* part is unaware of which presentation technology is used.
+The *platform-specific* part concerns itself with [`MVC`](api/table.md#mvc), `HTML` and [`Razor`](api/table.md#razor), while the *platform independent* part is unaware of which presentation technology is used.
 
 That means that we can use similar logic for multiple presentation techniques, such as offering an application both *web* based as well as *Windows* or a *mobile* app.
 
@@ -263,7 +263,7 @@ Setting [default values](aspects.md#defaults) when creating an [entity](patterns
 
 ### Cascading
 
-Along with one [entity](patterns/data-access.md#entities), other [entities](patterns/data-access.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns/data-access.md#entities) when a main [entity](patterns/data-access.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns/data-access.md#entities) before deleting a related [entity](patterns/data-access.md#entities). In this [architecture](index.md) this might be done in [`C#`](api/misc.md#csharp) to make it extra visible that these deletions take place.
+Along with one [entity](patterns/data-access.md#entities), other [entities](patterns/data-access.md#entities) might be deleted. [`Cascading`](aspects.md#cascading) here means the deletion of related [entities](patterns/data-access.md#entities) when a main [entity](patterns/data-access.md#entities) is deleted. [`Cascading`](aspects.md#cascading) can also mean *unlinking* some [entities](patterns/data-access.md#entities) before deleting a related [entity](patterns/data-access.md#entities). In this [architecture](index.md) this might be done in [`C#`](api/table.md#csharp) to make it extra visible that these deletions take place.
 
 ### Cloning
 
@@ -315,7 +315,7 @@ The infrastructure tends to be [loosely coupled](practices-and-principles.md#loo
 
 [User rights management](aspects.md#security) can alter the program navigation model in the [`Presenter`](patterns/presenters.md#-presenters) layer, adapting it to what the user is allowed to do.
 
-In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns/presenters.md#-presenters) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](api/misc.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
+In that respect the platform-independent [presentation layer](#presentation-layer) is dependent on the [security](aspects.md#security) *infrastructure*, which is a paradox. The reason the [`Presenter`](patterns/presenters.md#-presenters) layer is platform-independent after all, is that it communicates with the infrastructure using an [`interface`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface), that may have a different *implementation* depending on the infrastructural context in which it runs. This could be accomplished with a [config file](aspects.md#configuration) or [dependency injection](practices-and-principles.md#dependency-injection).
 
 ### Services
 

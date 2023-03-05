@@ -29,15 +29,15 @@ This article describes some of the technology choices in this [software architec
 Introduction
 ------------
 
-This article lists some of the tech used in the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects. Most are listed out in the [table](#list-of-apis-and-other-tech) below.
+This article lists some of the tech used in the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects. Most are listed out in the [table](table.md) below.
 
-Some technology is described in more detail, mostly [data](#data-1) technologies, but also [web](#web) technology.
+Some technology is described in more detail, mostly [data](table.md#data) technologies, but also [web](table.md#web) technology.
 
 
 More Elaborate Descriptions
 ---------------------------
 
-For some of these things you can find more elaborate descriptions below: mostly about [data](#data-1) store technologies, but also some about [web](#web) technology and [others](#misc).
+For some of these things you can find more elaborate descriptions below: mostly about [data](table.md#data) store technologies, but also some about [web](table.md#web) technology and [others](#misc).
 
 
 Web
@@ -47,9 +47,9 @@ Web
 
 `AJAX` is a way to load part of a web page, so the whole page does not have to be refreshed. This may make the user interaction smoother, than reloading the entire page every time.
 
-For `AJAX'ing` such partial web content, our team programmed [wrapper](../patterns/other.md#wrapper) functions in [`JavaScript`](#javascript), around calls to [`jQuery`](#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](#javascript) code.
+For `AJAX'ing` such partial web content, our team programmed [wrapper](../patterns/other.md#wrapper) functions in [`JavaScript`](table.md#javascript), around calls to [`jQuery`](table.md#jquery), so we could `AJAX` with a single code line and handle both partial loads and full reloads the same way. It saved quite a few lines of [`JavaScript`](table.md#javascript) code.
 
-Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](#csharp) realm. This before resorting to `AJAX` calls. See [Full Load – Partial Load – Cient-Native Code](../patterns/presentation.md#full-load--partial-load--client-native-code).
+Our strategy was to prefer full loads, so we could keep most logic in the [`C#`](table.md#csharp) realm. This before resorting to `AJAX` calls. See [Full Load – Partial Load – Cient-Native Code](../patterns/presentation.md#full-load--partial-load--client-native-code).
 
 ### JavaScript / TypeScript
 
@@ -57,25 +57,25 @@ Our strategy was to prefer full loads, so we could keep most logic in the [`C#`]
 
 [`JavaScript`](https://www.javascript.com/) was less preferred as an architectural choice. [`JavaScript's`](https://www.javascript.com/) weak type system played a role. The strange behavior and trickiness in [`JavaScript`](https://www.javascript.com/) (part due to this weak typing) gave it less appeal.
 
-For web, other technology was preferred in this [architecture](../index.md): The idea behind [`MVC`](#mvc) was logic on the server-side. [`Views`](../patterns/presentation.md#views) were in [`Razor`](#razor). Best to keep most logic [`C#`](#csharp) was the idea.
+For web, other technology was preferred in this [architecture](../index.md): The idea behind [`MVC`](table.md#mvc) was logic on the server-side. [`Views`](../patterns/presentation.md#views) were in [`Razor`](table.md#razor). Best to keep most logic [`C#`](table.md#csharp) was the idea.
 
-[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. You could refactor [`C#`](#csharp) code, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face when compiling.
+[`JavaScript`](https://www.javascript.com/) would easily get bloated, getting out of hand from a maintainability perspective, was the prevailing opinion. You could refactor [`C#`](table.md#csharp) code, upon which lots of the [`JavaScript`](https://www.javascript.com/) might break unexpectedly, with an error message tucked away in some console window, instead of right in your face when compiling.
 
 [`TypeScript`](https://www.typescriptlang.org/) may have saved the day to cover for the weak typing from [`JavaScript`](https://www.javascript.com/). But we hadn't tried that yet.
 
-But still: logic in one place in one language ([`C#`](#csharp)) felt so nice. I guess the love for [`C#`](#csharp) was strong.
+But still: logic in one place in one language ([`C#`](table.md#csharp)) felt so nice. I guess the love for [`C#`](table.md#csharp) was strong.
 
 The idea was that a full page load was 1<sup>st</sup> choice, [`AJAX'ing`](#ajax) the 2<sup>nd</sup> choice, and last in line [`JavaScript`](https://www.javascript.com/) *only* to support the user interaction. No business logic. See also: [Full Load – Partial Load – Cient-Native Code](../patterns/presentation.md#full-load--partial-load--client-native-code).
 
-For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries: [`JJ.Framework.JavaScript`](#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
+For this last-resort [`JavaScript`](https://www.javascript.com/) we used [`jQuery`](table.md#jquery) and some home-programmed [`JavaScript`](https://www.javascript.com/) libraries: [`JJ.Framework.JavaScript`](table.md#jj-framework-javascript) which had some merit, but may have been superseded by newer tech by now.
 
-I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick with [`C#`](#csharp) though.
+I realize [`JavaScript`](https://www.javascript.com/) is popular with a lot of people and that this is a powerful force. I don't know how my opinion would change, if I would try a newer [`JavaScript`](https://www.javascript.com/) version, [`TypeScript`](https://www.typescriptlang.org/), newer tech and libraries. My heart says I'd rather stick with [`C#`](table.md#csharp) though.
 
 ### Html.BeginCollection
 
-In [`MVC`](#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](../aspects.md#postdata-over-http).
+In [`MVC`](table.md#mvc) it is not so straightforward to [`HTTP` a tree structure in postdata](../aspects.md#postdata-over-http).
 
-[`JJ.Framework.Mvc`](#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](../patterns/viewmodels.md) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](../patterns/viewmodels.md) at the server side.
+[`JJ.Framework.Mvc`](table.md#jj-framework-mvc) makes that easier, by offering an `HtmlHelper` extensions: [`Html.BeginCollection`](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed/NuGet/JJ.Framework.Mvc). Using that `API` you can send a [`ViewModel`](../patterns/viewmodels.md) with arbitrary nestings and collections over the line. It would be restored as a [`ViewModel`](../patterns/viewmodels.md) at the server side.
 
 In the [`View`](../patterns/presentation.md#views) code you would wrap each nesting inside a `using` block:
 
@@ -121,7 +121,7 @@ Otherwise the input fields might not bind to the [`ViewModel`](../patterns/viewm
 
 ### Html.BeginCollectionItem
 
-In [`MVC`](#mvc) it is not so apparent how to [send a collection as `HTTP postdata`](../aspects.md#postdata-over-http).
+In [`MVC`](table.md#mvc) it is not so apparent how to [send a collection as `HTTP postdata`](../aspects.md#postdata-over-http).
 
 One alternative is the often-used [`Html.BeginCollectionItem`](https://www.nuget.org/packages/BeginCollectionItem):
 
@@ -140,7 +140,7 @@ This `API` has some limitations:
 - It can send *one* collection over the wire, not trees.
 - It takes a `string` a parameter, not an expression like: `() => Model.Children`.
 
-To send trees and arbitrary nestings over `HTTP postdata`, consider using [`Html.BeginCollection`](#htmlbegincollection) from [`JJ.Framework.Mvc`](#jj-framework-mvc).
+To send trees and arbitrary nestings over `HTTP postdata`, consider using [`Html.BeginCollection`](table.md#htmlbegincollection) from [`JJ.Framework.Mvc`](table.md#jj-framework-mvc).
 
 
 Misc
@@ -148,15 +148,15 @@ Misc
 
 ### JJ.Framework
 
-[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](#dotnet), so we programmed our own. These extensions to [`.NET`](#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
+[`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](table.md#dotnet), so we programmed our own. These extensions to [`.NET`](table.md#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](../layers.md#loosely-coupled). They are sort part of the [software architecture](../index.md) described here.
 
 ### Configuration
 
-[`.NET`](#dotnet) code can use configuration files, often named `App.config` or `Web.config`.
+[`.NET`](table.md#dotnet) code can use configuration files, often named `App.config` or `Web.config`.
 
-To access these `configs` we might use [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) quite a bit more easily than using [`.NET's`](#dotnet) `System.Configuration` directly.
+To access these `configs` we might use [`JJ.Framework.Configuration`](https://www.nuget.org/packages/JJ.Framework.Configuration) quite a bit more easily than using [`.NET's`](table.md#dotnet) `System.Configuration` directly.
 
 You might read from its [`README`](https://www.nuget.org/packages/JJ.Framework.Configuration) how it works.
 
@@ -199,7 +199,7 @@ internal interface IConnectionStrings
 
 *Bidirectional relationship synchronization* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
-This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](#jj-framework-business) package, which can be used in various models: [rich](../patterns/other.md#rich-models), [entity](../patterns/data-access.md#entities), `API` or otherwise.
+This can be achieved through the use of classes such as [`ManyToOneRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) and [`OneToManyRelationship`](https://www.nuget.org/packages/JJ.Framework.Business#onetomanyrelationship-manytoonerelationship) from the [`JJ.Framework.Business`](table.md#jj-framework-business) package, which can be used in various models: [rich](../patterns/other.md#rich-models), [entity](../patterns/data-access.md#entities), `API` or otherwise.
 
 There may be other options available. [`NHibernate`](orm.md#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](orm.md#entity-framework) might do this synchronization automatically. The [`LinkTo`](../patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
@@ -209,19 +209,19 @@ There may be other options available. [`NHibernate`](orm.md#nhibernate) does not
 
 In most cases, it is recommended to use `XElement` (LINQ to XML) instead of `XmlDocument`. However, a useful feature of `XmlDocument` is that it supports [`XPath`](https://www.w3schools.com/xml/xpath_intro.asp).
 
-To handle nullability and uniqueness more gracefully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](#jj-framework-xml-linq) over using other `API's` directly.
+To handle nullability and uniqueness more gracefully, it is suggested to use `XmlHelper` methods from [`JJ.Framework.Xml`](table.md#jj-framework-xml) or [`JJ.Framework.Xml.Linq`](table.md#jj-framework-xml-linq) over using other `API's` directly.
 
-For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](#jj-framework-data-xml-linq) might be useful. They can offer simpler solutions than other `API's`.
+For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](table.md#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](table.md#jj-framework-data-xml-linq) might be useful. They can offer simpler solutions than other `API's`.
 
 ### Embedded Resources
 
 *Embedded resources* might be handy, to prevent including loose files with a deployment. Instead they are compiled right into your program files' `EXE` or `DLL`. This also protects those resources a bit better against modifications.
 
-To include a file as an embedded resource, you could set the following property in [`Visual Studio`](#visual-studio):
+To include a file as an embedded resource, you could set the following property in [`Visual Studio`](table.md#visual-studio):
 
 ![](../images/sql-as-embedded-resource.png)
 
-[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](../patterns/other.md#helper) `class` [`EmbeddedResourceReader`](#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
+[`JJ.Framework.Common`](https://www.nuget.org/packages/JJ.Framework.Common) contains a [`Helper`](../patterns/other.md#helper) `class` [`EmbeddedResourceReader`](table.md#embedded-resource-reader). It makes it a little bit easier to access those resources from your code:
 
 ```cs
 string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");

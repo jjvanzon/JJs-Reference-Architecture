@@ -120,7 +120,7 @@ public class Supplier
 Mapping
 -------
 
-`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/orm.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/misc.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
+`Mappings` are `classes` programmed for a particular [persistence technology](../aspects.md#persistence), e.g. [`NHibernate`](../api/orm.md#nhibernate), that map the [`Entity`](#entities) model to how the `objects` are stored in the data store (e.g. an [`SQL Server`](../api/table.md#sql-server) database). A `Mapping` defines which `class` maps to which `table` and which `column` maps to which *property*.
 
 
 DTO
@@ -148,6 +148,6 @@ Repository Interfaces
 
 Any [`Repository type`](#repository) will get an associated `Repository interface`. This keeps our system loosely coupled from the underlying [persistence technology](../aspects.md#persistence).
 
-The `Repository interfaces` are also handy for [testing](../aspects.md#automated-testing), to create a [fake](other.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](../api/misc.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](#repository) and `interfaces`.
+The `Repository interfaces` are also handy for [testing](../aspects.md#automated-testing), to create a [fake](other.md#mock) in-memory data store, instead of connecting to a real database. The `API` [`JJ.Framework.Data`](../api/table.md#jj-framework-data) can help abstract this data access, providing a base for these [`Repositories`](#repository) and `interfaces`.
 
 [back](README.md)

@@ -27,13 +27,13 @@ API's | ORM | Meet in the Middle Queries
 
 One time [`ORM`](../api/orm.md#-orm) almost fails a little bit, is queries where you link a bunch of [entities](patterns/data-access.md#entities) together, you want a list of [entities](patterns/data-access.md#entities) somewhere in the middle of that chain, you want to filter one end of the relationship chain and also on the other end.
 
-In [`C#`](api/misc.md#csharp) it seems you can filter in one direction only:
+In [`C#`](api/table.md#csharp) it seems you can filter in one direction only:
 
 ```cs
 FirstList.Where(x => ...).SecondList.Where(x => ...).LastList.Where(x => ...);
 ```
 
-If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a [`LINQ`](api/misc.md#linq) query won't do, while in [`SQL`](api/sql.md) it would seem so trivial. The solution in [`C#`](api/misc.md#csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
+If you want to filter the `SecondList` by stuff in the `FirstList` and in the `LastList`, it seems a [`LINQ`](api/table.md#linq) query won't do, while in [`SQL`](api/sql.md) it would seem so trivial. The solution in [`C#`](api/table.md#csharp) might be to materialize the smaller selection, which would retrieve the database rows filtered up until then. And then go filter it further down in memory.
 
 ```cs
 var list = FirstList.Where(x => ...).SecondList.Where(x => ...).ToArray();
