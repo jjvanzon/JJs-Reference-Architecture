@@ -1,5 +1,22 @@
 ﻿---
 title: "🎋 Cascading"
+description: "Upon deleting a main entity, child-entities can be deleted too. Implement it as a pattern in C#, to see these deletions explicitly take place."
+image: "/images/cascading.png"
+keywords:
+  - cascading
+  - delete
+  - unlink
+  - entities
+  - design patterns
+  - patterns
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 🎋 Cascading
