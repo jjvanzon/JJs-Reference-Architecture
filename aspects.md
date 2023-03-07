@@ -691,9 +691,9 @@ In [`MVC`](api/table.md#mvc) it is not so straightforward to `POST` a collection
 
 There are a few possibilities:
 
-- [`Html.BeginCollection`](api/misc.md#htmlbegincollection)
+- [`Html.BeginCollection`](api/web.md#htmlbegincollection)
     - An `API` from [`JJ.Framework.Mvc`](api/table.md#jj-framework-mvc) for `POST`'ing trees and lists across `HTTP`.
-- [`Html.BeginCollectionItem`](api/misc.md#htmlbegincollectionitem)
+- [`Html.BeginCollectionItem`](api/web.md#htmlbegincollectionitem)
     - A commonly used alternative. Can send *one* collection over the wire, not trees.
 - [`for` loops](patterns/presentation-mvc.md#for-loops-for-lists-in-http-postdata)
     - A pattern that might work without an additional `API` for posting a list over `HTTP`.

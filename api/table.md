@@ -438,7 +438,7 @@ Presentation
 
 <tr id="javascript">
   <th>
-    <a href="misc.html#javascript--typescript">
+    <a href="web.html#javascript--typescript">
        JavaScript</a>
   </th>
   <td>
@@ -448,7 +448,7 @@ Presentation
 
 <tr id="typescript">
   <th>
-    <a href="misc.html#javascript--typescript">
+    <a href="web.html#javascript--typescript">
        TypeScript</a>
   </th>
   <td>
@@ -457,7 +457,7 @@ Presentation
 </tr>
 
 <tr>
-  <th><a href="misc.html#ajax">AJAX</a></th>
+  <th><a href="web.html#ajax">AJAX</a></th>
   <td>For retrieving / posting back parts of pages to the server and back.</td>
 </tr>
 
@@ -477,7 +477,7 @@ Presentation
   <td>
       Used to support UI details in web.
       Remembering scroll position, cookie functions, URL parsing.
-      Might be extended with one-line <a href="misc.html#ajax"><code>AJAX</code></a> functions one day.
+      Might be extended with one-line <a href="web.html#ajax"><code>AJAX</code></a> functions one day.
   </td>
 </tr>
 
@@ -493,7 +493,7 @@ Presentation
 
 <tr>
   <th>
-    <a href="misc.html#htmlbegincollection">Html.BeginCollection</a>
+    <a href="web.html#htmlbegincollection">Html.BeginCollection</a>
   </th>
   <td>
       Part of <a href="#jj-framework-mvc"><code>JJ.Framework.Mvc</code></a>. Makes it possible to send tree structures over <code>HTTP</code> to the server-side <a href="#mvc"><code>MVC</code></a>.
@@ -502,10 +502,10 @@ Presentation
 
 <tr>
   <th>
-    <a href="misc.html#htmlbegincollectionitem">Html.BeginCollectionItem</a>
+    <a href="web.html#htmlbegincollectionitem">Html.BeginCollectionItem</a>
   </th>
   <td>
-      Alternative for <a href="#jjframework"><code>JJ.Framework</code></a>'s <a href="misc.html#htmlbegincollection"><code>Html.BeginCollection</code></a>.
+      Alternative for <a href="#jjframework"><code>JJ.Framework</code></a>'s <a href="web.html#htmlbegincollection"><code>Html.BeginCollection</code></a>.
       Allows sending a collection over <code>HTTP</code> to server-side <a href="#mvc"><code>MVC</code></a>, but not trees.
   </td>
 </tr>
