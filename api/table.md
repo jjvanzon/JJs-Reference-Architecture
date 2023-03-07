@@ -1,5 +1,33 @@
 ﻿---
 title: "📜 Table of API's"
+image: "/images/api-table.png"
+description: "A comprehensive list of API's and other tech choices inside JJ's Reference Architecture."
+keywords:
+  - code
+  - data
+  - logic
+  - presentation
+  - debugging
+  - testing
+  - processing
+  - io
+  - localization
+  - globalization
+  - settings
+  - configuration
+  - logging
+  - security
+  - api
+  - framework
+  - software stack
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 <style>.wrapper { max-width: 90% }</style>
