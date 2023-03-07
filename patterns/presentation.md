@@ -118,15 +118,15 @@ Reusing the same list instance in multiple [ViewModels](#viewmodels) may seem to
 
 For lookup lists up until say 100 items you might want to have a single list in an [`Edit ViewModel`](viewmodels.md#screen-viewmodels). A central list may save some memory but, but when you still repeat the HTML multiple times, you did not gain much. You may use the HTML5 `<datalist>` tag to let a `<select>` / drop down list reuse the same data. You might also use a [`jQuery`](../api/table.md#jquery) trick to populate a drop down just before you slide it open.
 
-For big lookup list a viable option seems to [`AJAX`](../api/misc.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api/misc.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
+For big lookup list a viable option seems to [`AJAX`](../api/web.md#ajax) the list and show a popup that provides some search functionality, and not retrieve the full list in a single request. Once [`AJAX'ed`](../api/web.md#ajax) you might *cache* the popup to be reused each time you need to select something from it.
 
 
 Full Load – Partial Load – Client-Native Code
 ---------------------------------------------
 
-You might save the server some work by doing [partial loads instead of full loads](../api/misc.md#ajax) or maybe even do [`JavaScript`](../api/table.md#javascript) or other client-native code.
+You might save the server some work by doing [partial loads instead of full loads](../api/web.md#ajax) or maybe even do [`JavaScript`](../api/table.md#javascript) or other client-native code.
 
-[Partial loads](../api/misc.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
+[Partial loads](../api/web.md#ajax) load part of a web page, intead of the whole page, so the whole page does not have to be refreshed every time. It also might save work for the server that has to do less processing then.
 
 [`JavaScript`](../api/table.md#javascript) is client-native code, that could omit server code altoghether, but potentially with a penalty on maintainability, because the client-code may be written in a way that is more dependent on specific [view](#views) details, which might easily change as the server-code evolves.
 
@@ -134,17 +134,17 @@ You could also call it: first choice full load.
 
 In web technology you could also call it:
 
-Full postback - [`AJAX`](../api/misc.md#ajax) - [`JavaScript`](../api/table.md#javascript)
+Full postback - [`AJAX`](../api/web.md#ajax) - [`JavaScript`](../api/table.md#javascript)
 
-When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](..). Only if there is a very good reason, we might use [`AJAX`](../api/misc.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api/table.md#javascript).
+When programming page navigation, the first choice for showing content is a *full page load* in this [architecture](..). Only if there is a very good reason, we might use [`AJAX`](../api/web.md#ajax) to do a *partial load*. Only with a very good reason, we might start programming user interaction in [`JavaScript`](../api/table.md#javascript).
 
 But it was always the first choice to do full postbacks.
 
-The reason for this choice is *maintainability*: programming the application navigation in [`C#`](../api/table.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](../api/table.md#javascript). Also: when you do not use [`AJAX`](../api/misc.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
+The reason for this choice is *maintainability*: programming the application navigation in [`C#`](../api/table.md#csharp) using [`Presenters`](presenters.md#-presenters) is more maintainable than a whole lot of [`JavaScript`](../api/table.md#javascript). Also: when you do not use [`AJAX`](../api/web.md#ajax), the [`Presenter`](presenters.md#-presenters) keeps full control over the application navigation, and you do not have to let the web layer be aware of page navigation details.
 
-Furthermore [`AJAX'ing`](../api/misc.md#ajax) comes with extra difficulties. For instance that [`MVC`](../api/table.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](../api/misc.md#ajax) call, big code blocks of [`JavaScript`](../api/table.md#javascript) for doing [`AJAX`](../api/misc.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](../api/misc.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
+Furthermore [`AJAX'ing`](../api/web.md#ajax) comes with extra difficulties. For instance that [`MVC`](../api/table.md#mvc) `<input>` tag ID's vary depending on the context and must be preserved after an [`AJAX`](../api/web.md#ajax) call, big code blocks of [`JavaScript`](../api/table.md#javascript) for doing [`AJAX`](../api/web.md#ajax) posts, managing when you do a full redirect or just an update of a div. Keeping overview over the multitude of formats with which you can get and post partial content. The added complexity of sometimes returning a row, sometimes returning a partial, sometimes returning a full [`View`](#views). Things like managing the redirection to a full [`View`](#views) from a partial action. Info from a parent [`ViewModel`](#viewmodels) e.g. a lookup list that is passed to the generation of a child [`ViewModel`](#viewmodels) is not available when you generate a partial [`View`](#views). `Request.RawUrl` cannot be used as a return URL in links anymore. Related info in other panels is not updated when info from one panel changes. A lot of times the data on screen is so intricately related to eachother, updating one panel just does not cut it. The server just does not get a chance to change the [`View`](#views) depending on the outcome of the business logic. Sometimes an [`AJAX`](../api/web.md#ajax) call's result should be put in a different target element, depending on the type you get returned, which adds more complexity.
 
-Some of the difficulties with [`AJAX`](../api/misc.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](../api/misc.md#ajax) in the Aspects section.
+Some of the difficulties with [`AJAX`](../api/web.md#ajax) have been solved by employing a specific way of working, as described under [`AJAX`](../api/web.md#ajax) in the Aspects section.
 
 
 Stateless and Stateful

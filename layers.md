@@ -189,7 +189,7 @@ Requests from the web browser automatically make the right [`Controller`](patter
 
 The parameters of a [`Controller`](patterns/presentation-mvc.md#controller) method can be `URL` parameters. A parameter can also be *post data*. [`ViewModel`](patterns/viewmodels.md) parameters are accepted by [`MVC`](api/table.md#mvc) [`Controllers`](patterns/presentation-mvc.md#controller). The [`ViewModels`](patterns/viewmodels.md) and are built up from post data by [`MVC`](api/table.md#mvc) automatically.
 
-[`JJ.Framework.Mvc`](api/misc.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api/table.md#mvc).
+[`JJ.Framework.Mvc`](api/web.md#htmlbegincollection) might be used to send whole *tree structures* of post data over the wire to be correctly parsed by [`MVC`](api/table.md#mvc).
 
 ### View Engine (Razor)
 

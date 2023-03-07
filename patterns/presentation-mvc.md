@@ -167,7 +167,7 @@ public ActionResult Login(... string ret = null)
 }
 ```
 
-ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](../api/misc.md#ajax) CALL.
+ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](../api/web.md#ajax) CALL.
 
 - For full page loads, the ret parameter must be set to:
 
@@ -175,7 +175,7 @@ ASSIGN DIFFERENT RET FOR FULL PAGE LOAD OR [`AJAX`](../api/misc.md#ajax) CALL.
   Request.RawUrl
   ```
 
-- For [`AJAX`](../api/misc.md#ajax) calls the ret parameter must be set to:
+- For [`AJAX`](../api/web.md#ajax) calls the ret parameter must be set to:
 
   ```cs
   Url.Action(ActionNames.Index)

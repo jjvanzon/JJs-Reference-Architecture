@@ -1,6 +1,7 @@
 ﻿---
 title: "🗄️ SQL"
 description: "Describing the role of SQL in JJ's Software Architecture. SQL is a language for data retrieval and manipulation and other actions executed onto a database."
+image: "/images/api-sql.png"
 keywords:
   - sql
   - structured query language
@@ -21,7 +22,8 @@ keywords:
 
 [back](.)
 
-[`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.
+[`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.  
+This article describes how we managed [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) scripts in [`.NET`](table.md#dotnet) projects.
 
 <h2>Contents</h2>
 
