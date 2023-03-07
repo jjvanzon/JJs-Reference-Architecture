@@ -9,6 +9,7 @@ keywords:
   - entity framework
   - database
   - db
+  - framework
   - c#
   - .net
   - coding
