@@ -1,6 +1,23 @@
 ﻿---
 title: "🌐 API's Web"
 image: "/images/api-preview.png"
+description: Describing some web technology choices in JJ's Reference Architecture.
+keywords:
+  - ajax
+  - javascript
+  - typescript
+  - html
+  - http
+  - mvc
+  - web
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 🌐 API's Web
