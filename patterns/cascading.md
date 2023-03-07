@@ -7,7 +7,7 @@ title: "🎋 Cascading"
 
 [back](README.md)
 
-[`Cascading`](../aspects.md#cascading) means that upon `Deleting` a main [`Entity`](data-access.md#entities), *child-*[`Entities`](data-access.md#entities) are `Deleted` too.
+[`Cascading`](../aspects.md#cascading) means that upon deleting a main [`Entity`](data-access.md#entities), child-[`Entities`](data-access.md#entities) are deleted too.
 
 <h2>Contents</h2>
 
