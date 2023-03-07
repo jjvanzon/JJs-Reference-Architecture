@@ -8,27 +8,26 @@ image: "/images/api-preview.png"
 
 [back](.)
 
-This article describes some of the technology choices in this [software architecture](../index.md).
+This article describes some misc technologies chosen in this [software architecture](../index.md).
 
 <h2>Contents</h2>
 
-- [Misc](#misc)
-    - [JJ.Framework](#jjframework)
-    - [Configuration](#configuration)
-    - [OneToManyRelationship](#onetomanyrelationship)
-    - [XML](#xml)
-    - [Embedded Resources](#embedded-resources)
+- [JJ.Framework](#jjframework)
+- [Configuration](#configuration)
+- [OneToManyRelationship](#onetomanyrelationship)
+- [XML](#xml)
+- [Embedded Resources](#embedded-resources)
 
-Misc
-----
-
-### JJ.Framework
+JJ.Framework
+------------
 
 [`JJ.Framework`](https://www.nuget.org/profiles/jjvanzon) are nuts, bolts and screws for software development. There were things missing in [`.NET`](table.md#dotnet), so we programmed our own. These extensions to [`.NET`](table.md#dotnet) are compact and reusable. They can be found on [NuGet](https://www.nuget.org/profiles/jjvanzon). The lesser-tested ones on [JJs-Pre-Release-Package-Feed](https://dev.azure.com/jjvanzon/JJs-Software/_artifacts/feed/JJs-Pre-Release-Package-Feed). You can read more information of it on the [GitHub](https://github.com/jjvanzon/JJ.Framework) repository.
 
 They were made in the spirit of in-house developing small extensions and hiding platform-specific details behind [generalized interfaces](../layers.md#loosely-coupled). They are sort part of the [software architecture](../index.md) described here.
 
-### Configuration
+
+Configuration
+-------------
 
 [`.NET`](table.md#dotnet) code can use configuration files, often named `App.config` or `Web.config`.
 
@@ -71,7 +70,9 @@ internal interface IConnectionStrings
 }
 ```
 
-### OneToManyRelationship
+
+OneToManyRelationship
+---------------------
 
 *Bidirectional relationship synchronization* allows for automatic synchronization of related properties in a parent-child relationship. By setting the parent property, `product.Supplier = mySupplier`, the child collection, `mySupplier.Products`, will also be updated to include `myProduct`.
 
@@ -79,7 +80,9 @@ This can be achieved through the use of classes such as [`ManyToOneRelationship`
 
 There may be other options available. [`NHibernate`](orm.md#nhibernate) does not appear to do it for us automatically. However [`Entity Framework`](orm.md#entity-framework) might do this synchronization automatically. The [`LinkTo`](../patterns/business-logic.md#linkto) pattern can also be used. Or hand-writing the syncing in-place. 
 
-### XML
+
+XML
+---
 
 `XML` is a file format for storing and transmitting data. When working with `API's` for `XML` there are a few options to consider.
 
@@ -89,7 +92,9 @@ To handle nullability and uniqueness more gracefully, it is suggested to use `Xm
 
 For converting `XML` to an object graph, [`XmlToObjectConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) and [`ObjectToXmlConverter`](https://www.nuget.org/packages/JJ.Framework.Xml#xmltoobjectconverter) from [`JJ.Framework.Xml`](table.md#jj-framework-xml) and [`JJ.Framework.Xml.Linq`](table.md#jj-framework-data-xml-linq) might be useful. They can offer simpler solutions than other `API's`.
 
-### Embedded Resources
+
+Embedded Resources
+------------------
 
 *Embedded resources* might be handy, to prevent including loose files with a deployment. Instead they are compiled right into your program files' `EXE` or `DLL`. This also protects those resources a bit better against modifications.
 
@@ -102,4 +107,5 @@ To include a file as an embedded resource, you could set the following property 
 ```cs
 string text = EmbeddedResourceReader.GetText(assembly, "Ingredient_UpdateName.sql");
 ```
+
 [back](.)
