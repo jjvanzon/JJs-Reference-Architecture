@@ -1,7 +1,7 @@
 ﻿---
 title: "🧱 API's Misc"
-image: "/images/api-misc.png"
 descriptions: "Some misc choices for API's in JJ's Reference Architecture: XML, embedded resources, configuration settings, JJ.Framework, bi-directional relationship synchronization."
+image: "/images/api-misc.png"
 keywords:
   - configuration
   - settings
