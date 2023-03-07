@@ -1,6 +1,6 @@
 ﻿---
 title: "🎋 Cascading"
-description: "Upon deleting a main entity, child-entities can be deleted too. Implement it as a pattern in C#, to see these deletions explicitly take place."
+description: "Upon deleting a main entity, child-entities can be deleted too. Implemented as a pattern in C#, to see these deletions explicitly take place."
 image: "/images/cascading.png"
 keywords:
   - cascading
@@ -24,7 +24,7 @@ keywords:
 
 [back](README.md)
 
-[`Cascading`](../aspects.md#cascading) means that upon deleting a main [`Entity`](data-access.md#entities), child-[`Entities`](data-access.md#entities) are deleted too.
+[`Cascading`](../aspects.md#cascading) means that upon deleting a main [`Entity`](data-access.md#entities), child -[`Entities`](data-access.md#entities) are deleted too.
 
 <h2>Contents</h2>
 
