@@ -1,6 +1,33 @@
 ﻿---
-title: "📦 API's Misc"
-image: "/images/api-preview.png"
+title: "🧱 API's Misc"
+image: "/images/api-misc.png"
+descriptions: "Some misc choices for API's in JJ's Reference Architecture: XML, embedded resources, configuration settings, JJ.Framework, bi-directional relationship synchronization."
+keywords:
+  - configuration
+  - settings
+  - embedded resources
+  - xml
+  - xpath
+  - xmldocument
+  - xelement
+  - linq to xml
+  - serializer
+  - serialization
+  - one to many
+  - bidirectional
+  - relationship
+  - jj.framework
+  - nuget
+  - framework
+  - reusability
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 🧱 API's Misc
