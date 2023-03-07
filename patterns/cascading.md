@@ -35,9 +35,9 @@ One way to implement [`Cascading`](../aspects.md#cascading), is through extensio
 Code Files
 ----------
 
-Here is a suggestion for how to organize the [`Cascading`](#cascading) code.
+Here is a suggestion for how to organize the [`Cascading`](#-cascading) code.
 
-In the `csproj` of the [`Business` layer](../layers.md#business-layer), you could put a [sub-folder](../namespaces-assemblies-and-folders.md#patterns) called [`Cascading`](#cascading) and put two code files in it:
+In the `csproj` of the [`Business` layer](../layers.md#business-layer), you could put a [sub-folder](../namespaces-assemblies-and-folders.md#patterns) called [`Cascading`](#-cascading) and put two code files in it:
 
 ```
 JJ.Ordering.Business.csproj
@@ -87,7 +87,7 @@ public static class DeleteRelatedEntitiesExtensions
 
 (Note: The `ToArray` can prevent an `Exception` about the loop collection being modified.)
 
-Before an extension method `Deletes` a child [`Entity`](data-access.md#entities), it might call [`Cascading`](#cascading) upon the child [`Entity`](data-access.md#entities) too!
+Before an extension method `Deletes` a child [`Entity`](data-access.md#entities), it might call [`Cascading`](#-cascading) upon the child [`Entity`](data-access.md#entities) too!
 
 ```cs
 public static void DeleteRelatedEntities(this Order order)
@@ -129,7 +129,7 @@ Note that it uses the [Unlink](#unlink) pattern discussed earlier.
 Delete Main Entity
 ------------------
 
-The [`Cascading`](#cascading) extension methods delete *related* [`Entities`](data-access.md#entities), not the *main* [`Entity`](data-access.md#entities). The idea behind that is: Where a main [`Entity`](data-access.md#entities) is `Deleted`, we could call the [`Cascading`](#cascading) methods first:
+The [`Cascading`](#-cascading) extension methods delete *related* [`Entities`](data-access.md#entities), not the *main* [`Entity`](data-access.md#entities). The idea behind that is: Where a main [`Entity`](data-access.md#entities) is `Deleted`, we could call the [`Cascading`](#-cascading) methods first:
 
 ```cs
 entity.DeleteRelatedEntities();
@@ -171,13 +171,13 @@ It's up to you. The choice to use *extension* methods was also a matter of prefe
 Nuance
 ------
 
-Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
 Conclusion
 ----------
 
-Hopefully this introduced a way to build up [`Cascading`](#cascading) code by just using a pattern.
+Hopefully this introduced a way to build up [`Cascading`](#-cascading) code by just using a pattern.
 
 
 [back](README.md)
