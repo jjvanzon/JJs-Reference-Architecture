@@ -24,7 +24,7 @@ title: "🎋 Cascading"
 Introduction
 ------------
 
-[`Entities`](data-access.md#entities) can be automatically deleted along with other [`Entities`](data-access.md#entities). But if they are not inherently part of the main [`Entity`](data-access.md#entities), they would be [`Unlinked`](#unlink) instead.
+[`Entities`](data-access.md#entities) can be automatically `Deleted` along with other [`Entities`](data-access.md#entities). But if they are not inherently part of the main [`Entity`](data-access.md#entities), they would be [`Unlinked`](#unlink) instead.
 
 This can be implemented as a pattern in [`C#`](../api/table.md#csharp). A reason to do it in [`C#`](../api/table.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
 
