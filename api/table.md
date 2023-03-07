@@ -1,7 +1,7 @@
 ﻿---
 title: "📜 Table of API's"
-image: "/images/api-table.png"
 description: "A comprehensive list of API's and other tech choices inside JJ's Reference Architecture."
+image: "/images/api-table.png"
 keywords:
   - code
   - data

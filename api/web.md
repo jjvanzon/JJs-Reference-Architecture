@@ -1,7 +1,7 @@
 ﻿---
 title: "🌐 API's Web"
-image: "/images/api-web.png"
 description: "Choices around web technology like AJAX, MVC and JavaScript inside JJ's Reference Architecture."
+image: "/images/api-web.png"
 keywords:
   - ajax
   - javascript
