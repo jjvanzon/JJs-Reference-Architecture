@@ -22,7 +22,7 @@ keywords:
 🎋 Cascading
 ============
 
-[back](README.md)
+[back](business-logic.md)
 
 [`Cascading`](../aspects.md#cascading) means that upon deleting a main [`Entity`](data-access.md#entities), child -[`Entities`](data-access.md#entities) are deleted too.
 
@@ -197,4 +197,4 @@ Conclusion
 Hopefully this introduced a way to build up [`Cascading`](#-cascading) code by just using a pattern.
 
 
-[back](README.md)
+[back](business-logic.md)
