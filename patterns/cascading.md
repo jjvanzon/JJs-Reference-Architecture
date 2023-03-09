@@ -1,7 +1,7 @@
 ﻿---
 title: "🎋 Cascading"
 description: "Upon deleting a main entity, child-entities can be deleted too. Implemented as a pattern in C#, to see these deletions explicitly take place."
-image: "/images/cascading.png"
+image: "/images/cascading-page.png"
 keywords:
   - cascading
   - delete
