@@ -24,7 +24,7 @@ keywords:
 
 [back](business-logic.md)
 
-[`Cascading`](../aspects.md#cascading) means that upon deleting a main [`Entity`](data-access.md#entities), child-entities are deleted too.
+[`Cascading`](../aspects.md#cascading) means that upon deleting a entity, child-entities are deleted too.
 
 <img src="../images/cascading-code-3.png" width="700" />
 
