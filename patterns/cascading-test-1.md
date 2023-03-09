@@ -26,7 +26,7 @@ keywords:
 
 [`Cascading`](../aspects.md#cascading) means that upon deleting a main entity, child-entities are deleted too.
 
-<img src="../images/cascading.png" width="700" />
+<img src="../images/cascading-code.png" width="700" />
 
 <h2>Contents</h2>
 
