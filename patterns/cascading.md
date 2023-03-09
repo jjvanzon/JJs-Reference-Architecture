@@ -37,6 +37,8 @@ keywords:
 - [Delete Main Entity](#delete-main-entity)
 - [Cascading & Repositories](#cascading--repositories)
 - [Nuance](#nuance)
+- [Alternative: Database Cascading](#alternative-database-cascading)
+- [Alternative: ORM-Mapped Cascading](#alternative-orm-mapped-cascading)
 - [Conclusion](#conclusion)
 
 
@@ -193,10 +195,25 @@ Nuance
 Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
+Alternative: Database Cascading
+--------------------------------
+
+An alternative for [`Cascading`](#-cascading) is to configure it in the *database* instead. You could use `Triggers` or `Delete Actions` as an alternative.
+
+But these might not play along nicely with our data access technique technique of choice: [`ORM`](../api/orm.md). Saving changes to the database might complain about too many records modified, if you by pass the [`ORM`](../api/orm.md) by doing cascading in the database.
+
+Alternative: ORM-Mapped Cascading
+---------------------------------
+
+You can also configure the [`ORM`](../api/orm.md) itself through [`Mappings`](data-access.md#mapping) to take care of the [`Cascading`](#-cascading) automatically.
+
+A downside of this is that the deletions are hidden from view. Things go off that might not be the intention of the programmers, taking away control from them, who might not intend for all this data to be deleted all of a sudden.
+
+
 Conclusion
 ----------
 
-Hopefully this introduced a way to build up [`Cascading`](#-cascading) code by just using a pattern.
+Hopefully this introduced a way to build up [`Cascading`](#-cascading) code by just using a pattern in [`C#`](../api/table.md#csharp).
 
 
 [back](business-logic.md)
