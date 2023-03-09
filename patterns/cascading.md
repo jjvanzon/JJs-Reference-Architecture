@@ -26,7 +26,7 @@ keywords:
 
 [`Cascading`](../aspects.md#cascading) means that upon deleting a main [`Entity`](data-access.md#entities), child -[`Entities`](data-access.md#entities) are deleted too.
 
-<img src="../images/cascading-code.png" width="700" />
+<img src="../images/cascading-code-3.png" width="700" />
 
 <h2>Contents</h2>
 
