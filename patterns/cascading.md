@@ -200,7 +200,7 @@ Alternative: Database Cascading
 
 Instead of using [`ORM`](../api/orm.md) to perform the [`Cascading`](#-cascading) you could also configure the *database* to do it for you. You could use `Triggers` or `Delete Actions` for that.
 
-But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified, because more records were deleted than the [`ORM`](../api/orm.md) was aware of.
+But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified, because more records were affected than the [`ORM`](../api/orm.md) was aware of.
 
 
 Alternative: ORM-Mapped Cascading
@@ -208,13 +208,13 @@ Alternative: ORM-Mapped Cascading
 
 You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to automatically handle the [`Cascading`](#-cascading).
 
-A downside of this, is that the deletions are hidden away from view. It may surprise programmers, when related data is automatically `Deleted`. This can result in unintended consequences, taking away control from the programmer.
+A downside of this might be, that the deletions are hidden away from view. It may surprise programmers, when related data is automatically `Deleted`. This can result in unintended consequences, taking away control from the programmer.
 
 
 Conclusion
 ----------
 
-Hopefully this gave a good introduction to a way to build up [`Cascading`](#-cascading) code by just using a pattern in [`C#`](../api/table.md#csharp).
+Hopefully this gave a good impression of a way to build up [`Cascading`](#-cascading) code by just using a pattern in [`C#`](../api/table.md#csharp).
 
 
 [back](business-logic.md)
