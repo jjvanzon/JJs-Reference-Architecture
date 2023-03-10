@@ -37,8 +37,8 @@ keywords:
 - [Delete Main Entity](#delete-main-entity)
 - [Cascading & Repositories](#cascading--repositories)
 - [Nuance](#nuance)
-- [Alternative: ORM-Mapped Cascading](#alternative-orm-mapped-cascading)
 - [Alternative: Database Cascading](#alternative-database-cascading)
+- [Alternative: ORM-Mapped Cascading](#alternative-orm-mapped-cascading)
 - [Conclusion](#conclusion)
 
 
@@ -195,20 +195,20 @@ Nuance
 Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](business-logic.md#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
-Alternative: ORM-Mapped Cascading
----------------------------------
-
-You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to automatically handle [`Cascading`](#-cascading).
-
-A downside of this, is that the deletions are hidden away from view. It may surprise programmers, when related data is automatically `Deleted`. This can result in unintended consequences, taking away control from the programmers.
-
-
 Alternative: Database Cascading
 --------------------------------
 
 Instead of using [`ORM`](../api/orm.md) to perform the [`Cascading`](#-cascading) you could also configure it in the *database* instead using `Triggers` or `Delete Actions`.
 
-But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified, when you bypassed the [`ORM`](../api/orm.md) and let de database do it.
+But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified.
+
+
+Alternative: ORM-Mapped Cascading
+---------------------------------
+
+You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to automatically handle [`Cascading`](#-cascading).
+
+A downside of this, is that the deletions are hidden away from view. It may surprise programmers, when related data is automatically `Deleted`. This can result in unintended consequences, taking away control from a programmer.
 
 
 Conclusion
