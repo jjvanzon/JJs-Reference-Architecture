@@ -198,9 +198,9 @@ Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](
 Alternative: ORM-Mapped Cascading
 ---------------------------------
 
-You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to take care of the [`Cascading`](#-cascading) automatically.
+You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to automatically handle [`Cascading`](#-cascading).
 
-A downside of this, is that the deletions are hidden away from view. It may surprise programmers, when things are auto-magically deleted all of a sudden. Things would go off, beyond the intention of the programmers, taking control away from them.
+A downside of this, is that the deletions are hidden away from view. It may surprise programmers, when related data is automatically `Deleted`. This can result in unintended consequences, taking away control from the programmers.
 
 
 Alternative: Database Cascading
