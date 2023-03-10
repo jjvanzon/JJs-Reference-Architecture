@@ -38,7 +38,7 @@ keywords:
 - [Cascading & Repositories](#cascading--repositories)
 - [Nuance](#nuance)
 - [Alternative: Database Cascading](#alternative-database-cascading)
-- [Alternative: ORM-Mapped Cascading](#alternative-orm-mapped-cascading)
+- [Alternative: ORM-Mappings](#alternative-orm-mappings)
 - [Conclusion](#conclusion)
 
 
@@ -203,8 +203,8 @@ Instead of using [`ORM`](../api/orm.md) to perform the [`Cascading`](#-cascading
 But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified, because more records were affected than the [`ORM`](../api/orm.md) was aware of.
 
 
-Alternative: ORM-Mapped Cascading
----------------------------------
+Alternative: ORM-Mappings
+-------------------------
 
 You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to automatically handle the [`Cascading`](#-cascading).
 
