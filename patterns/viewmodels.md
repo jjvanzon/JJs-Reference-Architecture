@@ -309,7 +309,7 @@ public class Product
 {
     public virtual int ID { get; set; }
     public virtual string Name { get; set; }
-    public virtual Category Caterogy { get; set; }
+    public virtual Category Category { get; set; }
 }
 ```
 
