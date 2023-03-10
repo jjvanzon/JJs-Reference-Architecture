@@ -1,7 +1,7 @@
 ﻿---
 title: "📀 ORM"
 description: "ORM saves things to a database, while you focus on the logic around entity objects. This article lists issues you could encounter using ORM, and suggestions for how to deal with it."
-image: "/images/orm-page.png"
+image: "/images/orm-page-test-4.png"
 keywords:
   - orm
   - object relational mapper
