@@ -45,7 +45,7 @@ keywords:
 Introduction
 ------------
 
-[`Entities`](data-access.md#entities) can be automatically `Deleted` along with other [`Entities`](data-access.md#entities). But if they are not inherently part of the main [`Entity`](data-access.md#entities), they would be [`Unlinked`](#unlink) instead.
+[`Entities`](data-access.md#entities) can be automatically `Deleted` along with other [`Entities`](data-access.md#entities). But if they are not inherently part of the main [`Entity`](data-access.md#entities), they would be [`Unlinked`](business-logic.md#unlink) instead.
 
 This can be implemented as a pattern in [`C#`](../api/table.md#csharp). A reason to do it in [`C#`](../api/table.md#csharp), is to explicitly see in the code, that the other `Deletions` take place. It may be important not to hide this from view.
 
@@ -144,7 +144,7 @@ public static class UnlinkRelatedEntitiesExtensions
 }
 ```
 
-Note that it uses the [Unlink](#unlink) pattern discussed earlier.
+Note that it uses the [Unlink](business-logic.md#unlink) pattern discussed earlier.
 
 
 Delete Main Entity
@@ -192,7 +192,7 @@ It's up to you. The choice to use *extension* methods was also a matter of prefe
 Nuance
 ------
 
-Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](business-logic.md#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
 Alternative: Database Cascading
