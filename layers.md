@@ -275,7 +275,7 @@ Sometimes there is code for [cloning](aspects.md#cloning) or copying an object o
 
 ### Facades
 
-Calling the [business layer](#business-layer) can happen through [`Facades`](patterns/business-logic.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns/business-logic.md#validators), [`SideEffects`](patterns/business-logic.md#sideeffects), [`Cascading`](patterns/business-logic.md#cascading) and other things in all a row. [`Facades`](patterns/business-logic.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
+Calling the [business layer](#business-layer) can happen through [`Facades`](patterns/business-logic.md#facade). They would combine several aspects of the [business logic](#business-layer), by calling [`Validators`](patterns/business-logic.md#validators), [`SideEffects`](patterns/business-logic.md#sideeffects), [`Cascading`](patterns/cascading.md) and other things in all a row. [`Facades`](patterns/business-logic.md#facade) might provide a few main *entry points* into the [business layer](#business-layer).
 
 ### CRUD
 
