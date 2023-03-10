@@ -91,9 +91,6 @@ public static class DeleteRelatedEntitiesExtensions
 In there, child [`Entities`](data-access.md#entities) are successively `Deleted`:
 
 ```cs
-/// <summary>
-/// Deletes child entities inherently part of the main entity.
-/// </summary>
 public static class DeleteRelatedEntitiesExtensions
 {
     public static void DeleteRelatedEntities(this Order order)
@@ -108,12 +105,11 @@ public static class DeleteRelatedEntitiesExtensions
 
 (Note: The `ToArray` can prevent an `Exception` about the loop collection being modified.)
 
-Before an extension method `Deletes` a child [`Entity`](data-access.md#entities), it might call [`Cascading`](#-cascading) upon the child [`Entity`](data-access.md#entities) too!
+Before an extension method `Deletes` a child [`Entity`](data-access.md#entities), it might call [`Cascading`](#-cascading) upon the child [`Entity`](data-access.md#entities) too:
 
 ```cs
 public static void DeleteRelatedEntities(this Order order)
 {
-    // Delete child entities.
     foreach (var orderLine in order.OrderLines.ToArray())
     {
         // Call cascading on the child entity too!
@@ -144,7 +140,7 @@ public static class UnlinkRelatedEntitiesExtensions
 }
 ```
 
-Note that it uses the [Unlink](business-logic.md#unlink) pattern discussed earlier.
+Note that it uses the [`Unlink`](business-logic.md#unlink) pattern discussed earlier.
 
 
 Delete Main Entity
@@ -192,15 +188,15 @@ It's up to you. The choice to use *extension* methods was also a matter of prefe
 Nuance
 ------
 
-Sometimes an [`Entity`](data-access.md#entities) does have related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](business-logic.md#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
+Sometimes an [`Entity`](data-access.md#entities) indeed has related [`Entities`](data-access.md#entities) to [`Cascadedly`](#-cascading) [`Unlink`](business-logic.md#unlink) or `Delete`, but sometimes it doesn't, creating subtleties in the implementation.
 
 
 Alternative: Database Cascading
 --------------------------------
 
-Instead of using [`ORM`](../api/orm.md) to perform the [`Cascading`](#-cascading) you could also configure the *database* to do it for you. You could use `Triggers` or `Delete Actions` for that.
+Instead of using [`C#`](../api/table.md#csharp) to perform the [`Cascading`](#-cascading) you could also configure the *database* to do it for you. You could use `Triggers` or `Delete Actions` for that.
 
-But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified, because more records were affected than the [`ORM`](../api/orm.md) was aware of.
+But this might not play along nicely with our data access technology of choice: [`ORM`](../api/orm.md). Saving the changes could then complain about too many records modified, because more records were affected than the [`ORM`](../api/orm.md) expected.
 
 
 Alternative: ORM-Mappings
@@ -208,13 +204,13 @@ Alternative: ORM-Mappings
 
 You can also configure the [`ORM`](../api/orm.md) through [`Mappings`](data-access.md#mapping) to automatically handle the [`Cascading`](#-cascading).
 
-A downside of this might be, that the deletions are hidden away from view. It may surprise programmers, when related data is automatically `Deleted`. This can result in unintended consequences, taking away control from the programmer.
+A downside of this might be, that the deletions are hidden away from view. It may surprise programmers, when related data is automatically deleted. This can result in unintended consequences, taking away control from the programmer.
 
 
 Conclusion
 ----------
 
-Hopefully this gave a good impression of a way to build up [`Cascading`](#-cascading) code by just using a pattern in [`C#`](../api/table.md#csharp).
+Hopefully this gave a good impression of how you could build up [`Cascading`](#-cascading) code by just using a pattern in [`C#`](../api/table.md#csharp).
 
 
 [back](business-logic.md)
