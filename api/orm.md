@@ -82,7 +82,7 @@ The trouble with `Flush` is, that it might be executed when things are not done 
 
 Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](../aspects.md#exceptions) on the child object's `ParentID` column.
 
-It may also help to create [entities](../patterns/data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose an identity generation scheme, that does not require flushing an [entity](../patterns/data-access.md#entities) pre-maturely.
+It may also help to create [entities](../patterns/data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose an identity generation scheme, that does not require flushing an [entity](../patterns/data-access.md#entities) pre-maturely (like a `Database Sequence` or `Guids`).
 
 
 Read-Write Order
