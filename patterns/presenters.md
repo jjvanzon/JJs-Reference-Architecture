@@ -1,6 +1,6 @@
 ﻿---
 title: "🕺 Presenters"
-image: "/images/presenter.png"
+image: "/images/presenter-page.png"
 description: "Learn how to improve your user interfaces by using Presenters: a software design pattern for modeling user interaction. This article provides practical tips using them in your own projects, helping you make your user interfaces more flexible and reliable."
 ---
 
@@ -14,7 +14,7 @@ description: "Learn how to improve your user interfaces by using Presenters: a s
 [`Presenters`](#-presenters) model the user interactions. A non-visual blue-print of the user interface.
 This section describes how they are implemented in [this architecture](..).
 
-<img src="../images/presenter.png" width="700" />
+<img src="../images/presenter-code.png" width="700" />
 
 <h2>Contents</h2>
 
