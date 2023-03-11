@@ -32,9 +32,9 @@ An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](.
 <h2>Contents</h2>
 
 - [Introduction](#introduction)
+- [Read-Write Order](#read-write-order)
 - [Uncommitted Objects](#uncommitted-objects)
 - [Flush](#flush)
-- [Read-Write Order](#read-write-order)
 - [Bridge Entities](#bridge-entities)
 - [Binary Fields](#binary-fields)
 - [Inheritance](#inheritance)
@@ -50,6 +50,12 @@ Introduction
 Here follow some issues you could encounter while using an [`ORM`](#-orm), and some suggestions for how to deal with it.
 
 This information was gathered from experience, built up with [`NHibernate`](#nhibernate). It might be possible that other [`ORM's`](#-orm) have similar issues, due to how [`ORM's`](#-orm) work internally.
+
+
+Read-Write Order
+----------------
+
+It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#uncommitted-objects).
 
 
 Uncommitted Objects
@@ -83,12 +89,6 @@ The trouble with `Flush` is, that it might be executed when things are not done 
 Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](../aspects.md#exceptions) on the child object's `ParentID` column.
 
 It may also help to create [entities](../patterns/data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose an identity generation scheme, that does not require flushing an [entity](../patterns/data-access.md#entities) pre-maturely (like a `Database Sequence` or `Guids`).
-
-
-Read-Write Order
-----------------
-
-It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#uncommitted-objects).
 
 
 Bridge Entities
