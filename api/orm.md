@@ -157,43 +157,63 @@ Inheritance
 
 Particular surprises might emerge when using *inheritance* in your [entity](../patterns/data-access.md#entities) model at least while working with [`NHibernate`](#nhibernate). The main advice is to avoid inheritance at all in the [entity](../patterns/data-access.md#entities) models if you can.
 
-### Problem: Entity / Proxy Type Mismatch
+
+<h3 id="problem-entity--proxy-type-mismatch">
+Problem: Entity / Proxy Type Mismatch</h3>
 
 When retrieving an [entity](../patterns/data-access.md#entities) through [`ORM`](#-orm), it will likely not return an instance of your [entity](../patterns/data-access.md#entities) type, but an instance of a type derived from your [entity](../patterns/data-access.md#entities), a so called `Proxy`. This `Proxy` adds to your [entity](../patterns/data-access.md#entities) a sort of connectedness to the database.
 
-### Problem: Base Proxy / Derived Proxy Type Mismatch
+
+<h3 id="problem-base-proxy--derived-proxy-type-mismatch">
+Problem: Base Proxy / Derived Proxy Type Mismatch</h3>
 
 When you retrieved an [entity](../patterns/data-access.md#entities) from `NHibernate` that has inheritance, using the base type it returns a `Proxy` of the base type instead of a `Proxy` of the derived type, which makes reference comparisons between base `Proxies` and derived class `Proxies` fail.
 
-### Problem: 2 Proxies / 1 Entity
+
+<h3 id="problem-2-proxies--1-entity">
+Problem: 2 Proxies / 1 Entity</h3>
 
 But you can also get failing reference comparisons another way. If you `Unproxied` a derived type, and retrieve another `Proxy` of the derived type, reference comparison might also fail.
 
-### Problem: Query Performance
+
+<h3 id="problem-query-performance">
+Problem: Query Performance</h3>
 
 It can also harm performance of queries, getting a lot of `left joins`: one for each derived class' table.
 
-### Alternative: Unproxy for Reference Comparison
+
+<h3 id="alternative-unproxy-for-reference-comparison">
+Alternative: Unproxy for Reference Comparison</h3>
 
 You can then `Unproxy` both and it will return the underlying object, which is indeed of the derived class, upon which reference comparison succeeds.
 
-### Alternative: Unproxy for Type Evaluation
+
+<h3 id="alternative-unproxy-for-type-evaluation">
+Alternative: Unproxy for Type Evaluation</h3>
 
 To evaluate the *type*, you are better of `Unproxying` as well. Otherwise it will compare `Proxy` types instead of your [entity](../patterns/data-access.md#entities) type. This can be confusing.
 
-### Alternative: ID Comparison
+
+<h3 id="alternative-id-comparison">
+Alternative: ID Comparison</h3>
 
 [ID comparison](../code-style.md#entity-equality-by-id) could avoid this problem that surrounds [entity](../patterns/data-access.md#entities) equality checks.
 
-### Alternative: 1-to-1 Relationship
+
+<h3 id="alternative-1-to-1-relationship">
+Alternative: 1-to-1 Relationship</h3>
 
 An alternative for inheritance might be, to use a `1-to-1` related object to represent the base of the [entity](../patterns/data-access.md#entities). Although, [`NHibernate`](#nhibernate) and other [`ORM's`](#-orm) are  not a fan of `1 => 1` relationships either. What may save the day, is to map the relationship one-way only and not bidirectionally, so the [`ORM`](#-orm) gets less confused.
 
-### Alternative: Interfaces
+
+<h3 id="alternative-interfaces">
+Alternative: Interfaces</h3>
 
 Letting two [entity](../patterns/data-access.md#entities) types use a mutual `interface` might be an alternative too.
 
-### Alternative: No Inheritance
+
+<h3 id="alternative-no-inheritance">
+Alternative: No Inheritance</h3>
 
 By now maybe it may be clear, that the main advice is not to use inheritance in the first place in your [entity](../patterns/data-access.md#entities) models, if at all possible.
 
