@@ -32,8 +32,8 @@ An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](.
 <h2>Contents</h2>
 
 - [Introduction](#introduction)
-- [Read-Write Order](#read-write-order)
 - [Binary Fields](#binary-fields)
+- [Read-Write Order](#read-write-order)
 - [Bridge Entities](#bridge-entities)
 - [Inheritance](#inheritance)
 - [Generic Interfaces](#generic-interfaces)
@@ -54,12 +54,6 @@ This article will not go into the basics of using [`ORM`](#-orm). There's other 
 This information was gathered from experience, built up with [`NHibernate`](#nhibernate). It might be possible that other [`ORM's`](#-orm) have similar issues, due to how [`ORM's`](#-orm) work internally.
 
 
-Read-Write Order
-----------------
-
-It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with its way of querying the database, caching things and how it handles [committed and uncommitted objects](#uncommitted-objects).
-
-
 Binary Fields
 -------------
 
@@ -68,6 +62,12 @@ You might not want to map *binary* and other *serialized data* fields using [`OR
 Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes, especially in a multi-user environment.
 
 Using separate [`SQL`](sql.md) statements for retrieving blobs might be a better alternative.
+
+
+Read-Write Order
+----------------
+
+It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with its way of querying the database, caching things and how it handles [committed and uncommitted objects](#uncommitted-objects).
 
 
 Bridge Entities
