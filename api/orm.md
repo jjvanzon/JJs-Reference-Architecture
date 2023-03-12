@@ -33,12 +33,12 @@ An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](.
 
 - [Introduction](#introduction)
 - [Read-Write Order](#read-write-order)
-- [Uncommitted Objects](#uncommitted-objects)
-- [Flush](#flush)
-- [Bridge Entities](#bridge-entities)
 - [Binary Fields](#binary-fields)
+- [Bridge Entities](#bridge-entities)
 - [Inheritance](#inheritance)
 - [Generic Interfaces](#generic-interfaces)
+- [Uncommitted Objects](#uncommitted-objects)
+- [Flush](#flush)
 - [Entity Framework](#entity-framework)
 - [NHibernate](#nhibernate)
 - [Conclusion](#conclusion)
@@ -55,40 +55,17 @@ This information was gathered from experience, built up with [`NHibernate`](#nhi
 Read-Write Order
 ----------------
 
-It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with how it queries the database and handles [committed / uncommitted objects](#uncommitted-objects).
+It seems [`ORM's`](#-orm) like it when you first read the data out, and then start writing to it. Not read, write some, read a little more, write some more. It may have to do with its way of querying the database, caching things and how it handles [committed and uncommitted objects](#uncommitted-objects).
 
 
-Uncommitted Objects
--------------------
+Binary Fields
+-------------
 
-Here is something that happens in [`ORM`](#-orm) sometimes:
+You might not want to map *binary* and other *serialized data* fields using [`ORM`](#-orm), because it can harm performance quite a bit.
 
-Some methods of data retrieval work with uncommitted / non-flushed [entities](../patterns/data-access.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](../patterns/data-access.md#entities). This asymmetry might be common in [`ORM's`](#-orm), since doing it another way might harm performance considerably:
+Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
 
-| Method | Data Read |
-|--------|----------|
-| `IContext.Query` | committed
-| `IContext.Get` | 1st committed, then uncommitted
-| `IContext.TryGet` | 1st committed, then uncommitted
-| Navigation properties /<br>following the object graph | 1st committed, then uncommitted
-
-It appears to have to do with, when the [`ORM`](#-orm) goes to the database to query for objects.
-
-
-Flush
------
-
-`Flushing` in [`NHibernate`](#nhibernate) would mean that all the pending [`SQL`](sql.md) statements are executed onto the database, without committing the transaction yet.
-
-A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes when [`NHibernate`](#nhibernate) is confused about the order in which to execute things, a `Flush` may help it execute things in the right order.
-
-The trouble with `Flush` is, that it might be executed when things are not done yet, and incomplete data might go to the database, upon which database may give an error. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
-
-`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](../patterns/data-access.md#entities). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
-
-Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](../aspects.md#exceptions) on the child object's `ParentID` column.
-
-It may also help to create [entities](../patterns/data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose an identity generation scheme, that does not require flushing an [entity](../patterns/data-access.md#entities) pre-maturely (like a `Database Sequence` or `Guids`).
+Using separate [`SQL`](sql.md) statements for retrieving blobs might be a better alternative.
 
 
 Bridge Entities
@@ -142,15 +119,6 @@ It might be advised, that the bridge table not rely on a *composite* key of the 
 
 This is because it gives 1 handle to the combination of 2 thing. This gives [`ORM`](#-orm) less difficulty managing things under the hood, prevents passing around composite keys, lower quality hash codes, URLs that don't look pretty, etc.
 
-
-Binary Fields
--------------
-
-You might not want to map *binary* and other *serialized data* fields using [`ORM`](#-orm), because it can harm performance quite a bit.
-
-Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
-
-Using separate [`SQL`](sql.md) statements for retrieving blobs might be a better alternative.
 
 Inheritance
 -----------
@@ -222,6 +190,39 @@ Generic Interfaces
 ------------------
 
 Data access in this [architecture](../index.md) is favored behind generic interfaces from [`JJ.Framework.Data`](table.md#jj-framework-data).
+
+
+Uncommitted Objects
+-------------------
+
+Here is something that happens in [`ORM`](#-orm) sometimes:
+
+Some methods of data retrieval work with uncommitted / non-flushed [entities](../patterns/data-access.md#entities): so things that are newly created, and not yet committed to the data store. Other methods of data retrieval do the opposite: only returning committed / flushed [entities](../patterns/data-access.md#entities). This asymmetry might be common in [`ORM's`](#-orm), since doing it another way might harm performance considerably:
+
+| Method | Data Read |
+|--------|----------|
+| `IContext.Query` | committed
+| `IContext.Get` | 1st committed, then uncommitted
+| `IContext.TryGet` | 1st committed, then uncommitted
+| Navigation properties /<br>following the object graph | 1st committed, then uncommitted
+
+It appears to have to do with, when the [`ORM`](#-orm) goes to the database to query for objects.
+
+
+Flush
+-----
+
+`Flushing` in [`NHibernate`](#nhibernate) would mean that all the pending [`SQL`](sql.md) statements are executed onto the database, without committing the transaction yet.
+
+A `Flush` can help get an auto-generated `ID` from the database. Also, sometimes when [`NHibernate`](#nhibernate) is confused about the order in which to execute things, a `Flush` may help it execute things in the right order.
+
+The trouble with `Flush` is, that it might be executed when things are not done yet, and incomplete data might go to the database, upon which database may give an error. So it is a thing to use sparsely only with a good reason, because you can expect some side-effects.
+
+`Flushes` might also go off automatically. Sometimes [`NHibernate`](#nhibernate) wants to get a data-store generated ID. This can happen calling `Save` on an [entity](../patterns/data-access.md#entities). Unlike the documentation suggests, `FlushMode.Never` or `FlushMode.Commit` may not prevent these intermediate flushes.
+
+Upon saving a parent object, child objects might be flushed too. Internally then [`NHibernate`](#nhibernate) asked itself the question if the child object was `Transient` and while doing so, it apparently wanted to get its identity, by executing an `insert` statement onto the data store. This once caused a `null` [`Exception`](../aspects.md#exceptions) on the child object's `ParentID` column.
+
+It may also help to create [entities](../patterns/data-access.md#entities) in a specific order (e.g. parent object first, child objects second) or choose an identity generation scheme, that does not require flushing an [entity](../patterns/data-access.md#entities) pre-maturely (like a `Database Sequence` or `Guids`).
 
 
 Entity Framework
