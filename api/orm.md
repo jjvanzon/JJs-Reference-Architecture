@@ -47,7 +47,7 @@ An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](.
 Introduction
 ------------
 
-Here follow some issues you could encounter while using an [`ORM`](#-orm), and some suggestions for how to deal with it.
+This article won't go into the basics of using [`ORM`](#-orm). There's other resources for that. Instead it covers some specific anomalies you could encounter while using an [`ORM`](#-orm), and some suggestions for how to deal with it.
 
 This information was gathered from experience, built up with [`NHibernate`](#nhibernate). It might be possible that other [`ORM's`](#-orm) have similar issues, due to how [`ORM's`](#-orm) work internally.
 
