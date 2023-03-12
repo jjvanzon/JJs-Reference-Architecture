@@ -47,7 +47,7 @@ An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](.
 Introduction
 ------------
 
-This article won't go into the basics of using [`ORM`](#-orm). There's other resources for that.
+This article does not go into the basics of using [`ORM`](#-orm). There's other resources for that.
 
 Instead it covers specific anomalies you may encounter while using an [`ORM`](#-orm), and some suggestions for how to deal with it.
 
