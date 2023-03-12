@@ -65,7 +65,7 @@ Binary Fields
 
 You might not want to map *binary* and other *serialized data* fields using [`ORM`](#-orm), because it can harm performance quite a bit.
 
-Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes.
+Retrieving some loose fields of an [entity](../patterns/data-access.md#entities), would also retrieve a blob in that case. As well as saving a whole blob, when changing just a few fields. That data transmission can be quite a bottle-neck sometimes, especially in a multi-user environment.
 
 Using separate [`SQL`](sql.md) statements for retrieving blobs might be a better alternative.
 
