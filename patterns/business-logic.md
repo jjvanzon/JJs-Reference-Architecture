@@ -8,6 +8,10 @@ image: "/images/business-layer.png"
 
 [back](README.md)
 
+Business logic guards the rules of a system. It is the invisible engine that powers the software.
+
+<img src="../images/business-layer.png" width="700" />
+
 <h2>Contents</h2>
 
 <ul>
