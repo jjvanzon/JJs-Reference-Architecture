@@ -29,6 +29,8 @@ keywords:
 
 This article describes some of the web technology choices in this [software architecture](../index.md).
 
+<img src="../images/jj-framework-mvc-code.png" width="700" />
+
 <h2>Contents</h2>
 
 - [AJAX](#ajax)
