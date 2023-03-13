@@ -1,5 +1,21 @@
 ﻿---
 title: "🎁 API's"
+description: "API and technology choices in this architecture: ORM, SQL, web and others."
+image: "/images/api-page.png"
+keywords:
+  - orm
+  - sql
+  - web
+  - tech stack
+  - framework
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
 ---
 
 🎁 API's
