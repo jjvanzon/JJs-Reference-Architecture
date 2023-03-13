@@ -25,6 +25,8 @@ keywords:
 [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.  
 This article describes how we managed [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) scripts in [`.NET`](table.md#dotnet) projects.
 
+<img src="../images/sql-code.png" width="700" />
+
 <h2>Contents</h2>
 
 - [Introduction](#introduction)
