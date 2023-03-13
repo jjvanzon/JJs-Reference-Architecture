@@ -1,7 +1,7 @@
 ﻿---
 title: "🗄️ SQL"
 description: "Describing the role of SQL in JJ's Software Architecture. SQL is a language for data retrieval and manipulation and other actions executed onto a database."
-image: "/images/api-sql.png"
+image: "/images/sql-page.png"
 keywords:
   - sql
   - structured query language
