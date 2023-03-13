@@ -27,7 +27,7 @@ Some of this [software architecture's](../index.md) technology choices are descr
 
 Most are listed out in a [table](table.md). Some technology is described in more detail, mostly data technology, like [`ORM`](orm.md) and [`SQL`](sql.md), but also some more about [web](web.md) technology.
 
-- 📜 [Table](table.md)
+- 📜 [Table of API's](table.md)
 - 📀 [ORM](orm.md)
 - 🗄️ [SQL](sql.md)
 - 🌐 [Web](web.md)
