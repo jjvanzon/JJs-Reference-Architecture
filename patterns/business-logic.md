@@ -8,7 +8,7 @@ image: "/images/business-layer.png"
 
 [back](README.md)
 
-[Business logic](#-patterns--business-logic) guards the rules of a system: the invisible engine powering the software.  
+[Business logic](#-patterns--business-logic) guards the rules of a system: the invisible engine of the software.  
 It sits between the [presentation](../layers.md#presentation-layer) and the [data layer](../layers.md#data-layer)
 
 <img src="../images/business-layer-horizontal.png" width="700" />
