@@ -8,9 +8,9 @@ image: "/images/business-layer.png"
 
 [back](README.md)
 
-Business logic guards the rules of a system. It is the invisible engine that powers the software.
+Business logic guards the rules of a system: the invisible engine powering the software.
 
-<img src="../images/business-layer.png" width="700" />
+<img src="../images/business-layer-horizontal.png" width="700" />
 
 <h2>Contents</h2>
 
