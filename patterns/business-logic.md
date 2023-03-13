@@ -1,6 +1,6 @@
 ﻿---
 title: "🤖 Patterns : Business Logic"
-image: "/images/business-layer.png"
+image: "/images/business-logic-page.png"
 ---
 
 🤖 Patterns : Business Logic
@@ -11,7 +11,7 @@ image: "/images/business-layer.png"
 [Business logic](#-patterns--business-logic) guards the rules of a system: the invisible part of the software.  
 It sits between the [presentation](../layers.md#presentation-layer) and the [data layer](../layers.md#data-layer).
 
-<img src="../images/business-layer-horizontal.png" width="800" />
+<img src="../images/business-layer-banner.png" width="800" />
 
 <h2>Contents</h2>
 
