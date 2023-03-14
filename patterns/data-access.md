@@ -1,10 +1,10 @@
 ﻿---
-title: "💽 Patterns : Data Access"
+title: "💽 Data Access Patterns"
 image: "/images/data-layer.png"
 ---
 
-💽 Patterns : Data Access
-==========================
+💽 Data Access Patterns
+========================
 
 [back](README.md)
 

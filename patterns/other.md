@@ -1,11 +1,11 @@
 ﻿---
-title: "⚙️ Patterns : Other"
+title: "⚙️ Other Patterns"
 ---
 
 `[ Draft ]`
 
-⚙️ Patterns : Other
-===================
+⚙️ Other Patterns
+=================
 
 [back](README.md)
 

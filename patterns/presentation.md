@@ -1,5 +1,5 @@
 ﻿---
-title: "🖥️ Patterns : Presentation"
+title: "🖥️ Presentation Patterns"
 image: "/images/presentation-layer.png"
 ---
 
@@ -7,8 +7,8 @@ image: "/images/presentation-layer.png"
 
 `[ Draft ]`
 
-🖥️ Patterns : Presentation
-===========================
+🖥️ Presentation Patterns
+=========================
 
 [back](README.md)
 

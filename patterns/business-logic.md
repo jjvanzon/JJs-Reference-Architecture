@@ -1,5 +1,5 @@
 ﻿---
-title: "🤖 Patterns : Business Logic"
+title: "🤖 Business Logic Patterns"
 description: "Business logic guards the rules of a system: the invisible part of the software. It sits between the presentation and the data layer."
 image: "/images/patterns-business-logic-page.png"
 keywords:
@@ -24,8 +24,8 @@ keywords:
   - computers
 ---
 
-🤖 Patterns : Business Logic
-============================
+🤖 Business Logic Patterns
+===========================
 
 [back](README.md)
 

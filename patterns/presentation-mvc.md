@@ -1,11 +1,11 @@
 ﻿---
-title: "🕸️ Patterns : Presentation (MVC)"
+title: "🕸️ Presentation Patterns (MVC)"
 ---
 
 `[ Draft ]`
 
-🕸️ Patterns : Presentation (MVC)
-================================
+🕸️ Presentation Patterns (MVC)
+===============================
 
 [back](README.md)
 

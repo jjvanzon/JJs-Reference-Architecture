@@ -1,11 +1,11 @@
 ﻿---
-title: "🐛 Patterns : Data Transformation"
+title: "🐛 Data Transformation Patterns"
 ---
 
 `[ Draft ]`
 
-🐛 Patterns : Data Transformation
-==================================
+🐛 Data Transformation Patterns
+================================
 
 [back](README.md)
 
