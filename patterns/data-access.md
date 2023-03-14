@@ -1,6 +1,6 @@
 ﻿---
 title: "💽 Data Access Patterns"
-image: "/images/data-layer.png"
+image: "/images/data-access-patterns-page.png"
 ---
 
 💽 Data Access Patterns
