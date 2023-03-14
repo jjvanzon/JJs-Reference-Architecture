@@ -8,6 +8,8 @@ image: "/images/data-layer.png"
 
 [back](README.md)
 
+This [software architecture](../README.md) enjoys the benefits of [`ORM`](../api/orm.md) technology. Here are some [`patterns`](README.md) for how the code might be structured.
+
 <img src="../images/data-access-code.png" width="800" />
 
 <h2>Contents</h2>
