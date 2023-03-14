@@ -1,5 +1,6 @@
 ﻿---
 title: "🐛 Data Transformation Patterns"
+image: "/images/data-transformation-page.png"
 ---
 
 `[ Draft ]`
