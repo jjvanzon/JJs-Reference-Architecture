@@ -1,6 +1,27 @@
 ﻿---
 title: "🤖 Patterns : Business Logic"
+description: "Business logic guards the rules of a system: the invisible part of the software. It sits between the presentation and the data layer."
 image: "/images/patterns-business-logic-page.png"
+keywords:
+  - validation
+  - defaults
+  - facade
+  - relationship synchronization
+  - business logic
+  - business layer
+  - business logic layer
+  - layered architecture
+  - design patterns
+  - patterns
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - computers
 ---
 
 🤖 Patterns : Business Logic
