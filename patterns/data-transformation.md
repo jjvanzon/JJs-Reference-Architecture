@@ -9,6 +9,8 @@ title: "🐛 Data Transformation Patterns"
 
 [back](README.md)
 
+<img src="../images/data-transformation-code.png" width="800" />
+
 <h2>Contents</h2>
 
 - [Converter](#converter)
