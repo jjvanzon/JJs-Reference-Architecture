@@ -8,6 +8,8 @@ image: "/images/data-layer.png"
 
 [back](README.md)
 
+<img src="../images/data-access-code.png" width="800" />
+
 <h2>Contents</h2>
 
 - [Entities](#entities)
