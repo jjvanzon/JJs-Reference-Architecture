@@ -8,7 +8,7 @@ image: "/images/data-access-patterns-page.png"
 
 [back](README.md)
 
-Our [software architecture](../README.md) enjoys the benefits of [`ORM`](../api/orm.md) technology.  
+Our [software architecture](../index.md) enjoys the benefits of [`ORM`](../api/orm.md) technology.  
 These [patterns](README.md) show how you might structure your code.
 
 <img src="../images/data-access-code.png" width="800" />
