@@ -1,6 +1,32 @@
 ﻿---
 title: "🐛 Data Transformation Patterns"
+description: "Conversion code might run in quite a few places, for example in background processes or even in the front-end. Here are some ideas how to structure code that converts one thing to another."
 image: "/images/data-transformation-page.png"
+keywords:
+  - data transformation
+  - data
+  - conversion
+  - conversion code
+  - crud
+  - collections
+  - state flagging
+  - entity status
+  - object state
+  - record status
+  - entity change tracking
+  - object change tracking
+  - persistence state
+  - input output
+  - framework
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - computers
 ---
 
 `[ Draft ]`
@@ -9,6 +35,8 @@ image: "/images/data-transformation-page.png"
 ================================
 
 [back](README.md)
+
+Conversion code might run in quite a few places, for example in background processes or even in the front-end. Here are some ideas how to structure code that converts one thing to another.
 
 <img src="../images/data-transformation-code.png" width="800" />
 
@@ -139,12 +167,12 @@ Selector-Model-Generator-Result
 
 <h3 id="">Contents</h3>
 
-- [Introduction](#selector-model-generator-result-introduction)
-- [Generating a Document](#generating-a-document)
-- [Data Source Independence](#selector-model-generator-result-data-source-independence)
-- [Multiple Import Formats](#selector-model-generator-result-multiple-import-formats)
-- [Limiting Complexity](#selector-model-generator-result-limiting-complexity)
-- [MVC](#selector-model-generator-result-mvc)
+- [Converter](#converter)
+- [TryGet-Insert-Update](#tryget-insert-update)
+- [TryGet-Insert-Update-Delete / Full-CRUD Conversion / Collection Conversion](#tryget-insert-update-delete--full-crud-conversion--collection-conversion)
+- [State Flagging](#state-flagging)
+- [DocumentModel](#documentmodel)
+- [Selector-Model-Generator-Result](#selector-model-generator-result)
 
 
 <h3 id="selector-model-generator-result-introduction">
