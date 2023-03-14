@@ -1,6 +1,30 @@
 ﻿---
 title: "💽 Data Access Patterns"
+description: "Our software architecture enjoys the benefits of ORM technology. These patterns show how you might structure your code."
 image: "/images/data-access-patterns-page.png"
+kywords:
+  - entities
+  - mappings
+  - repositories
+  - repository interfaces
+  - dto
+  - dtos
+  - orm
+  - object relational mapper
+  - nhibernate
+  - entity framework
+  - database
+  - db
+  - framework
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - computers
 ---
 
 💽 Data Access Patterns
