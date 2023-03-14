@@ -15,6 +15,7 @@ keywords:
   - software development
   - software design
   - software architecture
+  - computers
 ---
 
 🗄 SQL

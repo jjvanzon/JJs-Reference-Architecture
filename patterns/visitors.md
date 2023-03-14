@@ -15,6 +15,7 @@ keywords:
   - design patterns
   - software design
   - software architecture
+  - computers
 ---
 
 🎄 The Visitor Pattern

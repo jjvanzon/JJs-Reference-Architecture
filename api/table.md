@@ -28,6 +28,7 @@ keywords:
   - software development
   - software design
   - software architecture
+  - computers
 ---
 
 <style>.wrapper { max-width: 90% }</style>
