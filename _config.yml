@@ -1,6 +1,6 @@
 theme: jekyll-theme-midnight
 title: 📲 JJ's Software Architecture 🧑🏽‍💻
-description: about programming techniques
+description: about software programming techniques
 plugins:
   - jekyll-relative-links
   - jekyll-default-layout
