@@ -12,7 +12,7 @@ image: "/images/presentation-layer.png"
 
 [back](README.md)
 
-<img src="../images/presentation-layer-platform-independent-banner.png" width="800" />
+<img src="../images/presentation-layer-platform-independent-banner-reversed.png" width="800" />
 
 <h2>Contents</h2>
 
