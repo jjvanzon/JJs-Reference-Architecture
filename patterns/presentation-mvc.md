@@ -9,6 +9,8 @@ title: "🧩 Presentation Patterns (MVC)"
 
 [back](README.md)
 
+<img src="../images/mvc-code.png" width="800" />
+
 <h2>Contents</h2>
 
 - [Controller](#controller)
