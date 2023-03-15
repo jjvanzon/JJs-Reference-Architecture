@@ -2,6 +2,31 @@
 title: "🖥️ Presentation Patterns"
 description: "The presentation layer is the visual part of a program. It is what the user sees. Much of the presentation code is kept platform independent in this software architecture. These are the design patterns regularly employed."
 image: "/images/patterns-presentation-page.png"
+keywords:
+  - viewmodel
+  - presenter
+  - toviewmodel
+  - toentity
+  - lookup lists
+  - temporary ids
+  - full page load
+  - partial load
+  - javascript
+  - ajax
+  - stateful
+  - stateless
+  - platform independent
+  - platform independence
+  - design patterns
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - computers
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap; } thead { display: none; } </style>
