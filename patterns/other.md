@@ -1,6 +1,38 @@
 ﻿---
 title: "⚙️ Other Patterns"
 description: "There are quite a few other design patterns, not specific to any particular software layer. These are patterns like Factories and Wrapper classes."
+keywords:
+  - accessors
+  - encapsulation
+  - initialization
+  - finalization
+  - constructor inheritance
+  - debuggerdisplays
+  - executor
+  - factory class
+  - Base classes
+  - Interfaces
+  - helper classes
+  - Mocks
+  - name constants
+  - null coalesce
+  - plug-ins
+  - progress messages
+  - canel callbacks
+  - cancellation callbacks
+  - Wrappers
+  - rich models
+  - design patterns
+  - framework
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - computers
 ---
 
 `[ Draft ]`
