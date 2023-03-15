@@ -14,7 +14,7 @@ description: "Code makes things easier to read. It is about  using clear names a
 [Code style](#-code-style) makes things easier to read. It is about  using clear *names* as well as *white space*.  
 It also covers specific preferences for *language constructs*.
 
-<img src="images/code-style.png" width="700" />
+<img src="images/code-style.png" width="800" />
 
 <h2>Contents</h2>
 

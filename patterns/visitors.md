@@ -25,7 +25,7 @@ keywords:
 
 [`Visitor`](#-the-visitor-pattern) `classes` process recursive tree structures that might involve many `objects` and multiple `types` of `objects`.
 
-<img src="../images/visitor-pattern.png" width="700" />
+<img src="../images/visitor-pattern.png" width="800" />
 
 <h2>Contents</h2>
 

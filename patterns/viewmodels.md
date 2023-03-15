@@ -13,7 +13,7 @@ description: "A ViewModel provides a simplified and organized representation of 
 [`ViewModels`](#-viewmodels) are as simple as they are invaluable in [this architecture](..).  
 A [`ViewModel`](#-viewmodels) provides a simplified and organized representation of the data to display on screen.
 
-<img src="../images/view-model-banner.png" width="700" />
+<img src="../images/view-model-banner.png" width="800" />
 
 
 <h2>Contents</h2>

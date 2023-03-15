@@ -29,7 +29,7 @@ keywords:
 
 An [`ORM`](#-orm) aims to make it easier to focus on the logic around [entity](../patterns/data-access.md#entities) objects, while saving things to a database is pretty much done for you.
 
-<img src="../images/orm-code.png" width="700" />
+<img src="../images/orm-code.png" width="800" />
 
 <h2>Contents</h2>
 

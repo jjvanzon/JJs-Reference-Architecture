@@ -30,7 +30,7 @@ keywords:
 
 This article describes some of the web technology choices in this [software architecture](../index.md).
 
-<img src="../images/jj-framework-mvc-code.png" width="700" />
+<img src="../images/jj-framework-mvc-code.png" width="800" />
 
 <h2>Contents</h2>
 
