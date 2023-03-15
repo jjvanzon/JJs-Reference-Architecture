@@ -9,6 +9,8 @@ title: "⚙️ Other Patterns"
 
 [back](README.md)
 
+<img src="../images/factory-code.png" width="800" />
+
 <h2>Contents</h2>
 
 - [Accessor](#accessor)
