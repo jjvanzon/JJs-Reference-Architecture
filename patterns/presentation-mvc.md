@@ -1,5 +1,6 @@
 ﻿---
 title: "🧩 Presentation Patterns (MVC)"
+image: "/images/patterns-presentation-mvc-page.png"
 ---
 
 `[ Draft ]`
