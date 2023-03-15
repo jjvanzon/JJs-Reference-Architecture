@@ -1,7 +1,7 @@
 ﻿---
 title: "🖥️ Presentation Patterns"
 description: "The presentation layer is the visual part of a program. It is what the user sees. Much of the presentation code is kept platform independent in this software architecture. These are the design patterns regularly employed."
-image: "/images/presentation-layer-platform-independent-banner.png"
+image: "/images/patterns-presentation-page.png"
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap; } thead { display: none; } </style>
