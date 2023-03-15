@@ -1,6 +1,7 @@
 ﻿---
 title: "⚙️ Other Patterns"
 description: "There are quite a few other design patterns, not specific to any particular software layer: patterns like Wrappers and Factories."
+image: "/images/patterns-other-page.png"
 keywords:
   - accessors
   - encapsulation
