@@ -42,7 +42,7 @@ keywords:
 
 [back](README.md)
 
-There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md). These are patterns like [`Factories`](#factory) and [`Wrapper`](#wrapper) `classes`.
+There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md): patterns like [`Factories`](#factory) and [`Wrapper classes`](#wrapper).
 
 <img src="../images/factory-code.png" width="800" />
 
