@@ -1,6 +1,6 @@
 ﻿---
 title: "⚙️ Other Patterns"
-description: "There are quite a few other design patterns, not specific to any particular software layer. Patterns like Factories and Wrapper classes for instance."
+description: "There are quite a few other design patterns, not specific to any particular software layer. These are patterns like Factories and Wrapper classes."
 ---
 
 `[ Draft ]`
@@ -10,7 +10,7 @@ description: "There are quite a few other design patterns, not specific to any p
 
 [back](README.md)
 
-There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md). Patterns like [`Factories`](#factory) and [`Wrapper`](#wrapper) `classes` for instance.
+There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md). These are patterns like [`Factories`](#factory) and [`Wrapper`](#wrapper) `classes`.
 
 <img src="../images/factory-code.png" width="800" />
 
