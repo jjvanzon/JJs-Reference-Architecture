@@ -1,5 +1,6 @@
 ﻿---
 title: "🧩 Presentation Patterns (MVC)"
+description: "Microsoft ASP.NET MVC has a few peculiarities in it, that might be worth knowing about. Here are some tips for overcoming these common challenges."
 image: "/images/patterns-presentation-mvc-page.png"
 ---
 
@@ -9,6 +10,8 @@ image: "/images/patterns-presentation-mvc-page.png"
 ===============================
 
 [back](README.md)
+
+[Microsoft ASP.NET MVC](../api/table.md#mvc) has a few peculiarities in it, that might be worth knowing about. Here are some tips for overcoming these common challenges.
 
 <img src="../images/mvc-code.png" width="800" />
 
