@@ -17,6 +17,7 @@ keywords:
   - object change tracking
   - persistence state
   - input output
+  - design patterns
   - framework
   - c#
   - .net

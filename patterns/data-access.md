@@ -15,6 +15,7 @@ kywords:
   - entity framework
   - database
   - db
+  - design patterns
   - framework
   - c#
   - .net
