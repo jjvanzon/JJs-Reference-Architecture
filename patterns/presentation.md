@@ -1,5 +1,6 @@
 ﻿---
 title: "🖥️ Presentation Patterns"
+description: "The presentation layer is the visual part of a program. It is what the user sees. Much of the presentation code is kept platform independent in this software architecture. These are the design patterns regularly employed."
 image: "/images/presentation-layer-platform-independent-banner.png"
 ---
 
@@ -11,6 +12,8 @@ image: "/images/presentation-layer-platform-independent-banner.png"
 =========================
 
 [back](README.md)
+
+The [presentation layer](../layers.md#presentation-layer) is the visual part of a program. It is what the user sees. Much of the [presentation code](../layers.md#presentation-layer) is kept [platform independent](../layers.md#platform-independence-1) in this software architecture. These are the [design patterns](README.md) regularly employed.
 
 <img src="../images/presentation-layer-platform-independent-banner.png" width="800" />
 
