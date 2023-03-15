@@ -1,6 +1,3 @@
-JJ's Reference Architecture
-===========================
-
 Documentation about software development techniques.  
 Used as a base in several home projects.   
 A variation of this was also used at a former employer.

@@ -211,7 +211,7 @@ Code Style
 
 Code style an be enforced with different methods:
 
-- The [Code Style](code-style.md) handbook, such as is part of this [Reference Architecture](index.md).
+- The [Code Style](code-style.md) handbook, such as is part of this [Software Architecture](index.md).
 - Write your own code analysers, though this can be difficult except for the really basic ones. Far easier are the options below. <https://docs.microsoft.com/en-us/visualstudio/extensibility/getting-started-with-roslyn-analyzers>
 - Using Visual Studio's code style options from the Options screen.
 - [`ReSharper`](api/table.md#resharper)!
