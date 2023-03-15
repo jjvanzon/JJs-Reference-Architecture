@@ -1,6 +1,6 @@
 ﻿---
 title: "🖥️ Presentation Patterns"
-image: "/images/presentation-layer.png"
+image: "/images/presentation-layer-platform-independent-banner.png"
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap; } thead { display: none; } </style>
@@ -12,7 +12,7 @@ image: "/images/presentation-layer.png"
 
 [back](README.md)
 
-<img src="../images/presentation-layer-platform-independent-banner-reversed.png" width="800" />
+<img src="../images/presentation-layer-platform-independent-banner.png" width="800" />
 
 <h2>Contents</h2>
 
