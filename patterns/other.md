@@ -1,5 +1,6 @@
 ﻿---
 title: "⚙️ Other Patterns"
+description: "There are quite a few other design patterns, not specific to any particular software layer. Patterns like Factories and Wrapper classes for instance."
 ---
 
 `[ Draft ]`
@@ -8,6 +9,8 @@ title: "⚙️ Other Patterns"
 =================
 
 [back](README.md)
+
+There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md). Patterns like [`Factories`](#factory) and [`Wrapper`](#wrapper) `classes` for instance.
 
 <img src="../images/factory-code.png" width="800" />
 
