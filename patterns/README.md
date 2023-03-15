@@ -16,7 +16,7 @@ Contents
 - 💽 [Data Access](data-access.md)
 - 🤖 [Business Logic](business-logic.md)
 - 🖥️ [Presentation](presentation.md) `[ Draft ]`
-- 🕸️ [Presentation (MVC)](presentation-mvc.md) `[ Draft ]`
+- 🧩 [Presentation (MVC)](presentation-mvc.md) `[ Draft ]`
 - 🐛 [Data Transformation](data-transformation.md) `[ Draft ]`
 - ⚙️ [Other Patterns](other.md) `[ Draft ]`
 
