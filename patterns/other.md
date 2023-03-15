@@ -1,6 +1,6 @@
 ﻿---
 title: "⚙️ Other Patterns"
-description: "There are quite a few other design patterns, not specific to any particular software layer. These are patterns like Factories and Wrapper classes."
+description: "There are quite a few other design patterns, not specific to any particular software layer: patterns like Wrappers and Factories."
 keywords:
   - accessors
   - encapsulation
@@ -42,7 +42,7 @@ keywords:
 
 [back](README.md)
 
-There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md): patterns like [`Factories`](#factory) and [`Wrapper classes`](#wrapper).
+There are quite a few other [design patterns](README.md), not specific to any particular [software layer](../layers.md): patterns like [`Wrappers`](#wrapper) and [`Factories`](#factory).
 
 <img src="../images/factory-code.png" width="800" />
 
