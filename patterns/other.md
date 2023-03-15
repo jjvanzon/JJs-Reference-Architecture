@@ -21,7 +21,7 @@ keywords:
   - progress messages
   - canel callbacks
   - cancellation callbacks
-  - Wrappers
+  - wrappers
   - rich models
   - design patterns
   - framework
