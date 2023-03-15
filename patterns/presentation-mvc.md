@@ -37,7 +37,7 @@ keywords:
 
 [back](README.md)
 
-[Microsoft ASP.NET MVC](../api/table.md#mvc) has a few peculiarities in it, that might be worth knowing about. Here are some tips for overcoming these challenges.
+[`Microsoft ASP.NET MVC`](../api/table.md#mvc) has a few peculiarities in it, that might be worth knowing about. Here are some tips for overcoming these challenges.
 
 <img src="../images/mvc-code.png" width="800" />
 
