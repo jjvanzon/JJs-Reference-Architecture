@@ -9,6 +9,7 @@ keywords:
   - naming
   - white space
   - braces
+  - language constructs
   - encapsulation
   - comments
   - notation
