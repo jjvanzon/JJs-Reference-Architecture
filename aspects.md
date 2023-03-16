@@ -78,7 +78,14 @@ keywords:
   - reflection
   - scheduling
   - security
-  - user rights models
+  - authentication
+  - authorization
+  - rights management
+  - permissions
+  - user rights
+  - user rights management
+  - user rights model
+  - identity
   - sideeffects
   - styling
   - text processing
