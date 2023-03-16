@@ -1,6 +1,6 @@
 ﻿---
 title: "💅🏼 Code Style"
-image: "/images/code-style-wide.png"
+image: "/images/code-style-page.png"
 description: "Code makes things easier to read. It is about using clear names as well as white space. Specific language construct preferences are also part of the deal."
 keywords:
   - code style
