@@ -13,6 +13,7 @@ keywords:
   - partial load
   - javascript
   - ajax
+  - presentation layer
   - stateful
   - stateless
   - platform independent
@@ -26,6 +27,7 @@ keywords:
   - software development
   - software design
   - software architecture
+  - layered architecture
   - computers
 ---
 
