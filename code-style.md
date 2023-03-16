@@ -1,7 +1,38 @@
 ﻿---
 title: "👨‍💻 Code Style"
 image: "/images/code-style.png"
-description: "Code makes things easier to read. It is about  using clear names as well as white space. It also covers specific preferences for language constructs"
+description: "Code makes things easier to read. It is about using clear names as well as white space. Specific language construct preferences are also part of the deal."
+keywords:
+  - code style
+  - code handbook
+  - casing
+  - naming
+  - white space
+  - braces
+  - encapsulation
+  - comments
+  - notation
+  - var
+  - namespaces
+  - namespacing
+  - null
+  - empty string
+  - string
+  - nullable
+  - nullable types
+  - exceptions
+  - best practices
+  - code samples
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - layered architecture
+  - computers
 ---
 
 <style>.wrapper { max-width: 90% }</style>
@@ -12,7 +43,7 @@ description: "Code makes things easier to read. It is about  using clear names a
 [back](.)
 
 [Code style](#-code-style) makes things easier to read. It is about  using clear *names* as well as *white space*.  
-It also covers specific preferences for *language constructs*.
+Specific *language construct* preferences are also part of the deal..
 
 <img src="images/code-style.png" width="800" />
 
