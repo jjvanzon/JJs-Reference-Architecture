@@ -1,5 +1,95 @@
 ﻿---
 title: "🧱 Aspects"
+description: "Technical concerns like security, logging and validation and many more. Choices for API's, design patterns and programming languages determine how the aspects are addressed."
+image: "/images/aspects-page.png"
+keywords:
+  - aspects
+  - concepts
+  - topics
+  - architectural choices 
+  - c#
+  - .net
+  - design patterns
+  - best practices
+  - code samples
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - computers
+  - authoring
+  - reviewing
+  - bidirectional relationship synchronization
+  - bidirectional relationship management
+  - linkto
+  - onetomanyrelationship
+  - one to many relationship
+  - inverse properties
+  - inverse property management
+  - property setters
+  - caching
+  - calculation
+  - cascading
+  - circular references
+  - code style
+  - collections
+  - list processing
+  - specialized lists
+  - concurrency
+  - configuration
+  - conversion
+  - entity model / data model
+  - entity status management
+  - state flagging
+  - status flagging
+  - entity state
+  - object state
+  - entity state flagging
+  - object state flagging
+  - change tracking
+  - entity change tracking
+  - enums
+  - errors
+  - exceptions
+  - facades
+  - io
+  - logging
+  - multi-language
+  - multi-lingual
+  - translations
+  - loosely linked entities
+  - culture
+  - localization
+  - globalization
+  - resources
+  - string resources
+  - resource strings
+  - culture
+  - naming
+  - network communication
+  - postdata
+  - http
+  - http post
+  - paging
+  - performance
+  - persistence
+  - reflection
+  - scheduling
+  - security
+  - user rights models
+  - sideeffects
+  - styling
+  - text processing
+  - transactions
+  - automated testing
+  - user interface
+  - utilities
+  - processes
+  - executor
+  - task runner
+  - workflow
 ---
 
 `[ Draft ]`
