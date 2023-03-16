@@ -14,7 +14,7 @@ Contents
 - 🏗 [Practices & Principles](practices-and-principles.md) `[ Draft ]`
 - 🌍 [Service Oriented Architecture](service-oriented-architecture.md)
 - 📀 [Database Conventions](database-conventions.md) `[ Draft ]`
-- 🔣 [Code Style](code-style.md)
+- 💅🏼 [Code Style](code-style.md)
 - 🚀 [Software Lifecycle](software-lifecycle.md) `[ Draft ]`
 - 👥 [Team Management](team-management.md) `[ Draft ]`
 - 🗄 [Server Architecture](server-architecture.md) `[ Draft ]`

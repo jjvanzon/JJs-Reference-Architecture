@@ -1,5 +1,5 @@
 ﻿---
-title: "🔣 Code Style"
+title: "💅🏼 Code Style"
 image: "/images/code-style.png"
 description: "Code makes things easier to read. It is about using clear names as well as white space. Specific language construct preferences are also part of the deal."
 keywords:
@@ -38,7 +38,7 @@ keywords:
 
 <style>.wrapper { max-width: 90% }</style>
 
-🔣 Code Style
+💅🏼 Code Style
 ==============
 
 [back](.)
