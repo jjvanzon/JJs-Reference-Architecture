@@ -2,6 +2,25 @@
 title: "🕺 Presenters"
 image: "/images/presenter-page.png"
 description: "Learn how to improve your user interfaces by using Presenters: a software design pattern for modeling user interaction. This article provides practical tips using them in your own projects, helping you make your user interfaces more flexible and reliable."
+keywords:
+  - presenter
+  - viewmodel
+  - facade
+  - presentation layer
+  - user actions
+  - platform independent
+  - platform independence
+  - design patterns
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - layered architecture
+  - computers
 ---
 
 <style type="text/css" rel="stylesheet">td:first-child { white-space: nowrap } thead { display: none; } </style>
