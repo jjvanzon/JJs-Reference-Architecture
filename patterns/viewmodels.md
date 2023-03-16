@@ -1,9 +1,28 @@
 ﻿---
 title: "🪟 ViewModels"
-image: "/images/view-model-banner.png"
+image: "/images/view-models-page.png"
 description: "A ViewModel provides a simplified and organized representation of the data to display on screen."
+keywords:
+  - viewmodels
+  - presentation layer
+  - screens
+  - platform independent
+  - platform independence
+  - design patterns
+  - best practices
+  - code samples
+  - clean code
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - layered architecture
+  - computers
 ---
-
 
 🪟 ViewModels
 ==============
@@ -13,7 +32,7 @@ description: "A ViewModel provides a simplified and organized representation of 
 [`ViewModels`](#-viewmodels) are as simple as they are invaluable in [this architecture](..).  
 A [`ViewModel`](#-viewmodels) provides a simplified and organized representation of the data to display on screen.
 
-<img src="../images/view-model-banner.png" width="800" />
+<img src="../images/view-models-banner.png" width="800" />
 
 
 <h2>Contents</h2>
