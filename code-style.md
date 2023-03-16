@@ -16,7 +16,7 @@ keywords:
   - var
   - namespaces
   - namespacing
-  - null
+  - "null"
   - empty string
   - string
   - nullable
