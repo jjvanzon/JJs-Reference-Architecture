@@ -3,8 +3,8 @@ title: "🖥️ Presentation Patterns"
 description: "The presentation layer is the visual part of a program. It is what the user sees. Much of the presentation code is kept platform independent in this software architecture. These are the design patterns regularly employed."
 image: "/images/patterns-presentation-page.png"
 keywords:
-  - viewmodel
-  - presenter
+  - viewmodels
+  - presenters
   - toviewmodel
   - toentity
   - lookup lists
