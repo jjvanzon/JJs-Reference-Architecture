@@ -44,7 +44,7 @@ keywords:
 [back](.)
 
 [Code style](#-code-style) makes things easier to read. It is about  using clear *names* as well as *white space*.  
-Specific *language construct* preferences are also part of the deal..
+Specific *language construct* preferences are also part of the deal.
 
 <img src="images/code-style.png" width="800" />
 
