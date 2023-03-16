@@ -1,6 +1,6 @@
 ﻿---
 title: "💅🏼 Code Style"
-image: "/images/code-style.png"
+image: "/images/code-style-wide.png"
 description: "Code makes things easier to read. It is about using clear names as well as white space. Specific language construct preferences are also part of the deal."
 keywords:
   - code style
@@ -46,7 +46,7 @@ keywords:
 [Code style](#-code-style) makes things easier to read. It is about  using clear *names* as well as *white space*.  
 Specific *language construct* preferences are also part of the deal.
 
-<img src="images/code-style.png" width="800" />
+<img src="images/code-style-wide.png" width="800" />
 
 <h2>Contents</h2>
 
