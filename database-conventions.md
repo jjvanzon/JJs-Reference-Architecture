@@ -1,5 +1,64 @@
 ﻿---
 title: "📀 Database Conventions"
+image: "/images/database-conventions-page.png"
+keywords:
+  - database
+  - db
+  - sql server
+  - sql
+  - naming
+  - database name
+  - tables
+  - columns
+  - primary keys
+  - pk
+  - identity
+  - id
+  - id column
+  - data types
+  - foreign keys
+  - fk
+  - unique
+  - unique keys
+  - unique indexes
+  - unique constraints
+  - "null"
+  - nullable
+  - indexes
+  - alternative keys
+  - queries
+  - naming
+  - naming conventions
+  - views
+  - stored procedures
+  - functions
+  - triggers
+  - defaults
+  - constraints
+  - check constraints
+  - computed columns
+  - cascade rules
+  - synonyms
+  - assemblies
+  - types
+  - rules
+  - guid
+  - guids
+  - auto-increment
+  - enviroments
+  - staging
+  - database upgrade
+  - upgrade scripts
+  - migrations
+  - manual upgrades
+  - incremental updates
+  - c# based migrations
+  - transactions
+  - best practices
+  - coding
+  - software engineering
+  - software architecture
+  - computers
 ---
 
 `[ Draft ]`
