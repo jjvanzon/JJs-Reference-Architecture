@@ -1,18 +1,24 @@
 ﻿---
 title: "🎄 The Visitor Pattern"
-image: "/images/visitor-pattern.png"
+image: "/images/visitor-pattern-page.png"
 description: "For processing complex recursive tree structures, involving many objects and multiple types of objects, the Visitor pattern is a good option. It's usually about translating a tree structure into something else."
 keywords:
   - visitor pattern
   - tree traversal
   - recursive
+  - recusion
+  - graphs
+  - object graphs
+  - data processing
   - c#
   - .net
+  - design patterns
+  - best practices
+  - code samples
   - coding
   - programming
   - software engineering
   - software development
-  - design patterns
   - software design
   - software architecture
   - computers
@@ -25,7 +31,7 @@ keywords:
 
 [`Visitor`](#-the-visitor-pattern) `classes` process recursive tree structures that might involve many `objects` and multiple `types` of `objects`.
 
-<img src="../images/visitor-pattern.png" width="800" />
+<img src="../images/visitor-pattern-code.png" width="800" />
 
 <h2>Contents</h2>
 
