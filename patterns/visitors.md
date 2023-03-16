@@ -10,11 +10,11 @@ keywords:
   - graphs
   - object graphs
   - data processing
-  - c#
-  - .net
   - design patterns
   - best practices
   - code samples
+  - c#
+  - .net
   - coding
   - programming
   - software engineering
