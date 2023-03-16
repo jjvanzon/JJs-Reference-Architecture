@@ -1,6 +1,27 @@
 ﻿---
 title: "🧶 Patterns"
 description: "Design patterns are coding techniques to solve common programming problems. They can bring consistency to the code. They help us reuse established solutions and improve the overall design of the software."
+image: "/images/patterns-page.png"
+keywords:
+  - patterns
+  - design patterns
+  - data access
+  - business logic
+  - presentation
+  - mvc
+  - data transformation
+  - platform independent
+  - platform independence
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - layered architecture
+  - computers
 ---
 
 🧶 Patterns
