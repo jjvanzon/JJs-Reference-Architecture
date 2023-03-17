@@ -1,5 +1,5 @@
 ﻿---
-title: "📀 Database Conventions"
+title: "💽 Database Conventions"
 description: "Database conventions help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also provides a stable way to deploy database structure changes."
 image: "/images/database-conventions-page.png"
 keywords:
@@ -64,7 +64,7 @@ keywords:
 
 `[ Draft ]`
 
-📀 Database Conventions
+💽 Database Conventions
 ========================
 
 [back](.)

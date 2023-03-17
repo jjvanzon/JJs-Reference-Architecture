@@ -13,7 +13,7 @@ Contents
 - 🎁 [API's](api/README.md)
 - 🏗 [Practices & Principles](practices-and-principles.md) `[ Draft ]`
 - 🌍 [Service Oriented Architecture](service-oriented-architecture.md)
-- 📀 [Database Conventions](database-conventions.md) `[ Draft ]`
+- 💽 [Database Conventions](database-conventions.md) `[ Draft ]`
 - 💅🏼 [Code Style](code-style.md)
 - 🚀 [Software Lifecycle](software-lifecycle.md) `[ Draft ]`
 - 👥 [Team Management](team-management.md) `[ Draft ]`
