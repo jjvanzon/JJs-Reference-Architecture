@@ -69,7 +69,7 @@ keywords:
 
 [back](.)
 
-Database conventions help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also provides a stable way to deploy database structure changes.
+[Database conventions](#-database-conventions) help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also provides a stable way to deploy [database structure changes](#upgrade-scripts).
 
 <h2>Contents</h2>
 
