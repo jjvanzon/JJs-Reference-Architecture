@@ -1,6 +1,6 @@
 ﻿---
 title: "📀 Database Conventions"
-description: "These database conventions help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also suggests a stable way to deploy database structure changes."
+description: "Database conventions help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also provides a stable way to deploy database structure changes."
 image: "/images/database-conventions-page.png"
 keywords:
   - database
@@ -69,7 +69,7 @@ keywords:
 
 [back](.)
 
-These database conventions help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also suggests a stable way to deploy database structure changes.
+Database conventions help us keep things consistent and well-optimized in a way that cooperates well with other software components. It also provides a stable way to deploy database structure changes.
 
 <h2>Contents</h2>
 
