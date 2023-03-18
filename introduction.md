@@ -1,6 +1,6 @@
 ﻿---
 title: "📢 Introduction"
-description: "The emphasis here is on modular design of software components. But software architecture involves anything even slightly to do with making software."
+description: "Modular design of software components. Software architecture also involves anything even slightly to do with making software."
 image: "/images/introduction-page.png"
 ---
 
