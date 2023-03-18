@@ -1,5 +1,6 @@
 ﻿---
 title: "📢 Introduction"
+image: "/images/introduction-page.png"
 ---
 
 📢 Introduction
