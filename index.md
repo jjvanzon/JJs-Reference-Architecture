@@ -1,5 +1,27 @@
 ---
 title: "📲 JJ's Software Architecture 🧑🏽‍💻"
+image: "/images/main-page.png"
+keywords:
+  - api
+  - framework
+  - best practices
+  - code style
+  - service oriented architecture
+  - soa
+  - patterns
+  - design patterns
+  - platform independent
+  - platform independence
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - layered architecture
+  - computers
 ---
 
 Contents 
