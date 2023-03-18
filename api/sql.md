@@ -45,8 +45,9 @@ Introduction
 
 Executing queries onto a database would normally be done through [`ORM`](orm.md#-orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
+
 SqlExecutor
------------------
+-----------
 
 Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](table.md#dotnet) projects, under a sub-folder named `Sql`:
 
@@ -219,7 +220,7 @@ Behind Repositories
 The [`repository`](../patterns/data-access.md#repository) pattern is used in this [architecture](../index.md).  
 The [`repository`](../patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](table.md#jj-framework-data).  
 
-Using [`SQL`](#-sql) combined with [`repositories`](../patterns/data-access.md#repository) can be simplified with [`SqlExecutor`](table.md#sql-executor).
+Using [`SQL`](#-sql) combined with [`repositories`](../patterns/data-access.md#repository) can be simplified using the [`SqlExecutor`](table.md#sql-executor) from [`JJ.Framework.Data.SqlClient`](table.md#sql-executor).
 
 Here is some pseudo-code to demonstrate how it is put together:
 
