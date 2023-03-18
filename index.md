@@ -1,6 +1,6 @@
 ---
 title: "📲 JJ's Software Architecture 🧑🏽‍💻"
-description: "about software development techniques | C# | .NET | design patterns | code style | api & framework choices"
+description: "About software development techniques: C#, .NET, design patterns, code style, frameworks and api's."
 image: "/images/main-page.png"
 keywords:
   - api
