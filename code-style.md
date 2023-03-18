@@ -33,6 +33,7 @@ keywords:
   - software design
   - software architecture
   - layered architecture
+  - software
   - computers
 ---
 
