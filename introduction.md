@@ -2,6 +2,59 @@
 title: "📢 Introduction"
 description: "Modular design of software components. Software architecture also involves anything even slightly to do with making software."
 image: "/images/introduction-page.png"
+keywords:
+  - api
+  - framework
+  - best practices
+  - practices and principles
+  - pros and cons
+  - code style
+  - service oriented architecture
+  - soa
+  - system integration
+  - patterns
+  - design patterns
+  - pattern stack
+  - software stack
+  - modules
+  - modularization
+  - components
+  - software components
+  - separation of concerns
+  - abstractions
+  - code structure
+  - maintainability
+  - scalability
+  - code readability
+  - readable code
+  - platform independence
+  - protocol independence
+  - stability
+  - software reuse
+  - reuse
+  - reusable components
+  - system complexity
+  - coding
+  - programming
+  - technical design
+  - source control
+  - code base
+  - software planning
+  - team management
+  - software lifecycle
+  - software quality
+  - qa
+  - change management
+  - software maintenance
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - application architecture
+  - layered architecture
+  - software
+  - computers
+  - technology
 ---
 
 📢 Introduction
@@ -15,7 +68,7 @@ image: "/images/introduction-page.png"
 - [Inter-Disciplinary Aspects](#inter-disciplinary-aspects)
 - [Possible Choices over Definite Choices](#possible-choices-over-definite-choices)
 - [Technical over Functional](#technical-over-functional)
-- [Application Architecture vs Service Architecture](#application-architecture-vs-service-architecture)
+- [Application Architecture vs Service Oriented Architecture](#application-architecture-vs-service-oriented-architecture)
 - [Fundamental Principles](#fundamental-principles)
 - [Top 12 Code Improvements](#top-12-code-improvements)
 
@@ -78,8 +131,8 @@ To also accommodate for quickly changing technology, we use abstractions of thes
 This gives us a subdivision into parts into which everything fits, even when not everything is given a place in it yet.
 
 
-Application Architecture vs Service Architecture
-------------------------------------------------
+Application Architecture vs Service Oriented Architecture
+---------------------------------------------------------
 
 There are two parts of this software architecture:
 
