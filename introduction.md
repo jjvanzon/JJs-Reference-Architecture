@@ -29,6 +29,7 @@ keywords:
   - readable code
   - platform independence
   - protocol independence
+  - multi-platform
   - stability
   - software reuse
   - reuse
@@ -43,6 +44,7 @@ keywords:
   - team management
   - software lifecycle
   - software quality
+  - quality assurance
   - qa
   - change management
   - software maintenance
