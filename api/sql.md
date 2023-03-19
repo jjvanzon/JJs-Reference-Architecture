@@ -6,6 +6,7 @@ keywords:
   - sql
   - structured query language
   - database
+  - queries
   - db
   - c#
   - .net
@@ -53,7 +54,7 @@ Other techniques, like *stored procedures* and *views* were dismissed at one poi
 
 ![](../images/sql-sub-folder.png)
 
-The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) might be used.
+The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) is used.
 
 With an `API` like that, we can execute [`SQL`](#-sql) command in a strongly-typed way, often with only a single line of code.
 
