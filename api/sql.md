@@ -8,6 +8,19 @@ keywords:
   - database
   - queries
   - db
+  - data access
+  - data access layer
+  - api
+  - framework
+  - jj.framework
+  - sqlexecutor
+  - repositories
+  - string concatenation
+  - concatenation
+  - string concat
+  - xss
+  - cross-site scripting
+  - cross-site scripting attack
   - c#
   - .net
   - coding
