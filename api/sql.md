@@ -167,6 +167,8 @@ var ingredient = new IngredientDto
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, ingredient);
 ```
 
+The parameter names are *not* case sensitive.
+
 
 Records
 -------
