@@ -39,37 +39,54 @@ keywords:
 [back](.)
 
 [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) is a language for data retrieval and manipulation and other actions executed onto a *database*.  
-This article introduces a way to organize [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) scripts in [`.NET`](table.md#dotnet) projects.
+This article introduces different ways of organizing [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) scripts in [`.NET`](table.md#dotnet) projects.
 
 <img src="../images/sql-code.png" width="800" />
 
 <h2>Contents</h2>
 
-- [Introduction](#introduction)
+- [Combining ORM with SQL](#combining-orm-with-sql)
+- [SQL in .NET Projects](#sql-in-net-projects)
 - [SqlExecutor](#sqlexecutor)
-- [With NHibernate](#with-nhibernate)
-- [SQL Files](#sql-files)
-- [SQL Strings](#sql-strings)
-- [String Concat](#string-concat)
-- [Behind Repositories](#behind-repositories)
+- [Using Embedded Resources](#using-embedded-resources)
+- [Script Content](#script-content)
+- [SqlEnum](#sqlenum)
+- [Using SqlExecutor](#using-sqlexecutor)
+- [Parameters](#parameters)
+- [Records](#records)
+- [Columns](#columns)
+- [File Grouping](#file-grouping)
+- [NHibernate Integration](#nhibernate-integration)
+- [Using Raw SQL Files](#using-raw-sql-files)
+- [Using String Literals](#using-string-literals)
+- [String Concatenation](#string-concatenation)
+- [Using Repositories](#using-repositories)
 - [Database Upgrade Scripts](#database-upgrade-scripts)
 
-Introduction
-------------
+Combining ORM with SQL
+----------------------
 
 Executing queries onto a database would normally be done through [`ORM`](orm.md#-orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
 
-SqlExecutor
------------
+SQL in .NET Projects
+--------------------
 
 Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](table.md#dotnet) projects, under a sub-folder named `Sql`:
 
 ![](../images/sql-sub-folder.png)
 
+
+SqlExecutor
+-----------
+
 The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) is used.
 
 With an `API` like that, we can execute [`SQL`](#-sql) command in a strongly-typed way, often with only a single line of code.
+
+
+Using Embedded Resources
+------------------------
 
 It is preferred to use [embedded resources](misc.md#embedded-resources) to include the [`SQL`](#-sql) files:
 
@@ -78,11 +95,18 @@ It is preferred to use [embedded resources](misc.md#embedded-resources) to inclu
 This deploys the [`SQL`](#-sql) together with your `EXE` or `DLL`, because compiles the [`SQL`](#-sql) file right into the assembly.
 
 
+Script Content
+--------------
+
 The [`SQL`](#-sql) may look as follows:
 
 ```sql
 update Ingredient set Name = @name where ID = @id;
 ```
+
+
+SqlEnum
+-------
 
 Then you can put an `enum` in the [`Sql`](#-sql) folder in your [`.NET`](table.md#dotnet) project:
 
@@ -100,6 +124,10 @@ namespace JJ.Demos.SqlExecutor.Sql
 }
 ```
 
+
+Using SqlExecutor
+-----------------
+
 Then an [`SqlExecutor`](table.md#sql-executor) can be created as follows:
 
 ```cs
@@ -115,7 +143,13 @@ Then you can call a method that executes the [`SQL`](#-sql):
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names, like `ExecuteNonQuery`, are similar to an `SqlCommand`. [`SQL`](#-sql) parameters can be passed along as an anonymous type:
+The method names, like `ExecuteNonQuery`, are similar to that of `SqlCommand`.
+
+
+Parameters
+----------
+
+[`SQL`](#-sql) parameters can be passed along as an anonymous type:
 
 ```cs
 new { id, name }
@@ -133,6 +167,10 @@ var ingredient = new IngredientDto
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, ingredient);
 ```
 
+
+Records
+-------
+
 You can also retrieve records as a collection of strongly typed objects:
 
 ```cs
@@ -145,15 +183,23 @@ foreach (IngredientDto record in records)
 }
 ```
 
+
+Columns
+-------
+
 The column names in the [`SQL`](#-sql) are *case sensitive!*
+
+
+File Grouping
+-------------
 
 It might be an idea to let the [`SQL`](#-sql) file names begin with the [entity](../patterns/data-access.md#entities) type name, so they stay grouped together:
 
 ![](../images/sql-file-names.png)
 
 
-With NHibernate
----------------
+NHibernate Integration
+----------------------
 
 If you use [`SqlExecutor`](table.md#sql-executor) in combination with [`NHibernate`](orm.md#nhibernate) you might want to 
 use the [`NHibernateSqlExecutorFactory`](table.md#jj-framework-data-nhibernate) instead of the default [`SqlExecutorFactory`](table.md#sql-executor):
@@ -171,8 +217,8 @@ This version uses an `ISession`. In order for the [`SQL`](#-sql) to run in the s
 An implementation of [`NHibernateSqlExecutorFactory`](table.md#jj-framework-data-nhibernate) can be found in [`JJ.Framework.Data.NHibernate`](table.md#jj-framework-data-nhibernate).
 
 
-SQL Files
----------
+Using Raw SQL Files
+-------------------
 
 *(This feature might not be available in the [`JJ.Framework`](misc.md#jjframework).)*
 
@@ -193,8 +239,8 @@ sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient_Update.sql", new { id, name });
 So the `SqlEnum` cannot be used here. You'd use a (relative) file path.
 
 
-SQL Strings
------------
+Using String Literals
+---------------------
 
 *(This feature might not be available in the [`JJ.Framework`](misc.md#jjframework).)*
 
@@ -215,8 +261,8 @@ In that case no [`SQL`](#-sql) files have to be included in your project.
 But it might make it harder to track down all the [`SQL`](#-sql) of your project and optimize it. Using [`SQL`](#-sql) strings may also circumvent another layer of protection against [`SQL`](#-sql) injection attacks.
 
 
-String Concat
--------------
+String Concatenation
+--------------------
 
 *[`SQL`](#-sql) `string` concatenation* is sort of a no-no, because it removes a layer of protection against [`SQL`](#-sql) injection attacks. `SqlClient` has `SqlParameters` from [`.NET`](table.md#dotnet) to prevent unwanted insertion of scripting. [`SqlExecutor`](table.md#sql-executor) from [`JJ.Framework`](misc.md#jjframework) uses `SqlParameters` under the hood, to offer the same kind of protection. This *encodes* the parameters, so that they are recognized as simple types or string values rather than additional scripting.
 
@@ -234,8 +280,9 @@ But there might be exceptional cases where [`SQL`](#-sql) string concatenation w
 
 One variation of [`SqlExecutor`](table.md#sql-executor) included the ability to add placeholders to the [`SQL`](#-sql) files to insert additional scripting for this purpose. *(This feature might not be available in the [`JJ.Framework`](misc.md#jjframework).)* 
 
-Behind Repositories
--------------------
+
+Using Repositories
+------------------
 
 The [`repository`](../patterns/data-access.md#repository) pattern is used in this [architecture](../index.md).  
 The [`repository`](../patterns/data-access.md#repository) pattern can be used together with [`JJ.Framework.Data`](table.md#jj-framework-data).  
