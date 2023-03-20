@@ -124,7 +124,7 @@ update Ingredient set Name = @name where ID = @id;
 SqlExecutor
 -----------
 
-The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) is used.
+The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) is used instead.
 
 With an `API` like that, we can execute [`SQL`](#-sql) command in a strongly-typed way, often with only a single line of code.
 
@@ -143,7 +143,7 @@ Then you can call a method that executes the [`SQL`](#-sql):
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-The method names, like `ExecuteNonQuery`, are similar to that of `SqlCommand`.
+The method names, like `ExecuteNonQuery`, are similar to those of the `SqlCommands` in the [`.NET Framework`](../api/table.md#dotnet).
 
 
 Parameters
