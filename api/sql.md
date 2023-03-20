@@ -84,7 +84,7 @@ The [`SQL`](#-sql) may look as follows:
 update Ingredient set Name = @name where ID = @id;
 ```
 
-Then you can put an enum in the [`Sql`](#-sql) folder in your [`.NET`](table.md#dotnet) project:
+Then you can put an `enum` in the [`Sql`](#-sql) folder in your [`.NET`](table.md#dotnet) project:
 
 ![](../images/sql-enum.png)
 
@@ -115,7 +115,7 @@ Then you can call a method that executes the [`SQL`](#-sql):
 sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, new { id, name });
 ```
 
-Its method names are similar to an `SqlCommand`. [`SQL`](#-sql) parameters can be passed along as an anonymous type:
+The method names, like `ExecuteNonQuery`, are similar to an `SqlCommand`. [`SQL`](#-sql) parameters can be passed along as an anonymous type:
 
 ```cs
 new { id, name }
@@ -136,7 +136,8 @@ sqlExecutor.ExecuteNonQuery(SqlEnum.Ingredient_UpdateName, ingredient);
 You can also retrieve records as a collection of strongly typed objects:
 
 ```cs
-IList<IngredientDto> records = sqlExecutor.ExecuteReader<IngredientDto>(SqlEnum.Ingredient_GetAll).ToArray();
+IList<IngredientDto> records = 
+    sqlExecutor.ExecuteReader<IngredientDto>(SqlEnum.Ingredient_GetAll).ToArray();
 
 foreach (IngredientDto record in records)
 {
@@ -201,7 +202,9 @@ It is not recommended to use [`SQL`](#-sql) strings in your code. But it is poss
 ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
     SqlSourceTypeEnum.String, session);
 
-sqlExecutor.ExecuteNonQuery("update Ingredient set Name = @name where ID = @id", new { id, name });
+sqlExecutor.ExecuteNonQuery(
+    "update Ingredient set Name = @name where ID = @id", 
+    new { id, name });
 ```
 
 In that case no [`SQL`](#-sql) files have to be included in your project.
