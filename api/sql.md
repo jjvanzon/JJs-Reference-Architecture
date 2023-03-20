@@ -330,7 +330,7 @@ This would result in:
  
 It may seem overhead all the layers, but it might add up after adding more queries for more [entities](../patterns/data-access.md#entities), that are either [`SQL`](#-sql) or [`ORM`](orm.md#-orm) queries. Of course you could skip layers, but this is how it is done in some of the [`JJ`](https://github.com/jjvanzon?tab=repositories) projects.
 
-You might also find split up into separate assemblies: 
+You might also find a split up into separate assemblies: 
 
 - `MyProject.Data`  
 - `MyProject.Data.EntityFramework`
