@@ -161,8 +161,9 @@ use the [`NHibernateSqlExecutorFactory`](table.md#jj-framework-data-nhibernate) 
 ```cs
 ISession session = ...;
 
-ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
-    SqlSourceTypeEnum.EmbeddedResource, session);
+ISqlExecutor sqlExecutor = 
+    NHibernateSqlExecutorFactory.CreateSqlExecutor(
+        SqlSourceTypeEnum.EmbeddedResource, session);
 ```
 
 This version uses an `ISession`. In order for the [`SQL`](#-sql) to run in the same transaction as [`NHibernate`](orm.md#nhibernate), we made it aware of its `ISession`.
@@ -182,8 +183,9 @@ It might be a good choice to include the [`SQL`](#-sql) as an [embedded resource
 Here is code to create the [`SqlExecutor`](table.md#sql-executor) and execute the [`SQL`](#-sql) file:
 
 ```cs
-ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
-    SqlSourceTypeEnum.FileName, session);
+ISqlExecutor sqlExecutor = 
+    NHibernateSqlExecutorFactory.CreateSqlExecutor(
+        SqlSourceTypeEnum.FileName, session);
 
 sqlExecutor.ExecuteNonQuery(@"Sql\Ingredient_Update.sql", new { id, name });
 ```
@@ -199,8 +201,9 @@ SQL Strings
 It is not recommended to use [`SQL`](#-sql) strings in your code. But it is possible all the same using code like this:
 
 ```cs
-ISqlExecutor sqlExecutor = NHibernateSqlExecutorFactory.CreateSqlExecutor(
-    SqlSourceTypeEnum.String, session);
+ISqlExecutor sqlExecutor = 
+    NHibernateSqlExecutorFactory.CreateSqlExecutor(
+        SqlSourceTypeEnum.String, session);
 
 sqlExecutor.ExecuteNonQuery(
     "update Ingredient set Name = @name where ID = @id", 
