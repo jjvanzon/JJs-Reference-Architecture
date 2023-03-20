@@ -54,7 +54,6 @@ This article introduces different ways of organizing [`SQL`](https://learn.micro
 - [SqlExecutor](#sqlexecutor)
 - [Parameters](#parameters)
 - [Records](#records)
-- [Columns](#columns)
 - [NHibernate Integration](#nhibernate-integration)
 - [Using Raw SQL Files](#using-raw-sql-files)
 - [Using String Literals](#using-string-literals)
@@ -184,13 +183,7 @@ foreach (IngredientDto record in records)
 }
 ```
 
-
-Columns
--------
-
 The column names in the [`SQL`](#-sql) are *case sensitive!*
-
-
 
 
 NHibernate Integration
