@@ -47,15 +47,14 @@ This article introduces different ways of organizing [`SQL`](https://learn.micro
 
 - [Combining ORM with SQL](#combining-orm-with-sql)
 - [SQL in .NET Projects](#sql-in-net-projects)
-- [SqlExecutor](#sqlexecutor)
 - [Using Embedded Resources](#using-embedded-resources)
-- [Script Content](#script-content)
+- [File Grouping](#file-grouping)
 - [SqlEnum](#sqlenum)
-- [Using SqlExecutor](#using-sqlexecutor)
+- [Script Content](#script-content)
+- [SqlExecutor](#sqlexecutor)
 - [Parameters](#parameters)
 - [Records](#records)
 - [Columns](#columns)
-- [File Grouping](#file-grouping)
 - [NHibernate Integration](#nhibernate-integration)
 - [Using Raw SQL Files](#using-raw-sql-files)
 - [Using String Literals](#using-string-literals)
@@ -77,14 +76,6 @@ Other techniques, like *stored procedures* and *views* were dismissed at one poi
 ![](../images/sql-sub-folder.png)
 
 
-SqlExecutor
------------
-
-The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) is used.
-
-With an `API` like that, we can execute [`SQL`](#-sql) command in a strongly-typed way, often with only a single line of code.
-
-
 Using Embedded Resources
 ------------------------
 
@@ -94,15 +85,12 @@ It is preferred to use [embedded resources](misc.md#embedded-resources) to inclu
 
 This deploys the [`SQL`](#-sql) together with your `EXE` or `DLL`, because compiles the [`SQL`](#-sql) file right into the assembly.
 
+File Grouping
+-------------
 
-Script Content
---------------
+It might be an idea to let the [`SQL`](#-sql) file names begin with the [entity](../patterns/data-access.md#entities) type name, so they stay grouped together:
 
-The [`SQL`](#-sql) may look as follows:
-
-```sql
-update Ingredient set Name = @name where ID = @id;
-```
+![](../images/sql-file-names.png)
 
 
 SqlEnum
@@ -124,11 +112,24 @@ namespace JJ.Demos.SqlExecutor.Sql
 }
 ```
 
+Script Content
+--------------
 
-Using SqlExecutor
------------------
+The [`SQL`](#-sql) may look as follows:
 
-Then an [`SqlExecutor`](table.md#sql-executor) can be created as follows:
+```sql
+update Ingredient set Name = @name where ID = @id;
+```
+
+
+SqlExecutor
+-----------
+
+The classic way of executing [`SQL`](#-sql) in [`.NET`](table.md#dotnet) would be to use `System.Data.SqlClient`. But in this [architecture](../index.md) the [`SqlExecutor API`](table.md#sql-executor) is used.
+
+With an `API` like that, we can execute [`SQL`](#-sql) command in a strongly-typed way, often with only a single line of code.
+
+An [`SqlExecutor`](table.md#sql-executor) can be created as follows:
 
 ```cs
 ISqlExecutor sqlExecutor = SqlExecutorFactory.CreateSqlExecutor(
@@ -190,12 +191,6 @@ Columns
 The column names in the [`SQL`](#-sql) are *case sensitive!*
 
 
-File Grouping
--------------
-
-It might be an idea to let the [`SQL`](#-sql) file names begin with the [entity](../patterns/data-access.md#entities) type name, so they stay grouped together:
-
-![](../images/sql-file-names.png)
 
 
 NHibernate Integration
