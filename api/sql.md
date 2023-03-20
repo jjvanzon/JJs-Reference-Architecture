@@ -45,7 +45,7 @@ This article introduces different ways of organizing [`SQL`](https://learn.micro
 
 <h2>Contents</h2>
 
-- [Combining ORM with SQL](#combining-orm-with-sql)
+- [Combining ORM and SQL](#combining-orm-and-sql)
 - [SQL in .NET Projects](#sql-in-net-projects)
 - [Using Embedded Resources](#using-embedded-resources)
 - [File Grouping](#file-grouping)
@@ -61,8 +61,8 @@ This article introduces different ways of organizing [`SQL`](https://learn.micro
 - [Using Repositories](#using-repositories)
 - [Database Upgrade Scripts](#database-upgrade-scripts)
 
-Combining ORM with SQL
-----------------------
+Combining ORM and SQL
+---------------------
 
 Executing queries onto a database would normally be done through [`ORM`](orm.md#-orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
