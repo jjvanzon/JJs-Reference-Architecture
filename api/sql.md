@@ -46,7 +46,7 @@ This article introduces different ways of organizing [`SQL`](https://learn.micro
 <h2>Contents</h2>
 
 - [Combining ORM and SQL](#combining-orm-and-sql)
-- [SQL in .NET Projects](#sql-in-net-projects)
+- [SQL inside .NET Projects](#sql-inside-net-projects)
 - [Using Embedded Resources](#using-embedded-resources)
 - [File Grouping](#file-grouping)
 - [SqlEnum](#sqlenum)
@@ -67,8 +67,8 @@ Combining ORM and SQL
 Executing queries onto a database would normally be done through [`ORM`](orm.md#-orm), but if performance is an issue, it can be combined with raw [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql).
 
 
-SQL in .NET Projects
---------------------
+SQL inside .NET Projects
+------------------------
 
 Other techniques, like *stored procedures* and *views* were dismissed at one point, in favor of putting the [`SQL`](https://learn.microsoft.com/en-us/training/paths/get-started-querying-with-transact-sql) files directly the [`.NET`](table.md#dotnet) projects, under a sub-folder named `Sql`:
 
