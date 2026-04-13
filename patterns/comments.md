@@ -14,26 +14,26 @@ A way to centralize and reuse comments: a technique to improve code documentatio
 - [Reuse the Comments Anywhere!](#reuse-the-comments-anywhere)
 - [Say "No" to Bewildering Links](#say-no-to-bewildering-links)
 - [Say "No" to XPaths](#say-no-to-xpaths)
-- [Make Them Play Nicely](#make-them-play-nicely)
-    - [Shipping](#shipping)
-    - [Structs](#structs)
-    - [Namespace](#namespace)
+- [Unobtrusive Doc-Only Members](#unobtrusive-doc-only-members)
+    - [Docs Namespace](#docs-namespace)
     - [Public](#public)
     - [Object Browser](#object-browser)
+    - [Structs](#structs)
     - [Naming Style](#naming-style)
-    - [Compiler Nags](#compiler-nags)
+- [Make 'Em Play Nicely](#make-em-play-nicely)
+    - [Shipping](#shipping)
     - [Warnings as Errors](#warnings-as-errors)
-    - [Param Tag Mismatch](#param-tag-mismatch)
     - [Naming Rules](#naming-rules)
     - [Namespace != Folder](#namespace--folder)
+    - [Param Tag Mismatch](#param-tag-mismatch)
 - [Conclusion](#conclusion)
-- [~ AI Aided Drafts](#-ai-aided-drafts)
-- [~ Topics to Cover](#-topics-to-cover)
-    - [Compiler Nags](#compiler-nags-1)
-    - [Efficiency](#efficiency)
-    - [Misc Tip:](#misc-tip)
-- [~ For Social post](#-for-social-post)
-- [~ Snippets](#-snippets)
+- [~ Drafts](#-drafts)
+    - [~ AI Aided](#-ai-aided)
+    - [~ Missing XML Comments](#-missing-xml-comments)
+    - [~ Deprecated Members](#-deprecated-members)
+    - [~ Efficiency](#-efficiency)
+    - [~ For Social Post](#-for-social-post)
+    - [~ Snippets](#-snippets)
 
 
 ### What are XML Doc Comments?
@@ -120,8 +120,8 @@ It can happen though that you can hardly see the code itself through all the com
 
 ### Stop Repeating the Comments!
 
-Comments would a;so ofter get repeated.  
-In the former example you can already spot some repeated comments:
+Comments would also ofter get repeated.  
+In the former example you can already spot some:
 
 ```cs
 /// <summary>
@@ -141,7 +141,7 @@ They have exactly the same comment! But there are ways to avoid the clutter.
 
 ### Inherit the Comments!
 
-One way is to use `<inheritdoc />`, which usually takes over the doc comments from the `base` type or `base` method. This is a shortcut to repeat the comment or not to write comment at all:
+One way is to use `<inheritdoc />`, which takes over the doc comment from the `base` class or method. This is a shortcut to avoid repeating the comment:
 
 ```cs
 /// <inheritdoc />
@@ -180,7 +180,7 @@ But there's still repeated comments in the `Element` base class! Oh no! Now what
 
 ### Reuse the Comments!
 
-`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want to take over its comments. This comes out handy for our constructor to brush away any repeated text:
+`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want to take. This takes over its comments. This comes out handy for our constructor to brush away any repeated text:
 
 ```cs
 /// <summary>
@@ -201,11 +201,11 @@ There the inner constructor `inherits` the doc from the `Element class`, because
 
 <img src="image-2.png" width="500" />
 
-Yes, it's lazy! But efficient. But the code still has those little barriers of comments that'll stop you from reading the code.
+Yes, it's lazy! But efficient. But it's still quite cluttered with comment. Half the code above is still comment.
 
 ### Reuse the Comments Anywhere!
 
-To find our code back, we can use a trick, making things much easier. I like to put all the comments in a file called `docs.cs`:
+To find our code back, we can use a trick, making things much easier. I like to put my comments in a file called `docs.cs`:
 
 ```cs
 /// <summary>
@@ -218,7 +218,7 @@ To find our code back, we can use a trick, making things much easier. I like to 
 struct _element;
 ```
 
-Those are our __Doc-Only Members__ and here they are referenced with `inheritdoc`:
+Those are our __Doc-Only Members__. Here they are referenced with `inheritdoc`:
 
 ```cs
 /// <inheritdoc cref="_element" />
@@ -236,9 +236,9 @@ class Element
 }
 ```
 
-Now each documentation is just a single unobtrusive line with an `inheritdoc` tag referenced by name.
+Now each documentation is just a single unobtrusive line with an `inheritdoc` tag.
 
-This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and still have meaningful, helpful pop ups all over the place. The docs are now central, which makes documentation reviews, revisions and maintenance a lot easier.
+This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it a lot easier to review, revisise and maintenance them.
 
 It's my preferred way of doing it now.
 
@@ -264,34 +264,11 @@ You can then link to that XML with XPath
 
 `[ Links to XML file from code ]`
 
-But those links are convoluted and can break easily.
+But those links are convoluted and can break easily. How's that going to look for generics? I don't even want to know. Centralizing docs in code seems a stronger alternative.
 
-How's that going to look for generics? I don't even want to know.
+### Unobtrusive Doc-Only Members
 
-Centralizing docs in code is a stronger alternative.
-
-### Make Them Play Nicely
-
-#### Shipping
-
-To ship the docs along with your NuGet package you can add this to your csproj file:
-
-```xml
-<GenerateDocumentationFile>True</GenerateDocumentationFile>
-```
-To actually generate the package you add: 
-
-```xml
-<GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
-```
-
-#### Structs
-
-The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
-
-`[ TODO: Screen shot ]`
-
-#### Namespace
+#### Docs Namespace
 
 I like to give the docs their own sub-namespace `.docs`
 
@@ -301,6 +278,8 @@ namespace JJ.Demos.Architecture.docs;
 /// <summary>...</summary>
 struct _element;
 ```
+
+This keeps them from cluttering the main namespace.
 
 To use the `docs` you'd add a `using` statement to `GlobalUsings.cs`:
 
@@ -318,7 +297,6 @@ using docs;
 /// <inheritdoc cref="_element" />
 class Element;
 ```
-
 #### Public
 
 I actually like to make the docs-structs `public`:
@@ -328,15 +306,27 @@ I actually like to make the docs-structs `public`:
 public struct _element;
 ```
 
+That way a `docs` namespace gives an overview of the documentation accessible from outside your assembly.
+
 #### Object Browser
 
-That way you can inspect them in the `Object Browser` as a whole, and other people can too:
+For instance you can inspect them in the `Object Browser` as a whole, and other people can too:
 
 `[Screen shot]`
 
+#### Structs
+
+The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
+
+`[ TODO: Screen shot ]`
+
+This in contrast to crefs to actual code elements, which might be colored like that code element, which makes them very confusing to me:
+
+`[ TODO: Screen shot ]`
+
 #### Naming Style
 
-The naming format is specifically chosen to make the `<inheritdoc/>` tags as unobtrusive as possible.
+The naming format is also specifically chosen to make the `<inheritdoc/>` tags as unobtrusive as possible.
 
 Consider the follow docs only member called `_mydoc`:
 
@@ -349,69 +339,78 @@ Not only do the lower case letters not stand out as much. This and the underscor
 
 <img src="image-7.png" width="200" />
 
-#### Compiler Nags
+### Make 'Em Play Nicely
 
-You may get some warnings you might need to deal with.
+#### Shipping
+
+To ship the docs along with your NuGet package you can add this to your csproj file:
+
+```xml
+<GenerateDocumentationFile>True</GenerateDocumentationFile>
+```
+To actually generate the package you add: 
+
+```xml
+<GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
+```
 
 #### Warnings as Errors
 
-I like to make things worse, by treating all warnings as errors. You can do this by adding the following to your `.csproj`:
+You may get some warnings you might need to deal with. I like to make things worse, by treating all warnings as errors. You can do this too by adding the following to your `.csproj`:
 
 ```xml
 <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 ```
 
-Now you can be sure, that it won't compile, until you've solved those nasty nags.
-
-#### Param Tag Mismatch
-
-For instance, the docs-only members do not actually have the parameters you defined documentation for:
-
-<img src="image-6.png" width="500" />
-
-But that's a trade-off I'm willing to make. I just squelch that warning at the top of the code file:
-
-```cs
-#pragma warning disable CS1572 // param tag mismatch
-```
-
-The members you use it for will still use the param tag either way.
-
-You do lose the checks on param existence this way. 
-
-Downside: You lose some automatic checking (like param-existence validation), But you gain a lot of other things by using these centralized docs structs, like the maintainability, clarity of the code, and comment reuse.
+Now you can be sure, that it won't compile, until we've solved our self-imposed problems.
 
 #### Naming Rules
 
-Then the system might start bickering about other things too, like naming rule violations:
+Then the system might start bickering about things, like naming rule violations:
 
 <img src="image-5.png" width="500" />
 
-See the [Naming Style](#naming-style) section explains why we use names like that. There's no way to configure a naming rule specifically for these, so I like to squelch that warning at the top of the file:
+See the [Naming Style](#naming-style) section explains why we use names like that. There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the file:
 
-```cs
-#pragma warning disable IDE1006 // naming rule
-```
-
-Since we only use one docs file per project, at least we can just squelch these with a single line each.
+`#pragma warning disable IDE1006 // naming rule`
 
 #### Namespace != Folder
 
-The namespace where we put the docs itself is violating another naming rule. We  put the `docs.cs` in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler:
+The namespace where we put the docs is violating another naming rule. We  put a `docs` namespace in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler:
 
 <img src="image-4.png" width="500" />
 
 Squelch as follows:
 
+`#pragma warning disable IDE0130 // namespace != folder`
+
+Since we only use one docs file per project, at least we can just squelch these pesky warnings with a single line each.
+
+#### Param Tag Mismatch
+
+Another warning you can get, has to do with the docs-only members not actually having the parameters you defined:
+
+<img src="image-6.png" width="500" />
+
+I'd just squelch that warning at the top of the code file:
+
 ```cs
-#pragma warning disable IDE0130 // namespace != folder
+#pragma warning disable CS1572 // param tag mismatch
 ```
+
+The members you use it for will still use the `param` doc anyway.
+
+Downside: You do lose the checks on param existence this way. That's a trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and clarity of the code.
 
 ### Conclusion
 
-Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too, to make your code comments more centralized, manageable and reusable.
+Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, without repetitions or code clutter.
 
-### ~ AI Aided Drafts
+-----
+
+### ~ Drafts
+
+#### ~ AI Aided
 
 <h4>Missing Doc Lenience</h4>
 
@@ -419,28 +418,22 @@ Eventually I settled on this doc-only member trick, which has been serving me ve
 
 ```xml
 <PropertyGroup>
-  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   <WarningsAsErrors>$(WarningsAsErrors);1591</WarningsAsErrors>
 </PropertyGroup>
 ```
 
-### ~ Topics to Cover
+#### ~ Missing XML Comments
 
-#### Compiler Nags
+Compiler Nags. Squelch missing doc comment warnings temporarily.
 
-- [x] GenerateDocumentationFile
-- [x] Warnings as errors
-- [ ] Squelch missing doc comment warnings temporarily.
-- [x] ~~Centralized~~ warning squelches.
-- [x] Naming style rule breakage.
-- [ ] Several XML doc comments-related warnings.
-- [ ] Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
-  Alternative `<b>[Deprecated]</b>` in XML doc comment.
+#### ~ Deprecated Members
+
+`[Obsolete]`, compiler error option, friction with `WarningAsErrors`. Alternative `<b>[Deprecated]</b>` in XML doc comment.
 
 If you mark a member as `[Obsolete]` and treat warnings as errors, you can create friction in your build process.
 An alternative: add `<b>[Deprecated]</b>` in the doc comment for softer, visible warnings that don’t break the build.
 
-#### Efficiency
+#### ~ Efficiency
 
 - [ ] Converting README to doc comments manually.
 - [ ] Using generalized comment for multiple elements = efficiency.
@@ -453,26 +446,19 @@ This keeps documentation efficient.
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
-#### Misc Tip:
+#### ~ For Social Post
 
-- [ ] Syntax coloring in doc comments.
-- [ ] Using structs
+Hi there developers! And hello to you normal people too. Another technical update (again). Ever opened a file and thought: "Where’s the code? Oh, buried in the middle of all these comments."
 
-### ~ For Social post
+This time I want to talk about "doc-only members": a pattern to improve code documentation.
 
-Hi there developers! And hello to you normal people too. Another technical update (again).
-
-This time I want to talk about "doc-only members" - a technique to improve code documentation.
-
-I had way too much to say about these, so I put together an article with the details.
+I had way too much to say about it, so I put together an article with all the details.
 
 👉 XML Doc Comments: `[ TODO: Link ]`
 
-### ~ Snippets
+#### ~ Snippets
 
 You can check your documentation in the Object Browser and see it all in one place.
-
-Ever opened a file and thought: “Where’s the code? Oh, buried in the middle of all these comments.”
 
 This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere. 
 
@@ -489,22 +475,13 @@ It's hiding behind that wall.
 
 Where'd the code go?
 
-Centralized Doc-Only Members
-
 Want to read more about software development techniques for .NET and C#? Here's the forever unfinished resource, where I brain-dump more of these things inside neat looking web pages. You can find explanations, reasons and code samples of all sorts of patterns and techniques both mainstream or made up:
 
 `[ Link to JJ's Software Architecture Page ]`
 
 
-The end result: Better usability, centralized comments, efficiently written, without repetitions or code clutter and all in all cleaner code.
+`[ This fits better in the Comments section in patterns/other.md ]`
 
-This article touches on:
-
-- XML doc comments
-- Warning management
-- Centralized csproj configurations
-
-`[ More for the Comments section in patterns/other.md ]`
 Not all doc comments are useful.
 A bad comment looks like this:
 
