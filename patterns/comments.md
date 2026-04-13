@@ -1,14 +1,29 @@
 ` [Draft] `
 
-### 2025-07-14 ~ Postponed Social Post XML Doc Comments - Draft
-
 `[TODO: Use more engaging titles, such as questions or how/why/what/where.]`
+
+📖 Doc Comments
+================
 
 Hi there developers! And hello to you normal people too. Another technical update (again).
 
 This time I want to talk about "doc-only members": a way to centralize the XML doc comments in your code.
 
-#### What are XML Doc Comments?
+- [What are XML Doc Comments?](#what-are-xml-doc-comments)
+- [Declutter Your Code!](#declutter-your-code)
+- [Stop Repeating Comments!](#stop-repeating-comments)
+- [Inherit the Comments!](#inherit-the-comments)
+- [Reuse the Comments!](#reuse-the-comments)
+- [Reuse the Comments Anywhere!](#reuse-the-comments-anywhere)
+- [Bad Example: Bewildering Links](#bad-example-bewildering-links)
+- [Why Not XML Files and XPaths?](#why-not-xml-files-and-xpaths)
+- [Conclusion](#conclusion)
+- [2025-07-04 ~ Postponed Social Post XML Doc Comments - Draft Texts](#2025-07-04--postponed-social-post-xml-doc-comments---draft-texts)
+- [2025-07-04 ~ Postponed Social Post XML Doc Comments - AI Aided Draft](#2025-07-04--postponed-social-post-xml-doc-comments---ai-aided-draft)
+- [Outtakes](#outtakes)
+
+
+### What are XML Doc Comments?
 
 XML doc comments are special comments, that light up when you hover the code elements. You can add them to your own code elements, to have instant documentation pop up while you program.
 
@@ -47,7 +62,7 @@ This helps you remember what it's for. Even if you have not much to write about 
 
 There's a lot of other options for writing doc comments, but we'll not be covering all of those. This post focuses on a high-level way of managing these doc comments.
 
-#### Crowded Comments
+### Declutter Your Code!
 
 See, the doc comments are placed with the code, and it can get quite crowded with them.
 
@@ -90,7 +105,7 @@ string TakeStartUntil(string input, char until)
 
 It can happen though that you can hardly see the code itself through all the comment.
 
-#### Repeated Doc Comments
+### Stop Repeating Comments!
 
 Comments would a;so ofter get repeated.  
 In the former example you can already spot some repeated comments:
@@ -111,7 +126,7 @@ string TakeStartUntil(string input, char until);
 
 They have exactly the same comment! But there are ways to avoid the clutter.
 
-#### Reused Comments
+### Inherit the Comments!
 
 One way is to use `<inheritdoc />`, which usually takes over the doc comments from the `base` type or `base` method. This is a shortcut to repeat the comment or not to write comment at all:
 
@@ -150,7 +165,7 @@ Here's a resulting IntelliSense tool tip:
 
 But there's still repeated comments in the `Element` base class! Oh no! Now what?
 
-#### Flexibile Reuse
+### Reuse the Comments!
 
 `<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want to take over its comments. This comes out handy for our constructor to brush away any repeated text:
 
@@ -169,13 +184,13 @@ class Element
 }
 ```
 
-There the inner constructor `inherits` the documentation from the `Element class`, because we added the `cref` attribute pointing to it. Here's a resulting tool tip:
+There the inner constructor `inherits` the doc from the `Element class`, because we added the `cref` attribute pointing to it. Here's a resulting tool tip:
 
 ![](image-2.png)
 
-Yes, it's lazy! But efficient. But we still hit a brick wall of comment in the base class. Where'd the code go? 
+Yes, it's lazy! But efficient. But the code still starts with kind of a wall of comment.
 
-#### Centralized Doc-Only Members
+### Reuse the Comments Anywhere!
 
 To find our code back, we can use a trick, making things much easier:
 
@@ -183,7 +198,7 @@ To find our code back, we can use a trick, making things much easier:
 
 Here I define doc-only members and then `inheritdoc` from them. That way the code doesn't get cluttered with the comments, the inheritdoc cref's are simple, it's easier to reuse the same doc comment for efficiency, and still have meaningful helpful pop ups all over. The docs are now central, which makes reviews, revisions and maintenance a lot easier.
 
-#### Bewildering Links
+### Bad Example: Bewildering Links
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
@@ -193,7 +208,7 @@ With centralized doc comments, we've snuck by that beast completely:
 
 `[ Example code: both generic and non-generic refer to one doc-only member with simple crefs. ]`
 
-#### Why Not Use XML Files With XPaths?
+### Why Not XML Files and XPaths?
 
 There is an alternative, which is putting the doc comments in XML files, but that replaces the crefs with convoluted XPaths that are also easy to break.
 
@@ -201,28 +216,9 @@ There is an alternative, which is putting the doc comments in XML files, but tha
 
 How's that going to look for generics? I don't even want to know.
 
-#### Conclusion
+### Conclusion
 
 Eventually I settled on this doc-only member trick which has been serving me very well ever since.
-
-Want to read more about software development techniques for .NET and C#? Here's the forever unfinished resource, where I brain-dump more of these things inside neat looking web pages. You can find explanations, reasons and code samples of all sorts of patterns and techniques both mainstream or made up:
-
-`[ TODO: Link to JJ's Software Architecture Page ]`
-
-### 2025-07-04 ~ Postponed Social Post XML Doc Comments - More Draft Texts
-
-This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere. 
-
-What shall we do...?
-
-("Where is my code?")
-
-Can't find the code through all the comments...
-("Where'd the code go?") 
-
-To solve the remaining hacky `crefs` 
-
-It's hiding behind that wall.
 
 ### 2025-07-04 ~ Postponed Social Post XML Doc Comments - Draft Texts
 
@@ -366,4 +362,25 @@ Centralizing your doc comments makes your codebase:
 
 The result: Better usability, efficient docs, and cleaner code.
 
+### Outtakes
 
+This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere. 
+
+What shall we do...?
+
+("Where is my code?")
+
+Can't find the code through all the comments...
+("Where'd the code go?") 
+
+To solve the remaining hacky `crefs` 
+
+It's hiding behind that wall.
+
+Where'd the code go?
+
+Centralized Doc-Only Members
+
+Want to read more about software development techniques for .NET and C#? Here's the forever unfinished resource, where I brain-dump more of these things inside neat looking web pages. You can find explanations, reasons and code samples of all sorts of patterns and techniques both mainstream or made up:
+
+`[ TODO: Link to JJ's Software Architecture Page ]`
