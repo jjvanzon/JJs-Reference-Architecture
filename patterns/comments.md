@@ -4,18 +4,19 @@
 ====================
 
 
-A technique to improve code documentation: a way to centralize and reuse comments.
+A way to centralize and reuse comments - a technique to improve code documentation.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
-- [Stop Repeating Comments!](#stop-repeating-comments)
+- [Stop Repeating the Comments!](#stop-repeating-the-comments)
 - [Inherit the Comments!](#inherit-the-comments)
 - [Reuse the Comments!](#reuse-the-comments)
 - [Reuse the Comments Anywhere!](#reuse-the-comments-anywhere)
 - [Say "No" to Bewildering Links](#say-no-to-bewildering-links)
 - [Say "No" to XPaths](#say-no-to-xpaths)
+- [Make Them Play Nicely](#make-them-play-nicely)
 - [Conclusion](#conclusion)
-- [2025-07-04 ~ AI Aided Draft](#2025-07-04--ai-aided-draft)
+- [~ AI Aided Drafts](#-ai-aided-drafts)
 - [~ Topics to Cover](#-topics-to-cover)
 - [~ For Social post](#-for-social-post)
 - [~ Snippets](#-snippets)
@@ -103,7 +104,7 @@ string TakeStartUntil(string input, char until)
 
 It can happen though that you can hardly see the code itself through all the comment.
 
-### Stop Repeating Comments!
+### Stop Repeating the Comments!
 
 Comments would a;so ofter get repeated.  
 In the former example you can already spot some repeated comments:
@@ -200,7 +201,7 @@ To find our code back, we can use a trick, making things much easier. I like to 
 /// <param name="parent">
 /// When in doubt, use Diagram.Background.
 /// </param>
-public struct _element;
+struct _element;
 ```
 
 Those are our __Doc-Only Members__ and here they are referenced with `inheritdoc`:
@@ -221,11 +222,11 @@ class Element
 }
 ```
 
-Now each documentation is just a single unobtrusive line with an inheritdoc tag referenced by name.
+Now each documentation is just a single unobtrusive line with an `inheritdoc` tag referenced by name.
 
-This way the code doesn't get cluttered with comments, the inheritdoc cref's are simple, it's easier to reuse the same doc comment for efficiency, and still have meaningful helpful pop ups all over the place. The docs are now central, which makes documentation reviews, revisions and maintenance a lot easier.
+This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and still have meaningful, helpful pop ups all over the place. The docs are now central, which makes documentation reviews, revisions and maintenance a lot easier.
 
-This is my preferred way of doing it now.
+It's my preferred way of doing it now.
 
 <img src="image-3.png" width="500" />
 
@@ -247,57 +248,51 @@ There is an alternative, which is putting the doc comments in XML files, but tha
 
 How's that going to look for generics? I don't even want to know.
 
-### Conclusion
+### Make Them Play Nicely
 
-Eventually I settled on this doc-only member trick which has been serving me very well ever since.
+<h4>Docs Namespace</h4>
 
-### 2025-07-04 ~ AI Aided Draft
+I like to give the docs their own sub-namespace `.docs`
 
-~~In C#, XML doc comments are those triple-slash comments you see above classes, methods, or properties. They pop up as tooltips in your IDE when you hover a symbol.~~
+```cs
+namespace JJ.Demos.Architecture.docs;
 
-~~**Example:**~~
-
-~~You can write your own to provide instant, in-code documentation for your team or yourself.~~
-
-~~<h4>Why Quality Matters</h4>~~
-
-~~Not all doc comments are useful.~~
-~~A bad comment looks like this:~~
-
-```csharp
-/// <summary>
-/// This is the text.
-/// </summary>
+/// <summary>...</summary>
+public struct _element;
 ```
 
-~~Or, you see whole files so loaded with comments that the actual code gets buried.~~
+I actually like to make them `public` as well.
 
-~~Repeating boilerplate across files or methods just wastes time, makes maintenance harder, and trains people to ignore documentation.~~
+That way you can inspect them in the Object Browser as a whole, and other people can too:
 
-~~<h4>Tags: summary, inheritdoc, remarks</h4>~~
+`[Screen shot]`
 
-~~A good doc comment uses tags like `<summary>`, `<inheritdoc>`, or `<remarks>` to provide relevant, non-repetitive information.~~
+To use the `docs` namespace, you'd add a `using` statement to `GlobalUsings.cs`:
 
-~~<h4>The Problem With Scattered Comments</h4>~~
+```cs
+global using JJ.Demos.Architecture.docs;
+```
 
-~~Having doc comments everywhere leads to:~~
+Or to each code file, like `Element.cs`, you can just add `using docs`:
 
-~~* Maintenance overhead~~
-~~* Outdated documentation~~
-~~* Cluttered files~~
-~~* Lots of repetition~~
+```cs
+namespace JJ.Demos.Architecture;
 
-<h4>Centralized Docs: `docs.cs`</h4>
+using docs;
 
-The solution I use: put documentation in a central place.
-I keep a `docs.cs` file with doc-only members—classes or stubs that only exist to hold documentation.
+/// <inheritdoc cref="_element" />
+class Element;
+```
 
-Now, when something changes, I update comments once, not all over the place.
-You can check your documentation in the Object Browser and see it all in one place.
+### Conclusion
+
+Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too, to make your code comments more centralized, manageable and reusable.
+
+### ~ AI Aided Drafts
 
 <h4>Why Not Use XML Files With XPaths?</h4>
 
-Storing docs in separate XML files and linking them with XPath is possible, but those links are fragile and can break easily. Centralizing docs in code is stronger—one place, tracked in version control.
+Storing docs in separate XML files and linking them with XPath is possible, but those links are fragile and can break easily. Centralizing docs in code is stronger one place~~, tracked in version control~~.
 
 Downside:
 You lose some automatic checking (like param-existence validation), but you gain maintainability, clarity, and easier updates.
@@ -337,16 +332,6 @@ Do you want detailed `<param>` tags for everything, or just the essentials? Some
 Use minimal formatting or even basic syntax coloring in doc comments for clarity.
 Don’t be afraid to use structs or break naming rules in documentation blocks if it makes the docs easier to find and update.
 
-<h4>Summary</h4>
-
-Centralizing your doc comments makes your codebase:
-
-* Easier to maintain
-* Less cluttered
-* More reliable for developers
-
-The result: Better usability, efficient docs, and cleaner code.
-
 ### ~ Topics to Cover
 
 Compiler Nags:
@@ -367,14 +352,6 @@ Efficiency:
 - See refs, mark up: do or do not (efficiency, quality, take your pick)
 - params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
 
-Not all doc comments are useful.
-A bad comment looks like this:
-
-```csharp
-/// <summary>
-/// This is the text.
-/// </summary>
-```
 Misc Tip:
 
 - Syntax coloring in doc comments.
@@ -390,10 +367,7 @@ But we'll not be covering all of those. This post focuses on a high-level way of
 
 ### ~ Snippets
 
-```cs
-namespace JJ.Demos.Architecture.Other.DocOnlyMembers;
-using docs;
-```
+You can check your documentation in the Object Browser and see it all in one place.
 
 Ever opened a file and thought: “Where’s the code? Oh, buried in the middle of all these comments.”
 
@@ -427,3 +401,13 @@ This article touches on:
 - XML doc comments
 - Warning management
 - Centralized csproj configurations
+
+`[ More for the Comments section in patterns/other.md ]`
+Not all doc comments are useful.
+A bad comment looks like this:
+
+```csharp
+/// <summary>
+/// This is the text.
+/// </summary>
+```

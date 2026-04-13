@@ -56,10 +56,6 @@ There are quite a few other [design patterns](README.md), not specific to any pa
 - [Anti-Magic Booleans](#anti-magic-booleans)
 - [Comma Appending](#comma-appending)
 - [Comments](#comments)
-    - [Comments in Summaries](#comments-in-summaries)
-    - [Comments in English](#comments-in-english)
-    - [No Comments without Info](#no-comments-without-info)
-    - [No Unused / Outcommented Code](#no-unused--outcommented-code)
 - [Constructor Inheritance](#constructor-inheritance)
 - [DebuggerDisplays](#debuggerdisplays)
 - [Executor](#executor)
@@ -165,9 +161,7 @@ foreach (string element in elements)
 Comments
 --------
 
-Extensive article about docs reuse: [Comments](./comments.md) `[ Draft ]`
-
-### Comments in Summaries
+<h3>Comments in Summaries</h3>
 
 You might put comment for members in `<summary>` tags. 
 
@@ -190,7 +184,7 @@ int X { get; set; }
 Reason:  
 Your comment might be valuable from the outside for others to see. Your `summary` would show up when hovering over a member.
 
-### Comments in English
+<h3>Comments in English</h3>
 
 <table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
 
@@ -209,7 +203,7 @@ Your comment might be valuable from the outside for others to see. Your `summary
 Reason:  
 English is basically the main language in IT. A broader reach of people might be able to read your comments.
 
-### No Comments without Info
+<h3>No Comments without Info</h3>
 
 Avoid comments that do not add information.
 
@@ -231,12 +225,16 @@ int x;
 Reason:  
 Less visual clutter. Reading it might not be worth the time.
 
-### No Unused / Outcommented Code
+<h3>No Unused / Outcommented Code</h3>
 
 Avoid leaving around unused or outcommented code. If necessary, you can move it to an `Archive` folder.
 
 Reason:  
 Unused code might clutter your vision. It may also give the impression, that it was outcommented in error.
+
+<h3>More information</h3>
+
+Here's a way to centralize and reuse doc comments efficiently: [Comments](./comments.md) `[ Draft ]`
 
 
 Constructor Inheritance
