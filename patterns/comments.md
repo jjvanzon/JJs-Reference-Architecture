@@ -3,7 +3,8 @@
 📔 Doc-Only Members
 ====================
 
-"Doc-only members" are technique to improve code documentation: a way to centralize and reuse comments.
+
+A technique to improve code documentation: a way to centralize and reuse comments.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
@@ -11,18 +12,18 @@
 - [Inherit the Comments!](#inherit-the-comments)
 - [Reuse the Comments!](#reuse-the-comments)
 - [Reuse the Comments Anywhere!](#reuse-the-comments-anywhere)
-- [Bad Example: Bewildering Links](#bad-example-bewildering-links)
-- [Why Not XML Files and XPaths?](#why-not-xml-files-and-xpaths)
+- [Say "No" to Bewildering Links](#say-no-to-bewildering-links)
+- [Say "No" to XPaths](#say-no-to-xpaths)
 - [Conclusion](#conclusion)
-- [2025-07-04 ~ Topics to Cover](#2025-07-04--topics-to-cover)
 - [2025-07-04 ~ AI Aided Draft](#2025-07-04--ai-aided-draft)
-- [Social post](#social-post)
-- [Outtakes](#outtakes)
+- [~ Topics to Cover](#-topics-to-cover)
+- [~ For Social post](#-for-social-post)
+- [~ Snippets](#-snippets)
 
 
 ### What are XML Doc Comments?
 
-XML doc comments are special comments, that light up when you hover the code elements.
+XML doc comments are those special comments, that pop up when you hover classes, methods or properties in your code:
 
 <img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="500" />
 
@@ -57,7 +58,7 @@ string StartWithCap(string input)
 
 This helps you remember what it's for. Even if you have not much to write about it, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
-There's a lot of other options for writing doc comments, but we'll not be covering all of those. This post focuses on a high-level way of managing these doc comments.
+There's a lot of other options for writing doc comments, we'll be covering in this article.
 
 ### Declutter Your Code!
 
@@ -189,13 +190,46 @@ Yes, it's lazy! But efficient. But the code still has those little barriers of c
 
 ### Reuse the Comments Anywhere!
 
-To find our code back, we can use a trick, making things much easier:
+To find our code back, we can use a trick, making things much easier. I like to put all the comments in a file called `docs.cs`:
 
-`[ Example code: with doc-only members in one file and inheritdoc to it from the actual code. ] `
+```cs
+/// <summary>
+/// VectorGraphics element that can contain
+/// VectorGraphics child elements.
+/// </summary>
+/// <param name="parent">
+/// When in doubt, use Diagram.Background.
+/// </param>
+public struct _element;
+```
 
-Here I define doc-only members and then `inheritdoc` from them. That way the code doesn't get cluttered with the comments, the inheritdoc cref's are simple, it's easier to reuse the same doc comment for efficiency, and still have meaningful helpful pop ups all over. The docs are now central, which makes reviews, revisions and maintenance a lot easier.
+Those are our __Doc-Only Members__ and here they are referenced with `inheritdoc`:
 
-### Bad Example: Bewildering Links
+```cs
+/// <inheritdoc cref="_element" />
+class Rectangle : Element
+{
+    /// <inheritdoc cref="_element" />
+    Rectangle(Element parent) : base(parent) { }
+}
+
+/// <inheritdoc cref="_element" />
+class Element
+{
+    /// <inheritdoc cref="_element" />
+    public Element(Element parent) { }
+}
+```
+
+Now each documentation is just a single unobtrusive line with an inheritdoc tag referenced by name.
+
+This way the code doesn't get cluttered with comments, the inheritdoc cref's are simple, it's easier to reuse the same doc comment for efficiency, and still have meaningful helpful pop ups all over the place. The docs are now central, which makes documentation reviews, revisions and maintenance a lot easier.
+
+This is my preferred way of doing it now.
+
+<img src="image-3.png" width="500" />
+
+### Say "No" to Bewildering Links
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
@@ -205,7 +239,7 @@ With centralized doc comments, we've snuck by that beast completely:
 
 `[ Example code: both generic and non-generic refer to one doc-only member with simple crefs. ]`
 
-### Why Not XML Files and XPaths?
+### Say "No" to XPaths
 
 There is an alternative, which is putting the doc comments in XML files, but that replaces the crefs with convoluted XPaths that are also easy to break.
 
@@ -217,48 +251,18 @@ How's that going to look for generics? I don't even want to know.
 
 Eventually I settled on this doc-only member trick which has been serving me very well ever since.
 
-### 2025-07-04 ~ Topics to Cover
-
-- GenerateDocumentationFile
-- Warnings as errors
-- Squelch missing doc comment warnings temporarily.
-- Several XML doc comments-related warnings.
-- Centralized warning squelches.
-- Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
-  Alternative `<b>[Deprecated]</b>` in XML doc comment.
-
-- Converting README to doc comments manually.
-- Using generalized comment for multiple elements = efficiency.
-- See refs, mark up: do or do not (efficiency, quality, take your pick)
-- params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
-
-- Syntax coloring in doc comments.
-- Using structs
-- Naming style rule breakage.
-
 ### 2025-07-04 ~ AI Aided Draft
 
-<h4>What Are XML Doc Comments?</h4>
+~~In C#, XML doc comments are those triple-slash comments you see above classes, methods, or properties. They pop up as tooltips in your IDE when you hover a symbol.~~
 
-In C#, XML doc comments are those triple-slash comments you see above classes, methods, or properties. They pop up as tooltips in your IDE when you hover a symbol.
+~~**Example:**~~
 
-**Example:**
+~~You can write your own to provide instant, in-code documentation for your team or yourself.~~
 
-```csharp
-/// <summary>
-/// Removes accents from characters in a string.
-/// </summary>
-public static string RemoveAccents(this string input)
-```
+~~<h4>Why Quality Matters</h4>~~
 
-You can write your own to provide instant, in-code documentation for your team or yourself.
-
----
-
-<h4>Why Quality Matters</h4>
-
-Not all doc comments are useful.
-A bad comment looks like this:
+~~Not all doc comments are useful.~~
+~~A bad comment looks like this:~~
 
 ```csharp
 /// <summary>
@@ -266,23 +270,22 @@ A bad comment looks like this:
 /// </summary>
 ```
 
-Or, you see whole files so loaded with comments that the actual code gets buried.
-Ever opened a file and thought: “Where’s the code? Oh, buried in the middle of all these comments.”
+~~Or, you see whole files so loaded with comments that the actual code gets buried.~~
 
-Repeating boilerplate across files or methods just wastes time, makes maintenance harder, and trains people to ignore documentation.
+~~Repeating boilerplate across files or methods just wastes time, makes maintenance harder, and trains people to ignore documentation.~~
 
-<h4>Tags: summary, inheritdoc, remarks</h4>
+~~<h4>Tags: summary, inheritdoc, remarks</h4>~~
 
-A good doc comment uses tags like `<summary>`, `<inheritdoc>`, or `<remarks>` to provide relevant, non-repetitive information.
+~~A good doc comment uses tags like `<summary>`, `<inheritdoc>`, or `<remarks>` to provide relevant, non-repetitive information.~~
 
-<h4>The Problem With Scattered Comments</h4>
+~~<h4>The Problem With Scattered Comments</h4>~~
 
-Having doc comments everywhere leads to:
+~~Having doc comments everywhere leads to:~~
 
-* Maintenance overhead
-* Outdated documentation
-* Cluttered files
-* Lots of repetition
+~~* Maintenance overhead~~
+~~* Outdated documentation~~
+~~* Cluttered files~~
+~~* Lots of repetition~~
 
 <h4>Centralized Docs: `docs.cs`</h4>
 
@@ -344,13 +347,55 @@ Centralizing your doc comments makes your codebase:
 
 The result: Better usability, efficient docs, and cleaner code.
 
-### Social post
+### ~ Topics to Cover
+
+Compiler Nags:
+
+- GenerateDocumentationFile
+- Warnings as errors
+- Squelch missing doc comment warnings temporarily.
+- Several XML doc comments-related warnings.
+- Centralized warning squelches.
+- Naming style rule breakage.
+- Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
+  Alternative `<b>[Deprecated]</b>` in XML doc comment.
+
+Efficiency:
+
+- Converting README to doc comments manually.
+- Using generalized comment for multiple elements = efficiency.
+- See refs, mark up: do or do not (efficiency, quality, take your pick)
+- params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
+
+Not all doc comments are useful.
+A bad comment looks like this:
+
+```csharp
+/// <summary>
+/// This is the text.
+/// </summary>
+```
+Misc Tip:
+
+- Syntax coloring in doc comments.
+- Using structs
+
+### ~ For Social post
 
 Hi there developers! And hello to you normal people too. Another technical update (again).
 
 This time I want to talk about "doc-only members" - a technique to improve code documentation.
 
-### Outtakes
+But we'll not be covering all of those. This post focuses on a high-level way of managing these doc comments.
+
+### ~ Snippets
+
+```cs
+namespace JJ.Demos.Architecture.Other.DocOnlyMembers;
+using docs;
+```
+
+Ever opened a file and thought: “Where’s the code? Oh, buried in the middle of all these comments.”
 
 This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere. 
 
