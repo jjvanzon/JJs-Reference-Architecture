@@ -53,26 +53,32 @@ There are quite a few other [design patterns](README.md), not specific to any pa
 - [Accessor](#accessor)
 - [Adapter](#adapter)
 - [Anti-Encapsulation](#anti-encapsulation)
-- [Initialization and Finalization](#initialization-and-finalization)
-- [Constructor Inheritance](#constructor-inheritance)
+- [Anti-Magic Booleans](#anti-magic-booleans)
 - [Comma Appending](#comma-appending)
+- [Comments](#comments)
+    - [Comments in Summaries](#comments-in-summaries)
+    - [Comments in English](#comments-in-english)
+    - [No Comments without Info](#no-comments-without-info)
+    - [No Unused / Outcommented Code](#no-unused--outcommented-code)
+- [Constructor Inheritance](#constructor-inheritance)
 - [DebuggerDisplays](#debuggerdisplays)
 - [Executor](#executor)
-- [Inheritance-Helper](#inheritance-helper)
 - [Factory](#factory)
 - [Factory-Base-Interface](#factory-base-interface)
-- [TryGet](#tryget)
-- [Get-TryGet-GetMany](#get-tryget-getmany)
 - [Helper](#helper)
 - [Info](#info)
+- [Inheritance-Helper](#inheritance-helper)
+- [Initialization and Finalization](#initialization-and-finalization)
 - [Mock](#mock)
 - [Name Constants](#name-constants)
 - [NullCoalesce](#nullcoalesce)
 - [Plug-In Model](#plug-in-model)
 - [Progress and Cancel Callbacks](#progress-and-cancel-callbacks)
-- [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](#singular-plural-non-recursive-recursive-and-withrelatedentities)
-- [Wrapper](#wrapper)
 - [Rich Models](#rich-models)
+- [Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities](#singular-plural-non-recursive-recursive-and-withrelatedentities)
+- [TryGet](#tryget)
+- [TryGet-Get-GetMany](#tryget-get-getmany)
+- [Wrapper](#wrapper)
 
 
 Accessor
@@ -97,38 +103,18 @@ The reason not to use encapsulation is that it can go against the grain of frame
 Anti-encapsulation can also be a solution to prevent spreading of the same responsibility over multiple places. If the `class` cannot check all the rules itself, it may be better the check all the rules elsewhere, instead of checking half the rules in the `class` and the other half in another place.
 
 
-Initialization and Finalization
--------------------------------
+Anti-Magic Booleans
+--------------
 
-Cleanup code should be symmetric to the set-up code. Build something up in the constuctor then dispose things in the finalizer, start a service at startup then stop a service at shutdown, etc. If in the constructor you bind an event, then in the destructor you unbind it.
+Allows for a syntax that looks like a boolean parameter that you do not have to assign a value to:
 
-You can also choose to implement IDisposable. This is useful if you want to be able to explicitly trigger finalization. Finalizers/destructors only go off when the garbage collector feels like it, and you might want to imperatively tell an `object` to clean up its stuff.
+```cs
+Contains(matchCase)
+Contains(matchCase: true)
+Contains(matchCase: false)
+```
 
-- If you implement IDisposable, call Dispose from the finalizer/destructor.:
-
-    ```cs
-    ~MyClass 
-    {
-        Dispose();
-    }
-    ```
-
-- Make sure the dispose can successfully run regardless of state, so check any variable you might use for null first and be tollerant towards null.
-
-    ```cs
-    public void Dispose()
-    {
-        _myConnection?.Close();
-    }
-    ```
-
-- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the `object`.
-
-
-Constructor Inheritance
------------------------
-
-Sort of forces a derived `class` to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a `base class` that has specific constructors forces your derived `class` to call that `base` constructor, often leading to exposing a similar constructor in the derived `class`.
+See: [Anti-Magic Booleans](./anti-magic-booleans.md)
 
 
 Comma Appending
@@ -176,6 +162,88 @@ foreach (string element in elements)
 }
 ```
 
+Comments
+--------
+
+Extensive article about docs reuse: [Comments](./comments.md) `[ Draft ]`
+
+### Comments in Summaries
+
+You might put comment for members in `<summary>` tags. 
+
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
+
+```cs
+/// <summary> This is the x coordinate. </summary>
+int X { get; set; }
+```
+
+</td><td markdown="1" class="red">
+
+```cs
+// This is the x-coordinate.
+int X { get; set; } 
+```
+
+</td></tr></table>
+
+Reason:  
+Your comment might be valuable from the outside for others to see. Your `summary` would show up when hovering over a member.
+
+### Comments in English
+
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
+
+```cs
+// This is a thing.
+```
+
+</td><td markdown="1" class="red">
+
+```cs
+// Dit is een ding. 
+```
+
+</td></tr></table>
+
+Reason:  
+English is basically the main language in IT. A broader reach of people might be able to read your comments.
+
+### No Comments without Info
+
+Avoid comments that do not add information.
+
+<table><tr><th class="green">Recommended</th><th class="red">Less Preferred</th></tr><tr><td markdown="1" class="green">
+
+```cs
+int x;
+```
+
+</td><td markdown="1" class="red">
+
+```cs
+// This is x
+int x;
+```
+
+</td></tr></table>
+
+Reason:  
+Less visual clutter. Reading it might not be worth the time.
+
+### No Unused / Outcommented Code
+
+Avoid leaving around unused or outcommented code. If necessary, you can move it to an `Archive` folder.
+
+Reason:  
+Unused code might clutter your vision. It may also give the impression, that it was outcommented in error.
+
+
+Constructor Inheritance
+-----------------------
+
+Sort of forces a derived `class` to have a constructor with specific arguments. Constructors are not inherited, but inheriting from a `base class` that has specific constructors forces your derived `class` to call that `base` constructor, often leading to exposing a similar constructor in the derived `class`.
+
 
 DebuggerDisplays
 ----------------
@@ -191,14 +259,6 @@ Executor
 `Executor classes` are `classes` that encapsulate a whole process to run. For processes that involve more than just a single function, for instance downloading a file, transforming it and then importing it, involving infrastructure end-points and possibly multiple back-end libraries.
 
 By giving each of those processes its own `Executor class`, you make the code overviewable, and also make the process more easily runnable from different contexts, e.g. in a scheduler, behind a service method or by means of a button in a UI or in a utility.
-
-
-Inheritance-Helper
-------------------
-
-One weakness of inheritance in [`.NET`](../api/table.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](../practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
-
-This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](../practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
 
 
 Factory
@@ -238,66 +298,6 @@ Factory-Base-Interface
 The `Factory-Base-Interface` pattern is a common way the [`Factory`](#factory) pattern is applied. Next to a [`Factory`](#factory), as described above in the [`Factory`](#factory) pattern, you give each concrete implementation that the [`Factory`](#factory) can return a mutual `interface`, which also becomes the return type of the [`Factory`](#factory) method. To also give each concrete implementation a mutual `base class`, with common functionality in it, and also to sort of force an implementation to have a specific constructor (see 'Constructor Inheritance').
 
 
-TryGet
-------
-
-A combination of a `TryGet` method and a `Get` method (e.g. `TryGetObject` and `GetObject`) means that `TryGet` would return `null` if the `object` does not exist and `Get` would `throw` an `Exception` if the `object` does not exist.
-
-Call `Get` if it makes sense that the `object` should exist.
-
-Call `TryGet` if the non-existence of the `object` makes sense.
-
-If you call a `TryGet` you should handle the `null` value that could be returned.
-
-`TryGet` can `throw` other `Exceptions`, even though it does not `throw` an `Exception` if the `object` does not exist.
-
-
-Get-TryGet-GetMany
-------------------
-
-Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
-
-```cs
-public Item GetItem(string searchText)
-{
-    Item item = TryGetItem(searchText);
-
-    if (item == null)
-    {
-        throw new Exception(String.Format("Item with searchText '{0}' not found.", searchText));
-    }
-
-    return item;
-}
-
-public Item TryGetItem(string searchText)
-{
-    IList<Item> items = GetItems(searchText);
-    switch (items.Count)
-    {
-        case 0:
-            return null;
-
-        case 1:
-            return items[0];
-
-        default:
-            throw new Exception(String.Format(
-                "Multiple items found for searchText '{0}'.", searchText));
-    }
-}
-
-public IList<Item> GetItems(string searchText)
-{
-    return _items.Where(x => !String.IsNullOrEmpty(x.Name) &&
-                             x.Name.Contains(searchText))
-                 .ToArray();
-}
-```
-
-The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
-
-
 Helper
 ------
 
@@ -311,6 +311,42 @@ Info
 
 `Info objects` are like [DTO's](data-access.md#dto) in that they are usually used for yielding over information from one place to another. `Info objects` can be used in limited scopes, `internal` or `private classes` and serve as a temporary place of storing info. But `Info objects` can also have a broader scope, such as in frameworks, and unlike [DTO's](data-access.md#dto) they might have constructor parameters, auto-instantiation, encapsulation and other implementation code.
 
+
+
+Inheritance-Helper
+------------------
+
+One weakness of inheritance in [`.NET`](../api/table.md#dotnet) might be, that there is no multiple inheritance: you can only derive from one `base class`. This can lead to problems programming a `base class`, because one `base` will offer you one set of functionalities and the other `base` the other functionalities. (See the [Cartesian Product of Features Problem](../practices-and-principles.md#cartesian-product-of-features-problem).) To still use inheritance to have behaviors turned on or off, but not have an awkward inheritance structure, and problems picking what feature to put at which layer of inheritance, you could simply program [`Helper classes`](#helper) (`static classes` with `static` methods) that implement each feature, and then use inheritance, letting derived `classes` delegate to the [`Helpers`](#helper), to give each `class` a specific set of features and specific versions of the features, to polymorphically have the features either turned on or off. You will still have many derived `classes`, but no arbitrary spreading of features over the `base classes`, and no code repetition either.
+
+This allows you to solve what inheritance promises to solve, but does not do a good job at on its own. It basically solves the [Cartesian Product of Features Problem](../practices-and-principles.md#cartesian-product-of-features-problem), the problem that there is no multiple inheritance and the problem with big hairy `base classes`, all weakneses of inheritance.
+
+
+Initialization and Finalization
+-------------------------------
+
+Cleanup code should be symmetric to the set-up code. Build something up in the constuctor then dispose things in the finalizer, start a service at startup then stop a service at shutdown, etc. If in the constructor you bind an event, then in the destructor you unbind it.
+
+You can also choose to implement IDisposable. This is useful if you want to be able to explicitly trigger finalization. Finalizers/destructors only go off when the garbage collector feels like it, and you might want to imperatively tell an `object` to clean up its stuff.
+
+- If you implement IDisposable, call Dispose from the finalizer/destructor.:
+
+    ```cs
+    ~MyClass 
+    {
+        Dispose();
+    }
+    ```
+
+- Make sure the dispose can successfully run regardless of state, so check any variable you might use for null first and be tollerant towards null.
+
+    ```cs
+    public void Dispose()
+    {
+        _myConnection?.Close();
+    }
+    ```
+
+- Also call `GC.SuppressFinalize()` in the `Dispose()` method, because then the garbage collector will skip a few unneeded steps in getting rid of the `object`.
 
 Mock
 ----
@@ -382,6 +418,24 @@ It depends on your problem whether those callbacks are nullable and you should d
 Sometimes it is useful to separate `Cancel` into two: `Canceling` and `Canceled`. This is because a process might not cancel immediately. A UI should not immediately enable a Start button again after the user pressed Cancel. A isCancelingCallback then allows the client to signal to the process that cancellation is requested. And an isCanceledCallback will let the process signal the client that cancelation has complete, so it can enable the start button again.
 
 
+Rich Models
+-----------
+
+`< TODO: Write story with pros and cons. Include:`
+
+`>> Arch: another downside of rich models is the magic of it. You are not sure what happens and all sorts of non-obvious side-effects may go off.`
+
+`- Arch: anemic models and separation of concerns and no rich models can have the consequence that you loose identity and instance integrity, because derived structures are more common. For controls for instance, with gesture events, the original object needs to be found and raised an event on, and you cannot get away with doing it on a derived object unless you clone everything. Not sure how to descrive this clearly. It is about rich models vs. anemic models and when and how to apply which and what are the pros and cons and I do not have a clear image of that yet.`  
+`- Explain the problems with rich models in the business layer comprised of derived classes out of the persistence layer, that extend the model with specific relations, constraints and rules, that you do not enforce in the persistence layer.`  
+`  Problems with putting it in the business layer include that the persistence layer does not know how to instantiate the derived class, so it must instantiate the base class. Also: if rules are strictly enforced in an extended entity model, it is hard to separate creating Entities from validating it, so instead of user-generated validation messages, you might get exception messages instead.`  
+`  Problems with putting the specialized classes in the persistence layer include that the entity model must stay as clean as possible: anything you put in the data layer is hard to get rid of.`  
+`  When you do need an business logic interfacing that is comprised of an 'extended' entity model, then you cannot really use inheritance. You might be able to create a facade class that creates a wrapper class around the 'base' class out of the entity model.`  
+`  Currently the choice is to not make an extended entity model in the business layer.`  
+`- Arch: against rich models: You want your entity model to be a direct depiction of what is actually stored, so that you have control over that. If it is obscured, this means less control over what is going on. >`
+
+`< TODO: Compare rich models with the 2D separation of concerns. >`
+
+
 Singular, Plural, Non-Recursive, Recursive and WithRelatedEntities
 ------------------------------------------------------------------
 
@@ -448,6 +502,65 @@ private class MyProcess
 }
 ```
 
+TryGet
+------
+
+A combination of a `TryGet` method and a `Get` method (e.g. `TryGetObject` and `GetObject`) means that `TryGet` would return `null` if the `object` does not exist and `Get` would `throw` an `Exception` if the `object` does not exist.
+
+Call `Get` if it makes sense that the `object` should exist.
+
+Call `TryGet` if the non-existence of the `object` makes sense.
+
+If you call a `TryGet` you should handle the `null` value that could be returned.
+
+`TryGet` can `throw` other `Exceptions`, even though it does not `throw` an `Exception` if the `object` does not exist.
+
+
+TryGet-Get-GetMany
+------------------
+
+Often you need a combination of the three methods that either get a list, a single item but allow `null` or get a single item and insist it is not `null`. You can implement the [plural](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) variation and base the `Get` and [`TryGet`](#tryget) on it using the same kind of code every time:
+
+```cs
+public Item GetItem(string searchText)
+{
+    Item item = TryGetItem(searchText);
+
+    if (item == null)
+    {
+        throw new Exception(String.Format("Item with searchText '{0}' not found.", searchText));
+    }
+
+    return item;
+}
+
+public Item TryGetItem(string searchText)
+{
+    IList<Item> items = GetItems(searchText);
+    switch (items.Count)
+    {
+        case 0:
+            return null;
+
+        case 1:
+            return items[0];
+
+        default:
+            throw new Exception(String.Format(
+                "Multiple items found for searchText '{0}'.", searchText));
+    }
+}
+
+public IList<Item> GetItems(string searchText)
+{
+    return _items.Where(x => !String.IsNullOrEmpty(x.Name) &&
+                             x.Name.Contains(searchText))
+                 .ToArray();
+}
+```
+
+The `GetItem` and `TryGetItem` methods are the same in any situation, except for names and `Exception` messages. Only the [plural](other.md#singular-plural-non-recursive-recursive-and-withrelatedentities) method is different depending on the situation. 
+
 
 Wrapper
 -------
@@ -455,22 +568,4 @@ Wrapper
 A `Wrapper class` is a `class` that wraps one or more other `objects`. This can be useful in various situations. You might give the `Wrapper` additional helper methods that the wrapped `object` does not have. You might dispose the underlying `Wrapper object` and create a new one, keeping the references to the `Wrapper object` in tact even though the `Wrapped object` does not exist anymore. You may hide a specific `object` in a `Wrapper` and give it an alternative `interface`, you might wrap multiple `objects` in one `Wrapper` to pass them around as a single `object` for convenience.
 
 
-Rich Models
------------
-
-`< TODO: Write story with pros and cons. Include:`
-
-`>> Arch: another downside of rich models is the magic of it. You are not sure what happens and all sorts of non-obvious side-effects may go off.`
-
-`- Arch: anemic models and separation of concerns and no rich models can have the consequence that you loose identity and instance integrity, because derived structures are more common. For controls for instance, with gesture events, the original object needs to be found and raised an event on, and you cannot get away with doing it on a derived object unless you clone everything. Not sure how to descrive this clearly. It is about rich models vs. anemic models and when and how to apply which and what are the pros and cons and I do not have a clear image of that yet.`  
-`- Explain the problems with rich models in the business layer comprised of derived classes out of the persistence layer, that extend the model with specific relations, constraints and rules, that you do not enforce in the persistence layer.`  
-`  Problems with putting it in the business layer include that the persistence layer does not know how to instantiate the derived class, so it must instantiate the base class. Also: if rules are strictly enforced in an extended entity model, it is hard to separate creating Entities from validating it, so instead of user-generated validation messages, you might get exception messages instead.`  
-`  Problems with putting the specialized classes in the persistence layer include that the entity model must stay as clean as possible: anything you put in the data layer is hard to get rid of.`  
-`  When you do need an business logic interfacing that is comprised of an 'extended' entity model, then you cannot really use inheritance. You might be able to create a facade class that creates a wrapper class around the 'base' class out of the entity model.`  
-`  Currently the choice is to not make an extended entity model in the business layer.`  
-`- Arch: against rich models: You want your entity model to be a direct depiction of what is actually stored, so that you have control over that. If it is obscured, this means less control over what is going on. >`
-
-`< TODO: Compare rich models with the 2D separation of concerns. >`
-
 [back](README.md)
-
