@@ -4,7 +4,7 @@
 ====================
 
 
-A way to centralize and reuse comments - a technique to improve code documentation.
+A way to centralize and reuse comments: a technique to improve code documentation.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
@@ -15,6 +15,7 @@ A way to centralize and reuse comments - a technique to improve code documentati
 - [Say "No" to Bewildering Links](#say-no-to-bewildering-links)
 - [Say "No" to XPaths](#say-no-to-xpaths)
 - [Make Them Play Nicely](#make-them-play-nicely)
+- [Compiler Nags](#compiler-nags)
 - [Conclusion](#conclusion)
 - [~ AI Aided Drafts](#-ai-aided-drafts)
 - [~ Topics to Cover](#-topics-to-cover)
@@ -284,6 +285,95 @@ using docs;
 class Element;
 ```
 
+<h4>Shipping Docs</h4>
+
+To ship the docs along with your NuGet package you can add this to your csproj file:
+
+```xml
+```
+
+
+
+To actually generate the package you add: 
+
+```xml
+<GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
+```
+
+<h3>Naming Style</h3>
+
+The naming format is specifically chosen to make the `<inheritdoc>` tags as unobtrusive as possible.
+
+Consider the follow docs only member called `_mydoc`:
+
+```cs
+/// <summary> ... </summary>
+struct _mydoc;
+```
+
+Not only do the lower case letters not stand out as much. This and the underscore prevent the name from colliding with the actual code elements.
+
+<h3>Structs</h3>
+
+The choice to use `structs` is also for camouflage. They are usually displayed in an unassuming green, making the `<inheritdoc>`s blend in the background, so the code itself pops out.
+
+### Compiler Nags
+
+You may get some warnings you might need to deal with.
+
+<h4><code>param</code> Tag Mismatch</h4>
+
+For instance, the docs-only members do not actually have the parameters you defined documentation for:
+
+![alt text](image-6.png)
+
+But that's a trade-off I'm willing to make. I just squelch that warning at the top of the code file:
+
+```cs
+#pragma warning disable CS1572 // param tag mismatch
+```
+
+And then that's dealt with. The members you use it for will still use the param tag either way.
+
+<h4>Warnings as Errors</h4>
+
+I like to make things worse, by treating all warnings as errors. You can do this by adding the following to your `.csproj`:
+
+```xml
+<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+```
+
+Now you can be sure, that it won't compile, until you've solved those nags.
+
+<h4>Naming Rule Violation</h4>
+
+Depending on your setup, the system will start bickering about other things too, like naming rule violations:
+
+![alt text](image-5.png)
+
+
+See the [Naming Style](#naming-style) section names like that in the first place. There's no way to configure a naming rule specifically for these, so I like to squelch that warning at the top of the file too:
+
+```cs
+#pragma warning disable IDE1006 // naming rule violation
+```
+
+Since we only use one docs file per project, at least we can just squelch these with a single line each.
+
+<h4>Namespace != Folder</h4>
+
+The namespace where we put the docs itself is violating another naming rule:
+
+```cs
+namespace JJ.Demos.Architecture.docs;
+```
+
+I put the `docs.cs` in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler. Squelch as follows:
+
+```cs
+#pragma warning disable IDE0130 // Namespace != folder
+```
+
 ### Conclusion
 
 Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too, to make your code comments more centralized, manageable and reusable.
@@ -299,8 +389,8 @@ You lose some automatic checking (like param-existence validation), but you gain
 
 <h4>Managing Warnings</h4>
 
-* Set `<GenerateDocumentationFile>true>` in your `.csproj` so documentation is built.
-* Use warnings as errors to enforce doc standards.
+* ~~Set `<GenerateDocumentationFile>true>` in your `.csproj` so documentation is built.~~
+* ~~Use warnings as errors to enforce doc standards.~~
 * If you’re mid-transition, squelch missing doc warnings **centrally** in your project file, not scattered through your code.
 
 __Example:__
@@ -336,26 +426,26 @@ Don’t be afraid to use structs or break naming rules in documentation blocks i
 
 Compiler Nags:
 
-- GenerateDocumentationFile
-- Warnings as errors
-- Squelch missing doc comment warnings temporarily.
-- Several XML doc comments-related warnings.
-- Centralized warning squelches.
-- Naming style rule breakage.
-- Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
+- [x] GenerateDocumentationFile
+- [x] Warnings as errors
+- [ ] Squelch missing doc comment warnings temporarily.
+- [ ] Several XML doc comments-related warnings.
+- [ ] Centralized warning squelches.
+- [ ] Naming style rule breakage.
+- [ ] Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
   Alternative `<b>[Deprecated]</b>` in XML doc comment.
 
 Efficiency:
 
-- Converting README to doc comments manually.
-- Using generalized comment for multiple elements = efficiency.
-- See refs, mark up: do or do not (efficiency, quality, take your pick)
-- params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
+- [ ] Converting README to doc comments manually.
+- [ ] Using generalized comment for multiple elements = efficiency.
+- [ ] See refs, mark up: do or do not (efficiency, quality, take your pick)
+- [ ] params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
 
 Misc Tip:
 
-- Syntax coloring in doc comments.
-- Using structs
+- [ ] Syntax coloring in doc comments.
+- [ ] Using structs
 
 ### ~ For Social post
 
