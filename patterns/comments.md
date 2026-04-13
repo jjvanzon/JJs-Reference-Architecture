@@ -4,7 +4,7 @@
 ====================
 
 
-A way to centralize and reuse comments: a technique to improve code documentation.
+A way to centralize and reuse comments: a technique to improve your docs in code.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
@@ -77,9 +77,9 @@ There's a lot of other options for writing doc comments, we'll be covering in th
 
 ### Declutter Your Code!
 
-See, the doc comments are placed with the code, and it can get quite crowded with them.
+See, the doc comments are put in the code, and it can get quite crowded with them.
 
-I couldn't even give a good example of that: it'd overpower this very post as much as it'd overpower your code. Here's a bad example anyway:
+I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a bad example anyway:
 
 ```cs
 /// <summary>
@@ -116,7 +116,7 @@ string TakeStartUntil(string input, char until)
 }
 ```
 
-It can happen though that you can hardly see the code itself through all the comment.
+More often there's even more documentation. Sometimes you can hardly see the code itself through all the comment. Where is my code? Oh, it's hiding behind that wall of comments.
 
 ### Stop Repeating the Comments!
 
@@ -199,13 +199,17 @@ class Element
 
 There the inner constructor `inherits` the doc from the `Element class`, because we added the `cref` attribute pointing to it. Here's a resulting tool tip:
 
+`[ TODO: A picture that is more to the point about hovering the Element class name might be better. ]`
+
 <img src="image-2.png" width="500" />
 
-Yes, it's lazy! But efficient. But it's still quite cluttered with comment. Half the code above is still comment.
+Yes, it's lazy! But efficient. 
+
+This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere.
 
 ### Reuse the Comments Anywhere!
 
-To find our code back, we can use a trick, making things much easier. I like to put my comments in a file called `docs.cs`:
+Where'd the code go? To find our code back, we can use a trick, making things much easier. I like to put my comments in a file called `docs.cs`:
 
 ```cs
 /// <summary>
@@ -238,7 +242,7 @@ class Element
 
 Now each documentation is just a single unobtrusive line with an `inheritdoc` tag.
 
-This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it a lot easier to review, revisise and maintenance them.
+This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it a lot easier to review, revise and maintain.
 
 It's my preferred way of doing it now.
 
@@ -287,7 +291,7 @@ To use the `docs` you'd add a `using` statement to `GlobalUsings.cs`:
 global using JJ.Demos.Architecture.docs;
 ```
 
-Or to each code file, like `Element.cs`, you can just add `using docs`:
+Or to each code file, you can just add `using docs`:
 
 ```cs
 namespace JJ.Demos.Architecture;
@@ -299,28 +303,30 @@ class Element;
 ```
 #### Public
 
-I actually like to make the docs-structs `public`:
+I actually like to make the doc-structs `public`:
 
 ```cs
 /// <summary>...</summary>
 public struct _element;
 ```
 
-That way a `docs` namespace gives an overview of the documentation accessible from outside your assembly.
+That way a `docs` namespace gives an overview of the documentation even outside your assembly.
 
 #### Object Browser
 
-For instance you can inspect them in the `Object Browser` as a whole, and other people can too:
+Now you can inspect them in the `Object Browser` as a whole, and so can others:
 
 `[Screen shot]`
 
+You can check your documentation in the Object Browser and see it all in one place.
+
 #### Structs
 
-The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
+The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
 
 `[ TODO: Screen shot ]`
 
-This in contrast to crefs to actual code elements, which might be colored like that code element, which makes them very confusing to me:
+This in contrast to crefs to actual code elements, which might be colored like that code element, which makes them visually very confusing to me:
 
 `[ TODO: Screen shot ]`
 
@@ -328,16 +334,16 @@ This in contrast to crefs to actual code elements, which might be colored like t
 
 The naming format is also specifically chosen to make the `<inheritdoc/>` tags as unobtrusive as possible.
 
-Consider the follow docs only member called `_mydoc`:
+Consider the follow docs only member called `_myprop`:
 
 ```cs
 /// <summary> ... </summary>
 struct _myprop;
 ```
 
-Not only do the lower case letters not stand out as much. This and the underscore prevent the name from colliding with the actual code elements:
+Not only do the lower case letters not stand out as much. The underscore prevents the name from colliding with the actual code elements:
 
-<img src="image-7.png" width="200" />
+<img src="image-7.png" width="250" />
 
 ### Make 'Em Play Nicely
 
@@ -351,7 +357,7 @@ To ship the docs along with your NuGet package you can add this to your csproj f
 To actually generate the package you add: 
 
 ```xml
-<GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
+<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 ```
 
 #### Warnings as Errors
@@ -366,13 +372,15 @@ Now you can be sure, that it won't compile, until we've solved our self-imposed 
 
 #### Naming Rules
 
-Then the system might start bickering about things, like naming rule violations:
+The system might start bickering about things, like naming rule violations:
 
 <img src="image-5.png" width="500" />
 
 See the [Naming Style](#naming-style) section explains why we use names like that. There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the file:
 
-`#pragma warning disable IDE1006 // naming rule`
+```
+#pragma warning disable IDE1006 // naming rule`
+```
 
 #### Namespace != Folder
 
@@ -394,7 +402,7 @@ Another warning you can get, has to do with the docs-only members not actually h
 
 I'd just squelch that warning at the top of the code file:
 
-```cs
+```
 #pragma warning disable CS1572 // param tag mismatch
 ```
 
@@ -404,7 +412,7 @@ Downside: You do lose the checks on param existence this way. That's a trade-off
 
 ### Conclusion
 
-Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, without repetitions or code clutter.
+Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, without repetitions and their not cluttering your code.
 
 -----
 
@@ -456,29 +464,18 @@ I had way too much to say about it, so I put together an article with all the de
 
 👉 XML Doc Comments: `[ TODO: Link ]`
 
-#### ~ Snippets
-
-You can check your documentation in the Object Browser and see it all in one place.
-
-This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere. 
-
-What shall we do...?
-
-("Where is my code?")
-
-Can't find the code through all the comments...
-("Where'd the code go?") 
-
-To solve the remaining hacky `crefs` 
-
-It's hiding behind that wall.
-
-Where'd the code go?
+-----
 
 Want to read more about software development techniques for .NET and C#? Here's the forever unfinished resource, where I brain-dump more of these things inside neat looking web pages. You can find explanations, reasons and code samples of all sorts of patterns and techniques both mainstream or made up:
 
 `[ Link to JJ's Software Architecture Page ]`
 
+#### ~ Snippets
+
+What shall we do...?
+
+Can't find the code through all the comments...
+To solve the remaining hacky `crefs` 
 
 `[ This fits better in the Comments section in patterns/other.md ]`
 
