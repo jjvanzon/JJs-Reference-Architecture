@@ -29,6 +29,9 @@ A way to centralize and reuse comments: a technique to improve code documentatio
 - [Conclusion](#conclusion)
 - [~ AI Aided Drafts](#-ai-aided-drafts)
 - [~ Topics to Cover](#-topics-to-cover)
+    - [Compiler Nags](#compiler-nags-1)
+    - [Efficiency](#efficiency)
+    - [Misc Tip:](#misc-tip)
 - [~ For Social post](#-for-social-post)
 - [~ Snippets](#-snippets)
 
@@ -253,11 +256,19 @@ With centralized doc comments, we've snuck by that beast completely:
 
 ### Say "No" to XPaths
 
-There is an alternative, which is putting the doc comments in XML files, but that replaces the crefs with convoluted XPaths that are also easy to break.
+There is an alternative: Storing docs in separate XML files:
 
 `[ Example XML of that. ]`
 
+You can then link to that XML with XPath
+
+`[ Links to XML file from code ]`
+
+But those links are convoluted and can break easily.
+
 How's that going to look for generics? I don't even want to know.
+
+Centralizing docs in code is a stronger alternative.
 
 ### Make Them Play Nicely
 
@@ -273,7 +284,6 @@ To actually generate the package you add:
 ```xml
 <GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
 ```
-
 
 #### Structs
 
@@ -365,7 +375,11 @@ But that's a trade-off I'm willing to make. I just squelch that warning at the t
 #pragma warning disable CS1572 // param tag mismatch
 ```
 
-And then that's dealt with. The members you use it for will still use the param tag either way.
+The members you use it for will still use the param tag either way.
+
+You do lose the checks on param existence this way. 
+
+Downside: You lose some automatic checking (like param-existence validation), But you gain a lot of other things by using these centralized docs structs, like the maintainability, clarity of the code, and comment reuse.
 
 #### Naming Rules
 
@@ -399,20 +413,9 @@ Eventually I settled on this doc-only member trick, which has been serving me ve
 
 ### ~ AI Aided Drafts
 
-<h4>Why Not Use XML Files With XPaths?</h4>
+<h4>Missing Doc Lenience</h4>
 
-Storing docs in separate XML files and linking them with XPath is possible, but those links are fragile and can break easily. Centralizing docs in code is stronger one place~~, tracked in version control~~.
-
-Downside:
-You lose some automatic checking (like param-existence validation), but you gain maintainability, clarity, and easier updates.
-
-<h4>Managing Warnings</h4>
-
-* ~~Set `<GenerateDocumentationFile>true>` in your `.csproj` so documentation is built.~~
-* ~~Use warnings as errors to enforce doc standards.~~
-* If you’re mid-transition, squelch missing doc warnings **centrally** in your project file, not scattered through your code.
-
-__Example:__
+* If you’re mid-transition, you can squelch missing doc warnings in your project file:
 
 ```xml
 <PropertyGroup>
@@ -421,14 +424,28 @@ __Example:__
 </PropertyGroup>
 ```
 
-This helps you manage all doc-related warnings in one spot.
+### ~ Topics to Cover
 
-<h4>Deprecation: `[Obsolete]` vs Doc Markers</h4>
+#### Compiler Nags
+
+- [x] GenerateDocumentationFile
+- [x] Warnings as errors
+- [ ] Squelch missing doc comment warnings temporarily.
+- [x] ~~Centralized~~ warning squelches.
+- [x] Naming style rule breakage.
+- [ ] Several XML doc comments-related warnings.
+- [ ] Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
+  Alternative `<b>[Deprecated]</b>` in XML doc comment.
 
 If you mark a member as `[Obsolete]` and treat warnings as errors, you can create friction in your build process.
 An alternative: add `<b>[Deprecated]</b>` in the doc comment for softer, visible warnings that don’t break the build.
 
-<h4>Readme and Generalized Docs</h4>
+#### Efficiency
+
+- [ ] Converting README to doc comments manually.
+- [ ] Using generalized comment for multiple elements = efficiency.
+- [ ] See refs, mark up: do or do not (efficiency, quality, take your pick)
+- [ ] params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
 
 You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
 This keeps documentation efficient.
@@ -436,32 +453,7 @@ This keeps documentation efficient.
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
-<h4>Syntax Coloring and Style</h4>
-
-Use minimal formatting or even basic syntax coloring in doc comments for clarity.
-Don’t be afraid to use structs or break naming rules in documentation blocks if it makes the docs easier to find and update.
-
-### ~ Topics to Cover
-
-Compiler Nags:
-
-- [x] GenerateDocumentationFile
-- [x] Warnings as errors
-- [ ] Squelch missing doc comment warnings temporarily.
-- [ ] Several XML doc comments-related warnings.
-- [x] ~~Centralized~~ warning squelches.
-- [x] Naming style rule breakage.
-- [ ] Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
-  Alternative `<b>[Deprecated]</b>` in XML doc comment.
-
-Efficiency:
-
-- [ ] Converting README to doc comments manually.
-- [ ] Using generalized comment for multiple elements = efficiency.
-- [ ] See refs, mark up: do or do not (efficiency, quality, take your pick)
-- [ ] params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
-
-Misc Tip:
+#### Misc Tip:
 
 - [ ] Syntax coloring in doc comments.
 - [ ] Using structs
@@ -475,8 +467,6 @@ This time I want to talk about "doc-only members" - a technique to improve code 
 I had way too much to say about these, so I put together an article with the details.
 
 👉 XML Doc Comments: `[ TODO: Link ]`
-
-But we'll not be covering all of those. This post focuses on a high-level way of managing these doc comments.
 
 ### ~ Snippets
 
@@ -523,5 +513,3 @@ A bad comment looks like this:
 /// This is the text.
 /// </summary>
 ```
-
-You do lose the checks on param existence. But you gain a lot of the other things discussed here.
