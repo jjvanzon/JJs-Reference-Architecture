@@ -15,7 +15,17 @@ A way to centralize and reuse comments: a technique to improve code documentatio
 - [Say "No" to Bewildering Links](#say-no-to-bewildering-links)
 - [Say "No" to XPaths](#say-no-to-xpaths)
 - [Make Them Play Nicely](#make-them-play-nicely)
-- [Compiler Nags](#compiler-nags)
+    - [Shipping Docs](#shipping-docs)
+    - [Docs Namespace](#docs-namespace)
+    - [Public](#public)
+    - [Object Browser](#object-browser)
+    - [Naming Style](#naming-style)
+    - [Structs](#structs)
+    - [Compiler Nags](#compiler-nags)
+    - [Warnings as Errors](#warnings-as-errors)
+    - [Param Tag Mismatch](#param-tag-mismatch)
+    - [Naming Rule Violations](#naming-rule-violations)
+    - [Namespace != Folder](#namespace--folder)
 - [Conclusion](#conclusion)
 - [~ AI Aided Drafts](#-ai-aided-drafts)
 - [~ Topics to Cover](#-topics-to-cover)
@@ -251,7 +261,20 @@ How's that going to look for generics? I don't even want to know.
 
 ### Make Them Play Nicely
 
-<h4>Docs Namespace</h4>
+#### Shipping Docs
+
+To ship the docs along with your NuGet package you can add this to your csproj file:
+
+```xml
+<GenerateDocumentationFile>True</GenerateDocumentationFile>
+```
+To actually generate the package you add: 
+
+```xml
+<GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
+```
+
+#### Docs Namespace
 
 I like to give the docs their own sub-namespace `.docs`
 
@@ -259,16 +282,10 @@ I like to give the docs their own sub-namespace `.docs`
 namespace JJ.Demos.Architecture.docs;
 
 /// <summary>...</summary>
-public struct _element;
+struct _element;
 ```
 
-I actually like to make them `public` as well.
-
-That way you can inspect them in the Object Browser as a whole, and other people can too:
-
-`[Screen shot]`
-
-To use the `docs` namespace, you'd add a `using` statement to `GlobalUsings.cs`:
+To use the `docs` structs, you'd add a `using` statement to `GlobalUsings.cs`:
 
 ```cs
 global using JJ.Demos.Architecture.docs;
@@ -285,43 +302,56 @@ using docs;
 class Element;
 ```
 
-<h4>Shipping Docs</h4>
+#### Public
 
-To ship the docs along with your NuGet package you can add this to your csproj file:
+I actually like to make the docs-structs `public` as well.
 
-```xml
+```cs
+/// <summary>...</summary>
+public struct _element;
 ```
 
+#### Object Browser
+
+That way you can inspect them in the `Object Browser` as a whole, and other people can too:
+
+`[Screen shot]`
 
 
-To actually generate the package you add: 
+#### Naming Style
 
-```xml
-<GeneratePackageOnBuild>True</GeneratePackageOnBuild>`
-```
-
-<h3>Naming Style</h3>
-
-The naming format is specifically chosen to make the `<inheritdoc>` tags as unobtrusive as possible.
+The naming format is specifically chosen to make the `<inheritdoc/>` tags as unobtrusive as possible.
 
 Consider the follow docs only member called `_mydoc`:
 
 ```cs
 /// <summary> ... </summary>
-struct _mydoc;
+struct _myprop;
 ```
 
-Not only do the lower case letters not stand out as much. This and the underscore prevent the name from colliding with the actual code elements.
+Not only do the lower case letters not stand out as much. This and the underscore prevent the name from colliding with the actual code elements:
 
-<h3>Structs</h3>
+<img src="image-7.png" width="150" />
 
-The choice to use `structs` is also for camouflage. They are usually displayed in an unassuming green, making the `<inheritdoc>`s blend in the background, so the code itself pops out.
+#### Structs
 
-### Compiler Nags
+The choice to use `structs` is also for camouflage. They are usually displayed in an unassuming green, making the `<inheritdocs>` blend in the background, so the code itself pops out.
+
+#### Compiler Nags
 
 You may get some warnings you might need to deal with.
 
-<h4><code>param</code> Tag Mismatch</h4>
+#### Warnings as Errors
+
+I like to make things worse, by treating all warnings as errors. You can do this by adding the following to your `.csproj`:
+
+```xml
+<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+```
+
+Now you can be sure, that it won't compile, until you've solved those nasty nags.
+
+#### Param Tag Mismatch
 
 For instance, the docs-only members do not actually have the parameters you defined documentation for:
 
@@ -335,24 +365,13 @@ But that's a trade-off I'm willing to make. I just squelch that warning at the t
 
 And then that's dealt with. The members you use it for will still use the param tag either way.
 
-<h4>Warnings as Errors</h4>
+#### Naming Rule Violations
 
-I like to make things worse, by treating all warnings as errors. You can do this by adding the following to your `.csproj`:
-
-```xml
-<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-```
-
-Now you can be sure, that it won't compile, until you've solved those nags.
-
-<h4>Naming Rule Violation</h4>
-
-Depending on your setup, the system will start bickering about other things too, like naming rule violations:
+Then the system might start bickering about other things too, like naming rule violations:
 
 ![alt text](image-5.png)
 
-
-See the [Naming Style](#naming-style) section names like that in the first place. There's no way to configure a naming rule specifically for these, so I like to squelch that warning at the top of the file too:
+See the [Naming Style](#naming-style) section explains why we use names like that. There's no way to configure a naming rule specifically for these, so I like to squelch that warning at the top of the file:
 
 ```cs
 #pragma warning disable IDE1006 // naming rule violation
@@ -360,18 +379,16 @@ See the [Naming Style](#naming-style) section names like that in the first place
 
 Since we only use one docs file per project, at least we can just squelch these with a single line each.
 
-<h4>Namespace != Folder</h4>
+#### Namespace != Folder
 
-The namespace where we put the docs itself is violating another naming rule:
+The namespace where we put the docs itself is violating another naming rule. We  put the `docs.cs` in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler:
 
-```cs
-namespace JJ.Demos.Architecture.docs;
-```
+![alt text](image-4.png)
 
-I put the `docs.cs` in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler. Squelch as follows:
+Squelch as follows:
 
 ```cs
-#pragma warning disable IDE0130 // Namespace != folder
+#pragma warning disable IDE0130 // namespace != folder
 ```
 
 ### Conclusion
@@ -430,8 +447,8 @@ Compiler Nags:
 - [x] Warnings as errors
 - [ ] Squelch missing doc comment warnings temporarily.
 - [ ] Several XML doc comments-related warnings.
-- [ ] Centralized warning squelches.
-- [ ] Naming style rule breakage.
+- [x] ~~Centralized~~ warning squelches.
+- [x] Naming style rule breakage.
 - [ ] Deprecated members: `[Obsolete]`, compiler error option, friction with `WarningAsErrors`.
   Alternative `<b>[Deprecated]</b>` in XML doc comment.
 
@@ -452,6 +469,10 @@ Misc Tip:
 Hi there developers! And hello to you normal people too. Another technical update (again).
 
 This time I want to talk about "doc-only members" - a technique to improve code documentation.
+
+I had way too much to say about these, so I put together an article with the details.
+
+👉 XML Doc Comments: `[ TODO: Link ]`
 
 But we'll not be covering all of those. This post focuses on a high-level way of managing these doc comments.
 
@@ -482,7 +503,6 @@ Want to read more about software development techniques for .NET and C#? Here's 
 
 `[ Link to JJ's Software Architecture Page ]`
 
-- You do lose the checks on param existence. But you gain a lot of the other things discussed here.
 
 The end result: Better usability, centralized comments, efficiently written, without repetitions or code clutter and all in all cleaner code.
 
@@ -501,3 +521,5 @@ A bad comment looks like this:
 /// This is the text.
 /// </summary>
 ```
+
+You do lose the checks on param existence. But you gain a lot of the other things discussed here.
