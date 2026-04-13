@@ -1,12 +1,9 @@
 `[ Draft ]`
 
-📖 Doc-Only Members
+📔 Doc-Only Members
 ====================
 
-Hi there developers! And hello to you normal people too. Another technical update (again).
-
-This time I want to talk about "doc-only members": a technique to improve code documentation.
-It's way to centralize and reuse the comments in your code.
+"Doc-only members" are technique to improve code documentation: a way to centralize and reuse comments.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
@@ -18,7 +15,8 @@ It's way to centralize and reuse the comments in your code.
 - [Why Not XML Files and XPaths?](#why-not-xml-files-and-xpaths)
 - [Conclusion](#conclusion)
 - [2025-07-04 ~ Topics to Cover](#2025-07-04--topics-to-cover)
-- [2025-07-04 ~ Postponed Social Post XML Doc Comments - AI Aided Draft](#2025-07-04--postponed-social-post-xml-doc-comments---ai-aided-draft)
+- [2025-07-04 ~ AI Aided Draft](#2025-07-04--ai-aided-draft)
+- [Social post](#social-post)
 - [Outtakes](#outtakes)
 
 
@@ -26,7 +24,7 @@ It's way to centralize and reuse the comments in your code.
 
 XML doc comments are special comments, that light up when you hover the code elements.
 
-<img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="450" />
+<img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="500" />
 
 You can add them to your own code, so instant documentation pops up while you program.
 
@@ -56,7 +54,6 @@ string StartWithCap(string input)
     return input.Left(1).ToUpper() + input.CutLeft(1);
 }
 ```
-
 
 This helps you remember what it's for. Even if you have not much to write about it, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
@@ -161,7 +158,7 @@ class Element
 
 Here's a resulting IntelliSense tool tip:
 
-![Screen shot of code with tool tip showing an inherited doc](image-1.png)
+<img alt="Screen shot of code with tool tip showing an inherited doc" src="image-1.png" width="500" />
 
 But there's still repeated comments in the `Element` base class! Oh no! Now what?
 
@@ -186,7 +183,7 @@ class Element
 
 There the inner constructor `inherits` the doc from the `Element class`, because we added the `cref` attribute pointing to it. Here's a resulting tool tip:
 
-![](image-2.png)
+<img src="image-2.png" width="500" />
 
 Yes, it's lazy! But efficient. But the code still has those little barriers of comments that'll stop you from reading the code.
 
@@ -239,7 +236,7 @@ Eventually I settled on this doc-only member trick which has been serving me ver
 - Using structs
 - Naming style rule breakage.
 
-### 2025-07-04 ~ Postponed Social Post XML Doc Comments - AI Aided Draft
+### 2025-07-04 ~ AI Aided Draft
 
 <h4>What Are XML Doc Comments?</h4>
 
@@ -346,6 +343,12 @@ Centralizing your doc comments makes your codebase:
 * More reliable for developers
 
 The result: Better usability, efficient docs, and cleaner code.
+
+### Social post
+
+Hi there developers! And hello to you normal people too. Another technical update (again).
+
+This time I want to talk about "doc-only members" - a technique to improve code documentation.
 
 ### Outtakes
 
