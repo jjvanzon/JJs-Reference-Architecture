@@ -1,13 +1,12 @@
-` [Draft] `
+`[ Draft ]`
 
-`[TODO: Use more engaging titles, such as questions or how/why/what/where.]`
-
-📖 Doc Comments
-================
+📖 Doc-Only Members
+====================
 
 Hi there developers! And hello to you normal people too. Another technical update (again).
 
-This time I want to talk about "doc-only members": a way to centralize the XML doc comments in your code.
+This time I want to talk about "doc-only members": a technique to improve code documentation.
+It's way to centralize and reuse the comments in your code.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
@@ -18,14 +17,18 @@ This time I want to talk about "doc-only members": a way to centralize the XML d
 - [Bad Example: Bewildering Links](#bad-example-bewildering-links)
 - [Why Not XML Files and XPaths?](#why-not-xml-files-and-xpaths)
 - [Conclusion](#conclusion)
-- [2025-07-04 ~ Postponed Social Post XML Doc Comments - Draft Texts](#2025-07-04--postponed-social-post-xml-doc-comments---draft-texts)
+- [2025-07-04 ~ Topics to Cover](#2025-07-04--topics-to-cover)
 - [2025-07-04 ~ Postponed Social Post XML Doc Comments - AI Aided Draft](#2025-07-04--postponed-social-post-xml-doc-comments---ai-aided-draft)
 - [Outtakes](#outtakes)
 
 
 ### What are XML Doc Comments?
 
-XML doc comments are special comments, that light up when you hover the code elements. You can add them to your own code elements, to have instant documentation pop up while you program.
+XML doc comments are special comments, that light up when you hover the code elements.
+
+![Tooltip with comment shows while hovering method name](xml-doc-comment-tooltip.png)
+
+You can add them to your own code, so instant documentation pops up while you program.
 
 Here's an example method:
 
@@ -54,9 +57,6 @@ string StartWithCap(string input)
 }
 ```
 
-It'll pop up as a tool tip when you hover over its name:
-
-![Tooltip with comment shows while hovering method name](xml-doc-comment-tooltip.png)
 
 This helps you remember what it's for. Even if you have not much to write about it, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
@@ -188,7 +188,7 @@ There the inner constructor `inherits` the doc from the `Element class`, because
 
 ![](image-2.png)
 
-Yes, it's lazy! But efficient. But the code still starts with kind of a wall of comment.
+Yes, it's lazy! But efficient. But the code still has those little barriers of comments that'll stop you from reading the code.
 
 ### Reuse the Comments Anywhere!
 
@@ -220,9 +220,7 @@ How's that going to look for generics? I don't even want to know.
 
 Eventually I settled on this doc-only member trick which has been serving me very well ever since.
 
-### 2025-07-04 ~ Postponed Social Post XML Doc Comments - Draft Texts
-
-- You do lose the checks on param existence. But you gain a lot of the other things discussed here.
+### 2025-07-04 ~ Topics to Cover
 
 - GenerateDocumentationFile
 - Warnings as errors
@@ -241,20 +239,7 @@ Eventually I settled on this doc-only member trick which has been serving me ver
 - Using structs
 - Naming style rule breakage.
 
-The end result: Better usability, centralized comments, efficiently written, without repetitions or code clutter and all in all cleaner code.
-
-This article touches on:
-
-- XML doc comments
-- Warning management
-- Centralized csproj configurations
-
 ### 2025-07-04 ~ Postponed Social Post XML Doc Comments - AI Aided Draft
-
-<h4>Centralized Doc Comments in C#: Practical Approaches</h4>
-
-Hi developers, and yes, normal people too. Another technical update.
-This time, it’s about a technique that improves code documentation: using “doc-only members” to centralize your XML doc comments.
 
 <h4>What Are XML Doc Comments?</h4>
 
@@ -383,4 +368,14 @@ Centralized Doc-Only Members
 
 Want to read more about software development techniques for .NET and C#? Here's the forever unfinished resource, where I brain-dump more of these things inside neat looking web pages. You can find explanations, reasons and code samples of all sorts of patterns and techniques both mainstream or made up:
 
-`[ TODO: Link to JJ's Software Architecture Page ]`
+`[ Link to JJ's Software Architecture Page ]`
+
+- You do lose the checks on param existence. But you gain a lot of the other things discussed here.
+
+The end result: Better usability, centralized comments, efficiently written, without repetitions or code clutter and all in all cleaner code.
+
+This article touches on:
+
+- XML doc comments
+- Warning management
+- Centralized csproj configurations
