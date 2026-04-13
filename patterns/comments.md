@@ -26,7 +26,9 @@ It's way to centralize and reuse the comments in your code.
 
 XML doc comments are special comments, that light up when you hover the code elements.
 
-![Tooltip with comment shows while hovering method name](xml-doc-comment-tooltip.png)
+<img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="150" />
+
+`![Tooltip with comment shows while hovering method name](xml-doc-comment-tooltip.png)`
 
 You can add them to your own code, so instant documentation pops up while you program.
 
