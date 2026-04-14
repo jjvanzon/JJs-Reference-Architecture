@@ -26,15 +26,13 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Naming Rules](#naming-rules)
     - [Namespace != Folder](#namespace--folder)
     - [Param Tag Mismatch](#param-tag-mismatch)
+- [Efficiency](#efficiency)
+    - [From README.md](#from-readmemd)
+    - [Generalized Comment](#generalized-comment)
+    - [Leave Out the Params](#leave-out-the-params)
 - [Conclusion](#conclusion)
 - [~ Drafts](#-drafts)
-    - [~ Efficiency](#-efficiency)
-    - [~ Brainstorm](#-brainstorm)
-    - [~ For Social Post](#-for-social-post)
     - [~ Snippets](#-snippets)
-- [? Out of Scope](#-out-of-scope)
-    - [? Warnings as Errors](#-warnings-as-errors)
-    - [? Deprecated Members](#-deprecated-members)
 
 
 ### What are XML Doc Comments?
@@ -350,7 +348,7 @@ Not only do the lower case letters not stand out as much. The underscore prevent
 
 #### Shipping
 
-To ship the docs along with your NuGet package you can add this to your `csproj` file.
+To ship the docs along with your `NuGet` package you can add this to your `csproj` file.
 
 ```xml
 <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -365,7 +363,7 @@ Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 
 #### Missing XML Comments
 
-You can add an extra check to find missing XML comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
+You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
 
 ```xml
 <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> <!--missing docs as errors-->
@@ -376,6 +374,9 @@ If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in
 ```xml
 <NoWarn>$(NoWarn);CS1591</NoWarn> <!--missing doc lenience-->
 ```
+
+These tags also belong in a inside a `<PropertyGroup>` so be sure to put them there.
+
 #### Naming Rules
 
 You may get some warnings you might need to deal with. The system might start bickering about things, like naming rule violations:
@@ -396,7 +397,7 @@ The namespace where we put the docs is violating another naming rule. We  put a 
 
 Squelch as follows:
 
-```cs
+```
 #pragma warning disable IDE0130 // namespace != folder
 ```
 
@@ -416,7 +417,35 @@ The parameters are part of the methods you inherit the doc from. I'd just squelc
 
 The members you use it for will still use the `param` doc anyway.
 
-Downside: You do lose the checks on param existence. That's the trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and focus and clarity in your code.
+Downside: You do lose the checks on `param` existence. That's the trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and focus and clarity in your code.
+
+### Efficiency
+
+Here follow a few strategies for producting XML doc comments efficiently.
+
+#### From README.md
+
+If you already have a README.md with descriptions of what your code does, you could cut it up into little pieces: one per code element and add them as docs only members. Apply them to multiple members. That way you get a head-start at making your code comments more complete.
+
+#### Generalized Comment
+
+You can choose to make one generalized description of multiple code elements and put all in one docs-only member. You can use `<inheritdoc>` to apply those to multiple code elements at once. Sometimes this means efficiency for the author, but it can also help the reader, when a few elements are so related and a shared comment provides a little "how to" at hand where needed.
+
+#### Leave Out the Params
+
+It is my opinion that the summary is the most i
+
+...
+
+- [ ] See refs, mark up: do or do not (efficiency, quality, take your pick)
+- [ ] params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
+- [ ] `<remarks>` for extending and reusing comments.
+
+You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
+This keeps documentation efficient.
+
+Decide for yourself:
+Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
 ### Conclusion
 
@@ -426,42 +455,6 @@ Eventually I settled on this doc-only member trick, which has been serving me ve
 
 ### ~ Drafts
 
-#### ~ Efficiency
-
-- [ ] Converting README to doc comments manually.
-- [ ] Using generalized comment for multiple elements = efficiency.
-- [ ] See refs, mark up: do or do not (efficiency, quality, take your pick)
-- [ ] params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
-
-You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
-This keeps documentation efficient.
-
-Decide for yourself:
-Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
-
-#### ~ Brainstorm
-
-It's starting to be more about the warnings as errors than about doc-only members.
-Maybe details about this should be split off into another topic.
-For me, warning as errors just makes the warnings pop out that people may get when uisng doc-only members.
-
-What I'd also like to stress is the arbitrary decisions like naming and structs. I already do, but I'd like to stress even more that you could name them any way you want and it doesn't matter if they're classes, structs, enums or what have you.
-
-#### ~ For Social Post
-
-Hi there developers! And hello to you normal people too. Another technical update (again). Ever opened a file and thought: "Where’s the code? Oh, buried in the middle of all these comments."
-
-This time I want to talk about "doc-only members": a pattern to improve code documentation.
-
-I had way too much to say about it, so I put together an article with all the details.
-
-👉 XML Doc Comments: `[ TODO: Link ]`
-
------
-
-Want to read more about software development techniques for .NET and C#? Here's the forever unfinished resource, where I brain-dump more of these things inside neat looking web pages. You can find explanations, reasons and code samples of all sorts of patterns and techniques both mainstream or made up:
-
-`[ Link to JJ's Software Architecture Page ]`
 
 #### ~ Snippets
 
@@ -469,38 +462,3 @@ What shall we do...?
 
 Can't find the code through all the comments...
 To solve the remaining hacky `crefs` 
-
-### ? Out of Scope
-
-`[ This fits better in the Comments section in patterns/other.md ]`
-
-Not all doc comments are useful.
-A bad comment looks like this:
-
-```csharp
-/// <summary>
-/// This is the text.
-/// </summary>
-```
-
-#### ? Warnings as Errors
-
-I like to make things worse, by treating all warnings as errors. You can do this too by adding the following to your `.csproj`:
-
-```xml
-<PropertyGroup>
-  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-</PropertyGroup>
-```
-
-Now you can be sure, that it won't compile, until we've solved our self-imposed problems.
-
-But without turning all the warnings into errors all at once, you could also choose to only turn missing XML comments into errors. 
-
-```xml
-<WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> <!--missing docs as errors-->
-```
-
-#### ? Deprecated Members
-
-Turning warnings into errors may also cause friction with deprecated members marked as [Obsolete] that would only result in a warning before, but now pop up as an error. Fortunately this can also be solved with comments. Leading a member summary with: `<b>[Deprecated]</b>` goes a long way and serves as a stand-in for a warning, and won't break the build.
