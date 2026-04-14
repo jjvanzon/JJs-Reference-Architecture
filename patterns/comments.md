@@ -22,17 +22,17 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Naming Style](#naming-style)
 - [Make 'Em Play Nicely](#make-em-play-nicely)
     - [Shipping](#shipping)
-    - [Missing XML Comments](#missing-xml-comments)
+    - [Missing Comments](#missing-comments)
     - [Naming Rules](#naming-rules)
     - [Namespace != Folder](#namespace--folder)
     - [Param Tag Mismatch](#param-tag-mismatch)
 - [Efficiency](#efficiency)
-    - [From README.md](#from-readmemd)
-    - [Generalized Comment](#generalized-comment)
+    - [Copy from the README](#copy-from-the-readme)
+    - [One Generalized Comment](#one-generalized-comment)
     - [Leave Out the Params](#leave-out-the-params)
+    - [To `cref` or not to `cref`](#to-cref-or-not-to-cref)
+    - [`<remarks>` Are Awesome](#remarks-are-awesome)
 - [Conclusion](#conclusion)
-- [~ Drafts](#-drafts)
-    - [~ Snippets](#-snippets)
 
 
 ### What are XML Doc Comments?
@@ -361,7 +361,7 @@ To actually generate the package you add:
 
 Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 
-#### Missing XML Comments
+#### Missing Comments
 
 You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
 
@@ -423,42 +423,38 @@ Downside: You do lose the checks on `param` existence. That's the trade-off. You
 
 Here follow a few strategies for producting XML doc comments efficiently.
 
-#### From README.md
+#### Copy from the README
 
 If you already have a README.md with descriptions of what your code does, you could cut it up into little pieces: one per code element and add them as docs only members. Apply them to multiple members. That way you get a head-start at making your code comments more complete.
 
-#### Generalized Comment
+You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
+This keeps documentation efficient.
+
+#### One Generalized Comment
 
 You can choose to make one generalized description of multiple code elements and put all in one docs-only member. You can use `<inheritdoc>` to apply those to multiple code elements at once. Sometimes this means efficiency for the author, but it can also help the reader, when a few elements are so related and a shared comment provides a little "how to" at hand where needed.
 
 #### Leave Out the Params
 
-It is my opinion that the summary is the most i
+Te main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all and save yourself a lot of time.
 
-...
+Comments like `<param name="text">This is the text.</param>` are usually not very useful anyway.
 
-- [ ] See refs, mark up: do or do not (efficiency, quality, take your pick)
-- [ ] params, etc? leave out for efficiency? Take your pick. Main descriptions = most important.
-- [ ] `<remarks>` for extending and reusing comments.
-
-You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
-This keeps documentation efficient.
+I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might ad a `<param>` tag but this is rare in my code.
 
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
+#### To `cref` or not to `cref`
+
+Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can *choose* whether to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
+
+#### `<remarks>` Are Awesome
+
+...
+
+- [ ] `<remarks>` for extending and reusing comments.
+
 ### Conclusion
 
 Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, without repetitions and their not cluttering your code.
-
------
-
-### ~ Drafts
-
-
-#### ~ Snippets
-
-What shall we do...?
-
-Can't find the code through all the comments...
-To solve the remaining hacky `crefs` 
