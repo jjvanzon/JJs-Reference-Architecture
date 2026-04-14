@@ -22,18 +22,19 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Naming Style](#naming-style)
 - [Make 'Em Play Nicely](#make-em-play-nicely)
     - [Shipping](#shipping)
-    - [Warnings as Errors](#warnings-as-errors)
+    - [Missing XML Comments](#missing-xml-comments)
     - [Naming Rules](#naming-rules)
     - [Namespace != Folder](#namespace--folder)
     - [Param Tag Mismatch](#param-tag-mismatch)
 - [Conclusion](#conclusion)
 - [~ Drafts](#-drafts)
-    - [~ AI Aided](#-ai-aided)
-    - [~ Missing XML Comments](#-missing-xml-comments)
-    - [~ Deprecated Members](#-deprecated-members)
     - [~ Efficiency](#-efficiency)
+    - [~ Brainstorm](#-brainstorm)
     - [~ For Social Post](#-for-social-post)
     - [~ Snippets](#-snippets)
+- [? Out of Scope](#-out-of-scope)
+    - [? Warnings as Errors](#-warnings-as-errors)
+    - [? Deprecated Members](#-deprecated-members)
 
 
 ### What are XML Doc Comments?
@@ -349,7 +350,7 @@ Not only do the lower case letters not stand out as much. The underscore prevent
 
 #### Shipping
 
-To ship the docs along with your NuGet package you can add this to your csproj file:
+To ship the docs along with your NuGet package you can add this to your `csproj` file.
 
 ```xml
 <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -360,23 +361,28 @@ To actually generate the package you add:
 <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 ```
 
-#### Warnings as Errors
+Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 
-You may get some warnings you might need to deal with. I like to make things worse, by treating all warnings as errors. You can do this too by adding the following to your `.csproj`:
+#### Missing XML Comments
+
+You can add an extra check to find missing XML comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
 
 ```xml
-<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+<WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> <!--missing docs as errors-->
 ```
 
-Now you can be sure, that it won't compile, until we've solved our self-imposed problems.
+If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in lenience for missing docs, for while you're still writing your comments and are not quite done yet:
 
+```xml
+<NoWarn>$(NoWarn);CS1591</NoWarn> <!--missing doc lenience-->
+```
 #### Naming Rules
 
-The system might start bickering about things, like naming rule violations:
+You may get some warnings you might need to deal with. The system might start bickering about things, like naming rule violations:
 
 <img src="image-5.png" width="500" />
 
-See the [Naming Style](#naming-style) section explains why we use names like that. There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the file:
+See the [Naming Style](#naming-style) section explains why we would even use names like that. There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the `docs.cs` file:
 
 ```
 #pragma warning disable IDE1006 // naming rule`
@@ -390,17 +396,19 @@ The namespace where we put the docs is violating another naming rule. We  put a 
 
 Squelch as follows:
 
-`#pragma warning disable IDE0130 // namespace != folder`
+```cs
+#pragma warning disable IDE0130 // namespace != folder
+```
 
 Since we only use one docs file per project, at least we can just squelch these pesky warnings with a single line each.
 
 #### Param Tag Mismatch
 
-Another warning you can get, has to do with the docs-only members not actually having the parameters you defined:
+Another warning you can get, has to do with the docs-only members not actually *having* the parameters you define:
 
 <img src="image-6.png" width="500" />
 
-I'd just squelch that warning at the top of the code file:
+The parameters are part of the methods you inherit the doc from. I'd just squelch that warning at the top of the code file:
 
 ```
 #pragma warning disable CS1572 // param tag mismatch
@@ -408,7 +416,7 @@ I'd just squelch that warning at the top of the code file:
 
 The members you use it for will still use the `param` doc anyway.
 
-Downside: You do lose the checks on param existence this way. That's a trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and clarity of the code.
+Downside: You do lose the checks on param existence. That's the trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and focus and clarity in your code.
 
 ### Conclusion
 
@@ -417,29 +425,6 @@ Eventually I settled on this doc-only member trick, which has been serving me ve
 -----
 
 ### ~ Drafts
-
-#### ~ AI Aided
-
-<h4>Missing Doc Lenience</h4>
-
-* If you’re mid-transition, you can squelch missing doc warnings in your project file:
-
-```xml
-<PropertyGroup>
-  <WarningsAsErrors>$(WarningsAsErrors);1591</WarningsAsErrors>
-</PropertyGroup>
-```
-
-#### ~ Missing XML Comments
-
-Compiler Nags. Squelch missing doc comment warnings temporarily.
-
-#### ~ Deprecated Members
-
-`[Obsolete]`, compiler error option, friction with `WarningAsErrors`. Alternative `<b>[Deprecated]</b>` in XML doc comment.
-
-If you mark a member as `[Obsolete]` and treat warnings as errors, you can create friction in your build process.
-An alternative: add `<b>[Deprecated]</b>` in the doc comment for softer, visible warnings that don’t break the build.
 
 #### ~ Efficiency
 
@@ -453,6 +438,14 @@ This keeps documentation efficient.
 
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
+
+#### ~ Brainstorm
+
+It's starting to be more about the warnings as errors than about doc-only members.
+Maybe details about this should be split off into another topic.
+For me, warning as errors just makes the warnings pop out that people may get when uisng doc-only members.
+
+What I'd also like to stress is the arbitrary decisions like naming and structs. I already do, but I'd like to stress even more that you could name them any way you want and it doesn't matter if they're classes, structs, enums or what have you.
 
 #### ~ For Social Post
 
@@ -477,6 +470,8 @@ What shall we do...?
 Can't find the code through all the comments...
 To solve the remaining hacky `crefs` 
 
+### ? Out of Scope
+
 `[ This fits better in the Comments section in patterns/other.md ]`
 
 Not all doc comments are useful.
@@ -487,3 +482,25 @@ A bad comment looks like this:
 /// This is the text.
 /// </summary>
 ```
+
+#### ? Warnings as Errors
+
+I like to make things worse, by treating all warnings as errors. You can do this too by adding the following to your `.csproj`:
+
+```xml
+<PropertyGroup>
+  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+</PropertyGroup>
+```
+
+Now you can be sure, that it won't compile, until we've solved our self-imposed problems.
+
+But without turning all the warnings into errors all at once, you could also choose to only turn missing XML comments into errors. 
+
+```xml
+<WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> <!--missing docs as errors-->
+```
+
+#### ? Deprecated Members
+
+Turning warnings into errors may also cause friction with deprecated members marked as [Obsolete] that would only result in a warning before, but now pop up as an error. Fortunately this can also be solved with comments. Leading a member summary with: `<b>[Deprecated]</b>` goes a long way and serves as a stand-in for a warning, and won't break the build.
