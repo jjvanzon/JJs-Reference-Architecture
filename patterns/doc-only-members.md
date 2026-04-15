@@ -29,7 +29,7 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Copy from the README](#copy-from-the-readme)
     - [One Generalized Comment](#one-generalized-comment)
     - [Ditch the Params](#ditch-the-params)
-    - [To `cref` Or Not To `cref`](#to-cref-or-not-to-cref)
+    - [To `cref` or not to `cref`](#to-cref-or-not-to-cref)
     - [Remarks Are Awesome](#remarks-are-awesome)
 - [Conclusion](#conclusion)
 
@@ -339,21 +339,21 @@ That way a `docs` namespace gives an overview of the documentation even outside 
 
 ### Object Browser
 
-Now you can inspect them in the `Object Browser` as a whole, and so can others:
+Now you and others can check your documentation in the `Object Browser` and see it all in one place:
 
 ![](docs-in-object-browser.png)
-
-You can check your documentation in the `Object Browser` and see it all in one place.
 
 ### Structs
 
 The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
 
-`[ TODO: Screen shot ]`
+<img src="struct-cref.png" width="450" />
 
-This in contrast to crefs to actual code elements, which might be colored like that code element, which makes them visually very confusing to me:
+This in contrast to crefs to actual code elements, which might be colored like that code element, which can make them visually very confusing:
 
-`[ TODO: Screen shot ]`
+<img src="generic-cref.png" width="750"/>
+
+`[ TODO: Add definition under it to see "blending" effect ]`
 
 ### Naming Style
 
@@ -473,7 +473,7 @@ I often choose to stick with a good `<summary>` and be done with it. Only if the
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
-### To `cref` Or Not To `cref`
+### To `cref` or not to `cref`
 
 Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can *choose* whether to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
