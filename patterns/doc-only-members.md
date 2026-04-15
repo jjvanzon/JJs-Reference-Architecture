@@ -289,12 +289,8 @@ You can then link to that `XML` with `XPath`:
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-I guess this is ok, but you'd still need to know the XPath syntax, those links are quite verbose and break easily. The syntax requirements for the doc comments aren't checked when you edit the XML file, which are actively checked in C#. You can't quickly nagivate to the comment with any keyboard shortcut either. When something gets renamed, the docs just vanish. Centralizing docs in *code* seems a stronger alternative, though the XML option does leave out those excess docs-only members out of the assembly.
 
-
-`[ Altarnative ]`
-
-It works, but requires knowing XPath, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Centralizing docs in __code__ is a stronger alternative, though the `XML` approach leaves the docs-only members out of the compiled assembly.
+It works, but requires knowing XPath, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ is a strong alternative,
 
 Unobtrusive Doc-Only Members
 ----------------------------
