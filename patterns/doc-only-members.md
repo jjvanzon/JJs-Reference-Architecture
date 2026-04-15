@@ -289,11 +289,12 @@ You can then link to that `XML` with `XPath`:
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-
 It works, but requires knowing XPath, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ is a strong alternative,
 
 Unobtrusive Doc-Only Members
 ----------------------------
+
+Though these choices are mostly cosmetic, they do help keep the docs references low-key and prevent clashing with the main code.
 
 ### Docs Namespace
 
@@ -340,9 +341,9 @@ That way a `docs` namespace gives an overview of the documentation even outside 
 
 Now you can inspect them in the `Object Browser` as a whole, and so can others:
 
-`[Screen shot]`
+![](docs-in-object-browser.png)
 
-You can check your documentation in the Object Browser and see it all in one place.
+You can check your documentation in the `Object Browser` and see it all in one place.
 
 ### Structs
 
