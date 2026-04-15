@@ -3,7 +3,6 @@
 📔 Doc-Only Members
 ====================
 
-
 A way to centralize and reuse comments: a technique to improve your docs in code.
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
@@ -29,13 +28,13 @@ A way to centralize and reuse comments: a technique to improve your docs in code
 - [Efficiency](#efficiency)
     - [Copy from the README](#copy-from-the-readme)
     - [One Generalized Comment](#one-generalized-comment)
-    - [Leave Out the Params](#leave-out-the-params)
-    - [To `cref` or not to `cref`](#to-cref-or-not-to-cref)
-    - [`<remarks>` Are Awesome](#remarks-are-awesome)
+    - [Ditch the Params](#ditch-the-params)
+    - [To `cref` or Not to `cref`](#to-cref-or-not-to-cref)
+    - [Remarks Are Awesome](#remarks-are-awesome)
 - [Conclusion](#conclusion)
 
-
-### What are XML Doc Comments?
+What are XML Doc Comments?
+--------------------------
 
 XML doc comments are those special comments, that pop up when you hover classes, methods or properties in your code:
 
@@ -54,7 +53,6 @@ string StartWithCap(string input)
 ```
 
 Do you know what it does? Great, but this might help:  
-Here's an XML doc comment added to it:
 
 ```cs
 /// <summary>
@@ -70,15 +68,16 @@ string StartWithCap(string input)
 }
 ```
 
-This helps you remember what it's for. Even if you have not much to write about it, a slight addition of detail can make the reader get an "aha" moment of recognition.
+An XML doc comment helps you remember what it's for. Even if you have not much to write about it, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
 There's a lot of other options for writing doc comments, we'll be covering in this article.
 
-### Declutter Your Code!
+Declutter Your Code!
+--------------------
 
 See, the doc comments are put in the code, and it can get quite crowded with them.
 
-I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a bad example anyway:
+I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a one anyway:
 
 ```cs
 /// <summary>
@@ -115,12 +114,12 @@ string TakeStartUntil(string input, char until)
 }
 ```
 
-More often there's even more documentation. Sometimes you can hardly see the code itself through all the comment. Where is my code? Oh, it's hiding behind that wall of comments.
+More often there's even more documentation. Sometimes you can hardly see the code itself. Where is my code? Oh, it's hiding behind that wall of comments.
 
-### Stop Repeating the Comments!
+Stop Repeating the Comments!
+----------------------------
 
-Comments would also ofter get repeated.  
-In the former example you can already spot some:
+Comments would also often get repeated. In the former example you can already spot some repetition:
 
 ```cs
 /// <summary>
@@ -138,9 +137,10 @@ string TakeStartUntil(string input, char until);
 
 They have exactly the same comment! But there are ways to avoid the clutter.
 
-### Inherit the Comments!
+Inherit the Comments!
+---------------------
 
-One way is to use `<inheritdoc />`, which takes over the doc comment from the `base` class or method. This is a shortcut to avoid repeating the comment:
+One way is to use `<inheritdoc>`, which takes over the doc comment from the `base` class or method. This is a shortcut to avoid repeating the comment:
 
 ```cs
 /// <inheritdoc />
@@ -151,7 +151,7 @@ class Rectangle : Element
 }
 ```
 
-It makes the `Rectangle` class inherit comments of its base class  `Element`. Here it is with its comments, that we didn't need to repeat in the `Rectangle` class:
+It makes the `Rectangle` class inherit comments of its base class  `Element`. Here is the `Element` class. The comments live there andwe didn't need to repeat them the `Rectangle` class:
 
 ```cs
 /// <summary>
@@ -171,15 +171,16 @@ class Element
 }
 ```
 
-Here's a resulting IntelliSense tool tip:
+Here's a resulting `IntelliSense` tool tip:
 
 <img alt="Screen shot of code with tool tip showing an inherited doc" src="image-1.png" width="500" />
 
-But there's still repeated comments in the `Element` base class! Oh no! Now what?
+It works! But there's still repeated comments in the `Element` base class! Oh no! Now what?
 
-### Reuse the Comments!
+Reuse the Comments!
+-------------------
 
-`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want to take. This takes over its comments. This comes out handy for our constructor to brush away any repeated text:
+`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want. This comes out handy for our constructor to brush away any repeated text:
 
 ```cs
 /// <summary>
@@ -206,7 +207,8 @@ Yes, it's lazy! But efficient.
 
 This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere.
 
-### Reuse the Comments Anywhere!
+Reuse the Comments Anywhere!
+----------------------------
 
 Where'd the code go? To find our code back, we can use a trick, making things much easier. I like to put my comments in a file called `docs.cs`:
 
@@ -247,7 +249,8 @@ It's my preferred way of doing it now.
 
 <img src="image-3.png" width="500" />
 
-### Say "No" to Bewildering Links
+Say "No" to Bewildering Links
+-----------------------------
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
@@ -257,7 +260,8 @@ With centralized doc comments, we've snuck by that beast completely:
 
 `[ Example code: both generic and non-generic refer to one doc-only member with simple crefs. ]`
 
-### Say "No" to XPaths
+Say "No" to XPaths
+------------------
 
 There is an alternative: Storing docs in separate XML files:
 
@@ -269,9 +273,11 @@ You can then link to that XML with XPath
 
 But those links are convoluted and can break easily. How's that going to look for generics? I don't even want to know. Centralizing docs in code seems a stronger alternative.
 
-### Unobtrusive Doc-Only Members
 
-#### Docs Namespace
+Unobtrusive Doc-Only Members
+----------------------------
+
+### Docs Namespace
 
 I like to give the docs their own sub-namespace `.docs`
 
@@ -300,7 +306,8 @@ using docs;
 /// <inheritdoc cref="_element" />
 class Element;
 ```
-#### Public
+
+### Public
 
 I actually like to make the doc-structs `public`:
 
@@ -311,7 +318,7 @@ public struct _element;
 
 That way a `docs` namespace gives an overview of the documentation even outside your assembly.
 
-#### Object Browser
+### Object Browser
 
 Now you can inspect them in the `Object Browser` as a whole, and so can others:
 
@@ -319,7 +326,7 @@ Now you can inspect them in the `Object Browser` as a whole, and so can others:
 
 You can check your documentation in the Object Browser and see it all in one place.
 
-#### Structs
+### Structs
 
 The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
 
@@ -329,7 +336,7 @@ This in contrast to crefs to actual code elements, which might be colored like t
 
 `[ TODO: Screen shot ]`
 
-#### Naming Style
+### Naming Style
 
 The naming format is also specifically chosen to make the `<inheritdoc/>` tags as unobtrusive as possible.
 
@@ -344,9 +351,10 @@ Not only do the lower case letters not stand out as much. The underscore prevent
 
 <img src="image-7.png" width="250" />
 
-### Make 'Em Play Nicely
+Make 'Em Play Nicely
+--------------------
 
-#### Shipping
+### Shipping
 
 To ship the docs along with your `NuGet` package you can add this to your `csproj` file.
 
@@ -361,7 +369,7 @@ To actually generate the package you add:
 
 Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 
-#### Missing Comments
+### Missing Comments
 
 You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
 
@@ -377,7 +385,7 @@ If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in
 
 These tags also belong in a inside a `<PropertyGroup>` so be sure to put them there.
 
-#### Naming Rules
+### Naming Rules
 
 You may get some warnings you might need to deal with. The system might start bickering about things, like naming rule violations:
 
@@ -389,7 +397,7 @@ See the [Naming Style](#naming-style) section explains why we would even use nam
 #pragma warning disable IDE1006 // naming rule`
 ```
 
-#### Namespace != Folder
+### Namespace != Folder
 
 The namespace where we put the docs is violating another naming rule. We  put a `docs` namespace in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler:
 
@@ -403,7 +411,7 @@ Squelch as follows:
 
 Since we only use one docs file per project, at least we can just squelch these pesky warnings with a single line each.
 
-#### Param Tag Mismatch
+### Param Tag Mismatch
 
 Another warning you can get, has to do with the docs-only members not actually *having* the parameters you define:
 
@@ -419,22 +427,23 @@ The members you use it for will still use the `param` doc anyway.
 
 Downside: You do lose the checks on `param` existence. That's the trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and focus and clarity in your code.
 
-### Efficiency
+Efficiency
+----------
 
 Here follow a few strategies for producting XML doc comments efficiently.
 
-#### Copy from the README
+### Copy from the README
 
 If you already have a README.md with descriptions of what your code does, you could cut it up into little pieces: one per code element and add them as docs only members. Apply them to multiple members. That way you get a head-start at making your code comments more complete.
 
 You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
 This keeps documentation efficient.
 
-#### One Generalized Comment
+### One Generalized Comment
 
 You can choose to make one generalized description of multiple code elements and put all in one docs-only member. You can use `<inheritdoc>` to apply those to multiple code elements at once. Sometimes this means efficiency for the author, but it can also help the reader, when a few elements are so related and a shared comment provides a little "how to" at hand where needed.
 
-#### Leave Out the Params
+### Ditch the Params
 
 Te main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all and save yourself a lot of time.
 
@@ -445,16 +454,17 @@ I often choose to stick with a good `<summary>` and be done with it. Only if the
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
-#### To `cref` or not to `cref`
+### To `cref` or Not to `cref`
 
 Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can *choose* whether to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
-#### `<remarks>` Are Awesome
+### Remarks Are Awesome
 
 ...
 
 - [ ] `<remarks>` for extending and reusing comments.
 
-### Conclusion
+Conclusion
+----------
 
 Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, without repetitions and their not cluttering your code.
