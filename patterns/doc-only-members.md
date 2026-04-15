@@ -313,7 +313,7 @@ To use the `docs` you'd add a `using` statement to `GlobalUsings.cs`:
 global using JJ.Demos.Architecture.docs;
 ```
 
-Or to each code file::
+Or to each code file you can add `using docs;`
 
 ```cs
 namespace JJ.Demos.Architecture;
@@ -326,11 +326,11 @@ class Element;
 
 ### Structs
 
-The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
+The choice to use `structs` is for camouflage. They're usually displayed in an unassuming green color, making the `<inheritdoc>` tags blend in the background, so the code itself pops out.
 
-<img src="struct-cref.png" width="300" />
+<img src="struct-cref.png" width="250" />
 
-This in contrast to crefs to actual code elements, which might be colored like that code element, which can make them visually very confusing:
+This in contrast to regular crefs, which might be more colorful, which can make them visually very confusing:
 
 <img src="generic-cref.png" width="750"/>
 
@@ -343,7 +343,7 @@ I actually like to make the doc-structs `public`:
 public struct _element;
 ```
 
-That way a `docs` namespace gives an overview of the documentation even outside your assembly.
+That way a `docs` namespace gives an overview of the documentation that even others can see.
 
 ### Object Browser
 
@@ -354,7 +354,7 @@ Now you and others can check your documentation in the `Object Browser` and see 
 
 ### Naming Style
 
-The naming format is also specifically chosen to make the `<inheritdoc/>` tags as unobtrusive as possible.
+The naming format is also specifically chosen to make the `<inheritdoc>` tags as unobtrusive as possible.
 
 Consider the follow docs only member called `_myprop`:
 
@@ -363,7 +363,7 @@ Consider the follow docs only member called `_myprop`:
 struct _myprop;
 ```
 
-Not only do the lower case letters not stand out as much. The underscore prevents the name from colliding with the actual code elements:
+Not only do the lower case letters not stand out as much, the underscore prevents the name from colliding with the actual code elements:
 
 <img src="image-7.png" width="250" />
 
@@ -377,7 +377,7 @@ To ship the docs along with your `NuGet` package you can add this to your `cspro
 ```xml
 <GenerateDocumentationFile>True</GenerateDocumentationFile>
 ```
-To actually generate the package you add: 
+To actually generate the package you would add: 
 
 ```xml
 <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -387,20 +387,20 @@ Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 
 ### Missing Comments
 
-You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
+You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep released packages so they always stay documented. Add the following to your `csproj`:
 
 ```xml
 <!--missing docs as errors-->
 <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> 
 ```
 
-If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in lenience for missing docs, for while you're still writing your comments and are not quite done yet:
+If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in lenience for missing docs, for while you're still writing and are not quite done yet:
 
 ```xml
 <NoWarn>$(NoWarn);CS1591</NoWarn> <!--missing doc lenience-->
 ```
 
-These tags also belong in a inside a `<PropertyGroup>`.
+These tags belong inside a `<PropertyGroup>`.
 
 ### Naming Rules
 
@@ -408,10 +408,10 @@ You may get some warnings you might need to deal with. The system might start bi
 
 <img src="image-5.png" width="500" />
 
-See the [Naming Style](#naming-style) section explains why we would even use names like that. There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the `docs.cs` file:
+There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the `docs.cs` file:
 
 ```cs
-#pragma warning disable IDE1006 // naming rule`
+#pragma warning disable IDE1006 // naming rule
 ```
 
 ### Namespace != Folder
@@ -434,7 +434,7 @@ Another warning you can get, has to do with the docs-only members not actually *
 
 <img src="image-6.png" width="500" />
 
-The parameters are part of the methods you inherit the doc from. I'd just squelch that warning at the top of the code file:
+The parameters are part of the methods, not part of the doc-struct. I'd just squelch that warning at the top of the code file:
 
 ```cs
 #pragma warning disable CS1572 // param tag mismatch
@@ -447,40 +447,40 @@ Downside: You do lose the checks on `param` existence. That's the trade-off. You
 Writing Efficiently
 -------------------
 
-Here follow a few strategies for producting XML doc comments efficiently.
+Here are a few tips for producting `XML` doc comments efficiently.
 
 ### Copy from the README
 
-If you already have a README.md with descriptions of what your code does, you could cut it up into little pieces: one per code element and add them as docs only members. Apply them to multiple members. That way you get a head-start at making your code comments more complete.
-
-You can copy key parts of your README directly into your doc comments, or use a generalized comment for several elements when they share a description.
-This keeps documentation efficient.
+If you already have a README.md with descriptions of what your code does, you could cut it up into little pieces: one per code element and add them as docs only members. Apply them to multiple members. That way you get a head-start at making your code comments complete.
 
 ### One Generalized Comment
 
-You can choose to make one generalized description of multiple code elements and put all in one docs-only member. You can use `<inheritdoc>` to apply those to multiple code elements at once. Sometimes this means efficiency for the author, but it can also help the reader, when a few elements are so related and a shared comment provides a little "how to" at hand where needed.
+You can choose to make one generalized description of multiple code elements and put all in one docs-only member. You can use `<inheritdoc>` to apply those to multiple code elements at once. Sometimes this means efficiency for you, the author, but it can also help the reader, when a few elements are so related, a shared description provides a little "how to" at hand where needed.
 
 ### Ditch the Params
 
-Te main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all and save yourself a lot of time.
+The main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all, and save yourself a bit of time.
 
 Comments like `<param name="text">This is the text.</param>` are usually not very useful anyway.
 
-I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might ad a `<param>` tag but this is rare in my code.
+I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might ad a `<param>` tag, but this is rare in my code.
 
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
 ### To `cref` or not to `cref`
 
-Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can *choose* whether to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
+`[ TODO: Needs an example ]`
+
+Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can __choose__ to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
 ### Remarks Are Awesome
 
 You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
 
-Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag to it:
+Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag:
 
+`[ TODO: Single screen shot may be better. Pop-up currently feels detached. ]`
 
 ```cs
 /// <summary>
@@ -498,9 +498,11 @@ public struct _loggertypes;
 
 <img src="intellisense-logger-type.png" width="600" />
 
-If the remarks tag would have been a `<summary>`, the added documentation would disappear from the pop-up.
+`[ TODO: Circle the added remark in the popup. ]`
 
-Another example is where I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
+If the added `<remarks>` tag would also have been a `<summary>`, the original one will shadow the new one and it disappear from the pop-up.
+
+Another example: I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
 
 ```cs
 /// <summary>
