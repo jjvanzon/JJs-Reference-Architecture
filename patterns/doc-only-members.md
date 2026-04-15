@@ -29,7 +29,7 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Copy from the README](#copy-from-the-readme)
     - [One Generalized Comment](#one-generalized-comment)
     - [Ditch the Params](#ditch-the-params)
-    - [To `cref` or Not to `cref`](#to-cref-or-not-to-cref)
+    - [To `cref` Or Not To `cref`](#to-cref-or-not-to-cref)
     - [Remarks Are Awesome](#remarks-are-awesome)
 - [Conclusion](#conclusion)
 
@@ -205,7 +205,7 @@ There the inner constructor `inherits` the doc from the `Element class`, because
 
 Yes, it's lazy! But efficient. 
 
-This is all fine and well, but our code may still feel cluttered with all those comments, because eventually, they've got to live somewhere.
+But wait! This is all fine and dandy, but there's still a bunch of comment in the base class. Because eventually, it's got to live somewhere, right? What shall we do...?
 
 Reuse the Comments Anywhere!
 ----------------------------
@@ -251,14 +251,19 @@ It's my preferred way of doing it now.
 
 Say "No" to Bewildering Links
 -----------------------------
+![](generic-cref.png)
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
-`[ Example code: with complicated cref to a generic overload ]`
+<img src="generic-cref-2-methods.png" width="550" />
+
+You can see how the code coloring of the `crefs` obscures the actual code?
 
 With centralized doc comments, we've snuck by that beast completely:
 
-`[ Example code: both generic and non-generic refer to one doc-only member with simple crefs. ]`
+<img src="generic-cref-avoided-2-methods.png" width="300" />
+
+Much cleaner!
 
 Say "No" to XPaths
 ------------------
@@ -454,7 +459,7 @@ I often choose to stick with a good `<summary>` and be done with it. Only if the
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
-### To `cref` or Not to `cref`
+### To `cref` Or Not To `cref`
 
 Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can *choose* whether to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
