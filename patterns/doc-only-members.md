@@ -25,7 +25,7 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Naming Rules](#naming-rules)
     - [Namespace != Folder](#namespace--folder)
     - [Param Tag Mismatch](#param-tag-mismatch)
-- [Write Efficiently](#write-efficiently)
+- [Writing Efficiently](#writing-efficiently)
     - [Copy from the README](#copy-from-the-readme)
     - [One Generalized Comment](#one-generalized-comment)
     - [Ditch the Params](#ditch-the-params)
@@ -289,7 +289,7 @@ You can then link to that `XML` with `XPath`:
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-It works, but requires knowing XPath, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ is a strong alternative,
+It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ is a strong alternative,
 
 Unobtrusive Doc-Only Members
 ----------------------------
@@ -410,7 +410,7 @@ You may get some warnings you might need to deal with. The system might start bi
 
 See the [Naming Style](#naming-style) section explains why we would even use names like that. There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the `docs.cs` file:
 
-```
+```cs
 #pragma warning disable IDE1006 // naming rule`
 ```
 
@@ -422,7 +422,7 @@ The namespace where we put the docs is violating another naming rule. We  put a 
 
 Squelch as follows:
 
-```
+```cs
 #pragma warning disable IDE0130 // namespace != folder
 ```
 
@@ -436,7 +436,7 @@ Another warning you can get, has to do with the docs-only members not actually *
 
 The parameters are part of the methods you inherit the doc from. I'd just squelch that warning at the top of the code file:
 
-```
+```cs
 #pragma warning disable CS1572 // param tag mismatch
 ```
 
@@ -444,8 +444,8 @@ The members you use it for will still use the `param` doc anyway.
 
 Downside: You do lose the checks on `param` existence. That's the trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and focus and clarity in your code.
 
-Write Efficiently
------------------
+Writing Efficiently
+-------------------
 
 Here follow a few strategies for producting XML doc comments efficiently.
 
@@ -464,7 +464,11 @@ You can choose to make one generalized description of multiple code elements and
 
 Te main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all and save yourself a lot of time.
 
-Comments like `<param name="text">This is the text.</param>` are usually not very useful anyway.
+Comments like:
+
+`<param name="text">This is the text.</param>`
+
+are usually not very useful anyway.
 
 I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might ad a `<param>` tag but this is rare in my code.
 
@@ -497,30 +501,26 @@ public struct _loggertype;
 /// <remarks>Multiple values allowed separated by semi-colons.</remarks>
 public struct _loggertypes;
 ```
-![](intellisense-logger-type.png)
 
-`[ TODO: Screen shot unnecessary? ]`
-
-![](inheritdoc-remarks-extends-summary.png)
+<img src="intellisense-logger-type.png" width="350" />
 
 If the remarks tag would have been a `<summary>`, the added documentation would disappear from the pop-up.
 
 Another example is where I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
 
-```cs
-<inheritdoc cref="_myclass" />
-```
+`[ TODO: Check syntax in demo project. ]`
 
-`[ TODO: Show the original summary and the declaration of the code element. ]`
+```cs
+/// <summary>The legacy shall be respected!</summary>
+/// <inheritdoc cref="_mylegacyclass" />
+public class MyLegacyClass;
+```
 
 and leveraging a `<remarks>` tag in my centralized `docs.cs`
 
 ```cs
-
-/// <remarks>
-/// Remarks are awesome!
-/// </remarks>
-struct _myclass;
+/// <remarks>But remarks are awesome!</remarks>
+struct _mylegacyclass;
 ```
 
 The original `<summary>` near the code element and the `<remarks>` tag from the docs-struct were now combined in one `IntelliSense` popup!
@@ -531,4 +531,4 @@ The original `<summary>` near the code element and the `<remarks>` tag from the 
 Conclusion
 ----------
 
-Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, without repetitions and their not cluttering your code.
+Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, robust without repetitions and their not cluttering your code.
