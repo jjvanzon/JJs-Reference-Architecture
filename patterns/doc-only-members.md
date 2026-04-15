@@ -25,7 +25,7 @@ A way to centralize and reuse comments: a technique to improve your docs in code
     - [Naming Rules](#naming-rules)
     - [Namespace != Folder](#namespace--folder)
     - [Param Tag Mismatch](#param-tag-mismatch)
-- [Efficiency](#efficiency)
+- [Write Efficiently](#write-efficiently)
     - [Copy from the README](#copy-from-the-readme)
     - [One Generalized Comment](#one-generalized-comment)
     - [Ditch the Params](#ditch-the-params)
@@ -271,7 +271,7 @@ Say "No" to XPaths
 
 There is an alternative: Storing docs in separate XML files:
 
-```cs
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <docs>
   <member name="Shout">
@@ -347,7 +347,7 @@ Now you and others can check your documentation in the `Object Browser` and see 
 
 The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
 
-<img src="struct-cref.png" width="250" />
+<img src="struct-cref.png" width="300" />
 
 This in contrast to crefs to actual code elements, which might be colored like that code element, which can make them visually very confusing:
 
@@ -444,8 +444,8 @@ The members you use it for will still use the `param` doc anyway.
 
 Downside: You do lose the checks on `param` existence. That's the trade-off. You get a whole lot back for it though, like centralized reusable docs, maintainability and focus and clarity in your code.
 
-Efficiency
-----------
+Write Efficiently
+-----------------
 
 Here follow a few strategies for producting XML doc comments efficiently.
 
@@ -481,7 +481,25 @@ Linking from one `<summary>` to other code elements (using `<see>` elements) mig
 
 You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
 
-I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
+Here's an example where one member has a summary and the other member inherits that summary and adds to it with a remarks tag:
+
+```cs
+/// <summary>
+/// Specifies the logger type. Options include:
+/// 1) LoggerEnum values (e.g., Console, DebugOutput).
+/// 2) Assembly name containing an ILogger implementation.
+/// 3) Full .NET Type string indicating an implementation of ILogger.
+/// </summary>
+public struct _loggertype;
+
+/// <inheritdoc cref="_loggertype" />
+/// <remarks>Multiple values allowed separated by semi-colons.</remarks>
+public struct _loggertypes;
+```
+
+If the remarks tag would have been a `<summary>`, only the inherited `<summary>` would be shown and the added documentation would disappear from the pop-up.
+
+Another example is where I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
 
 ```cs
 <inheritdoc cref="_myclass" />
@@ -503,7 +521,6 @@ The original `<summary>` near the code element and the `<remarks>` tag from the 
 
 `[ TODO: Screen Shot]`
 
-`[ TODO: Talk about inheriting from a base docs-struct for parameter definition reuse or general description reuse. ]`
 
 Conclusion
 ----------
