@@ -289,7 +289,7 @@ You can then link to that `XML` with `XPath`:
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-But those links are quite convoluted and can break easily. `[How's that going to look for generics? I don't even want to know.]` Centralizing docs in *code* seems a stronger alternative.
+It's ok, but you'd still need to know the XPath syntax, those links are quite verbose and break easily. A simple rename will break the link. Editing the XML file directly allows for more syntax errors, that are actively checked in C#. You can't quickly nagivate to the comment with any shortcut key either. When something gets renamed, the docs just vanish. Centralizing docs in *code* seems a stronger alternative.
 
 
 Unobtrusive Doc-Only Members
