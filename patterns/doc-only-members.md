@@ -1,5 +1,3 @@
-`[ Draft ]`
-
 📔 Doc-Only Members
 ====================
 
@@ -38,7 +36,7 @@ What are XML Doc Comments?
 
 XML doc comments are those special comments, that pop up when you hover classes, methods or properties in your code:
 
-<img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="500" />
+<img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="350" />
 
 You can add them to your own code, so instant documentation pops up while you program.
 
@@ -389,7 +387,8 @@ Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep your released packages always documented. Add the following to your `csproj`:
 
 ```xml
-<WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> <!--missing docs as errors-->
+<!--missing docs as errors-->
+<WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors> 
 ```
 
 If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in lenience for missing docs, for while you're still writing your comments and are not quite done yet:
@@ -398,7 +397,7 @@ If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in
 <NoWarn>$(NoWarn);CS1591</NoWarn> <!--missing doc lenience-->
 ```
 
-These tags also belong in a inside a `<PropertyGroup>` so be sure to put them there.
+These tags also belong in a inside a `<PropertyGroup>`.
 
 ### Naming Rules
 
@@ -462,11 +461,7 @@ You can choose to make one generalized description of multiple code elements and
 
 Te main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all and save yourself a lot of time.
 
-Comments like:
-
-`<param name="text">This is the text.</param>`
-
-are usually not very useful anyway.
+Comments like `<param name="text">This is the text.</param>` are usually not very useful anyway.
 
 I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might ad a `<param>` tag but this is rare in my code.
 
@@ -481,7 +476,7 @@ Linking from one `<summary>` to other code elements (using `<see>` elements) mig
 
 You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
 
-Here's an example where one member has a `<summary>` and the other member inherits that `<summary>` and adds to it with a `<remarks>` tag:
+Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag to it:
 
 
 ```cs
@@ -502,7 +497,7 @@ public struct _loggertypes;
 
 If the remarks tag would have been a `<summary>`, the added documentation would disappear from the pop-up.
 
-Another example is where I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
+Another example is where I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
 
 ```cs
 /// <summary>
@@ -521,7 +516,7 @@ and leveraging a `<remarks>` tag in my centralized `docs.cs`
 struct _mylegacyclass;
 ```
 
-The original `<summary>` near the code element and the `<remarks>` tag from the docs-struct were now combined in one `IntelliSense` popup!
+The two texts were now combined in one `IntelliSense` popup!
 
 <img src="legacy-class-summary-and-inherit-doc.png" width="450" />
 
