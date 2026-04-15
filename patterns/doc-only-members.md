@@ -347,13 +347,11 @@ Now you and others can check your documentation in the `Object Browser` and see 
 
 The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
 
-<img src="struct-cref.png" width="450" />
+<img src="struct-cref.png" width="250" />
 
 This in contrast to crefs to actual code elements, which might be colored like that code element, which can make them visually very confusing:
 
 <img src="generic-cref.png" width="750"/>
-
-`[ TODO: Add definition under it to see "blending" effect ]`
 
 ### Naming Style
 
@@ -479,9 +477,33 @@ Linking from one `<summary>` to other code elements (using `<see>` elements) mig
 
 ### Remarks Are Awesome
 
-...
+`[ TODO: Finish section about <remarks> for extending and reusing comments. ]`
 
-- [ ] `<remarks>` for extending and reusing comments.
+You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
+
+I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
+
+```cs
+<inheritdoc cref="_myclass" />
+```
+
+`[ TODO: Show the original summary and the declaration of the code element. ]`
+
+and leveraging a `<remarks>` tag in my centralized `docs.cs`
+
+```cs
+
+/// <remarks>
+/// Remarks are awesome!
+/// </remarks>
+struct _myclass;
+```
+
+The original `<summary>` near the code element and the `<remarks>` tag from the docs-struct were now combined in one `IntelliSense` popup!
+
+`[ TODO: Screen Shot]`
+
+`[ TODO: Talk about inheriting from a base docs-struct for parameter definition reuse or general description reuse. ]`
 
 Conclusion
 ----------
