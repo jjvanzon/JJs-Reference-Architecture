@@ -252,6 +252,8 @@ It's my preferred way of doing it now.
 Say "No" to Bewildering Links
 -----------------------------
 
+Ever come across something like this?
+
 <img src="generic-cref.png" width="750"/>
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
@@ -269,13 +271,25 @@ Say "No" to XPaths
 
 There is an alternative: Storing docs in separate XML files:
 
-`[ Example XML of that. ]`
+```cs
+<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+  <member name="Shout">
+    <summary>
+      Converts the text to upper case and appends an exclamation mark.
+    </summary>
+  </member>
+</docs>
+```
 
-You can then link to that XML with XPath
+You can then link to that `XML` with `XPath`:
 
-`[ Links to XML file from code ]`
+```cs
+/// <include file='docs.xml' path='docs/member[@name="Shout"]/*' />
+public string Shout(string input) => input.ToUpper() + "!";
+```
 
-But those links are convoluted and can break easily. How's that going to look for generics? I don't even want to know. Centralizing docs in code seems a stronger alternative.
+But those links are quite convoluted and can break easily. `[How's that going to look for generics? I don't even want to know.]` Centralizing docs in *code* seems a stronger alternative.
 
 
 Unobtrusive Doc-Only Members
