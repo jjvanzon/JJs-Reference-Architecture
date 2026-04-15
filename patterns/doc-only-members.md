@@ -251,17 +251,18 @@ It's my preferred way of doing it now.
 
 Say "No" to Bewildering Links
 -----------------------------
-![](generic-cref.png)
+
+<img src="generic-cref.png" width="500"/>
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
-<img src="generic-cref-2-methods.png" width="550" />
+<img src="generic-cref-2-methods.png" width="650" />
 
 You can see how the code coloring of the `crefs` obscures the actual code?
 
 With centralized doc comments, we've snuck by that beast completely:
 
-<img src="generic-cref-avoided-2-methods.png" width="300" />
+<img src="generic-cref-avoided-2-methods.png" width="400" />
 
 Much cleaner!
 
