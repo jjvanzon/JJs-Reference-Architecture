@@ -199,8 +199,6 @@ class Element
 
 There the inner constructor `inherits` the doc from the `Element class`, because we added the `cref` attribute pointing to it. Here's a resulting tool tip:
 
-`[ TODO: A picture that is more to the point about hovering the Element class name might be better. ]`
-
 <img src="image-2.png" width="500" />
 
 Yes, it's lazy! But efficient. 
@@ -481,8 +479,6 @@ Linking from one `<summary>` to other code elements (using `<see>` elements) mig
 
 ### Remarks Are Awesome
 
-`[ TODO: Finish section about <remarks> for extending and reusing comments. ]`
-
 You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
 
 Here's an example where one member has a `<summary>` and the other member inherits that `<summary>` and adds to it with a `<remarks>` tag:
@@ -502,16 +498,16 @@ public struct _loggertype;
 public struct _loggertypes;
 ```
 
-<img src="intellisense-logger-type.png" width="350" />
+<img src="intellisense-logger-type.png" width="600" />
 
 If the remarks tag would have been a `<summary>`, the added documentation would disappear from the pop-up.
 
 Another example is where I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
 
-`[ TODO: Check syntax in demo project. ]`
-
 ```cs
-/// <summary>The legacy shall be respected!</summary>
+/// <summary>
+/// The legacy shall be respected!
+/// </summary>
 /// <inheritdoc cref="_mylegacyclass" />
 public class MyLegacyClass;
 ```
@@ -519,16 +515,17 @@ public class MyLegacyClass;
 and leveraging a `<remarks>` tag in my centralized `docs.cs`
 
 ```cs
-/// <remarks>But remarks are awesome!</remarks>
+/// <remarks>
+/// But remarks are awesome!
+/// </remarks>
 struct _mylegacyclass;
 ```
 
 The original `<summary>` near the code element and the `<remarks>` tag from the docs-struct were now combined in one `IntelliSense` popup!
 
-`[ TODO: Screen Shot]`
-
+<img src="legacy-class-summary-and-inherit-doc.png" width="450" />
 
 Conclusion
 ----------
 
-Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you can use it too. The end result: centralized comments, efficiently written, robust without repetitions and their not cluttering your code.
+Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you find use for it too. The end result: centralized comments, efficiently written, robust without repetitions and not cluttering your code.
