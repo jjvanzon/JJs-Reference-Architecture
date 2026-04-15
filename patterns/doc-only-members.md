@@ -13,9 +13,9 @@ A way to centralize and reuse comments: a technique to improve your docs in code
 - [Say "No" to XPaths](#say-no-to-xpaths)
 - [Unobtrusive Doc-Only Members](#unobtrusive-doc-only-members)
     - [Docs Namespace](#docs-namespace)
+    - [Structs](#structs)
     - [Public](#public)
     - [Object Browser](#object-browser)
-    - [Structs](#structs)
     - [Naming Style](#naming-style)
 - [Make 'Em Play Nicely](#make-em-play-nicely)
     - [Shipping](#shipping)
@@ -40,7 +40,7 @@ XML doc comments are those special comments, that pop up when you hover classes,
 
 You can add them to your own code, so instant documentation pops up while you program.
 
-Here's an example method:
+Take this example method:
 
 ```cs
 string StartWithCap(string input)
@@ -66,7 +66,7 @@ string StartWithCap(string input)
 }
 ```
 
-An XML doc comment helps you remember what it's for. Even if you have not much to write about it, a slight addition of detail can make the reader get an "aha" moment of recognition.
+An XML doc comment helps you remember what it's for. Even if you have not much to write, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
 There's a lot of other options for writing doc comments, we'll be covering in this article.
 
@@ -112,12 +112,12 @@ string TakeStartUntil(string input, char until)
 }
 ```
 
-More often there's even more documentation. Sometimes you can hardly see the code itself. Where is my code? Oh, it's hiding behind that wall of comments.
+Usually there's more documentation but I didn't want you to stop reading here. Sometimes you can hardly see the code for the comments. Where is my code? Oh, it's hiding behind that wall of text.
 
 Stop Repeating the Comments!
 ----------------------------
 
-Comments would also often get repeated. In the former example you can already spot some repetition:
+Comments also often get repeated. In the former example you can already spot the repetition:
 
 ```cs
 /// <summary>
@@ -149,7 +149,7 @@ class Rectangle : Element
 }
 ```
 
-It makes the `Rectangle` class inherit comments of its base class  `Element`. Here is the `Element` class. The comments live there andwe didn't need to repeat them the `Rectangle` class:
+It makes the `Rectangle` class inherit comments of its base class  `Element`. Here is the `Element` class. The comments live there and we didn't need to repeat them:
 
 ```cs
 /// <summary>
@@ -173,12 +173,12 @@ Here's a resulting `IntelliSense` tool tip:
 
 <img alt="Screen shot of code with tool tip showing an inherited doc" src="image-1.png" width="500" />
 
-It works! But there's still repeated comments in the `Element` base class! Oh no! Now what?
+It works! But there's still all that comment in the `Element` base class! Oh no! Now what?
 
 Reuse the Comments!
 -------------------
 
-`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want. This comes out handy for our constructor to brush away any repeated text:
+`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want. This comes out handy for our constructor to brush away some more repeated text:
 
 ```cs
 /// <summary>
@@ -195,18 +195,18 @@ class Element
 }
 ```
 
-There the inner constructor `inherits` the doc from the `Element class`, because we added the `cref` attribute pointing to it. Here's a resulting tool tip:
+There constructor now `inherits` the doc from the `Element class`, with the `cref` attribute. Here's a resulting tool tip:
 
 <img src="image-2.png" width="500" />
 
 Yes, it's lazy! But efficient. 
 
-But wait! This is all fine and dandy, but there's still a bunch of comment in the base class. Because eventually, it's got to live somewhere, right? What shall we do...?
+But wait! This is all fine and dandy, but there's still a bunch of comment in the base class. Because eventually, it's got to live somewhere? What shall we do?
 
 Reuse the Comments Anywhere!
 ----------------------------
 
-Where'd the code go? To find our code back, we can use a trick, making things much easier. I like to put my comments in a file called `docs.cs`:
+Where'd the code go? To find our code back, we can use a trick, that makes things a lot easier. I like to put my comments in a file called `docs.cs`:
 
 ```cs
 /// <summary>
@@ -219,7 +219,7 @@ Where'd the code go? To find our code back, we can use a trick, making things mu
 struct _element;
 ```
 
-Those are our __Doc-Only Members__. Here they are referenced with `inheritdoc`:
+Those are our __Doc-Only Members__. They can be referenced with `inheritdoc`:
 
 ```cs
 /// <inheritdoc cref="_element" />
@@ -239,7 +239,7 @@ class Element
 
 Now each documentation is just a single unobtrusive line with an `inheritdoc` tag.
 
-This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it a lot easier to review, revise and maintain.
+This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it easier to review, revise and maintain.
 
 It's my preferred way of doing it now.
 
@@ -254,6 +254,8 @@ Ever come across something like this?
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
+`[ TODO: Hide more details of 2nd overload in pic ]`
+
 <img src="generic-cref-2-methods.png" width="700" />
 
 You can see how the code coloring of the `crefs` obscures the actual code? With centralized doc comments, we've snuck by that beast completely:
@@ -265,7 +267,7 @@ Much cleaner!
 Say "No" to XPaths
 ------------------
 
-There is an alternative: Storing docs in separate XML files:
+There is an alternative: Storing docs in separate `XML` files:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -278,19 +280,19 @@ There is an alternative: Storing docs in separate XML files:
 </docs>
 ```
 
-You can then link to that `XML` with `XPath`:
+Then, you can link to it with `XPath`:
 
 ```cs
 /// <include file='docs.xml' path='docs/member[@name="Shout"]/*' />
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ is a strong alternative,
+It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ seems a stronger alternative.
 
 Unobtrusive Doc-Only Members
 ----------------------------
 
-Though these choices are mostly cosmetic, they do help keep the docs references low-key and prevent clashing with the main code.
+Though the choices below are mostly cosmetic, they do help keep the docs low-key and prevent clashes with the main code.
 
 ### Docs Namespace
 
@@ -311,7 +313,7 @@ To use the `docs` you'd add a `using` statement to `GlobalUsings.cs`:
 global using JJ.Demos.Architecture.docs;
 ```
 
-Or to each code file, you can just add `using docs`:
+Or to each code file::
 
 ```cs
 namespace JJ.Demos.Architecture;
@@ -321,6 +323,16 @@ using docs;
 /// <inheritdoc cref="_element" />
 class Element;
 ```
+
+### Structs
+
+The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
+
+<img src="struct-cref.png" width="300" />
+
+This in contrast to crefs to actual code elements, which might be colored like that code element, which can make them visually very confusing:
+
+<img src="generic-cref.png" width="750"/>
 
 ### Public
 
@@ -339,15 +351,6 @@ Now you and others can check your documentation in the `Object Browser` and see 
 
 ![](docs-in-object-browser.png)
 
-### Structs
-
-The choice to use `structs` is for camouflage. They are usually displayed in an unassuming green color, making the `<inheritdoc>'s` blend in the background, so the code itself pops out.
-
-<img src="struct-cref.png" width="300" />
-
-This in contrast to crefs to actual code elements, which might be colored like that code element, which can make them visually very confusing:
-
-<img src="generic-cref.png" width="750"/>
 
 ### Naming Style
 
