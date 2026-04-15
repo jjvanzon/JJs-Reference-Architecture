@@ -234,7 +234,7 @@ Unused code might clutter your vision. It may also give the impression, that it 
 
 <h3>More information</h3>
 
-Here's a way to centralize and reuse doc comments efficiently: [Comments](./comments.md) `[ Draft ]`
+Here's a way to centralize and reuse doc comments efficiently: [Doc-Only Members](./doc-only-members.md) `[ Draft ]`
 
 
 Constructor Inheritance
