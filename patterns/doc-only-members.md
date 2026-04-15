@@ -252,15 +252,13 @@ It's my preferred way of doing it now.
 Say "No" to Bewildering Links
 -----------------------------
 
-<img src="generic-cref.png" width="500"/>
+<img src="generic-cref.png" width="750"/>
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
-<img src="generic-cref-2-methods.png" width="650" />
+<img src="generic-cref-2-methods.png" width="700" />
 
-You can see how the code coloring of the `crefs` obscures the actual code?
-
-With centralized doc comments, we've snuck by that beast completely:
+You can see how the code coloring of the `crefs` obscures the actual code? With centralized doc comments, we've snuck by that beast completely:
 
 <img src="generic-cref-avoided-2-methods.png" width="400" />
 
