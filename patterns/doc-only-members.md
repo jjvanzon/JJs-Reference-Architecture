@@ -481,7 +481,8 @@ Linking from one `<summary>` to other code elements (using `<see>` elements) mig
 
 You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
 
-Here's an example where one member has a summary and the other member inherits that summary and adds to it with a remarks tag:
+Here's an example where one member has a `<summary>` and the other member inherits that `<summary>` and adds to it with a `<remarks>` tag:
+
 
 ```cs
 /// <summary>
@@ -496,8 +497,13 @@ public struct _loggertype;
 /// <remarks>Multiple values allowed separated by semi-colons.</remarks>
 public struct _loggertypes;
 ```
+![](intellisense-logger-type.png)
 
-If the remarks tag would have been a `<summary>`, only the inherited `<summary>` would be shown and the added documentation would disappear from the pop-up.
+`[ TODO: Screen shot unnecessary? ]`
+
+![](inheritdoc-remarks-extends-summary.png)
+
+If the remarks tag would have been a `<summary>`, the added documentation would disappear from the pop-up.
 
 Another example is where I had a legacy project. It's code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
 
