@@ -82,16 +82,16 @@ string StartWithCap(string input)
 }
 ```
 
-An `XML` doc comment helps you remember what it's for. Even if you have not much to write, a slight addition of detail can make the reader get an "aha" moment of recognition.
+An `XML` doc comment helps you remember what it's for. Even if you have not much to say, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
-There's a lot of other options for writing doc comments, that will be covered in this article.
+There's a lot of other options for writing doc comments, that we will cover in this article.
 
 Declutter Your Code!
 --------------------
 
 See, the doc comments are put in the code, and it can get quite crowded with them.
 
-I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a one anyway where `<summary>` tags take up much of the space.
+I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a one anyway where `<summary>` tags take up much of the space:
 
 ```cs
 /// <summary>
@@ -194,7 +194,7 @@ It works! But there's still all that comment in the `Element` base class! Oh no!
 Reuse the Comments!
 -------------------
 
-`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want. This comes out handy for our constructor to brush away some more repeated text:
+`<inheritdoc>` is very flexible. You can use the `cref` attribute to point at any member you want. This comes out handy for our constructor, so we can brush away some more repeated text:
 
 ```cs
 /// <summary>
@@ -222,7 +222,7 @@ But wait! This is all fine and dandy, but there's still a bunch of comment in th
 Reuse the Comments Anywhere!
 ----------------------------
 
-Where'd the code go? To find our code back, we can use a trick, that makes things a lot easier. I like to put my comments in a file called `docs.cs`:
+Where'd the code go? Can't see the code for the comments. To find our code back, we can use a trick! It would make things a lot easier. I like to put my comments in a file called `docs.cs`:
 
 ```cs
 /// <summary>
@@ -255,7 +255,7 @@ class Element
 
 Now each documentation is just a single unobtrusive line with an `inheritdoc` tag.
 
-This way the code doesn't get cluttered with comments, the `inheritdoc` `cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it easier to review, revise and maintain.
+Now the code doesn't get cluttered with comments anymore, the `inheritdoc cref`'s are simple, it's easier to reuse the same doc comment for efficiency, and have meaningful, helpful pop ups all over the place. The docs are now central, which makes it easier to review, revise and maintain.
 
 It's my preferred way of doing it now.
 
@@ -271,8 +271,6 @@ Ever come across something like this?
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
 <img src="generic-cref-2-methods-2.png" width="700" />
-
-Can you see how to  colors of the `cref` melt together with the colors of the code? I think it's distracting.
 
 With centralized doc comments, we've snuck by that beast completely:
 
@@ -304,7 +302,7 @@ Then, you can link to it with `XPath`:
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc, and the `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ seems a stronger alternative.
+It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc. The `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ seems a stronger alternative.
 
 Unobtrusive Doc-Only Members
 ----------------------------
@@ -355,7 +353,7 @@ The choice to use `structs` is for camouflage. They're usually displayed in an u
 
 <img src="struct-cref.png" width="250" />
 
-This in contrast to regular crefs, which might be more colorful, which can make them visually confusing:
+This in contrast to regular crefs, which might be more colorful, which can make them visually distracting:
 
 <img src="generic-cref.png" width="750"/>
 
