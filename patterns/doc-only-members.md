@@ -187,7 +187,7 @@ class Element
 
 Here's a resulting IntelliSense tool tip:
 
-<img alt="Tooltip showing doc inherited from base" src="intellisense-tooltip-inherited-from-base.png" width="500" />
+<img alt="Tooltip with doc inherited from base class" src="intellisense-tooltip-inherited-from-base.png" width="500" />
 
 It works! But there's still all that comment in the `Element` base class! Oh no! Now what?
 
@@ -213,7 +213,7 @@ class Element
 
 There constructor now `inherits` the doc from the `Element class`, with the `cref` attribute. Here's a resulting tool tip:
 
-<img src="intellisense-class-tooltip-inherited-from-constructor.png" width="500" alt="Tooltip showing documentation inherited via cref" />
+<img src="intellisense-class-tooltip-inherited-from-constructor.png" width="500" alt="Tooltip showing doc inherited via cref" />
 
 Yes, it's lazy! But efficient. 
 
@@ -259,22 +259,22 @@ Now the code doesn't get cluttered with comments anymore, the `inheritdoc cref`'
 
 It's my preferred way of doing it now.
 
-<img src="xml-doc-comments-inheritdoc-to-central-docs-struct-four-times.png" width="500" alt="Clean code devoid of documentation clutter with single-line inheritdoc cref links" />
+<img src="xml-doc-comments-inheritdoc-to-central-docs-struct-four-times.png" width="500" alt="Cleaned code devoid of documentation clutter using inheritdoc cref links" />
 
 Say "No" to Bewildering Links
 -----------------------------
 
 Ever come across something like this?
 
-<img src="generic-cref.png" width="750"/>
+<img src="generic-cref.png" width="750" alt="inheritdoc tag with long convoluted cref link with nested generic type arguments"/>
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
-<img src="generic-cref-2-methods.png" width="700" alt="Visual clutter from verbose generic cref links" />
+<img src="generic-cref-2-methods.png" width="700" alt="One method with verbose generic cref link. Another method with the actual documentation." />
 
 With centralized doc comments, we've snuck by that beast completely:
 
-<img src="generic-cref-avoided-2-methods.png" width="400" />
+<img src="generic-cref-avoided-2-methods.png" width="400" alt="clean inheritdoc cref links near methods with generic type arguments" />
 
 
 Much cleaner!
@@ -351,11 +351,11 @@ Structs
 
 The choice to use `structs` is for camouflage. They're usually displayed in an unassuming green color, making the `<inheritdoc>` tags blend in the background, so the code itself pops out.
 
-<img src="struct-cref.png" width="250" />
+<img src="struct-cref.png" width="250" alt="subtly green colored documentation tag inheritdoc cref=_merge" />
 
 This in contrast to regular crefs, which might be more colorful, which can make them visually distracting:
 
-<img src="generic-cref.png" width="750"/>
+<img src="generic-cref.png" width="750" alt="complex cref link with distracting code coloring" />
 
 
 <h3>
@@ -452,7 +452,7 @@ Naming Rules
 
 You may get some warnings you might need to deal with. The system might start bickering about things, like naming rule violations:
 
-<img src="docs-struct-naming-rule-violation.png" width="500" alt="Tooltip with struct naming rule violation warning" />
+<img src="docs-struct-naming-rule-violation.png" width="500" alt="Tooltip with naming rule violation warning for struct" />
 
 There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the `docs.cs` file:
 
@@ -486,7 +486,7 @@ Param Tag Mismatch
 
 Another warning you can get, has to do with the docs-only members not actually having the parameters you define:
 
-<img src="param-tag-without-parameter.png" width="500" alt="Tooltip with param tag mismatch warning" />
+<img src="param-tag-without-parameter.png" width="500" alt="Tooltip warning: cannot resolve parameter 'parent'" />
 
 The parameters are part of the methods, not part of the doc-struct. I'd just squelch that warning at the top of the code file:
 
@@ -552,7 +552,7 @@ You can add an extra layer of `docs` inheritance, by leveraging tags other than 
 
 Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag:
 
-<img src="intellisense-logger-types.png" width="600" alt="Tooltip showing merged tags from multiple sources."/>
+<img src="intellisense-logger-types.png" width="600" alt="Tooltip showing merged content from two tags from different sources."/>
 
 If they both would have been `summaries`, they would overlap and the 2nd one would disappear from the pop-up. That's one reason why `<remarks>` are great.
 
@@ -577,7 +577,7 @@ struct _mylegacyclass;
 
 The two texts were now combined in one IntelliSense popup!
 
-<img src="legacy-class-summary-and-inherit-doc.png" width="450" alt="Tooltip combining local summary and inherited remarks." />
+<img src="legacy-class-summary-and-inherit-doc.png" width="450" alt="Summary tag, inheritdoc tag, tooltip with text combined from both." />
 
 Conclusion
 ----------
