@@ -30,7 +30,7 @@ keywords:
 
 Centralize and reuse comments: a pattern to improve your docs in code.
 
-<img src="../images/doc-only-members-banner.png" width="800" alt="Page-wide banner with colorful background: C# code sample: a hidden struct to host XML docs inherited by a class using inheritdoc tag" />
+<img src="../images/doc-only-members-banner.png" width="800" alt="Page-wide banner, colorful background, C# code sample: a hidden struct to host XML docs inherited by a class using inheritdoc tag" />
 
 <h2>Contents</h2>
 
@@ -52,7 +52,7 @@ What are XML Doc Comments?
 
 XML doc comments are those special comments, that pop up when you hover classes, methods or properties in your code:
 
-<img alt="Code sample showing doc as tooltip under a code element name" src="intellisense-tooltip.png" width="350" />
+<img alt="IntelliSense tooltip for StartWithCap method" src="intellisense-tooltip-start-with-cap.png" width="350" />
 
 You can add them to your own code, so IntelliSense pops up while you program.
 
@@ -187,7 +187,7 @@ class Element
 
 Here's a resulting IntelliSense tool tip:
 
-<img alt="Code with tool tip showing an inherited doc" src="intellisense-tooltip-inherited-from-base.png" width="500" />
+<img alt="Tooltip showing doc inherited from base" src="intellisense-tooltip-inherited-from-base.png" width="500" />
 
 It works! But there's still all that comment in the `Element` base class! Oh no! Now what?
 
@@ -213,7 +213,7 @@ class Element
 
 There constructor now `inherits` the doc from the `Element class`, with the `cref` attribute. Here's a resulting tool tip:
 
-<img src="intellisense-class-tooltip-inherited-from-constructor.png" width="500" />
+<img src="intellisense-class-tooltip-inherited-from-constructor.png" width="500" alt="Tooltip showing documentation inherited via cref" />
 
 Yes, it's lazy! But efficient. 
 
@@ -259,7 +259,7 @@ Now the code doesn't get cluttered with comments anymore, the `inheritdoc cref`'
 
 It's my preferred way of doing it now.
 
-<img src="xml-doc-comments-inheritdoc-to-central-docs-struct-four-times.png" width="500" />
+<img src="xml-doc-comments-inheritdoc-to-central-docs-struct-four-times.png" width="500" alt="Clean code devoid of documentation clutter with single-line inheritdoc cref links" />
 
 Say "No" to Bewildering Links
 -----------------------------
@@ -270,7 +270,7 @@ Ever come across something like this?
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
-<img src="generic-cref-2-methods-2.png" width="700" />
+<img src="generic-cref-2-methods.png" width="700" alt="Visual clutter from verbose generic cref links" />
 
 With centralized doc comments, we've snuck by that beast completely:
 
@@ -380,7 +380,7 @@ Object Browser
 
 Now you and others can check your documentation in the `Object Browser` and see it all in one place:
 
-![](object-browser-docs-struct-namespace.png)
+<img src="object-browser-docs-struct-namespace.png" alt="Centralized docs list in Visual Studio Object Browser." />
 
 
 <h3>
@@ -399,7 +399,7 @@ struct _myprop;
 
 Not only do the lower case letters not stand out as much, the underscore prevents the name from colliding with the actual code elements:
 
-<img src="inheritdoc-to-docs-struct-from-prop.png" width="250" />
+<img src="inheritdoc-to-docs-struct-from-prop.png" width="250" alt="Struct syntax showing subtle color in IDE." />
 
 Make 'Em Play Nicely
 --------------------
@@ -452,7 +452,7 @@ Naming Rules
 
 You may get some warnings you might need to deal with. The system might start bickering about things, like naming rule violations:
 
-<img src="docs-struct-naming-rule-violation.png" width="500" />
+<img src="docs-struct-naming-rule-violation.png" width="500" alt="Tooltip with struct naming rule violation warning" />
 
 There's no way to configure a naming rule specifically for doc-only elements, so I like to squelch that warning at the top of the `docs.cs` file:
 
@@ -468,7 +468,7 @@ Namespace != Folder
 
 The namespace where we put the docs is violating another naming rule. We  put a `docs` namespace in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler:
 
-<img src="docs-namespace-naming-rule-violation.png" width="500" />
+<img src="docs-namespace-naming-rule-violation.png" width="500" alt="Tooltip with namespace mismatch warning" />
 
 Squelch as follows:
 
@@ -486,7 +486,7 @@ Param Tag Mismatch
 
 Another warning you can get, has to do with the docs-only members not actually having the parameters you define:
 
-<img src="param-tag-without-parameter.png" width="500" />
+<img src="param-tag-without-parameter.png" width="500" alt="Tooltip with param tag mismatch warning" />
 
 The parameters are part of the methods, not part of the doc-struct. I'd just squelch that warning at the top of the code file:
 
@@ -552,7 +552,7 @@ You can add an extra layer of `docs` inheritance, by leveraging tags other than 
 
 Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag:
 
-<img src="intellisense-logger-types.png" width="600" />
+<img src="intellisense-logger-types.png" width="600" alt="Tooltip showing merged tags from multiple sources."/>
 
 If they both would have been `summaries`, they would overlap and the 2nd one would disappear from the pop-up. That's one reason why `<remarks>` are great.
 
@@ -577,7 +577,7 @@ struct _mylegacyclass;
 
 The two texts were now combined in one IntelliSense popup!
 
-<img src="legacy-class-summary-and-inherit-doc.png" width="450" />
+<img src="legacy-class-summary-and-inherit-doc.png" width="450" alt="Tooltip combining local summary and inherited remarks." />
 
 Conclusion
 ----------
