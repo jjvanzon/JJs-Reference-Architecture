@@ -1,3 +1,28 @@
+---
+title: "📔 Doc-Only Members"
+image: "/images/doc-only-members.png"
+description: "A way to centralize and reuse comments: a technique to improve your docs in code."
+keywords:
+  - XML doc comments
+  - code comments
+  - documentation
+  - summary tags
+  - reuse
+  - centralize
+  - code samples
+  - c#
+  - .net
+  - coding
+  - programming
+  - software engineering
+  - software development
+  - software design
+  - software architecture
+  - layered architecture
+  - software
+  - computers
+---
+
 📔 Doc-Only Members
 ====================
 
@@ -5,7 +30,7 @@
 
 A way to centralize and reuse comments: a technique to improve your docs in code.
 
-<img src="../images/doc-only-members.png" width="400" />
+<img src="../images/doc-only-members-banner.png" width="400" />
 
 <h2>Contents</h2>
 
