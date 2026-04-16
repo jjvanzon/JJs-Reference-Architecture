@@ -28,7 +28,7 @@ keywords:
 
 [back](README.md)
 
-A way to centralize and reuse comments: a pattern to improve your docs in code.
+Centralize and reuse comments: a pattern to improve your docs in code.
 
 <img src="../images/doc-only-members-banner.png" width="800" />
 
@@ -43,23 +43,8 @@ A way to centralize and reuse comments: a pattern to improve your docs in code.
 - [Say "No" to Bewildering Links](#say-no-to-bewildering-links)
 - [Say "No" to XPaths](#say-no-to-xpaths)
 - [Unobtrusive Doc-Only Members](#unobtrusive-doc-only-members)
-    - [Docs Namespace](#docs-namespace)
-    - [Structs](#structs)
-    - [Public](#public)
-    - [Object Browser](#object-browser)
-    - [Naming Style](#naming-style)
 - [Make 'Em Play Nicely](#make-em-play-nicely)
-    - [Shipping](#shipping)
-    - [Missing Comments](#missing-comments)
-    - [Naming Rules](#naming-rules)
-    - [Namespace != Folder](#namespace--folder)
-    - [Param Tag Mismatch](#param-tag-mismatch)
 - [Writing Efficiently](#writing-efficiently)
-    - [Copy from the README](#copy-from-the-readme)
-    - [One Generalized Comment](#one-generalized-comment)
-    - [Ditch the Params](#ditch-the-params)
-    - [To `cref` or not to `cref`](#to-cref-or-not-to-cref)
-    - [Remarks Are Awesome](#remarks-are-awesome)
 - [Conclusion](#conclusion)
 
 What are XML Doc Comments?
@@ -69,7 +54,7 @@ XML doc comments are those special comments, that pop up when you hover classes,
 
 <img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="350" />
 
-You can add them to your own code, so instant documentation pops up while you program.
+You can add them to your own code, so `IntelliSense` pops up while you program.
 
 Take this example method:
 
@@ -97,16 +82,16 @@ string StartWithCap(string input)
 }
 ```
 
-An XML doc comment helps you remember what it's for. Even if you have not much to write, a slight addition of detail can make the reader get an "aha" moment of recognition.
+An `XML` doc comment helps you remember what it's for. Even if you have not much to write, a slight addition of detail can make the reader get an "aha" moment of recognition.
 
-There's a lot of other options for writing doc comments, we'll be covering in this article.
+There's a lot of other options for writing doc comments, that will be covered in this article.
 
 Declutter Your Code!
 --------------------
 
 See, the doc comments are put in the code, and it can get quite crowded with them.
 
-I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a one anyway:
+I couldn't even give a good example: it'd overpower this very article just as it'd overpower your code. Here's a one anyway where `<summary>` tags take up much of the space.
 
 ```cs
 /// <summary>
@@ -143,7 +128,7 @@ string TakeStartUntil(string input, char until)
 }
 ```
 
-Usually there's more documentation but I didn't want you to stop reading here. Sometimes you can hardly see the code for the comments. Where is my code? Oh, it's hiding behind that wall of text.
+Usually there's more comments, but I didn't want you to stop reading. Sometimes you can hardly see the code for the comments. Where is my code? Oh, it's hiding behind that wall of text.
 
 Stop Repeating the Comments!
 ----------------------------
@@ -287,11 +272,11 @@ These `cref` links can get wild if you're dealing with overloads and, oh boy, ge
 
 <img src="generic-cref-2-methods-2.png" width="700" />
 
-Can you see how to  colors of the `cref` melt together with the colors of the code? I think it's very distracting.
+Can you see how to  colors of the `cref` melt together with the colors of the code? I think it's distracting.
 
 With centralized doc comments, we've snuck by that beast completely:
 
-<img src="~generic-cref-avoided-2-methods.png" width="400" />
+<img src="generic-cref-avoided-2-methods.png" width="400" />
 
 
 Much cleaner!
@@ -324,9 +309,13 @@ It works, but requires knowing `XPath`, and the links are verbose. When somethin
 Unobtrusive Doc-Only Members
 ----------------------------
 
-Though the choices below are mostly cosmetic, they do help keep the docs low-key and prevent clashes with the main code.
+The choices we mention now are mostly cosmetic. But they do help keep the docs low-key and prevent clashing with the main code.
 
-### Docs Namespace
+
+<h3>
+Docs Namespace
+</h3>
+
 
 I like to give the docs their own sub-namespace `.docs`
 
@@ -356,17 +345,25 @@ using docs;
 class Element;
 ```
 
-### Structs
+
+<h3>
+Structs
+</h3>
+
 
 The choice to use `structs` is for camouflage. They're usually displayed in an unassuming green color, making the `<inheritdoc>` tags blend in the background, so the code itself pops out.
 
 <img src="struct-cref.png" width="250" />
 
-This in contrast to regular crefs, which might be more colorful, which can make them visually very confusing:
+This in contrast to regular crefs, which might be more colorful, which can make them visually confusing:
 
 <img src="generic-cref.png" width="750"/>
 
-### Public
+
+<h3>
+Public
+</h3>
+
 
 I actually like to make the doc-structs `public`:
 
@@ -375,16 +372,23 @@ I actually like to make the doc-structs `public`:
 public struct _element;
 ```
 
-That way a `docs` namespace gives an overview of the documentation that even others can see.
+That way a `docs` namespace gives an overview of the documentation, that even others can see.
 
-### Object Browser
+
+<h3>
+Object Browser
+</h3>
+
 
 Now you and others can check your documentation in the `Object Browser` and see it all in one place:
 
 ![](docs-in-object-browser.png)
 
 
-### Naming Style
+<h3>
+Naming Style
+</h3>
+
 
 The naming format is also specifically chosen to make the `<inheritdoc>` tags as unobtrusive as possible.
 
@@ -402,9 +406,13 @@ Not only do the lower case letters not stand out as much, the underscore prevent
 Make 'Em Play Nicely
 --------------------
 
-### Shipping
 
-To ship the docs along with your `NuGet` package you can add this to your `csproj` file.
+<h3>
+Shipping
+</h3>
+
+
+To ship the docs along with your `NuGet` package you can add this to your `csproj` file:
 
 ```xml
 <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -417,9 +425,13 @@ To actually generate the package you would add:
 
 Put those tags inside a `<PropertyGroup>` and you'll be ready to go.
 
-### Missing Comments
 
-You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help keep released packages so they always stay documented. Add the following to your `csproj`:
+<h3>
+Missing Comments
+</h3>
+
+
+You can add an extra check to find missing `XML` comments, by turning their warnings into errors. This would help the released packages, so they always stay documented. Add the following to your `csproj`:
 
 ```xml
 <!--missing docs as errors-->
@@ -434,7 +446,11 @@ If you already `<TreatWarningsAsErrors>`, you could do the opposite and build in
 
 These tags belong inside a `<PropertyGroup>`.
 
-### Naming Rules
+
+<h3>
+Naming Rules
+</h3>
+
 
 You may get some warnings you might need to deal with. The system might start bickering about things, like naming rule violations:
 
@@ -446,7 +462,11 @@ There's no way to configure a naming rule specifically for doc-only elements, so
 #pragma warning disable IDE1006 // naming rule
 ```
 
-### Namespace != Folder
+
+<h3>
+Namespace != Folder
+</h3>
+
 
 The namespace where we put the docs is violating another naming rule. We  put a `docs` namespace in the `JJ.Demos.Architecture` folder, which does not include the `docs` sub-folder, which can get you another nag from the compiler:
 
@@ -458,11 +478,15 @@ Squelch as follows:
 #pragma warning disable IDE0130 // namespace != folder
 ```
 
-Since we only use one docs file per project, at least we can just squelch these pesky warnings with a single line each.
+Since we only use one "docs" file per project, at least we can just squelch these pesky warnings with a single line each.
 
-### Param Tag Mismatch
 
-Another warning you can get, has to do with the docs-only members not actually *having* the parameters you define:
+<h3>
+Param Tag Mismatch
+</h3>
+
+
+Another warning you can get, has to do with the docs-only members not actually having the parameters you define:
 
 <img src="image-6.png" width="500" />
 
@@ -481,15 +505,27 @@ Writing Efficiently
 
 Here are a few tips for producting `XML` doc comments efficiently.
 
-### Copy from the README
+
+<h3>
+Copy from the README
+</h3>
+
 
 If you already have a README.md with descriptions of what your code does, you could cut it up into little pieces: one per code element and add them as docs only members. Apply them to multiple members. That way you get a head-start at making your code comments complete.
 
-### One Generalized Comment
+
+<h3>
+One Generalized Comment
+</h3>
+
 
 You can choose to make one generalized description of multiple code elements and put all in one docs-only member. You can use `<inheritdoc>` to apply those to multiple code elements at once. Sometimes this means efficiency for you, the author, but it can also help the reader, when a few elements are so related, a shared description provides a little "how to" at hand where needed.
 
-### Ditch the Params
+
+<h3>
+Ditch the Params
+</h3>
+
 
 The main description is more important than the parameters, so you could get away with not adding documentation to the separate parameters at all, and save yourself a bit of time.
 
@@ -500,11 +536,19 @@ I often choose to stick with a good `<summary>` and be done with it. Only if the
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
 
-### To `cref` or not to `cref`
+
+<h3>
+To `cref` or not to `cref`
+</h3>
+
 
 Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can __choose__ to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
-### Remarks Are Awesome
+
+<h3>
+Remarks Are Awesome
+</h3>
+
 
 You can add an extra layer of `docs` inheritance, by leveraging tags other than `<summary>`.
 
@@ -512,9 +556,9 @@ Here's an example where one member has a `<summary>` and the other member adds a
 
 <img src="intellisense-logger-types.png" width="600" />
 
-If the added `<remarks>` tag would also have been a `<summary>`, the original one will shadow the new one and it disappear from the pop-up.
+If they both would have been `summaries`, they would overlap and the 2nd one would disappear from the pop-up.
 
-Another example: I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it with more info by adding one line to the original code:
+Another example: I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it adding one line to the original code:
 
 ```cs
 /// <summary>
