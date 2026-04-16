@@ -1,7 +1,13 @@
 📔 Doc-Only Members
 ====================
 
+[back](README.md)
+
 A way to centralize and reuse comments: a technique to improve your docs in code.
+
+<img src="../images/doc-only-members.png" width="400" />
+
+<h2>Contents</h2>
 
 - [What are XML Doc Comments?](#what-are-xml-doc-comments)
 - [Declutter Your Code!](#declutter-your-code)
@@ -529,3 +535,5 @@ Conclusion
 ----------
 
 Eventually I settled on this doc-only member trick, which has been serving me very well ever since. I hope you find use for it too. The end result: centralized comments, efficiently written, robust without repetitions and not cluttering your code.
+
+[back](README.md)

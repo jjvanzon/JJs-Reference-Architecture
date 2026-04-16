@@ -20,8 +20,6 @@ keywords:
   - computers
 ---
 
-`[ Draft ]`
-
 🪄 Anti-Magic Booleans
 =================
 
