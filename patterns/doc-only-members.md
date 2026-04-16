@@ -380,7 +380,7 @@ Object Browser
 
 Now you and others can check your documentation in the `Object Browser` and see it all in one place:
 
-![](docs-in-object-browser.png)
+![](object-browser-docs-struct-namespace.png)
 
 
 <h3>
@@ -399,7 +399,7 @@ struct _myprop;
 
 Not only do the lower case letters not stand out as much, the underscore prevents the name from colliding with the actual code elements:
 
-<img src="object-browser-docs-struct-namespace.png" width="250" />
+<img src="inheritdoc-to-docs-struct-from-prop.png" width="250" />
 
 Make 'Em Play Nicely
 --------------------
