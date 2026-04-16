@@ -390,7 +390,7 @@ Naming Style
 
 The naming format is also specifically chosen to make the `<inheritdoc>` tags as unobtrusive as possible.
 
-Consider the follow docs only member called `_myprop`:
+Consider the following docs-only member called `_myprop`:
 
 ```cs
 /// <summary> ... </summary>
@@ -501,7 +501,7 @@ Downside: You do lose the checks on `param` existence. That's the trade-off. You
 Writing Efficiently
 -------------------
 
-Here are a few tips for producting `XML` doc comments efficiently.
+Here are a few tips for producing `XML` doc comments efficiently.
 
 
 <h3>
@@ -529,7 +529,7 @@ The main description is more important than the parameters, so you could get awa
 
 Comments like `<param name="text">This is the text.</param>` are usually not very useful anyway.
 
-I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might ad a `<param>` tag, but this is rare in my code.
+I often choose to stick with a good `<summary>` and be done with it. Only if there's something very specific to say, I might add a `<param>` tag, but this is rare in my code.
 
 Decide for yourself:
 Do you want detailed `<param>` tags for everything, or just the essentials? Sometimes, focusing on the main description is more practical.
