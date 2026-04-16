@@ -1,6 +1,6 @@
 ---
 title: "📔 Doc-Only Members"
-image: "/images/doc-only-members.png"
+image: "/images/doc-only-members-page.png"
 description: "A way to centralize and reuse comments: a technique to improve your docs in code."
 keywords:
   - XML doc comments
@@ -28,7 +28,7 @@ keywords:
 
 [back](README.md)
 
-A way to centralize and reuse comments: a technique to improve your docs in code.
+A way to centralize and reuse comments: a pattern to improve your docs in code.
 
 <img src="../images/doc-only-members-banner.png" width="800" />
 
