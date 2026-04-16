@@ -285,13 +285,14 @@ Ever come across something like this?
 
 These `cref` links can get wild if you're dealing with overloads and, oh boy, generics:
 
-`[ TODO: Hide more details of 2nd overload in pic ]`
+<img src="generic-cref-2-methods-2.png" width="700" />
 
-<img src="generic-cref-2-methods.png" width="700" />
+Can you see how to  colors of the `cref` melt together with the colors of the code? I think it's very distracting.
 
-You can see how the code coloring of the `crefs` obscures the actual code? With centralized doc comments, we've snuck by that beast completely:
+With centralized doc comments, we've snuck by that beast completely:
 
-<img src="generic-cref-avoided-2-methods.png" width="400" />
+<img src="~generic-cref-avoided-2-methods.png" width="400" />
+
 
 Much cleaner!
 
@@ -511,25 +512,7 @@ You can add an extra layer of `docs` inheritance, by leveraging tags other than 
 
 Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag:
 
-`[ TODO: Single screen shot may be better. Pop-up currently feels detached. ]`
-
-```cs
-/// <summary>
-/// Specifies the logger type. Options include:
-/// 1) LoggerEnum values (e.g., Console, DebugOutput).
-/// 2) Assembly name containing an ILogger implementation.
-/// 3) Full .NET Type string indicating an implementation of ILogger.
-/// </summary>
-public struct _loggertype;
-
-/// <inheritdoc cref="_loggertype" />
-/// <remarks>Multiple values allowed separated by semi-colons.</remarks>
-public struct _loggertypes;
-```
-
-<img src="intellisense-logger-type.png" width="600" />
-
-`[ TODO: Circle the added remark in the popup. ]`
+<img src="intellisense-logger-types.png" width="700" />
 
 If the added `<remarks>` tag would also have been a `<summary>`, the original one will shadow the new one and it disappear from the pop-up.
 
