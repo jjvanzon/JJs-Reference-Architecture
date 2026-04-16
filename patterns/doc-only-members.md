@@ -30,7 +30,7 @@ keywords:
 
 A way to centralize and reuse comments: a technique to improve your docs in code.
 
-<img src="../images/doc-only-members-banner.png" width="400" />
+<img src="../images/doc-only-members-banner.png" width="800" />
 
 <h2>Contents</h2>
 
