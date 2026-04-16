@@ -502,8 +502,6 @@ Do you want detailed `<param>` tags for everything, or just the essentials? Some
 
 ### To `cref` or not to `cref`
 
-`[ TODO: Needs an example ]`
-
 Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can __choose__ to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
 ### Remarks Are Awesome
@@ -512,7 +510,7 @@ You can add an extra layer of `docs` inheritance, by leveraging tags other than 
 
 Here's an example where one member has a `<summary>` and the other member adds a `<remarks>` tag:
 
-<img src="intellisense-logger-types.png" width="700" />
+<img src="intellisense-logger-types.png" width="600" />
 
 If the added `<remarks>` tag would also have been a `<summary>`, the original one will shadow the new one and it disappear from the pop-up.
 
