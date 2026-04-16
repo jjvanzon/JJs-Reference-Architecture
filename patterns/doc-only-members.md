@@ -54,7 +54,7 @@ XML doc comments are those special comments, that pop up when you hover classes,
 
 <img alt="Tooltip with comment shows while hovering method name" src="xml-doc-comment-tooltip.png" width="350" />
 
-You can add them to your own code, so `IntelliSense` pops up while you program.
+You can add them to your own code, so IntelliSense pops up while you program.
 
 Take this example method:
 
@@ -185,7 +185,7 @@ class Element
 }
 ```
 
-Here's a resulting `IntelliSense` tool tip:
+Here's a resulting IntelliSense tool tip:
 
 <img alt="Screen shot of code with tool tip showing an inherited doc" src="image-1.png" width="500" />
 
@@ -302,7 +302,7 @@ Then, you can link to it with `XPath`:
 public string Shout(string input) => input.ToUpper() + "!";
 ```
 
-It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc. The `XML` editor won't catch malformed doc syntax the way the `C#` compiler will. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ seems a stronger alternative.
+It works, but requires knowing `XPath`, and the links are verbose. When something gets renamed, docs silently vanish with no compiler warning or anything. There's no keyboard shortcut to navigate to the doc. The `XML` editor won't catch malformed doc syntax. Though the `XML` approach leaves the docs-only members out of the compiled assembly, centralizing docs in __code__ seems a stronger alternative.
 
 Unobtrusive Doc-Only Members
 ----------------------------
@@ -540,7 +540,7 @@ To `cref` or not to `cref`
 </h3>
 
 
-Linking from one `<summary>` to other code elements (using `<see>` elements) might provide a rich navigation. But you can __choose__ to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
+Hyperlinks from one `<summary>` to other code elements (using `<see>` elements) can provide rich navigation. But you can __choose__ to make everything a link or not, and save some time writing. The main text of the `<summary>` might be more important. It's a choice. It's up to you. Efficiency, quality, take your pick.
 
 
 <h3>
@@ -554,9 +554,9 @@ Here's an example where one member has a `<summary>` and the other member adds a
 
 <img src="intellisense-logger-types.png" width="600" />
 
-If they both would have been `summaries`, they would overlap and the 2nd one would disappear from the pop-up.
+If they both would have been `summaries`, they would overlap and the 2nd one would disappear from the pop-up. That's one reason why `<remarks>` are great.
 
-Another example: I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to `IntelliSense`. I was able to unobtrusively extend it adding one line to the original code:
+Another example: I had a legacy project. Its code was not allowed to change very much. It already had a `<summary>` tag near the code element. I wanted to add more description to IntelliSense. I was able to unobtrusively extend it adding one line to the original code:
 
 ```cs
 /// <summary>
@@ -575,7 +575,7 @@ and leveraging a `<remarks>` tag in my centralized `docs.cs`
 struct _mylegacyclass;
 ```
 
-The two texts were now combined in one `IntelliSense` popup!
+The two texts were now combined in one IntelliSense popup!
 
 <img src="legacy-class-summary-and-inherit-doc.png" width="450" />
 
